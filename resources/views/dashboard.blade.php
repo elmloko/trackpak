@@ -1,13 +1,16 @@
+
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Seguimiento de Paqueteria de Agencia Boliviana de Correos</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Panel de Control</p>
+    
+@include('footer')
 @stop
 
 @section('css')
@@ -17,4 +20,3 @@
 @section('js')
     <script> console.log('Hi!'); </script>
 @stop
-
