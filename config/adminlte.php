@@ -307,12 +307,11 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        ['header' => 'PAQUETERIA POSTAL'],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Paquetes Certificados',
+            'url'         => 'packages',
+            'icon'        => 'fas fa-box',
         ],
     ],
 
