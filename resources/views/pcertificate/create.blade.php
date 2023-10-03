@@ -13,13 +13,13 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Crear Nuevo') }} Paquete</span>
+                        <span class="card-title">{{ __('Crear Nuevo') }} Paquete Certificado</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('packages.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('pcertificates.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('package.form')
+                            @include('pcertificate.form')
 
                         </form>
                     </div>

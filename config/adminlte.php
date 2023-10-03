@@ -309,8 +309,13 @@ return [
         ],
         ['header' => 'PAQUETERIA POSTAL'],
         [
-            'text'        => 'Paquetes Certificados',
+            'text'        => 'Paquetes Ordinarios',
             'url'         => 'packages',
+            'icon'        => 'fas fa-box',
+        ],
+        [
+            'text'        => 'Paquetes Certificados',
+            'url'         => 'pcertificates',
             'icon'        => 'fas fa-box',
         ],
     ],

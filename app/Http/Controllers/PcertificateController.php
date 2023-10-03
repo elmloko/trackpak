@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Package;
+use App\Models\Pcertificate;
 use Illuminate\Http\Request;
 
 /**
- * Class PackageController
+ * Class PcertificateController
  * @package App\Http\Controllers
  */
-class PackageController extends Controller
+class PcertificateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::paginate();
+        $pcertificates = Pcertificate::paginate();
 
-        return view('package.index', compact('packages'))
-            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+        return view('pcertificate.index', compact('pcertificates'))
+            ->with('i', (request()->input('page', 1) - 1) * $pcertificates->perPage());
     }
 
     /**
@@ -31,8 +31,8 @@ class PackageController extends Controller
      */
     public function create()
     {
-        $package = new Package();
-        return view('package.create', compact('package'));
+        $pcertificate = new Pcertificate();
+        return view('pcertificate.create', compact('pcertificate'));
     }
 
     /**
@@ -43,11 +43,11 @@ class PackageController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Package::$rules);
+        request()->validate(Pcertificate::$rules);
 
-        $package = Package::create($request->all());
+        $pcertificate = Pcertificate::create($request->all());
 
-        return redirect()->route('packages.index')
+        return redirect()->route('pcertificates.index')
             ->with('success', 'Paquete Creado Con Exito!');
     }
 
@@ -59,9 +59,9 @@ class PackageController extends Controller
      */
     public function show($id)
     {
-        $package = Package::find($id);
+        $pcertificate = Pcertificate::find($id);
 
-        return view('package.show', compact('package'));
+        return view('pcertificate.show', compact('pcertificate'));
     }
 
     /**
@@ -72,25 +72,25 @@ class PackageController extends Controller
      */
     public function edit($id)
     {
-        $package = Package::find($id);
+        $pcertificate = Pcertificate::find($id);
 
-        return view('package.edit', compact('package'));
+        return view('pcertificate.edit', compact('pcertificate'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Package $package
+     * @param  Pcertificate $pcertificate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Package $package)
+    public function update(Request $request, Pcertificate $pcertificate)
     {
-        request()->validate(Package::$rules);
+        request()->validate(Pcertificate::$rules);
 
-        $package->update($request->all());
+        $pcertificate->update($request->all());
 
-        return redirect()->route('packages.index')
+        return redirect()->route('pcertificates.index')
             ->with('success', 'Paquete Actualizado Con Exito!');
     }
 
@@ -101,9 +101,9 @@ class PackageController extends Controller
      */
     public function destroy($id)
     {
-        $package = Package::find($id)->delete();
+        $pcertificate = Pcertificate::find($id)->delete();
 
-        return redirect()->route('packages.index')
+        return redirect()->route('pcertificates.index')
             ->with('success', 'Paquete Eliminado Con Exito!');
     }
 }

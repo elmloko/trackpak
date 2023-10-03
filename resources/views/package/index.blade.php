@@ -46,6 +46,7 @@
 										<th>Peso</th>
 										<th>Tipo</th>
 										<th>Estado</th>
+                                        <th>Fecha Ingreso</th>
 
                                         <th></th>
                                     </tr>
@@ -65,6 +66,7 @@
 											<td>{{ $package->PESO }}</td>
 											<td>{{ $package->TIPO }}</td>
 											<td>{{ $package->ESTADO }}</td>
+                                            <td>{{ $package->created_at }}</td>
 
                                             <td>
                                                 <form action="{{ route('packages.destroy',$package->id) }}" method="POST">
