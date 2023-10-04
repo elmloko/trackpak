@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('ESTADO') }}
-                    {{ Form::select('ESTADO',['Almacen' => 'Almacen', 'Transito' => 'Transito','Pendiente' => 'Pendiente','Pre-Return' => 'Pre-Return'], $pcertificate->ESTADO, ['class' => 'form-control' . ($errors->has('ESTADO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se encuentra el paquete']) }}
+                    {{ Form::select('ESTADO',['ALMACEN' => 'ALMACEN', 'TRANSITO' => 'TRANSITO','PENDIENTE' => 'PENDIENTE','PRE-RETURN' => 'PRE-RETURN'], $pcertificate->ESTADO, ['class' => 'form-control' . ($errors->has('ESTADO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se encuentra el paquete']) }}
                     {!! $errors->first('ESTADO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('CUIDAD') }}
-                    {{ Form::select('CUIDAD', ['La Paz' => 'La Paz', 'Cochabamba' => 'Cochabamba', 'Santa Cruz' => 'Santa Cruz', 'Oruro' => 'Oruro', 'Potosi' => 'Potosi', 'Tarija' => 'Tarija', 'Chuquisaca' => 'Chuquisaca', 'Beni' => 'Beni', 'Pando' => 'Pando'], $pcertificate->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Cuidad']) }}
+                    {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $pcertificate->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Cuidad']) }}
                     {!! $errors->first('CUIDAD', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('TIPO') }}
-                    {{ Form::select('TIPO', ['Paquete' => 'Paquete', 'Sobre' => 'Sobre'], $pcertificate->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
+                    {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $pcertificate->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
                     {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
