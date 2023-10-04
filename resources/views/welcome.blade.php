@@ -19,6 +19,7 @@
 </head>
 
 <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
+    <meta name="csrf-token" content="{{csrf_token() }}">
     <!--Nav-->
     <nav id="header" class="fixed w-full z-30 top-0 text-white">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -84,13 +85,10 @@
                     Un servicio de seguimiento de paquetería postal de la Agencia Boliviana de Correos
                 </p>
                 <div class="w-full flex flex-col md:flex-row items-center justify-center">
-                    <input type="text" class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0"
+                    <input type="text" id="mysearch" class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0"
                         placeholder="Buscar Paquete...">
-                    <button
-                        class="mx-2 md:ml-2 bg-white text-gray-800 font-bold rounded-full py-2 px-4 shadow-lg hover:underline focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
-                        Buscar
-                    </button>
                 </div>
+                <ul id="showlist" tabindex="1" class="list-group"></ul>
             </div>
             <!-- Right Col -->
             <div class="w-full md:w-3/5 py-6 text-center">
@@ -494,6 +492,7 @@
             </div>
         </div>
     </footer>
+    <script src="{{asset('search/js/search.js')}}" type="module"></script>
     <!-- jQuery if you need it
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   -->
