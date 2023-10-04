@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::post('myurl',[SearchController::class,'show']);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -27,6 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('packages', App\Http\Controllers\PackageController::class);
+    Route::get('/packages/excel', [PackageController::class, 'excel'])->name('packages.excel');
+    Route::get('/packages/pdf', [PackageController::class, 'pdf'])->name('packages.pdf');
     Route::resource('pcertificates', App\Http\Controllers\PcertificateController::class);
     
 });

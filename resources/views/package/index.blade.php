@@ -11,18 +11,25 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
                             <span id="card_title">
                                 {{ __('Paquetes Certificados Nacionales') }}
                             </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear Nuevo') }}
+                            <div class="float-right">
+                                <a href="{{ route('packages.excel') }}"
+                                    class="btn btn-success btn-sm"
+                                    data-placement="left">
+                                    Excel</a>
+                                <a href="{{ route('packages.pdf') }}"
+                                    class="btn btn-danger btn-sm"
+                                    data-placement="left">
+                                    PDF</a>
+                                <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm"
+                                    data-placement="left">
+                                    {{ __('Crear Nuevo') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
-                    </div>
+                    </div>                    
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
@@ -35,17 +42,17 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Codigo Postal</th>
-										<th>Destinatario</th>
-										<th>Telefono</th>
-										<th>Pais</th>
-										<th>Cuidad</th>
-										<th>Zona</th>
-										<th>Ventanilla</th>
-										<th>Peso</th>
-										<th>Tipo</th>
-										<th>Estado</th>
+
+                                        <th>Codigo Postal</th>
+                                        <th>Destinatario</th>
+                                        <th>Telefono</th>
+                                        <th>Pais</th>
+                                        <th>Cuidad</th>
+                                        <th>Zona</th>
+                                        <th>Ventanilla</th>
+                                        <th>Peso</th>
+                                        <th>Tipo</th>
+                                        <th>Estado</th>
                                         <th>Fecha Ingreso</th>
 
                                         <th></th>
@@ -55,25 +62,28 @@
                                     @foreach ($packages as $package)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $package->CODIGO }}</td>
-											<td>{{ $package->DESTINATARIO }}</td>
-											<td>{{ $package->TELEFONO }}</td>
-											<td>{{ $package->PAIS }}</td>
-											<td>{{ $package->CUIDAD }}</td>
-											<td>{{ $package->ZONA }}</td>
-											<td>{{ $package->VENTANILLA }}</td>
-											<td>{{ $package->PESO }}</td>
-											<td>{{ $package->TIPO }}</td>
-											<td>{{ $package->ESTADO }}</td>
+
+                                            <td>{{ $package->CODIGO }}</td>
+                                            <td>{{ $package->DESTINATARIO }}</td>
+                                            <td>{{ $package->TELEFONO }}</td>
+                                            <td>{{ $package->PAIS }}</td>
+                                            <td>{{ $package->CUIDAD }}</td>
+                                            <td>{{ $package->ZONA }}</td>
+                                            <td>{{ $package->VENTANILLA }}</td>
+                                            <td>{{ $package->PESO }}</td>
+                                            <td>{{ $package->TIPO }}</td>
+                                            <td>{{ $package->ESTADO }}</td>
                                             <td>{{ $package->created_at }}</td>
 
                                             <td>
-                                                <form action="{{ route('packages.destroy',$package->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-success" href="{{ route('packages.edit',$package->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                <form action="{{ route('packages.destroy', $package->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('packages.edit', $package->id) }}"><i
+                                                            class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -88,11 +98,11 @@
                         Se encontraron {{ $packages->currentPage() }} de {{ $packages->lastPage() }} Paginas
                     </div>
                     <div class="mt-8">
-                        {{$packages->links() }}
+                        {{ $packages->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@include('footer')
+    @include('footer')
 @endsection
