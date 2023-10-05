@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pcertificate;
+use App\Exports\PcertificateExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 /**
@@ -106,4 +108,17 @@ class PcertificateController extends Controller
         return redirect()->route('pcertificates.index')
             ->with('success', 'Paquete Eliminado Con Exito!');
     }
+    public function excel()
+    {
+        return Excel::download(new PcertificatesExport, 'Paquetes Certificados.xlsx');
+    }
+
+    public function pdf()
+    {
+        return Excel::download(new PcertificatesExport, 'Paquetes Certificados.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    } 
+    public function pdf()
+    {
+        return Excel::download(new PcertificatesExport, 'Paquetes Certificados.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    } 
 }

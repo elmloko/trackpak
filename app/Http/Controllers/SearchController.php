@@ -1,16 +1,16 @@
 <?php
 
-namespace AppHttpControllers;
-use IlluminateHttpRequest;
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Models\Package;
 use Response;
-use DB;
+
 class SearchController extends Controller
 {
     public function show(Request $request)
     {
         $data = trim($request->valor);
-        $result = DB::table('packages')
-        ->where('CODIGO','like','%'.$data.'%')
+        $result = Package::where('CODIGO','like','%'.$data.'%')
         ->orwhere('DESTINATARIO','like','%'.$data.'%')
         ->limit(5)
         ->get();

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
-use Illuminate\Http\Request;
-use App\Exports\PackageExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PackageExport;
+use Illuminate\Http\Request;
 
 /**
  * Class PackageController
@@ -110,18 +110,11 @@ class PackageController extends Controller
     }
     public function excel()
     {
-        $package = Package::all();
-
-        Excel::create('packages', function ($excel) use ($package) {
-            $excel->sheet('Exportar', function ($sheet) use ($package) {
-                $sheet->fromArray($package);
-            });
-        })->export('xls');
+        return Excel::download(new PackageExport, 'users.xlsx');
     }
 
     public function pdf()
     {
-        // return(new PackageExport)->download('Paquetes.pdf',Excel::DOMPDF);
         return Excel::download(new PackageExport, 'Paquetes.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     } 
 }
