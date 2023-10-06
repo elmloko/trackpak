@@ -16,11 +16,12 @@
             background: linear-gradient(90deg, rgba(52, 68, 124, 1) 35%, rgba(185, 156, 70, 1) 70%);
         }
     </style>
+    @livewireStyles
 </head>
 
 <body class="leading-normal tracking-normal text-white gradient" style="font-family: 'Source Sans Pro', sans-serif;">
-    <meta name="csrf-token" content="{{csrf_token() }}">
-    @csrf 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @csrf
     <!--Nav-->
     <nav id="header" class="fixed w-full z-30 top-0 text-white">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
@@ -73,30 +74,7 @@
         <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
     </nav>
     <!--Hero-->
-    <div class="pt-24">
-        <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-            <!-- Left Col -->
-            <div
-                class="flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left">
-                <p class="uppercase tracking-loose w-full">¿Estás buscando tu paquete?</p>
-                <h1 class="my-4 text-5xl font-bold leading-tight">
-                    RASTREA TU PAQUETE NACIONAL
-                </h1>
-                <p class="leading-normal text-2xl mb-8">
-                    Un servicio de seguimiento de paquetería postal de la Agencia Boliviana de Correos
-                </p>
-                <div class="w-full flex flex-col md:flex-row items-center justify-center">
-                    <input type="text" id="" class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0"
-                        placeholder="Buscar Paquete...">
-                </div>
-                <ul id="showlist" tabindex="1" class="list-group"></ul>
-            </div>
-            <!-- Right Col -->
-            <div class="w-full md:w-3/5 py-6 text-center">
-                <img class="w-2/3 md:w-1/2 mx-auto z-50" src="{{ asset('images/MONITO.png') }}" />
-            </div>
-        </div>
-    </div>
+    @livewire('search')
     <div class="relative -mt-12 lg:-mt-24">
         <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -390,9 +368,10 @@
             Boliviana de Correos tiene para ofrecerte en línea hoy mismo!
         </h3>
         <br>
-        <a href="https://correos.gob.bo/" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+        <a href="https://correos.gob.bo/"
+            class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
             Visitame!
-        </a>        
+        </a>
     </section>
     <!--Footer-->
     <footer class="bg-white">
@@ -579,6 +558,7 @@
             return false;
         }
     </script>
+    @livewireScripts
 </body>
 
 </html>
