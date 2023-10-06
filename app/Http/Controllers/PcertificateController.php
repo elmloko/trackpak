@@ -65,7 +65,6 @@ class PcertificateController extends Controller
 
         return view('pcertificate.show', compact('pcertificate'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -117,4 +116,10 @@ class PcertificateController extends Controller
     {
         return Excel::download(new PcertificateExport, 'Paquetes Certificados.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     } 
+    public function delete($id)
+    {
+        $pcertificate = Pcertificate::find($id)->delete();
+
+        return back()->with('success', 'Paquete se dio de Baja Con Exito!');
+    }
 }

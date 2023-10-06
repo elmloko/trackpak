@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Package
@@ -26,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Package extends Model
 {
-    
+    use SoftDeletes;
     static $rules = [
 		'CODIGO' => 'required',
 		'DESTINATARIO' => 'required',

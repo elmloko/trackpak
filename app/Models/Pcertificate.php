@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Pcertificate
  *
@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Pcertificate extends Model
 {
-    
+    use SoftDeletes;
     static $rules = [
 		'CODIGO' => 'required',
 		'DESTINATARIO' => 'required',

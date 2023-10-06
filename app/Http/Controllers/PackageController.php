@@ -117,4 +117,10 @@ class PackageController extends Controller
     {
         return Excel::download(new PackageExport, 'Paquetes Ordinarios.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     } 
+    public function delete($id)
+    {
+        $package = Package::find($id)->delete();
+
+        return back()->with('success', 'Paquete se dio de Baja Con Exito!');
+    }
 }

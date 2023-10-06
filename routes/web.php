@@ -31,12 +31,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('packages', App\Http\Controllers\PackageController::class);
+    Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
     Route::get('prueba/excel', [PackageController::class, 'excel'])->name('prueba.excel');
     Route::get('prueba/pdf', [PackageController::class, 'pdf'])->name('prueba.pdf');
-    Route::resource('pcertificates', App\Http\Controllers\PcertificateController::class);
+    
+    Route::resource('pcertificates', App\Http\Controllers\PcertificateController::class);    
+    Route::get('pcertificates/{id}/delete', [PcertificateController::class, 'delete'])->name('pcertificates.delete');
     Route::get('prueba1/excel', [PcertificateController::class, 'excel'])->name('prueba1.excel');
     Route::get('prueba1/pdf', [PcertificateController::class, 'pdf'])->name('prueba1.pdf');
-    Route::get('prueba1/import', [PcertificateExport::class, 'import'])->name('prueba1.import');
+
 });
 
 require __DIR__.'/auth.php';

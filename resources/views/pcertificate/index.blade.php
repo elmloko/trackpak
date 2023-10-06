@@ -15,37 +15,26 @@
                             <span id="card_title">
                                 {{ __('Paquetes Certificados') }}
                             </span>
-
-                            <div class="float-right">
-                                <a href="{{ route('prueba1.excel') }}" class="btn btn-success btn-sm" data-placement="left">
-                                    Excel</a>
-                                <a href="{{ route('prueba1.pdf') }}" class="btn btn-danger btn-sm" data-placement="left">
-                                    PDF</a>
-                                <a href="{{ route('pcertificates.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Crear Nuevo') }}
-                                </a>
+                            <div style="display: flex; align-items: center;">
+                                <div class="mr-2">
+                                    <a href="{{ route('prueba1.excel') }}" class="btn btn-success btn-sm"
+                                        data-placement="left">
+                                        Excel
+                                    </a>
+                                </div>
+                                <div class="mr-2">
+                                    <a href="{{ route('prueba1.pdf') }}" class="btn btn-danger btn-sm"
+                                        data-placement="left">
+                                        PDF
+                                    </a>
+                                </div>
+                                <div class="mr-2">
+                                    <a href="{{ route('pcertificates.create') }}" class="btn btn-primary btn-sm"
+                                        data-placement="left">
+                                        {{ __('Crear Nuevo') }}
+                                    </a>
+                                </div>
                             </div>
-                            {{-- <div>
-                                @if(session('success'))
-                                    <div class="alert alert-success">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
-                        
-                                @if(session('error'))
-                                    <div class="alert alert-danger">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
-                        
-                                <form action="{{ route('prueba1.import') }}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="file" name="file" id="file" class="form-control-file" accept=".xlsx, .csv" required onchange="this.form.submit()">
-                                    </div>
-                                </form>
-                            </div> --}}
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -96,6 +85,9 @@
                                             <td>
                                                 <form action="{{ route('pcertificates.destroy', $pcertificate->id) }}"
                                                     method="POST">
+                                                    <a class="btn btn-sm btn-warning"
+                                                        href="{{ route('pcertificates.delete', $pcertificate->id) }}"><i
+                                                            class="fa fa-arrow-down"></i> {{ __('Baja') }}</a>
                                                     <a class="btn btn-sm btn-success"
                                                         href="{{ route('pcertificates.edit', $pcertificate->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
@@ -104,6 +96,7 @@
                                                     <button type="submit" class="btn btn-danger btn-sm"><i
                                                             class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                                 </form>
+                                                
                                             </td>
                                         </tr>
                                     @endforeach
