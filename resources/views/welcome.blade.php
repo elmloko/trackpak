@@ -86,7 +86,7 @@
                     Un servicio de seguimiento de paquetería postal de la Agencia Boliviana de Correos
                 </p>
                 <div class="w-full flex flex-col md:flex-row items-center justify-center">
-                    <input type="text" id="mysearch" class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0"
+                    <input type="text" id="" class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0"
                         placeholder="Buscar Paquete...">
                 </div>
                 <ul id="showlist" tabindex="1" class="list-group"></ul>
@@ -493,7 +493,6 @@
             </div>
         </div>
     </footer>
-    <script src="{{asset('search/js/search.js')}}" type="module"></script>
     <!-- jQuery if you need it
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   -->
