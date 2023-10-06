@@ -17,16 +17,16 @@
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('prueba.excel') }}" class="btn btn-success btn-sm" data-placement="left">
+                                <a href="{{ route('prueba1.excel') }}" class="btn btn-success btn-sm" data-placement="left">
                                     Excel</a>
-                                <a href="{{ route('prueba.pdf') }}" class="btn btn-danger btn-sm" data-placement="left">
+                                <a href="{{ route('prueba1.pdf') }}" class="btn btn-danger btn-sm" data-placement="left">
                                     PDF</a>
                                 <a href="{{ route('pcertificates.create') }}" class="btn btn-primary btn-sm float-right"
                                     data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
                             </div>
-                            <div>
+                            {{-- <div>
                                 @if(session('success'))
                                     <div class="alert alert-success">
                                         {{ session('success') }}
@@ -45,7 +45,7 @@
                                         <input type="file" name="file" id="file" class="form-control-file" accept=".xlsx, .csv" required onchange="this.form.submit()">
                                     </div>
                                 </form>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     @if ($message = Session::get('success'))

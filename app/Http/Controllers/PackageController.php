@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\PackageExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 /**
@@ -110,11 +110,11 @@ class PackageController extends Controller
     }
     public function excel()
     {
-        return Excel::download(new PackageExport, 'users.xlsx');
+        return Excel::download(new PackageExport, 'Paquetes Ordinarios.xlsx');
     }
 
     public function pdf()
     {
-        return Excel::download(new PackageExport, 'Paquetes.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        return Excel::download(new PackageExport, 'Paquetes Ordinarios.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     } 
 }

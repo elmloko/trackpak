@@ -16,12 +16,12 @@
                             </span>
                             <div style="display: flex; align-items: center;">
                                 <div class="mr-2">
-                                    <a href="{{ route('prueba1.excel') }}" class="btn btn-success btn-sm" data-placement="left">
+                                    <a href="{{ route('prueba.excel') }}" class="btn btn-success btn-sm" data-placement="left">
                                         Excel
                                     </a>
                                 </div>
                                 <div class="mr-2">
-                                    <a href="{{ route('prueba1.pdf') }}" class="btn btn-danger btn-sm" data-placement="left">
+                                    <a href="{{ route('prueba.pdf') }}" class="btn btn-danger btn-sm" data-placement="left">
                                         PDF
                                     </a>
                                 </div>
@@ -43,12 +43,12 @@
                                         </div>
                                     @endif
                             
-                                    <form action="{{ route('import.store') }}" method="POST" enctype="multipart/form-data">
+                                    {{-- <form action="{{ route('import.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <input type="file" name="file" id="file" class="form-control-file" accept=".xlsx, .csv" required onchange="this.form.submit()">
                                         </div>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                                                 <form action="{{ route('packages.destroy', $package->id) }}"
                                                     method="POST">
                                                     <a class="btn btn-sm btn-success"
-                                                        href="{{ route('packages.show', $package->id) }}"><i
+                                                        href="{{ route('packages.edit', $package->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')

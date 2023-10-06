@@ -110,15 +110,11 @@ class PcertificateController extends Controller
     }
     public function excel()
     {
-        return Excel::download(new PcertificatesExport, 'Paquetes Certificados.xlsx');
+        return Excel::download(new PcertificateExport, 'Paquetes Certificados.xlsx');
     }
 
     public function pdf()
     {
-        return Excel::download(new PcertificatesExport, 'Paquetes Certificados.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
-    } 
-    public function pdf()
-    {
-        return Excel::download(new PcertificatesExport, 'Paquetes Certificados.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        return Excel::download(new PcertificateExport, 'Paquetes Certificados.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     } 
 }
