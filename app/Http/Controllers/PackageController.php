@@ -20,7 +20,7 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::paginate();
+        $packages = Package::paginate(20);
 
         return view('package.index', compact('packages'))
             ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
@@ -123,4 +123,20 @@ class PackageController extends Controller
 
         return back()->with('success', 'Paquete se dio de Baja Con Exito!');
     }
+    public function deleted()
+    {
+        // Recupera todos los elementos eliminados (soft deleted)
+        $deletedPackages = Package::onlyTrashed()->paginate();
+
+        return view('package.deleted', compact('deletedPackages'));
+    }
+    public function restoring($id)
+    {
+        // Restaura el paquete con el ID dado
+        $package = Package::withTrashed()->findOrFail($id);
+        $package->restore();
+
+        return redirect()->route('package.index')->with('success', 'Paquete se restauró con éxito.');
+    }
+
 }

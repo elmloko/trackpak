@@ -16,7 +16,8 @@
                             </span>
                             <div style="display: flex; align-items: center;">
                                 <div class="mr-2">
-                                    <a href="{{ route('prueba.excel') }}" class="btn btn-success btn-sm" data-placement="left">
+                                    <a href="{{ route('prueba.excel') }}" class="btn btn-success btn-sm"
+                                        data-placement="left">
                                         Excel
                                     </a>
                                 </div>
@@ -26,13 +27,14 @@
                                     </a>
                                 </div>
                                 <div class="mr-2">
-                                    <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm" data-placement="left">
+                                    <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm"
+                                        data-placement="left">
                                         {{ __('Crear Nuevo') }}
                                     </a>
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
@@ -50,7 +52,7 @@
                                         <th>Destinatario</th>
                                         <th>Telefono</th>
                                         <th>Pais</th>
-                                        <th>Cuidad</th>
+                                        <th>Ciudad</th>
                                         <th>Zona</th>
                                         <th>Ventanilla</th>
                                         <th>Peso</th>
@@ -70,7 +72,7 @@
                                             <td>{{ $package->DESTINATARIO }}</td>
                                             <td>{{ $package->TELEFONO }}</td>
                                             <td>{{ $package->PAIS }}</td>
-                                            <td>{{ $package->CUIDAD }}</td>
+                                            <td>{{ $package->CIUDAD }}</td>
                                             <td>{{ $package->ZONA }}</td>
                                             <td>{{ $package->VENTANILLA }}</td>
                                             <td>{{ $package->PESO }}</td>
@@ -98,14 +100,14 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        Se encontraron {{ $packages->currentPage() }} de {{ $packages->lastPage() }} Paginas
-                    </div>
-                    <div class="mt-8">
-                        {{ $packages->links() }}
+                        <div class="row mt-3">
+                            <div class="col-md-6 ">
+                                {{ $packages->links() }}
+                            </div>
+                            <div class="col-md-6 text-right">
+                                Se encontraron {{ $packages->total() }} registros en total
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -309,14 +309,30 @@ return [
         ],
         ['header' => 'PAQUETERIA POSTAL'],
         [
-            'text'        => 'Paquetes Ordinarios',
-            'url'         => 'packages',
-            'icon'        => 'fas fa-box',
+            'text' => 'Paquetes Ordinarios',
+            'icon' => 'fas fa-archive',
+            'submenu' => [
+                [
+                    'text' => 'Paquetes',
+                    'url' => 'packages',
+                    'icon' => 'fas fa-box',
+                ],
+                [
+                    'text' => 'Inventario',
+                    'url' => 'packages/deleted',
+                    'icon' => 'fas fa-clipboard-list',
+                ],
+                [
+                    'text' => 'Reportes',
+                    'url' => '',
+                    'icon' => 'fas fa-chart-bar',
+                ],
+            ],
         ],
         [
-            'text'        => 'Paquetes Certificados',
-            'url'         => 'pcertificates',
-            'icon'        => 'fas fa-box',
+            'text' => 'Paquetes Certificados',
+            'url' => 'pcertificates',
+            'icon' => 'fas fa-box',
         ],
     ],
 

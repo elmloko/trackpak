@@ -103,9 +103,17 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                {{ $pcertificates->links() }}
+                            </div>
+                            <div class="col-md-6 text-right">
+                                Se encontraron {{ $pcertificates->total() }} registros en total
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
-                {!! $pcertificates->links() !!}
             </div>
         </div>
     </div>

@@ -51,7 +51,11 @@ return [
             'output_encoding'        => '',
             'test_auto_detect'       => true,
         ],
-
+        'pdf' => [
+            'enabled' => true,
+            'writer' => 'dompdf',
+            'orientation' => 'landscape', // Configura la orientación horizontal para PDF
+        ],
         /*
         |--------------------------------------------------------------------------
         | Worksheet properties
@@ -61,7 +65,7 @@ return [
         |
         */
         'properties'             => [
-            'creator'        => '',
+            'creator'        => 'Agencia Boliviana de Correos',
             'lastModifiedBy' => '',
             'title'          => '',
             'description'    => '',

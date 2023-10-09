@@ -1,6 +1,6 @@
 <div class="pt-24">
     <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-        <!-- Left Col -->
+        <!-- Columna Izquierda -->
         <div class="flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left">
             <p class="uppercase tracking-loose w-full">¿Estás buscando tu paquete?</p>
             <h1 class="my-4 text-5xl font-bold leading-tight">
@@ -31,9 +31,11 @@
                     </div>
                 @endif
             </div>
-            <!-- Right Col -->
-            <div class="w-full md:w-3/5 py-6 text-center">
-                <img class="w-2/3 md:w-1/2 mx-auto z-50" src="{{ asset('images/MONITO.png') }}" />
-            </div>
+        </div>
+        
+        <!-- Columna Derecha -->
+        <div class="w-full md:w-3/5 py-6 text-center">
+            <img class="w-2/3 md:w-1/2 mx-auto z-50" src="{{ asset('images/MONITO.png') }}" />
         </div>
     </div>
+</div>
