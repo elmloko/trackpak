@@ -20,7 +20,7 @@ class PcertificateController extends Controller
      */
     public function index()
     {
-        $pcertificates = Pcertificate::paginate();
+        $pcertificates = Pcertificate::paginate(20);
 
         return view('pcertificate.index', compact('pcertificates'))
             ->with('i', (request()->input('page', 1) - 1) * $pcertificates->perPage());

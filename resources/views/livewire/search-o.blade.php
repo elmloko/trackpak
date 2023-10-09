@@ -1,0 +1,61 @@
+<div class="card-body">
+    <div class="table-responsive">
+        <div class="px-6 py-4">
+            <input type="text" wire:model.live="search-o"
+                class="w-full bg-gray-100 rounded-full py-2 px-4 mb-2 md:mb-0 text-black" placeholder="Busca">
+        </div>
+        <table class="table table-striped table-hover">
+            <thead class="thead">
+                <tr>
+                    <th>No</th>
+
+                    <th>Codigo Postal</th>
+                    <th>Destinatario</th>
+                    <th>Telefono</th>
+                    <th>Pais</th>
+                    <th>Ciudad</th>
+                    <th>Zona</th>
+                    <th>Ventanilla</th>
+                    <th>Peso</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Fecha Ingreso</th>
+                    <th>Acciones</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($packages as $package)
+                    <tr>
+                        <td>{{ ++$i }}</td>
+
+                        <td>{{ $package->CODIGO }}</td>
+                        <td>{{ $package->DESTINATARIO }}</td>
+                        <td>{{ $package->TELEFONO }}</td>
+                        <td>{{ $package->PAIS }}</td>
+                        <td>{{ $package->CIUDAD }}</td>
+                        <td>{{ $package->ZONA }}</td>
+                        <td>{{ $package->VENTANILLA }}</td>
+                        <td>{{ $package->PESO }}</td>
+                        <td>{{ $package->TIPO }}</td>
+                        <td>{{ $package->ESTADO }}</td>
+                        <td>{{ $package->created_at }}</td>
+
+                        <td>
+                            <form action="{{ route('packages.destroy', $package->id) }}" method="POST">
+                                <a class="btn btn-sm btn-warning"
+                                    href="{{ route('packages.delete', $package->id) }}"><i
+                                        class="fa fa-arrow-down"></i> {{ __('Baja') }}</a>
+                                <a class="btn btn-sm btn-success" href="{{ route('packages.edit', $package->id) }}"><i
+                                        class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>
+                                    {{ __('Eliminar') }}</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
