@@ -9,25 +9,31 @@
             <p class="leading-normal text-2xl mb-8">
                 Un servicio de seguimiento de paquetería postal de la Agencia Boliviana de Correos
             </p>
-            <div class="w-full flex flex-col md:flex-row items-center justify-center text-black">
+            <div class="w-full bg-white rounded p-4">
                 <input type="text" wire:model.live="search"
-                    class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0" placeholder="Buscar Paquete...">
-            </div>
-            <ul id="showlist" tabindex="1" class="list-group">
+                    class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0 text-black" placeholder="Buscar Paquete...">
                 @if ($search)
-                    @foreach ($packages as $package)
-                        <li>{{$package->CODIGO}}</li>
-                        <li>{{$package->DESTINATARIO}}</li>
-                    @endforeach
-                    @if ($packages->count() == 0)
-                        <p>No hay resultados para la búsqueda <b>"{{$search}}"</b></p>
-                    @endif
+                    <div class="w-full bg-white rounded p-4 mt-4">
+                        @foreach ($results as $results)
+                            <div class="mb-4 text-black" tabindex="1">
+                                Su paquete <strong>{{ $results->CODIGO }}</strong> se encuentra en 
+                                <strong>{{ $results->CUIDAD }}</strong> en la ventanilla
+                                <strong>{{ $results->VENTANILLA }}</strong>
+                            </div>
+                            @if (!$loop->last)
+                                <!-- Verifica si no es el último elemento -->
+                                <div class="mb-4 border-b border-gray-300"></div>
+                            @endif
+                        @endforeach
+                        @if ($results->count() == 0)
+                            <p>No hay resultados para la búsqueda <b>"{{ $search }}"</b></p>
+                        @endif
+                    </div>
                 @endif
-            </ul>
-        </div>
-        <!-- Right Col -->
-        <div class="w-full md:w-3/5 py-6 text-center">
-            <img class="w-2/3 md:w-1/2 mx-auto z-50" src="{{ asset('images/MONITO.png') }}" />
+            </div>
+            <!-- Right Col -->
+            <div class="w-full md:w-3/5 py-6 text-center">
+                <img class="w-2/3 md:w-1/2 mx-auto z-50" src="{{ asset('images/MONITO.png') }}" />
+            </div>
         </div>
     </div>
-</div>
