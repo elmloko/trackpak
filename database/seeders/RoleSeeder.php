@@ -1,0 +1,53 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;  
+use Spatie\Permission\Models\Permission;
+
+class RoleSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $role1 = Role::create(['name' => 'SuperAdmin']);
+        $role2 = Role::create(['name' => 'Administrador']);
+        $role3 = Role::create(['name' => 'Urbano']);
+        $role4 = Role::create(['name' => 'Auxiliar Urbano']);
+        $role5 = Role::create(['name' => 'Clasificacion']);
+        $role6 = Role::create(['name' => 'Auxiliar Clasificacion']);
+        $role12 = Role::create(['name' => 'Adminsion']);
+        $role12 = Role::create(['name' => 'Auxiliar Adminsion']);
+        $role7 = Role::create(['name' => 'Despacho']);
+        $role8 = Role::create(['name' => 'Auxiliar Despacho']);
+        $role9 = Role::create(['name' => 'Enlace']);
+        $role10 = Role::create(['name' => 'Expedicion']);
+        $role10 = Role::create(['name' => 'Auxiliar Expedicion']);
+        $role11 = Role::create(['name' => 'Ventanilla']);
+        $role12 = Role::create(['name' => 'Almacen']);
+        $role12 = Role::create(['name' => 'Auxiliar Almacen']);
+        $role13 = Role::create(['name' => 'Cartero']);
+        $role14 = Role::create(['name' => 'Operador']);
+        $role14 = Role::create(['name' => 'Auxiliar Operador']);
+        $role15 = Role::create(['name' => 'Cajero']);
+        $role16 = Role::create(['name' => 'Ordinarios']);
+        $role17 = Role::create(['name' => 'Auxiliar Ordinarios']);
+
+
+        Permission::create(['name' => 'packages.index'])->syncRoles([$role1,$role2,$role16,$role17]);
+        Permission::create(['name' => 'packages.create'])->syncRoles([$role1,$role2,$role16,$role17]);
+        Permission::create(['name' => 'packages.edit'])->syncRoles([$role1,$role2,$role16,$role17]);
+        Permission::create(['name' => 'packages.destroy'])->syncRoles([$role1,$role2,$role16]);
+        Permission::create(['name' => 'packages.delete'])->syncRoles([$role1,$role2,$role16,$role17]);
+
+        Permission::create(['name' => 'pcertificate.index'])->syncRoles([$role1,$role2,$role5,$role6]);
+        Permission::create(['name' => 'pcertificate.create'])->syncRoles([$role1,$role2,$role5,$role6]);
+        Permission::create(['name' => 'pcertificate.edit'])->syncRoles([$role1,$role2,$role5,$role6]);
+        Permission::create(['name' => 'pcertificate.destroy'])->syncRoles([$role1,$role2,$role5]);
+        Permission::create(['name' => 'pcertificate.delete'])->syncRoles([$role1,$role2,$role5,$role6]);
+    }
+}

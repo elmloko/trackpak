@@ -123,12 +123,12 @@ class PackageController extends Controller
 
         return back()->with('success', 'Paquete se dio de Baja Con Exito!');
     }
-    public function deleted()
+    public function deleteado()
     {
         // Recupera todos los elementos eliminados (soft deleted)
-        $deletedPackages = Package::onlyTrashed()->paginate();
+        $deleteadoPackages = Package::onlyTrashed()->paginate();
 
-        return view('package.deleted', compact('deletedPackages'));
+        return view('package.deleteado', compact('deleteadoPackages'));
     }
     public function restoring($id)
     {

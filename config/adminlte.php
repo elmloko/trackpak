@@ -319,20 +319,36 @@ return [
                 ],
                 [
                     'text' => 'Inventario',
-                    'url' => 'packages/deleted',
+                    'url' => '#',
                     'icon' => 'fas fa-clipboard-list',
                 ],
                 [
                     'text' => 'Reportes',
-                    'url' => '',
+                    'url' => '#',
                     'icon' => 'fas fa-chart-bar',
                 ],
             ],
         ],
         [
             'text' => 'Paquetes Certificados',
-            'url' => 'pcertificates',
-            'icon' => 'fas fa-box',
+            'icon' => 'pcertificates',
+            'submenu' => [
+                [
+                    'text' => 'Paquetes',
+                    'url' => 'pcertificates',
+                    'icon' => 'fas fa-box',
+                ],
+                [
+                    'text' => 'Inventario',
+                    'url' => '#',
+                    'icon' => 'fas fa-clipboard-list',
+                ],
+                [
+                    'text' => 'Reportes',
+                    'url' => '#',
+                    'icon' => 'fas fa-chart-bar',
+                ],
+            ],
         ],
     ],
 
