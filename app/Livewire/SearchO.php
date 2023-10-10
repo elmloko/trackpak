@@ -21,7 +21,7 @@ class SearchO extends Component
             ->orWhere('PESO', 'like', '%' . $this->search . '%')
             ->orWhere('TIPO', 'like', '%' . $this->search . '%')
             ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
-            ->paginate(10);
+            ->paginate(10)->get();
 
         return view('livewire.search-o');
     }

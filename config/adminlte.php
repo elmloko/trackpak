@@ -319,7 +319,7 @@ return [
                 ],
                 [
                     'text' => 'Inventario',
-                    'url' => '#',
+                    'url' => 'packages/deleteado',
                     'icon' => 'fas fa-clipboard-list',
                 ],
                 [

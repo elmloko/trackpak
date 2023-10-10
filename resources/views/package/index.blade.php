@@ -41,7 +41,7 @@
                         </div>
                     @endif
 
-                    <div class="card-body">
+                    {{-- <div class="card-body">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div class="px-6 py-4">
@@ -104,8 +104,8 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div>
-                        {{-- @livewire('search-o') --}}
+                            </div> --}}
+                        @livewire('search-o')
                         <div class="row mt-3">
                             <div class="col-md-6 ">
                                 {{ $packages->links() }}
