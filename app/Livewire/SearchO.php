@@ -14,7 +14,6 @@ class SearchO extends Component
     {
         $this->packages = Package::where('CODIGO', 'like', '%' . $this->search . '%')
             ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-            ->orWhere('DIRECCION', 'like', '%' . $this->search . '%')
             ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
             ->orWhere('PAIS', 'like', '%' . $this->search . '%')
             ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
