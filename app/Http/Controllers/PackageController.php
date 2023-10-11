@@ -126,17 +126,24 @@ class PackageController extends Controller
     public function deleteado()
     {
         // Recupera todos los elementos eliminados (soft deleted)
-        $deleteadoPackages = Package::onlyTrashed()->paginate();
+        $deleteadoPackages = Package::onlyTrashed()->paginate(20);
 
         return view('package.deleteado', compact('deleteadoPackages'));
     }
     public function restoring($id)
     {
         // Restaura el paquete con el ID dado
-        $package = Package::withTrashed()->findOrFail($id);
-        $package->restore();
-
-        return redirect()->route('package.index')->with('success', 'Paquete se restauró con éxito.');
+        $package = Package::withTrashed()->find($id);
+        // Verifica si se encontró un paquete eliminado con ese ID
+        if ($package) {
+            // Restaura el paquete
+            $package->restore();
+            return redirect()->route('packages.index')
+                ->with('success', 'El paquete ha sido restaurado exitosamente');
+        } else {
+            return redirect()->route('packages.index')
+                ->with('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
     }
 
 }

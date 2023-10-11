@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Paquetes Ordinarios')
+@section('title', 'Paquetes Certificados')
 
 @section('content')
     <div class="container-fluid">
@@ -10,7 +10,7 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span id="card_title">
-                                {{ __('Paquetes Ordinarios Nacionales') }}
+                                {{ __('Paquetes Certificados Nacionales') }}
                             </span>
                             <div style="display: flex; align-items: center;">
                                 {{-- <div class="mr-2">
@@ -60,23 +60,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($deleteadoPackages as $package)
+                                        @foreach ($deleteadoPackages as $pcertificates)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                         
-                                            <td>{{ $package->CODIGO }}</td>
-                                            <td>{{ $package->DESTINATARIO }}</td>
-                                            <td>{{ $package->TELEFONO }}</td>
-                                            <td>{{ $package->PAIS }}</td>
-                                            <td>{{ $package->CIUDAD }}</td>
-                                            <td>{{ $package->ZONA }}</td>
-                                            <td>{{ $package->VENTANILLA }}</td>
-                                            <td>{{ $package->PESO }}</td>
-                                            <td>{{ $package->TIPO }}</td>
-                                            <td>{{ $package->ESTADO }}</td>
-                                            <td>{{ $package->deleted_at }}</td>
+                                            <td>{{ $pcertificates->CODIGO }}</td>
+                                            <td>{{ $pcertificates->DESTINATARIO }}</td>
+                                            <td>{{ $pcertificates->TELEFONO }}</td>
+                                            <td>{{ $pcertificates->PAIS }}</td>
+                                            <td>{{ $pcertificates->CIUDAD }}</td>
+                                            <td>{{ $pcertificates->ZONA }}</td>
+                                            <td>{{ $pcertificates->VENTANILLA }}</td>
+                                            <td>{{ $pcertificates->PESO }}</td>
+                                            <td>{{ $pcertificates->TIPO }}</td>
+                                            <td>{{ $pcertificates->ESTADO }}</td>
+                                            <td>{{ $pcertificates->deleted_at }}</td>
                                             <td>
-                                                <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
+                                                <form action="{{ route('pcertificates.restoring', $pcertificates->id) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <button type="submit" class="btn btn-sm btn btn-info"">

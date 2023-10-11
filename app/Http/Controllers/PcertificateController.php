@@ -122,4 +122,26 @@ class PcertificateController extends Controller
 
         return back()->with('success', 'Paquete se dio de Baja Con Exito!');
     }
+    public function deleteado()
+    {
+        // Recupera todos los elementos eliminados (soft deleted)
+        $deleteadoPackages = Pcertificate::onlyTrashed()->paginate(20);
+
+        return view('pcertificate.deleteado', compact('deleteadoPackages'));
+    }
+    public function restoring($id)
+    {
+        // Restaura el paquete con el ID dado
+        $pcertificate = Pcertificate::withTrashed()->find($id);
+        // Verifica si se encontró un paquete eliminado con ese ID
+        if ($pcertificate) {
+            // Restaura el paquete
+            $pcertificate->restore();
+            return redirect()->route('pcertificates.index')
+                ->with('success', 'El paquete ha sido restaurado exitosamente');
+        } else {
+            return redirect()->route('pcertificates.index')
+                ->with('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
+    }
 }

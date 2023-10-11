@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Paquetes')
+@section('title', 'Paquetes Ordinarios')
 @section('template_title')
     Paqueteria Postal
 @endsection
@@ -45,13 +45,13 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 @php
-                                $i = 0; // Inicializa la variable $i
+                                    $i = 0; // Inicializa la variable $i
                                 @endphp
                                 <table class="table table-striped table-hover">
                                     <thead class="thead">
                                         <tr>
                                             <th>No</th>
-                        
+
                                             <th>Codigo Postal</th>
                                             <th>Destinatario</th>
                                             <th>Telefono</th>
@@ -69,50 +69,54 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($packages as $package)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                        
-                                            <td>{{ $package->CODIGO }}</td>
-                                            <td>{{ $package->DESTINATARIO }}</td>
-                                            <td>{{ $package->TELEFONO }}</td>
-                                            <td>{{ $package->PAIS }}</td>
-                                            <td>{{ $package->CIUDAD }}</td>
-                                            <td>{{ $package->ZONA }}</td>
-                                            <td>{{ $package->VENTANILLA }}</td>
-                                            <td>{{ $package->PESO }}</td>
-                                            <td>{{ $package->TIPO }}</td>
-                                            <td>{{ $package->ESTADO }}</td>
-                                            <td>{{ $package->created_at }}</td>
-                        
-                                            <td>
-                                                <form action="{{ route('packages.destroy', $package->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-warning" href="{{ route('packages.delete', $package->id) }}"><i
-                                                            class="fa fa-arrow-down"></i> {{ __('Baja') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('packages.edit', $package->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>
-                                                        {{ __('Eliminar') }}</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ ++$i }}</td>
+
+                                                <td>{{ $package->CODIGO }}</td>
+                                                <td>{{ $package->DESTINATARIO }}</td>
+                                                <td>{{ $package->TELEFONO }}</td>
+                                                <td>{{ $package->PAIS }}</td>
+                                                <td>{{ $package->CIUDAD }}</td>
+                                                <td>{{ $package->ZONA }}</td>
+                                                <td>{{ $package->VENTANILLA }}</td>
+                                                <td>{{ $package->PESO }}</td>
+                                                <td>{{ $package->TIPO }}</td>
+                                                <td>{{ $package->ESTADO }}</td>
+                                                <td>{{ $package->created_at }}</td>
+
+                                                <td>
+                                                    <form action="{{ route('packages.destroy', $package->id) }}"
+                                                        method="POST">
+                                                        <a class="btn btn-sm btn-warning"
+                                                            href="{{ route('packages.delete', $package->id) }}"><i
+                                                                class="fa fa-arrow-down"></i> {{ __('Baja') }}</a>
+                                                        <a class="btn btn-sm btn-success"
+                                                            href="{{ route('packages.edit', $package->id) }}"><i
+                                                                class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                class="fa fa-fw fa-trash"></i>
+                                                            {{ __('Eliminar') }}</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6 ">
-                                {{ $packages->links() }}
-                            </div>
-                            <div class="col-md-6 text-right">
-                                Se encontraron {{ $packages->total() }} registros en total
+                            <div class="row mt-3">
+                                <div class="col-md-6 ">
+                                    {{ $packages->links() }}
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    Se encontraron {{ $packages->total() }} registros en total
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    @include('footer')
-@endsection
+        @include('footer')
+    @endsection

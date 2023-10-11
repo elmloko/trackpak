@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Paquetes')
+@section('title', 'Editar Paquetes Ordinarios')
 @section('template_title')
     Paqueteria Postal
 @endsection

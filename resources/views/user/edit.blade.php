@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Editar Paquetes Certificados')
+@section('title', 'Editar Usuarios')
 @section('template_title')
     Paqueteria Postal
 @endsection
@@ -13,20 +13,20 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Actualizar') }} Paquete Certificado</span>
+                        <span class="card-title">{{ __('Actualizar') }} Usuarios</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('pcertificates.update', $pcertificate->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('users.update', $user->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('pcertificate.form')
+                            @include('user.form')
 
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        @include('footer')
     </section>
-    @include('footer')
 @endsection

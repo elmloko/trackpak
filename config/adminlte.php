@@ -309,6 +309,11 @@ return [
         ],
         ['header' => 'PAQUETERIA POSTAL'],
         [
+            'text' => 'Usuarios',
+            'url' => 'users',
+            'icon' => 'fas fa-user',
+        ],
+        [
             'text' => 'Paquetes Ordinarios',
             'icon' => 'fas fa-archive',
             'submenu' => [
@@ -319,7 +324,7 @@ return [
                 ],
                 [
                     'text' => 'Inventario',
-                    'url' => 'packages/deleteado',
+                    'url' => 'test/deleteado',
                     'icon' => 'fas fa-clipboard-list',
                 ],
                 [
@@ -340,7 +345,7 @@ return [
                 ],
                 [
                     'text' => 'Inventario',
-                    'url' => '#',
+                    'url' => 'ctest/deleteado',
                     'icon' => 'fas fa-clipboard-list',
                 ],
                 [

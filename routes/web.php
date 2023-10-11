@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PcertificateController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,20 +28,26 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::resource('users', App\Http\Controllers\UserController::class);    
+    Route::get('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    Route::get('usuario1/excel', [UserController::class, 'excel'])->name('usuario1.excel');
+    Route::get('usuario1/pdf', [UserController::class, 'pdf'])->name('usuario1.pdf');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::resource('packages', App\Http\Controllers\PackageController::class);
     Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
-    Route::get('packages/deleteado', [PackageController::class, 'deleteado'])->name('packages.deleteado');
-    Route::get('packages/{id}/restore', [PackageController::class, 'restore'])->name('packages.restore');
-
+    Route::get('test/deleteado', [PackageController::class, 'deleteado'])->name('test.deleteado');
+    Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
     Route::get('prueba/excel', [PackageController::class, 'excel'])->name('prueba.excel');
     Route::get('prueba/pdf', [PackageController::class, 'pdf'])->name('prueba.pdf');
 
     Route::resource('pcertificates', App\Http\Controllers\PcertificateController::class);    
     Route::get('pcertificates/{id}/delete', [PcertificateController::class, 'delete'])->name('pcertificates.delete');
-    Route::get('pcertificates/{id}/restore', [PcertificateController::class, 'restore'])->name('pcertificates.restore');
+    Route::get('ctest/deleteado', [PcertificateController::class, 'deleteado'])->name('ctest.deleteado');
+    Route::put('ctest/{id}/restoring', [PcertificateController::class, 'restoring'])->name('pcertificates.restoring');
     Route::get('prueba1/excel', [PcertificateController::class, 'excel'])->name('prueba1.excel');
     Route::get('prueba1/pdf', [PcertificateController::class, 'pdf'])->name('prueba1.pdf');
 

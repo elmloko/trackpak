@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Paquetes')
+@section('title', 'Crear Paquetes Certificados')
 @section('template_title')
     Paqueteria Postal
 @endsection

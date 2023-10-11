@@ -15,12 +15,18 @@ class SearchTest extends Component
     
     public function render()
     {
-        $this->packages = Package::where('CODIGO', 'like', '%' . $this->search . '%')->take(5)->get();
-        $this->pcertificates = Pcertificate::where('CODIGO', 'like', '%' . $this->search . '%')->take(5)->get();
-        
-        // Combina los resultados de ambas tablas y asigna a $results
-        $this->results = $this->packages->concat($this->pcertificates);
-        
-        return view('livewire.search-test');
+        $this->packages = Package::where('CODIGO', 'like', '%' . $this->search . '%')
+        ->whereNull('deleted_at') // Excluye paquetes eliminados
+        ->take(5)
+        ->get();
+    
+    $this->pcertificates = Pcertificate::where('CODIGO', 'like', '%' . $this->search . '%')
+        ->take(5)
+        ->get();
+    
+    // Combina los resultados de ambas tablas y asigna a $results
+    $this->results = $this->packages->concat($this->pcertificates);
+    
+    return view('livewire.search-test');
     }
 }
