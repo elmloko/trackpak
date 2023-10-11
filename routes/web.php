@@ -29,9 +29,12 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::resource('users', App\Http\Controllers\UserController::class);    
-    Route::get('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
-    Route::get('usuario1/excel', [UserController::class, 'excel'])->name('usuario1.excel');
-    Route::get('usuario1/pdf', [UserController::class, 'pdf'])->name('usuario1.pdf');
+    Route::get('users/{id}/delete', [PackageController::class, 'delete'])->name('users.delete');
+    Route::get('utest/deleteado', [UserController::class, 'deleteado'])->name('utest.deleteado');
+    Route::put('utest/{id}/restoring', [UserController::class, 'restoring'])->name('users.restoring');
+    Route::get('prueba2/excel', [UserController::class, 'excel'])->name('usuario1.excel');
+    Route::get('prueba2/pdf', [UserController::class, 'pdf'])->name('usuario1.pdf');
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

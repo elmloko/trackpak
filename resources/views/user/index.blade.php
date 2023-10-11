@@ -52,6 +52,9 @@
 
                                         <th>Nombre Completo</th>
                                         <th>Email</th>
+                                        <th>Contraseña</th>
+                                        <th>Nivel de Usuario</th>
+                                        <th>Estado</th>
 
                                         <th></th>
                                     </tr>
@@ -63,9 +66,17 @@
 
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
-
+                                            <td>{{ str_repeat('*', min(12, strlen($user->password))) }}</td>
+                                            <td>
+                                                @foreach ($user->roles as $role)
+                                                    <span class="badge badge-info">{{ $role->name }}</span>
+                                                @endforeach
+                                            </td>
                                             <td>
                                                 <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-warning"
+                                                        href="{{ route('users.delete', $user->id) }}"><i
+                                                            class="fa fa-arrow-down"></i> {{ __('Baja') }}</a>
                                                     <a class="btn btn-sm btn-success"
                                                         href="{{ route('users.edit', $user->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>

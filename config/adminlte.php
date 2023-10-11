@@ -316,6 +316,7 @@ return [
         [
             'text' => 'Paquetes Ordinarios',
             'icon' => 'fas fa-archive',
+            'can'  => 'packages.index',
             'submenu' => [
                 [
                     'text' => 'Paquetes',
@@ -337,6 +338,7 @@ return [
         [
             'text' => 'Paquetes Certificados',
             'icon' => 'pcertificates',
+            'can'  => 'packages.index',
             'submenu' => [
                 [
                     'text' => 'Paquetes',

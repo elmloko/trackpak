@@ -2,16 +2,16 @@
     <div class="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
         <!-- Columna Izquierda -->
         <div class="flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left">
-            <p class="uppercase tracking-loose w-full">¿Estás buscando tu paquete?</p>
-            <h1 class="my-4 text-5xl font-bold leading-tight">
-                RASTREA TU PAQUETE NACIONAL
+            {{-- <p class="uppercase tracking-loose w-full">¿Estás buscando tu paquete?</p> --}}
+            <h1 class="my-5 text-5xl font-bold leading-tight">
+                RASTREA TU CODIGO POSTAL
             </h1>
-            <p class="leading-normal text-2xl mb-8">
-                Un servicio de seguimiento de paquetería postal de la Agencia Boliviana de Correos
+            <p class="leading-normal text-2xl mb-10">
+                Este es un servicio de seguimiento de paquetería postal de la Agencia Boliviana de Correos
             </p>
             <div class="w-full bg-white rounded p-4">
                 <input type="text" wire:model.live="search"
-                    class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0 text-black" placeholder="Buscar Paquete...">
+                    class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0 text-black" placeholder="Busca tu paquetería...">
                 @if ($search)
                     <div class="w-full bg-white rounded p-4 mt-4">
                         @foreach ($results as $results)

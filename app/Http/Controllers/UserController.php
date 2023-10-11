@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 /**
  * Class UserController
@@ -32,7 +33,8 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        return view('user.create', compact('user'));
+        $roles = Role::all();
+        return view('user.create', compact('user','roles'));
     }
 
     /**
@@ -43,12 +45,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(User::$rules);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+        ]);
+    
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password')); // Encriptar la contraseña
+    
+        $user->save();
 
-        $user = User::create($request->all());
-
+        $user->assignRole($request->input('roles'));
+        
         return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
+            ->with('success', 'Usuario creado correctamente');
     }
 
     /**
@@ -73,8 +86,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $roles = Role::all();
 
-        return view('user.edit', compact('user'));
+        return view('user.edit', compact('user','roles'));
     }
 
     /**
@@ -85,14 +99,22 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
-    {
-        request()->validate(User::$rules);
+{
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,' . $user->id, // Utiliza $user->id
+    ]);
 
-        $user->update($request->all());
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    $user->roles()->sync($request->roles);
 
-        return redirect()->route('users.index')
-            ->with('success', 'User updated successfully');
-    }
+    $user->save();
+
+    return redirect()->route('users.index')
+        ->with('success', 'Usuario actualizado correctamente');
+}
+
 
     /**
      * @param int $id
@@ -120,5 +142,27 @@ class UserController extends Controller
         $user = User::find($id)->delete();
 
         return back()->with('success', 'Usuario se dio de Baja Con Exito!');
+    }
+    public function deleteado()
+    {
+        // Recupera todos los elementos eliminados (soft deleted)
+        $deleteadoUser = User::onlyTrashed()->paginate(20);
+
+        return view('users.deleteado', compact('deleteadoUser'));
+    }
+    public function restoring($id)
+    {
+        // Restaura el paquete con el ID dado
+        $user = User::withTrashed()->find($id);
+        // Verifica si se encontró un paquete eliminado con ese ID
+        if ($user) {
+            // Restaura el paquete
+            $user->restore();
+            return redirect()->route('users.index')
+                ->with('success', 'El paquete ha sido restaurado exitosamente');
+        } else {
+            return redirect()->route('users.index')
+                ->with('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
     }
 }

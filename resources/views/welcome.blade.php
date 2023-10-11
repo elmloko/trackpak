@@ -259,7 +259,7 @@
                 <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
                     <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
                         <div class="p-8 text-3xl font-bold text-center border-b-4">
-                            Mercancia Volátil Peligrosa
+                            Artículo u Objetos Volátiles Peligrosos
                         </div>
                         <ul class="w-full text-center text-sm">
                             <li class="border-b py-4">EXPLOSIVOS</li>
@@ -273,14 +273,14 @@
                     <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                         <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
                             <div>NO</div>
-                            <div class="text-base">Articulos Peligrosos</div>
+                            <div class="text-base">Artículo u Objetos Peligrosos</div>
                         </div>
                     </div>
                 </div>
                 <div
                     class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
                     <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                        <div class="w-full p-8 text-3xl font-bold text-center">Mercancia Permitida</div>
+                        <div class="w-full p-8 text-3xl font-bold text-center">Artículo u Objetos Permitida</div>
                         <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
                         <ul class="w-full text-center text-base font-bold">
                             <li class="border-b py-4">ROPA</li>
@@ -294,7 +294,7 @@
                     <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                         <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
                             <div>SI</div>
-                            <div class="text-base">Articulos Permitidos</div>
+                            <div class="text-base">Artículo u Objetos Permitidos</div>
                         </div>
                         <div class="flex items-center justify-center">
                             <a href="https://www.upu.int/UPU/media/upu/files/UPU/outreachAndCampaigns/Dangerous%20Goods%20Campaign/UPU_Flyer_es_web.pdf"
@@ -307,7 +307,7 @@
                 <div class="flex flex-col w-5/6 lg:w-1/4 mx-auto lg:mx-0 rounded-none lg:rounded-l-lg bg-white mt-4">
                     <div class="flex-1 bg-white text-gray-600 rounded-t rounded-b-none overflow-hidden shadow">
                         <div class="p-8 text-3xl font-bold text-center border-b-4">
-                            Mercancia Peligrosa Prohibida
+                            Artículo u Objetos Peligrosa Prohibida
                         </div>
                         <ul class="w-full text-center text-sm">
                             <li class="border-b py-4">MEDICAMENTOS</li>
@@ -321,7 +321,7 @@
                     <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                         <div class="w-full pt-6 text-3xl text-gray-600 font-bold text-center">
                             <div>NO</div>
-                            <div class="text-base">Articulos Prohibidos</div>
+                            <div class="text-base">Artículo u Objetos Prohibidos</div>
                         </div>
                     </div>
                 </div>
@@ -357,14 +357,14 @@
     </svg>
     <section class="container mx-auto text-center py-6 mb-12">
         <h2 class="w-full my-2 text-5xl font-bold leading-tight text-center text-white">
-            ¡Te invitamos a visitar nuestra página web en la Agencia Boliviana de Correos!
+            ¡Te invitamos a visitar nuestra página web Agencia Boliviana de Correos!
         </h2>
         <div class="w-full mb-4">
             <div class="h-1 mx-auto bg-white w-1/6 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
         <h3 class="my-4 text-3xl leading-tight">
             En nuestro sitio, encontrarás toda la información que necesitas sobre nuestros servicios postales. Explora
-            sobre nuestra institucion, horarios de atención, ubicaciones de oficinas, y más.¡Descubre lo que la Agencia
+            sobre nuestra Institucion, horarios de atención, ubicaciones de oficinas a nivel nacional, y más.¡Descubre lo que la Agencia
             Boliviana de Correos tiene para ofrecerte en línea hoy mismo!
         </h3>
         <br>
