@@ -41,13 +41,9 @@
                         </div>
                     @endif
 
-                    {{-- <div class="card-body">
+                    <div class="card-body">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <div class="px-6 py-4">
-                                    <input type="text" wire:model="search-o"
-                                        class="w-full bg-gray-100 rounded-full py-2 px-4 mb-2 md:mb-0 text-black" placeholder="Busca">
-                                </div>
                                 @php
                                 $i = 0; // Inicializa la variable $i
                                 @endphp
@@ -104,8 +100,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            </div> --}}
-                        @livewire('search-o')
+                            </div>
                         <div class="row mt-3">
                             <div class="col-md-6 ">
                                 {{ $packages->links() }}
