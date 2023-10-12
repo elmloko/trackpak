@@ -10,6 +10,9 @@
     </title>
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
     <style>
         .gradient {
             background: rgb(52, 68, 124);
@@ -364,7 +367,8 @@
         </div>
         <h3 class="my-4 text-3xl leading-tight">
             En nuestro sitio, encontrarás toda la información que necesitas sobre nuestros servicios postales. Explora
-            sobre nuestra Institucion, horarios de atención, ubicaciones de oficinas a nivel nacional, y más.¡Descubre lo que la Agencia
+            sobre nuestra Institucion, horarios de atención, ubicaciones de oficinas a nivel nacional, y más.¡Descubre
+            lo que la Agencia
             Boliviana de Correos tiene para ofrecerte en línea hoy mismo!
         </h3>
         <br>
@@ -386,20 +390,20 @@
                     </div>
                 </div>
 
-                <div class="flex-1 ml-4"> <!-- Margen izquierdo agregado -->
+                <div class="flex-1"> <!-- Margen izquierdo agregado -->
                     <p class="uppercase text-gray-500 md:mb-6">Preguntas Frecuentes</p>
                     <ul class="list-reset mb-6">
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-gray-800 hover:text-pink-500">FAQ</a>
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">FAQ</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-gray-800 hover:text-pink-500">Help</a>
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Help</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-gray-800 hover:text-pink-500">Support</a>
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Support</a>
                         </li>
                     </ul>
                 </div>
@@ -455,20 +459,75 @@
                     <ul class="list-reset mb-6">
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/about/"
-                                class="no-underline hover:underline text-gray-800 hover:text-pink-500">Quienes
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Quienes
                                 Somos</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/services/"
-                                class="no-underline hover:underline text-gray-800 hover:text-pink-500">Nuestros
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Nuestros
                                 Servicios</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/contact-us/"
-                                class="no-underline hover:underline text-gray-800 hover:text-pink-500">Contactanos</a>
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Contactanos</a>
                         </li>
                     </ul>
                 </div>
+                <div class="flex-1">
+                    <p class="uppercase text-gray-500 md:mb-6">NUESTROS SERVICIOS</p>
+                    <ul class="list-reset mb-6">
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                            <a href="https://correos.gob.bo/ems/"
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Envió de
+                                Mensajería Urgente</a>
+                        </li>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                            <a href="https://correos.gob.bo/sp/"
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Servicio
+                                Prioritario</a>
+                        </li>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                            <a href="https://correos.gob.bo/eca/"
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Envíos de
+                                Correspondencia Agrupada</a>
+                        </li>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                            <a href="https://correos.gob.bo/eca/"
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Mi
+                                Encomienda</a>
+                        </li>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                            <a href="https://correos.gob.bo/filatelia/"
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Servicio de
+                                Filatelia</a>
+                        </li>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                            <a href="https://correos.gob.bo/casillas/"
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Servicio de
+                                Casillas</a>
+                        </li>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                            <a href="https://correos.gob.bo/construccion/"
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Tracking Postal
+                                Internacional</a>
+                        </li>
+                        <li class="mt-2 inline-block mr-2 md:block md:mr-0">
+                            <a href="https://correos.gob.bo/construccion/"
+                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Calculadora
+                                Postal</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <div class="footer-content">
+                <hr class="line-divider">
+                <p class="mb-2 text-lg text-black">#EstamosSaliendoAdelante #RumboalBicentenario</p>
+                <p class="mb-2 text-lg text-black">&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
+                    Boliviana de Correos</p>
+                <p class="text-lg text-black">Contacto: (591-2) 2152423 - Av. Mariscal Santa Cruz Esq. C. Oruro Edif.
+                    Telecomunicaciones - agbc@correos.gob.bo</p>
             </div>
         </div>
     </footer>

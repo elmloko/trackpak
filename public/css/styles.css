@@ -1,0 +1,10 @@
+.line-divider {
+    border: 0;
+    border-top: 2px solid #000; /* Establece el color y grosor de la línea */
+    width: 100%; /* Haz que la línea ocupe todo el ancho del contenedor */
+    margin: 10px 0; /* Ajusta el espacio antes y después de la línea según tus preferencias */
+}
+.footer-content {
+    max-width: 960px; /* Ajusta el ancho máximo según tus necesidades */
+    margin: 0 auto;  /* Centra el contenedor horizontalmente */
+}

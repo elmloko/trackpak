@@ -118,11 +118,24 @@ class PackageController extends Controller
         return Excel::download(new PackageExport, 'Paquetes Ordinarios.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     } 
     public function delete($id)
-    {
-        $package = Package::find($id)->delete();
+{
+    $package = Package::find($id);
 
-        return back()->with('success', 'Paquete se dio de Baja Con Exito!');
+    if ($package) {
+        // Cambia el estado del paquete a "ENTREGADO"
+        $package->estado = 'ENTREGADO';
+
+        // Guarda el paquete actualizado
+        $package->save();
+
+        // Luego, elimina el paquete
+        $package->delete();
+
+        return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
+    } else {
+        return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
     }
+}
     public function deleteado()
     {
         // Recupera todos los elementos eliminados (soft deleted)
@@ -136,6 +149,7 @@ class PackageController extends Controller
         $package = Package::withTrashed()->find($id);
         // Verifica si se encontró un paquete eliminado con ese ID
         if ($package) {
+            $package->update(['ESTADO' => 'ENTREGADO']);
             // Restaura el paquete
             $package->restore();
             return redirect()->route('packages.index')

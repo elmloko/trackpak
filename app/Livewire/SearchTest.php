@@ -9,24 +9,27 @@ use Livewire\Component;
 class SearchTest extends Component
 {
     public $search = '';
-    public $packages;
-    public $pcertificates;
-    public $results; 
-    
+    public $results;
+
     public function render()
     {
-        $this->packages = Package::where('CODIGO', 'like', '%' . $this->search . '%')
-        ->whereNull('deleted_at') // Excluye paquetes eliminados
-        ->take(5)
-        ->get();
-    
-    $this->pcertificates = Pcertificate::where('CODIGO', 'like', '%' . $this->search . '%')
-        ->take(5)
-        ->get();
-    
-    // Combina los resultados de ambas tablas y asigna a $results
-    $this->results = $this->packages->concat($this->pcertificates);
-    
-    return view('livewire.search-test');
+        $this->results = collect([]);
+
+        $packages = Package::where('CODIGO', 'like', '%' . $this->search . '%')
+            // ->whereNull('deleted_at')  // Comentado para incluir registros eliminados
+            ->take(5)
+            ->withTrashed()
+            ->get();
+
+        $pcertificates = Pcertificate::where('CODIGO', 'like', '%' . $this->search . '%')
+            // ->whereNull('deleted_at')  // Comentado para incluir registros eliminados
+            ->take(5)
+            ->withTrashed()
+            ->get();
+
+        // Combina los resultados de ambas tablas y asigna a $results
+        $this->results = $this->results->concat($packages)->concat($pcertificates);
+
+        return view('livewire.search-test');
     }
 }

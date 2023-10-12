@@ -117,11 +117,22 @@ class PcertificateController extends Controller
         return Excel::download(new PcertificateExport, 'Paquetes Certificados.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
     } 
     public function delete($id)
-    {
-        $pcertificate = Pcertificate::find($id)->delete();
+{
+    $pcertificate = Pcertificate::find($id);
 
-        return back()->with('success', 'Paquete se dio de Baja Con Exito!');
+    if (!$pcertificate) {
+        return back()->with('error', 'El Certificado Postal no pudo ser encontrado o dado de baja');
     }
+
+    // Cambia el estado del certificado de ALMACEN a ENTREGADO
+    $pcertificate->update(['ESTADO' => 'ENTREGADO']);
+
+    // Elimina el Certificado Postal
+    $pcertificate->delete();
+
+    return back()->with('success', 'Certificado Postal dado de Baja y Estado Cambiado a ENTREGADO exitosamente');
+}
+
     public function deleteado()
     {
         // Recupera todos los elementos eliminados (soft deleted)
@@ -135,6 +146,7 @@ class PcertificateController extends Controller
         $pcertificate = Pcertificate::withTrashed()->find($id);
         // Verifica si se encontró un paquete eliminado con ese ID
         if ($pcertificate) {
+            $pcertificate->update(['ESTADO' => 'ALMACEN']);
             // Restaura el paquete
             $pcertificate->restore();
             return redirect()->route('pcertificates.index')
