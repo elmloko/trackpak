@@ -32,6 +32,7 @@
                                         {{ __('Crear Nuevo') }}
                                     </a>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

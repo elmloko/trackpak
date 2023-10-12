@@ -49,10 +49,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'packages.destroy'])->syncRoles([$role1,$role2,$role16]);
         Permission::create(['name' => 'packages.delete'])->syncRoles([$role1,$role2,$role16,$role17]);
 
-        Permission::create(['name' => 'pcertificate.index'])->syncRoles([$role1,$role2,$role5,$role6]);
-        Permission::create(['name' => 'pcertificate.create'])->syncRoles([$role1,$role2,$role5,$role6]);
-        Permission::create(['name' => 'pcertificate.edit'])->syncRoles([$role1,$role2,$role5,$role6]);
-        Permission::create(['name' => 'pcertificate.destroy'])->syncRoles([$role1,$role2,$role5]);
-        Permission::create(['name' => 'pcertificate.delete'])->syncRoles([$role1,$role2,$role5,$role6]);
+        Permission::create(['name' => 'pcertificates.index'])->syncRoles([$role1,$role2,$role5,$role6]);
+        Permission::create(['name' => 'pcertificates.create'])->syncRoles([$role1,$role2,$role5,$role6]);
+        Permission::create(['name' => 'pcertificates.edit'])->syncRoles([$role1,$role2,$role5,$role6]);
+        Permission::create(['name' => 'pcertificates.destroy'])->syncRoles([$role1,$role2,$role5]);
+        Permission::create(['name' => 'pcertificates.delete'])->syncRoles([$role1,$role2,$role5,$role6]);
     }
 }

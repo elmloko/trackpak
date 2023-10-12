@@ -25,7 +25,8 @@ class User extends Authenticatable
 
     public function adminlte_desc()
     {
-        return 'Administrador';
+        // Recupera el nombre del rol del usuario actual
+        return $this->getRoleNames()->implode(', ');
     }
 
     public function adminlte_profile_url()

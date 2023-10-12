@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::get('prueba2/excel', [UserController::class, 'excel'])->name('usuario1.excel');
     Route::get('prueba2/pdf', [UserController::class, 'pdf'])->name('usuario1.pdf');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+    
+    Route::resource('roles', App\Http\Controllers\RoleHasPermissionController::class);    
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

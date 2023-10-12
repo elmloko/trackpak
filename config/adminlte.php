@@ -310,8 +310,25 @@ return [
         ['header' => 'PAQUETERIA POSTAL'],
         [
             'text' => 'Usuarios',
-            'url' => 'users',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-users',
+            'can'  => 'users.index',
+            'submenu' => [
+                [
+                    'text' => 'Personal AGBC',
+                    'url' => 'users',
+                    'icon' => 'fas fa-user',
+                ],
+                [
+                    'text' => 'Roles',
+                    'url' => '#',
+                    'icon' => 'fas fa-lock',
+                ],
+                [
+                    'text' => 'Permisos',
+                    'url' => '#',
+                    'icon' => 'fas fa-key',
+                ],
+            ],
         ],
         [
             'text' => 'Paquetes Ordinarios',
