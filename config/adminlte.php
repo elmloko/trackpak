@@ -344,6 +344,7 @@ return [
                     'text' => 'Inventario',
                     'url' => 'test/deleteado',
                     'icon' => 'fas fa-clipboard-list',
+                    'can'  => 'packages.destroy',
                 ],
                 [
                     'text' => 'Reportes',
@@ -355,7 +356,7 @@ return [
         [
             'text' => 'Paquetes Certificados',
             'icon' => 'pcertificates',
-            'can'  => 'packages.index',
+            'can'  => 'pcertificates.index',
             'submenu' => [
                 [
                     'text' => 'Paquetes',
@@ -365,6 +366,7 @@ return [
                 [
                     'text' => 'Inventario',
                     'url' => 'ctest/deleteado',
+                    'can'  => 'pcertificates.destroy',
                     'icon' => 'fas fa-clipboard-list',
                 ],
                 [

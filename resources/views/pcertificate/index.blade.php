@@ -28,12 +28,14 @@ Paqueteria Postal
                                     PDF
                                 </a>
                             </div>
+                            @hasrole('SuperAdmin|Clasificacion|Auxiliar Clasificacion')
                             <div class="mr-2">
                                 <a href="{{ route('pcertificates.create') }}" class="btn btn-primary btn-sm"
                                     data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
                             </div>
+                            @endrole
                         </div>
                     </div>
                 </div>
@@ -85,16 +87,22 @@ Paqueteria Postal
                                     <td>
                                         <form action="{{ route('pcertificates.destroy', $pcertificate->id) }}"
                                             method="POST">
+                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                             <a class="btn btn-sm btn-warning"
                                                 href="{{ route('pcertificates.delete', $pcertificate->id) }}"><i
                                                     class="fa fa-arrow-down"></i> {{ __('Baja') }}</a>
+                                            @endhasrole
+                                            @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion|Auxiliar Clasificacion')
                                             <a class="btn btn-sm btn-success"
                                                 href="{{ route('pcertificates.edit', $pcertificate->id) }}"><i
                                                     class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                            @endhasrole
                                             @csrf
                                             @method('DELETE')
+                                            @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
                                             <button type="submit" class="btn btn-danger btn-sm"><i
                                                     class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                            @endhasrole
                                         </form>
 
                                     </td>

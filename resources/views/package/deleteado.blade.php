@@ -76,6 +76,7 @@
                                             <td>{{ $package->ESTADO }}</td>
                                             <td>{{ $package->deleted_at }}</td>
                                             <td>
+                                                @hasrole('SuperAdmin|Administrador|Urbano')
                                                 <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
                                                     @csrf
                                                     @method('PUT')
@@ -83,6 +84,7 @@
                                                         <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
                                                     </button>
                                                 </form>
+                                                @endhasrole
                                             </td>                                            
                                         </tr>
                                         @endforeach

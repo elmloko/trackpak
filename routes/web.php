@@ -56,7 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::get('prueba1/excel', [PcertificateController::class, 'excel'])->name('prueba1.excel');
     Route::get('prueba1/pdf', [PcertificateController::class, 'pdf'])->name('prueba1.pdf');
 
-    
+    Blade::if('role', function ($roles) {
+        return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -30,7 +30,7 @@
                             @endif
                         @endforeach
                         @if ($results->count() == 0)
-                            <p>No hay resultados para la búsqueda <b>"{{ $search }}"</b></p>
+                            <p class="mb-4 text-black">No hay resultados para la búsqueda <b>"{{ $search }}"</b></p>
                         @endif
                     </div>
                 @endif                
