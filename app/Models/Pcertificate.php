@@ -40,6 +40,7 @@ class Pcertificate extends Model
 		'PESO' => 'required',
 		'TIPO' => 'required',
 		'ESTADO' => 'required',
+		'ADUANA' => 'required',
     ];
 
     protected $perPage = 20;
@@ -49,7 +50,7 @@ class Pcertificate extends Model
      *
      * @var array
      */
-    protected $fillable = ['CODIGO','DESTINATARIO','DIRECCION','TELEFONO','PAIS','CUIDAD','ZONA','VENTANILLA','PESO','TIPO','ESTADO'];
+    protected $fillable = ['CODIGO','DESTINATARIO','DIRECCION','TELEFONO','PAIS','CUIDAD','ZONA','VENTANILLA','PESO','TIPO','ESTADO','ADUANA'];
 
 
 

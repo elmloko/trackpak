@@ -32,10 +32,14 @@ class PcertificateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        $pcertificate = new Pcertificate();
-        return view('pcertificate.create', compact('pcertificate'));
-    }
+{
+    $pcertificate = new Pcertificate();
+    
+    // Asigna la clasificación predeterminada (por ejemplo, "Clasificación Predeterminada") al atributo correspondiente
+    $pcertificate->ESTADO = "CLASIFICACION";
+    
+    return view('pcertificate.create', compact('pcertificate'));
+}
 
     /**
      * Store a newly created resource in storage.

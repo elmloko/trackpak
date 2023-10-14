@@ -54,6 +54,11 @@
                     {!! $errors->first('ESTADO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
+                    {{ Form::label('ADUANA') }}
+                    {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}
+                    {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                <div class="form-group">
                     {{ Form::label('ZONA') }}
                     {{ Form::text('ZONA', $package->ZONA, ['class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''), 'placeholder' => 'Zona']) }}
                     {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}

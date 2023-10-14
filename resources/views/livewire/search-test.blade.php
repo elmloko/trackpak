@@ -15,19 +15,22 @@
                     @if ($search)
                     <div class="w-full bg-white rounded p-4 mt-4">
                         @foreach ($results as $result)
-                            <div class="mb-4 text-black" tabindex="1">
-                                @if ($result->ESTADO == "ENTREGADO")
-                                    Su paquete <strong>{{ $result->CODIGO }}</strong> ha sido entregado!
-                                @else
-                                    Su paquete <strong>{{ $result->CODIGO }}</strong> se encuentra en 
-                                    <strong>{{ $result->CUIDAD }}</strong>, en la ventanilla
-                                    <strong>{{ $result->VENTANILLA }}</strong>
+                        <div class="mb-4 text-black" tabindex="1">
+                            @if ($result->ESTADO == "ENTREGADO")
+                                Su paquete <strong>{{ $result->CODIGO }}</strong> ha sido entregado!
+                            @else
+                                Su paquete <strong>{{ $result->CODIGO }}</strong> se encuentra en 
+                                <strong>{{ $result->CUIDAD }}</strong>, en la ventanilla
+                                <strong>{{ $result->VENTANILLA }}</strong>
+                                @if ($result->ADUANA == "SI")
+                                    envío observado por <strong>ADUANA NACIONAL</strong>
                                 @endif
-                            </div>
-                            @if (!$loop->last)
-                                <!-- Verifica si no es el último elemento -->
-                                <div class="mb-4 border-b border-gray-300"></div>
                             @endif
+                        </div>
+                        @if (!$loop->last)
+                            <!-- Verifica si no es el último elemento -->
+                            <div class="mb-4 border-b border-gray-300"></div>
+                        @endif
                         @endforeach
                         @if ($results->count() == 0)
                             <p class="mb-4 text-black">No hay resultados para la búsqueda <b>"{{ $search }}"</b></p>

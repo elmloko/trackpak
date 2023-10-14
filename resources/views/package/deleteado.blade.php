@@ -54,6 +54,7 @@
                                             <th>Peso</th>
                                             <th>Tipo</th>
                                             <th>Estado</th>
+                                            <th>Aduana</th>
                                             <th>Fecha Baja</th>
                                             <th>Acciones</th>
                                             <th></th>
@@ -74,6 +75,7 @@
                                             <td>{{ $package->PESO }}</td>
                                             <td>{{ $package->TIPO }}</td>
                                             <td>{{ $package->ESTADO }}</td>
+                                            <td>{{ $package->ADUANA }}</td>
                                             <td>{{ $package->deleted_at }}</td>
                                             <td>
                                                 @hasrole('SuperAdmin|Administrador|Urbano')

@@ -50,6 +50,11 @@
                     {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
+                    {{ Form::label('ADUANA') }}
+                    {{ Form::select('ADUANA',['SI' => 'SI', 'NO' => 'NO'], $pcertificate->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}
+                    {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                <div class="form-group">
                     {{ Form::label('PESO') }}
                     {{ Form::text('PESO', $pcertificate->PESO, ['class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''), 'placeholder' => 'Peso']) }}
                     {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}

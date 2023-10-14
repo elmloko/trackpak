@@ -63,6 +63,7 @@ Paqueteria Postal
                                     <th>Peso</th>
                                     <th>Tipo</th>
                                     <th>Estado</th>
+                                    <th>Aduana</th>
                                     <th>Fecha Ingreso</th>
                                     <th></th>
                                 </tr>
@@ -83,6 +84,7 @@ Paqueteria Postal
                                     <td>{{ $pcertificate->PESO }}</td>
                                     <td>{{ $pcertificate->TIPO }}</td>
                                     <td>{{ $pcertificate->ESTADO }}</td>
+                                    <td>{{ $pcertificate->ADUANA }}</td>
                                     <td>{{ $pcertificate->created_at }}</td>
                                     <td>
                                         <form action="{{ route('pcertificates.destroy', $pcertificate->id) }}"
