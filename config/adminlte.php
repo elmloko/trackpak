@@ -353,29 +353,29 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'Paquetes Certificados',
-            'icon' => 'pcertificates',
-            'can'  => 'pcertificates.index',
-            'submenu' => [
-                [
-                    'text' => 'Paquetes',
-                    'url' => 'pcertificates',
-                    'icon' => 'fas fa-box',
-                ],
-                [
-                    'text' => 'Inventario',
-                    'url' => 'ctest/deleteado',
-                    'can'  => 'pcertificates.destroy',
-                    'icon' => 'fas fa-clipboard-list',
-                ],
-                [
-                    'text' => 'Reportes',
-                    'url' => '#',
-                    'icon' => 'fas fa-chart-bar',
-                ],
-            ],
-        ],
+        // [
+        //     'text' => 'Paquetes Certificados',
+        //     'icon' => 'pcertificates',
+        //     'can'  => 'pcertificates.index',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Paquetes',
+        //             'url' => 'pcertificates',
+        //             'icon' => 'fas fa-box',
+        //         ],
+        //         [
+        //             'text' => 'Inventario',
+        //             'url' => 'ctest/deleteado',
+        //             'can'  => 'pcertificates.destroy',
+        //             'icon' => 'fas fa-clipboard-list',
+        //         ],
+        //         [
+        //             'text' => 'Reportes',
+        //             'url' => '#',
+        //             'icon' => 'fas fa-chart-bar',
+        //         ],
+        //     ],
+        // ],
     ],
 
     /*

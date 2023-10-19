@@ -5,35 +5,35 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+@livewire('search-packages')
+    {{-- <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span id="card_title">
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center;">     --}}
+                            {{-- <span id="card_title">
                                 {{ __('Paquetes Certificados Nacionales') }}
                             </span>
                             <div style="display: flex; align-items: center;">
                                 <div class="mr-2">
-                                    <a href="{{ route('prueba.excel') }}" class="btn btn-success btn-sm"
-                                        data-placement="left">
+                                    <a href="{{ route('prueba.excel') }}" class="btn btn-success btn-sm" data-placement="left">
                                         Excel
                                     </a>
                                 </div>
                                 <div class="mr-2">
-                                    <a href="{{ route('prueba.pdf') }}" class="btn btn-danger btn-sm" data-placement="left">
+                                    <a href="{{ route('prueba.pdf') }}" class "btn btn-danger btn-sm" data-placement="left">
                                         PDF
                                     </a>
                                 </div>
-                                @hasrole('SuperAdmin|Clasificacion|Auxiliar Clasificacion')
+                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                 <div class="mr-2">
-                                    <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm"
-                                        data-placement="left">
+                                    <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm" data-placement="left">
                                         {{ __('Crear Nuevo') }}
                                     </a>
                                 </div>
-                                @endrole
+                                @endhasrole
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,6 @@
                                     <thead class="thead">
                                         <tr>
                                             <th>No</th>
-
                                             <th>Codigo Postal</th>
                                             <th>Destinatario</th>
                                             <th>Telefono</th>
@@ -64,7 +63,6 @@
                                             <th>Peso</th>
                                             <th>Tipo</th>
                                             <th>Estado</th>
-                                            <th>Aduana</th>
                                             <th>Fecha Ingreso</th>
                                             <th>Acciones</th>
                                             <th></th>
@@ -74,39 +72,35 @@
                                         @foreach ($packages as $package)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
-
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                 <td>{{ $package->TELEFONO }}</td>
                                                 <td>{{ $package->PAIS }}</td>
-                                                <td>{{ $package->CIUDAD }}</td>
+                                                <td>{{ $package->CUIDAD }}</td>
                                                 <td>{{ $package->ZONA }}</td>
                                                 <td>{{ $package->VENTANILLA }}</td>
                                                 <td>{{ $package->PESO }}</td>
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>{{ $package->ESTADO }}</td>
-                                                <td>{{ $package->ADUANA }}</td
                                                 <td>{{ $package->created_at }}</td>
-
                                                 <td>
-                                                    <form action="{{ route('packages.destroy', $package->id) }}"
-                                                        method="POST">
+                                                    <form action="{{ route('packages.destroy', $package->id) }}" method="POST">
                                                         @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                                        <a class="btn btn-sm btn-warning"
-                                                            href="{{ route('packages.delete', $package->id) }}"><i
-                                                                class="fa fa-arrow-down"></i> {{ __('Baja') }}</a>
+                                                        <a class="btn btn-sm btn-warning" href="{{ route('packages.delete', $package->id) }}">
+                                                            <i class="fa fa-arrow-down"></i> {{ __('Baja') }}
+                                                        </a>
                                                         @endhasrole
-                                                        @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion|Auxiliar Clasificacion')
-                                                        <a class="btn btn-sm btn-success"
-                                                            href="{{ route('packages.edit', $package->id) }}"><i
-                                                                class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano|Clasificacion|Auxiliar Clasificacion')
+                                                        <a class="btn btn-sm btn-success" href="{{ route('packages.edit', $package->id) }}">
+                                                            <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
+                                                        </a>
                                                         @endhasrole
                                                         @csrf
                                                         @method('DELETE')
                                                         @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i
-                                                                class="fa fa-fw fa-trash"></i>
-                                                            {{ __('Eliminar') }}</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>
+                                                            {{ __('Eliminar') }}
+                                                        </button>
                                                         @endhasrole
                                                     </form>
                                                 </td>
@@ -119,7 +113,7 @@
                                 <div class="col-md-6 ">
                                     {{ $packages->links() }}
                                 </div>
-                                <div class="col-md-6 text-right">
+                                <div class="col-md-6 text right">
                                     Se encontraron {{ $packages->total() }} registros en total
                                 </div>
                             </div>
@@ -127,6 +121,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        @include('footer')
-    @endsection
+        </div> --}}
+        {{-- @include('footer')
+    </div> --}}
+@endsection

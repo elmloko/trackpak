@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
     Route::get('prueba/excel', [PackageController::class, 'excel'])->name('prueba.excel');
     Route::get('prueba/pdf', [PackageController::class, 'pdf'])->name('prueba.pdf');
+    Route::post('search-packages', 'SearchPackagesController@search');
 
     Route::resource('pcertificates', App\Http\Controllers\PcertificateController::class);    
     Route::get('pcertificates/{id}/delete', [PcertificateController::class, 'delete'])->name('pcertificates.delete');

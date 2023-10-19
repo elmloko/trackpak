@@ -1,66 +1,132 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+1.- Instalación de Servidor y Herramientas PHP MariaDB
+sudo yum install -y nginx php php-fpm mariadb-server
 
-## About Laravel
+2.- Configurar Servicio php-fpm
+sudo nano /etc/php-fpm.d/www.conf
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+3.- Cambiar el directorio de escucha y ejecuta
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+user=nginx
+group=nginx
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+4.-cambiar el socket unix
+listen = /var/run/php-fpm/php-fpm.sock
 
-## Learning Laravel
+5.- Descomentar y cambiar parametros 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+listen.owner = nginx
+listen.group = nginx
+listen.mode = 0660
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+6.- Iniciamos Servicio PHP
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+sudo systemctl star php-fpm
+sudo systemctl enable php-fpm
 
-## Laravel Sponsors
+7.-  Configurar servidor nginx
+sudo nano /ect/nginx/nginx.conf
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+8.- Cambiar PHPfmp
 
-### Premium Partners
+en el bloque de server{
+    //cambiar esta lineas de codigo
+    root  /var/www/html;
+    index  index.php;
+    //comentamos esta linea
+    #include /ect/nginx/default.d/*.conf;
+    #location{
+    }
+}
+ 9.- agregamos debajo de error_page 500 502....
+location ~ \.php$ {
+    fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+}
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+10.-Iniciamos servicio nginx 
+sudo nginx -t
+sudo systemctl restart nginx
+sudo systemctl enable nginx
 
-## Contributing
+11.- PHP Packages Laravel nesesarios
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+sudo yum -y install php-{common,curl,json,mbstring,mysqlnd,xml,zip,opcache,fpm}
 
-## Code of Conduct
+12.- NVM (Versión a la fecha de publicación del video)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+wget qO https://raw.githubusercontent.com/nvm... | bash
+source ~/.bashrc
 
-## Security Vulnerabilities
+13.- en listamos versiones
+nvm ls-remote 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+14.- Elegimos la mas resiente LTS y utilizamos esa version
+nvm install VERSIONELEGIDA
+nvm use VERSIONELEGIDA
 
-## License
+15.- Composer Install
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+16.- Configurar composer de manera global
+mv composer.phar /usr/local/bin/composer
+chmod +x /usr/local/bin/composer
+composer -V
+
+17.-Inicamos MariaDB
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+
+18.-Configuramos MariaDB y a todo le damos Y
+sudo mysql_secure_installation
+
+19.-Nos logeamos en MariaDB
+mysql -u root -p
+
+20.- Creas Base de Datos y permitir conexion 
+
+GRANT ALL PRIVILEGES ON NOMBREDB.* To 'user'@'localhost' IDENTIFIED BY 'password';
+flush privileges;
+
+21.- dar privilegios para composer en html
+cd /var/www/
+sudo  chown -R agbc:agbc html
+
+22.-copiamos el proyecto
+
+23.-dar permisos al proyecto para ejecucion con nginx
+sudo chown -R agbc:nginx bootstrap/cache storage
+sudo chown ug+rw agbc:nginx bootstrap/cache storage
+
+24.- Installar las dependencias de composer
+composer install
+
+25.- Copiar .env y configurar
+cp .env.example .env
+
+APP_NAME=TrackPak
+DB_DATABASE=trackpak
+DB_USERNAME=root
+DB_PASSWORD=
+
+26.- Generamos la llave 
+php artisan key:generate
+
+27.- Instalamos los paquetes npm y Compliamos
+npm install && npm run dev
+
+29.- Migramos
+php artisan migrate
+
+30.- Ajustamos Selinux
+sudo semanage permissive -a httpd_t
+ 
+yt
+https://www.youtube.com/watch?v=pWy59Dn-pB0
+https://www.youtube.com/watch?v=ok96RMlWTnQ
+
