@@ -4,14 +4,17 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Package;
+use Livewire\WithPagination;
 
 class SearchPackages extends Component
 {
+    use WithPagination;
+
     public $search = '';
 
     public function render()
     {
-        $package = Package::where('CODIGO', 'like', '%' . $this->search . '%')
+        $packages = Package::where('CODIGO', 'like', '%' . $this->search . '%')
             ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
             ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
             ->orWhere('PAIS', 'like', '%' . $this->search . '%')
@@ -26,23 +29,11 @@ class SearchPackages extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.search-packages', ['packages' => $package]);
-    }
-    public function update(Request $request, Package $package)
-    {
-        request()->validate(Package::$rules);
-
-        $package->update($request->all());
-
-        return redirect()->route('packages.index')
-            ->with('success', 'Paquete Actualizado Con Exito!');
-    }
-    public function index()
-    {
-        $packages = Package::paginate(20);
-
-        return view('package.index', compact('packages'))
-            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+        return view('livewire.search-packages', [
+            'packages' => $packages,
+        ]);
     }
 }
+
+
 
