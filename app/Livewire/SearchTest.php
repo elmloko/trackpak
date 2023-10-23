@@ -21,14 +21,14 @@ class SearchTest extends Component
             ->withTrashed()
             ->get();
 
-        $pcertificates = Pcertificate::where('CODIGO', 'like', '%' . $this->search . '%')
-            // ->whereNull('deleted_at')  // Comentado para incluir registros eliminados
-            ->take(5)
-            ->withTrashed()
-            ->get();
+        // $pcertificates = Pcertificate::where('CODIGO', 'like', '%' . $this->search . '%')
+        //     // ->whereNull('deleted_at')  // Comentado para incluir registros eliminados
+        //     ->take(5)
+        //     ->withTrashed()
+        //     ->get();
 
         // Combina los resultados de ambas tablas y asigna a $results
-        $this->results = $this->results->concat($packages)->concat($pcertificates);
+        $this->results = $this->results->concat($packages);
 
         return view('livewire.search-test');
     }
