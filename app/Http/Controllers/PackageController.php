@@ -149,7 +149,7 @@ class PackageController extends Controller
         $package = Package::withTrashed()->find($id);
         // Verifica si se encontró un paquete eliminado con ese ID
         if ($package) {
-            $package->update(['ESTADO' => 'ENTREGADO']);
+            $package->update(['ESTADO' => 'VENTANILLA']);
             // Restaura el paquete
             $package->restore();
             return redirect()->route('packages.index')
@@ -159,5 +159,52 @@ class PackageController extends Controller
                 ->with('error', 'El paquete no pudo ser encontrado o restaurado');
         }
     }
+    public function redirigir($id)
+    {
+        $package = Package::find($id);
+    
+        if ($package) {
+            // Cambia el estado del paquete a "redirigido"
+            $package->redirigido = true;
 
+            $package->estado = 'REENCAMINADO';
+
+            // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
+            $package->date_redirigido = now();
+    
+            // Guarda el paquete actualizado
+            $package->save();
+    
+            return back()->with('success', 'Paquete redirigido con éxito.');
+        } else {
+            return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
+        }
+    }
+    public function redirigidos()
+    {
+        $paquetesRedirigidos = Package::where('redirigido', true)->get();
+        
+        return view('package.redirigidos', compact('paquetesRedirigidos'));
+    }
+    public function dirigido($id)
+    {
+        $package = Package::find($id);
+    
+        if ($package) {
+            // Cambia el estado del paquete a "redirigido"
+            $package->redirigido = false;
+
+            $package->estado = 'ALMACEN';
+
+            // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
+            $package->date_redirigido = now();
+    
+            // Guarda el paquete actualizado
+            $package->save();
+    
+            return back()->with('success', 'Paquete redirigido con éxito.');
+        } else {
+            return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
+        }
+    }
 }

@@ -34,9 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::put('utest/{id}/restoring', [UserController::class, 'restoring'])->name('users.restoring');
     Route::get('prueba2/excel', [UserController::class, 'excel'])->name('usuario1.excel');
     Route::get('prueba2/pdf', [UserController::class, 'pdf'])->name('usuario1.pdf');
-    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
-    
-    Route::resource('roles', App\Http\Controllers\RoleHasPermissionController::class);    
+    Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');   
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -48,14 +46,10 @@ Route::middleware('auth')->group(function () {
     Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
     Route::get('prueba/excel', [PackageController::class, 'excel'])->name('prueba.excel');
     Route::get('prueba/pdf', [PackageController::class, 'pdf'])->name('prueba.pdf');
-    Route::post('search-packages', 'SearchPackagesController@search');
+    Route::get('packages/redirigir/{id}', [PackageController::class, 'redirigir'])->name('packages.redirigir');
+    Route::get('test/redirigidos', [PackageController::class, 'redirigidos'])->name('packages.redirigidos');
+    Route::get('test/dirigido/{id}', [PackageController::class, 'dirigido'])->name('packages.dirigido');
 
-    Route::resource('pcertificates', App\Http\Controllers\PcertificateController::class);    
-    Route::get('pcertificates/{id}/delete', [PcertificateController::class, 'delete'])->name('pcertificates.delete');
-    Route::get('ctest/deleteado', [PcertificateController::class, 'deleteado'])->name('ctest.deleteado');
-    Route::put('ctest/{id}/restoring', [PcertificateController::class, 'restoring'])->name('pcertificates.restoring');
-    Route::get('prueba1/excel', [PcertificateController::class, 'excel'])->name('prueba1.excel');
-    Route::get('prueba1/pdf', [PcertificateController::class, 'pdf'])->name('prueba1.pdf');
 
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));

@@ -347,9 +347,9 @@ return [
                     'can'  => 'packages.destroy',
                 ],
                 [
-                    'text' => 'Reportes',
-                    'url' => '#',
-                    'icon' => 'fas fa-chart-bar',
+                    'text' => 'Reencaminar',
+                    'url' => 'test/redirigidos',
+                    'icon' => 'fas fa-paper-plane',
                 ],
             ],
         ],

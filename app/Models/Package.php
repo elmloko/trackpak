@@ -39,7 +39,8 @@ class Package extends Model
 		'PESO' => 'required',
 		'TIPO' => 'required',
 		'ESTADO' => 'required',
-    'ADUANA' => 'required'
+    'ADUANA' => 'required',
+    'date_redirigido' => 'required'
     ];
 
     protected $perPage = 20;
@@ -49,7 +50,7 @@ class Package extends Model
      *
      * @var array
      */
-    protected $fillable = ['CODIGO','DESTINATARIO','TELEFONO','PAIS','CUIDAD','ZONA','VENTANILLA','PESO','TIPO','ESTADO','ADUANA'];
+    protected $fillable = ['CODIGO','DESTINATARIO','TELEFONO','PAIS','CUIDAD','ZONA','VENTANILLA','PESO','TIPO','ESTADO','ADUANA','date_redirigido'];
 
 
 

@@ -21,14 +21,16 @@
                         </div>
                         @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                             <div class="mr-2">
-                                <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm" data-placement="left">
+                                <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm"
+                                    data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
                             </div>
                         @endhasrole
                         <div class="col-md-3" style="margin-left: 20px;">
                             <div class="form-group">
-                                <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                <input wire:model.lazy="search" type="text" class="form-control"
+                                    placeholder="Buscar...">
                             </div>
                         </div>
                     </div>
@@ -65,45 +67,53 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($packages as $package)
-                                        <tr>
-                                            <td>{{ $package->id }}</td>
-                                            <td>{{ $package->CODIGO }}</td>
-                                            <td>{{ $package->DESTINATARIO }}</td>
-                                            <td>{{ $package->TELEFONO }}</td>
-                                            <td>{{ $package->PAIS }}</td>
-                                            <td>{{ $package->CUIDAD }}</td>
-                                            <td>{{ $package->ZONA }}</td>
-                                            <td>{{ $package->VENTANILLA }}</td>
-                                            <td>{{ $package->PESO }}</td>
-                                            <td>{{ $package->TIPO }}</td>
-                                            <td>{{ $package->ESTADO }}</td>
-                                            <td>{{ $package->ADUANA }}</td>
-                                            <td>{{ $package->created_at }}</td>
-                                            <td>
-                                                <form action="{{ route('packages.destroy', $package->id) }}" method="POST">
-                                                    @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                                        <a class="btn btn-sm btn-warning"
-                                                            href="{{ route('packages.delete', $package->id) }}">
-                                                            <i class="fa fa-arrow-down"></i> {{ __('Baja') }}
-                                                        </a>
-                                                    @endhasrole
-                                                    @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano|Clasificacion|Auxiliar Clasificacion')
-                                                        <a class="btn btn-sm btn-success"
-                                                            href="{{ route('packages.edit', $package->id) }}">
-                                                            <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
-                                                        </a>
-                                                    @endhasrole
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i>
-                                                            {{ __('Eliminar') }}
-                                                        </button>
-                                                    @endhasrole
-                                                </form>
-                                            </td>
-                                        </tr>
+                                        @if (!$package->redirigido)
+                                            <tr>
+                                                <td>{{ $package->id }}</td>
+                                                <td>{{ $package->CODIGO }}</td>
+                                                <td>{{ $package->DESTINATARIO }}</td>
+                                                <td>{{ $package->TELEFONO }}</td>
+                                                <td>{{ $package->PAIS }}</td>
+                                                <td>{{ $package->CUIDAD }}</td>
+                                                <td>{{ $package->ZONA }}</td>
+                                                <td>{{ $package->VENTANILLA }}</td>
+                                                <td>{{ $package->PESO }}</td>
+                                                <td>{{ $package->TIPO }}</td>
+                                                <td>{{ $package->ESTADO }}</td>
+                                                <td>{{ $package->ADUANA }}</td>
+                                                <td>{{ $package->created_at }}</td>
+                                                <td>
+                                                    <form action="{{ route('packages.destroy', $package->id) }}"
+                                                        method="POST">
+                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                                            <a class="btn btn-sm btn-warning"
+                                                                href="{{ route('packages.delete', $package->id) }}">
+                                                                <i class="fa fa-arrow-down"></i> {{ __('Baja') }}
+                                                            </a>
+                                                        @endhasrole
+                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                            Urbano|Clasificacion|Auxiliar Clasificacion')
+                                                            <a class="btn btn-sm btn-success"
+                                                                href="{{ route('packages.edit', $package->id) }}">
+                                                                <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
+                                                            </a>
+                                                        @endhasrole
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
+                                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                                    class="fa fa-fw fa-trash"></i>
+                                                                {{ __('Eliminar') }}
+                                                            </button>
+                                                        @endhasrole
+                                                        @if (!$package->redirigido)
+                                                            <a href="{{ route('packages.redirigir', $package->id) }}"
+                                                                class="btn btn-sm btn-secondary"><i class="fas fa-arrow-up"></i>Reencaminar</a>
+                                                        @endif
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
@@ -118,8 +128,8 @@
                     </div>
                 @else
                     <p>No se encontraron resultados para la búsqueda.</p>
-                @endif
+                    @endif
+                </div>
             </div>
         </div>
     </div>
-</div>

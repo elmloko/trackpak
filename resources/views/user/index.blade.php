@@ -53,9 +53,9 @@
                                         <th>Nombre Completo</th>
                                         <th>Email</th>
                                         <th>Contraseña</th>
+                                        <th>Regional</th>
                                         <th>Nivel de Usuario</th>
                                         <th>Estado</th>
-
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -67,6 +67,7 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ str_repeat('*', min(12, strlen($user->password))) }}</td>
+                                            <td>{{ $user->Regional }}</td>
                                             <td>
                                                 @foreach ($user->roles as $role)
                                                     <span class="badge badge-info">{{ $role->name }}</span>

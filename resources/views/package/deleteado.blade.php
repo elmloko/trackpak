@@ -44,7 +44,7 @@
                                         <tr>
                                             <th>No</th>
                         
-                                            <th>Codigo Postal</th>
+                                            <th>Código Postal</th>
                                             <th>Destinatario</th>
                                             <th>Telefono</th>
                                             <th>Pais</th>
