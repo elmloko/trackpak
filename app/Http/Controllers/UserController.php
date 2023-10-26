@@ -49,13 +49,15 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
+            'Regional' => 'required',
         ]);
     
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password')); // Encriptar la contraseña
-    
+        $user->Regional = $request->input('Regional');
+
         $user->save();
 
         $user->assignRole($request->input('roles'));
@@ -108,7 +110,8 @@ class UserController extends Controller
     $user->name = $request->input('name');
     $user->email = $request->input('email');
     $user->roles()->sync($request->roles);
-
+    $user->Regional = $request->input('Regional');
+    
     $user->save();
 
     return redirect()->route('users.index')
