@@ -48,11 +48,11 @@
                     {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $package->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
                     {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     {{ Form::label('ESTADO') }}
                     {{ Form::select('ESTADO', ['ALMACEN' => 'ALMACEN', 'TRANSITO' => 'TRANSITO', 'PENDIENTE' => 'PENDIENTE', 'PRE-RETURN' => 'PRE-RETURN'], $package->ESTADO, ['class' => 'form-control' . ($errors->has('ESTADO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se encuentra el paquete']) }}
                     {!! $errors->first('ESTADO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                </div> --}}
                 <div class="form-group">
                     {{ Form::label('ADUANA') }}
                     {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}

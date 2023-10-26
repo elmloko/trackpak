@@ -67,20 +67,21 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(1, 'App\\Models\\User', 1),
-	(3, 'App\\Models\\User', 2),
-	(4, 'App\\Models\\User', 3),
-	(5, 'App\\Models\\User', 4),
-	(6, 'App\\Models\\User', 5),
-	(6, 'App\\Models\\User', 6);
+	(6, 'App\\Models\\User', 7),
+	(6, 'App\\Models\\User', 8),
+	(6, 'App\\Models\\User', 9),
+	(4, 'App\\Models\\User', 10),
+	(4, 'App\\Models\\User', 11),
+	(3, 'App\\Models\\User', 12);
 
 CREATE TABLE IF NOT EXISTS `packages` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `CODIGO` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `DESTINATARIO` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `DESTINATARIO` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `PAIS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `CUIDAD` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `VENTANILLA` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ESTADO` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ESTADO` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'CLASIFICACION',
   `TELEFONO` int DEFAULT NULL,
   `ZONA` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `PESO` double(8,2) DEFAULT NULL,
@@ -89,22 +90,22 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
-  `redirigido` tinyint(1) NOT NULL DEFAULT '0',
+  `redirigido` tinyint(1) DEFAULT NULL,
   `date_redirigido` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `PAIS`, `CUIDAD`, `VENTANILLA`, `ESTADO`, `TELEFONO`, `ZONA`, `PESO`, `TIPO`, `ADUANA`, `created_at`, `updated_at`, `deleted_at`, `redirigido`, `date_redirigido`) VALUES
-	(1, 'RG958792285BE', 'JOSE LUIS SANCHEZ CHAMBI', 'BE', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-26 14:51:16', '2023-10-26 14:51:16', 0, '2023-10-23 22:32:25'),
-	(2, 'RK996001089CH', 'FRANCISCA FLORES DE CHOQUE', 'CH', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-23 20:00:27', NULL, 0, '2023-10-23 19:44:50'),
-	(3, 'RR305053048AT', 'OLGA VALDIVIA', 'AT', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-23 20:00:01', '2023-10-23 20:00:01', 0, '2023-10-23 19:44:54'),
+	(1, 'RG958792285BE', 'JOSE LUIS SANCHEZ CHAMBI', 'BE', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-26 21:52:02', NULL, 0, '2023-10-23 22:32:25'),
+	(2, 'RK996001089CH', 'FRANCISCA FLORES DE CHOQUE', 'CH', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-26 21:48:34', '2023-10-26 21:48:34', 0, '2023-10-26 19:58:59'),
+	(3, 'RR305053048AT', 'OLGA VALDIVIA', 'AT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-26 21:05:18', NULL, 0, '2023-10-23 19:44:54'),
 	(4, 'RI274241199BG', 'ISMAEL CUTIPA LOPEZ', 'BG', 'LA PAZ', '32', 'REENCAMINADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-23 19:59:46', NULL, 1, '2023-10-23 19:59:46'),
-	(5, 'RT913714274HK', 'GUNAR ZAMBRANA', 'HK', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-26 17:52:39', '2023-10-26 17:52:39', 0, NULL),
+	(5, 'RT913714274HK', 'GUNAR ZAMBRANA', 'HK', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-26 19:58:21', NULL, 0, NULL),
 	(6, 'RC096255251IT', 'HANS ROMERO PORCO QUISPE', 'IT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(7, 'RR529435991CL', 'SALOMON TORREZ RAMOS', 'CL', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(8, 'RR531061520CL', 'XIMENA JIMENEZ MARCA', 'CL', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(9, 'RB899442198SG', 'MATHHEW HERNANDEZ', 'SG', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
-	(10, 'RQ482777470AT', 'ZENOVIA TARANIAAPO VILLCA', 'AT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
+	(10, 'RQ482777470AT', 'ZENOVIA TARANIAAPO VILLCA', 'AT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-26 19:58:01', NULL, 0, NULL),
 	(11, 'RU664596882NL', 'DARKI GOMEZ ITURRY', 'NL', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(12, 'RR054658317LU', 'ABEL OLIVIA LANZA', 'LU', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(13, 'RL280663298GB', 'DIEGO ALEJO', 'GB', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
@@ -12876,11 +12877,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Regional`) VALUES
 	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$70CNA.ZSKWoiVviIWuOgJOWBoChJAWeytDOmu1SNX3D1MmBZjfI8K', NULL, '2023-10-13 17:27:44', '2023-10-26 17:52:25', 'LA PAZ'),
-	(2, 'Leo Doria Medina', 'leo.medina@correos.gob.bo', NULL, '$2y$10$V5FmVUsHjoT7EVL7i16QlujuPy6jQApaVDs0BpzCGcLfRRPRyUluK', NULL, '2023-10-13 17:29:07', '2023-10-26 17:52:17', 'SANTA CRUZ'),
-	(3, 'Alejandra Quintanilla', 'ale.quintanilla@correos.gob.bo', NULL, '$2y$10$noWL5tRAOqUFYDT9fI64L.TZ7xW51LU21RSffsyinimJBvqztwfMa', NULL, '2023-10-13 17:29:26', '2023-10-13 17:29:26', ''),
-	(4, 'Nadia Rodriguez', 'nadia.rodriguez@correos.gob.bo', NULL, '$2y$10$K72mE4B4Y/bjkFWUYITmfeJ8Rt4qghMjEPJdgwntR.85CIbo8chIK', NULL, '2023-10-13 17:29:52', '2023-10-13 17:29:52', ''),
-	(5, 'Teresa Rojas', 'teresa.rojas@correos.gob.bo', NULL, '$2y$10$2lOXRmfStKtieE6nzdDDY.cy9i73Jx65nrD.nmfRqiODSQrhgX..y', NULL, '2023-10-13 17:30:22', '2023-10-13 17:30:22', ''),
-	(6, 'Rodrigo Villa Sanjines', 'rodrigo.villa@correos.gob.bo', NULL, '$2y$10$WUOb0o1je54/aAiyc7.rZeFqJ7wmaCscIkaCR6hpvPH8CXEio8eVO', NULL, '2023-10-26 17:48:05', '2023-10-26 17:48:05', NULL);
+	(7, 'Rodrigo Villa Sanjines', 'rodrigo.villa@correos.gob.bo', NULL, '$2y$10$b6aDZSzXjhB8LyewKqoEjOAvIeYFks32wmX/teQfsLn/Bz43mccxK', NULL, '2023-10-26 18:19:40', '2023-10-26 18:19:40', 'LA PAZ'),
+	(8, 'Victor Antonio Tapia Quisbert', 'victor.tapia@correos.gob.bo', NULL, '$2y$10$gtWuAzWdTp9ZB9IWoqxDWu6z/jLb3Za86w8BNHszGQMEHfmY08xuq', NULL, '2023-10-26 18:20:40', '2023-10-26 18:20:40', 'LA PAZ'),
+	(9, 'Jose Luis Rodriguez Alvarez', 'jose.rodriguez@correos.gob.bo', NULL, '$2y$10$w6KmhI.BzXspWpUkAyXWxetO.2Jz2H0/bTL6TaT72g.nslXjnfqzi', NULL, '2023-10-26 20:40:14', '2023-10-26 20:40:14', 'LA PAZ'),
+	(10, 'Luisa Gutierrez Arroyo', 'luisa.gutierrez@correos.gob.bo', NULL, '$2y$10$TaD.egiUuukEL8.wUcdmOupYpmZUR9vd/6ea6bgw/z7IblIwIaPe6', NULL, '2023-10-26 20:41:30', '2023-10-26 20:41:30', 'LA PAZ'),
+	(11, 'Wike Mamani Apaza', 'wike.mamani@correos.gob.bo', NULL, '$2y$10$3AqPBNmLJ1fvMJL7qIt/8eYwZxORnRXTAx1dvjXuh1vbE3DHGwg4y', NULL, '2023-10-26 20:42:17', '2023-10-26 20:42:17', 'LA PAZ'),
+	(12, 'Caleb Conde Huanca', 'caleb.conde@correos.gob.bo', NULL, '$2y$10$JoWeg7Kz.NHfh4dJHc/L6e/1qvgIZP37H3pM7IR8q0E4M1cs2Afve', NULL, '2023-10-26 20:43:05', '2023-10-26 20:43:05', 'LA PAZ');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

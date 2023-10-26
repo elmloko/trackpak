@@ -34,6 +34,7 @@ class PackageController extends Controller
     public function create()
     {
         $package = new Package();
+
         return view('package.create', compact('package'));
     }
 
@@ -88,6 +89,7 @@ class PackageController extends Controller
      */
     public function update(Request $request, Package $package)
     {
+        // dd($request->all());
         request()->validate(Package::$rules);
 
         $package->update($request->all());
