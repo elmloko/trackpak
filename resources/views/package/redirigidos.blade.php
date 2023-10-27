@@ -21,7 +21,7 @@
                                                 <th>Código Postal</th>
                                                 <th>Destinatario</th>
                                                 <th>País</th>
-                                                <th>Ciudad</th>
+                                                <th>Destino Cuidad</th>
                                                 <th>Tipo</th>
                                                 <th>Estado</th>
                                                 <th>Aduana</th>

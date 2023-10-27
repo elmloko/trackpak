@@ -50,7 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::get('test/redirigidos', [PackageController::class, 'redirigidos'])->name('packages.redirigidos');
     Route::get('test/dirigido/{id}', [PackageController::class, 'dirigido'])->name('packages.dirigido');
 
-
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
     });
