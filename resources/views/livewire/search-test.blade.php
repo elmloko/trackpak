@@ -11,32 +11,38 @@
             </p>
             <div class="w-full bg-white rounded p-4">
                 <input type="text" wire:model.live="search"
-                    class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0 text-black" placeholder="Buscar Paquete...">
-                    @if ($search)
+                    class="w-full bg-gray-200 rounded-full py-2 px-4 mb-2 md:mb-0 text-black"
+                    placeholder="Buscar Paquete...">
+                @if ($search)
                     <div class="w-full bg-white rounded p-4 mt-4">
                         @foreach ($results as $result)
-                        <div class="mb-4 text-black" tabindex="1">
-                            @if ($result->ESTADO == "ENTREGADO")
-                                Su paquete <strong>{{ $result->CODIGO }}</strong> ha sido entregado!
-                            @else
-                                Su paquete <strong>{{ $result->CODIGO }}</strong> se encuentra en 
-                                <strong>{{ $result->CUIDAD }}</strong>, en la ventanilla
-                                <strong>{{ $result->VENTANILLA }}</strong>
-                                @if ($result->ADUANA == "SI")
-                                    envío observado por <strong>ADUANA NACIONAL</strong>
+                            <div class="mb-4 text-black" tabindex="1">
+                                @if ($result->ESTADO == 'ENTREGADO')
+                                    Su paquete <strong>{{ $result->CODIGO }}</strong> ha sido entregado!
+                                @elseif ($result->ESTADO == 'CLASIFICACION')
+                                    Su paquete <strong>{{ $result->CODIGO }}</strong> está en proceso de Distribución.
+                                @elseif ($result->ESTADO == 'VENTANILLA')
+                                    Su paquete <strong>{{ $result->CODIGO }}</strong> se encuentra en
+                                    <strong>{{ $result->CUIDAD }}</strong>, en la ventanilla
+                                    <strong>{{ $result->VENTANILLA }}</strong>
+                                    @if ($result->ADUANA == 'SI')
+                                        envío observado por <strong>ADUANA NACIONAL</strong>
+                                    @endif
+                                @else
+                                    Su paquete <strong>{{ $result->CODIGO }}</strong> tiene un estado no reconocido.
                                 @endif
+                            </div>
+                            @if (!$loop->last)
+                                <!-- Verifica si no es el último elemento -->
+                                <div class="mb-4 border-b border-gray-300"></div>
                             @endif
-                        </div>
-                        @if (!$loop->last)
-                            <!-- Verifica si no es el último elemento -->
-                            <div class="mb-4 border-b border-gray-300"></div>
-                        @endif
                         @endforeach
                         @if ($results->count() == 0)
-                            <p class="mb-4 text-black">No hay resultados para la búsqueda <b>"{{ $search }}"</b></p>
+                            <p class="mb-4 text-black">No hay resultados para la búsqueda <b>"{{ $search }}"</b>
+                            </p>
                         @endif
                     </div>
-                @endif                
+                @endif
             </div>
         </div>
         <!-- Columna Derecha -->
