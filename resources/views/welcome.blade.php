@@ -618,6 +618,7 @@
         }
     </script>
     @livewireScripts
+    @livewire('livewire-ui-modal')
 </body>
 
 </html>
