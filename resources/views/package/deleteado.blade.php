@@ -9,9 +9,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span id="card_title">
-                                {{ __('Paquetes Ordinarios Nacionales') }}
-                            </span>
+                            <div>
+                                <h5 id="card_title">
+                                    {{ __('Inventario de Paquetes en Entregados') }}
+                                </h5>
+                            </div>
                             <div style="display: flex; align-items: center;">
                                 {{-- <div class="mr-2">
                                     <a href="{{ route('prueba.excel') }}" class="btn btn-success btn-sm"

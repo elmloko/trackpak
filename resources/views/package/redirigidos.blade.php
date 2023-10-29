@@ -12,7 +12,11 @@
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <h1>Paquetes Redirigidos</h1>
+                                <div>
+                                    <h5 id="card_title">
+                                        {{ __('Paquetes Perdidos en Destino') }}
+                                    </h5>
+                                </div>
                                 @if ($paquetesRedirigidos->count() > 0)
                                     <table class="table table-striped table-hover">
                                         <thead class="thead">
@@ -41,7 +45,13 @@
                                                     <td>{{ $packages->ESTADO }}</td>
                                                     <td>{{ $packages->ADUANA }}</td>
                                                     <td>{{ $packages->date_redirigido }}</td>
-                                                    <td><a href="{{ route('packages.dirigido', $packages->id) }}" class="btn btn-info"><i class="fa fa-arrow-up"></i>Rencaminado</a></td>
+                                                    <td><a class="btn btn-sm btn-info"
+                                                        href="#" data-toggle="modal"
+                                                        data-target="#reencaminadoModal{{ $packages->id }}">
+                                                        <i class="fa fa-arrow-up"></i>
+                                                        {{ __('Rencaminado') }}
+                                                    </a>
+                                                    @include('package.modal.reencaminado')</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

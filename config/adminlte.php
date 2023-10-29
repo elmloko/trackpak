@@ -336,21 +336,52 @@ return [
             'can'  => 'packages.index',
             'submenu' => [
                 [
-                    'text' => 'Paquetes',
+                    'text' => 'Todos Paquetes',
                     'url' => 'packages',
                     'icon' => 'fas fa-box',
                 ],
                 [
-                    'text' => 'Inventario',
-                    'url' => 'test/deleteado',
+                    'text' => 'Clasificacion',
                     'icon' => 'fas fa-clipboard-list',
-                    'can'  => 'packages.destroy',
+                    'can'  => '',
+                    'submenu' => [
+                        [
+                            'text' => 'Registro Paquetes',
+                            'url' => 'packages/clasificacion',
+                            'icon' => 'fas fa-clipboard-list',
+                            'can'  => '',
+                        ],
+                        [
+                            'text' => 'Reencaminar',
+                            'url' => 'test/redirigidos',
+                            'icon' => 'fas fa-paper-plane',
+                        ],
+                    ],
                 ],
                 [
-                    'text' => 'Reencaminar',
-                    'url' => 'test/redirigidos',
-                    'icon' => 'fas fa-paper-plane',
+                    'text' => 'Ventanilla',
+                    'icon' => 'fas fa-clipboard-list',
+                    'can'  => '',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas Ventanilla',
+                            'url' => 'packages/ventanilla',
+                            'icon' => 'fas fa-clipboard-list',
+                            'can'  => '',
+                        ],
+                        [
+                            'text' => 'Inventario',
+                            'url' => 'test/deleteado',
+                            'icon' => 'fas fa-clipboard-list',
+                            'can'  => 'packages.destroy',
+                        ],
+                    ],
                 ],
+                // [
+                //     'text' => 'Reencaminar',
+                //     'url' => 'test/redirigidos',
+                //     'icon' => 'fas fa-paper-plane',
+                // ],
             ],
         ],
         // [

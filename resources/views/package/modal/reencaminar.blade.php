@@ -13,7 +13,7 @@
                     <div class="col">
                         <p>Código Postal: {{$package->CODIGO}}</p>
                         <p>Destinatario: {{$package->DESTINATARIO}}</p>
-                        <p>Ciudad: {{$package->CUIDAD}}</p>
+                        <p>Destino: {{$package->CUIDAD}}</p>
                         <p>Ventanilla: {{$package->VENTANILLA}}</p>
                     </div>
                     <div class="col">
@@ -23,17 +23,9 @@
                         <p>Fecha Ingreso: {{$package->created_at}}</p>
                     </div>
                 </div>
-                <p>¿Estás seguro de que deseas reencaminar este paquete?</p>
+                <p>¿Donde se encontraba este paquete?</p>
             </div>
-            {{-- <div class="form-group">
-                <label for="departamentoSelect">Selecciona un Departamento:</label>
-                <select class="form-control" id="departamentoSelect" name="departamento">
-                    <option value="La Paz">La Paz</option>
-                    <option value="Cochabamba">Cochabamba</option>
-                    <option value="Santa Cruz">Santa Cruz</option>
-                    <!-- Agrega más opciones para otros departamentos de Bolivia -->
-                </select>
-            </div> --}}
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 <a href="{{ route('packages.redirigir', $package->id) }}" class="btn btn-success">Confirmar Rencaminamiento</a>

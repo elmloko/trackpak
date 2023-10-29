@@ -9,7 +9,7 @@
                                 <div class="card">
                                     <div>
                                         <h5 id="card_title">
-                                            {{ __('Paquetes Ordinarios Nacionales') }}
+                                            {{ __('Entregas de Paquetes en Ventanilla') }}
                                         </h5>
                                     </div>
                                     <div class="row">
@@ -29,15 +29,15 @@
                                                     PDF
                                                 </a>
                                             </div>
-                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                                 <div class="d-inline-block">
-                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
+                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm" data-placement="left">
                                                         {{ __('Crear Nuevo') }}
                                                     </a>
                                                 </div>
-                                            @endhasrole
+                                            @endhasrole --}}
                                         </div>
-                                    </div>  
+                                    </div>                                                                        
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
@@ -70,7 +70,7 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($packages as $package)
-                                                            
+                                                            @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido )
                                                                 <tr>
                                                                     <td>{{ $package->id }}</td>
                                                                     <td>{{ $package->CODIGO }}</td>
@@ -110,13 +110,13 @@
                                                                             @endhasrole
                                                                             @csrf
                                                                             @method('DELETE')
-                                                                            @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
+                                                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
                                                                                 <button type="submit"
                                                                                     class="btn btn-danger btn-sm"><i
                                                                                         class="fa fa-fw fa-trash"></i>
                                                                                     {{ __('Eliminar') }}
                                                                                 </button>
-                                                                            @endhasrole
+                                                                            @endhasrole --}}
                                                                             @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                                 Urbano')
                                                                                 @if (!$package->redirigido)
@@ -132,7 +132,7 @@
                                                                         </form>
                                                                     </td>
                                                                 </tr>
-                                                            
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>

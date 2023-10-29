@@ -9,7 +9,7 @@
                                 <div class="card">
                                     <div>
                                         <h5 id="card_title">
-                                            {{ __('Paquetes Ordinarios Nacionales') }}
+                                            {{ __('Registro de Paquetes Ordinarios') }}
                                         </h5>
                                     </div>
                                     <div class="row">
@@ -70,7 +70,7 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($packages as $package)
-                                                            
+                                                        @if ($package->ESTADO === 'CLASIFICACION')
                                                                 <tr>
                                                                     <td>{{ $package->id }}</td>
                                                                     <td>{{ $package->CODIGO }}</td>
@@ -89,7 +89,7 @@
                                                                         <form
                                                                             action="{{ route('packages.destroy', $package->id) }}"
                                                                             method="POST">
-                                                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                                 Urbano')
                                                                                 <a class="btn btn-sm btn-warning"
                                                                                     href="#" data-toggle="modal"
@@ -98,7 +98,7 @@
                                                                                     {{ __('Baja') }}
                                                                                 </a>
                                                                                 @include('package.modal.baja')
-                                                                            @endhasrole
+                                                                            @endhasrole --}}
                                                                             @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                                 Urbano|Clasificacion|Auxiliar
                                                                                 Clasificacion')
@@ -117,7 +117,7 @@
                                                                                     {{ __('Eliminar') }}
                                                                                 </button>
                                                                             @endhasrole
-                                                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                                 Urbano')
                                                                                 @if (!$package->redirigido)
                                                                                     <a class="btn btn-sm btn-secondary"
@@ -128,11 +128,11 @@
                                                                                     </a>
                                                                                     @include('package.modal.reencaminar')
                                                                                 @endif
-                                                                            @endhasrole
+                                                                            @endhasrole --}}
                                                                         </form>
                                                                     </td>
                                                                 </tr>
-                                                            
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>

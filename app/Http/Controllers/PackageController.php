@@ -196,7 +196,7 @@ class PackageController extends Controller
             // Cambia el estado del paquete a "redirigido"
             $package->redirigido = false;
 
-            $package->estado = 'ALMACEN';
+            $package->estado = 'VENTANILLA';
 
             // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
             $package->date_redirigido = now();
@@ -208,5 +208,19 @@ class PackageController extends Controller
         } else {
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
+    }
+    public function ventanilla()
+    {
+        $packages = Package::paginate(20);
+
+        return view('package.ventanilla', compact('packages'))
+            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+    }
+    public function clasificacion()
+    {
+        $packages = Package::paginate(20);
+
+        return view('package.clasificacion', compact('packages'))
+            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
     }
 }
