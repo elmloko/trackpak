@@ -9,35 +9,35 @@
                                 <div class="card">
                                     <div>
                                         <h5 id="card_title">
-                                            {{ __('Registro de Paquetes Ordinarios') }}
+                                            {{ __('Entregas de Paquetes en Ventanilla') }}
                                         </h5>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
-                                                <input wire:model.lazy="searchv" type="text" class="form-control" placeholder="Buscar...">
+                                                <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                             </div>
                                         </div>
                                         <div class="col-lg-9 text-right">
                                             <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('clasificacion.excel') }}" class="btn btn-success" data-placement="left">
+                                                <a href="{{ route('ventanilla.excel') }}" class="btn btn-success" data-placement="left">
                                                     Excel
                                                 </a>
                                             </div>
                                             <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('clasificacion.pdf') }}" class="btn btn-danger" data-placement="left">
+                                                <a href="{{ route('ventanilla.pdf') }}" class="btn btn-danger" data-placement="left">
                                                     PDF
                                                 </a>
                                             </div>
-                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                                 <div class="d-inline-block">
-                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
+                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm" data-placement="left">
                                                         {{ __('Crear Nuevo') }}
                                                     </a>
                                                 </div>
-                                            @endhasrole
+                                            @endhasrole --}}
                                         </div>
-                                    </div>  
+                                    </div>                                                                        
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
@@ -70,7 +70,7 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($packages as $package)
-                                                        @if ($package->ESTADO === 'CLASIFICACION')
+                                                            @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido )
                                                                 <tr>
                                                                     <td>{{ $package->id }}</td>
                                                                     <td>{{ $package->CODIGO }}</td>
@@ -89,7 +89,7 @@
                                                                         <form
                                                                             action="{{ route('packages.destroy', $package->id) }}"
                                                                             method="POST">
-                                                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                                 Urbano')
                                                                                 <a class="btn btn-sm btn-warning"
                                                                                     href="#" data-toggle="modal"
@@ -98,7 +98,7 @@
                                                                                     {{ __('Baja') }}
                                                                                 </a>
                                                                                 @include('package.modal.baja')
-                                                                            @endhasrole --}}
+                                                                            @endhasrole
                                                                             @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                                 Urbano|Clasificacion|Auxiliar
                                                                                 Clasificacion')
@@ -110,14 +110,14 @@
                                                                             @endhasrole
                                                                             @csrf
                                                                             @method('DELETE')
-                                                                            @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
+                                                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
                                                                                 <button type="submit"
                                                                                     class="btn btn-danger btn-sm"><i
                                                                                         class="fa fa-fw fa-trash"></i>
                                                                                     {{ __('Eliminar') }}
                                                                                 </button>
-                                                                            @endhasrole
-                                                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                                            @endhasrole --}}
+                                                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                                 Urbano')
                                                                                 @if (!$package->redirigido)
                                                                                     <a class="btn btn-sm btn-secondary"
@@ -128,7 +128,7 @@
                                                                                     </a>
                                                                                     @include('package.modal.reencaminar')
                                                                                 @endif
-                                                                            @endhasrole --}}
+                                                                            @endhasrole
                                                                         </form>
                                                                     </td>
                                                                 </tr>

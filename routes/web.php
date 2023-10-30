@@ -32,15 +32,14 @@ Route::middleware('auth')->group(function () {
     Route::get('users/{id}/delete', [PackageController::class, 'delete'])->name('users.delete');
     Route::get('utest/deleteado', [UserController::class, 'deleteado'])->name('utest.deleteado');
     Route::put('utest/{id}/restoring', [UserController::class, 'restoring'])->name('users.restoring');
-    Route::get('prueba2/excel', [UserController::class, 'excel'])->name('usuario1.excel');
-    Route::get('prueba2/pdf', [UserController::class, 'pdf'])->name('usuario1.pdf');
+    Route::get('user/excel', [UserController::class, 'excel'])->name('user.excel');
+    Route::get('user/pdf', [UserController::class, 'pdf'])->name('user.pdf');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    //Route::resource('packages', App\Http\Controllers\PackageController::class);
     Route::get('packages', [PackageController::class, 'index'])->name('packages.index');
     Route::get('packages/create', [PackageController::class, 'create'])->name('packages.create');
     Route::post('packages', [PackageController::class, 'store'])->name('packages.store');
@@ -58,6 +57,10 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/clasificacion', [PackageController::class, 'clasificacion'])->name('packages.clasificacion');
     Route::get('test/redirigidos', [PackageController::class, 'redirigidos'])->name('packages.redirigidos');
     Route::get('test/dirigido/{id}', [PackageController::class, 'dirigido'])->name('packages.dirigido');
+    Route::get('ventanilla/ventanillaexcel', [PackageController::class, 'ventanillaexcel'])->name('ventanilla.excel');
+    Route::get('ventanilla/ventanillapdf', [PackageController::class, 'ventanillapdf'])->name('ventanilla.pdf');
+    Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
+    Route::get('clasificacion/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('clasificacion.pdf');
 
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));

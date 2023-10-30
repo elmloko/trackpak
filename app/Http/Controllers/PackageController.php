@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Exports\VentanillaExport;
+use App\Exports\ClasificacionExport;
 use App\Exports\PackageExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -110,6 +112,28 @@ class PackageController extends Controller
         return redirect()->route('packages.index')
             ->with('success', 'Paquete Eliminado Con Exito!');
     }
+    public function ventanillaexcel()
+    {
+        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
+        return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
+    }
+
+    public function ventanillapdf()
+    {
+        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
+        return Excel::download(new VentanillaExport($packages), 'Ventanilla.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
+    public function clasificacionexcel()
+    {
+        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
+        return Excel::download(new ClasificacionExport($packages), 'Clasificacion.xlsx');
+    }
+
+    public function clasificacionpdf()
+    {
+        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
+        return Excel::download(new ClasificacionExport($packages), 'Clasificacion.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+    }
     public function excel()
     {
         return Excel::download(new PackageExport, 'Paquetes Ordinarios.xlsx');
@@ -118,26 +142,26 @@ class PackageController extends Controller
     public function pdf()
     {
         return Excel::download(new PackageExport, 'Paquetes Ordinarios.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
-    } 
-    public function delete($id)
-{
-    $package = Package::find($id);
-
-    if ($package) {
-        // Cambia el estado del paquete a "ENTREGADO"
-        $package->estado = 'ENTREGADO';
-
-        // Guarda el paquete actualizado
-        $package->save();
-
-        // Luego, elimina el paquete
-        $package->delete();
-
-        return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
-    } else {
-        return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
     }
-}
+    public function delete($id)
+    {
+        $package = Package::find($id);
+
+        if ($package) {
+            // Cambia el estado del paquete a "ENTREGADO"
+            $package->estado = 'ENTREGADO';
+
+            // Guarda el paquete actualizado
+            $package->save();
+
+            // Luego, elimina el paquete
+            $package->delete();
+
+            return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
+        } else {
+            return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
+        }
+    }
     public function deleteado()
     {
         // Recupera todos los elementos eliminados (soft deleted)
@@ -164,7 +188,7 @@ class PackageController extends Controller
     public function redirigir($id)
     {
         $package = Package::find($id);
-    
+
         if ($package) {
             // Cambia el estado del paquete a "redirigido"
             $package->redirigido = true;
@@ -173,10 +197,10 @@ class PackageController extends Controller
 
             // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
             $package->date_redirigido = now();
-    
+
             // Guarda el paquete actualizado
             $package->save();
-    
+
             return back()->with('success', 'Paquete redirigido con éxito.');
         } else {
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
@@ -185,13 +209,13 @@ class PackageController extends Controller
     public function redirigidos()
     {
         $paquetesRedirigidos = Package::where('redirigido', true)->get();
-        
+
         return view('package.redirigidos', compact('paquetesRedirigidos'));
     }
     public function dirigido($id)
     {
         $package = Package::find($id);
-    
+
         if ($package) {
             // Cambia el estado del paquete a "redirigido"
             $package->redirigido = false;
@@ -200,10 +224,10 @@ class PackageController extends Controller
 
             // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
             $package->date_redirigido = now();
-    
+
             // Guarda el paquete actualizado
             $package->save();
-    
+
             return back()->with('success', 'Paquete redirigido con éxito.');
         } else {
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
