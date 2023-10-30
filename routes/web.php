@@ -5,6 +5,7 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PcertificateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::get('users/{id}/delete', [PackageController::class, 'delete'])->name('users.delete');
     Route::get('utest/deleteado', [UserController::class, 'deleteado'])->name('utest.deleteado');
     Route::put('utest/{id}/restoring', [UserController::class, 'restoring'])->name('users.restoring');
-    Route::get('user/excel', [UserController::class, 'excel'])->name('user.excel');
-    Route::get('user/pdf', [UserController::class, 'pdf'])->name('user.pdf');
+    Route::get('users/excel', [UserController::class, 'excel'])->name('users.excel');
+    Route::get('users/pdf', [UserController::class, 'pdf'])->name('users.pdf');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -44,9 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/create', [PackageController::class, 'create'])->name('packages.create');
     Route::post('packages', [PackageController::class, 'store'])->name('packages.store');
     // Route::get('test/{test}', [PackageController::class, 'show'])->name('test.show');
-    Route::get('packages/{test}/edit', [PackageController::class, 'edit'])->name('packages.edit');
-    Route::put('packages/{test}', [PackageController::class, 'update'])->name('packages.update');
-    Route::delete('packages/{test}', [PackageController::class, 'destroy'])->name('packages.destroy');
+    Route::get('packages/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit');
+    Route::put('packages/{package}', [PackageController::class, 'update'])->name('packages.update');
+    Route::delete('packages/{packages}', [PackageController::class, 'destroy'])->name('packages.destroy');
     Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
     Route::get('test/deleteado', [PackageController::class, 'deleteado'])->name('test.deleteado');
     Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
@@ -63,6 +64,13 @@ Route::middleware('auth')->group(function () {
     Route::get('clasificacion/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('clasificacion.pdf');
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
 
+    Route::resource('events', EventController::class);
+    Route::get('/events', [EventController::class, 'index'])->name('events.index');
+    Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');
+    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));

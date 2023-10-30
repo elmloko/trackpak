@@ -17,13 +17,13 @@
                             </span>
                             <div style="display: flex; align-items: center;">
                                 <div class="mr-2">
-                                    <a href="{{ route('usuario1.excel') }}" class="btn btn-success btn-sm"
+                                    <a href="{{ route('users.excel') }}" class="btn btn-success btn-sm"
                                         data-placement="left">
                                         Excel
                                     </a>
                                 </div>
                                 <div class="mr-2">
-                                    <a href="{{ route('usuario1.pdf') }}" class="btn btn-danger btn-sm"
+                                    <a href="{{ route('users.pdf') }}" class="btn btn-danger btn-sm"
                                         data-placement="left">
                                         PDF
                                     </a>

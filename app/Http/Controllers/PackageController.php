@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Event;
 use App\Exports\VentanillaExport;
 use App\Exports\ClasificacionExport;
 use App\Exports\PackageExport;
@@ -33,35 +34,29 @@ class PackageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
+        // Crear una instancia de Package
         $package = new Package();
 
         return view('package.create', compact('package'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate(Package::$rules);
 
         $package = Package::create($request->all());
-
+        Event::create([
+            'action' => 'Creación de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $package->CODIGO,
+        ]);
         return redirect()->route('packages.index')
             ->with('success', 'Paquete Creado Con Exito!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $package = Package::find($id);
@@ -69,49 +64,46 @@ class PackageController extends Controller
         return view('package.show', compact('package'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $package = Package::find($id);
-
         return view('package.edit', compact('package'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Package $package
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Package $package)
-    {
-        // dd($request->all());
-        request()->validate(Package::$rules);
+{
+    request()->validate(Package::$rules);
 
-        $package->update($request->all());
+    // Obtener el código del paquete antes de la actualización
+    $codigo = $package->CODIGO;
 
-        return redirect()->route('packages.index')
-            ->with('success', 'Paquete Actualizado Con Exito!');
-    }
+    $package->update($request->all());
+    Event::create([
+        'action' => 'Edición de Paquete',
+        'user_id' => auth()->user()->id,
+        'codigo' => $codigo, // Utiliza el código obtenido previamente
+    ]);
+    return redirect()->route('packages.index')
+        ->with('success', 'Paquete Actualizado Con Éxito!');
+}
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
+
     public function destroy($id)
     {
-        $package = Package::find($id)->delete();
+        $package = Package::find($id); // Encuentra el paquete
+        $codigo = $package->CODIGO; // Obtiene el código antes de eliminar el paquete
+        $package->delete(); // Elimina el paquete
+
+        Event::create([
+            'action' => 'Eliminación de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $codigo, // Utiliza el código obtenido previamente
+        ]);
 
         return redirect()->route('packages.index')
-            ->with('success', 'Paquete Eliminado Con Exito!');
+            ->with('success', 'Paquete Eliminado Con Éxito!');
     }
+
     public function ventanillaexcel()
     {
         $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
@@ -147,6 +139,11 @@ class PackageController extends Controller
         $package = Package::find($id);
 
         if ($package) {
+            Event::create([
+                'action' => 'Baja de Paquete',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
             // Cambia el estado del paquete a "ENTREGADO"
             $package->estado = 'ENTREGADO';
 
@@ -165,7 +162,6 @@ class PackageController extends Controller
     {
         // Recupera todos los elementos eliminados (soft deleted)
         $deleteadoPackages = Package::onlyTrashed()->paginate(20);
-
         return view('package.deleteado', compact('deleteadoPackages'));
     }
     public function restoring($id)
@@ -174,6 +170,11 @@ class PackageController extends Controller
         $package = Package::withTrashed()->find($id);
         // Verifica si se encontró un paquete eliminado con ese ID
         if ($package) {
+            Event::create([
+                'action' => 'Alta de Paquete',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
             $package->update(['ESTADO' => 'VENTANILLA']);
             // Restaura el paquete
             $package->restore();
@@ -191,6 +192,11 @@ class PackageController extends Controller
         if ($package) {
             // Cambia el estado del paquete a "redirigido"
             $package->redirigido = true;
+            Event::create([
+                'action' => 'Correccion de Paquete en destino a Agencia Central',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
 
             $package->estado = 'REENCAMINADO';
 
@@ -219,6 +225,12 @@ class PackageController extends Controller
             // Cambia el estado del paquete a "redirigido"
             $package->redirigido = false;
 
+            Event::create([
+                'action' => 'Paquete encaminado con exito a Regional',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+
             $package->estado = 'VENTANILLA';
 
             // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
@@ -245,7 +257,7 @@ class PackageController extends Controller
 
         return view('package.clasificacion', compact('packages'))
             ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
-    } // Asegúrate de importar el modelo Package en la parte superior del controlador
+    }
 
     public function buscarPaquete(Request $request)
     {
@@ -253,6 +265,11 @@ class PackageController extends Controller
         $package = Package::where('CODIGO', $codigo)->first(); // Usar el nombre del modelo correctamente
 
         if ($package) {
+            Event::create([
+                'action' => 'Paquete Registrado en Oficina Postal Regional(VENTANILLA)',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
             // Cambiar el estado del paquete a "VENTANILLA"
             $package->ESTADO = 'VENTANILLA';
             $package->save();

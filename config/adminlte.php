@@ -376,12 +376,12 @@ return [
                             'can'  => 'packages.destroy',
                         ],
                     ],
+                ], 
+                [
+                    'text' => 'Eventos',
+                    'url' => 'events',
+                    'icon' => 'fas fa-paper-plane',
                 ],
-                // [
-                //     'text' => 'Reencaminar',
-                //     'url' => 'test/redirigidos',
-                //     'icon' => 'fas fa-paper-plane',
-                // ],
             ],
         ],
         // [
