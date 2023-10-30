@@ -117,7 +117,6 @@ class PackageController extends Controller
         $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
         return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
     }
-
     public function ventanillapdf()
     {
         $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
@@ -235,16 +234,33 @@ class PackageController extends Controller
     }
     public function ventanilla()
     {
-        $packages = Package::paginate(20);
+        $packages = Package::paginate(10);
 
         return view('package.ventanilla', compact('packages'))
-            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+        ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
     }
     public function clasificacion()
     {
-        $packages = Package::paginate(20);
+        $packages = Package::paginate(10);
 
         return view('package.clasificacion', compact('packages'))
             ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+    } // Asegúrate de importar el modelo Package en la parte superior del controlador
+
+    public function buscarPaquete(Request $request)
+    {
+        $codigo = $request->input('codigo');
+        $package = Package::where('CODIGO', $codigo)->first(); // Usar el nombre del modelo correctamente
+
+        if ($package) {
+            // Cambiar el estado del paquete a "VENTANILLA"
+            $package->ESTADO = 'VENTANILLA';
+            $package->save();
+
+            return redirect()->back()->with('success', 'El paquete ha sido movido a VENTANILLA.');
+        } else {
+            return redirect()->back()->with('error', 'El paquete no se encuentra en clasificación.');
+        }
     }
+
 }

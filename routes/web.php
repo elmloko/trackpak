@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::get('ventanilla/ventanillapdf', [PackageController::class, 'ventanillapdf'])->name('ventanilla.pdf');
     Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
     Route::get('clasificacion/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('clasificacion.pdf');
+    Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
+
 
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
