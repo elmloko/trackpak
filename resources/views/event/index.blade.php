@@ -16,11 +16,11 @@
                                 {{ __('Eventos Paqueteria Postal') }}
                             </span>
 
-                             <div class="float-right">
+                             {{-- <div class="float-right">
                                 <a href="{{ route('events.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
-                              </div>
+                              </div> --}}
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -39,7 +39,7 @@
 										<th>Usuario</th>
 										<th>Codigo</th>
                                         <th>Fecha y Hora de Modificacion</th>
-
+                                        <th>Acciones</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -56,7 +56,7 @@
                                             <td>
                                                 <form action="{{ route('events.destroy',$event->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('events.show',$event->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('events.edit',$event->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    {{-- <a class="btn btn-sm btn-success" href="{{ route('events.edit',$event->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a> --}}
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
