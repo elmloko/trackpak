@@ -49,7 +49,14 @@ class PackageController extends Controller
 
         $package = Package::create($request->all());
         Event::create([
-            'action' => 'Creación de Paquete',
+            'action' => 'ADMITIDO',
+            'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
+            'user_id' => auth()->user()->id,
+            'codigo' => $package->CODIGO,
+        ]);
+        Event::create([
+            'action' => 'ADMITIDO',
+            'descripcion' => 'Clasificacion del Paquete en Oficina Postal Regional',
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
@@ -79,7 +86,8 @@ class PackageController extends Controller
 
     $package->update($request->all());
     Event::create([
-        'action' => 'Edición de Paquete',
+        'action' => 'ESTADO',
+        'descripcion' => 'Edición de Paquete',
         'user_id' => auth()->user()->id,
         'codigo' => $codigo, // Utiliza el código obtenido previamente
     ]);
@@ -95,7 +103,8 @@ class PackageController extends Controller
         $package->delete(); // Elimina el paquete
 
         Event::create([
-            'action' => 'Eliminación de Paquete',
+            'action' => 'ESTADO',
+            'descripcion' => 'Eliminación de Paquete',
             'user_id' => auth()->user()->id,
             'codigo' => $codigo, // Utiliza el código obtenido previamente
         ]);
@@ -140,7 +149,8 @@ class PackageController extends Controller
 
         if ($package) {
             Event::create([
-                'action' => 'Baja de Paquete',
+                'action' => 'ENTREGADO',
+                'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional(ENTREGADO)',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
@@ -171,7 +181,8 @@ class PackageController extends Controller
         // Verifica si se encontró un paquete eliminado con ese ID
         if ($package) {
             Event::create([
-                'action' => 'Alta de Paquete',
+                'action' => 'ESTADO',
+                'descripcion' => 'Alta de Paquete',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
@@ -193,7 +204,8 @@ class PackageController extends Controller
             // Cambia el estado del paquete a "redirigido"
             $package->redirigido = true;
             Event::create([
-                'action' => 'Correccion de Paquete en destino a Agencia Central',
+                'action' => 'PRE-ENTREGA',
+                'descripcion' => 'Correccion de Destino de paquete a Oficina Postal Regional',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
@@ -226,7 +238,8 @@ class PackageController extends Controller
             $package->redirigido = false;
 
             Event::create([
-                'action' => 'Paquete encaminado con exito a Regional',
+                'action' => 'PRE-ENTREGA',
+                'descripcion' => 'Paquete encaminado con exito a Oficina Postal Regional',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
@@ -266,7 +279,8 @@ class PackageController extends Controller
 
         if ($package) {
             Event::create([
-                'action' => 'Paquete Registrado en Oficina Postal Regional(VENTANILLA)',
+                'action' => 'EN ENTREGA',
+                'descripcion' => 'Paquete Recibido en Oficina Postal Regional(VENTANILLA)',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);

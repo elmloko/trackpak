@@ -59,6 +59,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Accion</th>
+                                    <th>Descripcion</th>
                                     <th>Usuario</th>
                                     <th>Codigo</th>
                                     <th>Fecha y Hora de Modificacion</th>
@@ -74,6 +75,7 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $event->action }}</td>
+                                        <td>{{ $event->descripcion }}</td>
                                         <td>{{ $event->user->name }}</td>
                                         <td>{{ $event->codigo }}</td>
                                         <td>{{ $event->created_at }}</td>

@@ -21,11 +21,13 @@ class LogPaqueteBaja
      */
     public function handle(PaqueteBaja $event): void
     {
-        $action = "Baja de Paquete"; // Personaliza el tipo de acción
+        $action = "Baja de Paquete";
+        $descripcion = "Descripcion de Paquete"; 
         $user = $event->user;
     
     Event::create([
         'action' => $action,
+        'descripcion' => $descripcion,
         'user_id' => $user->id,
     ]);
     }

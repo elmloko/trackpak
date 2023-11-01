@@ -25,6 +25,7 @@ class Event extends Model
 		'action' => 'required',
 		'user_id' => 'required',
 		'codigo' => 'required',
+    'descripcion' => 'required',
     ];
 
     protected $perPage = 20;
@@ -34,7 +35,7 @@ class Event extends Model
      *
      * @var array
      */
-    protected $fillable = ['action','user_id','codigo'];
+    protected $fillable = ['action','user_id','codigo','descripcion'];
 
 
     /**
