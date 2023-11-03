@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/timeline.css') }}"> --}}
 
     <style>
         .gradient {
@@ -78,6 +79,7 @@
     </nav>
     <!--Hero-->
     @livewire('search-test')
+
     <div class="relative -mt-12 lg:-mt-24">
         <svg viewBox="0 0 1428 174" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">

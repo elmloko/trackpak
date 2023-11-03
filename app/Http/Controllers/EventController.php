@@ -106,4 +106,15 @@ class EventController extends Controller
         return redirect()->route('events.index')
             ->with('success', 'Event deleted successfully');
     }
+    public function search(Request $request)
+    {
+        $codigo = $request->input('codigo'); // Cambia 'codigo_postal' a 'codigo'
+
+        // Realiza la lógica para buscar eventos basados en el código postal
+        $event = Event::where('codigo', $codigo)
+        ->where('action', '!=', 'ESTADO')
+        ->orderBy('created_at', 'desc')->get();
+
+        return view('search', compact('event'));
+    }
 }

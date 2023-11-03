@@ -23,9 +23,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+Route::get('/search', [EventController::class, 'search'])->name('search');
 Route::get('/dashboard', function () {
     return view('dashboard');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
