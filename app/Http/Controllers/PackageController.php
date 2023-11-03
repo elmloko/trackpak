@@ -50,13 +50,13 @@ class PackageController extends Controller
         $package = Package::create($request->all());
         Event::create([
             'action' => 'ADMITIDO',
-            'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
+            'descripcion' => 'Clasificacion del Paquete en Oficina Postal Regional',
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
         Event::create([
             'action' => 'ADMITIDO',
-            'descripcion' => 'Clasificacion del Paquete en Oficina Postal Regional',
+            'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
