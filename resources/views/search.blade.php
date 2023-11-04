@@ -235,7 +235,7 @@
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <div class="pl-4 flex items-center">
                 <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-                    href="https://correos.gob.bo/">
+                    href="/">
                     <span class="flex items-center">
                         <img src="{{ asset('images/AGBClogo.png') }}" alt="TrackingBO" width="60" height="30"
                             class="mr-2">
@@ -354,9 +354,9 @@
             <div class="w-full flex flex-col md:flex-row py-6">
                 <div class="flex-1 mb-6 text-black mr-4"> <!-- Margen derecho agregado -->
                     <div class="w-full mb-4 flex flex-col items-center justify-center">
-                        <img src="{{ asset('images/AGBCazul.png') }}" alt="TrackingBO"
+                        <img src="{{ asset('images/LOGOcen.png') }}" alt="TrackingBO"
                             class="max-w-full max-h-full mb-2">
-                        <img src="{{ asset('images/LOGO-BOLIVIA.png') }}" alt="TrackingBO"
+                        <img src="{{ asset('images/LOGO-BOLIVIA-BLANCO.png') }}" alt="TrackingBO"
                             class="max-w-full max-h-full">
                     </div>
                 </div>

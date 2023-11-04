@@ -31,7 +31,7 @@
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
             <div class="pl-4 flex items-center">
                 <a class="toggleColour text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-                    href="https://correos.gob.bo/">
+                    href="/">
                     <span class="flex items-center">
                         <img src="{{ asset('images/AGBClogo.png') }}" alt="TrackingBO" width="60" height="30"
                             class="mr-2">
@@ -380,142 +380,142 @@
         </a>
     </section>
     <!--Footer-->
-    <footer class="bg-white">
+    <footer class="bg-white gradient">
         <div class="container mx-auto px-8">
             <div class="w-full flex flex-col md:flex-row py-6">
                 <div class="flex-1 mb-6 text-black mr-4"> <!-- Margen derecho agregado -->
                     <div class="w-full mb-4 flex flex-col items-center justify-center">
-                        <img src="{{ asset('images/AGBCazul.png') }}" alt="TrackingBO"
+                        <img src="{{ asset('images/LOGOcen.png') }}" alt="TrackingBO"
                             class="max-w-full max-h-full mb-2">
-                        <img src="{{ asset('images/LOGO-BOLIVIA.png') }}" alt="TrackingBO"
+                        <img src="{{ asset('images/LOGO-BOLIVIA-BLANCO.png') }}" alt="TrackingBO"
                             class="max-w-full max-h-full">
                     </div>
                 </div>
 
                 <div class="flex-1"> <!-- Margen izquierdo agregado -->
-                    <p class="uppercase text-gray-500 md:mb-6">Preguntas Frecuentes</p>
+                    <p class="uppercase text-while-500 md:mb-6">Preguntas Frecuentes</p>
                     <ul class="list-reset mb-6">
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">FAQ</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">FAQ</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Help</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Help</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Support</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Support</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="flex-1">
-                    <p class="uppercase text-gray-500 md:mb-6">Enlaces Externos</p>
+                    <p class="uppercase text-while-500 md:mb-6">Enlaces Externos</p>
                     <ul class="list-reset mb-6">
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://www.aduana.gob.bo/aduana7/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Aduana Nacional
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Aduana Nacional
                                 de Bolivia</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://www.oopp.gob.bo/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Ministerio de
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Ministerio de
                                 Obras Públicas, Servicio y Vivienda</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://www.upu.int/en/Home"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Union Postal
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Union Postal
                                 Universal</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://www.upu.int/en/Home"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Unión Postal de
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Unión Postal de
                                 las Américas, España y Portugal</a>
                         </li>
                     </ul>
                 </div>
                 <div class="flex-1">
-                    <p class="uppercase text-gray-500 md:mb-6">Redes Sociales</p>
+                    <p class="uppercase text-while-500 md:mb-6">Redes Sociales</p>
                     <ul class="list-reset mb-6">
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://www.facebook.com/agbc.oficial"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Facebook</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Facebook</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://twitter.com/AGBC_oficial"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Twitter</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Twitter</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://www.instagram.com/agenciabolivianadecorreos.of/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Instagram</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Instagram</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://www.instagram.com/agenciabolivianadecorreos.of/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Tiktok</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Tiktok</a>
                         </li>
                     </ul>
                 </div>
                 <div class="flex-1">
-                    <p class="uppercase text-gray-500 md:mb-6">SOBRE NOSOTROS</p>
+                    <p class="uppercase text-while-500 md:mb-6">SOBRE NOSOTROS</p>
                     <ul class="list-reset mb-6">
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/about/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Quienes
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Quienes
                                 Somos</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/services/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Nuestros
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Nuestros
                                 Servicios</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/contact-us/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Contactanos</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Contactanos</a>
                         </li>
                     </ul>
                 </div>
                 <div class="flex-1">
-                    <p class="uppercase text-gray-500 md:mb-6">NUESTROS SERVICIOS</p>
+                    <p class="uppercase text-while-500 md:mb-6">NUESTROS SERVICIOS</p>
                     <ul class="list-reset mb-6">
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/ems/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Envió de
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Envió de
                                 Mensajería Urgente</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/sp/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Servicio
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Servicio
                                 Prioritario</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/eca/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Envíos de
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Envíos de
                                 Correspondencia Agrupada</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/eca/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Mi
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Mi
                                 Encomienda</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/filatelia/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Servicio de
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Servicio de
                                 Filatelia</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/casillas/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Servicio de
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Servicio de
                                 Casillas</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/construccion/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Tracking Postal
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Tracking Postal
                                 Internacional</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="https://correos.gob.bo/construccion/"
-                                class="no-underline hover:underline text-gray-800 hover:text-blue-500">Calculadora
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Calculadora
                                 Postal</a>
                         </li>
                     </ul>
@@ -524,15 +524,14 @@
         </div>
         <div class="text-center mt-4">
             <div class="footer-content">
-                <hr class="line-divider">
-                <p class="mb-2 text-lg text-black">#EstamosSaliendoAdelante #RumboalBicentenario</p>
-                <p class="mb-2 text-lg text-black">&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
+                <hr class="line-divider text-black">
+                <p class="mb-2 text-lg text-while">#EstamosSaliendoAdelante #RumboalBicentenario</p>
+                <p class="mb-2 text-lg text-while">&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
                     Boliviana de Correos</p>
-                <p class="text-lg text-black">Contacto: (591-2) 2152423 - Av. Mariscal Santa Cruz Esq. C. Oruro Edif.
+                <p class="text-lg text-while">Contacto: (591-2) 2152423 - Av. Mariscal Santa Cruz Esq. C. Oruro Edif.
                     Telecomunicaciones - agbc@correos.gob.bo</p>
             </div>
         </div>
-        @livewire('cookie-component')
     </footer>
     <!-- jQuery if you need it
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
