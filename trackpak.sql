@@ -1,10 +1,3 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Versión del servidor:         8.0.30 - MySQL Community Server - GPL
--- SO del servidor:              Win64
--- HeidiSQL Versión:             12.1.0.6537
--- --------------------------------------------------------
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
@@ -14,12 +7,37 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- Volcando estructura de base de datos para trackpak
 CREATE DATABASE IF NOT EXISTS `trackpak` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `trackpak`;
 
--- Volcando estructura para tabla trackpak.failed_jobs
+CREATE TABLE IF NOT EXISTS `events` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `action` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `events_user_id_foreign` (`user_id`),
+  CONSTRAINT `events_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `events` (`id`, `user_id`, `action`, `descripcion`, `codigo`, `created_at`, `updated_at`) VALUES
+	(29, 1, 'ADMITIDO', 'Clasificacion del Paquete en Oficina Postal Regional', 'RK996001089CH', '2023-11-03 20:06:04', '2023-11-03 20:06:04'),
+	(30, 1, 'ADMITIDO', 'Llegada de Paquete en Oficina Postal Regional', 'RK996001089CH', '2023-11-03 20:06:04', '2023-11-03 20:06:04'),
+	(31, 1, 'EN ENTREGA', 'Paquete Recibido en Oficina Postal Regional(VENTANILLA)', 'RK996001089CH', '2023-11-03 20:06:38', '2023-11-03 20:06:38'),
+	(32, 1, 'PRE-ENTREGA', 'Correccion de Destino de paquete a Oficina Postal Regional', 'RK996001089CH', '2023-11-03 20:06:49', '2023-11-03 20:06:49'),
+	(33, 1, 'PRE-ENTREGA', 'Paquete encaminado con exito a Oficina Postal Regional', 'RK996001089CH', '2023-11-03 20:07:04', '2023-11-03 20:07:04'),
+	(34, 1, 'PRE-ENTREGA', 'Correccion de Destino de paquete a Oficina Postal Regional', 'RT913714274HK', '2023-11-03 20:07:19', '2023-11-03 20:07:19'),
+	(35, 1, 'ENTREGADO', 'Entrega de paquete en ventanilla en Oficina Postal Regional(ENTREGADO)', 'RK996001089CH', '2023-11-03 20:07:25', '2023-11-03 20:07:25'),
+	(36, 1, 'ESTADO', 'Eliminación de Paquete', 'RR531061520CL', '2023-11-04 15:25:09', '2023-11-04 15:25:09'),
+	(37, 1, 'EN ENTREGA', 'Paquete Recibido en Oficina Postal Regional(VENTANILLA)', 'RR305053048AT', '2023-11-04 15:39:42', '2023-11-04 15:39:42'),
+	(38, 1, 'PRE-ENTREGA', 'Correccion de Destino de paquete a Oficina Postal Regional', 'RR305053048AT', '2023-11-04 15:40:30', '2023-11-04 15:40:30'),
+	(39, 1, 'PRE-ENTREGA', 'Paquete encaminado con exito a Oficina Postal Regional', 'RR305053048AT', '2023-11-04 15:41:39', '2023-11-04 15:41:39'),
+	(40, 1, 'ENTREGADO', 'Entrega de paquete en ventanilla en Oficina Postal Regional(ENTREGADO)', 'RR305053048AT', '2023-11-04 15:43:23', '2023-11-04 15:43:23'),
+	(41, 1, 'ESTADO', 'Alta de Paquete', 'RR305053048AT', '2023-11-04 15:44:23', '2023-11-04 15:44:23');
+
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -32,19 +50,14 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.failed_jobs: ~0 rows (aproximadamente)
-DELETE FROM `failed_jobs`;
 
--- Volcando estructura para tabla trackpak.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.migrations: ~14 rows (aproximadamente)
-DELETE FROM `migrations`;
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
@@ -59,9 +72,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(11, '2023_10_14_120032_add_aduana_to_pcertificates', 2),
 	(12, '2023_10_23_115728_add_redirigido_to_packages_table', 3),
 	(13, '2023_10_23_152118_add_date_redirigido_to_packages_table', 4),
-	(14, '2023_10_23_174631_add_regional_to_users_table', 5);
+	(14, '2023_10_23_174631_add_regional_to_users_table', 5),
+	(15, '2023_10_30_150455_create_events_table', 6),
+	(16, '2023_11_01_085232_add_descripcion_to_events', 7);
 
--- Volcando estructura para tabla trackpak.model_has_permissions
 CREATE TABLE IF NOT EXISTS `model_has_permissions` (
   `permission_id` bigint unsigned NOT NULL,
   `model_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -71,10 +85,7 @@ CREATE TABLE IF NOT EXISTS `model_has_permissions` (
   CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.model_has_permissions: ~0 rows (aproximadamente)
-DELETE FROM `model_has_permissions`;
 
--- Volcando estructura para tabla trackpak.model_has_roles
 CREATE TABLE IF NOT EXISTS `model_has_roles` (
   `role_id` bigint unsigned NOT NULL,
   `model_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -84,8 +95,6 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.model_has_roles: ~6 rows (aproximadamente)
-DELETE FROM `model_has_roles`;
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(1, 'App\\Models\\User', 1),
 	(6, 'App\\Models\\User', 7),
@@ -95,7 +104,6 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(4, 'App\\Models\\User', 11),
 	(3, 'App\\Models\\User', 12);
 
--- Volcando estructura para tabla trackpak.packages
 CREATE TABLE IF NOT EXISTS `packages` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `CODIGO` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -115,24 +123,22 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `redirigido` tinyint(1) DEFAULT NULL,
   `date_redirigido` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12605 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.packages: ~11.845 rows (aproximadamente)
-DELETE FROM `packages`;
 INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `PAIS`, `CUIDAD`, `VENTANILLA`, `ESTADO`, `TELEFONO`, `ZONA`, `PESO`, `TIPO`, `ADUANA`, `created_at`, `updated_at`, `deleted_at`, `redirigido`, `date_redirigido`) VALUES
-	(1, 'RG958792285BE', 'JOSE LUIS SANCHEZ CHAMBI', 'BE', 'LA PAZ', '32', 'REENCAMINADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-29 17:56:57', NULL, 1, '2023-10-29 17:56:57'),
-	(2, 'RK996001089CH', 'FRANCISCA FLORES DE CHOQUE', 'CH', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 22:01:42', NULL, 0, '2023-10-27 22:01:42'),
-	(3, 'RR305053048AT', 'OLGA VALDIVIA', 'AT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:31:59', NULL, 0, '2023-10-23 19:44:54'),
-	(4, 'RI274241199BG', 'ISMAEL CUTIPA LOPEZ', 'BG', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-29 18:22:48', NULL, 0, '2023-10-29 18:22:48'),
-	(5, 'RT913714274HK', 'GUNAR ZAMBRANA', 'HK', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 22:01:46', NULL, 0, '2023-10-27 22:01:46'),
-	(6, 'RC096255251IT', 'HANS ROMERO PORCO QUISPE', 'IT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 22:01:53', NULL, 0, '2023-10-27 22:01:53'),
-	(7, 'RR529435991CL', 'SALOMON TORREZ RAMOS', 'CL', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:32:15', NULL, 0, NULL),
-	(8, 'RR531061520CL', 'XIMENA JIMENEZ MARCA', 'CL', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-29 17:45:51', NULL, 0, '2023-10-29 17:45:51'),
-	(9, 'RB899442198SG', 'MATHHEW HERNANDEZ', 'SG', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:32:19', NULL, 0, NULL),
-	(10, 'RQ482777470AT', 'ZENOVIA TARANIAAPO VILLCA', 'AT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:32:29', NULL, 0, NULL),
-	(11, 'RU664596882NL', 'DARKI GOMEZ ITURRY', 'NL', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:32:33', NULL, 0, NULL),
-	(12, 'RR054658317LU', 'ABEL OLIVIA LANZA', 'LU', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:31:45', '2023-10-27 19:31:45', 0, NULL),
-	(13, 'RL280663298GB', 'DIEGO ALEJO', 'GB', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 17:49:13', NULL, 0, NULL),
+	(1, 'RG958792285BE', 'JOSE LUIS SANCHEZ CHAMBI', 'BE', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-11-03 20:02:19', '2023-11-03 20:02:19', 0, '2023-11-03 20:02:09'),
+	(2, 'RK996001089CH', 'FRANCISCA FLORES DE CHOQUE', 'CH', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-11-03 20:00:29', '2023-11-03 20:00:29', 0, '2023-10-27 22:01:42'),
+	(3, 'RR305053048AT', 'OLGA VALDIVIA', 'AT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-11-04 15:44:23', NULL, 0, '2023-11-04 15:41:39'),
+	(4, 'RI274241199BG', 'ISMAEL CUTIPA LOPEZ', 'BG', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-30 20:42:50', NULL, 0, '2023-10-29 18:22:48'),
+	(5, 'RT913714274HK', 'GUNAR ZAMBRANA', 'HK', 'LA PAZ', '32', 'REENCAMINADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-11-03 20:07:19', NULL, 1, '2023-11-03 20:07:19'),
+	(6, 'RC096255251IT', 'HANS ROMERO PORCO QUISPE', 'IT', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-30 21:17:41', NULL, 0, '2023-10-27 22:01:53'),
+	(7, 'RR529435991CL', 'SALOMON TORREZ RAMOS', 'CL', 'LA PAZ', '32', 'CLASIFICACION', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:32:15', NULL, 0, NULL),
+	(8, 'RR531061520CL', 'XIMENA JIMENEZ MARCA', 'CL', 'LA PAZ', '32', 'CLASIFICACION', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-11-04 15:25:09', '2023-11-04 15:25:09', 0, '2023-10-29 17:45:51'),
+	(9, 'RB899442198SG', 'MATHHEW HERNANDEZ', 'SG', 'LA PAZ', '32', 'CLASIFICACION', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:32:19', NULL, 0, NULL),
+	(10, 'RQ482777470AT', 'ZENOVIA TARANIAAPO VILLCA', 'AT', 'LA PAZ', '32', 'CLASIFICACION', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:32:29', NULL, 0, NULL),
+	(11, 'RU664596882NL', 'DARKI GOMEZ ITURRY', 'NL', 'LA PAZ', '32', 'CLASIFICACION', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 19:32:33', NULL, 0, NULL),
+	(12, 'RR054658317LU', 'ABEL OLIVIA LANZA', 'LU', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-30 20:08:48', '2023-10-30 20:08:48', 0, NULL),
+	(13, 'RL280663298GB', 'DIEGO ALEJO', 'GB', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-30 20:10:53', '2023-10-30 20:10:53', 0, NULL),
 	(14, 'RL004680808CO', 'REBECA MADAI PAYE CAHUAYA', 'CO', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 17:49:08', NULL, 0, NULL),
 	(15, 'RL004836598CO', 'ROMER CHURANI', 'CO', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 17:49:04', NULL, 0, NULL),
 	(16, 'RH875363694DE', 'JOSE JORGE PAREJA', 'DE', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-27 17:48:59', NULL, 0, NULL),
@@ -151,7 +157,7 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `PAIS`, `CUIDAD`, `VENTA
 	(29, 'RR703364255ES', 'MARIA LUIS MALLCU ALARCON', 'ES', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(30, 'RX246560639DE', 'FRANZ TIMOTEO ROJAS FEBRERO', 'DE', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(31, 'RL000666346CO', 'ISMAEL RODRIGO VILLCA CHAVEZ', 'CO', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
-	(32, 'RL000443905CO', 'WILSON FRANK BARRIOS POMA', 'CO', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
+	(32, 'RL000443905CO', 'WILSON FRANK BARRIOS POMA', 'CO', 'LA PAZ', '32', 'ENTREGADO', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', '2023-10-30 18:12:21', '2023-10-30 18:12:21', 0, NULL),
 	(33, 'RR703352310ES', 'SEQUEIROS ALCOCER ASUNTA DEL ROSARIO', 'ES', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(34, 'RL000925880CO', 'ROXANA MARISOL SINKA POMA', 'CO', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(35, 'RL001081133CO', 'ALEX TUMIRI  ALVAREZ', 'CO', 'LA PAZ', '32', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
@@ -5704,9 +5710,9 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `PAIS`, `CUIDAD`, `VENTA
 	(5582, 'UV505335305UZ', 'DALTON  LOPEZ JULIO', 'UZ', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(5583, 'UV618717915UZ', 'DARIO  COCA JORGE', 'UZ', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(5584, 'UV617767760UZ', 'DAVID  HUARACHI EFRAIN', 'UZ', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
-	(5585, 'UV600297214UZ', 'DAXE  LAURA JORGE', 'UZ', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
-	(5586, 'UV688522306UZ', 'DE  CAMA TANIA', 'UZ', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL);
+	(5585, 'UV600297214UZ', 'DAXE  LAURA JORGE', 'UZ', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL);
 INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `PAIS`, `CUIDAD`, `VENTANILLA`, `ESTADO`, `TELEFONO`, `ZONA`, `PESO`, `TIPO`, `ADUANA`, `created_at`, `updated_at`, `deleted_at`, `redirigido`, `date_redirigido`) VALUES
+	(5586, 'UV688522306UZ', 'DE  CAMA TANIA', 'UZ', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(5587, 'UA000686164TR', 'DE HINOJOZA  RAMOS STEPHANIE', 'TR', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(5588, 'UA323111012SB', 'DE LA BARRA  SAAVEDRA CLAUDIA VERONICA', 'SB', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(5589, 'UA323119441SB', 'DE LA BARRA  SAAVEDRA CLAUDIA VERONICA', 'SB', 'ORURO', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
@@ -11132,9 +11138,9 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `PAIS`, `CUIDAD`, `VENTA
 	(11009, 'RP111096736MU', 'ANEIVA YANET', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(11010, 'RP111379865MU', 'ANTECIO HUANEC  PAMELA KRYSTEL', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(11011, 'RP111385769MU', 'CHAVEZ ALCOCER MAURICIO', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
-	(11012, 'RP111375024MU', 'MENESES HECTOR', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
-	(11013, 'RP111349850MU', 'GAMBOA FORONDA LUIS ORLANDO', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL);
+	(11012, 'RP111375024MU', 'MENESES HECTOR', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL);
 INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `PAIS`, `CUIDAD`, `VENTANILLA`, `ESTADO`, `TELEFONO`, `ZONA`, `PESO`, `TIPO`, `ADUANA`, `created_at`, `updated_at`, `deleted_at`, `redirigido`, `date_redirigido`) VALUES
+	(11013, 'RP111349850MU', 'GAMBOA FORONDA LUIS ORLANDO', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(11014, 'RP111249635MU', 'HEREDIA GARCIA ANA MARIA', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(11015, 'RP111270205MU', 'URRUTIA  EVERTH', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(11016, 'RP111555879MU', 'RODRIGUEZ ENRIQUE', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
@@ -12725,9 +12731,11 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `PAIS`, `CUIDAD`, `VENTA
 	(12601, 'UA472608304US', 'PEÃƒâ€˜ARRIETA LAZCANO GABRIEL', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(12602, 'LD164457330FR', 'CARDENAS MIRANDA KEVIN MICHAEL', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
 	(12603, 'UY148991205DE', 'RIVERA BENJAMIN', NULL, 'COCHABAMBA', 'UNICA', 'VENTANILLA', NULL, NULL, NULL, 'PAQUETE', NULL, '2023-10-10 16:28:13', NULL, NULL, 0, NULL),
-	(12604, 'FEDFDES', 'EWQA', 'bop', 'COCHABAMBA', '32', 'CLASIFICACION', 0, 'SASASSA', 0.00, 'PAQUETE', 'SI', '2023-10-29 17:11:02', '2023-10-29 17:11:02', NULL, NULL, NULL);
+	(12617, 'RK996001089CH', 'FRANCISCA FLORES DE CHOQUE', 'CH', 'LA PAZ', '32', 'CLASIFICACION', 0, 'DND', 0.00, 'PAQUETE', 'SI', '2023-11-03 19:59:48', '2023-11-03 19:59:56', '2023-11-03 19:59:56', NULL, NULL),
+	(12618, 'RK996001089CH', 'FRANCISCA FLORES DE CHOQUE', 'CH', 'LA PAZ', '32', 'REENCAMINADO', 0, 'DND', 0.00, 'PAQUETE', 'SI', '2023-11-03 19:59:48', '2023-11-03 20:04:21', '2023-11-03 20:04:21', 1, '2023-11-03 20:02:02'),
+	(12619, 'PRUEBA', 'ARCOS VASQUEZ ANTONIO', 'ES', 'LA PAZ', '32', 'CLASIFICACION', 0, 'DND', 0.00, 'PAQUETE', 'SI', '2023-11-03 20:01:01', '2023-11-03 20:04:26', '2023-11-03 20:04:26', NULL, NULL),
+	(12620, 'RK996001089CH', 'FRANCISCA FLORES DE CHOQUE', 'CH', 'LA PAZ', '33', 'ENTREGADO', 0, 'DND', 0.00, 'PAQUETE', 'SI', '2023-11-03 20:06:04', '2023-11-03 20:07:25', '2023-11-03 20:07:25', 0, '2023-11-03 20:07:05');
 
--- Volcando estructura para tabla trackpak.password_reset_tokens
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -12735,10 +12743,7 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.password_reset_tokens: ~0 rows (aproximadamente)
-DELETE FROM `password_reset_tokens`;
 
--- Volcando estructura para tabla trackpak.permissions
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -12747,10 +12752,8 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.permissions: ~15 rows (aproximadamente)
-DELETE FROM `permissions`;
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'users.index', 'web', '2023-10-13 17:26:40', '2023-10-13 17:26:40'),
 	(2, 'users.create', 'web', '2023-10-13 17:26:40', '2023-10-13 17:26:40'),
@@ -12768,7 +12771,6 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(14, 'pcertificates.destroy', 'web', '2023-10-13 17:26:44', '2023-10-13 17:26:44'),
 	(15, 'pcertificates.delete', 'web', '2023-10-13 17:26:45', '2023-10-13 17:26:45');
 
--- Volcando estructura para tabla trackpak.personal_access_tokens
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -12785,10 +12787,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.personal_access_tokens: ~0 rows (aproximadamente)
-DELETE FROM `personal_access_tokens`;
 
--- Volcando estructura para tabla trackpak.roles
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -12797,10 +12796,8 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.roles: ~20 rows (aproximadamente)
-DELETE FROM `roles`;
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'SuperAdmin', 'web', '2023-10-13 17:26:40', '2023-10-13 17:26:40'),
 	(2, 'Administrador', 'web', '2023-10-13 17:26:40', '2023-10-13 17:26:40'),
@@ -12823,7 +12820,6 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 	(19, 'Auxiliar Operador', 'web', '2023-10-13 17:26:40', '2023-10-13 17:26:40'),
 	(20, 'Cajero', 'web', '2023-10-13 17:26:40', '2023-10-13 17:26:40');
 
--- Volcando estructura para tabla trackpak.role_has_permissions
 CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   `permission_id` bigint unsigned NOT NULL,
   `role_id` bigint unsigned NOT NULL,
@@ -12833,8 +12829,6 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.role_has_permissions: ~0 rows (aproximadamente)
-DELETE FROM `role_has_permissions`;
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(1, 1),
 	(2, 1),
@@ -12901,7 +12895,6 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(13, 6),
 	(14, 6);
 
--- Volcando estructura para tabla trackpak.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -12914,10 +12907,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Regional` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.users: ~7 rows (aproximadamente)
-DELETE FROM `users`;
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `Regional`) VALUES
 	(1, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$70CNA.ZSKWoiVviIWuOgJOWBoChJAWeytDOmu1SNX3D1MmBZjfI8K', 'JOHex0LaRgvl7nkRpBR2QiHBLhiLgkDHMZi9xDyi1Vp5czYMqYUGAU7rd51M', '2023-10-13 17:27:44', '2023-10-26 17:52:25', 'LA PAZ'),
 	(7, 'Rodrigo Villa Sanjines', 'rodrigo.villa@correos.gob.bo', NULL, '$2y$10$b6aDZSzXjhB8LyewKqoEjOAvIeYFks32wmX/teQfsLn/Bz43mccxK', NULL, '2023-10-26 18:19:40', '2023-10-26 18:19:40', 'LA PAZ'),
