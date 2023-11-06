@@ -29,7 +29,7 @@
                                                     PDF
                                                 </a>
                                             </div>
-                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                                                 <div class="d-inline-block">
                                                     <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
                                                         {{ __('Crear Nuevo') }}
@@ -89,19 +89,7 @@
                                                                         <form
                                                                             action="{{ route('packages.destroy', $package->id) }}"
                                                                             method="POST">
-                                                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                                                Urbano')
-                                                                                <a class="btn btn-sm btn-warning"
-                                                                                    href="#" data-toggle="modal"
-                                                                                    data-target="#bajaModal{{ $package->id }}">
-                                                                                    <i class="fa fa-arrow-down"></i>
-                                                                                    {{ __('Baja') }}
-                                                                                </a>
-                                                                                @include('package.modal.baja')
-                                                                            @endhasrole --}}
-                                                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                                                Urbano|Clasificacion|Auxiliar
-                                                                                Clasificacion')
+                                                                            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                                                                                 <a class="btn btn-sm btn-success"
                                                                                     href="{{ route('packages.edit', $package->id) }}">
                                                                                     <i class="fa fa-fw fa-edit"></i>
@@ -110,25 +98,13 @@
                                                                             @endhasrole
                                                                             @csrf
                                                                             @method('DELETE')
-                                                                            @hasrole('SuperAdmin|Administrador|Urbano|Clasificacion')
+                                                                            @hasrole('SuperAdmin|Administrador|Clasificacion')
                                                                                 <button type="submit"
                                                                                     class="btn btn-danger btn-sm"><i
                                                                                         class="fa fa-fw fa-trash"></i>
                                                                                     {{ __('Eliminar') }}
                                                                                 </button>
                                                                             @endhasrole
-                                                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                                                Urbano')
-                                                                                @if (!$package->redirigido)
-                                                                                    <a class="btn btn-sm btn-secondary"
-                                                                                        href="#" data-toggle="modal"
-                                                                                        data-target="#reencaminarModal{{ $package->id }}">
-                                                                                        <i class="fas fa-arrow-up"></i>
-                                                                                        {{ __('Reencaminar') }}
-                                                                                    </a>
-                                                                                    @include('package.modal.reencaminar')
-                                                                                @endif
-                                                                            @endhasrole --}}
                                                                         </form>
                                                                     </td>
                                                                 </tr>

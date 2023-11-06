@@ -55,7 +55,7 @@ class PackageController extends Controller
             'codigo' => $package->CODIGO,
         ]);
         Event::create([
-            'action' => 'ADMITIDO',
+            'action' => 'ADMISION',
             'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,

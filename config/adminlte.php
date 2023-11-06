@@ -333,7 +333,7 @@ return [
         [
             'text' => 'Paquetes Ordinarios',
             'icon' => 'fas fa-archive',
-            'can'  => 'packages.index',
+            'can'  => '',
             'submenu' => [
                 [
                     'text' => 'Todos Paquetes',
@@ -343,37 +343,38 @@ return [
                 [
                     'text' => 'Clasificacion',
                     'icon' => 'fas fa-clipboard-list',
-                    'can'  => '',
+                    'can'  => 'packages.clasificacion',
                     'submenu' => [
                         [
                             'text' => 'Registro Paquetes',
                             'url' => 'packages/clasificacion',
                             'icon' => 'fas fa-clipboard-list',
-                            'can'  => '',
+                            'can'  => 'packages.clasificacion',
                         ],
                         [
                             'text' => 'Reencaminar',
                             'url' => 'test/redirigidos',
                             'icon' => 'fas fa-paper-plane',
+                            'can'  => 'packages.clasificacion',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Ventanilla',
                     'icon' => 'fas fa-clipboard-list',
-                    'can'  => '',
+                    'can'  => 'packages.ventanilla',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla',
                             'url' => 'packages/ventanilla',
                             'icon' => 'fas fa-clipboard-list',
-                            'can'  => '',
+                            'can'  => 'packages.ventanilla',
                         ],
                         [
                             'text' => 'Inventario',
                             'url' => 'test/deleteado',
                             'icon' => 'fas fa-clipboard-list',
-                            'can'  => 'packages.destroy',
+                            'can'  => 'packages.delete',
                         ],
                     ],
                 ], 
@@ -381,32 +382,10 @@ return [
                     'text' => 'Eventos',
                     'url' => 'events',
                     'icon' => 'fas fa-paper-plane',
+                    'can'  => '',
                 ],
             ],
         ],
-        // [
-        //     'text' => 'Paquetes Certificados',
-        //     'icon' => 'pcertificates',
-        //     'can'  => 'pcertificates.index',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Paquetes',
-        //             'url' => 'pcertificates',
-        //             'icon' => 'fas fa-box',
-        //         ],
-        //         [
-        //             'text' => 'Inventario',
-        //             'url' => 'ctest/deleteado',
-        //             'can'  => 'pcertificates.destroy',
-        //             'icon' => 'fas fa-clipboard-list',
-        //         ],
-        //         [
-        //             'text' => 'Reportes',
-        //             'url' => '#',
-        //             'icon' => 'fas fa-chart-bar',
-        //         ],
-        //     ],
-        // ],
     ],
 
     /*

@@ -32,6 +32,7 @@
                                                     PDF
                                                 </a>
                                             </div>
+                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                             <div class="mr-2 d-inline-block">
                                                 <!-- Botón para abrir el modal de cambio de estado -->
                                                 <button class="btn btn-primary" data-toggle="modal"
@@ -40,6 +41,7 @@
                                                 </button>
                                                 @include('package.modal.ventanilla')
                                             </div>
+                                            @endhasrole
                                             {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                                 <div class="d-inline-block">
                                                     <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm"
@@ -114,7 +116,7 @@
                                                                             </a>
                                                                             @include('package.modal.baja')
                                                                         @endhasrole
-                                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano|Clasificacion|Auxiliar Clasificacion')
+                                                                        @hasrole('SuperAdmin|Administrador|Urbano')
                                                                             <a class="btn btn-sm btn-success"
                                                                                 href="{{ route('packages.edit', $package->id) }}">
                                                                                 <i class="fa fa-fw fa-edit"></i>

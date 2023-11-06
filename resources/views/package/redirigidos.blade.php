@@ -45,13 +45,16 @@
                                                     <td>{{ $packages->ESTADO }}</td>
                                                     <td>{{ $packages->ADUANA }}</td>
                                                     <td>{{ $packages->date_redirigido }}</td>
-                                                    <td><a class="btn btn-sm btn-info"
-                                                        href="#" data-toggle="modal"
-                                                        data-target="#reencaminadoModal{{ $packages->id }}">
-                                                        <i class="fa fa-arrow-up"></i>
-                                                        {{ __('Rencaminado') }}
-                                                    </a>
-                                                    @include('package.modal.reencaminado')</td>
+                                                    <td>
+                                                        @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                                                            <a class="btn btn-sm btn-info" href="#" data-toggle="modal"
+                                                                data-target="#reencaminadoModal{{ $packages->id }}">
+                                                                <i class="fa fa-arrow-up"></i>
+                                                                {{ __('Rencaminado') }}
+                                                            </a>
+                                                        @endhasrole
+                                                        @include('package.modal.reencaminado')
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
