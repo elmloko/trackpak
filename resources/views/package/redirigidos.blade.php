@@ -52,8 +52,8 @@
                                                                 <i class="fa fa-arrow-up"></i>
                                                                 {{ __('Rencaminado') }}
                                                             </a>
+                                                            @include('package.modal.reencaminado')
                                                         @endhasrole
-                                                        @include('package.modal.reencaminado')
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -60,9 +60,9 @@ Route::middleware('auth')->group(function () {
     Route::get('test/redirigidos', [PackageController::class, 'redirigidos'])->name('packages.redirigidos');
     Route::get('test/dirigido/{id}', [PackageController::class, 'dirigido'])->name('packages.dirigido');
     Route::get('ventanilla/ventanillaexcel', [PackageController::class, 'ventanillaexcel'])->name('ventanilla.excel');
-    Route::get('ventanilla/ventanillapdf', [PackageController::class, 'ventanillapdf'])->name('ventanilla.pdf');
+    Route::get('package/pdf/ventanillapdf', [PackageController::class, 'ventanillapdf'])->name('package.pdf.ventanillapdf');
     Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
-    Route::get('clasificacion/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('clasificacion.pdf');
+    Route::get('package/pdf/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('package.pdf.clasificacionpdf');
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
 
     Route::resource('events', EventController::class);
@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+    Route::get('/events/pdf/eventspdf', [EventController::class, 'eventspdf'])->name('events.pdf.eventspdf');
 
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));

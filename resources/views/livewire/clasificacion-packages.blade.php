@@ -25,7 +25,7 @@
                                                 </a>
                                             </div>
                                             <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('clasificacion.pdf') }}" class="btn btn-danger" data-placement="left">
+                                                <a href="{{ route('package.pdf.clasificacionpdf') }}" class="btn btn-danger" data-placement="left">
                                                     PDF
                                                 </a>
                                             </div>

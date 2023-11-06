@@ -8,6 +8,7 @@ use App\Exports\VentanillaExport;
 use App\Exports\ClasificacionExport;
 use App\Exports\PackageExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 /**
@@ -119,10 +120,13 @@ class PackageController extends Controller
         return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
     }
     public function ventanillapdf()
-    {
-        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
-        return Excel::download(new VentanillaExport($packages), 'Ventanilla.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
-    }
+{
+    $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
+    $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
+
+    return $pdf->stream();
+}
+
     public function clasificacionexcel()
     {
         $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
@@ -131,10 +135,12 @@ class PackageController extends Controller
 
     public function clasificacionpdf()
     {
-        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
-        return Excel::download(new ClasificacionExport($packages), 'Clasificacion.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        $packages = Package::where('ESTADO', 'CLASIFICACION')->paginate();
+        $pdf = PDF::loadview('package.pdf.clasificacionpdf',['packages'=>$packages]);
+        return $pdf->stream();
     }
-    public function excel()
+
+    public function export()
     {
         return Excel::download(new PackageExport, 'Paquetes Ordinarios.xlsx');
     }

@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -27,7 +28,7 @@
                                                 </a>
                                             </div>
                                             <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('ventanilla.pdf') }}" class="btn btn-danger"
+                                                <a href="{{ route('package.pdf.ventanillapdf') }}" class="btn btn-danger"
                                                     data-placement="left">
                                                     PDF
                                                 </a>

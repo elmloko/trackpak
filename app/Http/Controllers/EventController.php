@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 /**
  * Class EventController
@@ -116,5 +117,11 @@ class EventController extends Controller
         ->orderBy('created_at', 'desc')->get();
 
         return view('search', compact('event'));
+    }
+    public function eventspdf()
+    {
+        $event = Event::all();
+        $pdf = PDF::loadview('event.pdf.eventspdf',['events'=>$event]);
+        return $pdf->stream();
     }
 }

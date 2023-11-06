@@ -32,7 +32,7 @@
                                                     PDF
                                                 </a>
                                             </div>
-                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                            @hasrole('SuperAdmin|Administrador')
                                                 <div class="d-inline-block">
                                                     <a href="{{ route('packages.create') }}" class="btn btn-primary"
                                                         data-placement="left">

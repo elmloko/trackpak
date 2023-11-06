@@ -3,49 +3,26 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex">
                             <h5 id="card_title">
                                 {{ __('Eventos de la Paqueteria Postal') }}
                             </h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 ml-2">
                                 <div class="form-group">
-                                    <input wire:model.lazy="search" type="text" class="form-control"
-                                        placeholder="Buscar...">
+                                    <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
-                            </div>
-                            <div class="col-lg-9 text-right">
-                                <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('ventanilla.excel') }}" class="btn btn-success"
-                                        data-placement="left">
-                                        Excel
-                                    </a>
-                                </div>
-                                <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('ventanilla.pdf') }}" class="btn btn-danger"
-                                        data-placement="left">
-                                        PDF
-                                    </a>
-                                </div>
-                                {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                    <div class="d-inline-block">
-                                        <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm"
-                                            data-placement="left">
-                                            {{ __('Crear Nuevo') }}
-                                        </a>
-                                    </div>
-                                @endhasrole --}}
                             </div>
                         </div>
-                        {{-- <div class="float-right">
-                            <a href="{{ route('events.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                              {{ __('Create New') }}
-                            </a>
-                          </div> --}}
+                        <div class="d-flex align-items-center">
+                            <a href="{{ route('events.pdf.eventspdf') }}" class="btn btn-success ml-2">Excel</a>
+                            <a href="{{ route('events.pdf.eventspdf') }}" class="btn btn-danger ml-2">PDF</a>
+                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm ml-2">{{ __('Crear Nuevo') }}</a>
+                            @endhasrole --}}
+                        </div>
                     </div>
-                </div>
+                </div>                
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         <p>{{ $message }}</p>
@@ -82,14 +59,17 @@
 
                                         <td>
                                             <form action="{{ route('events.destroy', $event->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary "
-                                                    href="{{ route('events.show', $event->id) }}"><i
-                                                        class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                {{-- <a class="btn btn-sm btn-success" href="{{ route('events.edit',$event->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a> --}}
+                                                <a class="btn btn-sm btn-primary" href="{{ route('events.show', $event->id) }}">
+                                                    <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
+                                                </a>
+                                                {{-- <a class="btn btn-sm btn-success" href="{{ route('events.edit', $event->id) }}">
+                                                    <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
+                                                </a> --}}
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
