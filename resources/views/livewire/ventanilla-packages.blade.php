@@ -16,7 +16,7 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
-                                                <input wire:model.lazy="searchv" type="text" class="form-control"
+                                                <input wire:model.lazy="search" type="text" class="form-control"
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>

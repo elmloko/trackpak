@@ -231,9 +231,9 @@ class PackageController extends Controller
     }
     public function redirigidos()
     {
-        $paquetesRedirigidos = Package::where('redirigido', true)->get();
+        $package = Package::where('redirigido', true)->get();
 
-        return view('package.redirigidos', compact('paquetesRedirigidos'));
+        return view('package.redirigidos', compact('package'));
     }
     public function dirigido($id)
     {
