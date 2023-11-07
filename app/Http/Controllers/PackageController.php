@@ -395,4 +395,10 @@ class PackageController extends Controller
             return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
         }
     }
+    public function deleteadocarteropdf()
+    {
+        $packages = Package::onlyTrashed()->get(); // Obtener registros eliminados
+        $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
+        return $pdf->stream();
+    }
 }

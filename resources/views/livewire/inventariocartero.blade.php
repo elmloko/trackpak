@@ -17,12 +17,12 @@
                             </div>
                             <div class="col-lg-9 text-right">
                                 <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('package.pdf.deleteadopdf') }}" class="btn btn-success" data-placement="left">
+                                    <a href="{{ route('package.pdf.deleteadocarteropdf') }}" class="btn btn-success" data-placement="left">
                                         Excel
                                     </a>
                                 </div>
                                 <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('package.pdf.deleteadopdf') }}" class="btn btn-danger" data-placement="left">
+                                    <a href="{{ route('package.pdf.deleteadocarteropdf') }}" class="btn btn-danger" data-placement="left">
                                         PDF
                                     </a>
                                 </div>
