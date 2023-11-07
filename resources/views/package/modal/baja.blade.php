@@ -26,13 +26,13 @@
                 </div>
                 <p>¿Estás seguro de que deseas dar de baja este paquete?</p>
                 <div class="text-center">
-                    <a href="{{ route('packages.delete', ['id' => $package->id]) }}"
+                    <a href="{{ route('package.pdf.formularioentrega', ['id' => $package->id]) }}"
                         class="btn btn-secondary btn-lg">Imprimir Formulario de Entrega</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col text-left mt-3">
-                    <a href="{{ route('packages.delete', $package->id) }}" class="btn btn-info ml-2">
+                    <a href="{{ route('package.pdf.abandono', $package->id) }}" class="btn btn-info ml-2">
                         Abandono Paquete
                     </a>
                 </div>

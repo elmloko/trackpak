@@ -10,6 +10,7 @@ use App\Exports\PackageExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 /**
  * Class PackageController
@@ -61,7 +62,7 @@ class PackageController extends Controller
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
-        return redirect()->route('packages.index')
+        return redirect()->route('packages.clasificacion')
             ->with('success', 'Paquete Creado Con Exito!');
     }
 
@@ -92,7 +93,7 @@ class PackageController extends Controller
         'user_id' => auth()->user()->id,
         'codigo' => $codigo, // Utiliza el código obtenido previamente
     ]);
-    return redirect()->route('packages.index')
+    return redirect()->route('packages.clasificacion')
         ->with('success', 'Paquete Actualizado Con Éxito!');
 }
 
@@ -110,7 +111,7 @@ class PackageController extends Controller
             'codigo' => $codigo, // Utiliza el código obtenido previamente
         ]);
 
-        return redirect()->route('packages.index')
+        return redirect()->route('packages.clasificacion')
             ->with('success', 'Paquete Eliminado Con Éxito!');
     }
 
@@ -120,12 +121,27 @@ class PackageController extends Controller
         return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
     }
     public function ventanillapdf()
-{
-    $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
-    $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
-
-    return $pdf->stream();
-}
+    {
+        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
+        $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
+        return $pdf->stream();
+    }
+    public function formularioentrega(Request $request, $id)
+    {
+        $package = Package::find($id);
+        $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
+        return $pdf->stream();
+        // Descargar el PDF o mostrarlo en el navegador
+        // return $pdf->download('formularioentrega.pdf');
+    }
+    public function abandono(Request $request, $id)
+    {
+        $package = Package::find($id);
+        $pdf = PDF::loadView('package.pdf.abandono', compact('package', 'request'));
+        return $pdf->stream();
+        // Descargar el PDF o mostrarlo en el navegador
+        // return $pdf->download('formularioentrega.pdf');
+    }
 
     public function clasificacionexcel()
     {
@@ -135,12 +151,12 @@ class PackageController extends Controller
 
     public function clasificacionpdf()
     {
-        $packages = Package::where('ESTADO', 'CLASIFICACION')->paginate();
+        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
         $pdf = PDF::loadview('package.pdf.clasificacionpdf',['packages'=>$packages]);
         return $pdf->stream();
     }
 
-    public function export()
+    public function excel()
     {
         return Excel::download(new PackageExport, 'Paquetes Ordinarios.xlsx');
     }
@@ -195,10 +211,10 @@ class PackageController extends Controller
             $package->update(['ESTADO' => 'VENTANILLA']);
             // Restaura el paquete
             $package->restore();
-            return redirect()->route('packages.index')
+            return redirect()->route('packages.ventanilla')
                 ->with('success', 'El paquete ha sido restaurado exitosamente');
         } else {
-            return redirect()->route('packages.index')
+            return redirect()->route('packages.ventanilla')
                 ->with('error', 'El paquete no pudo ser encontrado o restaurado');
         }
     }

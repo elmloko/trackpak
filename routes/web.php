@@ -64,6 +64,8 @@ Route::middleware('auth')->group(function () {
     Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
     Route::get('package/pdf/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('package.pdf.clasificacionpdf');
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
+    Route::get('package/pdf/formularioentrega/{id}', [PackageController::class, 'formularioentrega'])->name('package.pdf.formularioentrega');
+    Route::get('package/pdf/abandono/{id}', [PackageController::class, 'abandono'])->name('package.pdf.abandono');
 
     Route::resource('events', EventController::class);
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
