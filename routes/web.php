@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::get('package/pdf/formularioentrega/{id}', [PackageController::class, 'formularioentrega'])->name('package.pdf.formularioentrega');
     Route::get('package/pdf/abandono/{id}', [PackageController::class, 'abandono'])->name('package.pdf.abandono');
     Route::get('package/pdf/redirigidospdf', [PackageController::class, 'redirigidospdf'])->name('package.pdf.redirigidospdf');
+    Route::get('package/pdf/deleteadopdf', [PackageController::class, 'deleteadopdf'])->name('package.pdf.deleteadopdf');
 
     Route::resource('events', EventController::class);
     Route::get('/events', [EventController::class, 'index'])->name('events.index');

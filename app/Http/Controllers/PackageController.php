@@ -147,6 +147,12 @@ class PackageController extends Controller
         return Excel::download(new ClasificacionExport($packages), 'Clasificacion.xlsx');
     }
 
+    public function deleteadopdf()
+    {
+        $packages = Package::onlyTrashed()->get(); // Obtener registros eliminados
+        $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
+        return $pdf->stream();
+    }
     public function redirigidospdf()
     {
         $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
@@ -197,9 +203,9 @@ class PackageController extends Controller
     }
     public function deleteado()
     {
-        // Recupera todos los elementos eliminados (soft deleted)
-        $deleteadoPackages = Package::onlyTrashed()->paginate(20);
-        return view('package.deleteado', compact('deleteadoPackages'));
+        // $packages = Package::where('ESTADO', 'ENTREGADO')->paginate(20);
+        $packages = Package::onlyTrashed()->paginate(20);
+        return view('package.deleteado', compact('packages'));
     }
     public function restoring($id)
     {
