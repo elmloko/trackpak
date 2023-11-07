@@ -27,7 +27,7 @@
                                                 </a>
                                             </div>
                                             <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('prueba.pdf') }}" class="btn btn-danger"
+                                                <a href="{{ route('package.pdf.packagesall') }}" class="btn btn-danger"
                                                     data-placement="left">
                                                     PDF
                                                 </a>
@@ -42,112 +42,106 @@
                                             @endhasrole
                                         </div>
                                     </div>
-                                    @if ($message = Session::get('success'))
-                                        <div class="alert alert-success">
-                                            <p>{{ $message }}</p>
-                                        </div>
-                                    @endif
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            @php
-                                                $i = 0; // Inicializa la variable $i
-                                            @endphp
-                                            @if ($packages->count())
-                                                <table class="table table-striped table-hover">
-                                                    <thead class="thead">
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Código Postal</th>
-                                                            <th>Destinatario</th>
-                                                            <th>Teléfono</th>
-                                                            <th>País</th>
-                                                            <th>Ciudad</th>
-                                                            <th>Zona</th>
-                                                            <th>Ventanilla</th>
-                                                            <th>Peso</th>
-                                                            <th>Tipo</th>
-                                                            <th>Estado</th>
-                                                            <th>Aduana</th>
-                                                            <th>Fecha Ingreso</th>
-                                                            <th>Acciones</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($packages as $package)
-                                                            <tr>
-                                                                <td>{{ $package->id }}</td>
-                                                                <td>{{ $package->CODIGO }}</td>
-                                                                <td>{{ $package->DESTINATARIO }}</td>
-                                                                <td>{{ $package->TELEFONO }}</td>
-                                                                <td>{{ $package->PAIS }}</td>
-                                                                <td>{{ $package->CUIDAD }}</td>
-                                                                <td>{{ $package->ZONA }}</td>
-                                                                <td>{{ $package->VENTANILLA }}</td>
-                                                                <td>{{ $package->PESO }}</td>
-                                                                <td>{{ $package->TIPO }}</td>
-                                                                <td>{{ $package->ESTADO }}</td>
-                                                                <td>{{ $package->ADUANA }}</td>
-                                                                <td>{{ $package->created_at }}</td>
-                                                                <td>
-                                                                    <form
-                                                                        action="{{ route('packages.destroy', $package->id) }}"
-                                                                        method="POST">
-                                                                        @hasrole('SuperAdmin|Administrador')
-                                                                            <a class="btn btn-sm btn-warning" href="#"
-                                                                                data-toggle="modal"
-                                                                                data-target="#bajaModal{{ $package->id }}">
-                                                                                <i class="fa fa-arrow-down"></i>
-                                                                                {{ __('Baja') }}
-                                                                            </a>
-                                                                            @include('package.modal.baja')
-                                                                        @endhasrole
-                                                                        @hasrole('SuperAdmin|Administrador')
-                                                                            <a class="btn btn-sm btn-success"
-                                                                                href="{{ route('packages.edit', $package->id) }}">
-                                                                                <i class="fa fa-fw fa-edit"></i>
-                                                                                {{ __('Editar') }}
-                                                                            </a>
-                                                                        @endhasrole
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        @hasrole('SuperAdmin|Administrador')
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger btn-sm"><i
-                                                                                    class="fa fa-fw fa-trash"></i>
-                                                                                {{ __('Eliminar') }}
-                                                                            </button>
-                                                                        @endhasrole
-                                                                        @hasrole('SuperAdmin|Administrador')
-                                                                            @if (!$package->redirigido)
-                                                                                <a class="btn btn-sm btn-secondary"
-                                                                                    href="#" data-toggle="modal"
-                                                                                    data-target="#reencaminarModal{{ $package->id }}">
-                                                                                    <i class="fas fa-arrow-up"></i>
-                                                                                    {{ __('Reencaminar') }}
-                                                                                </a>
-                                                                                @include('package.modal.reencaminar')
-                                                                            @endif
-                                                                        @endhasrole
-                                                                    </form>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                {{ $packages->links() }}
-                                            </div>
-                                            <div class="col-md-6 text-right">
-                                                Se encontraron {{ $packages->total() }} registros en total
-                                            </div>
-                                        </div>
-                                    @else
-                                        <p>No se encontraron resultados para la búsqueda.</p>
-                                        @endif
-                                    </div>
                                 </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        @php
+                                            $i = 0; // Inicializa la variable $i
+                                        @endphp
+                                        @if ($packages->count())
+                                            <table class="table table-striped table-hover">
+                                                <thead class="thead">
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Código Postal</th>
+                                                        <th>Destinatario</th>
+                                                        <th>Teléfono</th>
+                                                        <th>País</th>
+                                                        <th>Ciudad</th>
+                                                        <th>Zona</th>
+                                                        <th>Ventanilla</th>
+                                                        <th>Peso</th>
+                                                        <th>Tipo</th>
+                                                        <th>Estado</th>
+                                                        <th>Aduana</th>
+                                                        <th>Fecha Ingreso</th>
+                                                        <th>Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($packages as $package)
+                                                        <tr>
+                                                            <td>{{ $package->id }}</td>
+                                                            <td>{{ $package->CODIGO }}</td>
+                                                            <td>{{ $package->DESTINATARIO }}</td>
+                                                            <td>{{ $package->TELEFONO }}</td>
+                                                            <td>{{ $package->PAIS }}</td>
+                                                            <td>{{ $package->CUIDAD }}</td>
+                                                            <td>{{ $package->ZONA }}</td>
+                                                            <td>{{ $package->VENTANILLA }}</td>
+                                                            <td>{{ $package->PESO }}</td>
+                                                            <td>{{ $package->TIPO }}</td>
+                                                            <td>{{ $package->ESTADO }}</td>
+                                                            <td>{{ $package->ADUANA }}</td>
+                                                            <td>{{ $package->created_at }}</td>
+                                                            <td>
+                                                                <form
+                                                                    action="{{ route('packages.destroy', $package->id) }}"
+                                                                    method="POST">
+                                                                    @hasrole('SuperAdmin|Administrador')
+                                                                        <a class="btn btn-sm btn-warning" href="#"
+                                                                            data-toggle="modal"
+                                                                            data-target="#bajaModal{{ $package->id }}">
+                                                                            <i class="fa fa-arrow-down"></i>
+                                                                            {{ __('Baja') }}
+                                                                        </a>
+                                                                        @include('package.modal.baja')
+                                                                    @endhasrole
+                                                                    @hasrole('SuperAdmin|Administrador')
+                                                                        <a class="btn btn-sm btn-success"
+                                                                            href="{{ route('packages.edit', $package->id) }}">
+                                                                            <i class="fa fa-fw fa-edit"></i>
+                                                                            {{ __('Editar') }}
+                                                                        </a>
+                                                                    @endhasrole
+                                                                    @hasrole('SuperAdmin|Administrador')
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger btn-sm"><i
+                                                                                class="fa fa-fw fa-trash"></i>
+                                                                            {{ __('Eliminar') }}
+                                                                        </button>
+                                                                    @endhasrole
+                                                                    @hasrole('SuperAdmin|Administrador')
+                                                                        @if (!$package->redirigido)
+                                                                            <a class="btn btn-sm btn-secondary"
+                                                                                href="#" data-toggle="modal"
+                                                                                data-target="#reencaminarModal{{ $package->id }}">
+                                                                                <i class="fas fa-arrow-up"></i>
+                                                                                {{ __('Reencaminar') }}
+                                                                            </a>
+                                                                            @include('package.modal.reencaminar')
+                                                                        @endif
+                                                                    @endhasrole
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            {{ $packages->links() }}
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            Se encontraron {{ $packages->total() }} registros en total
+                                        </div>
+                                    </div>
+                                @else
+                                    <p>No se encontraron resultados para la búsqueda.</p>
+                                @endif
                             </div>
                         </div>
                     </div>

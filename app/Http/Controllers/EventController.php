@@ -120,8 +120,8 @@ class EventController extends Controller
     }
     public function eventspdf()
     {
-        $event = Event::all();
-        $pdf = PDF::loadview('event.pdf.eventspdf',['events'=>$event]);
+        $events = Event::orderByDesc('created_at')->get();
+        $pdf = PDF::loadview('event.pdf.eventspdf', ['events' => $events]);
         return $pdf->stream();
     }
 }

@@ -16,7 +16,11 @@
                                         </div>
                                     </div>
                                     <div class="mr-2 d-inline-block">
-                                        <a href="{{ route('package.pdf.ventanillapdf') }}" class="btn btn-danger" data-placement="left">
+                                        <a href="{{ route('package.pdf.redirigidospdf') }}" class="btn btn-success"
+                                            data-placement="left">
+                                            Excel
+                                        </a>
+                                        <a href="{{ route('package.pdf.redirigidospdf') }}" class="btn btn-danger" data-placement="left">
                                             PDF
                                         </a>
                                     </div>

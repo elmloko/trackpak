@@ -96,13 +96,11 @@ class PackageController extends Controller
     return redirect()->route('packages.clasificacion')
         ->with('success', 'Paquete Actualizado Con Éxito!');
 }
-
-
     public function destroy($id)
     {
         $package = Package::find($id); // Encuentra el paquete
         $codigo = $package->CODIGO; // Obtiene el código antes de eliminar el paquete
-        $package->delete(); // Elimina el paquete
+        $package->forceDelete(); // Elimina el paquete
 
         Event::create([
             'action' => 'ESTADO',
@@ -149,21 +147,28 @@ class PackageController extends Controller
         return Excel::download(new ClasificacionExport($packages), 'Clasificacion.xlsx');
     }
 
+    public function redirigidospdf()
+    {
+        $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
+        $pdf = PDF::loadview('package.pdf.redirigidospdf',['packages'=>$packages]);
+        return $pdf->stream();
+    }
     public function clasificacionpdf()
     {
         $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
         $pdf = PDF::loadview('package.pdf.clasificacionpdf',['packages'=>$packages]);
         return $pdf->stream();
     }
-
     public function excel()
     {
         return Excel::download(new PackageExport, 'Paquetes Ordinarios.xlsx');
     }
 
-    public function pdf()
+    public function packagesall()
     {
-        return Excel::download(new PackageExport, 'Paquetes Ordinarios.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
+        $packages = Package::all();
+        $pdf = PDF::loadview('package.pdf.packagesall',['packages'=>$packages]);
+        return $pdf->stream();
     }
     public function delete($id)
     {

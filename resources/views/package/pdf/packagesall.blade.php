@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clasificacion</title>
+    <title>Todos los Paquetes</title>
     <style>
         /* Estilos para la tabla */
         table {
@@ -12,7 +13,8 @@
             font-size: 12px;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #000;
             padding: 5px;
         }
@@ -38,14 +40,15 @@
         }
     </style>
 </head>
+
 <body>
     <div class="header">
-        <div class="logo">
-            {{-- <img src="{{ asset('images/images.png') }}"> --}}
-        </div>
+        {{-- <div class="logo">
+            <img src="{{ public_path('images/images.png') }}" alt="" width="100" height="100">
+        </div> --}}
         <div class="title">
-            <h2>Lista Área Clasificación</h2>
-            <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
+            <h2>Lista Almacen</h2>
+            <h4>AGENCIA BOLIVIANA DE CORREOS</h4>
         </div>
     </div>
 
@@ -70,24 +73,22 @@
         <tbody>
             @php $i = 1; @endphp <!-- Inicializa $i con 1 -->
             @foreach ($packages as $package)
-                @if ($package->ESTADO === 'CLASIFICACION')
-                <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ $package->CODIGO }}</td>
-                    <td>{{ $package->DESTINATARIO }}</td>
-                    <td>{{ $package->TELEFONO }}</td>
-                    <td>{{ $package->PAIS }}</td>
-                    <td>{{ $package->CUIDAD }}</td>
-                    <td>{{ $package->ZONA }}</td>
-                    <td>{{ $package->VENTANILLA }}</td>
-                    <td>{{ $package->PESO }}</td>
-                    <td>{{ $package->PO }}</td>
-                    <td>{{ $package->ESTADO }}</td>
-                    <td>{{ $package->ADUANA }}</td>
-                    <td>{{ $package->created_at }}</td>
-                </tr>
-                @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
-                @endif
+                    <tr>
+                        <td>{{ $i }}</td>
+                        <td>{{ $package->CODIGO }}</td>
+                        <td>{{ $package->DESTINATARIO }}</td>
+                        <td>{{ $package->TELEFONO }}</td>
+                        <td>{{ $package->PAIS }}</td>
+                        <td>{{ $package->CUIDAD }}</td>
+                        <td>{{ $package->ZONA }}</td>
+                        <td>{{ $package->VENTANILLA }}</td>
+                        <td>{{ $package->PESO }}</td>
+                        <td>{{ $package->PO }}</td>
+                        <td>{{ $package->ESTADO }}</td>
+                        <td>{{ $package->ADUANA }}</td>
+                        <td>{{ $package->created_at }}</td>
+                    </tr>
+                    @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
             @endforeach
         </tbody>
     </table>

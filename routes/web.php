@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::get('test/deleteado', [PackageController::class, 'deleteado'])->name('test.deleteado');
     Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
     Route::get('prueba/excel', [PackageController::class, 'excel'])->name('prueba.excel');
-    Route::get('prueba/pdf', [PackageController::class, 'pdf'])->name('prueba.pdf');
+    Route::get('package/pdf/packagesall', [PackageController::class, 'packagesall'])->name('package.pdf.packagesall');
     Route::get('packages/redirigir/{id}', [PackageController::class, 'redirigir'])->name('packages.redirigir');
     Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->name('packages.ventanilla');
     Route::get('packages/clasificacion', [PackageController::class, 'clasificacion'])->name('packages.clasificacion');
@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
     Route::get('package/pdf/formularioentrega/{id}', [PackageController::class, 'formularioentrega'])->name('package.pdf.formularioentrega');
     Route::get('package/pdf/abandono/{id}', [PackageController::class, 'abandono'])->name('package.pdf.abandono');
+    Route::get('package/pdf/redirigidospdf', [PackageController::class, 'redirigidospdf'])->name('package.pdf.redirigidospdf');
 
     Route::resource('events', EventController::class);
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
