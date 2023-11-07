@@ -396,7 +396,7 @@ return [
                             'can'  => '',
                         ],
                         [
-                            'text' => 'Inventario Domicilio',
+                            'text' => 'Inventario',
                             'url' => 'packages/inventariocartero',
                             'icon' => 'fas fa-clipboard-list',
                             'can'  => '',

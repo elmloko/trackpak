@@ -30,7 +30,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('users/{id}/delete', [PackageController::class, 'delete'])->name('users.delete');
     Route::get('utest/deleteado', [UserController::class, 'deleteado'])->name('utest.deleteado');
     Route::put('utest/{id}/restoring', [UserController::class, 'restoring'])->name('users.restoring');
@@ -74,9 +80,9 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/inventariocartero', [PackageController::class, 'inventariocartero'])->name('packages.inventariocartero');
     Route::get('packages/{id}/deletecartero', [PackageController::class, 'deletecartero'])->name('packages.deletecartero');
 
-    Route::resource('events', EventController::class);
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+    Route::get('events/{events}', [EventController::class, 'show'])->name('events.show');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
