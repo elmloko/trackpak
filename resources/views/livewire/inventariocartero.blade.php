@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <h5 id="card_title">
-                                {{ __('Inventario de Paquetes en Entregados en Ventanilla') }}
+                                {{ __('Inventario de Paquetes en Entregados con Carteros') }}
                             </h5>
                         </div>
                         <div class="row">
@@ -63,7 +63,7 @@
                                         $i = 0; // Inicializa la variable $i
                                     @endphp
                                     @foreach ($packages as $package)
-                                    @if ($package->ESTADO !== 'DOMICILIO')
+                                    @if ($package->ESTADO !== 'ENTREGADO')
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $package->CODIGO }}</td>

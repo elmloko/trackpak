@@ -326,5 +326,73 @@ class PackageController extends Controller
             return redirect()->back()->with('error', 'El paquete no se encuentra en clasificación.');
         }
     }
+    public function buscarPaqueteCartero(Request $request)
+    {
+        $codigo = $request->input('codigo');
+        $package = Package::where('CODIGO', $codigo)->first();
 
+        if ($package) {
+            if ($package->ESTADO === 'VENTANILLA') {
+                Event::create([
+                    'action' => 'EN ENTREGA',
+                    'descripcion' => 'Paquete Destinado por envío con Cartero',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $package->CODIGO,
+                ]);
+                // Cambiar el estado del paquete a "CARTERO"
+                $package->ESTADO = 'CARTERO';
+                $package->save();
+
+                return redirect()->back()->with('success', 'El paquete ha sido movido a Cartero.');
+            } else {
+                return redirect()->back()->with('error', 'El paquete no se encuentra en estado "VENTANILLA".');
+            }
+        } else {
+            return redirect()->back()->with('error', 'El paquete no se encuentra en Clasificación.');
+        }
+    }
+
+    public function carteros()
+    {
+        $packages = Package::paginate(10);
+
+        return view('package.carteros', compact('packages'))
+        ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+    }
+    public function carteropdf()
+    {
+        $packages = Package::where('ESTADO', 'CARTERO')->get();
+        $pdf = PDF::loadview('package.pdf.carteropdf',['packages'=>$packages]);
+        return $pdf->stream();
+    }
+    public function inventariocartero()
+    {
+        $packages = Package::where('ESTADO', 'DOMICILIO')->paginate(20);
+        return view('package.inventariocartero', compact('packages'));
+    }
+    public function deletecartero($id)
+    {
+        $package = Package::find($id);
+
+        if ($package) {
+            Event::create([
+                'action' => 'ENTREGADO',
+                'descripcion' => 'Entrega de paquete con Cartero(DOMICILIO)',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+            // Cambia el estado del paquete a "ENTREGADO"
+            $package->estado = 'DOMICILIO';
+
+            // Guarda el paquete actualizado
+            $package->save();
+
+            // Luego, elimina el paquete
+            $package->delete();
+
+            return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
+        } else {
+            return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
+        }
+    }
 }

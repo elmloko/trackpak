@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="bajaModalLabel">Confirmar Baja de Paquete Ventanilla</h5>
+                <h5 class="modal-title" id="bajaModalLabel">Confirmar Baja de Paquete Cartero</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,12 +15,10 @@
                         <p>Código Postal: {{ $package->CODIGO }}</p>
                         <p>Destinatario: {{ $package->DESTINATARIO }}</p>
                         <p>Ciudad: {{ $package->CUIDAD }}</p>
-                        <p>Ventanilla: {{ $package->VENTANILLA }}</p>
                     </div>
                     <div class="col">
                         <p>Tipo: {{ $package->TIPO }}</p>
                         <p>Estado: {{ $package->ESTADO }}</p>
-                        <p>Aduana: {{ $package->ADUANA }}</p>
                         <p>Fecha Ingreso: {{ $package->created_at }}</p>
                     </div>
                 </div>
@@ -38,7 +36,7 @@
                 </div>
                 <div class="col modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <a href="{{ route('packages.delete', $package->id) }}" class="btn btn-success">Confirmar Baja</a>
+                    <a href="{{ route('packages.deletecartero', $package->id) }}" class="btn btn-success">Confirmar Baja</a>
                 </div>
             </div>
         </div>

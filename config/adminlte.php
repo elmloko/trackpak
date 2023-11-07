@@ -379,11 +379,37 @@ return [
                     ],
                 ], 
                 [
+                    'text' => 'Urbano',
+                    'icon' => 'fas fa-clipboard-list',
+                    'can'  => 'packages.ventanilla',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas Cartero',
+                            'url' => '#',
+                            'icon' => 'fas fa-clipboard-list',
+                            'can'  => '',
+                        ],
+                        [
+                            'text' => 'Entregas',
+                            'url' => 'packages/carteros',
+                            'icon' => 'fas fa-clipboard-list',
+                            'can'  => '',
+                        ],
+                        [
+                            'text' => 'Inventario Domicilio',
+                            'url' => 'packages/inventariocartero',
+                            'icon' => 'fas fa-clipboard-list',
+                            'can'  => '',
+                        ],
+                    ],
+                ],
+                [
                     'text' => 'Eventos',
                     'url' => 'events',
                     'icon' => 'fas fa-paper-plane',
                     'can'  => '',
                 ],
+                
             ],
         ],
     ],
