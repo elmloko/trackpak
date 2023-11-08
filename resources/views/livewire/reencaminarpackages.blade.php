@@ -12,7 +12,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                            <input wire:model.lazy="search" type="text" class="form-control"
+                                                placeholder="Buscar...">
                                         </div>
                                     </div>
                                     <div class="mr-2 d-inline-block">
@@ -20,13 +21,18 @@
                                             data-placement="left">
                                             Excel
                                         </a>
-                                        <a href="{{ route('package.pdf.redirigidospdf') }}" class="btn btn-danger" data-placement="left">
+                                        <a href="{{ route('package.pdf.redirigidospdf') }}" class="btn btn-danger"
+                                            data-placement="left">
                                             PDF
                                         </a>
                                     </div>
                                 </div>
                             </div>
-                            
+                            @if ($message = Session::get('success'))
+                                <div class="alert alert-success">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @endif
                             @if ($packages->count() > 0)
                                 <table class="table table-striped table-hover">
                                     <thead class="thead">
@@ -45,34 +51,44 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($packages as $package)
-                                        @if ($package->ESTADO === 'REENCAMINADO')
-                                            <tr>
-                                                <td>{{ $package->id }}</td>
-                                                <td>{{ $package->CODIGO }}</td>
-                                                <td>{{ $package->DESTINATARIO }}</td>
-                                                <td>{{ $package->PAIS }}</td>
-                                                <td>{{ $package->CUIDAD }}</td>
-                                                <td>{{ $package->TIPO }}</td>
-                                                <td>{{ $package->ESTADO }}</td>
-                                                <td>{{ $package->ADUANA }}</td>
-                                                <td>{{ $package->date_redirigido }}</td>
-                                                <td>
-                                                    @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
-                                                        <a class="btn btn-sm btn-info" href="#" data-toggle="modal"
-                                                            data-target="#reencaminadoModal{{ $package->id }}">
-                                                            <i class="fa fa-arrow-up"></i>
-                                                            {{ __('Rencaminado') }}
-                                                        </a>
-                                                    @endhasrole
-                                                    @include('package.modal.reencaminado')
-                                                </td>
-                                            </tr>
+                                            @if ($package->ESTADO === 'REENCAMINADO')
+                                                <tr>
+                                                    <td>{{ $package->id }}</td>
+                                                    <td>{{ $package->CODIGO }}</td>
+                                                    <td>{{ $package->DESTINATARIO }}</td>
+                                                    <td>{{ $package->PAIS }}</td>
+                                                    <td>{{ $package->CUIDAD }}</td>
+                                                    <td>{{ $package->TIPO }}</td>
+                                                    <td>{{ $package->ESTADO }}</td>
+                                                    <td>{{ $package->ADUANA }}</td>
+                                                    <td>{{ $package->date_redirigido }}</td>
+                                                    <td>
+                                                        @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar
+                                                            Clasificacion')
+                                                            <a class="btn btn-sm btn-info" href="#"
+                                                                data-toggle="modal"
+                                                                data-target="#reencaminadoModal{{ $package->id }}">
+                                                                <i class="fa fa-arrow-up"></i>
+                                                                {{ __('Rencaminado') }}
+                                                            </a>
+                                                        @endhasrole
+                                                        @include('package.modal.reencaminado')
+                                                    </td>
+                                                </tr>
                                             @endif
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        {{ $packages->links() }}
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                        Se encontraron {{ $packages->total() }} registros en total
+                                    </div>
+                                </div>
                             @else
-                                <p>No se encontraron paquetes redirigidos.</p>
+                                <p>No hay elementos eliminados.</p>
                             @endif
                         </div>
                     </div>

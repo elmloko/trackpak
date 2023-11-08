@@ -260,7 +260,7 @@ class PackageController extends Controller
 
     public function redirigidos()
     {
-        $package = Package::where('redirigido', true)->get();
+        $package = Package::where('redirigido', true)->paginate(20);
 
         return view('package.redirigidos', compact('package'));
     }
