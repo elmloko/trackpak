@@ -85,7 +85,7 @@
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->created_at }}</td>
                                                             <td>
-                                                                <form
+                                                                <form id="eliminarForm{{ $package->id }}"
                                                                     action="{{ route('packages.destroy', $package->id) }}"
                                                                     method="POST">
                                                                     @hasrole('SuperAdmin|Administrador')

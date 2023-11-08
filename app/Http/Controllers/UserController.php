@@ -52,6 +52,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8',
             'Regional' => 'required',
+            'ci' => 'required',
         ]);
     
         $user = new User();
@@ -59,6 +60,7 @@ class UserController extends Controller
         $user->email = $request->input('email');
         $user->password = bcrypt($request->input('password')); // Encriptar la contraseña
         $user->Regional = $request->input('Regional');
+        $user->ci = $request->input('ci');
 
         $user->save();
 
@@ -103,22 +105,27 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
-{
-    $request->validate([
-        'name' => 'required',
-        'email' => 'required|email|unique:users,email,' . $user->id, // Utiliza $user->id
-    ]);
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id, // Utiliza $user->id
+            'Regional' => 'required',
+            'ci' => 'required',
+        ]);
 
-    $user->name = $request->input('name');
-    $user->email = $request->input('email');
-    $user->roles()->sync($request->roles);
-    $user->Regional = $request->input('Regional');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->roles()->sync($request->roles);
+        $user->Regional = $request->input('Regional');
+        $user->ci = $request->input('ci');
+        
+        $user->save();
+
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario actualizado correctamente');
+    }
+
     
-    $user->save();
-
-    return redirect()->route('users.index')
-        ->with('success', 'Usuario actualizado correctamente');
-}
 
 
     /**

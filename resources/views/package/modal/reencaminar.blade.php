@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modal de confirmación de reencaminamiento -->
 <div class="modal fade" id="reencaminarModal{{$package->id}}" tabindex="-1" role="dialog" aria-labelledby="reencaminarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -24,11 +24,18 @@
                     </div>
                 </div>
                 <p>¿Donde se encontraba este paquete?</p>
+                
+                <!-- Agrega el campo de selección de ciudad debajo de la pregunta -->
+                <div class="form-group">
+                    {{ Form::label('cuidadre', 'Seleccione la Ciudad:') }}
+                    {{ Form::select('cuidadre', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], null, ['class' => 'form-control', 'placeholder' => 'Seleccione la Ciudad']) }}
+                </div>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <a href="{{ route('packages.redirigir', $package->id) }}" class="btn btn-success">Confirmar Rencaminamiento</a>
+                <!-- Agrega el enlace para confirmar el reencaminamiento con la ciudad seleccionada del modal -->
+                <a href="{{ route('packages.redirigir', ['id' => $package->id, 'cuidadre' => $package->cuidadre]) }}" id="confirmarRencaminamiento" class="btn btn-success">Confirmar Rencaminamiento</a>
             </div>
         </div>
     </div>

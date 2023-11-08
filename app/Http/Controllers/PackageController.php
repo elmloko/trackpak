@@ -149,7 +149,7 @@ class PackageController extends Controller
 
     public function deleteadopdf()
     {
-        $packages = Package::onlyTrashed()->get(); // Obtener registros eliminados
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get(); // Obtener registros eliminados
         $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
         return $pdf->stream();
     }
@@ -229,7 +229,7 @@ class PackageController extends Controller
                 ->with('error', 'El paquete no pudo ser encontrado o restaurado');
         }
     }
-    public function redirigir($id)
+    public function redirigir(Request $request, $id)
     {
         $package = Package::find($id);
 
@@ -244,6 +244,7 @@ class PackageController extends Controller
             ]);
 
             $package->estado = 'REENCAMINADO';
+            $package->cuidadre = $request->input('cuidadre');
 
             // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
             $package->date_redirigido = now();
@@ -256,6 +257,7 @@ class PackageController extends Controller
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
     }
+
     public function redirigidos()
     {
         $package = Package::where('redirigido', true)->get();
@@ -397,8 +399,8 @@ class PackageController extends Controller
     }
     public function deleteadocarteropdf()
     {
-        $packages = Package::onlyTrashed()->get(); // Obtener registros eliminados
-        $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
+        $packages = Package::withTrashed()->where('ESTADO', 'DOMICILIO')->get(); // Obtener registros eliminados
+        $pdf = PDF::loadView('package.pdf.deleteadocarteropdf', ['packages' => $packages]);
         return $pdf->stream();
     }
 }

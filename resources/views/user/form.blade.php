@@ -20,6 +20,11 @@
             {{ Form::select('Regional', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $user->Regional, ['class' => 'form-control' . ($errors->has('Regional') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Regional']) }}
             {!! $errors->first('Regional', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+        <div class="form-group">
+            {{ Form::label('Carnet de Identidad') }}
+            {{ Form::text('ci', $user->ci, ['class' => 'form-control' . ($errors->has('ci') ? ' is-invalid' : ''), 'placeholder' => 'Carnet de Identidad']) }}
+            {!! $errors->first('ci', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
         <h2 class="h5">Listado de Roles</h2>
         @foreach ($roles as $role)
             <div>
