@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use \Milon\Barcode\DNS1D;
+use Picqer;
 
 /**
  * Class PackageController
@@ -127,6 +129,8 @@ class PackageController extends Controller
     public function formularioentrega(Request $request, $id)
     {
         $package = Package::find($id);
+        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+        $code = $generator ->getBarcode($package->CODIGO,$generator::TYPE_CODE_128);
         $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
         return $pdf->stream();
         // Descargar el PDF o mostrarlo en el navegador

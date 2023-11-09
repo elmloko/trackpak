@@ -15,6 +15,7 @@
         .small-text {
             font-size: 12px;
         }
+
         .special-text {
             text-align: center;
             font-size: 12px;
@@ -44,7 +45,7 @@
             <table>
                 <tr>
                     <td>
-                        <p class="small-text"><strong>Usuario:</strong></p>
+                        <p class="barcode">{!! DNS1D::getBarcodeHTML($package->CODIGO, 'C39',1,25) !!}</p>
                         <p class="small-text"><strong>Código Postal:</strong> {{ $package->CODIGO }}</p>
                         <p class="small-text"><strong>Destinatario:</strong> {{ $package->DESTINATARIO }}</p>
                         <p class="small-text"><strong>Ciudad:</strong> {{ $package->CUIDAD }}</p>
@@ -52,7 +53,7 @@
                         <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA }}</p>
                     </td>
                     <td>
-                        <p class="small-text">{{ auth()->user()->name }}</p>
+                        <p class="small-text"><strong>Usuario:</strong> {{ auth()->user()->name }}</p>
                         <p class="small-text"><strong>Tipo:</strong> {{ $package->TIPO }}</p>
                         <p class="small-text"><strong>Peso:</strong> {{ $package->PESO }}</p>
                         <p class="small-text"><strong>Entrega:</strong> {{ $package->ESTADO }}</p>
@@ -68,7 +69,7 @@
                     <p class="special-text">RECIBIDO POR</p>
                 </td>
                 <td>
-                    <p class="special-text">__________________________  </p>
+                    <p class="special-text">__________________________ </p>
                     <p class="special-text">ENTREGADO POR</p>
                 </td>
             </table>
