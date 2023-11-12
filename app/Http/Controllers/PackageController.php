@@ -82,22 +82,22 @@ class PackageController extends Controller
     }
 
     public function update(Request $request, Package $package)
-{
-    request()->validate(Package::$rules);
+    {
+        request()->validate(Package::$rules);
 
-    // Obtener el código del paquete antes de la actualización
-    $codigo = $package->CODIGO;
+        // Obtener el código del paquete antes de la actualización
+        $codigo = $package->CODIGO;
 
-    $package->update($request->all());
-    Event::create([
-        'action' => 'ESTADO',
-        'descripcion' => 'Edición de Paquete',
-        'user_id' => auth()->user()->id,
-        'codigo' => $codigo, // Utiliza el código obtenido previamente
-    ]);
-    return redirect()->route('packages.clasificacion')
-        ->with('success', 'Paquete Actualizado Con Éxito!');
-}
+        $package->update($request->all());
+        Event::create([
+            'action' => 'ESTADO',
+            'descripcion' => 'Edición de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $codigo, // Utiliza el código obtenido previamente
+        ]);
+        return redirect()->route('packages.clasificacion')
+            ->with('success', 'Paquete Actualizado Con Éxito!');
+    }
     public function destroy($id)
     {
         $package = Package::find($id); // Encuentra el paquete
@@ -130,7 +130,7 @@ class PackageController extends Controller
     {
         $package = Package::find($id);
         $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
-        $code = $generator ->getBarcode($package->CODIGO,$generator::TYPE_CODE_128);
+        $code = $generator->getBarcode($package->CODIGO, $generator::TYPE_CODE_128);
         $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
         return $pdf->stream();
         // Descargar el PDF o mostrarlo en el navegador
@@ -160,13 +160,13 @@ class PackageController extends Controller
     public function redirigidospdf()
     {
         $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
-        $pdf = PDF::loadview('package.pdf.redirigidospdf',['packages'=>$packages]);
+        $pdf = PDF::loadview('package.pdf.redirigidospdf', ['packages' => $packages]);
         return $pdf->stream();
     }
     public function clasificacionpdf()
     {
         $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
-        $pdf = PDF::loadview('package.pdf.clasificacionpdf',['packages'=>$packages]);
+        $pdf = PDF::loadview('package.pdf.clasificacionpdf', ['packages' => $packages]);
         return $pdf->stream();
     }
     public function excel()
@@ -177,7 +177,7 @@ class PackageController extends Controller
     public function packagesall()
     {
         $packages = Package::all();
-        $pdf = PDF::loadview('package.pdf.packagesall',['packages'=>$packages]);
+        $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
         return $pdf->stream();
     }
     public function delete($id)
@@ -301,7 +301,7 @@ class PackageController extends Controller
         $packages = Package::paginate(10);
 
         return view('package.ventanilla', compact('packages'))
-        ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
     }
     public function clasificacion()
     {
@@ -318,11 +318,18 @@ class PackageController extends Controller
 
         if ($package) {
             Event::create([
+                'action' => 'DISPONIBLE',
+                'descripcion' => 'Paquete a la espera de ser recogido',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+            Event::create([
                 'action' => 'EN ENTREGA',
                 'descripcion' => 'Paquete Recibido en Oficina Postal Regional(VENTANILLA)',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
+
             // Cambiar el estado del paquete a "VENTANILLA"
             $package->ESTADO = 'VENTANILLA';
             $package->save();
@@ -363,12 +370,12 @@ class PackageController extends Controller
         $packages = Package::paginate(10);
 
         return view('package.carteros', compact('packages'))
-        ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
     }
     public function carteropdf()
     {
         $packages = Package::where('ESTADO', 'CARTERO')->get();
-        $pdf = PDF::loadview('package.pdf.carteropdf',['packages'=>$packages]);
+        $pdf = PDF::loadview('package.pdf.carteropdf', ['packages' => $packages]);
         return $pdf->stream();
     }
     public function inventariocartero()
