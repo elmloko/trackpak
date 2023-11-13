@@ -6,4 +6,5 @@
 
 @section('content')
 @livewire('ventanilla-packages')
+@include('footer')
 @endsection

@@ -334,27 +334,6 @@ class PackageController extends Controller
         return isset($translations[$iso]) ? $translations[$iso] : $iso;
     }    
 
-    // public function store(Request $request)
-    // {
-    //     request()->validate(Package::$rules);
-
-    //     $package = Package::create($request->all());
-    //     Event::create([
-    //         'action' => 'ADMITIDO',
-    //         'descripcion' => 'Clasificacion del Paquete en Oficina Postal Regional',
-    //         'user_id' => auth()->user()->id,
-    //         'codigo' => $package->CODIGO,
-    //     ]);
-    //     Event::create([
-    //         'action' => 'ADMISION',
-    //         'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
-    //         'user_id' => auth()->user()->id,
-    //         'codigo' => $package->CODIGO,
-    //     ]);
-    //     return redirect()->route('packages.clasificacion')
-    //         ->with('success', 'Paquete Creado Con Exito!');
-    // }
-
     public function show($id)
     {
         $package = Package::find($id);

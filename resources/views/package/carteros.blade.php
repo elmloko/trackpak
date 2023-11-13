@@ -6,4 +6,5 @@
 
 @section('content')
 @livewire('carteros')
+@include('footer')
 @endsection

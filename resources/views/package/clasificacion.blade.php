@@ -6,4 +6,5 @@
 
 @section('content')
 @livewire('clasificacion-packages')
+@include('footer')
 @endsection

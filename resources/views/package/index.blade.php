@@ -6,4 +6,5 @@
 
 @section('content')
 @livewire('search-packages')
+@include('footer')
 @endsection
