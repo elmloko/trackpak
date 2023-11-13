@@ -18,11 +18,11 @@
                     {{ Form::text('TELEFONO', $package->TELEFONO, ['class' => 'form-control' . ($errors->has('TELEFONO') ? ' is-invalid' : ''), 'placeholder' => 'Telefono']) }}
                     {!! $errors->first('TELEFONO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     {{ Form::label('PAIS') }}
                     {{ Form::text('PAIS', $package->PAIS, ['class' => 'form-control' . ($errors->has('PAIS') ? ' is-invalid' : ''), 'placeholder' => 'Pais']) }}
                     {!! $errors->first('PAIS', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                </div> --}}
                 <div class="form-group">
                     {{ Form::label('CUIDAD') }}
                     {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $package->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Cuidad']) }}

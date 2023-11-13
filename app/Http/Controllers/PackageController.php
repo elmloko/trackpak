@@ -47,26 +47,79 @@ class PackageController extends Controller
         return view('package.create', compact('package'));
     }
 
-    public function store(Request $request)
+        public function store(Request $request)
     {
-        request()->validate(Package::$rules);
+        // Validación de datos
+        $request->validate(Package::$rules);
 
+        // Crear el paquete
         $package = Package::create($request->all());
+
+        // Extraer el ISO del país y traducción del código del país
+        $iso = substr($request->input('CODIGO'), -2); // Obtener las dos últimas letras
+        $countryTranslation = $this->getCountryTranslation($iso);
+
+        // Actualizar el paquete con el ISO del país y la traducción del código del país
+        $package->update([
+            'PAIS' => $iso,
+            'ISO' => $countryTranslation,
+        ]);
+
+        // Crear eventos relacionados con el paquete
         Event::create([
             'action' => 'ADMITIDO',
-            'descripcion' => 'Clasificacion del Paquete en Oficina Postal Regional',
+            'descripcion' => 'Clasificación del Paquete en Oficina Postal Regional',
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
+
         Event::create([
             'action' => 'ADMISION',
             'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
+
+        // Redireccionar con mensaje de éxito
         return redirect()->route('packages.clasificacion')
-            ->with('success', 'Paquete Creado Con Exito!');
+            ->with('success', 'Paquete Creado Con Éxito!');
     }
+
+    
+    // Función para obtener la traducción del código del país
+    private function getCountryTranslation($iso)
+    {
+        // Aquí puedes implementar la lógica para traducir el código del país, por ejemplo, usando un array asociativo
+        $translations = [
+            'MU' => 'Islas Mauricio',
+            'ES' => 'España',
+            // Agrega más traducciones según sea necesario
+        ];
+    
+        // Devolver la traducción o el mismo ISO si no se encuentra la traducción
+        return isset($translations[$iso]) ? $translations[$iso] : $iso;
+    }    
+
+    // public function store(Request $request)
+    // {
+    //     request()->validate(Package::$rules);
+
+    //     $package = Package::create($request->all());
+    //     Event::create([
+    //         'action' => 'ADMITIDO',
+    //         'descripcion' => 'Clasificacion del Paquete en Oficina Postal Regional',
+    //         'user_id' => auth()->user()->id,
+    //         'codigo' => $package->CODIGO,
+    //     ]);
+    //     Event::create([
+    //         'action' => 'ADMISION',
+    //         'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
+    //         'user_id' => auth()->user()->id,
+    //         'codigo' => $package->CODIGO,
+    //     ]);
+    //     return redirect()->route('packages.clasificacion')
+    //         ->with('success', 'Paquete Creado Con Exito!');
+    // }
 
     public function show($id)
     {
