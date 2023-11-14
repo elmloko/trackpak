@@ -58,6 +58,7 @@
                 <th>País</th>
                 <th>Destino Cuidad</th>
                 <th>Tipo</th>
+                <th>Peso</th>
                 <th>Estado</th>
                 <th>Aduana</th>
                 <th>Fecha Retorno</th>
@@ -74,6 +75,7 @@
                         <td>{{ $package->PAIS }}</td>
                         <td>{{ $package->CUIDAD }}</td>
                         <td>{{ $package->TIPO }}</td>
+                        <td>{{ $package->PESO }}</td>
                         <td>{{ $package->ESTADO }}</td>
                         <td>{{ $package->ADUANA }}</td>
                         <td>{{ $package->date_redirigido }}</td>

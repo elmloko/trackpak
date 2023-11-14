@@ -61,13 +61,13 @@
                 <th>Teléfono</th>
                 <th>País</th>
                 <th>Ciudad</th>
-                <th>Zona</th>
+                <th>Dirección</th>
                 <th>Ventanilla</th>
                 <th>Peso</th>
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>Aduana</th>
-                <th>Fecha Ingreso</th>
+                <th>Fecha Pendiente</th>
             </tr>
         </thead>
         <tbody>
@@ -84,7 +84,7 @@
                         <td>{{ $package->ZONA }}</td>
                         <td>{{ $package->VENTANILLA }}</td>
                         <td>{{ $package->PESO }}</td>
-                        <td>{{ $package->PO }}</td>
+                        <td>{{ $package->TIPO }}</td>
                         <td>{{ $package->ESTADO }}</td>
                         <td>{{ $package->ADUANA }}</td>
                         <td>{{ $package->created_at }}</td>

@@ -17,7 +17,7 @@
                             </div>
                             <div class="col-lg-9 text-right">
                                 <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('package.pdf.deleteadopdf') }}" class="btn btn-success" data-placement="left">
+                                    <a href="{{ route('inventario.excel') }}" class="btn btn-success" data-placement="left">
                                         Excel
                                     </a>
                                 </div>
@@ -47,7 +47,7 @@
                                         <th>Telefono</th>
                                         <th>Pais</th>
                                         <th>Ciudad</th>
-                                        <th>Zona</th>
+                                        <th>Dirección</th>
                                         <th>Ventanilla</th>
                                         <th>Peso</th>
                                         <th>Tipo</th>

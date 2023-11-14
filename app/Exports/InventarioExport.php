@@ -8,12 +8,12 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
+class InventarioExport implements FromCollection, WithHeadings, WithStyles
 {
     public function collection()
     {
-        return Package::where('ESTADO', 'CLASIFICACION')
-            ->select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'TIPO', 'ADUANA', 'ESTADO',\DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_created_at"))
+        return Package::withTrashed()->where('ESTADO', 'ENTREGADO')
+            ->select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'TIPO', 'ESTADO', 'ADUANA', \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"))
             ->get();
     }
 
@@ -24,14 +24,14 @@ class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
             'DESTINATARIO',
             'TELEFONO',
             'PAIS',
-            'CUIDAD',
+            'DESTINO',
             'DIRECCION',
             'VENTANILLA',
             'PESO',
             'TIPO',
-            'ADUANA',
             'ESTADO',
-            'FECHA INGRESO'
+            'ADUANA',
+            'FECHA BAJA',
         ];
     }
 

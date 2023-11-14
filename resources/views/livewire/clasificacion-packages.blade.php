@@ -58,7 +58,7 @@
                                                             <th>Teléfono</th>
                                                             <th>País</th>
                                                             <th>Ciudad</th>
-                                                            <th>Zona</th>
+                                                            <th>Dirección</th>
                                                             <th>Ventanilla</th>
                                                             <th>Peso</th>
                                                             <th>Tipo</th>

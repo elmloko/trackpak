@@ -74,13 +74,13 @@
                                                         <th>Teléfono</th>
                                                         <th>País</th>
                                                         <th>Ciudad</th>
-                                                        <th>Zona</th>
+                                                        <th>Dirección</th>
                                                         <th>Ventanilla</th>
                                                         <th>Peso</th>
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
                                                         <th>Aduana</th>
-                                                        <th>Fecha Ingreso</th>
+                                                        <th>Fecha Pendiente</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>

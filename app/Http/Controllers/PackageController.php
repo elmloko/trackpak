@@ -6,6 +6,8 @@ use App\Models\Package;
 use App\Models\Event;
 use App\Exports\VentanillaExport;
 use App\Exports\ClasificacionExport;
+use App\Exports\ReencaminarExport;
+use App\Exports\InventarioExport;
 use App\Exports\PackageExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -20,24 +22,17 @@ use Picqer;
  */
 class PackageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $packages = Package::paginate(20);
-
+        // Obtener la regional del usuario actual (puedes ajustar esto según tu lógica de autenticación)
+        $userCuidad = auth()->user()->Regional;
+        
+        // Filtrar los paquetes por la regional del usuario
+        $packages = Package::where('CUIDAD', $userCuidad)->paginate(20);
+        
         return view('package.index', compact('packages'))
             ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function create()
     {
@@ -380,18 +375,6 @@ class PackageController extends Controller
         return redirect()->route('packages.clasificacion')
             ->with('success', 'Paquete Eliminado Con Éxito!');
     }
-
-    public function ventanillaexcel()
-    {
-        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
-        return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
-    }
-    public function ventanillapdf()
-    {
-        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
-        $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
-        return $pdf->stream();
-    }
     public function formularioentrega(Request $request, $id)
     {
         $package = Package::find($id);
@@ -409,31 +392,6 @@ class PackageController extends Controller
         return $pdf->stream();
         // Descargar el PDF o mostrarlo en el navegador
         // return $pdf->download('formularioentrega.pdf');
-    }
-
-    public function clasificacionexcel()
-    {
-        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
-        return Excel::download(new ClasificacionExport($packages), 'Clasificacion.xlsx');
-    }
-
-    public function deleteadopdf()
-    {
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get(); // Obtener registros eliminados
-        $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
-        return $pdf->stream();
-    }
-    public function redirigidospdf()
-    {
-        $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
-        $pdf = PDF::loadview('package.pdf.redirigidospdf', ['packages' => $packages]);
-        return $pdf->stream();
-    }
-    public function clasificacionpdf()
-    {
-        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
-        $pdf = PDF::loadview('package.pdf.clasificacionpdf', ['packages' => $packages]);
-        return $pdf->stream();
     }
     public function excel()
     {
@@ -680,4 +638,51 @@ class PackageController extends Controller
         $pdf = PDF::loadView('package.pdf.deleteadocarteropdf', ['packages' => $packages]);
         return $pdf->stream();
     }
+
+    //REPORTES
+    public function clasificacionexcel()
+    {
+        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
+        return Excel::download(new ClasificacionExport($packages), 'Clasificacion.xlsx');
+    }
+    public function reencaminarexcel()
+    {
+        $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
+        return Excel::download(new ReencaminarExport($packages), 'Rencaminar.xlsx');
+    }
+    public function inventarioexcel()
+    {
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
+        return Excel::download(new InventarioExport($packages), 'Inventario.xlsx');
+    }
+    public function ventanillaexcel()
+    {
+        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
+        return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
+    }
+    public function clasificacionpdf()
+    {
+        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
+        $pdf = PDF::loadview('package.pdf.clasificacionpdf', ['packages' => $packages]);
+        return $pdf->stream();
+    }
+    public function redirigidospdf()
+    {
+        $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
+        $pdf = PDF::loadview('package.pdf.redirigidospdf', ['packages' => $packages]);
+        return $pdf->stream();
+    }
+    public function ventanillapdf()
+    {
+        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
+        $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
+        return $pdf->stream();
+    }
+    public function deleteadopdf()
+    {
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get(); // Obtener registros eliminados
+        $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
+        return $pdf->stream();
+    }
+    
 }

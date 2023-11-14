@@ -18,12 +18,6 @@
                             </div>
                             <div class="col-lg-9 text-right">
                                 <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('events.pdf.eventspdf') }}" class="btn btn-success"
-                                        data-placement="left">
-                                        Excel
-                                    </a>
-                                </div>
-                                <div class="mr-2 d-inline-block">
                                     <a href="{{ route('events.pdf.eventspdf') }}" class="btn btn-danger"
                                         data-placement="left">
                                         PDF

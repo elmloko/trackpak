@@ -5,6 +5,6 @@
 @endsection
 
 @section('content')
-@livewire('reencaminarpackages')
+    @livewire('reencaminarpackages')
     @include('footer')
 @endsection
