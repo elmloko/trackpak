@@ -58,8 +58,6 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
     Route::get('test/deleteado', [PackageController::class, 'deleteado'])->name('test.deleteado');
     Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
-    Route::get('prueba/excel', [PackageController::class, 'excel'])->name('prueba.excel');
-    Route::get('package/pdf/packagesall', [PackageController::class, 'packagesall'])->name('package.pdf.packagesall');
     Route::get('packages/redirigir/{id}', [PackageController::class, 'redirigir'])->name('packages.redirigir');
     Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->name('packages.ventanilla');
     Route::get('packages/clasificacion', [PackageController::class, 'clasificacion'])->name('packages.clasificacion');
@@ -76,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('package/pdf/deleteadocarteropdf', [PackageController::class, 'deleteadocarteropdf'])->name('package.pdf.deleteadocarteropdf');
 
     // Reportes PDF
+    Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
     Route::get('package/pdf/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('package.pdf.clasificacionpdf');
     Route::get('package/pdf/redirigidospdf', [PackageController::class, 'redirigidospdf'])->name('package.pdf.redirigidospdf');
     Route::get('package/pdf/ventanillapdf', [PackageController::class, 'ventanillapdf'])->name('package.pdf.ventanillapdf');
@@ -83,6 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/pdf/eventspdf', [EventController::class, 'eventspdf'])->name('events.pdf.eventspdf');
 
     // Reportes Excel
+    Route::get('package/packagesallexcel', [PackageController::class, 'packagesallexcel'])->name('packagesall.excel');
     Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
     Route::get('clasificacion/reencaminarexcel', [PackageController::class, 'reencaminarexcel'])->name('reencaminar.excel');
     Route::get('ventanilla/ventanillaexcel', [PackageController::class, 'ventanillaexcel'])->name('ventanilla.excel');

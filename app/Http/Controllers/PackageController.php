@@ -393,17 +393,7 @@ class PackageController extends Controller
         // Descargar el PDF o mostrarlo en el navegador
         // return $pdf->download('formularioentrega.pdf');
     }
-    public function excel()
-    {
-        return Excel::download(new PackageExport, 'Paquetes Ordinarios.xlsx');
-    }
 
-    public function packagesall()
-    {
-        $packages = Package::all();
-        $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
-        return $pdf->stream();
-    }
     public function delete($id)
     {
         $package = Package::find($id);
@@ -640,6 +630,10 @@ class PackageController extends Controller
     }
 
     //REPORTES
+    public function packagesallexcel()
+    {
+        return Excel::download(new PackageExport, 'Almacen.xlsx');
+    }
     public function clasificacionexcel()
     {
         $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
@@ -659,6 +653,12 @@ class PackageController extends Controller
     {
         $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
         return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
+    }
+    public function packagesallpdf()
+    {
+        $packages = Package::all();
+        $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
+        return $pdf->stream();
     }
     public function clasificacionpdf()
     {

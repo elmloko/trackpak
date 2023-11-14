@@ -21,7 +21,7 @@
                                         </div>
                                         <div class="col-lg-9 text-right">
                                             <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('prueba.excel') }}" class="btn btn-success"
+                                                <a href="{{ route('packagesall.excel') }}" class="btn btn-success"
                                                     data-placement="left">
                                                     Excel
                                                 </a>
@@ -58,13 +58,12 @@
                                                         <th>Teléfono</th>
                                                         <th>País</th>
                                                         <th>Ciudad</th>
-                                                        <th>Zona</th>
+                                                        <th>Dirección</th>
                                                         <th>Ventanilla</th>
                                                         <th>Peso</th>
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
                                                         <th>Aduana</th>
-                                                        <th>Fecha Ingreso</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -83,7 +82,6 @@
                                                             <td>{{ $package->TIPO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>
                                                             <td>{{ $package->ADUANA }}</td>
-                                                            <td>{{ $package->created_at }}</td>
                                                             <td>
                                                                 <form id="eliminarForm{{ $package->id }}"
                                                                     action="{{ route('packages.destroy', $package->id) }}"
