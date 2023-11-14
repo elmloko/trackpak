@@ -91,5 +91,8 @@
             @endforeach
         </tbody>
     </table>
+    <div style="margin-top: 20px;">
+        <p>Firma del Encargado: ___________________________</p>
+    </div>
 </body>
 </html>

@@ -36,6 +36,9 @@
         .title {
             text-align: center;
         }
+        .firma{
+            
+        }
     </style>
 </head>
 <body>
@@ -91,5 +94,10 @@
             @endforeach
         </tbody>
     </table>
+    <br>
+    <div class="firma">
+        <p>___________________________</p>
+        <p>Area de Clasificacion</p>
+    </div> 
 </body>
 </html>
