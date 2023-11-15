@@ -13,7 +13,7 @@ class VentanillaExport implements FromCollection, WithHeadings, WithStyles
     public function collection()
     {
         return Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)
-            ->select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'TIPO', 'ADUANA', 'ESTADO',\DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_created_at"))
+            ->select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'PRECIO', 'TIPO', 'ADUANA', 'ESTADO',\DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_created_at"))
             ->get();
     }
 
@@ -28,6 +28,7 @@ class VentanillaExport implements FromCollection, WithHeadings, WithStyles
             'DIRECCION',
             'VENTANILLA',
             'PESO',
+            'PRECIO',
             'TIPO',
             'ESTADO',
             'ADUANA',

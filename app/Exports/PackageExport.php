@@ -12,7 +12,7 @@ class PackageExport implements FromCollection, WithHeadings, WithStyles
 {
     public function collection()
     {
-        return Package::select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'TIPO', 'ADUANA', 'ESTADO')
+        return Package::select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'PRECIO', 'TIPO', 'ADUANA', 'ESTADO')
         ->get();
     }
 
@@ -27,6 +27,7 @@ class PackageExport implements FromCollection, WithHeadings, WithStyles
             'DIRECCION',
             'VENTANILLA',
             'PESO',
+            'PRECIO',
             'TIPO',
             'ADUANA',
             'ESTADO',

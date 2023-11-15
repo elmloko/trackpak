@@ -52,7 +52,7 @@ class Package extends Model
      *
      * @var array
      */
-    protected $fillable = ['CODIGO','DESTINATARIO','TELEFONO','PAIS','CUIDAD','ZONA','VENTANILLA','PESO','TIPO','ESTADO','ADUANA','ISO','date_redirigido','redirigido'];
+    protected $fillable = ['CODIGO','DESTINATARIO','TELEFONO','PAIS','CUIDAD','ZONA','VENTANILLA','PESO','TIPO','ESTADO','ADUANA','ISO','PRECIO','date_redirigido','redirigido'];
 
 
 

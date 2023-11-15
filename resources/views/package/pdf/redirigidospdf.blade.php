@@ -53,7 +53,7 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Código Postal</th>
+                <th>Código Rastreo</th>
                 <th>Destinatario</th>
                 <th>País</th>
                 <th>Destino Cuidad</th>
@@ -75,7 +75,7 @@
                         <td>{{ $package->PAIS }}</td>
                         <td>{{ $package->CUIDAD }}</td>
                         <td>{{ $package->TIPO }}</td>
-                        <td>{{ $package->PESO }}</td>
+                        <td>{{ $package->PESO }} gr.</td>
                         <td>{{ $package->ESTADO }}</td>
                         <td>{{ $package->ADUANA }}</td>
                         <td>{{ $package->date_redirigido }}</td>

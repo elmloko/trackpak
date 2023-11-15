@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <p>Código Postal: {{ $package->CODIGO }}</p>
+                        <p>Código Rastreo: {{ $package->CODIGO }}</p>
                         <p>Destinatario: {{ $package->DESTINATARIO }}</p>
                         <p>Ciudad: {{ $package->CUIDAD }}</p>
                         <p>Ventanilla: {{ $package->VENTANILLA }}</p>
@@ -21,18 +21,19 @@
                         <p>Tipo: {{ $package->TIPO }}</p>
                         <p>Estado: {{ $package->ESTADO }}</p>
                         <p>Aduana: {{ $package->ADUANA }}</p>
+                        <p>Precio: {{ $package->PRECIO }} Bs.</p>
                         <p>Fecha Ingreso: {{ $package->created_at }}</p>
                     </div>
                 </div>
                 <p>¿Estás seguro de que deseas dar de baja este paquete?</p>
                 <div class="text-center">
                     <a href="{{ route('package.pdf.formularioentrega', ['id' => $package->id]) }}"
-                        class="btn btn-secondary btn-lg">Imprimir Formulario de Entrega</a>
+                        class="btn btn-secondary btn-lg" target="_blank">Imprimir Formulario de Entrega</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col text-left mt-3">
-                    <a href="{{ route('package.pdf.abandono', $package->id) }}" class="btn btn-info ml-2">
+                    <a href="{{ route('package.pdf.abandono', $package->id) }}" class="btn btn-info ml-2" >
                         Abandono Paquete
                     </a>
                 </div>

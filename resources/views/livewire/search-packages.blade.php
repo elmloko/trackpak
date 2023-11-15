@@ -53,7 +53,7 @@
                                                 <thead class="thead">
                                                     <tr>
                                                         <th>No</th>
-                                                        <th>Código Postal</th>
+                                                        <th>Código Rastreo</th>
                                                         <th>Destinatario</th>
                                                         <th>Teléfono</th>
                                                         <th>País</th>
@@ -78,7 +78,7 @@
                                                             <td>{{ $package->CUIDAD }}</td>
                                                             <td>{{ $package->ZONA }}</td>
                                                             <td>{{ $package->VENTANILLA }}</td>
-                                                            <td>{{ $package->PESO }}</td>
+                                                            <td>{{ $package->PESO }} gr.</td>
                                                             <td>{{ $package->TIPO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>
                                                             <td>{{ $package->ADUANA }}</td>

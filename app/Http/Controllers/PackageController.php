@@ -42,24 +42,47 @@ class PackageController extends Controller
         return view('package.create', compact('package'));
     }
 
-        public function store(Request $request)
+    public function store(Request $request)
     {
         // Validación de datos
-        $request->validate(Package::$rules);
-
+        $request->validate([
+            'CODIGO' => 'required|string|max:20',
+            'DESTINATARIO' => 'required|string|max:255',
+            'TELEFONO' => 'required|numeric|regex:/^[0-9]+$/',
+            'CUIDAD' => 'required|string',
+            'VENTANILLA' => 'required|string',
+            'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'TIPO' => 'required|string',
+            'ADUANA' => 'required|string',
+            'ZONA' => 'required|string|max:255',
+        ]);
+    
+        // Calcular el precio basado en el peso
+        $peso = $request->input('PESO');
+        $precio = 0;
+    
+        if ($peso >= 0.01 && $peso <= 0.5) {
+            $precio = 5;
+        } elseif ($peso > 0.5) {
+            $precio = 10;
+        } // Puedes agregar más condiciones según tus requerimientos
+    
+        // Agregar el precio al request antes de crear el paquete
+        $request->merge(['PRECIO' => $precio]);
+        
         // Crear el paquete
         $package = Package::create($request->all());
-
+    
         // Extraer el ISO del país y traducción del código del país
         $iso = substr($request->input('CODIGO'), -2); // Obtener las dos últimas letras
         $countryTranslation = $this->getCountryTranslation($iso);
-
+    
         // Actualizar el paquete con el ISO del país y la traducción del código del país
         $package->update([
             'PAIS' => $iso,
             'ISO' => $countryTranslation,
         ]);
-
+    
         // Crear eventos relacionados con el paquete
         Event::create([
             'action' => 'ADMITIDO',
@@ -67,18 +90,19 @@ class PackageController extends Controller
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
-
+    
         Event::create([
             'action' => 'ADMISION',
             'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
-
+    
         // Redireccionar con mensaje de éxito
         return redirect()->route('packages.clasificacion')
             ->with('success', 'Paquete Creado Con Éxito!');
     }
+    
 
     
     // Función para obtener la traducción del código del país
@@ -401,7 +425,7 @@ class PackageController extends Controller
         if ($package) {
             Event::create([
                 'action' => 'ENTREGADO',
-                'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional(ENTREGADO)',
+                'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
@@ -470,7 +494,7 @@ class PackageController extends Controller
             // Guarda el paquete actualizado
             $package->save();
 
-            return back()->with('success', 'Paquete redirigido con éxito.');
+            return back()->with('success', 'Paquete se dio de Reencamino con exito y cambió su estado a REENCAMINADO con éxito.');
         } else {
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
@@ -505,7 +529,7 @@ class PackageController extends Controller
             // Guarda el paquete actualizado
             $package->save();
 
-            return back()->with('success', 'Paquete redirigido con éxito.');
+            return back()->with('success', 'Paquete se dio de Redirigio con exito y cambió su estado a VENTANILLA con éxito.');
         } else {
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
@@ -533,13 +557,13 @@ class PackageController extends Controller
         if ($package) {
             Event::create([
                 'action' => 'DISPONIBLE',
-                'descripcion' => 'Paquete a la espera de ser recogido',
+                'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
-            ]);
+            ]);            
             Event::create([
                 'action' => 'EN ENTREGA',
-                'descripcion' => 'Paquete Recibido en Oficina Postal Regional(VENTANILLA)',
+                'descripcion' => 'Paquete Recibido en Oficina Postal Regional.',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
@@ -548,7 +572,7 @@ class PackageController extends Controller
             $package->ESTADO = 'VENTANILLA';
             $package->save();
 
-            return redirect()->back()->with('success', 'El paquete ha sido movido a VENTANILLA.');
+            return redirect()->back()->with('success', 'Paquete se movio a Ventanilla con exito y cambió su estado a VENTANILLA con éxito.');
         } else {
             return redirect()->back()->with('error', 'El paquete no se encuentra en clasificación.');
         }

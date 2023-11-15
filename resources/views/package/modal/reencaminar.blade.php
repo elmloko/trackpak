@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <p>Código Postal: {{$package->CODIGO}}</p>
+                        <p>Código Rastreo: {{$package->CODIGO}}</p>
                         <p>Destinatario: {{$package->DESTINATARIO}}</p>
                         <p>Destino: {{$package->CUIDAD}}</p>
                         <p>Ventanilla: {{$package->VENTANILLA}}</p>

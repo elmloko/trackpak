@@ -56,7 +56,7 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Código Postal</th>
+                <th>Código Rastreo</th>
                 <th>Destinatario</th>
                 <th>Teléfono</th>
                 <th>País</th>
@@ -64,6 +64,7 @@
                 <th>Dirección</th>
                 <th>Ventanilla</th>
                 <th>Peso</th>
+                <th>Precio</th>
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>Aduana</th>
@@ -83,7 +84,8 @@
                         <td>{{ $package->CUIDAD }}</td>
                         <td>{{ $package->ZONA }}</td>
                         <td>{{ $package->VENTANILLA }}</td>
-                        <td>{{ $package->PESO }}</td>
+                        <td>{{ $package->PESO }} gr.</td>
+                        <td>{{ $package->PRECIO }} Bs.</td>
                         <td>{{ $package->TIPO }}</td>
                         <td>{{ $package->ESTADO }}</td>
                         <td>{{ $package->ADUANA }}</td>
