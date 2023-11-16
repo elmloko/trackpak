@@ -15,29 +15,46 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
-                                                <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                                <input wire:model.lazy="search" type="text" class="form-control"
+                                                    placeholder="Buscar...">
                                             </div>
                                         </div>
                                         <div class="col-lg-9 text-right">
                                             <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('clasificacion.excel') }}" class="btn btn-success" data-placement="left">
+                                                <a href="{{ route('clasificacion.excel') }}" class="btn btn-success"
+                                                    data-placement="left">
                                                     Excel
                                                 </a>
                                             </div>
-                                            <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('package.pdf.clasificacionpdf') }}" class="btn btn-danger" data-placement="left">
-                                                    PDF
-                                                </a>
-                                            </div>
+                                            <form method="get" action="{{ route('package.pdf.clasificacionpdf') }}">
+                                                @csrf
+                                                <div class="form-row align-items-center">
+                                                    <div class="col-md-4">
+                                                        <label for="fecha_inicio">Fecha de inicio:</label>
+                                                        <input type="date" name="fecha_inicio" class="form-control"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="fecha_fin">Fecha de fin:</label>
+                                                        <input type="date" name="fecha_fin" class="form-control"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="submit" class="btn btn-danger">Generar
+                                                            PDF</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                             @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                                                 <div class="d-inline-block">
-                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
+                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary"
+                                                        data-placement="left">
                                                         {{ __('Crear Nuevo') }}
                                                     </a>
                                                 </div>
                                             @endhasrole
                                         </div>
-                                    </div>  
+                                    </div>
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
@@ -71,13 +88,14 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($packages as $package)
-                                                        @if ($package->ESTADO === 'CLASIFICACION')
+                                                            @if ($package->ESTADO === 'CLASIFICACION')
                                                                 <tr>
                                                                     <td>{{ $package->id }}</td>
                                                                     <td>{{ $package->CODIGO }}</td>
                                                                     <td>{{ $package->DESTINATARIO }}</td>
                                                                     <td>{{ $package->TELEFONO }}</td>
-                                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
+                                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}
+                                                                    </td>
                                                                     <td>{{ $package->CUIDAD }}</td>
                                                                     <td>{{ $package->ZONA }}</td>
                                                                     <td>{{ $package->VENTANILLA }}</td>
@@ -91,7 +109,8 @@
                                                                         <form
                                                                             action="{{ route('packages.destroy', $package->id) }}"
                                                                             method="POST">
-                                                                            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                                                                            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar
+                                                                                Clasificacion')
                                                                                 <a class="btn btn-sm btn-success"
                                                                                     href="{{ route('packages.edit', $package->id) }}">
                                                                                     <i class="fa fa-fw fa-edit"></i>

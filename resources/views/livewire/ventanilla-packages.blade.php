@@ -27,12 +27,25 @@
                                                     Excel
                                                 </a>
                                             </div>
-                                            <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('package.pdf.ventanillapdf') }}" class="btn btn-danger"
-                                                    data-placement="left">
-                                                    PDF
-                                                </a>
-                                            </div>
+                                            <form method="get" action="{{ route('package.pdf.ventanillapdf') }}">
+                                                @csrf
+                                                <div class="form-row align-items-center">
+                                                    <div class="col-md-4">
+                                                        <label for="fecha_inicio">Fecha de inicio:</label>
+                                                        <input type="date" name="fecha_inicio" class="form-control"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="fecha_fin">Fecha de fin:</label>
+                                                        <input type="date" name="fecha_fin" class="form-control"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="submit" class="btn btn-danger">Generar
+                                                            PDF</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                             @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                             <div class="mr-2 d-inline-block">
                                                 <!-- Botón para abrir el modal de cambio de estado -->
@@ -43,14 +56,6 @@
                                                 @include('package.modal.ventanilla')
                                             </div>
                                             @endhasrole
-                                            {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                                <div class="d-inline-block">
-                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary btn-sm"
-                                                        data-placement="left">
-                                                        {{ __('Crear Nuevo') }}
-                                                    </a>
-                                                </div>
-                                            @endhasrole --}}
                                         </div>
                                     </div>
                                     @if ($message = Session::get('success'))

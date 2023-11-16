@@ -21,11 +21,25 @@
                                         Excel
                                     </a>
                                 </div>
-                                <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('package.pdf.deleteadopdf') }}" class="btn btn-danger" data-placement="left">
-                                        PDF
-                                    </a>
-                                </div>
+                                <form method="get" action="{{ route('package.pdf.deleteadopdf') }}">
+                                    @csrf
+                                    <div class="form-row align-items-center">
+                                        <div class="col-md-4">
+                                            <label for="fecha_inicio">Fecha de inicio:</label>
+                                            <input type="date" name="fecha_inicio" class="form-control"
+                                                required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="fecha_fin">Fecha de fin:</label>
+                                            <input type="date" name="fecha_fin" class="form-control"
+                                                required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-danger">Generar
+                                                PDF</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

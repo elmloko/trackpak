@@ -678,33 +678,78 @@ class PackageController extends Controller
         $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
         return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
     }
-    public function packagesallpdf()
+    public function packagesallpdf(Request $request)
     {
-        $packages = Package::all();
-        $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
-        return $pdf->stream();
+    $fechaInicio = $request->input('fecha_inicio');
+    $fechaFin = $request->input('fecha_fin');
+
+    $query = Package::query();
+
+    if ($fechaInicio && $fechaFin) {
+        $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
     }
-    public function clasificacionpdf()
+
+    $packages = $query->get();
+    $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
+    return $pdf->stream();
+    }   
+    public function clasificacionpdf(Request $request)
     {
-        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+
+        $query = Package::where('ESTADO', 'CLASIFICACION');
+
+        if ($fechaInicio && $fechaFin) {
+        $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+        }
+
+        $packages = $query->get();
         $pdf = PDF::loadview('package.pdf.clasificacionpdf', ['packages' => $packages]);
         return $pdf->stream();
     }
-    public function redirigidospdf()
+    public function redirigidospdf(Request $request)
     {
-        $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+
+        $query = Package::where('ESTADO', 'REENCAMINADO');
+
+        if ($fechaInicio && $fechaFin) {
+        $query->whereBetween('date_redirigido', [$fechaInicio, $fechaFin]);
+        }
+
+        $packages = $query->get();
         $pdf = PDF::loadview('package.pdf.redirigidospdf', ['packages' => $packages]);
         return $pdf->stream();
     }
-    public function ventanillapdf()
+    public function ventanillapdf(Request $request)
     {
-        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+
+        $query = Package::where('ESTADO', 'VENTANILLA');
+
+        if ($fechaInicio && $fechaFin) {
+        $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+        }
+
+        $packages = $query->get();
         $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
         return $pdf->stream();
     }
-    public function deleteadopdf()
+    public function deleteadopdf(Request $request)
     {
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get(); // Obtener registros eliminados
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+
+        $query = Package::withTrashed()->where('ESTADO', 'ENTREGADO');
+
+        if ($fechaInicio && $fechaFin) {
+        $query->whereBetween('deleted_at', [$fechaInicio, $fechaFin]);
+        }
+
+        $packages = $query->get();
         $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
         return $pdf->stream();
     }
