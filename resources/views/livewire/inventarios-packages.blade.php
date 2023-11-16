@@ -63,6 +63,7 @@
                                                             <th>Peso</th>
                                                             <th>Tipo</th>
                                                             <th>Estado</th>
+                                                            <th>Observaciones</th>
                                                             <th>Aduana</th>
                                                             <th>Fecha Ingreso</th>
                                                             <th>Acciones</th>
@@ -83,6 +84,7 @@
                                                                     <td>{{ $package->PESO }} gr.</td>
                                                                     <td>{{ $package->TIPO }}</td>
                                                                     <td>{{ $package->ESTADO }}</td>
+                                                                    <td>{{ $package->OBSERVACIONES }}</td>
                                                                     <td>{{ $package->ADUANA }}</td>
                                                                     <td>{{ $package->created_at }}</td>
                                                                     <td>

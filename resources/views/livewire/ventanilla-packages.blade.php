@@ -80,6 +80,7 @@
                                                         <th>Precio</th>
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
+                                                        <th>Observaciones</th>
                                                         <th>Aduana</th>
                                                         <th>Fecha Pendiente</th>
                                                         <th>Acciones</th>
@@ -104,6 +105,7 @@
                                                                 <td>{{ $package->PRECIO }} Bs.</td>
                                                                 <td>{{ $package->TIPO }}</td>
                                                                 <td>{{ $package->ESTADO }}</td>
+                                                                <td>{{ $package->OBSERVACIONES }}</td>
                                                                 <td>{{ $package->ADUANA }}</td>
                                                                 <td>{{ $package->created_at }}</td>
                                                                 <td>

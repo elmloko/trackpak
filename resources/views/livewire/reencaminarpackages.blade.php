@@ -45,6 +45,7 @@
                                             <th>Tipo</th>
                                             <th>Peso</th>
                                             <th>Estado</th>
+                                            <th>Observaciones</th>
                                             <th>Fecha Retorno</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -61,6 +62,7 @@
                                                     <td>{{ $package->TIPO }}</td>
                                                     <td>{{ $package->PESO }} gr.</td>
                                                     <td>{{ $package->ESTADO }}</td>
+                                                    <td>{{ $package->OBSERVACIONES }}</td>
                                                     <td>{{ $package->date_redirigido }}</td>
                                                     <td>
                                                         @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar

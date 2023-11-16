@@ -33,22 +33,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            line-height: 0.5;
         }
 
         .title {
             text-align: center;
+        }
+        .firma {
+            text-align: center;
+        }
+        .firma {
+            text-align: center;
+            margin-top: 20px;
+            line-height: 0;
+        }
+        .date {
+            line-height: 0.5;
         }
     </style>
 </head>
 
 <body>
     <div class="header">
+        <div class="logo">
+            <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
+        </div>
         <div class="title">
             <h2>Lista Área Carteros</h2>
             <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
         </div>
     </div>
-
+    <div class="date">
+        <p>Nombre del Usuario: {{ auth()->user()->name }}</p>
+        <p>Regional: {{ auth()->user()->Regional }}</p>
+        <p>Fecha: {{ now()->format('Y-m-d H:i') }}</p>
+    </div>
     <table>
         <thead>
             <tr>
@@ -91,8 +110,11 @@
             @endforeach
         </tbody>
     </table>
-    <div style="margin-top: 20px;">
-        <p>Firma del Encargado: ___________________________</p>
+    <div class="firma">
+        <p>__________________________ </p>
+        <p>ENTREGADO POR</p>
+        <p>{{ auth()->user()->name }}</p>
     </div>
 </body>
+
 </html>

@@ -42,6 +42,9 @@
 <body>
     <div class="container">
         <div class="modal-body">
+            <div class="logo">
+                <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
+            </div>
             <div class="center-text">
                 <h2 class="normal-text" style="margin-top: 0;">FORMULARIO DE ENTREGA</h2>
                 <h3 class="normal-text">AGENCIA BOLIVIANA DE CORREOS</h3>

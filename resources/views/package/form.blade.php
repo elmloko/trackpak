@@ -42,7 +42,18 @@
                     {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $package->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Cuidad']) }}
                     {!! $errors->first('CUIDAD', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-
+                <div class="form-group">
+                    {{ Form::label('ZONA') }}
+                    {{ Form::text('ZONA', strtoupper($package->ZONA), [
+                        'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
+                        'placeholder' => 'Zona',
+                        // 'pattern' => '^[A-Z]+$',
+                        'title' => 'Ingrese solo letras mayúsculas',
+                        'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
+                        'maxlength' => '255',
+                    ]) }}
+                    {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
                 <!-- Fin de las primeras columnas -->
             </div>
             <div class="col-md-6">
@@ -73,16 +84,16 @@
                     {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('ZONA') }}
-                    {{ Form::text('ZONA', strtoupper($package->ZONA), [
-                        'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
-                        'placeholder' => 'Zona',
-                        'pattern' => '^[A-Z]+$',
+                    {{ Form::label('OBSERVACIONES') }}
+                    {{ Form::text('OBSERVACIONES', strtoupper($package->OBSERVACIONES), [
+                        'class' => 'form-control' . ($errors->has('OBSERVACIONES') ? ' is-invalid' : ''),
+                        'placeholder' => 'Observaciones',
+                        // 'pattern' => '^[A-Z]+$',
                         'title' => 'Ingrese solo letras mayúsculas',
                         'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
                         'maxlength' => '255',
                     ]) }}
-                    {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
+                    {!! $errors->first('OBSERVACIONES', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <!-- Fin de las segundas columnas -->
             </div>

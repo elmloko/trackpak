@@ -63,6 +63,7 @@
                                                         <th>Peso</th>
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
+                                                        <th>Observaciones</th>
                                                         <th>Aduana</th>
                                                         <th>Acciones</th>
                                                     </tr>
@@ -81,6 +82,7 @@
                                                             <td>{{ $package->PESO }} gr.</td>
                                                             <td>{{ $package->TIPO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>
+                                                            <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>
                                                                 <form id="eliminarForm{{ $package->id }}"
