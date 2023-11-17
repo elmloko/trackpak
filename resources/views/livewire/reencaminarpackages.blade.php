@@ -79,7 +79,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($packages as $package)
-                                            @if ($package->ESTADO === 'REENCAMINADO')
+                                            @if ($package->ESTADO === 'REENCAMINADO' && $package->CUIDAD === auth()->user()->Regional)
                                                 <tr>
                                                     <td>{{ $package->id }}</td>
                                                     <td>{{ $package->CODIGO }}</td>

@@ -108,7 +108,7 @@
                                                         $i = 1; // Inicializa la variable $i
                                                     @endphp
                                                     @foreach ($packages as $package)
-                                                        @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido)
+                                                        @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido && $package->CUIDAD === auth()->user()->Regional)
                                                             <tr>
                                                                 <td>{{ $i++ }}</td>
                                                                 <td>{{ $package->CODIGO }}</td>

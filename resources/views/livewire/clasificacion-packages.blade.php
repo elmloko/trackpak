@@ -102,7 +102,7 @@
                                                         </thead>
                                                         <tbody>
                                                             @foreach ($packages as $package)
-                                                                @if ($package->ESTADO === 'CLASIFICACION')
+                                                                @if ($package->ESTADO === 'CLASIFICACION' && $package->CUIDAD === auth()->user()->Regional)
                                                                     <tr>
                                                                         <td>{{ $package->id }}</td>
                                                                         <td>{{ $package->CODIGO }}</td>
