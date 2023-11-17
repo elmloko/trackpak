@@ -12,15 +12,27 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="col-lg-3">
                                         <div class="form-group">
+                                            <label for="search">Busca:</label>
                                             <input wire:model.lazy="search" type="text" class="form-control"
                                                 placeholder="Buscar...">
                                         </div>
                                     </div>
-                                    <div class="mr-2 d-inline-block">
-                                        <a href="{{ route('reencaminar.excel') }}" class="btn btn-success"
-                                            data-placement="left">
-                                            Excel
-                                        </a>
+                                        <form method="get" action="{{ route('reencaminar.excel') }}" class="col-md-6">
+                                            @csrf
+                                            <div class="form-row align-items-center">
+                                                <div class="col-md-4">
+                                                    <label for="excel_fecha_inicio">Fecha de inicio:</label>
+                                                    <input type="date" name="fecha_inicio" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="excel_fecha_fin">Fecha de fin:</label>
+                                                    <input type="date" name="fecha_fin" class="form-control" required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                         <form method="get" action="{{ route('package.pdf.redirigidospdf') }}">
                                             @csrf
                                             <div class="form-row align-items-center">
@@ -40,7 +52,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             @if ($message = Session::get('success'))

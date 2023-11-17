@@ -10,11 +10,38 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
 {
+    protected $fechaInicio;
+    protected $fechaFin;
+
+    public function __construct($fechaInicio, $fechaFin)
+    {
+        $this->fechaInicio = $fechaInicio;
+        $this->fechaFin = $fechaFin;
+    }
+
     public function collection()
     {
-        return Package::where('ESTADO', 'CLASIFICACION')
-            ->select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'TIPO', 'ADUANA', 'ESTADO',\DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_created_at"))
-            ->get();
+        $query = Package::where('ESTADO', 'CLASIFICACION')
+            ->select(
+                'CODIGO',
+                'DESTINATARIO',
+                'TELEFONO',
+                'PAIS',
+                'CUIDAD',
+                'ZONA',
+                'VENTANILLA',
+                'PESO',
+                'TIPO',
+                'ADUANA',
+                'ESTADO',
+                \DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_created_at"),
+            );
+
+        if ($this->fechaInicio && $this->fechaFin) {
+            $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
+        }
+
+        return $query->get();
     }
 
     public function headings(): array

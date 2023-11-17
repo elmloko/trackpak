@@ -10,11 +10,39 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class InventarioExport implements FromCollection, WithHeadings, WithStyles
 {
+    protected $fechaInicio;
+    protected $fechaFin;
+
+    public function __construct($fechaInicio, $fechaFin)
+    {
+        $this->fechaInicio = $fechaInicio;
+        $this->fechaFin = $fechaFin;
+    }
+
     public function collection()
     {
-        return Package::withTrashed()->where('ESTADO', 'ENTREGADO')
-            ->select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'TIPO', 'ESTADO', 'ADUANA', \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"))
-            ->get();
+        $query = Package::withTrashed()->where('ESTADO', 'ENTREGADO')
+            ->select(
+                'CODIGO',
+                'DESTINATARIO',
+                'TELEFONO',
+                'PAIS',
+                'CUIDAD',
+                'ZONA',
+                'VENTANILLA',
+                'PESO',
+                'PRECIO',
+                'TIPO',
+                'ESTADO',
+                'ADUANA',
+                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
+            );
+
+        if ($this->fechaInicio && $this->fechaFin) {
+            $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
+        }
+
+        return $query->get();
     }
 
     public function headings(): array

@@ -10,11 +10,36 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
 {
+    protected $fechaInicio;
+    protected $fechaFin;
+
+    public function __construct($fechaInicio, $fechaFin)
+    {
+        $this->fechaInicio = $fechaInicio;
+        $this->fechaFin = $fechaFin;
+    }
+
     public function collection()
     {
-        return Package::where('ESTADO', 'REENCAMINADO')
-            ->select('CODIGO', 'DESTINATARIO', 'PAIS', 'CUIDAD', 'TIPO', 'PESO', 'ESTADO', 'ADUANA',\DB::raw("DATE_FORMAT(date_redirigido, '%Y-%m-%d %H:%i') AS formatted_date_redirigido"))
-            ->get();
+        $query = Package::where('ESTADO', 'REENCAMINADO')
+            ->select(
+                'CODIGO',
+                'DESTINATARIO',
+                'PAIS',
+                'CUIDAD',
+                'ZONA',
+                'PESO',
+                'TIPO',
+                'ADUANA',
+                'ESTADO',
+                \DB::raw("DATE_FORMAT(date_redirigido, '%Y-%m-%d %H:%i') AS formatted_date_redirigido"),
+            );
+
+        if ($this->fechaInicio && $this->fechaFin) {
+            $query->whereBetween('date_redirigido', [$this->fechaInicio, $this->fechaFin]);
+        }
+
+        return $query->get();
     }
 
     public function headings(): array
@@ -23,11 +48,12 @@ class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
             'CODIGO',
             'DESTINATARIO',
             'PAIS',
-            'DESTINO',
-            'TIPO',
+            'CUIDAD',
+            'DIRECCION',
             'PESO',
-            'ESTADO',
+            'TIPO',
             'ADUANA',
+            'ESTADO',
             'FECHA REENCAMINADO'
         ];
     }

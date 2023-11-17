@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -16,37 +15,50 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
+                                                <label for="search">Busca:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control"
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        <div class="col-lg-9 text-right">
-                                            <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('ventanilla.excel') }}" class="btn btn-success"
-                                                    data-placement="left">
-                                                    Excel
-                                                </a>
-                                            </div>
-                                            <form method="get" action="{{ route('package.pdf.ventanillapdf') }}">
-                                                @csrf
-                                                <div class="form-row align-items-center">
-                                                    <div class="col-md-4">
-                                                        <label for="fecha_inicio">Fecha de inicio:</label>
-                                                        <input type="date" name="fecha_inicio" class="form-control"
-                                                            required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label for="fecha_fin">Fecha de fin:</label>
-                                                        <input type="date" name="fecha_fin" class="form-control"
-                                                            required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button type="submit" class="btn btn-danger">Generar
-                                                            PDF</button>
-                                                    </div>
+                                        <form method="get" action="{{ route('ventanilla.excel') }}" class="col-md-6">
+                                            @csrf
+                                            <div class="form-row align-items-center">
+                                                <div class="col-md-4">
+                                                    <label for="excel_fecha_inicio">Fecha de inicio:</label>
+                                                    <input type="date" name="fecha_inicio" class="form-control"
+                                                        required>
                                                 </div>
-                                            </form>
-                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                                <div class="col-md-4">
+                                                    <label for="excel_fecha_fin">Fecha de fin:</label>
+                                                    <input type="date" name="fecha_fin" class="form-control"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button type="submit" class="btn btn-success"
+                                                        target="_blank">Generar Excel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <form method="get" action="{{ route('package.pdf.ventanillapdf') }}">
+                                            @csrf
+                                            <div class="form-row align-items-center">
+                                                <div class="col-md-4">
+                                                    <label for="fecha_inicio">Fecha de inicio:</label>
+                                                    <input type="date" name="fecha_inicio" class="form-control"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="fecha_fin">Fecha de fin:</label>
+                                                    <input type="date" name="fecha_fin" class="form-control"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="submit" class="btn btn-danger">Generar
+                                                        PDF</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                             <div class="mr-2 d-inline-block">
                                                 <!-- Botón para abrir el modal de cambio de estado -->
                                                 <button class="btn btn-primary" data-toggle="modal"
@@ -55,9 +67,9 @@
                                                 </button>
                                                 @include('package.modal.ventanilla')
                                             </div>
-                                            @endhasrole
-                                        </div>
+                                        @endhasrole
                                     </div>
+
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
@@ -117,9 +129,10 @@
                                                                     <form
                                                                         action="{{ route('packages.destroy', $package->id) }}"
                                                                         method="POST">
-                                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                                                            <a class="btn btn-sm btn-warning"
-                                                                                href="#" data-toggle="modal"
+                                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                                            Urbano')
+                                                                            <a class="btn btn-sm btn-warning" href="#"
+                                                                                data-toggle="modal"
                                                                                 data-target="#bajaModal{{ $package->id }}">
                                                                                 <i class="fa fa-arrow-down"></i>
                                                                                 {{ __('Baja') }}

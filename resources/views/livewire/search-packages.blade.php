@@ -15,15 +15,34 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
+                                                <label for="search">Busca:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                             </div>
+                                            @hasrole('SuperAdmin|Administrador')
+                                                <div class="d-inline-block">
+                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
+                                                        {{ __('Crear Nuevo') }}
+                                                    </a>
+                                                </div>
+                                            @endhasrole
                                         </div>
                                         <div class="col-lg-9 text-right">
-                                            <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('packagesall.excel') }}" class="btn btn-success" data-placement="left">
-                                                    Excel
-                                                </a>
-                                            </div>
+                                            <form method="get" action="{{ route('packagesall.excel') }}">
+                                                @csrf
+                                                <div class="form-row align-items-center">
+                                                    <div class="col-md-4">
+                                                        <label for="fecha_inicio">Fecha de inicio:</label>
+                                                        <input type="date" name="fecha_inicio" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="fecha_fin">Fecha de fin:</label>
+                                                        <input type="date" name="fecha_fin" class="form-control" required>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                             <form method="get" action="{{ route('package.pdf.packagesall') }}">
                                                 @csrf
                                                 <div class="form-row align-items-center">
@@ -36,17 +55,10 @@
                                                         <input type="date" name="fecha_fin" class="form-control" required>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <button type="submit" class="btn btn-danger">Generar PDF</button>
+                                                        <button type="submit" class="btn btn-danger" target="_blank">Generar PDF</button>
                                                     </div>
                                                 </div>
                                             </form>
-                                            @hasrole('SuperAdmin|Administrador')
-                                                <div class="d-inline-block">
-                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
-                                                        {{ __('Crear Nuevo') }}
-                                                    </a>
-                                                </div>
-                                            @endhasrole
                                         </div>
                                     </div>                                    
                                 </div>

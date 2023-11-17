@@ -654,29 +654,39 @@ class PackageController extends Controller
     }
 
     //REPORTES
-    public function packagesallexcel()
+    public function packagesallexcel(Request $request)
     {
-        return Excel::download(new PackageExport, 'Almacen.xlsx');
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        return Excel::download(new PackageExport($fechaInicio, $fechaFin), 'Almacen.xlsx');
     }
-    public function clasificacionexcel()
+    public function clasificacionexcel(Request $request)
     {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
         $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
-        return Excel::download(new ClasificacionExport($packages), 'Clasificacion.xlsx');
+        return Excel::download(new ClasificacionExport($fechaInicio, $fechaFin), 'Clasificacion.xlsx');
     }
-    public function reencaminarexcel()
+    public function reencaminarexcel(Request $request)
     {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
         $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
-        return Excel::download(new ReencaminarExport($packages), 'Rencaminar.xlsx');
+        return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin), 'Rencaminar.xlsx');
     }
-    public function inventarioexcel()
+    public function inventarioexcel(Request $request)
     {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioExport($packages), 'Inventario.xlsx');
+        return Excel::download(new InventarioExport($fechaInicio, $fechaFin), 'Inventario.xlsx');
     }
-    public function ventanillaexcel()
+    public function ventanillaexcel(Request $request)
     {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
         $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
-        return Excel::download(new VentanillaExport($packages), 'ventanilla.xlsx');
+        return Excel::download(new VentanillaExport($fechaInicio, $fechaFin), 'ventanilla.xlsx');
     }
     public function packagesallpdf(Request $request)
     {

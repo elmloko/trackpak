@@ -12,35 +12,46 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                    <label for="search">Busca:</label>
+                                    <input wire:model.lazy="search" type="text" class="form-control"
+                                        placeholder="Buscar...">
                                 </div>
                             </div>
-                            <div class="col-lg-9 text-right">
-                                <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('inventario.excel') }}" class="btn btn-success" data-placement="left">
-                                        Excel
-                                    </a>
-                                </div>
-                                <form method="get" action="{{ route('package.pdf.deleteadopdf') }}">
-                                    @csrf
-                                    <div class="form-row align-items-center">
-                                        <div class="col-md-4">
-                                            <label for="fecha_inicio">Fecha de inicio:</label>
-                                            <input type="date" name="fecha_inicio" class="form-control"
-                                                required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="fecha_fin">Fecha de fin:</label>
-                                            <input type="date" name="fecha_fin" class="form-control"
-                                                required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <button type="submit" class="btn btn-danger">Generar
-                                                PDF</button>
-                                        </div>
+                            <form method="get" action="{{ route('inventario.excel') }}" class="col-md-6">
+                                @csrf
+                                <div class="form-row align-items-center">
+                                    <div class="col-md-4">
+                                        <label for="excel_fecha_inicio">Fecha de inicio:</label>
+                                        <input type="date" name="fecha_inicio" class="form-control" required>
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="col-md-4">
+                                        <label for="excel_fecha_fin">Fecha de fin:</label>
+                                        <input type="date" name="fecha_fin" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-success" target="_blank">Generar
+                                            Excel</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <form method="get" action="{{ route('package.pdf.deleteadopdf') }}">
+                                @csrf
+                                <div class="form-row align-items-center">
+                                    <div class="col-md-4">
+                                        <label for="fecha_inicio">Fecha de inicio:</label>
+                                        <input type="date" name="fecha_inicio" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="fecha_fin">Fecha de fin:</label>
+                                        <input type="date" name="fecha_fin" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-danger">Generar
+                                            PDF</button>
+                                    </div>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -78,34 +89,35 @@
                                         $i = 0; // Inicializa la variable $i
                                     @endphp
                                     @foreach ($packages as $package)
-                                    @if ($package->ESTADO !== 'DOMICILIO')
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            <td>{{ $package->CODIGO }}</td>
-                                            <td>{{ $package->DESTINATARIO }}</td>
-                                            <td>{{ $package->TELEFONO }}</td>
-                                            <td>{{ $package->PAIS }}</td>
-                                            <td>{{ $package->CIUDAD }}</td>
-                                            <td>{{ $package->ZONA }}</td>
-                                            <td>{{ $package->VENTANILLA }}</td>
-                                            <td>{{ $package->PESO }} gr.</td>
-                                            <td>{{ $package->TIPO }}</td>
-                                            <td>{{ $package->ESTADO }}</td>
-                                            <td>{{ $package->OBSERVACIONES }}</td>
-                                            <td>{{ $package->ADUANA }}</td>
-                                            <td>{{ $package->deleted_at }}</td>
-                                            <td>
-                                                @hasrole('SuperAdmin|Administrador|Urbano')
-                                                    <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-info">
-                                                            <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
-                                                        </button>
-                                                    </form>
-                                                @endhasrole
-                                            </td>
-                                        </tr>
+                                        @if ($package->ESTADO !== 'DOMICILIO')
+                                            <tr>
+                                                <td>{{ ++$i }}</td>
+                                                <td>{{ $package->CODIGO }}</td>
+                                                <td>{{ $package->DESTINATARIO }}</td>
+                                                <td>{{ $package->TELEFONO }}</td>
+                                                <td>{{ $package->PAIS }}</td>
+                                                <td>{{ $package->CIUDAD }}</td>
+                                                <td>{{ $package->ZONA }}</td>
+                                                <td>{{ $package->VENTANILLA }}</td>
+                                                <td>{{ $package->PESO }} gr.</td>
+                                                <td>{{ $package->TIPO }}</td>
+                                                <td>{{ $package->ESTADO }}</td>
+                                                <td>{{ $package->OBSERVACIONES }}</td>
+                                                <td>{{ $package->ADUANA }}</td>
+                                                <td>{{ $package->deleted_at }}</td>
+                                                <td>
+                                                    @hasrole('SuperAdmin|Administrador|Urbano')
+                                                        <form action="{{ route('packages.restoring', $package->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button type="submit" class="btn btn-sm btn-info">
+                                                                <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
+                                                            </button>
+                                                        </form>
+                                                    @endhasrole
+                                                </td>
+                                            </tr>
                                         @endif
                                     @endforeach
                                 </tbody>

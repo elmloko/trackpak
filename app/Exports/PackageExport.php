@@ -10,10 +10,34 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class PackageExport implements FromCollection, WithHeadings, WithStyles
 {
+    public function __construct($fechaInicio, $fechaFin)
+    {
+        $this->fechaInicio = $fechaInicio;
+        $this->fechaFin = $fechaFin;
+    }
+
     public function collection()
     {
-        return Package::select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'PRECIO', 'TIPO', 'ADUANA', 'ESTADO')
-        ->get();
+        $query = Package::select(
+            'CODIGO',
+            'DESTINATARIO',
+            'TELEFONO',
+            'PAIS',
+            'CUIDAD',
+            'ZONA',
+            'VENTANILLA',
+            'PESO',
+            'PRECIO',
+            'TIPO',
+            'ADUANA',
+            'ESTADO'
+        );
+
+        if ($this->fechaInicio && $this->fechaFin) {
+            $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
+        }
+
+        return $query->get();
     }
 
     public function headings(): array
