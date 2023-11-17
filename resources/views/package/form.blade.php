@@ -20,9 +20,9 @@
                     {{ Form::text('DESTINATARIO', strtoupper($package->DESTINATARIO), [
                         'class' => 'form-control' . ($errors->has('DESTINATARIO') ? ' is-invalid' : ''),
                         'placeholder' => 'Destinatario',
-                        'pattern' => '^[A-Z]+$',
+                        // 'pattern' => '^[A-Z]+$',
                         'title' => 'Ingrese solo letras mayúsculas',
-                        'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
+                        // 'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
                     ]) }}
                     {!! $errors->first('DESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>

@@ -399,16 +399,6 @@ class PackageController extends Controller
         return redirect()->route('packages.clasificacion')
             ->with('success', 'Paquete Eliminado Con Éxito!');
     }
-    public function formularioentrega(Request $request, $id)
-    {
-        $package = Package::find($id);
-        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
-        $code = $generator->getBarcode($package->CODIGO, $generator::TYPE_CODE_128);
-        $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
-        return $pdf->stream();
-        // Descargar el PDF o mostrarlo en el navegador
-        // return $pdf->download('formularioentrega.pdf');
-    }
     public function abandono(Request $request, $id)
     {
         $package = Package::find($id);
@@ -701,7 +691,7 @@ class PackageController extends Controller
 
     $packages = $query->get();
     $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
-    return $pdf->stream();
+    return $pdf->download('formularioentrega.pdf');
     }   
     public function clasificacionpdf(Request $request)
     {
@@ -716,7 +706,7 @@ class PackageController extends Controller
 
         $packages = $query->get();
         $pdf = PDF::loadview('package.pdf.clasificacionpdf', ['packages' => $packages]);
-        return $pdf->stream();
+        return $pdf->download('formularioentrega.pdf');
     }
     public function redirigidospdf(Request $request)
     {
@@ -731,7 +721,7 @@ class PackageController extends Controller
 
         $packages = $query->get();
         $pdf = PDF::loadview('package.pdf.redirigidospdf', ['packages' => $packages]);
-        return $pdf->stream();
+        return $pdf->download('formularioentrega.pdf');
     }
     public function ventanillapdf(Request $request)
     {
@@ -746,7 +736,7 @@ class PackageController extends Controller
 
         $packages = $query->get();
         $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
-        return $pdf->stream();
+        return $pdf->download('formularioentrega.pdf');
     }
     public function deleteadopdf(Request $request)
     {
@@ -761,7 +751,15 @@ class PackageController extends Controller
 
         $packages = $query->get();
         $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
+        return $pdf->download('formularioentrega.pdf');
+    }
+    public function formularioentrega(Request $request, $id)
+    {
+        $package = Package::find($id);
+        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+        $code = $generator->getBarcode($package->CODIGO, $generator::TYPE_CODE_128);
+        $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
+        $pdf->setPaper(9.5, 24);
         return $pdf->stream();
     }
-    
 }

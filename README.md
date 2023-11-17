@@ -12,6 +12,7 @@ rodrigo.villa@correos.gob.bo            RVS9883740      Auxiliar Clasificacion
 Utilize
 
  https://laravel-excel.com/                                     maatwebsite/excel
+ https://github.com/barryvdh/laravel-dompdf                     barryvdh/laravel-dompdf
  https://github.com/awais-vteams/laravel-crud-generator         ibex/crud-generator
  https://github.com/jeroennoten/Laravel-AdminLTE                jeroennoten/laravel-adminlte
  https://spatie.be/docs/laravel-permission/v5/introduction      spatie/laravel-permission

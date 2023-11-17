@@ -13,16 +13,16 @@
         }
 
         .small-text {
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .special-text {
             text-align: center;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .normal-text {
-            font-size: 13px;
+            font-size: 11px;
         }
 
         table {
@@ -32,6 +32,7 @@
         table td {
             width: 50%;
         }
+
         p {
             margin: 0;
             padding: 0;
@@ -43,7 +44,7 @@
     <div class="container">
         <div class="modal-body">
             <div class="logo">
-                <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
+                <img src="{{ public_path('images/images.png') }}" alt="" width="100" height="50">
             </div>
             <div class="center-text">
                 <h2 class="normal-text" style="margin-top: 0;">FORMULARIO DE ENTREGA</h2>
@@ -52,7 +53,7 @@
             <table>
                 <tr>
                     <td>
-                        <p class="barcode">{!! DNS1D::getBarcodeHTML($package->CODIGO, 'C39', 1, 25) !!}</p>
+                        <p class="barcode">{!! DNS1D::getBarcodeHTML($package->CODIGO, 'C128', 1.25, 25) !!}</p>
                         <p class="small-text"><strong>Código Rastreo:</strong> {{ $package->CODIGO }}</p>
                         <p class="small-text"><strong>Destinatario:</strong> {{ $package->DESTINATARIO }}</p>
                         <p class="small-text"><strong>Ciudad:</strong> {{ $package->CUIDAD }}</p>
