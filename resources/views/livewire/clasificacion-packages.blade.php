@@ -120,10 +120,7 @@
                                                                         <td>{{ $package->ADUANA }}</td>
                                                                         <td>{{ $package->created_at }}</td>
                                                                         <td>
-                                                                            <form
-                                                                                action="{{ route('packages.destroy', $package->id) }}"
-                                                                                method="POST">
-                                                                                @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar
+                                                                            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar
                                                                                     Clasificacion')
                                                                                     <a class="btn btn-sm btn-success"
                                                                                         href="{{ route('packages.edit', $package->id) }}">
@@ -131,6 +128,9 @@
                                                                                         {{ __('Editar') }}
                                                                                     </a>
                                                                                 @endhasrole
+                                                                            <form
+                                                                                action="{{ route('packages.destroy', $package->id) }}"
+                                                                                method="POST">
                                                                                 @csrf
                                                                                 @method('DELETE')
                                                                                 @hasrole('SuperAdmin|Administrador|Clasificacion')

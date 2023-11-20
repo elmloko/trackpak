@@ -17,7 +17,10 @@
                                             <div class="form-group">
                                                 <label for="search">Busca:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control"
-                                                    placeholder="Buscar...">
+                                                    placeholder="Buscar..." wire:loading.attr="disabled">
+                                                    <div wire:loading>
+                                                        Processing Payment...
+                                                    </div>
                                             </div>
                                         </div>
                                         <form method="get" action="{{ route('ventanilla.excel') }}" class="col-md-6">
@@ -80,7 +83,7 @@
                                         </div>
                                     @endif
 
-                                    <div class="card-body">
+                                    <div class="card-body" wire:loading.remove>
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover">
                                                 <thead class="thead">

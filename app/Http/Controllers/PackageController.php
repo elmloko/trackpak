@@ -526,10 +526,9 @@ class PackageController extends Controller
     }
     public function ventanilla()
     {
-        $packages = Package::paginate(10);
+        //$packages = Package::paginate(10);
 
-        return view('package.ventanilla', compact('packages'))
-            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
+        return view('package.ventanilla');
     }
     public function clasificacion()
     {
