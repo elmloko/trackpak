@@ -399,14 +399,6 @@ class PackageController extends Controller
         return redirect()->route('packages.clasificacion')
             ->with('success', 'Paquete Eliminado Con Éxito!');
     }
-    public function abandono(Request $request, $id)
-    {
-        $package = Package::find($id);
-        $pdf = PDF::loadView('package.pdf.abandono', compact('package', 'request'));
-        return $pdf->stream();
-        // Descargar el PDF o mostrarlo en el navegador
-        // return $pdf->download('formularioentrega.pdf');
-    }
 
     public function delete($id)
     {
@@ -432,12 +424,6 @@ class PackageController extends Controller
         } else {
             return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
         }
-    }
-    public function deleteado()
-    {
-        // $packages = Package::where('ESTADO', 'ENTREGADO')->paginate(20);
-        $packages = Package::onlyTrashed()->paginate(20);
-        return view('package.deleteado', compact('packages'));
     }
     public function restoring($id)
     {
@@ -490,12 +476,7 @@ class PackageController extends Controller
         }
     }
 
-    public function redirigidos()
-    {
-        $package = Package::where('redirigido', true)->paginate(20);
-
-        return view('package.redirigidos', compact('package'));
-    }
+    
     public function dirigido($id)
     {
         $package = Package::find($id);
@@ -523,19 +504,6 @@ class PackageController extends Controller
         } else {
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
-    }
-    public function ventanilla()
-    {
-        //$packages = Package::paginate(10);
-
-        return view('package.ventanilla');
-    }
-    public function clasificacion()
-    {
-        $packages = Package::paginate(10);
-
-        return view('package.clasificacion', compact('packages'))
-            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
     }
 
     public function buscarPaquete(Request $request)
@@ -641,6 +609,23 @@ class PackageController extends Controller
         $pdf = PDF::loadView('package.pdf.deleteadocarteropdf', ['packages' => $packages]);
         return $pdf->stream();
     }
+    //VISTAS 
+    public function clasificacion()
+    {
+        return view('package.clasificacion');
+    }
+    public function redirigidos()
+    {
+        return view('package.redirigidos');
+    }
+    public function ventanilla()
+    {
+        return view('package.ventanilla');
+    }
+    public function deleteado()
+    {
+        return view('package.deleteado');
+    }
 
     //REPORTES
     public function packagesallexcel(Request $request)
@@ -690,7 +675,7 @@ class PackageController extends Controller
 
     $packages = $query->get();
     $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
-    return $pdf->download('formularioentrega.pdf');
+    return $pdf->download('Almacen.pdf');
     }   
     public function clasificacionpdf(Request $request)
     {
@@ -705,7 +690,7 @@ class PackageController extends Controller
 
         $packages = $query->get();
         $pdf = PDF::loadview('package.pdf.clasificacionpdf', ['packages' => $packages]);
-        return $pdf->download('formularioentrega.pdf');
+        return $pdf->download('Clasificacion.pdf');
     }
     public function redirigidospdf(Request $request)
     {
@@ -720,7 +705,7 @@ class PackageController extends Controller
 
         $packages = $query->get();
         $pdf = PDF::loadview('package.pdf.redirigidospdf', ['packages' => $packages]);
-        return $pdf->download('formularioentrega.pdf');
+        return $pdf->download('Reencaminado.pdf');
     }
     public function ventanillapdf(Request $request)
     {
@@ -735,7 +720,7 @@ class PackageController extends Controller
 
         $packages = $query->get();
         $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
-        return $pdf->download('formularioentrega.pdf');
+        return $pdf->download('Ventanilla.pdf');
     }
     public function deleteadopdf(Request $request)
     {
@@ -750,7 +735,7 @@ class PackageController extends Controller
 
         $packages = $query->get();
         $pdf = PDF::loadView('package.pdf.deleteadopdf', ['packages' => $packages]);
-        return $pdf->download('formularioentrega.pdf');
+        return $pdf->download('Entregados.pdf');
     }
     public function formularioentrega(Request $request, $id)
     {
@@ -759,6 +744,12 @@ class PackageController extends Controller
         $code = $generator->getBarcode($package->CODIGO, $generator::TYPE_CODE_128);
         $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
         $pdf->setPaper(9.5, 24);
+        return $pdf->stream();
+    }
+    public function abandono(Request $request, $id)
+    {
+        $package = Package::find($id);
+        $pdf = PDF::loadView('package.pdf.abandono', compact('package', 'request'));
         return $pdf->stream();
     }
 }

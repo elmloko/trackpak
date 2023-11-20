@@ -89,7 +89,7 @@
         <tbody>
             @php $i = 1; @endphp <!-- Inicializa $i con 1 -->
             @foreach ($packages as $package)
-                @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido)
+                @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido && $package->CUIDAD === auth()->user()->Regional)
                     <tr>
                         <td>{{ $i }}</td>
                         <td>{{ $package->CODIGO }}</td>

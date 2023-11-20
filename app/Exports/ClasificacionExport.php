@@ -21,6 +21,7 @@ class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
 
     public function collection()
     {
+        $regional = auth()->user()->Regional;
         $query = Package::where('ESTADO', 'CLASIFICACION')
             ->select(
                 'CODIGO',
@@ -40,6 +41,7 @@ class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
         if ($this->fechaInicio && $this->fechaFin) {
             $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
         }
+        $query->where('CUIDAD', $regional);
 
         return $query->get();
     }
@@ -64,15 +66,6 @@ class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
 
     public function styles(Worksheet $sheet)
     {
-        // Establece el espaciado entre las tablas
-        $sheet->getStyle('A1:L1')->getAlignment()->setVertical('center');
-        $sheet->getStyle('A1:L1')->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('A1:L1')->getFont()->setBold(true);
-
-        // Establece un espaciado adicional después de cada fila de datos
-        $sheet->getStyle('A2:L' . ($sheet->getHighestRow()))->getAlignment()->setVertical('center');
-        $sheet->getStyle('A2:L' . ($sheet->getHighestRow()))->getAlignment()->setHorizontal('center');
-
         // Ajusta el espaciado según tus necesidades
         // $sheet->getStyle('A:L')->getAlignment()->setVertical('center');
         $sheet->getStyle('A:L')->getFont()->setSize(12);

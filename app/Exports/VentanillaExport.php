@@ -21,6 +21,7 @@ class VentanillaExport implements FromCollection, WithHeadings, WithStyles
 
     public function collection()
     {
+        $regional = auth()->user()->Regional;
         $query = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)
             ->select(
                 'CODIGO',
@@ -41,7 +42,7 @@ class VentanillaExport implements FromCollection, WithHeadings, WithStyles
         if ($this->fechaInicio && $this->fechaFin) {
             $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
         }
-
+        $query->where('CUIDAD', $regional);
         return $query->get();
     }
 

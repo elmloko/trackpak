@@ -21,6 +21,7 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
 
     public function collection()
     {
+        $regional = auth()->user()->Regional;
         $query = Package::withTrashed()->where('ESTADO', 'ENTREGADO')
             ->select(
                 'CODIGO',
@@ -42,6 +43,7 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
             $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
         }
 
+        $query->where('CUIDAD', $regional);
         return $query->get();
     }
 

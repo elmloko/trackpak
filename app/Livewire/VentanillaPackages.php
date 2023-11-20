@@ -15,69 +15,24 @@ class VentanillaPackages extends Component
 
     public function render()
     {
-        
+        $userRegional = auth()->user()->Regional;
+
         $packages = Package::where('ESTADO', 'VENTANILLA')
-        ->when($this->search, function ($query) {
-            $query->where('CODIGO', 'like', '%' . $this->search . '%')
-                ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-            ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-            ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-            ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
-            ->orWhere('ZONA', 'like', '%' . $this->search . '%')
-            ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
-            ->orWhere('PESO', 'like', '%' . $this->search . '%')
-            ->orWhere('TIPO', 'like', '%' . $this->search . '%')
-            ->orWhere('ADUANA', 'like', '%' . $this->search . '%');
-        })
-        ->orderBy('created_at', 'desc')
-        ->paginate(2);
-
-
-        // $packages = $packages->map(function ($item) {
-        //     return $item->only([
-        //         'CODIGO',
-        //         'DESTINATARIO',
-        //         'TELEFONO',
-        //         'PAIS',
-        //         'CIUDAD',
-        //         'ZONA',
-        //         'VENTANILLA',
-        //         'PESO',
-        //         'TIPO',
-        //         'ADUANA',
-        //     ]);
-        // });
-        // Log::info(print_r($packages,true));
-        /*
-
-        ["
-            '0'(
-                'codig' => "CODIGO1"
-                destin...
-            ),
-            '1'(
-                ....
-            )
-        
-        ]
-        */
-           /*where('CODIGO', 'like', '%' . $this->search . '%')
-            ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-            ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-            ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-            ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
-            ->orWhere('ZONA', 'like', '%' . $this->search . '%')
-            ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
-            ->orWhere('PESO', 'like', '%' . $this->search . '%')
-            ->orWhere('TIPO', 'like', '%' . $this->search . '%')
-            ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-            ->orWhere('created_at', 'like', '%' . $this->search . '%')*/
-       
-           // ->take(5)
-            //->get();
-
-            //Log::info(print_r($packages->count(),true));
-
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
+                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
+                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+            })
+            // Filtra por la 'CUIDAD' del usuario autenticado
+            ->where('CUIDAD', $userRegional)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return view('livewire.ventanilla-packages', [
             'packages' => $packages,

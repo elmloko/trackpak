@@ -21,6 +21,7 @@ class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
 
     public function collection()
     {
+        $regional = auth()->user()->Regional;
         $query = Package::where('ESTADO', 'REENCAMINADO')
             ->select(
                 'CODIGO',
@@ -38,7 +39,7 @@ class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
         if ($this->fechaInicio && $this->fechaFin) {
             $query->whereBetween('date_redirigido', [$this->fechaInicio, $this->fechaFin]);
         }
-
+        $query->where('CUIDAD', $regional);
         return $query->get();
     }
 

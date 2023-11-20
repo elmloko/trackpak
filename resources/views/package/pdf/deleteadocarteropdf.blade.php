@@ -87,7 +87,7 @@
         <tbody>
             @php $i = 1; @endphp <!-- Inicializa $i con 1 -->
             @foreach ($packages as $package)
-            @if ($package->ESTADO !== 'ENTREGADO')
+            @if ($package->ESTADO !== 'ENTREGADO' && $package->CUIDAD === auth()->user()->Regional)
                 <tr>
                     <td>{{ $i }}</td>
                     <td>{{ $package->CODIGO }}</td>

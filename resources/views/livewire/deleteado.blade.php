@@ -96,7 +96,7 @@
                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                 <td>{{ $package->TELEFONO }}</td>
                                                 <td>{{ $package->PAIS }}</td>
-                                                <td>{{ $package->CIUDAD }}</td>
+                                                <td>{{ $package->CUIDAD }}</td>
                                                 <td>{{ $package->ZONA }}</td>
                                                 <td>{{ $package->VENTANILLA }}</td>
                                                 <td>{{ $package->PESO }} gr.</td>
