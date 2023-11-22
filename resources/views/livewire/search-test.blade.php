@@ -7,7 +7,7 @@
                 RASTREA TU CODIGO POSTAL
             </h1>
             <p class="leading-normal text-2xl mb-6">
-                Este es un servicio de seguimiento de paquetería postal nacional de la Agencia Boliviana de Correos
+                Este es un servicio de seguimiento de codigo rastreo postales a nivel nacional de la Agencia Boliviana de Correos
             </p>
 
             <!-- Modificar el formulario de búsqueda con los estilos deseados -->
