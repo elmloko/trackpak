@@ -381,7 +381,7 @@ return [
                 [
                     'text' => 'Urbano',
                     'icon' => 'fas fa-clipboard-list',
-                    'can'  => 'packages.ventanilla',
+                    'can'  => 'packages.carteros',
                     'submenu' => [
                         [
                             'text' => 'Entregas Cartero',
