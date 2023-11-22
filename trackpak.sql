@@ -12960,7 +12960,8 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(6, 'packages.delete', 'web', '2023-11-06 14:18:19', '2023-11-06 14:18:19'),
 	(7, 'packages.clasificacion', 'web', '2023-11-06 14:18:19', '2023-11-06 14:18:19'),
 	(8, 'packages.ventanilla', 'web', '2023-11-06 14:18:19', '2023-11-06 14:18:19'),
-	(9, 'packages.redirigidos', 'web', '2023-11-06 14:18:19', '2023-11-06 14:18:19');
+	(9, 'packages.redirigidos', 'web', '2023-11-06 14:18:19', '2023-11-06 14:18:19'),
+	(10, 'packages.carteros', 'web', '2023-11-06 14:18:19', '2023-11-22 15:58:21');
 
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -13045,7 +13046,8 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(7, 5),
 	(9, 5),
 	(7, 6),
-	(9, 6);
+	(9, 6),
+	(10, 17);
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
