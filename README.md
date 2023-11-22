@@ -20,3 +20,7 @@ Utilize
  https://github.com/wire-elements/modal/tree/1.0.0              wire-elements/modal
  https://github.com/milon/barcode                               milon/barcode
  https://github.com/picqer/php-barcode-generator                picqer/php-barcode-generator
+
+SQL 
+ UPDATE `trackpak`.`packages`
+ SET `ESTADO` = 'VENTANILLA';
