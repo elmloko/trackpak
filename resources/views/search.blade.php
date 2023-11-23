@@ -294,6 +294,7 @@
             <!-- Resto del código del héroe -->
         </svg>
     </div>
+
     @if ($packages->count() > 0)
     <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
         <div class="mb-4 text-black" tabindex="1">
@@ -327,18 +328,6 @@
             @endforelse
         </div>
     </div>
-@else
-    {{-- Este mensaje se mostrará si no hay paquetes --}}
-    @isset($codigo)
-    <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-        <p class="mb-4 text-black">No hay resultados para la búsqueda
-            <b>"{{ $codigo }}"</b>
-        </p>
-    </div>
-    @endisset
-@endif
-
-
     <!-- Sección de eventos -->
     <section class="bg-white border-b py-8 text-center mt-8"> <!-- Añade "text-center" para centrar -->
         <div class="container mx-auto flex flex-wrap pt-4 pb-12">
@@ -363,10 +352,20 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>   
+@else
+    {{-- Este mensaje se mostrará si no hay paquetes --}}
+    @isset($codigo)
+    <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
+        <p class="mb-4 text-black">No hay resultados para la búsqueda
+            <b>"{{ $codigo }}"</b>
+        </p>
+    </div>
+    @endisset
+@endif
 
     <!-- Change the colour #f8fafc to match the previous section colour -->
-    <svg class="wave-top" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg"
+    <svg class="wave-top mt-10" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-1.000000, -14.000000)" fill-rule="nonzero">
