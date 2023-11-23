@@ -256,7 +256,7 @@
                 id="nav-content">
                 <ul class="list-reset lg:flex justify-end flex-1 items-center">
                     <li class="mr-3">
-                        <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="#">Inicio</a>
+                        <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/">Inicio</a>
                     </li>
                     <li class="mr-3">
                         <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
@@ -353,16 +353,22 @@
             </div>
         </div>
     </section>   
-@else
+    @else
     {{-- Este mensaje se mostrará si no hay paquetes --}}
     @isset($codigo)
-    <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-        <p class="mb-4 text-black">No hay resultados para la búsqueda
-            <b>"{{ $codigo }}"</b>
-        </p>
-    </div>
+        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
+            <p class="mb-4 text-black">No hay resultados para la búsqueda
+                <b>"{{ $codigo }}"</b>
+            </p>
+        </div>
+
+        {{-- Nuevo div para el botón --}}
+        <div class="text-center mt-10">
+            <a href="/" class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Volver a la página principal</a>
+        </div>
     @endisset
 @endif
+
 
     <!-- Change the colour #f8fafc to match the previous section colour -->
     <svg class="wave-top mt-10" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg"

@@ -59,7 +59,7 @@
             <form method="GET" action="{{ route('search') }}" class="w-full">
                 @csrf
                 <div class="flex items-center">
-                    <input type="text" name="codigo" placeholder="Ingresa tu código postal"
+                    <input type="text" name="codigo" placeholder="Ingresa tu código de rastreo"
                         class="w-full py-3 px-4 mx-3 border rounded-full text-black" style="width: 100%;">
                     <button type="submit"
                         class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Buscar</button>
