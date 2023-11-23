@@ -309,6 +309,11 @@ return [
         ],
         ['header' => 'PAQUETERIA POSTAL'],
         [
+            'text' => 'Dashboard',
+            'url' => '/dashboard',
+            'icon' => 'fas fa-user',
+        ],
+        [
             'text' => 'Usuarios',
             'icon' => 'fas fa-users',
             'can'  => 'users.index',

@@ -25,5 +25,12 @@ SQL
  UPDATE `trackpak`.`packages`
  SET `ESTADO` = 'VENTANILLA';
 
- git pull origin main
+UPDATE packages
+SET ESTADO = 'VENTANILLA', created_at = '2023-11-23 12:00:00'
+WHERE CUIDAD = 'LA PAZ';
+
+DELETE FROM packages
+WHERE CUIDAD = 'LA PAZ';
+
+git pull origin main
  

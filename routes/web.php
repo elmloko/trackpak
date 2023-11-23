@@ -6,6 +6,7 @@ use App\Http\Controllers\PcertificateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,10 +25,9 @@ Route::get('/', function () {
 });
 
 Route::get('/search', [EventController::class, 'search'])->name('search');
-Route::get('/dashboard', function () {
-    return view('dashboard');
-
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
