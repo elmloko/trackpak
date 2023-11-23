@@ -70,6 +70,7 @@ return [
     |
     */
 
+    'charset' => 'utf-8',
     'timezone' => 'America/La_Paz',
 
     /*

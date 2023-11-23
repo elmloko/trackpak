@@ -294,9 +294,53 @@
             <!-- Resto del código del héroe -->
         </svg>
     </div>
+    @if ($packages->count() > 0)
+    <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
+        <div class="mb-4 text-black" tabindex="1">
+            @forelse ($packages as $package)
+                @if ($package->ESTADO == 'ENTREGADO')
+                    Su paquete <strong>{{ $package->CODIGO }}</strong> ha sido entregado!
+                @elseif ($package->ESTADO == 'CLASIFICACION')
+                    Su paquete <strong>{{ $package->CODIGO }}</strong> está en proceso de Distribución.
+                @elseif ($package->ESTADO == 'VENTANILLA')
+                    Su paquete <strong>{{ $package->CODIGO }}</strong> se encuentra en
+                    <strong>{{ $package->CUIDAD }}</strong>, en la ventanilla
+                    <strong>{{ $package->VENTANILLA }}</strong>
+                    @if ($package->ADUANA == 'SI')
+                        envío observado por <strong>ADUANA NACIONAL</strong>
+                    @endif
+                @else
+                    Su paquete <strong>{{ $package->CODIGO }}</strong> tiene un estado no reconocido.
+                @endif
+
+                @if (!$loop->last)
+                    <!-- Verifica si no es el último elemento -->
+                    <div class="mb-4 border-b border-gray-300"></div>
+                @endif
+            @empty
+                {{-- Este mensaje se mostrará solo si no hay resultados --}}
+                @isset($codigo)
+                    <p class="mb-4 text-black">No hay resultados para la búsqueda
+                        <b>"{{ $codigo }}"</b>
+                    </p>
+                @endisset
+            @endforelse
+        </div>
+    </div>
+@else
+    {{-- Este mensaje se mostrará si no hay paquetes --}}
+    @isset($codigo)
+    <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
+        <p class="mb-4 text-black">No hay resultados para la búsqueda
+            <b>"{{ $codigo }}"</b>
+        </p>
+    </div>
+    @endisset
+@endif
+
 
     <!-- Sección de eventos -->
-    <section class="bg-white border-b py-8 text-center"> <!-- Añade "text-center" para centrar -->
+    <section class="bg-white border-b py-8 text-center mt-8"> <!-- Añade "text-center" para centrar -->
         <div class="container mx-auto flex flex-wrap pt-4 pb-12">
             <div class="w-full">
                 <h3 class="font-bold text-3xl text-black mb-10">Últimos Eventos</h3>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -109,14 +110,22 @@ class EventController extends Controller
     }
     public function search(Request $request)
     {
-        $codigo = $request->input('codigo'); // Cambia 'codigo_postal' a 'codigo'
+        $codigo = $request->input('codigo');
+        // Recupera todos los campos de la tabla 'packages'
+        $packages = Package::where('CODIGO', $codigo)
+        ->take(5)
+        ->withTrashed()
+        ->get(); // Cambiado de 'first' a 'get' para obtener una colección
+
+// Resto del código...
 
         // Realiza la lógica para buscar eventos basados en el código postal
         $event = Event::where('codigo', $codigo)
-        ->where('action', '!=', 'ESTADO')
-        ->orderBy('created_at', 'desc')->get();
+            ->where('action', '!=', 'ESTADO')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('search', compact('event'));
+            return view('search', compact('packages', 'event', 'codigo'));
     }
     public function eventspdf()
     {

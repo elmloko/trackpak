@@ -4,19 +4,19 @@
         <div class="flex flex-col w-full md:w-2/5 justify-center items-center md:items-start text-center md:text-left">
             <p class="uppercase tracking-loose w-full">¿Estás buscando tu paquete?</p>
             <h1 class="my-4 text-5xl font-bold leading-tight">
-                RASTREA TU CODIGO POSTAL
+                RASTREA TU CODIGO
             </h1>
             <p class="leading-normal text-2xl mb-6">
                 Este es un servicio de seguimiento de codigo rastreo postales a nivel nacional de la Agencia Boliviana de Correos
             </p>
 
             <!-- Modificar el formulario de búsqueda con los estilos deseados -->
-            <form method="GET" action="{{ route('search') }}" class="w-full">
+            {{-- <form method="GET" action="{{ route('search') }}" class="w-full">
                 @csrf
                 <div class="flex items-center">
                     <div class="w-full p-4">
-                        <label for="codigo" class="sr-only">Ingresa tu código postal</label>
-                        <input type="text" id="codigo" name="codigo" wire:model.live="search" placeholder="Ingresa tu código postal"
+                        <label for="codigo" class="sr-only">Ingresa tu código de rastreo</label>
+                        <input type="text" id="codigo" name="codigo" wire:model.live="search" placeholder="Ingresa tu de rastreo"
                             class="w-full py-3 px-4 mx-3 border rounded-full text-black" style="width: 100%;">
             
                         @if ($search)
@@ -54,9 +54,9 @@
                         class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
                         {{ $search ? '' : 'disabled' }}>Buscar Eventos</button>
                 </div>
-            </form>
+            </form> --}}
 
-            {{-- <form method="GET" action="{{ route('search') }}" class="w-full">
+            <form method="GET" action="{{ route('search') }}" class="w-full">
                 @csrf
                 <div class="flex items-center">
                     <input type="text" name="codigo" placeholder="Ingresa tu código postal"
@@ -64,7 +64,7 @@
                     <button type="submit"
                         class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Buscar</button>
                 </div>
-            </form> --}}
+            </form>
             
             {{-- <div class="w-full bg-white rounded p-4">
                 <input type="text" wire:model.live="search"
