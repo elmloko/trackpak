@@ -15,6 +15,7 @@ class DashboardController extends Controller
         $packages = Package::all();
         $totalPaquetes = $packages->count();
         $totalUsuarios = User::count();
+        $userRegional = auth()->user()->Regional;
 
         // Aplica el filtro de fecha antes de obtener la colección
         $totalRegistradosHoy = Package::whereDate('created_at', today())->count();
@@ -37,6 +38,51 @@ class DashboardController extends Controller
         $totaltj = $packages->where('CUIDAD', 'TARIJA')->count();
         $totalscr = $packages->where('CUIDAD', 'SUCRE')->count();
         $totalpn = $packages->where('CUIDAD', 'PANDO')->count();
+
+        //Regional Detallado Entregado
+        $totallpe = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->count();
+        $totalcbbae = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'ENTREGADO')->count();
+        $totalscze = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'ENTREGADO')->count();
+        $totalbne = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'ENTREGADO')->count();
+        $totalorue = $packages->where('CUIDAD', 'ORURO')->where('ESTADO', 'ENTREGADO')->count();
+        $totalpte = $packages->where('CUIDAD', 'POTOSI')->where('ESTADO', 'ENTREGADO')->count();
+        $totaltje = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'ENTREGADO')->count();
+        $totalscre = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'ENTREGADO')->count();
+        $totalpne = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'ENTREGADO')->count();
+
+        //Regional Detallado Clasificacion
+        $totallpc = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'CLASIFICACION')->count();
+        $totalcbbac = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'CLASIFICACION')->count();
+        $totalsczc = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'CLASIFICACION')->count();
+        $totalbnc = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'CLASIFICACION')->count();
+        $totaloruc = $packages->where('CUIDAD', 'ORURO')->where('ESTADO', 'CLASIFICACION')->count();
+        $totalptc = $packages->where('CUIDAD', 'POTOSI')->where('ESTADO', 'CLASIFICACION')->count();
+        $totaltjc = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'CLASIFICACION')->count();
+        $totalscrc = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'CLASIFICACION')->count();
+        $totalpnc = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'CLASIFICACION')->count();
+        
+        //Regional Detallado Reencaminado
+        $totallpr = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'REENCAMINADO')->count();
+        $totalcbbar = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'REENCAMINADO')->count();
+        $totalsczr = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'REENCAMINADO')->count();
+        $totalbnr = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'REENCAMINADO')->count();
+        $totalorur = $packages->where('CUIDAD', 'ORURO')->where('ESTADO', 'REENCAMINADO')->count();
+        $totalptr = $packages->where('CUIDAD', 'POTOSI')->where('ESTADO', 'REENCAMINADO')->count();
+        $totaltjr = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'REENCAMINADO')->count();
+        $totalscrr = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'REENCAMINADO')->count();
+        $totalpnr = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'REENCAMINADO')->count();
+
+        //Regional Detallado Ventanilla
+        $totallpv = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'VENTANILLA')->count();
+        $totalcbbav = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'VENTANILLA')->count();
+        $totalsczv = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'VENTANILLA')->count();
+        $totalbnv = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'VENTANILLA')->count();
+        $totaloruv = $packages->where('CUIDAD', 'ORURO')->where('ESTADO', 'VENTANILLA')->count();
+        $totalptv = $packages->where('CUIDAD', 'POTOSI')->where('ESTADO', 'VENTANILLA')->count();
+        $totaltjv = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'VENTANILLA')->count();
+        $totalscrv = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'VENTANILLA')->count();
+        $totalpnv = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'VENTANILLA')->count();
+
 
         //Datos por mes 
         $dataByMonth = Package::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"), DB::raw('COUNT(*) as total'))
@@ -84,7 +130,66 @@ class DashboardController extends Controller
         }
         
 
-        return view('dashboard', compact('totalReecaminado','dataArea','dataByMonthArea','dataByMonth','data','totalpn','totalscr','totaltj','totalpt','totaloru','totalbn','totalscz','totalcbba','totallp','packages', 'totalPaquetes', 'totalUsuarios', 'totalRegistradosHoy', 'totalEntregadosHoy', 'totalReencaminadoHoy', 'totalEntregados', 'totalVentanilla', 'totalClasificacion'));
+        return view('dashboard', compact('data',
+                                        'userRegional',
+                                        'totallpe',
+                                        'totalcbbae',
+                                        'totalscze',
+                                        'totalbne',
+                                        'totalorue',
+                                        'totalpte',
+                                        'totaltje',
+                                        'totalscre',
+                                        'totalpne',
+                                        'totallpc',
+                                        'totalcbbac',
+                                        'totalsczc',
+                                        'totalbnc',
+                                        'totaloruc',
+                                        'totalptc',
+                                        'totaltjc',
+                                        'totalscrc',
+                                        'totalpnc',
+                                        'totallpr',
+                                        'totalcbbar',
+                                        'totalsczr',
+                                        'totalbnr',
+                                        'totalorur',
+                                        'totalptr',
+                                        'totaltjr',
+                                        'totalscrr',
+                                        'totalpnr',
+                                        'totallpv',
+                                        'totalcbbav',
+                                        'totalsczv',
+                                        'totalbnv',
+                                        'totaloruv',
+                                        'totalptv',
+                                        'totaltjv',
+                                        'totalscrv',
+                                        'totalpnv',
+                                        'totalReecaminado',
+                                        'dataArea',
+                                        'dataByMonthArea',
+                                        'dataByMonth',
+                                        'totalpn',
+                                        'totalscr',
+                                        'totaltj',
+                                        'totalpt',
+                                        'totaloru',
+                                        'totalbn',
+                                        'totalscz',
+                                        'totalcbba',
+                                        'totallp',
+                                        'packages', 
+                                        'totalPaquetes',
+                                        'totalUsuarios',
+                                        'totalRegistradosHoy',
+                                        'totalEntregadosHoy',
+                                        'totalReencaminadoHoy',
+                                        'totalEntregados', 
+                                        'totalVentanilla', 
+                                        'totalClasificacion'));
     }
 }
 
