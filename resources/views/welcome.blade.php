@@ -283,7 +283,7 @@
                     </div>
                 </div>
                 <div
-                    class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg z-10">
+                    class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg">
                     <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                         <div class="w-full p-8 text-3xl font-bold text-center">Artículos u Objetos Permitidos</div>
                         <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
@@ -379,6 +379,7 @@
             Visitame!
         </a>
     </section>
+    @livewire('cookie-component')
     <!--Footer-->
     <footer class="bg-white gradient">
         <div class="container mx-auto px-8">
@@ -397,15 +398,15 @@
                     <ul class="list-reset mb-6">
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-while-800 hover:text-blue-500">FAQ</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Aviso Legal</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Help</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Condiciones de Uso</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Support</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Aviso de Privacidad</a>
                         </li>
                     </ul>
                 </div>
