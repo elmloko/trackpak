@@ -83,6 +83,27 @@ class DashboardController extends Controller
         $totalscrv = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'VENTANILLA')->count();
         $totalpnv = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'VENTANILLA')->count();
 
+        //Reportes por dia Clasificacion
+        $hoylpc = Package::where('CUIDAD', 'LA PAZ')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+        $hoycbbac = Package::where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+        $hoysczc = Package::where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+        $hoybnc = Package::where('CUIDAD', 'BENI')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+        $hoyoruc = Package::where('CUIDAD', 'ORURO')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+        $hoyptc = Package::where('CUIDAD', 'POTOSI')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+        $hoytjc = Package::where('CUIDAD', 'TARIJA')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+        $hoyscrc = Package::where('CUIDAD', 'SUCRE')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+        $hoypnc = Package::where('CUIDAD', 'PANDO')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+
+        //Reportes por dia Ventanilla
+        $hoylpe = Package::where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
+        $hoycbbae = Package::where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
+        $hoyscze = Package::where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
+        $hoybne = Package::where('CUIDAD', 'BENI')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
+        $hoyorue = Package::where('CUIDAD', 'ORURO')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
+        $hoypte = Package::where('CUIDAD', 'POTOSI')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
+        $hoytje = Package::where('CUIDAD', 'TARIJA')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
+        $hoyscre = Package::where('CUIDAD', 'SUCRE')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
+        $hoypne = Package::where('CUIDAD', 'PANDO')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
 
         //Datos por mes 
         $dataByMonth = Package::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"), DB::raw('COUNT(*) as total'))
@@ -131,6 +152,24 @@ class DashboardController extends Controller
         
 
         return view('dashboard', compact('data',
+                                        'hoylpe',
+                                        'hoycbbae',
+                                        'hoyscze',
+                                        'hoybne',
+                                        'hoyorue',
+                                        'hoypte',
+                                        'hoytje',
+                                        'hoyscre',
+                                        'hoypne',
+                                        'hoylpc',
+                                        'hoycbbac',
+                                        'hoysczc',
+                                        'hoybnc',
+                                        'hoyoruc',
+                                        'hoyptc',
+                                        'hoytjc',
+                                        'hoyscrc',
+                                        'hoypnc',
                                         'userRegional',
                                         'totallpe',
                                         'totalcbbae',

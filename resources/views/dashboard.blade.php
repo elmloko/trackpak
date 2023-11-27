@@ -202,6 +202,38 @@
                     </div>
                 </div>
             @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoylpc }}</h3>
+                            <p>Total Hoy Clasificacion La Paz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoylpe }}</h3>
+                            <p>Total Hoy Entregados La Paz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
         @endif
 
         @if ($userRegional === 'COCHABAMBA')
@@ -262,6 +294,38 @@
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoycbbac }}</h3>
+                            <p>Total Hoy Clasificacion Cochabamba</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoycbbae }}</h3>
+                            <p>Total Hoy Entregados Cochabamba</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
                         </div>
                         <a href="{{ route('test.deleteado') }}" class="small-box-footer">
                             Mas Informacion <i class="fas fa-arrow-circle-right"></i>
@@ -336,6 +400,38 @@
                     </div>
                 </div>
             @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoysczc }}</h3>
+                            <p>Total Hoy Clasificacion Santa Cruz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoyscze }}</h3>
+                            <p>Total Hoy Entregados Santa Cruz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
         @endif
 
         @if ($userRegional === 'BENI')
@@ -403,6 +499,38 @@
                     </div>
                 </div>
             @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoybnc }}</h3>
+                            <p>Total Hoy Clasificacion Beni</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoybne }}</h3>
+                            <p>Total Hoy Entregados Beni</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
         @endif
 
         @if ($userRegional === 'ORURO')
@@ -460,6 +588,38 @@
                         <div class="inner">
                             <h3>{{ $totalorue }}</h3>
                             <p>Total Entregados Oruro</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoyoruc }}</h3>
+                            <p>Total Hoy Clasificacion Oruro</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoyorue }}</h3>
+                            <p>Total Hoy Entregados Oruro</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-shopping-cart"></i>
@@ -537,6 +697,38 @@
                     </div>
                 </div>
             @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoytjc }}</h3>
+                            <p>Total Hoy Clasificacion Tarija</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoytjc }}</h3>
+                            <p>Total Hoy Entregados Tarija</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
         @endif
 
         @if ($userRegional === 'SUCRE')
@@ -597,6 +789,38 @@
                         </div>
                         <div class="icon">
                             <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoyscrc }}</h3>
+                            <p>Total Hoy Clasificacion Sucre</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoyscrc }}</h3>
+                            <p>Total Hoy Entregados Sucre</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
                         </div>
                         <a href="{{ route('test.deleteado') }}" class="small-box-footer">
                             Mas Informacion <i class="fas fa-arrow-circle-right"></i>
@@ -671,6 +895,38 @@
                     </div>
                 </div>
             @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoypnc }}</h3>
+                            <p>Total Hoy Clasificacion Pando</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoypne }}</h3>
+                            <p>Total Hoy Entregados Pando</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
         @endif
 
         @if ($userRegional === 'POTOSI')
@@ -731,6 +987,38 @@
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $hoyptc }}</h3>
+                            <p>Total Hoy Clasificacion Potosi</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $hoypte }}</h3>
+                            <p>Total Hoy Entregados Potosi</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
                         </div>
                         <a href="{{ route('test.deleteado') }}" class="small-box-footer">
                             Mas Informacion <i class="fas fa-arrow-circle-right"></i>
