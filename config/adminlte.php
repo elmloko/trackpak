@@ -357,7 +357,7 @@ return [
                             'can'  => 'packages.clasificacion',
                         ],
                         [
-                            'text' => 'Reencaminar',
+                            'text' => 'Reencaminar Paquetes',
                             'url' => 'test/redirigidos',
                             'icon' => 'fas fa-paper-plane',
                             'can'  => 'packages.clasificacion',
@@ -376,7 +376,7 @@ return [
                             'can'  => 'packages.ventanilla',
                         ],
                         [
-                            'text' => 'Inventario',
+                            'text' => 'Inventario Paquetes',
                             'url' => 'test/deleteado',
                             'icon' => 'fas fa-clipboard-list',
                             'can'  => 'packages.delete',
@@ -389,22 +389,22 @@ return [
                     'can'  => 'packages.carteros',
                     'submenu' => [
                         [
-                            'text' => 'Entregas Cartero',
-                            'url' => '#',
+                            'text' => 'Distribución Paquetes',
+                            'url' => 'packages.distribuicioncartero',
                             'icon' => 'fas fa-clipboard-list',
-                            'can'  => '',
+                            'can'  => 'packages.carteros',
                         ],
                         [
-                            'text' => 'Entregas',
+                            'text' => 'Entregas Cartero',
                             'url' => 'packages/carteros',
                             'icon' => 'fas fa-clipboard-list',
-                            'can'  => '',
+                            'can'  => 'packages.carteros',
                         ],
                         [
-                            'text' => 'Inventario',
+                            'text' => 'Inventario Cartero',
                             'url' => 'packages/inventariocartero',
                             'icon' => 'fas fa-clipboard-list',
-                            'can'  => '',
+                            'can'  => 'packages.carteros',
                         ],
                     ],
                 ],

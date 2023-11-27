@@ -3,6 +3,6 @@
 @section('title', 'Paquetes Ordinarios')
 
 @section('content')
-    @livewire('deleteado')
+    @livewire('distribuicioncartero')
     @include('footer')
 @endsection

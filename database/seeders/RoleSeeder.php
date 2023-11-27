@@ -47,6 +47,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'packages.ventanilla'])->syncRoles([$role1,$role2,$role3,$role4]);
         Permission::create(['name' => 'packages.redirigidos'])->syncRoles([$role1,$role2,$role5,$role6]);
         Permission::create(['name' => 'packages.carteros'])->syncRoles([$role1,$role2,$role13]);
+        Permission::create(['name' => 'packages.inventariocartero'])->syncRoles([$role1,$role2,$role13]);
         
     }
 }

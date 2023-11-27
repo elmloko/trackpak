@@ -55,21 +55,26 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit');
     Route::put('packages/{package}', [PackageController::class, 'update'])->name('packages.update');
     Route::delete('packages/{packages}', [PackageController::class, 'destroy'])->name('packages.destroy');
-    Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
-    Route::get('test/deleteado', [PackageController::class, 'deleteado'])->name('test.deleteado');
-    Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
-    Route::get('packages/redirigir/{id}', [PackageController::class, 'redirigir'])->name('packages.redirigir');
-    Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->name('packages.ventanilla');
+
+    //Modulo Clasificacion
     Route::get('packages/clasificacion', [PackageController::class, 'clasificacion'])->name('packages.clasificacion');
     Route::get('test/redirigidos', [PackageController::class, 'redirigidos'])->name('packages.redirigidos');
     Route::get('test/dirigido/{id}', [PackageController::class, 'dirigido'])->name('packages.dirigido');
+
+    //Modulo Ventanilla
+    Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->name('packages.ventanilla');
+    Route::get('test/deleteado', [PackageController::class, 'deleteado'])->name('test.deleteado');
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
-    Route::post('packages/buscarPaqueteCartero', [PackageController::class, 'buscarPaqueteCartero'])->name('packages.buscarPaqueteCartero');
+    Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
+    Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
+    Route::get('packages/redirigir/{id}', [PackageController::class, 'redirigir'])->name('packages.redirigir');
+
+    //Modulo Cartero
     Route::get('packages/carteros', [PackageController::class, 'carteros'])->name('packages.carteros');
-    Route::get('package/pdf/carteropdf', [PackageController::class, 'carteropdf'])->name('package.pdf.carteropdf');
     Route::get('packages/inventariocartero', [PackageController::class, 'inventariocartero'])->name('packages.inventariocartero');
     Route::get('packages/{id}/deletecartero', [PackageController::class, 'deletecartero'])->name('packages.deletecartero');
-    Route::get('package/pdf/deleteadocarteropdf', [PackageController::class, 'deleteadocarteropdf'])->name('package.pdf.deleteadocarteropdf');
+    Route::post('packages/buscarPaqueteCartero', [PackageController::class, 'buscarPaqueteCartero'])->name('packages.buscarPaqueteCartero');
+    Route::get('packages/distribuicioncartero', [PackageController::class, 'distribuicioncartero'])->name('packages.distribuicioncartero');
 
     // Reportes PDF
     Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
@@ -80,6 +85,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/pdf/eventspdf', [EventController::class, 'eventspdf'])->name('events.pdf.eventspdf');
     Route::get('package/pdf/formularioentrega/{id}', [PackageController::class, 'formularioentrega'])->name('package.pdf.formularioentrega');
     Route::get('package/pdf/abandono/{id}', [PackageController::class, 'abandono'])->name('package.pdf.abandono');
+    Route::get('package/pdf/carteropdf', [PackageController::class, 'carteropdf'])->name('package.pdf.carteropdf');
+    Route::get('package/pdf/deleteadocarteropdf', [PackageController::class, 'deleteadocarteropdf'])->name('package.pdf.deleteadocarteropdf');
     
     // Reportes Excel
     Route::get('package/packagesallexcel', [PackageController::class, 'packagesallexcel'])->name('packagesall.excel');
@@ -88,7 +95,7 @@ Route::middleware('auth')->group(function () {
     Route::get('ventanilla/ventanillaexcel', [PackageController::class, 'ventanillaexcel'])->name('ventanilla.excel');
     Route::get('ventanilla/inventarioexcel', [PackageController::class, 'inventarioexcel'])->name('inventario.excel');
 
-
+    //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::get('events/{events}', [EventController::class, 'show'])->name('events.show');

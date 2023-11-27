@@ -559,25 +559,6 @@ class PackageController extends Controller
             return redirect()->back()->with('error', 'El paquete no se encuentra en Clasificación.');
         }
     }
-
-    public function carteros()
-    {
-        $packages = Package::paginate(10);
-
-        return view('package.carteros', compact('packages'))
-            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
-    }
-    public function carteropdf()
-    {
-        $packages = Package::where('ESTADO', 'CARTERO')->get();
-        $pdf = PDF::loadview('package.pdf.carteropdf', ['packages' => $packages]);
-        return $pdf->stream();
-    }
-    public function inventariocartero()
-    {
-        $packages = Package::where('ESTADO', 'DOMICILIO')->paginate(20);
-        return view('package.inventariocartero', compact('packages'));
-    }
     public function deletecartero($id)
     {
         $package = Package::find($id);
@@ -603,12 +584,7 @@ class PackageController extends Controller
             return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
         }
     }
-    public function deleteadocarteropdf()
-    {
-        $packages = Package::withTrashed()->where('ESTADO', 'DOMICILIO')->get(); // Obtener registros eliminados
-        $pdf = PDF::loadView('package.pdf.deleteadocarteropdf', ['packages' => $packages]);
-        return $pdf->stream();
-    }
+    
     //VISTAS 
     public function clasificacion()
     {
@@ -626,8 +602,20 @@ class PackageController extends Controller
     {
         return view('package.deleteado');
     }
+    public function carteros()
+    {
+        return view('package.carteros');
+    }
+    public function inventariocartero()
+    {
+        return view('package.inventariocartero');
+    }
+    public function distribuicioncartero()
+    {
+        return view('package.distribuicioncartero');
+    }
 
-    //REPORTES
+    //REPORTES EXCEL Y PDF
     public function packagesallexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
@@ -750,6 +738,18 @@ class PackageController extends Controller
     {
         $package = Package::find($id);
         $pdf = PDF::loadView('package.pdf.abandono', compact('package', 'request'));
+        return $pdf->stream();
+    }
+    public function carteropdf()
+    {
+        $packages = Package::where('ESTADO', 'CARTERO')->get();
+        $pdf = PDF::loadview('package.pdf.carteropdf', ['packages' => $packages]);
+        return $pdf->stream();
+    }
+    public function deleteadocarteropdf()
+    {
+        $packages = Package::withTrashed()->where('ESTADO', 'DOMICILIO')->get(); // Obtener registros eliminados
+        $pdf = PDF::loadView('package.pdf.deleteadocarteropdf', ['packages' => $packages]);
         return $pdf->stream();
     }
 }
