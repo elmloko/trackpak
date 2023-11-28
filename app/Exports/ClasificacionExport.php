@@ -13,16 +13,12 @@ class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
     protected $fechaInicio;
     protected $fechaFin;
 
-    public function __construct($fechaInicio, $fechaFin)
-    {
-        $this->fechaInicio = $fechaInicio;
-        $this->fechaFin = $fechaFin;
-    }
-
     public function collection()
     {
-        $regional = auth()->user()->Regional;
+        $ciudad = request()->input('ciudad'); // Obtén la ciudad seleccionada del formulario
+
         $query = Package::where('ESTADO', 'CLASIFICACION')
+            ->where('CUIDAD', $ciudad) // Agrega la condición para la ciudad
             ->select(
                 'CODIGO',
                 'DESTINATARIO',
@@ -41,8 +37,7 @@ class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
         if ($this->fechaInicio && $this->fechaFin) {
             $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
         }
-        $query->where('CUIDAD', $regional);
-
+        
         return $query->get();
     }
 

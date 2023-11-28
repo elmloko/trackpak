@@ -626,7 +626,15 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
-        $packages = Package::where('ESTADO', 'CLASIFICACION')->get();
+        $ciudad = $request->input('ciudad');
+        $ventanilla = $request->input('ventanilla');
+
+        $packages = Package::where('ESTADO', 'CLASIFICACION')
+            ->where('CUIDAD', $ciudad)
+            ->where('VENTANILLA', $ventanilla)
+            ->whereBetween('created_at', [$fechaInicio, $fechaFin])
+            ->get();
+
         return Excel::download(new ClasificacionExport($fechaInicio, $fechaFin), 'Clasificacion.xlsx');
     }
     public function reencaminarexcel(Request $request)
@@ -669,11 +677,15 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
+        $ciudad = $request->input('ciudad');
+        $ventanilla = $request->input('ventanilla');
 
-        $query = Package::where('ESTADO', 'CLASIFICACION');
+        $query = Package::where('ESTADO', 'CLASIFICACION')
+            ->where('CUIDAD', $ciudad)
+            ->where('VENTANILLA', $ventanilla);
 
         if ($fechaInicio && $fechaFin) {
-        $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
         }
 
         $packages = $query->get();

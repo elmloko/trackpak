@@ -14,7 +14,7 @@ class ClasificacionPackages extends Component
 
     public function render()
     {
-        $userRegional = auth()->user()->Regional;
+        // $userRegional = auth()->user()->Regional;
 
         $packages = Package::where('ESTADO', 'CLASIFICACION')
             ->when($this->search, function ($query) {
@@ -22,7 +22,7 @@ class ClasificacionPackages extends Component
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
