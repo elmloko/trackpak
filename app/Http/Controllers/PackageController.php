@@ -509,6 +509,7 @@ class PackageController extends Controller
     public function buscarPaquete(Request $request)
     {
         $codigo = $request->input('codigo');
+        $zona = $request->input('zona');
         $package = Package::where('CODIGO', $codigo)->first(); // Usar el nombre del modelo correctamente
 
         if ($package) {
@@ -526,6 +527,7 @@ class PackageController extends Controller
             ]);
 
             // Cambiar el estado del paquete a "VENTANILLA"
+            $package->ZONA = $zona;
             $package->ESTADO = 'VENTANILLA';
             $package->save();
 
