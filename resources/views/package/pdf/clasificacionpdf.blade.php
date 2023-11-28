@@ -84,7 +84,8 @@
         <tbody>
             @php $i = 1; @endphp <!-- Inicializa $i con 1 -->
             @foreach ($packages as $package)
-                @if ($package->ESTADO === 'CLASIFICACION' && $package->CUIDAD === auth()->user()->Regional)
+                @if ($package->ESTADO === 'CLASIFICACION')
+                {{-- @if ($package->ESTADO === 'CLASIFICACION' && $package->CUIDAD === auth()->user()->Regional) --}}
                 <tr>
                     <td>{{ $i }}</td>
                     <td>{{ $package->CODIGO }}</td>

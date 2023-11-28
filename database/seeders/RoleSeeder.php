@@ -20,20 +20,20 @@ class RoleSeeder extends Seeder
         $role4 = Role::create(['name' => 'Auxiliar Urbano']);
         $role5 = Role::create(['name' => 'Clasificacion']);
         $role6 = Role::create(['name' => 'Auxiliar Clasificacion']);
-        $role12 = Role::create(['name' => 'Adminsion']);
-        $role12 = Role::create(['name' => 'Auxiliar Adminsion']);
-        $role7 = Role::create(['name' => 'Despacho']);
-        $role8 = Role::create(['name' => 'Auxiliar Despacho']);
-        $role9 = Role::create(['name' => 'Enlace']);
-        $role10 = Role::create(['name' => 'Expedicion']);
-        $role10 = Role::create(['name' => 'Auxiliar Expedicion']);
-        $role11 = Role::create(['name' => 'Ventanilla']);
-        $role12 = Role::create(['name' => 'Almacen']);
-        $role12 = Role::create(['name' => 'Auxiliar Almacen']);
-        $role13 = Role::create(['name' => 'Cartero']);
-        $role14 = Role::create(['name' => 'Operador']);
-        $role14 = Role::create(['name' => 'Auxiliar Operador']);
-        $role15 = Role::create(['name' => 'Cajero']);
+        $role7 = Role::create(['name' => 'Adminsion']);
+        $role8 = Role::create(['name' => 'Auxiliar Adminsion']);
+        $role9 = Role::create(['name' => 'Despacho']);
+        $role10 = Role::create(['name' => 'Auxiliar Despacho']);
+        $role11 = Role::create(['name' => 'Enlace']);
+        $role12 = Role::create(['name' => 'Expedicion']);
+        $role13 = Role::create(['name' => 'Auxiliar Expedicion']);
+        $role14 = Role::create(['name' => 'Ventanilla']);
+        $role15 = Role::create(['name' => 'Almacen']);
+        $role16 = Role::create(['name' => 'Auxiliar Almacen']);
+        $role17 = Role::create(['name' => 'Cartero']);
+        $role18 = Role::create(['name' => 'Operador']);
+        $role19 = Role::create(['name' => 'Auxiliar Operador']);
+        $role20 = Role::create(['name' => 'Cajero']);
 
         Permission::create(['name' => 'users.index'])->syncRoles([$role1,$role2]);
         Permission::create(['name' => 'users.create'])->syncRoles([$role1,$role2]);
@@ -42,12 +42,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'users.delete'])->syncRoles([$role1,$role2]);
 
         // Permission::create(['name' => 'packages.index'])->syncRoles([$role1,$role2,$role3,$role4,$role5,$role6]);
-        Permission::create(['name' => 'packages.delete'])->syncRoles([$role1,$role2,$role3,$role4]);
+        
         Permission::create(['name' => 'packages.clasificacion'])->syncRoles([$role1,$role2,$role5,$role6]);
         Permission::create(['name' => 'packages.ventanilla'])->syncRoles([$role1,$role2,$role3,$role4]);
-        Permission::create(['name' => 'packages.redirigidos'])->syncRoles([$role1,$role2,$role5,$role6]);
-        Permission::create(['name' => 'packages.carteros'])->syncRoles([$role1,$role2,$role13]);
-        Permission::create(['name' => 'packages.inventariocartero'])->syncRoles([$role1,$role2,$role13]);
+        Permission::create(['name' => 'packages.delete'])->syncRoles([$role1,$role2,$role3,$role4]);
+        Permission::create(['name' => 'packages.redirigidos'])->syncRoles([$role1,$role2,$role12,$role13]);
+        Permission::create(['name' => 'packages.carteros'])->syncRoles([$role1,$role2,$role17]);
         
     }
 }

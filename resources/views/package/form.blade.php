@@ -11,16 +11,31 @@
                         'pattern' => '^[A-Z0-9]+$',// Solo letras mayúsculas y números, al menos uno
                         'title' => 'Ingrese solo letras mayúsculas y números',
                         'maxlength' => '20',
-                        'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
+                        // 'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
                     ]) }}
                     {!! $errors->first('CODIGO', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('TIPO', 'Tipo') }}
+                    {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $package->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
+                    {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
+                </div> 
+                <div class="form-group">
+                    {{ Form::label('PESO') }}
+                    {{ Form::text('PESO', $package->PESO, [
+                        'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
+                        'placeholder' => 'Expresa el Peso en Gramos',
+                        'pattern' => '\d+(\.\d{1,2})?', // Expresión regular para permitir números con hasta dos decimales
+                        'title' => 'Ingrese un número válido con hasta dos decimales',
+                    ]) }}
+                    {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>                
                 <div class="form-group">
                     {{ Form::label('DESTINATARIO') }}
                     {{ Form::text('DESTINATARIO', strtoupper($package->DESTINATARIO), [
                         'class' => 'form-control' . ($errors->has('DESTINATARIO') ? ' is-invalid' : ''),
                         'placeholder' => 'Destinatario',
-                        // 'pattern' => '^[A-Z]+$',
+                        'pattern' => '^[A-Z]+$',
                         'title' => 'Ingrese solo letras mayúsculas',
                         // 'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
                     ]) }}
@@ -37,10 +52,21 @@
                     ]) }}
                     {!! $errors->first('TELEFONO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>                                                           
+                
+                <!-- Fin de las primeras columnas -->
+            </div>
+            <div class="col-md-6">
+                <!-- Segundas columnas del formulario -->
                 <div class="form-group">
                     {{ Form::label('CUIDAD') }}
-                    {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $package->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Cuidad']) }}
+                    {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $package->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Cuidad', 'id' => 'ciudad-select']) }}
                     {!! $errors->first('CUIDAD', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                
+                <div class="form-group">
+                    {{ Form::label('VENTANILLA') }}
+                    {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD','ECA' => 'ECA','CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
+                    {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
                     {{ Form::label('ZONA') }}
@@ -53,31 +79,7 @@
                         'maxlength' => '255',
                     ]) }}
                     {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <!-- Fin de las primeras columnas -->
-            </div>
-            <div class="col-md-6">
-                <!-- Segundas columnas del formulario -->
-                <div class="form-group">
-                    {{ Form::label('VENTANILLA') }}
-                    {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD', '27' => '27', '8' => '8'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla']) }}
-                    {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <div class="form-group">
-                    {{ Form::label('PESO') }}
-                    {{ Form::text('PESO', $package->PESO, [
-                        'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
-                        'placeholder' => 'Expresa el Peso en Gramos',
-                        'pattern' => '\d+(\.\d{1,2})?', // Expresión regular para permitir números con hasta dos decimales
-                        'title' => 'Ingrese un número válido con hasta dos decimales',
-                    ]) }}
-                    {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>                               
-                <div class="form-group">
-                    {{ Form::label('TIPO', 'Tipo') }}
-                    {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $package->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
-                    {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                </div>                              
                 <div class="form-group">
                     {{ Form::label('ADUANA') }}
                     {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}
@@ -105,3 +107,61 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // Ocultar opciones de Ventanilla al cargar la página
+        $('#ventanilla-select option[value="UNICA"]').hide();
+
+        // Al cambiar la ciudad
+        $('#ciudad-select').change(function(){
+            // Mostrar u ocultar opciones de Ventanilla según la ciudad seleccionada
+            if ($(this).val() === 'LA PAZ') {
+                $('#ventanilla-select option[value="UNICA"]').hide();
+                $('#ventanilla-select option[value="DND"]').show();
+                $('#ventanilla-select option[value="DD"]').show();
+                $('#ventanilla-select option[value="ECA"]').show();
+                $('#ventanilla-select option[value="CASILLAS"]').show();
+            } else {
+                $('#ventanilla-select option[value="UNICA"]').show();
+                $('#ventanilla-select option[value="DND"]').hide();
+                $('#ventanilla-select option[value="DD"]').hide();
+                $('#ventanilla-select option[value="ECA"]').hide();
+                $('#ventanilla-select option[value="CASILLAS"]').hide();
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        // Al cargar la página, verificar la opción seleccionada y actuar en consecuencia
+        checkVentanilla();
+
+        // Al cambiar la ciudad
+        $('#ciudad-select').change(function(){
+            // Al cambiar la ciudad, volver a verificar la opción seleccionada y actuar en consecuencia
+            checkVentanilla();
+        });
+
+        // Al cambiar la ventanilla
+        $('#ventanilla-select').change(function(){
+            // Al cambiar la ventanilla, volver a verificar la opción seleccionada y actuar en consecuencia
+            checkVentanilla();
+        });
+
+        function checkVentanilla() {
+            // Obtener el valor de la ventanilla seleccionada
+            var ventanillaSeleccionada = $('#ventanilla-select').val();
+
+            // Verificar si la ventanilla seleccionada es 'DND'
+            if (ventanillaSeleccionada === 'DND') {
+                // Deshabilitar la entrada de la zona
+                $('#ZONA').prop('disabled', true);
+            } else {
+                // Habilitar la entrada de la zona
+                $('#ZONA').prop('disabled', false);
+            }
+        }
+    });
+</script>
+

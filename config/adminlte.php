@@ -356,12 +356,6 @@ return [
                             'icon' => 'fas fa-clipboard-list',
                             'can'  => 'packages.clasificacion',
                         ],
-                        [
-                            'text' => 'Reencaminar Paquetes',
-                            'url' => 'test/redirigidos',
-                            'icon' => 'fas fa-paper-plane',
-                            'can'  => 'packages.clasificacion',
-                        ],
                     ],
                 ],
                 [
@@ -380,6 +374,19 @@ return [
                             'url' => 'test/deleteado',
                             'icon' => 'fas fa-clipboard-list',
                             'can'  => 'packages.delete',
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'Distribuicion',
+                    'icon' => 'fas fa-clipboard-list',
+                    'can'  => 'packages.redirigidos',
+                    'submenu' => [
+                        [
+                            'text' => 'Reencaminar Paquetes',
+                            'url' => 'test/redirigidos',
+                            'icon' => 'fas fa-paper-plane',
+                            'can'  => 'packages.redirigidos',
                         ],
                     ],
                 ], 

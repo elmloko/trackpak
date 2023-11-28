@@ -98,7 +98,6 @@
                                                             <th>Teléfono</th>
                                                             <th>País</th>
                                                             <th>Ciudad</th>
-                                                            <th>Dirección</th>
                                                             <th>Ventanilla</th>
                                                             <th>Peso</th>
                                                             <th>Tipo</th>
@@ -111,16 +110,15 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($packages as $package)
-                                                            @if ($package->ESTADO === 'CLASIFICACION' && $package->CUIDAD === auth()->user()->Regional)
+                                                            @if ($package->ESTADO === 'CLASIFICACION')
+                                                            {{-- @if ($package->ESTADO === 'CLASIFICACION' && $package->CUIDAD === auth()->user()->Regional) --}}
                                                                 <tr>
                                                                     <td>{{ $package->id }}</td>
                                                                     <td>{{ $package->CODIGO }}</td>
                                                                     <td>{{ $package->DESTINATARIO }}</td>
                                                                     <td>{{ $package->TELEFONO }}</td>
-                                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}
-                                                                    </td>
+                                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                                     <td>{{ $package->CUIDAD }}</td>
-                                                                    <td>{{ $package->ZONA }}</td>
                                                                     <td>{{ $package->VENTANILLA }}</td>
                                                                     <td>{{ $package->PESO }} gr.</td>
                                                                     <td>{{ $package->TIPO }}</td>
@@ -129,28 +127,34 @@
                                                                     <td>{{ $package->ADUANA }}</td>
                                                                     <td>{{ $package->created_at }}</td>
                                                                     <td>
-                                                                        @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar
-                                                                            Clasificacion')
-                                                                            <a class="btn btn-sm btn-success"
-                                                                                href="{{ route('packages.edit', $package->id) }}">
+                                                                        @hasrole('SuperAdmin|Administrador|Clasificacion')
+                                                                            <a class="btn btn-sm btn-success" href="{{ route('packages.edit', $package->id) }}">
                                                                                 <i class="fa fa-fw fa-edit"></i>
                                                                                 {{ __('Editar') }}
                                                                             </a>
+                                                                    
+                                                                            @php
+                                                                                $currentDate = now(); // Obtener la fecha y hora actuales
+                                                                                $creationDate = $package->created_at; // Obtener la fecha de creación del paquete
+                                                                    
+                                                                                // Verificar si la fecha de creación es igual a la fecha actual
+                                                                                $deleteEnabled = $currentDate->isSameDay($creationDate);
+                                                                            @endphp
+                                                                    
+                                                                            @if ($deleteEnabled)
+                                                                                <form action="{{ route('packages.destroy', $package->id) }}" method="POST">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                                                        <i class="fa fa-fw fa-trash"></i>
+                                                                                        {{ __('Eliminar') }}
+                                                                                    </button>
+                                                                                </form>
+                                                                            @else
+                                                                                <p>Eliminar solo disponible el día del registro.</p>
+                                                                            @endif
                                                                         @endhasrole
-                                                                        <form
-                                                                            action="{{ route('packages.destroy', $package->id) }}"
-                                                                            method="POST">
-                                                                            @csrf
-                                                                            @method('DELETE')
-                                                                            @hasrole('SuperAdmin|Administrador|Clasificacion')
-                                                                                <button type="submit"
-                                                                                    class="btn btn-danger btn-sm"><i
-                                                                                        class="fa fa-fw fa-trash"></i>
-                                                                                    {{ __('Eliminar') }}
-                                                                                </button>
-                                                                            @endhasrole
-                                                                        </form>
-                                                                    </td>
+                                                                    </td>                                                                                                                                        
                                                                 </tr>
                                                             @endif
                                                         @endforeach

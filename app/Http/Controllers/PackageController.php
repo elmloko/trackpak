@@ -49,12 +49,12 @@ class PackageController extends Controller
             'CODIGO' => 'required|string|max:20',
             'DESTINATARIO' => 'required|string|max:255',
             'TELEFONO' => 'required|numeric|regex:/^[0-9]+$/',
-            'CUIDAD' => 'required|string',
-            'VENTANILLA' => 'required|string',
+            'CUIDAD' => 'required',
+            'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA',
+            'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255',
             'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'TIPO' => 'required|string',
             'ADUANA' => 'required|string',
-            'ZONA' => 'required|string|max:255',
         ]);
     
         // Calcular el precio basado en el peso
