@@ -45,7 +45,8 @@
                 margin-top: 20px;
                 line-height: 0;
             }
-            .date{
+
+            .date {
                 line-height: 0.5;
             }
         </style>
@@ -84,7 +85,8 @@
             <tbody>
                 @php $i = 1; @endphp <!-- Inicializa $i con 1 -->
                 @foreach ($packages as $package)
-                    @if ($package->ESTADO === 'REENCAMINADO'&& $package->CUIDAD === auth()->user()->Regional)
+                    @if ($package->ESTADO === 'REENCAMINADO')
+                        {{-- @if ($package->ESTADO === 'REENCAMINADO' && $package->CUIDAD === auth()->user()->Regional) --}}
                         <tr>
                             <td>{{ $package->id }}</td>
                             <td>{{ $package->CODIGO }}</td>

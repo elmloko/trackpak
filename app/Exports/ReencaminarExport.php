@@ -13,15 +13,15 @@ class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
     protected $fechaInicio;
     protected $fechaFin;
 
-    public function __construct($fechaInicio, $fechaFin)
+    public function __construct($fechaInicio, $fechaFin, $ciudad)
     {
         $this->fechaInicio = $fechaInicio;
         $this->fechaFin = $fechaFin;
+        $this->ciudad = $ciudad;
     }
 
     public function collection()
     {
-        $regional = auth()->user()->Regional;
         $query = Package::where('ESTADO', 'REENCAMINADO')
             ->select(
                 'CODIGO',
@@ -39,7 +39,11 @@ class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
         if ($this->fechaInicio && $this->fechaFin) {
             $query->whereBetween('date_redirigido', [$this->fechaInicio, $this->fechaFin]);
         }
-        $query->where('CUIDAD', $regional);
+
+        if ($this->ciudad) {
+            $query->where('CUIDAD', $this->ciudad);
+        }
+
         return $query->get();
     }
 

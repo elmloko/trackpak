@@ -462,7 +462,6 @@ class PackageController extends Controller
             ]);
 
             $package->estado = 'REENCAMINADO';
-            $package->cuidadre = $request->input('cuidadre');
 
             // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
             $package->date_redirigido = now();
@@ -506,6 +505,58 @@ class PackageController extends Controller
         }
     }
 
+    public function deletecartero($id)
+    {
+        $package = Package::find($id);
+
+        if ($package) {
+            Event::create([
+                'action' => 'ENTREGADO',
+                'descripcion' => 'Entrega de paquete con Cartero(DOMICILIO)',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+            // Cambia el estado del paquete a "ENTREGADO"
+            $package->estado = 'DOMICILIO';
+
+            // Guarda el paquete actualizado
+            $package->save();
+
+            // Luego, elimina el paquete
+            $package->delete();
+
+            return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
+        } else {
+            return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
+        }
+    }
+    //Modal
+    public function buscarPaqueteCartero(Request $request)
+    {
+        $codigo = $request->input('codigo');
+        $package = Package::where('CODIGO', $codigo)->first();
+
+        if ($package) {
+            if ($package->ESTADO === 'VENTANILLA') {
+                Event::create([
+                    'action' => 'EN ENTREGA',
+                    'descripcion' => 'Paquete Destinado por envío con Cartero',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $package->CODIGO,
+                ]);
+                // Cambiar el estado del paquete a "CARTERO"
+                $package->ESTADO = 'CARTERO';
+                $package->save();
+
+                return redirect()->back()->with('success', 'El paquete ha sido movido a Cartero.');
+            } else {
+                return redirect()->back()->with('error', 'El paquete no se encuentra en estado "VENTANILLA".');
+            }
+        } else {
+            return redirect()->back()->with('error', 'El paquete no se encuentra en Clasificación.');
+        }
+    }
+
     public function buscarPaquete(Request $request)
     {
         $codigo = $request->input('codigo');
@@ -536,57 +587,7 @@ class PackageController extends Controller
             return redirect()->back()->with('error', 'El paquete no se encuentra en clasificación.');
         }
     }
-    public function buscarPaqueteCartero(Request $request)
-    {
-        $codigo = $request->input('codigo');
-        $package = Package::where('CODIGO', $codigo)->first();
 
-        if ($package) {
-            if ($package->ESTADO === 'VENTANILLA') {
-                Event::create([
-                    'action' => 'EN ENTREGA',
-                    'descripcion' => 'Paquete Destinado por envío con Cartero',
-                    'user_id' => auth()->user()->id,
-                    'codigo' => $package->CODIGO,
-                ]);
-                // Cambiar el estado del paquete a "CARTERO"
-                $package->ESTADO = 'CARTERO';
-                $package->save();
-
-                return redirect()->back()->with('success', 'El paquete ha sido movido a Cartero.');
-            } else {
-                return redirect()->back()->with('error', 'El paquete no se encuentra en estado "VENTANILLA".');
-            }
-        } else {
-            return redirect()->back()->with('error', 'El paquete no se encuentra en Clasificación.');
-        }
-    }
-    public function deletecartero($id)
-    {
-        $package = Package::find($id);
-
-        if ($package) {
-            Event::create([
-                'action' => 'ENTREGADO',
-                'descripcion' => 'Entrega de paquete con Cartero(DOMICILIO)',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-            // Cambia el estado del paquete a "ENTREGADO"
-            $package->estado = 'DOMICILIO';
-
-            // Guarda el paquete actualizado
-            $package->save();
-
-            // Luego, elimina el paquete
-            $package->delete();
-
-            return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
-        } else {
-            return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
-        }
-    }
-    
     //VISTAS 
     public function clasificacion()
     {
@@ -643,8 +644,8 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
-        $packages = Package::where('ESTADO', 'REENCAMINADO')->get();
-        return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin), 'Rencaminar.xlsx');
+        $ciudad = $request->input('ciudad');
+        return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin, $ciudad), 'Rencaminar.xlsx');
     }
     public function inventarioexcel(Request $request)
     {
@@ -698,11 +699,16 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
+        $ciudad = $request->input('ciudad');
 
         $query = Package::where('ESTADO', 'REENCAMINADO');
 
         if ($fechaInicio && $fechaFin) {
-        $query->whereBetween('date_redirigido', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('date_redirigido', [$fechaInicio, $fechaFin]);
+        }
+
+        if ($ciudad) {
+            $query->where('CUIDAD', $ciudad);
         }
 
         $packages = $query->get();
