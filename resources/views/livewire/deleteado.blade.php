@@ -5,16 +5,17 @@
                 <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                     <div class="container-fluid">
                         <div class="row">
-                            <h5 id="card_title">
-                                {{ __('Inventario de Paquetes en Entregados en Ventanilla') }}
-                            </h5>
+                            <div class="col-md-12">
+                                <h5 id="card_title">
+                                    {{ __('Inventario de Paquetes en Entregados en Ventanilla') }}
+                                </h5>
+                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="search">Busca:</label>
-                                    <input wire:model.lazy="search" type="text" class="form-control"
-                                        placeholder="Buscar...">
+                                    <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
                             </div>
                             <form method="get" action="{{ route('inventario.excel') }}" class="col-md-6">
@@ -29,12 +30,13 @@
                                         <input type="date" name="fecha_fin" class="form-control" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="submit" class="btn btn-success" target="_blank">Generar
-                                            Excel</button>
+                                        <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
                                     </div>
                                 </div>
                             </form>
-                            <form method="get" action="{{ route('package.pdf.deleteadopdf') }}">
+                            <div class="col-lg-6">
+                            </div>
+                            <form method="get" action="{{ route('package.pdf.deleteadopdf') }}" class="col-md-6">
                                 @csrf
                                 <div class="form-row align-items-center">
                                     <div class="col-md-4">
@@ -46,12 +48,10 @@
                                         <input type="date" name="fecha_fin" class="form-control" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="submit" class="btn btn-danger">Generar
-                                            PDF</button>
+                                        <button type="submit" class="btn btn-danger">Generar PDF</button>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
@@ -85,9 +85,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        $i = 0; // Inicializa la variable $i
-                                    @endphp
+                                    @php $i = 0; @endphp
                                     @foreach ($packages as $package)
                                         @if ($package->ESTADO !== 'DOMICILIO')
                                             <tr>
@@ -107,8 +105,7 @@
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|Urbano')
-                                                        <form action="{{ route('packages.restoring', $package->id) }}"
-                                                            method="POST">
+                                                        <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')
                                                             <button type="submit" class="btn btn-sm btn-info">
