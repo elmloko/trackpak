@@ -657,8 +657,8 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
-        $packages = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)->get();
-        return Excel::download(new VentanillaExport($fechaInicio, $fechaFin), 'ventanilla.xlsx');
+        $regional = $request->input('regional');
+        return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanilla.xlsx');
     }
     public function packagesallpdf(Request $request)
     {
@@ -713,14 +713,24 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
+        $ventanilla = $request->input('ventanilla');
+        $regional = auth()->user()->Regional;
 
         $query = Package::where('ESTADO', 'VENTANILLA');
 
         if ($fechaInicio && $fechaFin) {
-        $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+        }
+
+        // Añade la condición de la ventanilla según la regional
+        if ($regional == 'LA PAZ') {
+            $query->whereIn('VENTANILLA', ['DD', 'DND', 'CASILLAS', 'ECA']);
+        } else {
+            $query->where('VENTANILLA', 'UNICA');
         }
 
         $packages = $query->get();
+
         $pdf = PDF::loadView('package.pdf.ventanillapdf', ['packages' => $packages]);
         return $pdf->download('Ventanilla.pdf');
     }

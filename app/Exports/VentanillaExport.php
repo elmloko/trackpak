@@ -20,31 +20,41 @@ class VentanillaExport implements FromCollection, WithHeadings, WithStyles
     }
 
     public function collection()
-    {
-        $regional = auth()->user()->Regional;
-        $query = Package::where('ESTADO', 'VENTANILLA')->where('redirigido', 0)
-            ->select(
-                'CODIGO',
-                'DESTINATARIO',
-                'TELEFONO',
-                'PAIS',
-                'CUIDAD',
-                'ZONA',
-                'VENTANILLA',
-                'PESO',
-                'PRECIO',
-                'TIPO',
-                'ESTADO',
-                'ADUANA',
-                \DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_created_at"),
-            );
+{
+    $regional = auth()->user()->Regional;
 
-        if ($this->fechaInicio && $this->fechaFin) {
-            $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
-        }
-        $query->where('CUIDAD', $regional);
-        return $query->get();
+    $allowedVentanillas = ($regional == 'LA PAZ')
+        ? ['DD', 'DND', 'CASILLAS', 'ECA']
+        : ['UNICA'];
+
+    $query = Package::where('ESTADO', 'VENTANILLA')
+        ->where('redirigido', 0)
+        ->whereIn('VENTANILLA', $allowedVentanillas)
+        ->select(
+            'CODIGO',
+            'DESTINATARIO',
+            'TELEFONO',
+            'PAIS',
+            'CUIDAD',
+            'ZONA',
+            'VENTANILLA',
+            'PESO',
+            'PRECIO',
+            'TIPO',
+            'ESTADO',
+            'ADUANA',
+            \DB::raw("DATE_FORMAT(updated_at, '%Y-%m-%d %H:%i') AS formatted_updated_at"),
+        );
+
+    if ($this->fechaInicio && $this->fechaFin) {
+        $query->whereBetween('updated_at', [$this->fechaInicio, $this->fechaFin]);
     }
+
+    $query->where('CUIDAD', $regional);
+
+    return $query->get();
+}
+
 
     public function headings(): array
     {

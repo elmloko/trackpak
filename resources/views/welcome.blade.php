@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/timeline.css') }}"> --}}
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         .gradient {
             background: rgb(52, 68, 124);
