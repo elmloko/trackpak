@@ -6,26 +6,18 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div>
-                                    <h5 id="card_title">
-                                        {{ __('Entregas de Paquetes en Ventanilla') }}
-                                    </h5>
-                                </div>
+                                <h5 id="card_title">{{ __('Entregas de Paquetes en Ventanilla') }}</h5>
                                 <div class="col">
-                                    <div class="row">
-                                        <div class="col-lg-4">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="search">Busca:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control"
-                                                    placeholder="Buscar..." wire:loading.attr="disabled">
-                                                <div wire:loading>
-                                                    Processing Payment...
-                                                </div>
+                                                    placeholder="Buscar...">
                                             </div>
                                         </div>
                                         @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                            <div class="ml-2 d-inline-block float-right">
-                                                <!-- Botón para abrir el modal de cambio de estado -->
+                                            <div class="col-md-6 text-right">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buscarPaqueteModal">
                                                     Añadir Paquete
@@ -33,73 +25,76 @@
                                                 @include('package.modal.ventanilla')
                                             </div>
                                         @endhasrole
-                                    </div>
-                                    <div class="row">
-                                        <form method="get" action="{{ route('ventanilla.excel') }}" class="col-md-4">
-                                            @csrf
-                                            <div class="form-row align-items-center">
-                                                <div class="col-md-3">
-                                                    <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                                    <input type="date" name="fecha_inicio" class="form-control"
-                                                        required>
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <!-- Formulario para generar Excel -->
+                                                <div class="col-md-6">
+                                                    <form method="get" action="{{ route('ventanilla.excel') }}" class="col-md-12">
+                                                        @csrf
+                                                        <div class="form-row">
+                                                            <div class="col-md-4">
+                                                                <label for="excel_fecha_inicio">Fecha de inicio:</label>
+                                                                <input type="date" name="fecha_inicio" class="form-control" required>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="excel_fecha_fin">Fecha de fin:</label>
+                                                                <input type="date" name="fecha_fin" class="form-control" required>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="ventanilla">Ventanilla:</label>
+                                                                <select name="ventanilla" class="form-control">
+                                                                    @if (auth()->user()->Regional == 'LA PAZ')
+                                                                        <option value="DD">DD</option>
+                                                                        <option value="DND">DND</option>
+                                                                        <option value="CASILLAS">CASILLAS</option>
+                                                                        <option value="ECA">ECA</option>
+                                                                    @else
+                                                                        <option value="UNICA">UNICA</option>
+                                                                    @endif
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-12 mt-3 text-center">
+                                                                <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <div class="col-md-3">
-                                                    <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                    <input type="date" name="fecha_fin" class="form-control"
-                                                        required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label for="ventanilla">Seleccionar Ventanilla:</label>
-                                                    <select name="ventanilla" class="form-control">
-                                                        @if (auth()->user()->Regional == 'LA PAZ')
-                                                            <option value="DD">DD</option>
-                                                            <option value="DND">DND</option>
-                                                            <option value="CASILLAS">CASILLAS</option>
-                                                            <option value="ECA">ECA</option>
-                                                        @else
-                                                            <option value="UNICA">UNICA</option>
-                                                        @endif
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <button type="submit" class="btn btn-success"
-                                                        target="_blank">Generar Excel</button>
+                                        
+                                                <!-- Formulario para generar PDF -->
+                                                <div class="col-md-6">
+                                                    <form method="get" action="{{ route('package.pdf.ventanillapdf') }}" class="col-md-12">
+                                                        @csrf
+                                                        <div class="form-row">
+                                                            <div class="col-md-4">
+                                                                <label for="fecha_inicio">Fecha de inicio:</label>
+                                                                <input type="date" name="fecha_inicio" class="form-control" required>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="fecha_fin">Fecha de fin:</label>
+                                                                <input type="date" name="fecha_fin" class="form-control" required>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="ventanilla">Ventanilla:</label>
+                                                                <select name="ventanilla" class="form-control">
+                                                                    @if (auth()->user()->Regional == 'LA PAZ')
+                                                                        <option value="DD">DD</option>
+                                                                        <option value="DND">DND</option>
+                                                                        <option value="CASILLAS">CASILLAS</option>
+                                                                        <option value="ECA">ECA</option>
+                                                                    @else
+                                                                        <option value="UNICA">UNICA</option>
+                                                                    @endif
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-12 mt-3 text-center">
+                                                                <button type="submit" class="btn btn-danger">Generar PDF</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                        </form>
-                                        <form method="get" action="{{ route('package.pdf.ventanillapdf') }}"
-                                            class="col-md-4">
-                                            @csrf
-                                            <div class="form-row align-items-center">
-                                                <div class="col-md-3">
-                                                    <label for="fecha_inicio">Fecha de inicio:</label>
-                                                    <input type="date" name="fecha_inicio" class="form-control"
-                                                        required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label for="fecha_fin">Fecha de fin:</label>
-                                                    <input type="date" name="fecha_fin" class="form-control"
-                                                        required>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label for="ventanilla">Seleccionar Ventanilla:</label>
-                                                    <select name="ventanilla" class="form-control">
-                                                        @if (auth()->user()->Regional == 'LA PAZ')
-                                                            <option value="DD">DD</option>
-                                                            <option value="DND">DND</option>
-                                                            <option value="CASILLAS">CASILLAS</option>
-                                                            <option value="ECA">ECA</option>
-                                                        @else
-                                                            <option value="UNICA">UNICA</option>
-                                                        @endif
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <button type="submit" class="btn btn-danger">Generar
-                                                        PDF</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                                 @if ($message = Session::get('success'))
@@ -215,4 +210,3 @@
         </div>
     </div>
 </div>
-
