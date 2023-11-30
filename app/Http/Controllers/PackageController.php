@@ -613,10 +613,6 @@ class PackageController extends Controller
     {
         return view('package.inventariocartero');
     }
-    public function distribuicioncartero()
-    {
-        return view('package.distribuicioncartero');
-    }
 
     //REPORTES EXCEL Y PDF
     public function packagesallexcel(Request $request)

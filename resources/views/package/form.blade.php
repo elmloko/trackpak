@@ -22,21 +22,22 @@
                 </div> 
                 <div class="form-group">
                     {{ Form::label('PESO') }}
-                    {{ Form::text('PESO', $package->PESO, [
+                    {{ Form::number('PESO', $package->PESO, [
                         'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
                         'placeholder' => 'Expresa el Peso en Gramos',
-                        'pattern' => '\d+(\.\d{1,2})?', // Expresión regular para permitir números con hasta dos decimales
-                        'title' => 'Ingrese un número válido con hasta dos decimales',
+                        'step' => '0.01', // Establece el paso para permitir hasta dos decimales
+                        'title' => 'Ingrese un número válido con hasta dos decimales (ej. 1.25)',
+                        'oninput' => 'validity.valid||(value="")', // Elimina caracteres no permitidos
                     ]) }}
                     {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>                
+                </div>                              
                 <div class="form-group">
                     {{ Form::label('DESTINATARIO') }}
                     {{ Form::text('DESTINATARIO', strtoupper($package->DESTINATARIO), [
                         'class' => 'form-control' . ($errors->has('DESTINATARIO') ? ' is-invalid' : ''),
                         'placeholder' => 'Destinatario',
-                        'pattern' => '^[A-Z]+$',
-                        'title' => 'Ingrese solo letras mayúsculas',
+                        // 'pattern' => '^[A-Z]+$',
+                        // 'title' => 'Ingrese solo letras mayúsculas',
                         // 'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
                     ]) }}
                     {!! $errors->first('DESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
@@ -162,6 +163,16 @@
                 $('#ZONA').prop('disabled', false);
             }
         }
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Seleccionar todos los elementos de entrada de texto del formulario
+        $('input[type="text"]').on('input', function () {
+            // Convertir el valor a mayúsculas y actualizar el valor del campo
+            $(this).val($(this).val().toUpperCase());
+        });
     });
 </script>
 

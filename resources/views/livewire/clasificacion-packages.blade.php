@@ -185,7 +185,7 @@
                                                                         </button>
                                                                     </form>
                                                                 @else
-                                                                    <p class="btn btn-dark btn-sm">No Disponible.</p>
+                                                                    <p class="btn btn-dark btn-sm">ENVIADO</p>
                                                                 @endif
                                                             </div>
                                                         </div>
