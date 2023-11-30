@@ -7,7 +7,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="card">
+                                <div>
                                     <div>
                                         <h5 id="card_title">
                                             {{ __('Entregas de Paquetes en Carteros') }}
@@ -20,7 +20,7 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        <div class="col-lg-9 text-right">
+                                        {{-- <div class="col-lg-9 text-right">
                                             <div class="mr-2 d-inline-block">
                                                 <a href="{{ route('package.pdf.carteropdf') }}" class="btn btn-success"
                                                     data-placement="left">
@@ -43,7 +43,7 @@
                                                 @include('package.modal.cartero')
                                             </div>
                                             @endhasrole
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">

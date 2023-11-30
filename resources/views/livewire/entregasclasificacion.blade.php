@@ -3,7 +3,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 id="card_title">{{ __('Registro de Paquetes Ordinarios') }}</h5>
+                    <h5 id="card_title">{{ __('Despacho de Paquetes Ordinarios') }}</h5>
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="form-group">

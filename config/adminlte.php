@@ -403,7 +403,7 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Distribución Paquetes',
-                            'url' => 'packages.distribuicioncartero',
+                            'url' => 'packages/distribuicioncartero',
                             'icon' => 'fas fa-box-open',
                             'can'  => 'packages.carteros',
                         ],

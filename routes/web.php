@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/inventariocartero', [PackageController::class, 'inventariocartero'])->name('packages.inventariocartero');
     Route::get('packages/{id}/deletecartero', [PackageController::class, 'deletecartero'])->name('packages.deletecartero');
     Route::post('packages/buscarPaqueteCartero', [PackageController::class, 'buscarPaqueteCartero'])->name('packages.buscarPaqueteCartero');
-    // Route::get('packages/distribuicioncartero', [PackageController::class, 'distribuicioncartero'])->name('packages.distribuicioncartero');
+    Route::get('packages/distribuicioncartero', [PackageController::class, 'distribuicioncartero'])->name('packages.distribuicioncartero');
 
     // Reportes PDF
     Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
