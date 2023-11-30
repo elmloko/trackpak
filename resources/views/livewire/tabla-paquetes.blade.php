@@ -66,9 +66,7 @@
                             <div class="col-md-6">
                                 {{ $packagesToAdd->links() }}
                             </div>
-                            <div class="col-md-6 text-right">
-                                Se encontraron {{ $packagesToAdd->total() }} registros en total
-                            </div>
+
                         </div>
                     </div>
                 </div>
