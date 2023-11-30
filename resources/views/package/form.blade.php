@@ -73,7 +73,7 @@
                     {{ Form::label('ZONA') }}
                     {{ Form::text('ZONA', strtoupper($package->ZONA), [
                         'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
-                        'placeholder' => 'Zona',
+                        // 'placeholder' => 'Zona',
                         // 'pattern' => '^[A-Z]+$',
                         'title' => 'Ingrese solo letras mayúsculas',
                         'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente

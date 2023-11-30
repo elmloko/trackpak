@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/clasificacion', [PackageController::class, 'clasificacion'])->name('packages.clasificacion');
     Route::get('test/redirigidos', [PackageController::class, 'redirigidos'])->name('packages.redirigidos');
     Route::get('test/dirigido/{id}', [PackageController::class, 'dirigido'])->name('packages.dirigido');
+    Route::get('packages/entregasclasificacion', [PackageController::class, 'entregasclasificacion'])->name('packages.entregasclasificacion');
 
     //Modulo Ventanilla
     Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->name('packages.ventanilla');

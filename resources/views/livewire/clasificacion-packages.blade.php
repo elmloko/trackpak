@@ -5,7 +5,23 @@
                 <div class="card-header">
                     <h5 id="card_title">{{ __('Registro de Paquetes Ordinarios') }}</h5>
                     <div class="row align-items-center">
-                        <div class="col-md-6">
+                        <div class="col-md-3">
+                            <label for="cityFilter">Filtrar por Ciudad:</label>
+                            <select wire:model="selectedCity" class="form-control" id="cityFilter">
+                                <option value=""></option>
+                                <option value="LA PAZ">LA PAZ</option>
+                                <option value="COCHABAMBA">COCHABAMBA</option>
+                                <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                <option value="ORURO">ORURO</option>
+                                <option value="POTOSI">POTOSI</option>
+                                <option value="SUCRE">SUCRE</option>
+                                <option value="BENI">BENI</option>
+                                <option value="PANDO">PANDO</option>
+                                <option value="TARIJA">TARIJA</option>
+                                <!-- Agrega más opciones según tus necesidades -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="search">Busca:</label>
                                 <input wire:model.lazy="search" type="text" class="form-control"
@@ -17,97 +33,8 @@
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
+                                <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
                             @endhasrole
-                        </div>
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <form method="get" action="{{ route('clasificacion.excel') }}" class="mb-3">
-                                        @csrf
-                                        <div class="form-row align-items-center">
-                                            <div class="col-md-3">
-                                                <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                                <input type="date" name="fecha_inicio" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                <input type="date" name="fecha_fin" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ciudad">Ciudad:</label>
-                                                <select name="ciudad" class="form-control" required>
-                                                    <option value="LA PAZ">LA PAZ</option>
-                                                    <option value="COCHABAMBA">COCHABAMBA</option>
-                                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
-                                                    <option value="ORURO">ORURO</option>
-                                                    <option value="POTOSI">POTOSI</option>
-                                                    <option value="SUCRE">SUCRE</option>
-                                                    <option value="BENI">BENI</option>
-                                                    <option value="PANDO">PANDO</option>
-                                                    <option value="TARIJA">TARIJA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ventanilla">Ventanilla:</label>
-                                                <select name="ventanilla" class="form-control" required>
-                                                    <option value="DND">DND</option>
-                                                    <option value="DD">DD</option>
-                                                    <option value="ECA">ECA</option>
-                                                    <option value="CASILLAS">CASILLAS</option>
-                                                    <option value="UNICA">UNICA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-12 text-center mt-3">
-                                                <button type="submit" class="btn btn-success">Generar Excel</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-6">
-                                    <form method="get" action="{{ route('package.pdf.clasificacionpdf') }}"
-                                        name="pdfForm">
-                                        @csrf
-                                        <div class="form-row align-items-center">
-                                            <div class="col-md-3">
-                                                <label for="pdf_fecha_inicio">Fecha de inicio:</label>
-                                                <input type="date" name="fecha_inicio" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="pdf_fecha_fin">Fecha de fin:</label>
-                                                <input type="date" name="fecha_fin" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ciudad">Ciudad:</label>
-                                                <select name="ciudad" class="form-control" required>
-                                                    <option value="LA PAZ">LA PAZ</option>
-                                                    <option value="COCHABAMBA">COCHABAMBA</option>
-                                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
-                                                    <option value="ORURO">ORURO</option>
-                                                    <option value="POTOSI">POTOSI</option>
-                                                    <option value="SUCRE">SUCRE</option>
-                                                    <option value="BENI">BENI</option>
-                                                    <option value="PANDO">PANDO</option>
-                                                    <option value="TARIJA">TARIJA</option>
-                                                    <!-- Agrega más opciones según tus necesidades -->
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ventanilla">Ventanilla:</label>
-                                                <select name="ventanilla" class="form-control" required>
-                                                    <option value="DND">DND</option>
-                                                    <option value="DD">DD</option>
-                                                    <option value="ECA">ECA</option>
-                                                    <option value="CASILLAS">CASILLAS</option>
-                                                    <option value="UNICA">UNICA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-12 text-center mt-3">
-                                                <button type="submit" class="btn btn-danger">Generar PDF</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -122,6 +49,8 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
+                                        <th><input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
+                                        </th>
                                         <th>No</th>
                                         <th>Código Rastreo</th>
                                         <th>Destinatario</th>
@@ -129,7 +58,7 @@
                                         <th>País</th>
                                         <th>Ciudad</th>
                                         <th>Ventanilla</th>
-                                        <th>Peso</th>
+                                        <th>Peso (gr.)</th>
                                         <th>Tipo</th>
                                         <th>Estado</th>
                                         <th>Observaciones</th>
@@ -141,8 +70,10 @@
                                 <tbody>
                                     @foreach ($packages as $package)
                                         @if ($package->ESTADO === 'CLASIFICACION')
-                                            {{-- @if ($package->ESTADO === 'CLASIFICACION' && $package->CUIDAD === auth()->user()->Regional) --}}
                                             <tr>
+                                                <td><input type="checkbox" wire:model="paquetesSeleccionados"
+                                                        value="{{ $package->id }}"></td>
+                                                <td>{{ $package->estadoclasificacion }}</td>
                                                 <td>{{ $package->id }}</td>
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
@@ -151,7 +82,7 @@
                                                 </td>
                                                 <td>{{ $package->CUIDAD }}</td>
                                                 <td>{{ $package->VENTANILLA }}</td>
-                                                <td>{{ $package->PESO }} gr.</td>
+                                                <td>{{ $package->PESO }}</td>
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>{{ $package->ESTADO }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
@@ -161,37 +92,28 @@
                                                     @hasrole('SuperAdmin|Administrador|Clasificacion')
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <a class="btn btn-sm btn-success" href="{{ route('packages.edit', $package->id) }}">
+                                                                <a class="btn btn-sm btn-success"
+                                                                    href="{{ route('packages.edit', $package->id) }}">
                                                                     <i class="fa fa-fw fa-edit"></i>
                                                                     {{ __('Editar') }}
                                                                 </a>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                @php
-                                                                    $currentDate = now(); // Obtener la fecha y hora actuales
-                                                                    $creationDate = $package->created_at; // Obtener la fecha de creación del paquete
-                                                
-                                                                    // Verificar si la fecha de creación es igual a la fecha actual
-                                                                    $deleteEnabled = $currentDate->isSameDay($creationDate);
-                                                                @endphp
-                                                
-                                                                @if ($deleteEnabled)
-                                                                    <form action="{{ route('packages.destroy', $package->id) }}" method="POST">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit" class="btn btn-danger btn-sm">
-                                                                            <i class="fa fa-fw fa-trash"></i>
-                                                                            {{ __('Eliminar') }}
-                                                                        </button>
-                                                                    </form>
-                                                                @else
-                                                                    <p class="btn btn-dark btn-sm">ENVIADO</p>
-                                                                @endif
+                                                                <form
+                                                                    action="{{ route('packages.destroy', $package->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                                        <i class="fa fa-fw fa-trash"></i>
+                                                                        {{ __('Eliminar') }}
+                                                                    </button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     @endhasrole
                                                 </td>
-                                                
+
                                             </tr>
                                         @endif
                                     @endforeach
@@ -214,7 +136,6 @@
         </div>
     </div>
 </div>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Función para actualizar las opciones de ventanilla
@@ -237,19 +158,12 @@
         // Obtiene referencias a los elementos de ciudad y ventanilla para el formulario de Excel
         const ciudadSelectExcel = document.querySelector('form[name="excelForm"] select[name="ciudad"]');
         const ventanillaSelectExcel = document.querySelector(
-            'form[name="excelForm"] select[name="ventanilla"]');
+        'form[name="excelForm"] select[name="ventanilla"]');
 
         // Define las opciones de ventanilla por ciudad para el formulario de Excel
         const ventanillasPorCiudadExcel = {
             'LA PAZ': ['DND', 'DD', 'CASILLAS', 'ECA'],
             'COCHABAMBA': ['UNICA'],
-            'SANTA CRUZ': ['UNICA'],
-            'PANDO': ['UNICA'],
-            'BENI': ['UNICA'],
-            'TARIJA': ['UNICA'],
-            'SUCRE': ['UNICA'],
-            'ORURO': ['UNICA'],
-            'POTOSI': ['UNICA'],
             // Agrega más opciones según tus necesidades
         };
 
@@ -269,13 +183,6 @@
         const ventanillasPorCiudadPDF = {
             'LA PAZ': ['DND', 'DD', 'CASILLAS', 'ECA'],
             'COCHABAMBA': ['UNICA'],
-            'SANTA CRUZ': ['UNICA'],
-            'PANDO': ['UNICA'],
-            'BENI': ['UNICA'],
-            'TARIJA': ['UNICA'],
-            'SUCRE': ['UNICA'],
-            'ORURO': ['UNICA'],
-            'POTOSI': ['UNICA'],
             // Agrega más opciones según tus necesidades
         };
 

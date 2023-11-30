@@ -33,7 +33,7 @@ class Package extends Model
 		'DESTINATARIO' => 'required',
     'CUIDAD' => 'required',
     'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA',
-    'ZONA' => 'required_if:VENTANILLA,DND|string|max:255',
+    // 'ZONA' => 'required_if:VENTANILLA,DND|string|max:255',
 		// 'TELEFONO' => 'required',
 		// 'PAIS' => 'required',
 		// 'CUIDAD' => 'required',

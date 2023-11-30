@@ -356,6 +356,12 @@ return [
                             'icon' => 'fas fa-clipboard-list',
                             'can'  => 'packages.clasificacion',
                         ],
+                        [
+                            'text' => 'Despacho Paquetes',
+                            'url' => 'packages/entregasclasificacion',
+                            'icon' => 'fas fa-clipboard-list',
+                            'can'  => 'packages.clasificacion',
+                        ],
                     ],
                 ],
                 [

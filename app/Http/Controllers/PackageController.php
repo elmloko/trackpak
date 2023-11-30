@@ -51,7 +51,7 @@ class PackageController extends Controller
             'TELEFONO' => 'required|numeric|regex:/^[0-9]+$/',
             'CUIDAD' => 'required',
             'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA',
-            'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255',
+            // 'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255',
             'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
             'TIPO' => 'required|string',
             'ADUANA' => 'required|string',
@@ -592,6 +592,10 @@ class PackageController extends Controller
     public function clasificacion()
     {
         return view('package.clasificacion');
+    }
+    public function entregasclasificacion()
+    {
+        return view('package.entregasclasificacion');
     }
     public function redirigidos()
     {
