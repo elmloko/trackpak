@@ -347,7 +347,7 @@ return [
                 ],
                 [
                     'text' => 'Clasificacion',
-                    'icon' => 'fas fa-clipboard-list',
+                    'icon' => 'fas fa-cube ',
                     'can'  => 'packages.clasificacion',
                     'submenu' => [
                         [
@@ -359,33 +359,33 @@ return [
                         [
                             'text' => 'Despacho Paquetes',
                             'url' => 'packages/entregasclasificacion',
-                            'icon' => 'fas fa-clipboard-list',
+                            'icon' => 'fas  fa-cubes',
                             'can'  => 'packages.clasificacion',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Ventanilla',
-                    'icon' => 'fas fa-clipboard-list',
+                    'icon' => 'fas fa-window-maximize',
                     'can'  => 'packages.ventanilla',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla',
                             'url' => 'packages/ventanilla',
-                            'icon' => 'fas fa-clipboard-list',
+                            'icon' => 'fas fa-truck',
                             'can'  => 'packages.ventanilla',
                         ],
                         [
                             'text' => 'Inventario Paquetes',
                             'url' => 'test/deleteado',
-                            'icon' => 'fas fa-clipboard-list',
+                            'icon' => 'fas fa-book',
                             'can'  => 'packages.delete',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Distribuicion',
-                    'icon' => 'fas fa-clipboard-list',
+                    'icon' => 'fas fa-boxes',
                     'can'  => 'packages.redirigidos',
                     'submenu' => [
                         [
@@ -398,19 +398,19 @@ return [
                 ], 
                 [
                     'text' => 'Urbano',
-                    'icon' => 'fas fa-clipboard-list',
+                    'icon' => 'fas fa-building',
                     'can'  => 'packages.carteros',
                     'submenu' => [
                         [
                             'text' => 'Distribución Paquetes',
                             'url' => 'packages.distribuicioncartero',
-                            'icon' => 'fas fa-clipboard-list',
+                            'icon' => 'fas fa-box-open',
                             'can'  => 'packages.carteros',
                         ],
                         [
                             'text' => 'Entregas Cartero',
                             'url' => 'packages/carteros',
-                            'icon' => 'fas fa-clipboard-list',
+                            'icon' => 'fas fa-envelope-open-text',
                             'can'  => 'packages.carteros',
                         ],
                         [
@@ -424,7 +424,7 @@ return [
                 [
                     'text' => 'Eventos',
                     'url' => 'events',
-                    'icon' => 'fas fa-paper-plane',
+                    'icon' => 'fas fa-calendar-alt',
                     'can'  => '',
                 ],
                 

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
+use App\Models\Event;
 
 class ClasificacionPackages extends Component
 {
@@ -67,16 +68,22 @@ class ClasificacionPackages extends Component
             'datedespachoclasificacion' => now(), // Guardar la fecha de despacho actual
         ]);
 
-        // Limpiar la selección
-        $this->paquetesSeleccionados->each(function ($paqueteId) {
+        // Crear evento para cada paquete despachado
+        foreach ($this->paquetesSeleccionados as $paqueteId) {
             $paquete = Package::find($paqueteId);
+
             if ($paquete) {
-                $paquete->update([
-                    'ESTADO' => 'DESPACHO',
-                    'datedespachoclasificacion' => now(), // Guardar la fecha de despacho
+                // Crear evento para el paquete actual
+                Event::create([
+                    'action' => 'DESPACHO',
+                    'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $paquete->CODIGO,
                 ]);
             }
-        });
+        }
+
+        // Limpiar la selección
         $this->reset('paquetesSeleccionados');
     }
 

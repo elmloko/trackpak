@@ -128,7 +128,7 @@
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
                                         <th>Fecha Despacho</th>
-                                        <th>Acciones</th>
+                                        {{-- <th>Acciones</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -149,7 +149,7 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->datedespachoclasificacion }}</td>
-                                                <td>
+                                                {{-- <td>
                                                     @hasrole('SuperAdmin|Administrador|Clasificacion')
                                                         <div class="row">
                                                             <div class="col">
@@ -160,8 +160,7 @@
                                                             </div>
                                                         </div>
                                                     @endhasrole
-                                                </td>
-                                                
+                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endforeach

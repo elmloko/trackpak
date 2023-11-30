@@ -563,7 +563,7 @@ class PackageController extends Controller
         $zona = $request->input('zona');
         $package = Package::where('CODIGO', $codigo)->first(); // Usar el nombre del modelo correctamente
 
-        if ($package) {
+        if ($package->ESTADO === 'DESPACHO') {
             Event::create([
                 'action' => 'DISPONIBLE',
                 'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
@@ -584,7 +584,7 @@ class PackageController extends Controller
 
             return redirect()->back()->with('success', 'Paquete se movio a Ventanilla con exito y cambió su estado a VENTANILLA con éxito.');
         } else {
-            return redirect()->back()->with('error', 'El paquete no se encuentra en clasificación.');
+            return redirect()->back()->with('error', 'El paquete no se encuentra en Despacho de Clasificacion.');
         }
     }
 
