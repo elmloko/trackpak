@@ -1,7 +1,16 @@
 <!-- resources/views/livewire/tabla-paquetes.blade.php -->
 <div>
-    <div class="row mb-3">
-        <div class="col-lg-3">
+    <div class="row mb-12">
+        <!-- Columna de Búsqueda -->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="packagesToAdd">Buscar:</label>
+                <input wire:model.lazy="search" type="text" class="form-control" id="packagesToAdd" placeholder="Buscar...">
+            </div>
+        </div>
+
+        <!-- Columna de Seleccionar Cartero -->
+        <div class="col-md-4">
             <div class="form-group">
                 <label for="carteroSelect">Seleccionar Cartero:</label>
                 <select wire:model="selectedCartero" class="form-control" id="carteroSelect">
@@ -10,14 +19,22 @@
                         <option value="{{ $cartero->id }}">{{ $cartero->name }}</option>
                     @endforeach
                 </select>
-                <div class="col-lg-3">
-                    <button wire:click="cambiarEstadoVentanillaMasivo" class="btn btn-warning">Cambiar a Ventanilla</button>
-                </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <div class="form-group">
-                <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+
+        <!-- Columna de Botón Asignar -->
+        <div class="col-md-2">
+            <div class="row mb-12">
+                <div class="col-md-6">
+                    <button wire:click="cambiarEstadoVentanillaMasivo" class="btn btn-warning btn-lg">
+                        <i class="fas fa-check"></i> ASIGNAR
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ route('package.pdf.asignarcartero') }}" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-print"></i> Imprimir Registro de Entregas
+                    </a>
+                </div>                
             </div>
         </div>
     </div>
@@ -38,6 +55,8 @@
                 <div class="card-body">
                     <h5>{{ __('Paquetes para Agregar') }}</h5>
                     <div class="table-responsive">
+                        <div class="col-lg-3">
+                        </div>
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -56,7 +75,10 @@
                                         <td>{{ $package->ZONA }}</td>
                                         <!-- Agrega otras celdas según tu estructura de base de datos -->
                                         <td>
-                                            <button wire:click="agregarPaquete({{ $package->id }})" class="btn btn-success">Agregar</button>
+                                            <button wire:click="agregarPaquete({{ $package->id }})"
+                                                class="btn btn-success">
+                                                <i class="fas fa-plus"></i> Agregar
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -95,7 +117,10 @@
                                             <td>{{ $package->DESTINATARIO }}</td>
                                             <td>{{ $package->ZONA }}</td>
                                             <td>
-                                                <button wire:click="quitarPaquete({{ $package->id }})" class="btn btn-danger">Quitar</button>
+                                                <button wire:click="quitarPaquete({{ $package->id }})"
+                                                    class="btn btn-danger">
+                                                    <i class="fas fa-minus"></i> Quitar
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -118,5 +143,3 @@
         </div>
     </div>
 </div>
-
-

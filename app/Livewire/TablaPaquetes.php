@@ -1,4 +1,5 @@
 <?php
+// app/Livewire/TablaPaquetes.php
 
 namespace App\Livewire;
 
@@ -21,7 +22,8 @@ class TablaPaquetes extends Component
         $packagesToAdd = Package::where('ESTADO', 'VENTANILLA')
             ->where('CUIDAD', $userRegional)
             ->when($this->search, function ($query) {
-                // ... your existing search code ...
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%');
             })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -34,7 +36,7 @@ class TablaPaquetes extends Component
         return view('livewire.tabla-paquetes', [
             'packagesToAdd' => $packagesToAdd,
             'assignedPackages' => $assignedPackages,
-            'carters' => User::role('CARTERO')->get(),
+            'carters' => User::role('CARTERO')->get(), // Ajusta según tu lógica de roles
         ]);
     }
 
@@ -54,21 +56,10 @@ class TablaPaquetes extends Component
 
     public function cambiarEstadoVentanillaMasivo()
     {
-        if (!$this->selectedCartero) {
-            session()->flash('error', 'Debe seleccionar un cartero antes de cambiar el estado.');
-            return;
-        }
-
-        $selectedCartero = User::findOrFail($this->selectedCartero);
-
         Package::where('ESTADO', 'ASIGNADO')
-            ->where('CUIDAD', auth()->user()->Regional)
-            ->update([
-                'ESTADO' => 'CARTERO',
-                'usercartero' => $selectedCartero->name,
-            ]);
+            ->where('usercartero', auth()->user()->name)
+            ->update(['ESTADO' => 'CARTERO']);
 
-        $this->resetPage();
-        session()->flash('success', 'Se cambiaron los estados y asignó el cartero correctamente.');
+        $this->resetPage(); // Para reiniciar la paginación después de la actualización
     }
 }

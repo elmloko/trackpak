@@ -786,4 +786,16 @@ class PackageController extends Controller
         $pdf = PDF::loadView('package.pdf.deleteadocarteropdf', ['packages' => $packages]);
         return $pdf->stream();
     }
+    public function asignarcartero()
+    {
+        // Recupera los datos necesarios para el PDF
+        $user = auth()->user();
+        $packages = Package::where('ESTADO', 'ASIGNADO')
+            ->where('CUIDAD', $user->Regional)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $pdf = PDF::loadView('package.pdf.asignarcartero', ['packages' => $packages, 'user' => $user]);
+        return $pdf->stream();
+    }
 }

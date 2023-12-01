@@ -16,12 +16,9 @@
                                             {{ __('Entregas de Paquetes en Carteros') }}
                                         </h5>
                                     </div>
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div>
-                                                @livewire('tabla-paquetes')
-                                            </div>
-                                        </div>
+
+                                    <div>
+                                        @livewire('tabla-paquetes')
                                     </div>
                                 </div>
                             </div>
