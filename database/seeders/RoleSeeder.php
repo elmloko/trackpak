@@ -27,7 +27,7 @@ class RoleSeeder extends Seeder
         $role11 = Role::create(['name' => 'Enlace']);
         $role12 = Role::create(['name' => 'Expedicion']);
         $role13 = Role::create(['name' => 'Auxiliar Expedicion']);
-        $role14 = Role::create(['name' => 'Ventanilla']);
+        $role14 = Role::create(['name' => 'Ventanilla']); // DEMAS SE PUEDE CAMBIAR
         $role15 = Role::create(['name' => 'Almacen']);
         $role16 = Role::create(['name' => 'Auxiliar Almacen']);
         $role17 = Role::create(['name' => 'Cartero']);
@@ -48,7 +48,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'packages.ventanilla'])->syncRoles([$role1,$role2,$role3,$role4]);
         Permission::create(['name' => 'packages.delete'])->syncRoles([$role1,$role2,$role3,$role4]);
         Permission::create(['name' => 'packages.redirigidos'])->syncRoles([$role1,$role2,$role12,$role13]);
+        Permission::create(['name' => 'packages.distribuicioncartero'])->syncRoles([$role1,$role2,$role3,$role17]);
         Permission::create(['name' => 'packages.carteros'])->syncRoles([$role1,$role2,$role17]);
-        
+        Permission::create(['name' => 'packages.inventariocartero'])->syncRoles([$role1,$role2,$role17,$role3]);
     }
 }

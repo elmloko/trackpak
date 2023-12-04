@@ -399,13 +399,13 @@ return [
                 [
                     'text' => 'Urbano',
                     'icon' => 'fas fa-building',
-                    'can'  => 'packages.carteros',
+                    'can'  => 'packages.distribuicioncartero',
                     'submenu' => [
                         [
                             'text' => 'Distribución Paquetes',
                             'url' => 'packages/distribuicioncartero',
                             'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.carteros',
+                            'can'  => 'packages.distribuicioncartero',
                         ],
                         [
                             'text' => 'Entregas Cartero',
@@ -417,7 +417,7 @@ return [
                             'text' => 'Inventario Cartero',
                             'url' => 'packages/inventariocartero',
                             'icon' => 'fas fa-clipboard-list',
-                            'can'  => 'packages.carteros',
+                            'can'  => 'packages.inventariocartero',
                         ],
                     ],
                 ],

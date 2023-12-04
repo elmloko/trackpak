@@ -16,17 +16,17 @@
                 <select wire:model="selectedCartero" class="form-control" id="carteroSelect">
                     <option value="">Seleccione un cartero</option>
                     @foreach ($carters as $cartero)
-                        <option value="{{ $cartero->id }}">{{ $cartero->name }}</option>
+                        <option value="{{ $cartero->name }}">{{ $cartero->name }}</option>
                     @endforeach
                 </select>
             </div>
-        </div>
+        </div>        
 
         <!-- Columna de Botón Asignar -->
         <div class="col-md-2">
             <div class="row mb-12">
                 <div class="col-md-6">
-                    <button wire:click="cambiarEstadoVentanillaMasivo" class="btn btn-warning btn-lg">
+                    <button wire:click="asignarPaquetes" class="btn btn-warning btn-lg">
                         <i class="fas fa-check"></i> ASIGNAR
                     </button>
                 </div>
@@ -34,7 +34,7 @@
                     <a href="{{ route('package.pdf.asignarcartero') }}" class="btn btn-secondary btn-sm">
                         <i class="fas fa-print"></i> Imprimir Registro de Entregas
                     </a>
-                </div>                
+                </div>            
             </div>
         </div>
     </div>

@@ -1,5 +1,4 @@
 <?php
-// app/Livewire/TablaPaquetes.php
 
 namespace App\Livewire;
 
@@ -14,6 +13,7 @@ class TablaPaquetes extends Component
 
     public $search = '';
     public $selectedCartero;
+    public $selectedPackages = [];
 
     public function render()
     {
@@ -36,30 +36,56 @@ class TablaPaquetes extends Component
         return view('livewire.tabla-paquetes', [
             'packagesToAdd' => $packagesToAdd,
             'assignedPackages' => $assignedPackages,
-            'carters' => User::role('CARTERO')->get(), // Ajusta según tu lógica de roles
+            'carters' => User::role('CARTERO')->get(),
         ]);
     }
 
     public function agregarPaquete($packageId)
     {
         $package = Package::findOrFail($packageId);
-        $package->update(['ESTADO' => 'ASIGNADO']);
-        $package->touch();
+
+        // Verifica si el paquete ya está seleccionado
+        if (!in_array($packageId, $this->selectedPackages)) {
+            $this->selectedPackages[] = $packageId;
+            $package->update(['ESTADO' => 'ASIGNADO']);
+            $package->touch();
+        }
     }
 
     public function quitarPaquete($packageId)
     {
         $package = Package::findOrFail($packageId);
+        $this->selectedPackages = array_diff($this->selectedPackages, [$packageId]);
         $package->update(['ESTADO' => 'VENTANILLA']);
         $package->touch();
     }
 
-    public function cambiarEstadoVentanillaMasivo()
-    {
-        Package::where('ESTADO', 'ASIGNADO')
-            ->where('usercartero', auth()->user()->name)
-            ->update(['ESTADO' => 'CARTERO']);
-
-        $this->resetPage(); // Para reiniciar la paginación después de la actualización
+    public function asignarPaquetes()
+{
+    if (!$this->selectedCartero) {
+        session()->flash('error', 'Seleccione un cartero antes de asignar paquetes.');
+        return;
     }
+
+    if (empty($this->selectedPackages)) {
+        session()->flash('error', 'No hay paquetes seleccionados para asignar.');
+        return;
+    }
+
+    // Obtén los paquetes seleccionados
+    $packagesToAdd = Package::whereIn('id', $this->selectedPackages)->get();
+
+    // Asigna el cartero a cada paquete
+    foreach ($packagesToAdd as $package) {
+        $package->update([
+            'ESTADO' => 'CARTERO',
+            'usercartero' => $this->selectedCartero,
+        ]);
+        $package->touch();
+    }
+
+    $this->selectedPackages = [];
+    session()->flash('success', 'Paquetes asignados correctamente.');
+}
+
 }

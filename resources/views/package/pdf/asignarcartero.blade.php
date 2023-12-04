@@ -14,8 +14,8 @@
             font-size: 12px;
         }
 
-        th,
-        td {
+        .first-table th,
+        .first-table td {
             border: 1px solid #000;
             padding: 5px;
         }
@@ -50,6 +50,42 @@
         .date {
             line-height: 0.5;
         }
+
+        .second-table {
+            border: none;
+            margin: 20px auto;
+            /* Centra la segunda tabla en el medio */
+            line-height: 1;
+            /* Ajusta el line-height para quitar el interlineado */
+        }
+
+        .second-table {
+            border: none;
+            margin: 20px auto;
+            /* Centra la segunda tabla en el medio */
+            line-height: 1;
+            /* Ajusta el line-height para quitar el interlineado */
+        }
+
+        .second-table th {
+            background-color: white;
+            /* Establece el fondo de los th a blanco */
+            border: none;
+            padding: 5px;
+            text-align: center;
+            /* Centra el texto en las celdas */
+            line-height: 1;
+            /* Ajusta el line-height para quitar el interlineado */
+        }
+
+        .second-table td {
+            border: none;
+            padding: 5px;
+            text-align: center;
+            /* Centra el texto en las celdas */
+            line-height: 1;
+            /* Ajusta el line-height para quitar el interlineado */
+        }
     </style>
 </head>
 
@@ -67,7 +103,7 @@
         <p>Regional: {{ auth()->user()->Regional }}</p>
         <p>Fecha: {{ now()->format('Y-m-d H:i') }}</p>
     </div>
-    <table>
+    <table class="first-table">
         <thead>
             <tr>
                 <th>No</th>
@@ -97,7 +133,8 @@
             @endforeach
         </tbody>
     </table>
-    <table>
+    <br>
+    <table class="second-table">
         <thead>
             <tr>
                 <th>__________________________</th>
@@ -105,12 +142,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><p>SUPERVISOR/SALIDA</p>
-                    <p>{{ auth()->user()->name }}</p></td>
-                <td><p>ENTREGADO POR</p>
-                    <p>{{ auth()->user()->name }}</p></td>
-            </tr>
+            @foreach ($packages as $package)
+                    <tr>
+                        <td>
+                            <p>SUPERVISOR/SALIDA<br>{{ auth()->user()->name }}</p>
+                        </td>
+                        <td>
+                            <p>ENTREGADO POR<br>{{ $package->usercartero }}</p>
+                        </td>
+                    </tr>
+                    @break <!-- Rompe el bucle después de la primera iteración -->
+            @endforeach
         </tbody>
     </table>
 </body>
