@@ -61,43 +61,42 @@ class TablaPaquetes extends Component
     }
 
     public function asignarPaquetes()
-    {
-        // Verifica si se ha seleccionado un cartero
-        if (!$this->selectedCartero) {
-            session()->flash('error', 'Seleccione un cartero antes de asignar paquetes.');
-            return;
-        }
-
-        // Guarda el cartero seleccionado en una variable
-        $carteroSeleccionado = $this->selectedCartero;
-
-        // Verifica si hay paquetes seleccionados
-        if (empty($this->selectedPackages)) {
-            session()->flash('error', 'No hay paquetes seleccionados para asignar.');
-            return;
-        }
-
-        try {
-            // Obtén los paquetes seleccionados
-            $packagesToAdd = Package::whereIn('id', $this->selectedPackages)->get();
-
-            // Asigna el cartero a cada paquete
-            foreach ($packagesToAdd as $package) {
-                $package->update([
-                    'ESTADO' => 'CARTERO',
-                    'usercartero' => $carteroSeleccionado,
-                ]);
-                $package->touch();
-            }
-
-            // Reinicia las selecciones
-            $this->selectedPackages = [];
-            $this->selectedCartero = null;
-
-            session()->flash('success', 'Paquetes asignados correctamente.');
-        } catch (\Exception $e) {
-            // Captura y maneja cualquier excepción
-            session()->flash('error', 'Error al asignar paquetes. Detalles: ' . $e->getMessage());
-        }
+{
+    // Verifica si se ha seleccionado un cartero
+    if (!$this->selectedCartero) {
+        session()->flash('error', 'Seleccione un cartero antes de asignar paquetes.');
+        return;
     }
+
+    // Guarda el cartero seleccionado en una variable
+    $carteroSeleccionado = $this->selectedCartero;
+
+    // Verifica si hay paquetes seleccionados
+    if (empty($this->selectedPackages)) {
+        session()->flash('error', 'No hay paquetes seleccionados para asignar.');
+        return;
+    }
+
+    try {
+        // Asigna el cartero a cada paquete
+        Package::whereIn('id', $this->selectedPackages)
+            ->update([
+                'ESTADO' => 'CARTERO',
+                'usercartero' => $carteroSeleccionado,
+            ]);
+
+        // Reinicia las selecciones
+        $this->selectedPackages = [];
+        $this->selectedCartero = null;
+
+        session()->flash('success', 'Paquetes asignados correctamente.');
+    } catch (\Exception $e) {
+        // Loguea la excepción para obtener más detalles
+        \Log::error('Error al asignar paquetes. Detalles: ' . $e->getMessage());
+
+        session()->flash('error', 'Error al asignar paquetes. Detalles: ' . $e->getMessage());
+    }
+}
+
+
 }
