@@ -71,6 +71,7 @@
                                                         <th>Peso</th>
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
+
                                                         <th>Fecha Ingreso</th>
                                                         <th>Acciones</th>
                                                     </tr>
@@ -93,7 +94,7 @@
                                                                 <td>{{ $package->PESO }} gr.</td>
                                                                 <td>{{ $package->TIPO }}</td>
                                                                 <td>{{ $package->ESTADO }}</td>
-                                                                <td>{{ $package->usercartero }}</td>
+                                                                
                                                                 <td>{{ $package->created_at }}</td>
                                                                 <td>
                                                                     <form

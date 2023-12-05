@@ -15,6 +15,7 @@ class Carteros extends Component
     public function render()
     {
         $userRegional = auth()->user()->Regional;
+        $userasignado = auth()->user()->name;
         $packages = Package::where('ESTADO', 'CARTERO')
         ->when($this->search, function ($query) {
             $query->where('CODIGO', 'like', '%' . $this->search . '%')
@@ -29,6 +30,7 @@ class Carteros extends Component
         })
         // Filtra por la 'CUIDAD' del usuario autenticado
         ->where('CUIDAD', $userRegional)
+        ->where('usercartero', $userasignado)
         ->orderBy('created_at', 'desc')
         ->paginate(10);
 
