@@ -108,26 +108,6 @@
                                                                             </a>
                                                                             @include('package.modal.bajacartero')
                                                                         @endhasrole
-                                                                        @hasrole('SuperAdmin|Administrador|Cartero')
-                                                                            <a class="btn btn-sm btn-success"
-                                                                                href="{{ route('packages.edit', $package->id) }}">
-                                                                                <i class="fa fa-fw fa-edit"></i>
-                                                                                {{ __('Editar') }}
-                                                                            </a>
-                                                                        @endhasrole
-                                                                        {{-- @csrf
-                                                                        @method('DELETE')
-                                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                                                            @if (!$package->redirigido)
-                                                                                <a class="btn btn-sm btn-secondary"
-                                                                                    href="#" data-toggle="modal"
-                                                                                    data-target="#reencaminarModal{{ $package->id }}">
-                                                                                    <i class="fas fa-arrow-up"></i>
-                                                                                    {{ __('Reencaminar') }}
-                                                                                </a>
-                                                                                @include('package.modal.reencaminar')
-                                                                            @endif
-                                                                        @endhasrole --}}
                                                                     </form>
                                                                 </td>
                                                             </tr>

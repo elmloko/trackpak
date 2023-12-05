@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Package;
+use App\Models\Event;
 use Livewire\WithPagination;
 
 class TablaPaquetes extends Component
@@ -61,42 +62,61 @@ class TablaPaquetes extends Component
     }
 
     public function asignarPaquetes()
-{
-    // Verifica si se ha seleccionado un cartero
-    if (!$this->selectedCartero) {
-        session()->flash('error', 'Seleccione un cartero antes de asignar paquetes.');
-        return;
+    {
+        // Verifica si se ha seleccionado un cartero
+        if (!$this->selectedCartero) {
+            session()->flash('error', 'Seleccione un cartero antes de asignar paquetes.');
+            return;
+        }
+
+        // Guarda el cartero seleccionado en una variable
+        $carteroSeleccionado = $this->selectedCartero;
+
+        // Verifica si hay paquetes seleccionados
+        if (empty($this->selectedPackages)) {
+            session()->flash('error', 'No hay paquetes seleccionados para asignar.');
+            return;
+        }
+
+        try {
+            // Asigna el cartero a cada paquete
+            Package::whereIn('id', $this->selectedPackages)
+                ->update([
+                    'ESTADO' => 'CARTERO',
+                    'usercartero' => $carteroSeleccionado,
+                ]);
+
+            // Crea eventos para cada paquete asignado
+            foreach ($this->selectedPackages as $packageId) {
+                $package = Package::findOrFail($packageId);
+
+                Event::create([
+                    'action' => 'EN TRASCURSO',
+                    'descripcion' => 'Paquete Destinado por envío con Cartero',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $package->CODIGO,
+                ]);
+                
+                // Busca el ID del cartero basándote en su nombre
+                $carteroId = User::where('name', $carteroSeleccionado)->value('id');
+                
+                Event::create([
+                    'action' => 'EN ENTREGA',
+                    'descripcion' => 'Paquete Destinado por envío con Cartero',
+                    'user_id' => $carteroId,
+                    'codigo' => $package->CODIGO,
+                ]);
+            }
+            // Reinicia las selecciones
+            $this->selectedPackages = [];
+            $this->selectedCartero = null;
+
+            session()->flash('success', 'Paquetes asignados correctamente.');
+        } catch (\Exception $e) {
+            // Loguea la excepción para obtener más detalles
+            \Log::error('Error al asignar paquetes. Detalles: ' . $e->getMessage());
+
+            session()->flash('error', 'Error al asignar paquetes. Detalles: ' . $e->getMessage());
+        }
     }
-
-    // Guarda el cartero seleccionado en una variable
-    $carteroSeleccionado = $this->selectedCartero;
-
-    // Verifica si hay paquetes seleccionados
-    if (empty($this->selectedPackages)) {
-        session()->flash('error', 'No hay paquetes seleccionados para asignar.');
-        return;
-    }
-
-    try {
-        // Asigna el cartero a cada paquete
-        Package::whereIn('id', $this->selectedPackages)
-            ->update([
-                'ESTADO' => 'CARTERO',
-                'usercartero' => $carteroSeleccionado,
-            ]);
-
-        // Reinicia las selecciones
-        $this->selectedPackages = [];
-        $this->selectedCartero = null;
-
-        session()->flash('success', 'Paquetes asignados correctamente.');
-    } catch (\Exception $e) {
-        // Loguea la excepción para obtener más detalles
-        \Log::error('Error al asignar paquetes. Detalles: ' . $e->getMessage());
-
-        session()->flash('error', 'Error al asignar paquetes. Detalles: ' . $e->getMessage());
-    }
-}
-
-
 }

@@ -399,7 +399,7 @@ return [
                 [
                     'text' => 'Urbano',
                     'icon' => 'fas fa-building',
-                    'can'  => 'packages.distribuicioncartero',
+                    'can'  => 'packages.inventariocartero',
                     'submenu' => [
                         [
                             'text' => 'Distribución Paquetes',
