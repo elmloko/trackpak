@@ -22,18 +22,9 @@
                         <p>Fecha Ingreso: {{ $package->created_at }}</p>
                     </div>
                 </div>
-                <p>¿Estás seguro de que deseas dar de baja este paquete?</p>
-                <div class="text-center">
-                    <a href="{{ route('package.pdf.formularioentrega', ['id' => $package->id]) }}"
-                        class="btn btn-secondary btn-lg">Imprimir Formulario de Entrega</a>
-                </div>
+                <p>¿En que estado se entrego el paquete?</p>
             </div>
             <div class="row">
-                <div class="col text-left mt-3">
-                    <a href="{{ route('package.pdf.abandono', $package->id) }}" class="btn btn-info ml-2">
-                        Abandono Paquete
-                    </a>
-                </div>
                 <div class="col modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <a href="{{ route('packages.deletecartero', $package->id) }}" class="btn btn-success">Confirmar Baja</a>

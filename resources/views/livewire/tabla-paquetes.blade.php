@@ -118,7 +118,7 @@
                                             <td>{{ $package->ZONA }}</td>
                                             <td>
                                                 <button wire:click="quitarPaquete({{ $package->id }})"
-                                                    class="btn btn-danger">
+                                                    class="btn btn-danger ">
                                                     <i class="fas fa-minus"></i> Quitar
                                                 </button>
                                             </td>
