@@ -1,4 +1,3 @@
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -94,22 +93,18 @@
                                                                 <td>{{ $package->PESO }} gr.</td>
                                                                 <td>{{ $package->TIPO }}</td>
                                                                 <td>{{ $package->ESTADO }}</td>
-                                                                
+
                                                                 <td>{{ $package->created_at }}</td>
                                                                 <td>
-                                                                    <form
-                                                                        action="{{ route('packages.destroy', $package->id) }}"
-                                                                        method="POST">
-                                                                        @hasrole('SuperAdmin|Administrador|Cartero')
-                                                                            <a class="btn btn-sm btn-warning"
-                                                                                href="#" data-toggle="modal"
-                                                                                data-target="#bajaModal{{ $package->id }}">
-                                                                                <i class="fa fa-arrow-down"></i>
-                                                                                {{ __('Baja') }}
-                                                                            </a>
-                                                                            @include('package.modal.bajacartero')
-                                                                        @endhasrole
-                                                                    </form>
+                                                                    @hasrole('SuperAdmin|Administrador|Cartero')
+                                                                        <a class="btn btn-sm btn-warning" href="#"
+                                                                            data-toggle="modal"
+                                                                            data-target="#bajaModal{{ $package->id }}">
+                                                                            <i class="fa fa-arrow-down"></i>
+                                                                            {{ __('Baja') }}
+                                                                        </a>
+                                                                        @include('package.modal.bajacartero')
+                                                                    @endhasrole
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -117,7 +112,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        
+
                                         <div class="row mt-3">
                                             <div class="col-md-6">
                                                 {{ $packages->links() }}

@@ -16,22 +16,22 @@ class Inventariocartero extends Component
     {
         $userRegional = auth()->user()->Regional;
 
-        $packages = Package::onlyTrashed()->where('ESTADO', 'DOMICILIO')
-            ->when($this->search, function ($query) {
-                $query->where('CODIGO', 'like', '%' . $this->search . '%')
-                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
-                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
-                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('deleted_at', 'like', '%' . $this->search . '%');
-            })
-            // Filtra por la 'CUIDAD' del usuario autenticado
-            ->where('CUIDAD', $userRegional)
-            ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+        $packages = Package::onlyTrashed() ->where('CUIDAD', $userRegional)
+    ->when($this->search, function ($query) {
+        $query->where('CODIGO', 'like', '%' . $this->search . '%')
+            ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+            ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+            ->orWhere('PAIS', 'like', '%' . $this->search . '%')
+            ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
+            ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+            ->orWhere('TIPO', 'like', '%' . $this->search . '%')
+            ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
+            ->orWhere('deleted_at', 'like', '%' . $this->search . '%');
+        })
+        ->whereIn('ESTADO', ['REPARTIDO'])
+        ->orderBy('deleted_at', 'desc')
+        ->paginate(10);
+
 
         return view('livewire.inventariocartero', [
             'packages' => $packages,

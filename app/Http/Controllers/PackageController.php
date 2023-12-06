@@ -505,31 +505,66 @@ class PackageController extends Controller
         }
     }
 
-    public function deletecartero($id)
-    {
-        $package = Package::find($id);
+    public function deletecartero($id, Request $request)
+{
+    $package = Package::find($id);
 
-        if ($package) {
+    if ($package) {
+        // Obtén el valor seleccionado del select
+        $nuevoEstado = $request->input('estado');
+
+        // Guarda el nuevo estado en el paquete
+        $package->estado = $nuevoEstado;
+
+        // Verifica si el estado es "VENTANILLA"
+        if ($nuevoEstado == 'VENTANILLA') {
+            // Obtén la razón seleccionada desde el segundo select
+            $razonSeleccionada = $request->input('razon');
+
+            // Llena la variable OBSERVACIONES con la razón seleccionada
+            $package->OBSERVACIONES = $razonSeleccionada;
             Event::create([
-                'action' => 'ENTREGADO',
-                'descripcion' => 'Entrega de paquete con Cartero(DOMICILIO)',
+                'action' => 'DEVUELTO',
+                'descripcion' => 'El Cartero devolvio el paquete a Ventanilla',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
-            // Cambia el estado del paquete a "ENTREGADO"
-            $package->estado = 'DOMICILIO';
+            $package->save();
+        } elseif ($nuevoEstado == 'PRE-RESAGO'){
+            // Obtén la razón seleccionada desde el tercer select
+            $razonSeleccionada = $request->input('razon');
 
+            // Llena la variable OBSERVACIONES con la razón seleccionada
+            $package->OBSERVACIONES = $razonSeleccionada;
+            Event::create([
+                'action' => 'PRE-RESAGO',
+                'descripcion' => 'El Cartero devolvio el paquete a Ventanilla y Ingreso a Almacen',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+            $package->save();
+        }else {
+            // Si el estado no es "VENTANILLA", deja OBSERVACIONES en blanco
+            $package->OBSERVACIONES = "";
             // Guarda el paquete actualizado
             $package->save();
 
+            // Crea un registro de evento solo si el estado 
+            Event::create([
+                'action' => 'ENTREGADO',
+                'descripcion' => 'Entrega de paquete con Cartero',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+
             // Luego, elimina el paquete
             $package->delete();
-
-            return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
-        } else {
-            return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
         }
+        return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
+    } else {
+        return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
     }
+}
 
     public function buscarPaquete(Request $request)
     {

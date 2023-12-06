@@ -29,6 +29,7 @@ class Deleteado extends Component
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             // Filtra por la 'CUIDAD' del usuario autenticado
+            ->whereIn('ESTADO', ['ENTREGADO'])
             ->where('CUIDAD', $userRegional)
             ->orderBy('created_at', 'desc')
             ->paginate(10);

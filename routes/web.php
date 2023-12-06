@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
     //Modulo Cartero
     Route::get('packages/carteros', [PackageController::class, 'carteros'])->name('packages.carteros');
     Route::get('packages/inventariocartero', [PackageController::class, 'inventariocartero'])->name('packages.inventariocartero');
-    Route::get('packages/{id}/deletecartero', [PackageController::class, 'deletecartero'])->name('packages.deletecartero');
+    Route::post('packages/{id}/deletecartero', [PackageController::class, 'deletecartero'])->name('packages.deletecartero');
     Route::post('packages/buscarPaqueteCartero', [PackageController::class, 'buscarPaqueteCartero'])->name('packages.buscarPaqueteCartero');
     Route::get('packages/distribuicioncartero', [PackageController::class, 'distribuicioncartero'])->name('packages.distribuicioncartero');
 

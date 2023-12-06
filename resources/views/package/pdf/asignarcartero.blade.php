@@ -148,9 +148,10 @@
     </div>
     <table class="date">
         <tbody>
+            @foreach ($packages as $package)
             <tr>
                 <th>
-                    <p>Nombre del Distribuidor: {{ auth()->user()->name }}</p>
+                    <p>Nombre del Distribuidor: {{ $package->usercartero }}</p>
                 </th>
                 <th>Regional: {{ auth()->user()->Regional }}</th>
             </tr>
@@ -162,6 +163,8 @@
 
                 </td>
             </tr>
+            @break
+    @endforeach
         </tbody>
     </table>
     <table class="first-table">
@@ -204,7 +207,7 @@
         <thead>
             <tr>
                 <td>Accion</td>
-                <td><b>10.</b>Dirreccion incorrecta -
+                <td><b>10.</b>Direccion incorrecta -
                     <b>11.</b>No se localizo el destinatario -
                     <b>12.</b>El destinatario no esta direccion -
                     <b>13.</b>Articulo rechazado por el destinatario -
