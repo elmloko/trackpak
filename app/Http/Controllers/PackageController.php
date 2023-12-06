@@ -674,6 +674,19 @@ class PackageController extends Controller
         $regional = $request->input('regional');
         return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanilla.xlsx');
     }
+    public function carteroexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $user = auth()->user();
+
+        if (!$user) {
+            // Handle unauthenticated user (redirect to login or return an error response)
+            return redirect()->route('login');
+        }
+
+        return Excel::download(new CarteroExport($fechaInicio, $fechaFin, $user), 'Cartero.xlsx');
+    }
     public function packagesallpdf(Request $request)
     {
     $fechaInicio = $request->input('fecha_inicio');
@@ -789,12 +802,29 @@ class PackageController extends Controller
         $pdf = PDF::loadview('package.pdf.carteropdf', ['packages' => $packages]);
         return $pdf->stream();
     }
-    public function deleteadocarteropdf()
+    public function deleteadocarteropdf(Request $request)
     {
-        $packages = Package::withTrashed()->where('ESTADO', 'DOMICILIO')->get(); // Obtener registros eliminados
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $usuarioActual = auth()->user()->name;
+
+        $query = Package::withTrashed()
+            ->where('ESTADO', 'REPARTIDO')
+            ->where('usercartero', '=', trim($usuarioActual));
+
+        if ($fechaInicio && $fechaFin) {
+            // Assuming 'deleted_at' is a timestamp field
+            $query->whereBetween('deleted_at', [$fechaInicio, $fechaFin]);
+        }
+
+        // Fetch the records
+        $packages = $query->get();
+
+        // Generate and return PDF
         $pdf = PDF::loadView('package.pdf.deleteadocarteropdf', ['packages' => $packages]);
-        return $pdf->stream();
+        return $pdf->download('Entregados Cartero.pdf');
     }
+
     public function asignarcartero()
     {
         // Recupera los datos necesarios para el PDF

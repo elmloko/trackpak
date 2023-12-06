@@ -10,23 +10,45 @@
                             </h5>
                         </div>
                         <div class="row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
                             </div>
-                            <div class="col-lg-9 text-right">
-                                <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('package.pdf.deleteadocarteropdf') }}" class="btn btn-success" data-placement="left">
-                                        Excel
-                                    </a>
+                            <form method="get" action="{{ route('cartero.excel') }}" class="col-md-6">
+                                @csrf
+                                <div class="form-row align-items-center">
+                                    <div class="col-md-4">
+                                        <label for="excel_fecha_inicio">Fecha de inicio:</label>
+                                        <input type="date" name="fecha_inicio" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="excel_fecha_fin">Fecha de fin:</label>
+                                        <input type="date" name="fecha_fin" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
+                                    </div>
                                 </div>
-                                <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('package.pdf.deleteadocarteropdf') }}" class="btn btn-danger" data-placement="left">
-                                        PDF
-                                    </a>
-                                </div>
+                            </form>
+                            <div class="col-lg-6">
                             </div>
+                            <form method="get" action="{{ route('package.pdf.deleteadocarteropdf') }}" class="col-md-6">
+                                @csrf
+                                <div class="form-row align-items-center">
+                                    <div class="col-md-4">
+                                        <label for="fecha_inicio">Fecha de inicio:</label>
+                                        <input type="date" name="fecha_inicio" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="fecha_fin">Fecha de fin:</label>
+                                        <input type="date" name="fecha_fin" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-danger">Generar PDF</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
