@@ -14,9 +14,9 @@ class Inventariocartero extends Component
 
     public function render()
     {
-        $userRegional = auth()->user()->Regional;
+        $userasignado = auth()->user()->name;
 
-        $packages = Package::onlyTrashed() ->where('CUIDAD', $userRegional)
+        $packages = Package::onlyTrashed() ->where('usercartero', $userasignado)
     ->when($this->search, function ($query) {
         $query->where('CODIGO', 'like', '%' . $this->search . '%')
             ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')

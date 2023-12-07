@@ -9,6 +9,7 @@ use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
 use App\Exports\InventarioExport;
 use App\Exports\PackageExport;
+use App\Exports\CarteroExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -679,11 +680,6 @@ class PackageController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $user = auth()->user();
-
-        if (!$user) {
-            // Handle unauthenticated user (redirect to login or return an error response)
-            return redirect()->route('login');
-        }
 
         return Excel::download(new CarteroExport($fechaInicio, $fechaFin, $user), 'Cartero.xlsx');
     }

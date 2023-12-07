@@ -99,6 +99,7 @@
                                             <td>{{ $package->PESO }} gr.</td>
                                             <td>{{ $package->TIPO }}</td>
                                             <td>{{ $package->ESTADO }}</td>
+                                            <td>{{ $package->usercartero }}</td>
                                             <td>{{ $package->OBSERVACIONES }}</td>
                                             <td>{{ $package->ADUANA }}</td>
                                             <td>{{ $package->deleted_at }}</td>
