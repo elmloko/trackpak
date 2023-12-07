@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
     Route::get('packages/redirigir/{id}', [PackageController::class, 'redirigir'])->name('packages.redirigir');
     Route::get('packages/prerezago', [PackageController::class, 'prerezago'])->name('packages.prerezago');
+    Route::get('packages/rezago', [PackageController::class, 'rezago'])->name('packages.rezago');
 
     //Modulo Cartero
     Route::get('packages/carteros', [PackageController::class, 'carteros'])->name('packages.carteros');

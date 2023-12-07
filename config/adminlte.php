@@ -369,6 +369,12 @@ return [
                             'icon' => 'fas fa-truck',
                             'can'  => 'packages.ventanilla',
                         ],
+                        [
+                            'text' => 'Prerezago',
+                            'url' => 'packages/prerezago',
+                            'icon' => 'fas fa-suitcase',
+                            // 'can'  => 'packages.prerezago',
+                        ],
                     ],
                 ],
                 [
@@ -425,6 +431,12 @@ return [
                             'url' => 'packages/inventariocartero',
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.inventariocartero',
+                        ],
+                        [
+                            'text' => 'Inventario Rezago',
+                            'url' => 'packages/rezago',
+                            'icon' => 'fas fa-suitcase',
+                            // 'can'  => 'packages.rezago',
                         ],
                     ],
                 ],

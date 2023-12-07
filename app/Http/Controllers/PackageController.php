@@ -631,6 +631,14 @@ class PackageController extends Controller
     {
         return view('package.distribuicioncartero');
     }
+    public function rezago()
+    {
+        return view('package.rezago');
+    }
+    public function prerezago()
+    {
+        return view('package.prerezago');
+    }
 
     //REPORTES EXCEL Y PDF
     public function packagesallexcel(Request $request)
