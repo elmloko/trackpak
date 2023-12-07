@@ -96,8 +96,8 @@
                                         <th>Código Rastreo</th>
                                         <th>Destinatario</th>
                                         <th>País</th>
-                                        {{-- <th>Destino Perdido</th> --}}
-                                        <th>Destino Ciudad</th>
+                                        <th>Destino Perdido</th>
+                                        <th>Destino Final</th>
                                         <th>Tipo</th>
                                         <th>Peso</th>
                                         <th>Estado</th>
