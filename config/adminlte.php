@@ -417,13 +417,13 @@ return [
                         [
                             'text' => 'Inventario Ventanilla',
                             'url' => 'test/deleteado',
-                            'icon' => 'fas fa-book',
+                            'icon' => 'fas fa-archive',
                             'can'  => 'packages.delete',
                         ],
                         [
                             'text' => 'Inventario Cartero',
                             'url' => 'packages/inventariocartero',
-                            'icon' => 'fas fa-clipboard-list',
+                            'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.inventariocartero',
                         ],
                     ],
