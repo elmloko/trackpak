@@ -356,12 +356,6 @@ return [
                             'icon' => 'fas fa-clipboard-list',
                             'can'  => 'packages.clasificacion',
                         ],
-                        [
-                            'text' => 'Despacho Paquetes',
-                            'url' => 'packages/entregasclasificacion',
-                            'icon' => 'fas  fa-cubes',
-                            'can'  => 'packages.clasificacion',
-                        ],
                     ],
                 ],
                 [
@@ -374,12 +368,6 @@ return [
                             'url' => 'packages/ventanilla',
                             'icon' => 'fas fa-truck',
                             'can'  => 'packages.ventanilla',
-                        ],
-                        [
-                            'text' => 'Inventario Paquetes',
-                            'url' => 'test/deleteado',
-                            'icon' => 'fas fa-book',
-                            'can'  => 'packages.delete',
                         ],
                     ],
                 ],
@@ -399,7 +387,7 @@ return [
                 [
                     'text' => 'Urbano',
                     'icon' => 'fas fa-building',
-                    'can'  => 'packages.inventariocartero',
+                    'can'  => 'packages.carteros',
                     'submenu' => [
                         [
                             'text' => 'Distribución Paquetes',
@@ -412,6 +400,25 @@ return [
                             'url' => 'packages/carteros',
                             'icon' => 'fas fa-envelope-open-text',
                             'can'  => 'packages.carteros',
+                        ],
+                    ],
+                ],
+                [
+                    'text' => 'Almacen',
+                    'icon' => 'fas fa-building',
+                    'can'  => 'packages.inventario',
+                    'submenu' => [
+                        [
+                            'text' => 'Inventario Clasificacion',
+                            'url' => 'packages/entregasclasificacion',
+                            'icon' => 'fas fa-cubes',
+                            'can'  => 'packages.clasificacion',
+                        ],
+                        [
+                            'text' => 'Inventario Ventanilla',
+                            'url' => 'test/deleteado',
+                            'icon' => 'fas fa-book',
+                            'can'  => 'packages.delete',
                         ],
                         [
                             'text' => 'Inventario Cartero',
