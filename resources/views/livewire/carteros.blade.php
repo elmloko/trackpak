@@ -93,7 +93,6 @@
                                                                 <td>{{ $package->PESO }} gr.</td>
                                                                 <td>{{ $package->TIPO }}</td>
                                                                 <td>{{ $package->ESTADO }}</td>
-
                                                                 <td>{{ $package->created_at }}</td>
                                                                 <td>
                                                                     @hasrole('SuperAdmin|Administrador|Cartero')

@@ -44,8 +44,7 @@
                                             <th>Estado</th>
                                             <th>Observaciones</th>
                                             <th>Aduana</th>
-                                            <th>Fecha Ingreso</th>
-                                            <th>Acciones</th>
+                                            {{-- <th>Fecha Pre-rezago</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,13 +53,11 @@
                                                 <tr>
                                                     <td><input type="checkbox" wire:model="paquetesSeleccionados"
                                                         value="{{ $package->id }}"></td>
-                                                    <td>{{ $package->estadoclasificacion }}</td>
                                                     <td>{{ $package->id }}</td>
                                                     <td>{{ $package->CODIGO }}</td>
                                                     <td>{{ $package->DESTINATARIO }}</td>
                                                     <td>{{ $package->TELEFONO }}</td>
-                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}
-                                                    </td>
+                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                     <td>{{ $package->CUIDAD }}</td>
                                                     <td>{{ $package->VENTANILLA }}</td>
                                                     <td>{{ $package->PESO }}</td>
@@ -68,7 +65,7 @@
                                                     <td>{{ $package->ESTADO }}</td>
                                                     <td>{{ $package->OBSERVACIONES }}</td>
                                                     <td>{{ $package->ADUANA }}</td>
-                                                    <td>{{ $package->created_at }}</td>
+                                                    {{-- <td>{{ $package->dateprerezago }}</td> --}}
                                                 </tr>
                                             @endif
                                         @endforeach

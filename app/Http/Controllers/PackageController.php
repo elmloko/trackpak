@@ -543,6 +543,7 @@ class PackageController extends Controller
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
+            $package->update(['dateprerezago' => now()]);
             $package->save();
         }else {
             // Si el estado no es "VENTANILLA", deja OBSERVACIONES en blanco

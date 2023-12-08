@@ -28,9 +28,9 @@ class Prerezago extends Component
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('dateprerezago', 'like', '%' . $this->search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('dateprerezago', 'desc')
             ->paginate(10);
 
         return view('livewire.prerezago', [
@@ -64,7 +64,7 @@ class Prerezago extends Component
         }
     }
 
-    public function cambiarEstado()
+        public function cambiarEstado()
     {
         foreach ($this->paquetesSeleccionados as $packageId) {
             $paquete = Package::find($packageId);
@@ -72,7 +72,7 @@ class Prerezago extends Component
             // Cambiar el estado del paquete
             $paquete->update([
                 'ESTADO' => 'REZAGO',
-                'daterezago' => now(),
+                'daterezago' => now()->toDateTimeString(), // Asegúrate de que 'daterezago' sea el nombre correcto del campo
             ]);
 
             // Crear un nuevo evento
@@ -82,6 +82,7 @@ class Prerezago extends Component
                 'user_id' => auth()->user()->id,
                 'codigo' => $paquete->CODIGO,
             ]);
+            $paquete->save();
         }
 
         // Limpiar la selección después de almacenar
