@@ -18,17 +18,17 @@ class Prerezago extends Component
 
     public function render()
     {
-        $packages = Package::where('ESTADO', 'PRE-RESAGO')
-        ->when($this->search, function ($query) {
-            $query->where('CODIGO', 'like', '%' . $this->search . '%')
-                ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
-                ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
-                ->orWhere('TIPO', 'like', '%' . $this->search . '%')
-                ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                ->orWhere('created_at', 'like', '%' . $this->search . '%');
+        $packages = Package::where('ESTADO', 'PRE-REZAGO')
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
+                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
+                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->orderBy('created_at', 'desc')
             ->paginate(10);
@@ -40,57 +40,55 @@ class Prerezago extends Component
 
     public function toggleSelectAll()
     {
+        $this->selectAll = !$this->selectAll;
+
         if ($this->selectAll) {
-            $this->paquetesSeleccionados = $this->getPackageIds();
+            $this->paquetesSeleccionados = $this->packages->pluck('id')->map(function ($id) {
+                return (string) $id;
+            })->toArray();
         } else {
             $this->paquetesSeleccionados = [];
         }
     }
 
-    public function toggleSelectSingle($packageId)
+    public function selectAllPackages()
     {
-        if (in_array($packageId, $this->paquetesSeleccionados)) {
-            $this->paquetesSeleccionados = array_diff($this->paquetesSeleccionados, [$packageId]);
+        $this->selectAll = !$this->selectAll;
+
+        if ($this->selectAll) {
+            $this->paquetesSeleccionados = $this->packages->pluck('id')->map(function ($id) {
+                return (string) $id;
+            })->toArray();
         } else {
-            $this->paquetesSeleccionados[] = $packageId;
+            $this->paquetesSeleccionados = [];
         }
     }
 
     public function cambiarEstado()
     {
-        // Obtener los paquetes seleccionados y actualizar su estado
-        Package::whereIn('id', $this->paquetesSeleccionados)->update([
-            'ESTADO' => 'REZAGO',
-            'daterezago' => now(), // Guardar la fecha de despacho actual
-        ]);
+        foreach ($this->paquetesSeleccionados as $packageId) {
+            $paquete = Package::find($packageId);
 
-        // Crear evento para cada paquete despachado
-        foreach ($this->paquetesSeleccionados as $paqueteId) {
-            $paquete = Package::find($paqueteId);
+            // Cambiar el estado del paquete
+            $paquete->update([
+                'ESTADO' => 'REZAGO',
+                'daterezago' => now(),
+            ]);
 
-            if ($paquete) {
-                // Crear evento para el paquete actual
-                Event::create([
-                    'action' => 'ALMACEN',
-                    'descripcion' => 'Destino de Ventanilla hacia Almacen',
-                    'user_id' => auth()->user()->id,
-                    'codigo' => $paquete->CODIGO,
-                ]);
-            }
+            // Crear un nuevo evento
+            Event::create([
+                'action' => 'ALMACEN',
+                'descripcion' => 'Destino de Ventanilla hacia Almacen',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+            ]);
         }
 
-        // Limpiar la selección
-        $this->reset('paquetesSeleccionados');
-    }
-
-    private function getPackageIds()
-    {
-        return Package::where('ESTADO', 'VENTANILLA')->pluck('id')->toArray();
-    }
-
-    private function resetSeleccion()
-    {
+        // Limpiar la selección después de almacenar
         $this->selectAll = false;
         $this->paquetesSeleccionados = [];
+
+        // Actualizar la lista de paquetes después de cambiar el estado
+        $this->render();
     }
 }

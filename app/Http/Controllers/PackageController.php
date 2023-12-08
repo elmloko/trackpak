@@ -531,14 +531,14 @@ class PackageController extends Controller
                 'codigo' => $package->CODIGO,
             ]);
             $package->save();
-        } elseif ($nuevoEstado == 'PRE-RESAGO'){
+        } elseif ($nuevoEstado == 'PRE-REZAGO'){
             // Obtén la razón seleccionada desde el tercer select
             $razonSeleccionada = $request->input('razon');
 
             // Llena la variable OBSERVACIONES con la razón seleccionada
             $package->OBSERVACIONES = $razonSeleccionada;
             Event::create([
-                'action' => 'PRE-RESAGO',
+                'action' => 'PRE-REZAGO',
                 'descripcion' => 'El Cartero devolvio el paquete a Ventanilla y Ingreso a Almacen',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,

@@ -31,7 +31,7 @@
                         <select name="estado" class="form-control" id="estadoSelect">
                             <option value="REPARTIDO">ENTREGADO</option>
                             <option value="VENTANILLA">RETORNO</option>
-                            <option value="PRE-RESAGO">PRE-RESAGO</option>
+                            <option value="PRE-REZAGO">PRE-REZAGO</option>
                         </select>
                     </div>
                     <div id="observaciones" style="display: none;">
@@ -82,6 +82,6 @@
 
         // Muestra u oculta el div de observaciones según la opción seleccionada
         observacionesDiv.style.display = this.value === 'VENTANILLA' ? 'block' : 'none';
-        observacionespreDiv.style.display = this.value === 'PRE-RESAGO' ? 'block' : 'none';
+        observacionespreDiv.style.display = this.value === 'PRE-REZAGO' ? 'block' : 'none';
     });
 </script>
