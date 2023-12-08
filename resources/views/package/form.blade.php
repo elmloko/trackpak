@@ -21,16 +21,18 @@
                     {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
                 </div> 
                 <div class="form-group">
-                    {{ Form::label('PESO') }}
+                    {{ Form::label('PESO (gr.)') }}
                     {{ Form::number('PESO', $package->PESO, [
                         'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
                         'placeholder' => 'Expresa el Peso en Gramos',
-                        'step' => '0.01', // Establece el paso para permitir hasta dos decimales
+                        'step' => '0.01',
                         'title' => 'Ingrese un número válido con hasta dos decimales (ej. 1.25)',
-                        'oninput' => 'validity.valid||(value="")', // Elimina caracteres no permitidos
+                        'oninput' => 'validity.valid||(value="")',
+                        'min' => '0',  // Establecer el valor mínimo
+                        'max' => '2.00',  // Establecer el valor máximo
                     ]) }}
                     {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>                              
+                </div>                           
                 <div class="form-group">
                     {{ Form::label('DESTINATARIO') }}
                     {{ Form::text('DESTINATARIO', strtoupper($package->DESTINATARIO), [
@@ -69,7 +71,7 @@
                     {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD','ECA' => 'ECA','CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
                     {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     {{ Form::label('ZONA') }}
                     {{ Form::text('ZONA', strtoupper($package->ZONA), [
                         'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
@@ -80,7 +82,7 @@
                         'maxlength' => '255',
                     ]) }}
                     {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
-                </div>                              
+                </div>                               --}}
                 <div class="form-group">
                     {{ Form::label('ADUANA') }}
                     {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}

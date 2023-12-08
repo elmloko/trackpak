@@ -53,7 +53,7 @@ class PackageController extends Controller
             'CUIDAD' => 'required',
             'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA',
             // 'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255',
-            'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/',
+            'PESO' => 'required|numeric|between:0.01,2.00',
             'TIPO' => 'required|string',
             'ADUANA' => 'required|string',
         ]);
@@ -714,7 +714,7 @@ class PackageController extends Controller
         $ciudad = $request->input('ciudad');
         $ventanilla = $request->input('ventanilla');
 
-        $query = Package::where('ESTADO', 'CLASIFICACION')
+        $query = Package::where('ESTADO', 'DESPACHO')
             ->where('CUIDAD', $ciudad)
             ->where('VENTANILLA', $ventanilla);
 
