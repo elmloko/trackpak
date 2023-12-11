@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ClasificacionPackages extends Component
 {
@@ -43,13 +44,13 @@ class ClasificacionPackages extends Component
     }
 
     public function toggleSelectAll()
-{
-    if ($this->selectAll) {
-        $this->paquetesSeleccionados = $this->getPackageIds();
-    } else {
-        $this->paquetesSeleccionados = [];
+    {
+        if ($this->selectAll) {
+            $this->paquetesSeleccionados = $this->getPackageIds();
+        } else {
+            $this->paquetesSeleccionados = [];
+        }
     }
-}
 
     public function toggleSelectSingle($packageId)
     {
@@ -61,31 +62,46 @@ class ClasificacionPackages extends Component
     }
 
     public function cambiarEstado()
-    {
-        // Obtener los paquetes seleccionados y actualizar su estado
-        Package::whereIn('id', $this->paquetesSeleccionados)->update([
-            'ESTADO' => 'DESPACHO',
-            'datedespachoclasificacion' => now(), // Guardar la fecha de despacho actual
-        ]);
+{
+    // Obtener los paquetes seleccionados y actualizar su estado
+    $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)->get();
 
-        // Crear evento para cada paquete despachado
-        foreach ($this->paquetesSeleccionados as $paqueteId) {
-            $paquete = Package::find($paqueteId);
+    // Actualizar estado de los paquetes
+    Package::whereIn('id', $this->paquetesSeleccionados)->update([
+        'ESTADO' => 'DESPACHO',
+        'datedespachoclasificacion' => now(), // Guardar la fecha de despacho actual
+    ]);
 
-            if ($paquete) {
-                // Crear evento para el paquete actual
-                Event::create([
-                    'action' => 'DESPACHO',
-                    'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
-                    'user_id' => auth()->user()->id,
-                    'codigo' => $paquete->CODIGO,
-                ]);
-            }
+    // Crear evento para cada paquete despachado
+    foreach ($this->paquetesSeleccionados as $paqueteId) {
+        $paquete = Package::find($paqueteId);
+
+        if ($paquete) {
+            // Crear evento para el paquete actual
+            Event::create([
+                'action' => 'DESPACHO',
+                'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+            ]);
         }
-
-        // Limpiar la selección
-        $this->reset('paquetesSeleccionados');
     }
+    $this->resetSeleccion();
+    // Generar el PDF con los paquetes seleccionados
+    $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
+
+    // Obtener el contenido del PDF
+    $pdfContent = $pdf->output();
+
+    // Generar una respuesta con el contenido del PDF para descargar
+    return response()->streamDownload(function () use ($pdfContent) {
+        echo $pdfContent;
+    }, 'Despacho_Clasificacion.pdf');
+
+    // Restablecer la selección
+    $this->resetSeleccion();
+}
+
 
     private function getPackageIds()
     {

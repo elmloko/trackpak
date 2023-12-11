@@ -36,6 +36,10 @@
                                 <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
                             @endhasrole
                         </div>
+                        {{-- <form action="{{ route('package.pdf.despachopdf') }}" method="POST" target="_blank">
+                            @csrf
+                            <button type="submit" class="btn btn-danger" data-placement="left">Imprimir</button>
+                        </form> --}}
                     </div>
                 </div>
                 @if ($message = Session::get('success'))
@@ -195,17 +199,4 @@
         actualizarVentanillas(ciudadSelectPDF, ventanillaSelectPDF, ventanillasPorCiudadPDF);
     });
 </script>
-<script>
-    document.addEventListener('livewire:load', function () {
-        Livewire.on('ciudadSeleccionada', function (selectedCity) {
-            // Recorre todos los checkboxes y marca/desmarca según la ciudad seleccionada
-            document.querySelectorAll('input[type="checkbox"]').forEach(function (checkbox) {
-                if (checkbox.closest('tr').querySelector('td:nth-child(7)').innerText === selectedCity) {
-                    checkbox.checked = true;
-                } else {
-                    checkbox.checked = false;
-                }
-            });
-        });
-    });
-</script>
+

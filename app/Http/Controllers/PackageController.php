@@ -726,6 +726,7 @@ class PackageController extends Controller
         $pdf = PDF::loadview('package.pdf.clasificacionpdf', ['packages' => $packages]);
         return $pdf->download('Clasificacion.pdf');
     }
+
     public function redirigidospdf(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
