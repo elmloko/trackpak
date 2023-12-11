@@ -10,7 +10,7 @@
         </div>
 
         <!-- Columna de Seleccionar Cartero -->
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-group">
                 <label for="carteroSelect">Seleccionar Cartero:</label>
                 <select wire:model="selectedCartero" class="form-control" id="carteroSelect">
@@ -23,18 +23,13 @@
         </div>        
 
         <!-- Columna de Botón Asignar -->
-        <div class="col-md-2">
+        <div class="col-md-1">
             <div class="row mb-12">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <button wire:click="asignarPaquetes" class="btn btn-warning btn-lg">
                         <i class="fas fa-check"></i> ASIGNAR
                     </button>
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ route('package.pdf.asignarcartero') }}" class="btn btn-secondary btn-sm">
-                        <i class="fas fa-print"></i> Imprimir Registro de Entregas
-                    </a>
-                </div>            
+                </div>           
             </div>
         </div>
     </div>
@@ -63,7 +58,6 @@
                                     <th>Código Rastreo</th>
                                     <th>Destinatario</th>
                                     <th>Zona</th>
-                                    <!-- Agrega otros encabezados según tu estructura de base de datos -->
                                     <th>Acción</th>
                                 </tr>
                             </thead>
@@ -73,7 +67,6 @@
                                         <td>{{ $package->CODIGO }}</td>
                                         <td>{{ $package->DESTINATARIO }}</td>
                                         <td>{{ $package->ZONA }}</td>
-                                        <!-- Agrega otras celdas según tu estructura de base de datos -->
                                         <td>
                                             <button wire:click="agregarPaquete({{ $package->id }})"
                                                 class="btn btn-success">

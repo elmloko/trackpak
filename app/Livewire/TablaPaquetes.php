@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Package;
 use App\Models\Event;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TablaPaquetes extends Component
 {
@@ -96,20 +97,35 @@ class TablaPaquetes extends Component
                     'user_id' => auth()->user()->id,
                     'codigo' => $package->CODIGO,
                 ]);
-                
+
                 // Busca el ID del cartero basándote en su nombre
                 $carteroId = User::where('name', $carteroSeleccionado)->value('id');
-                
+
                 Event::create([
                     'action' => 'EN ENTREGA',
-                    'descripcion' => 'Paquete Destinado por envío con Cartero',
+                    'descripcion' => 'Paquete en camino a Destino',
                     'user_id' => $carteroId,
                     'codigo' => $package->CODIGO,
                 ]);
             }
+
+            // Recupera los datos necesarios para el PDF
+            $user = auth()->user();
+            $packages = Package::where('ESTADO', 'CARTERO')
+                ->where('usercartero', $carteroSeleccionado)
+                ->orderBy('created_at', 'desc')
+                ->get();
+
+            $pdf = PDF::loadView('package.pdf.asignarcartero', ['packages' => $packages, 'user' => $user]);
+            $pdfContent = $pdf->output();
+
             // Reinicia las selecciones
             $this->selectedPackages = [];
             $this->selectedCartero = null;
+
+            return response()->streamDownload(function () use ($pdfContent) {
+                echo $pdfContent;
+            }, 'Paquetes Asignados.pdf');
 
             session()->flash('success', 'Paquetes asignados correctamente.');
         } catch (\Exception $e) {
