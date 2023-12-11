@@ -475,8 +475,6 @@ class PackageController extends Controller
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
     }
-
-    
     public function dirigido($id)
     {
         $package = Package::find($id);
@@ -574,28 +572,38 @@ class PackageController extends Controller
         $zona = $request->input('zona');
         $package = Package::where('CODIGO', $codigo)->first(); // Usar el nombre del modelo correctamente
 
-        if ($package->ESTADO === 'DESPACHO') {
-            Event::create([
-                'action' => 'DISPONIBLE',
-                'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);            
-            Event::create([
-                'action' => 'EN ENTREGA',
-                'descripcion' => 'Paquete Recibido en Oficina Postal Regional.',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
+        if ($package) {
+            // Verificar que el estado del paquete sea 'DESPACHO'
+            if ($package->ESTADO === 'DESPACHO') {
+                // Verificar que el destino sea igual a la regional del usuario
+                if (auth()->user()->Regional == $package->CUIDAD) {
+                    Event::create([
+                        'action' => 'DISPONIBLE',
+                        'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
+                        'user_id' => auth()->user()->id,
+                        'codigo' => $package->CODIGO,
+                    ]);            
+                    Event::create([
+                        'action' => 'EN ENTREGA',
+                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.',
+                        'user_id' => auth()->user()->id,
+                        'codigo' => $package->CODIGO,
+                    ]);
 
-            // Cambiar el estado del paquete a "VENTANILLA"
-            $package->ZONA = $zona;
-            $package->ESTADO = 'VENTANILLA';
-            $package->save();
+                    // Cambiar el estado del paquete a "VENTANILLA"
+                    $package->ZONA = $zona;
+                    $package->ESTADO = 'VENTANILLA';
+                    $package->save();
 
-            return redirect()->back()->with('success', 'Paquete se movio a Ventanilla con exito y cambió su estado a VENTANILLA con éxito.');
+                    return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+                } else {
+                    return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
+                }
+            } else {
+                return redirect()->back()->with('error', 'El paquete no se encuentra en Despacho de Clasificación.');
+            }
         } else {
-            return redirect()->back()->with('error', 'El paquete no se encuentra en Despacho de Clasificacion.');
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
         }
     }
 

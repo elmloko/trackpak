@@ -393,7 +393,7 @@ return [
                 [
                     'text' => 'Urbano',
                     'icon' => 'fas fa-building',
-                    'can'  => 'packages.carteros',
+                    'can'  => 'packages.urbano',
                     'submenu' => [
                         [
                             'text' => 'Distribución Paquetes',
