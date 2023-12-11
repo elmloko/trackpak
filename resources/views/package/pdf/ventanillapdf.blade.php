@@ -79,7 +79,7 @@
                 <th>Dirección</th>
                 <th>Ventanilla</th>
                 <th>Peso</th>
-                <th>Precio</th>
+                <th>Precio (gr.)</th>
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>Aduana</th>

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entregas</title>
+    <title>Prerezago</title>
     <style>
         /* Estilos para la tabla */
         table {
@@ -13,8 +12,7 @@
             font-size: 12px;
         }
 
-        th,
-        td {
+        th, td {
             border: 1px solid #000;
             padding: 5px;
         }
@@ -39,7 +37,6 @@
         .title {
             text-align: center;
         }
-
         .firma {
             text-align: center;
             margin-top: 20px;
@@ -51,14 +48,13 @@
         }
     </style>
 </head>
-
 <body>
     <div class="header">
         <div class="logo">
             <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
         </div>
         <div class="title">
-            <h2>Lista de Entregas Ventanilla</h2>
+            <h2>Manifiesto Rezago</h2>
             <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
         </div>
     </div>
@@ -73,8 +69,8 @@
                 <th>No</th>
                 <th>Código Rastreo</th>
                 <th>Destinatario</th>
-                <th>Telefono</th>
-                <th>Pais</th>
+                <th>Teléfono</th>
+                <th>País</th>
                 <th>Ciudad</th>
                 <th>Dirección</th>
                 <th>Ventanilla</th>
@@ -82,38 +78,38 @@
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>Aduana</th>
-                <th>Fecha Baja</th>
+                <th>Observaciones</th>
             </tr>
         </thead>
         <tbody>
             @php $i = 1; @endphp <!-- Inicializa $i con 1 -->
             @foreach ($packages as $package)
-            @if ($package->CUIDAD === auth()->user()->Regional)
+                @if ($package->ESTADO === 'PRE-REZAGO')
                 <tr>
                     <td>{{ $i }}</td>
                     <td>{{ $package->CODIGO }}</td>
                     <td>{{ $package->DESTINATARIO }}</td>
                     <td>{{ $package->TELEFONO }}</td>
                     <td>{{ $package->PAIS }}</td>
-                    <td>{{ $package->CIUDAD }}</td>
+                    <td>{{ $package->CUIDAD }}</td>
                     <td>{{ $package->ZONA }}</td>
                     <td>{{ $package->VENTANILLA }}</td>
                     <td>{{ $package->PESO }} gr.</td>
-                    <td>{{ $package->TIPO }}</td>
+                    <td>{{ $package->PO }}</td>
                     <td>{{ $package->ESTADO }}</td>
                     <td>{{ $package->ADUANA }}</td>
-                    <td>{{ $package->deleted_at }}</td>
+                    <td>{{ $package->created_at }}</td>
                 </tr>
                 @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
                 @endif
             @endforeach
         </tbody>
     </table>
+    <br>
     <div class="firma">
         <p>__________________________ </p>
         <p>ENTREGADO POR</p>
         <p>{{ auth()->user()->name }}</p>
     </div>
 </body>
-
 </html>

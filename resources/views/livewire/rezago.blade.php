@@ -79,7 +79,7 @@
                                         <th>Estado</th>
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
-                                        {{-- <th>Fecha Rezago</th> --}}
+                                        <th>Fecha Rezago</th>
                                         @hasrole('SuperAdmin|Administrador')
                                         <th>Acciones</th>
                                         @endhasrole
@@ -104,7 +104,7 @@
                                                 <td>{{ $package->ESTADO }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->ADUANA }}</td>
-                                                {{-- <td>{{ $package->daterezago }}</td> --}}
+                                                <td>{{ $package->daterezago }}</td>
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador')
                                                         <form action="{{ route('packages.restoring', $package->id) }}" method="POST">

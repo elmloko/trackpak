@@ -76,7 +76,7 @@
                     <th>País</th>
                     <th>Destino Cuidad</th>
                     <th>Tipo</th>
-                    <th>Peso</th>
+                    <th>Peso (gr.)</th>
                     <th>Estado</th>
                     <th>Aduana</th>
                     <th>Fecha Retorno</th>

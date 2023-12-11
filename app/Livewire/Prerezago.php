@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Prerezago extends Component
 {
@@ -40,56 +41,71 @@ class Prerezago extends Component
 
     public function toggleSelectAll()
     {
-        $this->selectAll = !$this->selectAll;
-
         if ($this->selectAll) {
-            $this->paquetesSeleccionados = $this->packages->pluck('id')->map(function ($id) {
-                return (string) $id;
-            })->toArray();
+            $this->paquetesSeleccionados = $this->getPackageIds();
         } else {
             $this->paquetesSeleccionados = [];
         }
     }
 
-    public function selectAllPackages()
+    public function toggleSelectSingle($packageId)
     {
-        $this->selectAll = !$this->selectAll;
-
-        if ($this->selectAll) {
-            $this->paquetesSeleccionados = $this->packages->pluck('id')->map(function ($id) {
-                return (string) $id;
-            })->toArray();
+        if (in_array($packageId, $this->paquetesSeleccionados)) {
+            $this->paquetesSeleccionados = array_diff($this->paquetesSeleccionados, [$packageId]);
         } else {
-            $this->paquetesSeleccionados = [];
+            $this->paquetesSeleccionados[] = $packageId;
         }
     }
 
-        public function cambiarEstado()
+    public function cambiarEstado()
     {
+        $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)->get();
+
+        Package::whereIn('id', $this->paquetesSeleccionados)->update([
+            'ESTADO' => 'REZAGO',
+            'daterezago' => now(), // Guardar la fecha de despacho actual
+        ]);
+
         foreach ($this->paquetesSeleccionados as $packageId) {
             $paquete = Package::find($packageId);
 
-            // Cambiar el estado del paquete
-            $paquete->update([
-                'ESTADO' => 'REZAGO',
-                'daterezago' => now()->toDateTimeString(), // Asegúrate de que 'daterezago' sea el nombre correcto del campo
-            ]);
-
-            // Crear un nuevo evento
-            Event::create([
-                'action' => 'ALMACEN',
-                'descripcion' => 'Destino de Ventanilla hacia Almacen',
-                'user_id' => auth()->user()->id,
-                'codigo' => $paquete->CODIGO,
-            ]);
-            $paquete->save();
+            if ($paquete) {
+                // Crear un nuevo evento
+                Event::create([
+                    'action' => 'ALMACEN',
+                    'descripcion' => 'Destino de Ventanilla hacia Almacen',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $paquete->CODIGO,
+                ]);
+            }
+            $this->resetSeleccion();
+            // Generar el PDF con los paquetes seleccionados
+            $pdf = PDF::loadView('package.pdf.prerezago', ['packages' => $paquetesSeleccionados]);
+        
+            // Obtener el contenido del PDF
+            $pdfContent = $pdf->output();
+        
+            // Generar una respuesta con el contenido del PDF para descargar
+            return response()->streamDownload(function () use ($pdfContent) {
+                echo $pdfContent;
+            }, 'Paquetes_Prerezago.pdf');
+        
+            // Restablecer la selección
+            $this->resetSeleccion();
         }
+        // Actualizar la lista de paquetes después de cambiar el estado
+        // $this->render();
+    }
 
-        // Limpiar la selección después de almacenar
+    private function getPackageIds()
+    {
+        // Obtener los IDs de los paquetes en la lista actual
+        return Package::where('ESTADO', 'PRE-REZAGO')->pluck('id')->toArray();
+    }
+
+    private function resetSeleccion()
+    {
         $this->selectAll = false;
         $this->paquetesSeleccionados = [];
-
-        // Actualizar la lista de paquetes después de cambiar el estado
-        $this->render();
     }
 }

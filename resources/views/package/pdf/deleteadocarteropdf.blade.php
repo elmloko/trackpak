@@ -77,7 +77,7 @@
                 <th>Ciudad</th>
                 <th>Dirección</th>
                 <th>Ventanilla</th>
-                <th>Peso</th>
+                <th>Peso (gr.)</th>
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>Aduana</th>

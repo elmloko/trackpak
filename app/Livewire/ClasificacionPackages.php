@@ -62,45 +62,45 @@ class ClasificacionPackages extends Component
     }
 
     public function cambiarEstado()
-{
-    // Obtener los paquetes seleccionados y actualizar su estado
-    $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)->get();
+    {
+        // Obtener los paquetes seleccionados y actualizar su estado
+        $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)->get();
 
-    // Actualizar estado de los paquetes
-    Package::whereIn('id', $this->paquetesSeleccionados)->update([
-        'ESTADO' => 'DESPACHO',
-        'datedespachoclasificacion' => now(), // Guardar la fecha de despacho actual
-    ]);
+        // Actualizar estado de los paquetes
+        Package::whereIn('id', $this->paquetesSeleccionados)->update([
+            'ESTADO' => 'DESPACHO',
+            'datedespachoclasificacion' => now(), // Guardar la fecha de despacho actual
+        ]);
 
-    // Crear evento para cada paquete despachado
-    foreach ($this->paquetesSeleccionados as $paqueteId) {
-        $paquete = Package::find($paqueteId);
+        // Crear evento para cada paquete despachado
+        foreach ($this->paquetesSeleccionados as $paqueteId) {
+            $paquete = Package::find($paqueteId);
 
-        if ($paquete) {
-            // Crear evento para el paquete actual
-            Event::create([
-                'action' => 'DESPACHO',
-                'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
-                'user_id' => auth()->user()->id,
-                'codigo' => $paquete->CODIGO,
-            ]);
+            if ($paquete) {
+                // Crear evento para el paquete actual
+                Event::create([
+                    'action' => 'DESPACHO',
+                    'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $paquete->CODIGO,
+                ]);
+            }
         }
+        $this->resetSeleccion();
+        // Generar el PDF con los paquetes seleccionados
+        $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
+
+        // Obtener el contenido del PDF
+        $pdfContent = $pdf->output();
+
+        // Generar una respuesta con el contenido del PDF para descargar
+        return response()->streamDownload(function () use ($pdfContent) {
+            echo $pdfContent;
+        }, 'Despacho_Clasificacion.pdf');
+
+        // Restablecer la selección
+        $this->resetSeleccion();
     }
-    $this->resetSeleccion();
-    // Generar el PDF con los paquetes seleccionados
-    $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
-
-    // Obtener el contenido del PDF
-    $pdfContent = $pdf->output();
-
-    // Generar una respuesta con el contenido del PDF para descargar
-    return response()->streamDownload(function () use ($pdfContent) {
-        echo $pdfContent;
-    }, 'Despacho_Clasificacion.pdf');
-
-    // Restablecer la selección
-    $this->resetSeleccion();
-}
 
 
     private function getPackageIds()
