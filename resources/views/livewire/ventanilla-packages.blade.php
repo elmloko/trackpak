@@ -17,13 +17,13 @@
                                             </div>
                                         </div>
                                         @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#buscarPaqueteModal">
-                                                    Añadir Paquete
-                                                </button>
-                                                @include('package.modal.ventanilla')
-                                            </div>
+                                        <div class="col-md-6 text-right">
+                                            <button class="btn btn-primary" data-toggle="modal"
+                                                data-target="#buscarPaqueteModal">
+                                                Añadir Paquete
+                                            </button>
+                                            @include('package.modal.ventanilla')
+                                        </div>
                                         @endhasrole
                                         <div class="col-md-12">
                                             <div class="row">
@@ -40,19 +40,19 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                                <input type="date" name="fecha_fin"
-                                                                    class="form-control" required>
+                                                                <input type="date" name="fecha_fin" class="form-control"
+                                                                    required>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="ventanilla">Ventanilla:</label>
                                                                 <select name="ventanilla" class="form-control">
                                                                     @if (auth()->user()->Regional == 'LA PAZ')
-                                                                        <option value="DD">DD</option>
-                                                                        <option value="DND">DND</option>
-                                                                        <option value="CASILLAS">CASILLAS</option>
-                                                                        <option value="ECA">ECA</option>
+                                                                    <option value="DD">DD</option>
+                                                                    <option value="DND">DND</option>
+                                                                    <option value="CASILLAS">CASILLAS</option>
+                                                                    <option value="ECA">ECA</option>
                                                                     @else
-                                                                        <option value="UNICA">UNICA</option>
+                                                                    <option value="UNICA">UNICA</option>
                                                                     @endif
                                                                 </select>
                                                             </div>
@@ -66,8 +66,7 @@
 
                                                 <!-- Formulario para generar PDF -->
                                                 <div class="col-md-6">
-                                                    <form method="get"
-                                                        action="{{ route('package.pdf.ventanillapdf') }}"
+                                                    <form method="get" action="{{ route('package.pdf.ventanillapdf') }}"
                                                         class="col-md-12">
                                                         @csrf
                                                         <div class="form-row">
@@ -78,19 +77,19 @@
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="fecha_fin">Fecha de fin:</label>
-                                                                <input type="date" name="fecha_fin"
-                                                                    class="form-control" required>
+                                                                <input type="date" name="fecha_fin" class="form-control"
+                                                                    required>
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <label for="ventanilla">Ventanilla:</label>
                                                                 <select name="ventanilla" class="form-control">
                                                                     @if (auth()->user()->Regional == 'LA PAZ')
-                                                                        <option value="DD">DD</option>
-                                                                        <option value="DND">DND</option>
-                                                                        <option value="CASILLAS">CASILLAS</option>
-                                                                        <option value="ECA">ECA</option>
+                                                                    <option value="DD">DD</option>
+                                                                    <option value="DND">DND</option>
+                                                                    <option value="CASILLAS">CASILLAS</option>
+                                                                    <option value="ECA">ECA</option>
                                                                     @else
-                                                                        <option value="UNICA">UNICA</option>
+                                                                    <option value="UNICA">UNICA</option>
                                                                     @endif
                                                                 </select>
                                                             </div>
@@ -107,13 +106,13 @@
                                     </div>
                                 </div>
                                 @if ($message = Session::get('success'))
-                                    <div class="alert alert-success">
-                                        <p>{{ $message }}</p>
-                                    </div>
+                                <div class="alert alert-success">
+                                    <p>{{ $message }}</p>
+                                </div>
                                 @elseif ($message = Session::get('error'))
-                                    <div class="alert alert-danger">
-                                        <p>{{ $message }}</p>
-                                    </div>
+                                <div class="alert alert-danger">
+                                    <p>{{ $message }}</p>
+                                </div>
                                 @endif
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -140,66 +139,66 @@
                                             </thead>
                                             <tbody>
                                                 @php
-                                                    $i = 1; // Inicializa la variable $i
+                                                $i = 1; // Inicializa la variable $i
                                                 @endphp
                                                 @foreach ($packages as $package)
-                                                    @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido && $package->CUIDAD === auth()->user()->Regional)
-                                                        <tr>
-                                                            <td>{{ $i++ }}</td>
-                                                            <td>{{ $package->CODIGO }}</td>
-                                                            <td>{{ $package->DESTINATARIO }}</td>
-                                                            <td>{{ $package->TELEFONO }}</td>
-                                                            <td>{{ $package->PAIS }}</td>
-                                                            <td>{{ $package->CUIDAD }}</td>
-                                                            <td>{{ $package->ZONA }}</td>
-                                                            <td>{{ $package->VENTANILLA }}</td>
-                                                            <td>{{ $package->PESO }} </td>
-                                                            <td>{{ $package->PRECIO }} </td>
-                                                            <td>{{ $package->TIPO }}</td>
-                                                            <td>{{ $package->ESTADO }}</td>
-                                                            <td>{{ $package->OBSERVACIONES }}</td>
-                                                            <td>{{ $package->ADUANA }}</td>
-                                                            <td>{{ $package->updated_at }}</td>
-                                                            <td>
-                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                                    Urbano')
-                                                                    <a class="btn btn-sm btn-warning" href="#"
-                                                                        data-toggle="modal"
-                                                                        data-target="#bajaModal{{ $package->id }}">
-                                                                        <i class="fa fa-arrow-down"></i>
-                                                                        {{ __('Baja') }}
-                                                                    </a>
-                                                                    @include('package.modal.baja')
-                                                                @endhasrole
-                                                                @hasrole('SuperAdmin|Administrador|Urbano')
-                                                                    <a class="btn btn-sm btn-success"
-                                                                        href="{{ route('packages.edit', $package->id) }}">
-                                                                        <i class="fa fa-fw fa-edit"></i>
-                                                                        {{ __('Editar') }}
-                                                                    </a>
-                                                                @endhasrole
-                                                                @hasrole('SuperAdmin|Administrador|Urbano')
-                                                                    @if (!$package->redirigido)
-                                                                        <button
-                                                                            wire:click="reencaminar({{ $package->id }})"
-                                                                            class="btn btn-sm btn-secondary">
-                                                                            <i class="fas fa-arrow-up"></i>
-                                                                            {{ __('Reencaminar') }}
-                                                                        </button>
-                                                                        @include('package.modal.reencaminar')
-                                                                    @endif
-                                                                @endhasrole
-                                                                {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                                                @if (!$package->redirigido)
-                                                                    <button class="btn btn-sm btn-secondary" wire:click="reencaminar({{ $package->id }})">
-                                                                        <i class="fas fa-arrow-up"></i>
-                                                                        {{ __('Reencaminar') }}
-                                                                    </button>
-                                                                @endif
-                                                                @endhasrole --}}
-                                                            </td>
-                                                        </tr>
-                                                    @endif
+                                                @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido &&
+                                                $package->CUIDAD === auth()->user()->Regional)
+                                                <tr>
+                                                    <td>{{ $i++ }}</td>
+                                                    <td>{{ $package->CODIGO }}</td>
+                                                    <td>{{ $package->DESTINATARIO }}</td>
+                                                    <td>{{ $package->TELEFONO }}</td>
+                                                    <td>{{ $package->PAIS }}</td>
+                                                    <td>{{ $package->CUIDAD }}</td>
+                                                    <td>{{ $package->ZONA }}</td>
+                                                    <td>{{ $package->VENTANILLA }}</td>
+                                                    <td>{{ $package->PESO }} </td>
+                                                    <td>{{ $package->PRECIO }} </td>
+                                                    <td>{{ $package->TIPO }}</td>
+                                                    <td>{{ $package->ESTADO }}</td>
+                                                    <td>{{ $package->OBSERVACIONES }}</td>
+                                                    <td>{{ $package->ADUANA }}</td>
+                                                    <td>{{ $package->updated_at }}</td>
+                                                    <td>
+                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                        Urbano')
+                                                        <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                            data-target="#bajaModal{{ $package->id }}">
+                                                            <i class="fa fa-arrow-down"></i>
+                                                            {{ __('Baja') }}
+                                                        </a>
+                                                        @include('package.modal.baja')
+                                                        @endhasrole
+                                                        @hasrole('SuperAdmin|Administrador|Urbano')
+                                                        <a class="btn btn-sm btn-success"
+                                                            href="{{ route('packages.edit', $package->id) }}">
+                                                            <i class="fa fa-fw fa-edit"></i>
+                                                            {{ __('Editar') }}
+                                                        </a>
+                                                        @endhasrole
+                                                        @hasrole('SuperAdmin|Administrador|Urbano')
+                                                        @if (!$package->redirigido)
+                                                        <a class="btn btn-sm btn-secondary" href="#" data-toggle="modal"
+                                                            data-target="#reencaminarModal{{ $package->id }}">
+                                                            <i class="fas fa-arrow-up"></i>
+                                                            {{ __('Reencaminar') }}
+                                                        </a>
+                                                        @include('package.modal.reencaminar')
+                                                        @endif
+                                                        @endhasrole
+                                                        {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                                        @if (!$package->redirigido)
+                                                        <button class="btn btn-sm btn-secondary"
+                                                            wire:click="reencaminar({{ $package->id }})">
+                                                            <i class="fas fa-arrow-up"></i>
+                                                            {{ __('Reencaminar') }}
+                                                        </button>
+                                                        @endif
+                                                        @endhasrole --}}
+                                                    </td>
+                                                </tr>
+                                                @endif
                                                 @endforeach
                                             </tbody>
                                         </table>
