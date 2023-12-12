@@ -168,7 +168,13 @@
         const ventanillasPorCiudadExcel = {
             'LA PAZ': ['DND', 'DD', 'CASILLAS', 'ECA'],
             'COCHABAMBA': ['UNICA'],
-            // Agrega más opciones según tus necesidades
+            'SANTA CRUZ': ['UNICA'],
+            'ORURO': ['UNICA'],
+            'SUCRE': ['UNICA'],
+            'POTOSI': ['UNICA'],
+            'BENI': ['UNICA'],
+            'PANDO': ['UNICA'],
+            'TARIJA': ['UNICA'],
         };
 
         // Escucha el cambio en la selección de la ciudad para el formulario de Excel
@@ -187,7 +193,13 @@
         const ventanillasPorCiudadPDF = {
             'LA PAZ': ['DND', 'DD', 'CASILLAS', 'ECA'],
             'COCHABAMBA': ['UNICA'],
-            // Agrega más opciones según tus necesidades
+            'SANTA CRUZ': ['UNICA'],
+            'ORURO': ['UNICA'],
+            'SUCRE': ['UNICA'],
+            'POTOSI': ['UNICA'],
+            'BENI': ['UNICA'],
+            'PANDO': ['UNICA'],
+            'TARIJA': ['UNICA'],
         };
 
         // Escucha el cambio en la selección de la ciudad para el formulario de PDF

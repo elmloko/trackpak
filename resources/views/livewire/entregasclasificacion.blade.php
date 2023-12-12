@@ -128,7 +128,6 @@
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
                                         <th>Fecha Despacho</th>
-                                        {{-- <th>Acciones</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -149,18 +148,6 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->datedespachoclasificacion }}</td>
-                                                {{-- <td>
-                                                    @hasrole('SuperAdmin|Administrador|Clasificacion')
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <a class="btn btn-sm btn-success" href="{{ route('packages.edit', $package->id) }}">
-                                                                    <i class="fa fa-fw fa-edit"></i>
-                                                                    {{ __('Editar') }}
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    @endhasrole
-                                                </td> --}}
                                             </tr>
                                         @endif
                                     @endforeach
@@ -213,13 +200,12 @@
             'LA PAZ': ['DND', 'DD', 'CASILLAS', 'ECA'],
             'COCHABAMBA': ['UNICA'],
             'SANTA CRUZ': ['UNICA'],
-            'PANDO': ['UNICA'],
-            'BENI': ['UNICA'],
-            'TARIJA': ['UNICA'],
-            'SUCRE': ['UNICA'],
             'ORURO': ['UNICA'],
+            'SUCRE': ['UNICA'],
             'POTOSI': ['UNICA'],
-            // Agrega más opciones según tus necesidades
+            'BENI': ['UNICA'],
+            'PANDO': ['UNICA'],
+            'TARIJA': ['UNICA'],
         };
 
         // Escucha el cambio en la selección de la ciudad para el formulario de Excel
@@ -239,13 +225,12 @@
             'LA PAZ': ['DND', 'DD', 'CASILLAS', 'ECA'],
             'COCHABAMBA': ['UNICA'],
             'SANTA CRUZ': ['UNICA'],
-            'PANDO': ['UNICA'],
-            'BENI': ['UNICA'],
-            'TARIJA': ['UNICA'],
-            'SUCRE': ['UNICA'],
             'ORURO': ['UNICA'],
+            'SUCRE': ['UNICA'],
             'POTOSI': ['UNICA'],
-            // Agrega más opciones según tus necesidades
+            'BENI': ['UNICA'],
+            'PANDO': ['UNICA'],
+            'TARIJA': ['UNICA'],
         };
 
         // Escucha el cambio en la selección de la ciudad para el formulario de PDF

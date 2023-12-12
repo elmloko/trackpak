@@ -43,7 +43,8 @@ class VentanillaExport implements FromCollection, WithHeadings, WithStyles
             'TIPO',
             'ESTADO',
             'ADUANA',
-            \DB::raw("DATE_FORMAT(updated_at, '%Y-%m-%d %H:%i') AS formatted_updated_at"),
+            'updated_at',
+            \DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_updated_at"),
         );
 
     if ($this->fechaInicio && $this->fechaFin) {

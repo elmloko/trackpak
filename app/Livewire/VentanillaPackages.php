@@ -28,10 +28,10 @@ class VentanillaPackages extends Component
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where('CUIDAD', $userRegional)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
         return view('livewire.ventanilla-packages', [

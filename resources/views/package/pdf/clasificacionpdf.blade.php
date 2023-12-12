@@ -99,7 +99,7 @@
                     <td>{{ $package->PO }}</td>
                     <td>{{ $package->ESTADO }}</td>
                     <td>{{ $package->ADUANA }}</td>
-                    <td>{{ $package->created_at }}</td>
+                    <td>{{ $package->datedespachoclasificacion }}</td>
                 </tr>
                 @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
                 @endif

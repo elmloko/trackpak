@@ -142,8 +142,8 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $totallpc }}</h3>
-                            <p>Total Clasificacion La Paz</p>
+                            <h3>{{ $totalClasificacion }}</h3>
+                            <p>Total Clasificacion</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -156,47 +156,31 @@
             @endhasrole
             @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
-                    <div class="small-box bg-danger">
+                    <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $totallpr }}</h3>
-                            <p>Total Reencaminado en La Paz</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
-                        <a href="{{ route('packages.redirigidos') }}" class="small-box-footer">
-                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
-            @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-warning">
-                        <div class="inner">
-                            <h3>{{ $totallpv }}</h3>
-                            <p>Total Ventanilla en La Paz</p>
+                            <h3>{{ $totalDespacho }}</h3>
+                            <p>Total Despacho</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
                             Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
-                    <div class="small-box bg-success">
+                    <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ $totallpe }}</h3>
-                            <p>Total Entregados La Paz</p>
+                            <h3>{{ $meslpc }}</h3>
+                            <p>Total Mes Clasificacion</p>
                         </div>
                         <div class="icon">
-                            <i class="fas fa-shopping-cart"></i>
+                            <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
                             Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
@@ -218,7 +202,55 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $totallpr }}</h3>
+                            <p>Total Reencaminado en La Paz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <a href="{{ route('packages.redirigidos') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>{{ $totallpv }}</h3>
+                            <p>Total Ventanilla en La Paz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totallpe }}</h3>
+                            <p>Total Entregados La Paz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -253,7 +285,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -269,7 +301,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -285,7 +317,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -317,7 +349,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -352,7 +384,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -368,7 +400,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -384,7 +416,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -416,7 +448,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -451,7 +483,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -467,7 +499,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -483,7 +515,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -515,7 +547,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -550,7 +582,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -566,7 +598,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -582,7 +614,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -614,7 +646,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -649,7 +681,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -665,7 +697,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -681,7 +713,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -713,7 +745,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -748,7 +780,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -764,7 +796,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -780,7 +812,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -812,7 +844,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -847,7 +879,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -863,7 +895,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -879,7 +911,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -911,7 +943,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -946,7 +978,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('SuperAdmin|Administrador|Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -962,7 +994,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -978,7 +1010,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -1010,7 +1042,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Ventanilla|Auxiliar Urbano')
+            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">

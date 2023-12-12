@@ -26,7 +26,9 @@ class DashboardController extends Controller
         $totalEntregados = $packages->where('ESTADO', 'ENTREGADO')->count();
         $totalVentanilla = $packages->where('ESTADO', 'VENTANILLA')->count();
         $totalClasificacion = $packages->where('ESTADO', 'CLASIFICACION')->count();
+        $totalDespacho = $packages->where('ESTADO', 'DESPACHO')->count();
         $totalReecaminado = $packages->where('ESTADO', 'REENCAMINADO')->count();
+        
         
         //Regionales 
         $totallp = $packages->where('CUIDAD', 'LA PAZ')->count();
@@ -60,6 +62,17 @@ class DashboardController extends Controller
         $totaltjc = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'CLASIFICACION')->count();
         $totalscrc = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'CLASIFICACION')->count();
         $totalpnc = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'CLASIFICACION')->count();
+
+        //Regional Detallado Clasificacion Despacho
+        $totallpd = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'DESPACHO')->count();
+        $totalcbbad = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'DESPACHO')->count();
+        $totalsczd = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'DESPACHO')->count();
+        $totalbnd = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'DESPACHO')->count();
+        $totalorud = $packages->where('CUIDAD', 'ORURO')->where('ESTADO', 'DESPACHO')->count();
+        $totalptd = $packages->where('CUIDAD', 'POTOSI')->where('ESTADO', 'DESPACHO')->count();
+        $totaltjd = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'DESPACHO')->count();
+        $totalscrd = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'DESPACHO')->count();
+        $totalpnd = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'DESPACHO')->count();
         
         //Regional Detallado Reencaminado
         $totallpr = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'REENCAMINADO')->count();
@@ -93,6 +106,17 @@ class DashboardController extends Controller
         $hoytjc = Package::where('CUIDAD', 'TARIJA')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
         $hoyscrc = Package::where('CUIDAD', 'SUCRE')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
         $hoypnc = Package::where('CUIDAD', 'PANDO')->where('ESTADO', 'CLASIFICACION')->whereDate('created_at', today())->count();
+
+        //Reportes por dia Clasificacion mes
+        $meslpc = Package::where('CUIDAD', 'LA PAZ')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
+        $mescbbac = Package::where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
+        $messczc = Package::where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
+        $mesbnc = Package::where('CUIDAD', 'BENI')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
+        $mesoruc = Package::where('CUIDAD', 'ORURO')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
+        $mesptc = Package::where('CUIDAD', 'POTOSI')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
+        $mestjc = Package::where('CUIDAD', 'TARIJA')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
+        $messcrc = Package::where('CUIDAD', 'SUCRE')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
+        $mespnc = Package::where('CUIDAD', 'PANDO')->where('ESTADO', 'CLASIFICACION')->whereMonth('created_at', now()->month)->count();
 
         //Reportes por dia Ventanilla
         $hoylpe = Package::where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
@@ -152,6 +176,25 @@ class DashboardController extends Controller
         
 
         return view('dashboard', compact('data',
+                                        'totalDespacho',
+                                        'meslpc',
+                                        'mescbbac',
+                                        'messczc',
+                                        'mesbnc',
+                                        'mesoruc',
+                                        'mesptc',
+                                        'mestjc',
+                                        'messcrc',
+                                        'mespnc',
+                                        'totallpd',
+                                        'totalcbbad',
+                                        'totalsczd',
+                                        'totalbnd',
+                                        'totalorud',
+                                        'totalptd',
+                                        'totaltjd',
+                                        'totalscrd',
+                                        'totalpnd',
                                         'hoylpe',
                                         'hoycbbae',
                                         'hoyscze',

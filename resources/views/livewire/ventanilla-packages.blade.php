@@ -187,15 +187,6 @@
                                                         @include('package.modal.reencaminar')
                                                         @endif
                                                         @endhasrole
-                                                        {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                                        @if (!$package->redirigido)
-                                                        <button class="btn btn-sm btn-secondary"
-                                                            wire:click="reencaminar({{ $package->id }})">
-                                                            <i class="fas fa-arrow-up"></i>
-                                                            {{ __('Reencaminar') }}
-                                                        </button>
-                                                        @endif
-                                                        @endhasrole --}}
                                                     </td>
                                                 </tr>
                                                 @endif

@@ -401,31 +401,66 @@ class PackageController extends Controller
             ->with('success', 'Paquete Eliminado Con Éxito!');
     }
 
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
         $package = Package::find($id);
 
         if ($package) {
+            // Registra el evento de entrega
             Event::create([
                 'action' => 'ENTREGADO',
                 'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional',
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
+
             // Cambia el estado del paquete a "ENTREGADO"
             $package->estado = 'ENTREGADO';
 
             // Guarda el paquete actualizado
             $package->save();
 
-            // Luego, elimina el paquete
+            // Genera el PDF de abandono
+            $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
+
+            // Abre el PDF en una nueva pestaña
+            $pdf->stream('Formulario de Entrega.pdf');
+
+            // Elimina el paquete
             $package->delete();
 
-            return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
+            return $pdf->stream('Formulario de Entrega.pdf');
+            // return response()->json(['success' => true]);
         } else {
-            return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
+            return response()->json(['error' => 'No se pudo encontrar el paquete para dar de baja o generar el PDF.']);
         }
     }
+
+    
+
+        // $package = Package::find($id);
+
+        // if ($package) {
+        //     Event::create([
+        //         'action' => 'ENTREGADO',
+        //         'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional',
+        //         'user_id' => auth()->user()->id,
+        //         'codigo' => $package->CODIGO,
+        //     ]);
+        //     // Cambia el estado del paquete a "ENTREGADO"
+        //     $package->estado = 'ENTREGADO';
+
+        //     // Guarda el paquete actualizado
+        //     $package->save();
+
+        //     // Luego, elimina el paquete
+        //     $package->delete();
+
+        //     return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
+        // } else {
+        //     return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
+        // }
+        // }
     public function restoring($id)
     {
         // Restaura el paquete con el ID dado
@@ -758,7 +793,7 @@ class PackageController extends Controller
             ->where('VENTANILLA', $ventanilla);
 
         if ($fechaInicio && $fechaFin) {
-            $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('datedespachoclasificacion', [$fechaInicio, $fechaFin]);
         }
 
         $packages = $query->get();
@@ -796,7 +831,7 @@ class PackageController extends Controller
         $query = Package::where('ESTADO', 'VENTANILLA');
 
         if ($fechaInicio && $fechaFin) {
-            $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('updated_at', [$fechaInicio, $fechaFin]);
         }
 
         // Añade la condición de la ventanilla según la regional
@@ -835,12 +870,12 @@ class PackageController extends Controller
         $pdf->setPaper(9.5, 24);
         return $pdf->stream();
     }
-    public function abandono(Request $request, $id)
-    {
-        $package = Package::find($id);
-        $pdf = PDF::loadView('package.pdf.abandono', compact('package', 'request'));
-        return $pdf->stream();
-    }
+    // public function abandono(Request $request, $id)
+    // {
+    //     $package = Package::find($id);
+    //     $pdf = PDF::loadView('package.pdf.abandono', compact('package', 'request'));
+    //     return $pdf->stream();
+    // }
     public function carteropdf()
     {
         $packages = Package::where('ESTADO', 'CARTERO')->get();

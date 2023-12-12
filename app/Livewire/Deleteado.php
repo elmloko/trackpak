@@ -31,7 +31,7 @@ class Deleteado extends Component
             // Filtra por la 'CUIDAD' del usuario autenticado
             ->whereIn('ESTADO', ['ENTREGADO'])
             ->where('CUIDAD', $userRegional)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('deleted_at', 'desc')
             ->paginate(10);
 
         return view('livewire.deleteado', [

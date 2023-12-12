@@ -28,8 +28,6 @@ class Entregasclasificacion extends Component
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
                     ->orWhere('datedespachoclasificacion', 'like', '%' . $this->search . '%');
             })
-            // Filtra por la 'CUIDAD' del usuario autenticado
-            // ->where('CUIDAD', $userRegional)
             ->orderBy('datedespachoclasificacion', 'desc')
             ->paginate(10);
 

@@ -26,10 +26,10 @@
                     </div>
                 </div>
                 <p>¿Estás seguro de que deseas dar de baja este paquete?</p>
-                <div class="text-center">
+                {{-- <div class="text-center">
                     <a href="{{ route('package.pdf.formularioentrega', ['id' => $package->id]) }}"
                         class="btn btn-secondary btn-lg" target="_blank">Imprimir Formulario de Entrega</a>
-                </div>
+                </div> --}}
             </div>
             <div class="row">
                 <div class="col text-left mt-3">
@@ -39,9 +39,18 @@
                 </div>
                 <div class="col modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <a href="{{ route('packages.delete', $package->id) }}" class="btn btn-success">Confirmar Baja</a>
+                    <a href="{{ route('packages.delete', $package->id) }}" class="btn btn-success" target="_blank" onclick="reloadPageAfterDelay()">Confirmar Baja</a>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    // Agrega este bloque de script
+    function reloadPageAfterDelay() {
+        setTimeout(function () {
+            location.reload(true);
+        }, 1000);
+    }
+</script>
