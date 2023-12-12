@@ -15,6 +15,7 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
+                                                <label for="buscar">Buscar:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                             </div>
                                         </div>
@@ -60,7 +61,7 @@
                                                             <th>Ciudad</th>
                                                             <th>Dirección</th>
                                                             <th>Ventanilla</th>
-                                                            <th>Peso</th>
+                                                            <th>Peso (gr.)</th>
                                                             <th>Tipo</th>
                                                             <th>Estado</th>
                                                             <th>Observaciones</th>
@@ -81,7 +82,7 @@
                                                                     <td>{{ $package->CUIDAD }}</td>
                                                                     <td>{{ $package->ZONA }}</td>
                                                                     <td>{{ $package->VENTANILLA }}</td>
-                                                                    <td>{{ $package->PESO }} gr.</td>
+                                                                    <td>{{ $package->PESO }}</td>
                                                                     <td>{{ $package->TIPO }}</td>
                                                                     <td>{{ $package->ESTADO }}</td>
                                                                     <td>{{ $package->OBSERVACIONES }}</td>

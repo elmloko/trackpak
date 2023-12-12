@@ -713,6 +713,14 @@ class PackageController extends Controller
     {
         return view('package.prerezago');
     }
+    public function generalcartero()
+    {
+        return view('package.generalcartero');
+    }
+    public function despachocartero()
+    {
+        return view('package.despachocartero');
+    }
 
     //REPORTES EXCEL Y PDF
     public function packagesallexcel(Request $request)

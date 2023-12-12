@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <h5 id="card_title">
-                                {{ __('Inventario de Paquetes en Entregados con Carteros') }}
+                                {{ __('Inventario de Paquetes Generales Entregados de Todos Carteros') }}
                             </h5>
                         </div>
                         <div class="row">

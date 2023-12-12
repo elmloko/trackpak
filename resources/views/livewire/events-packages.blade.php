@@ -12,6 +12,7 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
+                                    <label for="buscar">Buscar:</label>
                                     <input wire:model.lazy="search" type="text" class="form-control"
                                         placeholder="Buscar...">
                                 </div>

@@ -427,6 +427,12 @@ return [
                             'can'  => 'packages.delete',
                         ],
                         [
+                            'text' => 'Inventario General Cartero',
+                            'url' => 'packages/generalcartero',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.generalcartero',
+                        ],
+                        [
                             'text' => 'Inventario Cartero',
                             'url' => 'packages/inventariocartero',
                             'icon' => 'fas fa-suitcase',

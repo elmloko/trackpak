@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit');
     Route::put('packages/{package}', [PackageController::class, 'update'])->name('packages.update');
     Route::delete('packages/{packages}', [PackageController::class, 'destroy'])->name('packages.destroy');
+    Route::get('packages/listas', [PackageController::class, 'listas'])->name('packages.listas');
 
     //Modulo Clasificacion
     Route::get('packages/clasificacion', [PackageController::class, 'clasificacion'])->name('packages.clasificacion');
@@ -78,6 +79,8 @@ Route::middleware('auth')->group(function () {
     Route::post('packages/{id}/deletecartero', [PackageController::class, 'deletecartero'])->name('packages.deletecartero');
     Route::post('packages/buscarPaqueteCartero', [PackageController::class, 'buscarPaqueteCartero'])->name('packages.buscarPaqueteCartero');
     Route::get('packages/distribuicioncartero', [PackageController::class, 'distribuicioncartero'])->name('packages.distribuicioncartero');
+    Route::get('packages/generalcartero', [PackageController::class, 'generalcartero'])->name('packages.generalcartero');
+    Route::get('packages/despachocartero', [PackageController::class, 'despachocartero'])->name('packages.despachocartero');
 
     // Reportes PDF
     Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
