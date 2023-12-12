@@ -763,7 +763,7 @@ class PackageController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $user = auth()->user();
-
+        $packages = Package::withTrashed()->where('ESTADO', 'REPARTIDO')->get();
         return Excel::download(new CarteroExport($fechaInicio, $fechaFin, $user), 'Cartero.xlsx');
     }
     public function packagesallpdf(Request $request)

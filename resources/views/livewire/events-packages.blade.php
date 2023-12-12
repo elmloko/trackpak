@@ -49,7 +49,9 @@
                                     <th>Usuario</th>
                                     <th>Codigo</th>
                                     <th>Fecha y Hora de Modificacion</th>
+                                    @hasrole('SuperAdmin')
                                     <th>Acciones</th>
+                                    @endhasrole
                                     <th></th>
                                 </tr>
                             </thead>
@@ -68,10 +70,6 @@
 
                                         <td>
                                             <form action="{{ route('events.destroy', $event->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary"
-                                                    href="{{ route('events.show', $event->id) }}">
-                                                    <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
-                                                </a>
                                                 @hasrole('SuperAdmin')
                                                 <a class="btn btn-sm btn-success" href="{{ route('events.edit', $event->id) }}">
                                                     <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}

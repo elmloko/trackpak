@@ -43,12 +43,6 @@
             text-align: center;
         }
 
-        .firma {
-            text-align: center;
-            margin-top: 20px;
-            line-height: 0;
-        }
-
         .date {
             line-height: 0.5;
         }
@@ -57,15 +51,7 @@
             border: none;
             margin: 20px auto;
             /* Centra la segunda tabla en el medio */
-            line-height: 1;
-            /* Ajusta el line-height para quitar el interlineado */
-        }
-
-        .second-table {
-            border: none;
-            margin: 20px auto;
-            /* Centra la segunda tabla en el medio */
-            line-height: 1;
+            line-height: 0.5;
             /* Ajusta el line-height para quitar el interlineado */
         }
 
@@ -121,7 +107,7 @@
             text-align: center;
             font-size: 10px;
             /* Tamaño de la fuente más pequeño */
-            line-height: 1;
+            line-height: 0.5;
             /* Ajusta el line-height para quitar el interlineado */
         }
 
@@ -191,7 +177,7 @@
                             <p class="barcode">{!! DNS1D::getBarcodeHTML($package->CODIGO, 'C128', 1.25, 25) !!} <br></p>{{ $package->CODIGO }}
                         </td>
                         <td>{{ $package->DESTINATARIO }}</td>
-                        <td></td>
+                        <td>{{ $package->ZONA }}</td>
                         <td></td>
                         <td></td>
                         <td></td>

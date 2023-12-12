@@ -23,7 +23,7 @@ class CarteroExport implements FromCollection, WithHeadings, WithStyles
 
     public function collection()
     {
-        $query = Package::withTrashed() // Solo registros eliminados
+        $query = Package::withTrashed()->where('ESTADO', 'REPARTIDO') // Solo registros eliminados
             ->select(
                 'CODIGO',
                 'DESTINATARIO',

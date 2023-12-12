@@ -17,6 +17,7 @@
         td {
             border: 1px solid #000;
             padding: 5px;
+            line-height: 1;
         }
 
         thead {

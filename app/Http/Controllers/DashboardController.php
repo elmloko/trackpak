@@ -28,6 +28,10 @@ class DashboardController extends Controller
         $totalClasificacion = $packages->where('ESTADO', 'CLASIFICACION')->count();
         $totalDespacho = $packages->where('ESTADO', 'DESPACHO')->count();
         $totalReecaminado = $packages->where('ESTADO', 'REENCAMINADO')->count();
+        $totalPreRezago = $packages->where('ESTADO', 'PRE-REZAGO')->count();
+        $totalRezago = $packages->where('ESTADO', 'REZAGO')->count();
+        $totalCartero = $packages->where('ESTADO', 'CARTERO')->count();
+        $totalCartInve = $packages->where('ESTADO', 'REPARTIDO')->count();
         
         
         //Regionales 
@@ -129,6 +133,39 @@ class DashboardController extends Controller
         $hoyscre = Package::where('CUIDAD', 'SUCRE')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
         $hoypne = Package::where('CUIDAD', 'PANDO')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->count();
 
+        //Regional Detallado Ventanilla
+        $totallppr = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'PRE-REZAGO')->count();
+        $totalcbbapr = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'PRE-REZAGO')->count();
+        $totalsczpr = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'PRE-REZAGO')->count();
+        $totalbnpr = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'PRE-REZAGO')->count();
+        $totalorupr = $packages->where('CUIDAD', 'ORURO')->where('ESTADO', 'PRE-REZAGO')->count();
+        $totalptpr = $packages->where('CUIDAD', 'POTOSI')->where('ESTADO', 'PRE-REZAGO')->count();
+        $totaltjpr = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'PRE-REZAGO')->count();
+        $totalscrpr = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'PRE-REZAGO')->count();
+        $totalpnpr = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'PRE-REZAGO')->count();
+
+        //Regional Detallado Cartero
+        $totallpcar = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'CARTERO')->count();
+        $totalcbbacar = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'CARTERO')->count();
+        $totalsczcar = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'CARTERO')->count();
+        $totalbncar = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'CARTERO')->count();
+        $totalorucar = $packages->where('CUIDAD', 'ORURO')->where('ESTADO', 'CARTERO')->count();
+        $totalptcar = $packages->where('CUIDAD', 'POTOSI')->where('ESTADO', 'CARTERO')->count();
+        $totaltjcar = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'CARTERO')->count();
+        $totalscrpcar = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'CARTERO')->count();
+        $totalpnpcar = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'CARTERO')->count();
+
+        //Regional Entregado Cartero
+        $totallprep = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'REPARTIDO')->count();
+        $totalcbbarep = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'REPARTIDO')->count();
+        $totalsczrep = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'REPARTIDO')->count();
+        $totalbnrep = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'REPARTIDO')->count();
+        $totalorurep = $packages->where('CUIDAD', 'ORURO')->where('ESTADO', 'REPARTIDO')->count();
+        $totalptrep = $packages->where('CUIDAD', 'POTOSI')->where('ESTADO', 'REPARTIDO')->count();
+        $totaltjrep = $packages->where('CUIDAD', 'TARIJA')->where('ESTADO', 'REPARTIDO')->count();
+        $totalscrprep = $packages->where('CUIDAD', 'SUCRE')->where('ESTADO', 'REPARTIDO')->count();
+        $totalpnprep = $packages->where('CUIDAD', 'PANDO')->where('ESTADO', 'REPARTIDO')->count();
+
         //Datos por mes 
         $dataByMonth = Package::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"), DB::raw('COUNT(*) as total'))
         ->groupBy('month')
@@ -177,6 +214,37 @@ class DashboardController extends Controller
 
         return view('dashboard', compact('data',
                                         'totalDespacho',
+                                        'totalCartero',
+                                        'totalCartInve',
+                                        'totallpcar',
+                                        'totalcbbacar',
+                                        'totalsczcar',
+                                        'totalbncar',
+                                        'totalorucar',
+                                        'totalptcar',
+                                        'totaltjcar',
+                                        'totalscrpcar',
+                                        'totalpnpcar',
+                                        'totallprep',
+                                        'totalcbbarep',
+                                        'totalsczrep',
+                                        'totalbnrep',
+                                        'totalorurep',
+                                        'totalptrep',
+                                        'totaltjrep',
+                                        'totalscrprep',
+                                        'totalpnprep',
+                                        'totalPreRezago',
+                                        'totalRezago',
+                                        'totallppr',
+                                        'totalcbbapr',
+                                        'totalsczpr',
+                                        'totalbnpr',
+                                        'totalorupr',
+                                        'totalptpr',
+                                        'totaltjpr',
+                                        'totalscrpr',
+                                        'totalpnpr',
                                         'meslpc',
                                         'mescbbac',
                                         'messczc',

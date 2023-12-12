@@ -27,12 +27,12 @@ class TablaPaquetes extends Component
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%');
             })
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
         $assignedPackages = Package::where('ESTADO', 'ASIGNADO')
             ->where('CUIDAD', $userRegional)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
         return view('livewire.tabla-paquetes', [

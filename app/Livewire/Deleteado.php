@@ -26,7 +26,7 @@ class Deleteado extends Component
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('deleted_at', 'like', '%' . $this->search . '%');
             })
             // Filtra por la 'CUIDAD' del usuario autenticado
             ->whereIn('ESTADO', ['ENTREGADO'])

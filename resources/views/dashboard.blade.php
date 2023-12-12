@@ -74,22 +74,6 @@
         @endhasrole
         @hasrole('SuperAdmin|Administrador')
             <div class="col-lg-3 col-6">
-                <div class="small-box bg-success">
-                    <div class="inner">
-                        <h3>{{ $totalEntregados }}</h3>
-                        <p>Total Paquetes en Inventario</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <a href="{{ route('test.deleteado') }}" class="small-box-footer">
-                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-        @endhasrole
-        @hasrole('SuperAdmin|Administrador')
-            <div class="col-lg-3 col-6">
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <h3>{{ $totalVentanilla }}</h3>
@@ -99,6 +83,22 @@
                         <i class="ion ion-stats-bars"></i>
                     </div>
                     <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ $totalEntregados }}</h3>
+                        <p>Total Paquetes en Inventario de Ventanilla</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <a href="{{ route('test.deleteado') }}" class="small-box-footer">
                         Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -121,6 +121,22 @@
             </div>
         @endhasrole
         @hasrole('SuperAdmin|Administrador')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>{{ $totalDespacho }}</h3>
+                            <p>Total Despacho en Clasificacion</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                        <a href="{{ route('packages.entregasclasificacion') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+        @hasrole('SuperAdmin|Administrador')
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-danger">
                     <div class="inner">
@@ -136,9 +152,363 @@
                 </div>
             </div>
         @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalPreRezago }}</h3>
+                        <p>Total Paquetes en Pre-Rezago</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalRezago }}</h3>
+                        <p>Total Paquetes en Rezago</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.rezago') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalCartero }}</h3>
+                        <p>Total Paquetes en Carteros</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalCartInve }}</h3>
+                        <p>Total Paquetes de Inventario de Carteros</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        {{-- @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totallpcar }}</h3>
+                        <p>Total Paquetes Carteros La Paz</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalcbbacar }}</h3>
+                        <p>Total Paquetes Carteros Cochabamba</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalsczcar }}</h3>
+                        <p>Total Paquetes Carteros Santa Cruz</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalbncar }}</h3>
+                        <p>Total Paquetes Carteros Beni</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalorucar }}</h3>
+                        <p>Total Paquetes Carteros Oruro</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalptcar }}</h3>
+                        <p>Total Paquetes Carteros Potosi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totaltjcar }}</h3>
+                        <p>Total Paquetes Carteros Tarija</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalscrpcar }}</h3>
+                        <p>Total Paquetes Carteros Sucre</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalpnpcar }}</h3>
+                        <p>Total Paquetes Carteros Pando</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.carteros') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totallprep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros La Paz</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalcbbarep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros Cochabamba</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalsczrep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros Santa Cruz</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalbnrep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros Beni</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalorurep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros Oruro</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalptrep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros Potosi</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totaltjrep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros Tarija</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalscrprep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros Sucre</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole
+        @hasrole('SuperAdmin|Administrador')
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ $totalpnprep }}</h3>
+                        <p>Total Paquetes Repartidos por Carteros Pando</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <a href="{{ route('packages.inventariocartero') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        @endhasrole --}}
+
+        
 
         @if ($userRegional === 'LA PAZ')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -154,23 +524,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>{{ $totalDespacho }}</h3>
-                            <p>Total Despacho</p>
+                            <p>Total Despacho en Clasificacion</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                        <a href="{{ route('packages.entregasclasificacion') }}" class="small-box-footer">
                             Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -180,13 +550,13 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                        {{-- <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
                             Mas Informacion <i class="fas fa-arrow-circle-right"></i>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -196,13 +566,13 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
+                        {{-- <a href="{{ route('packages.clasificacion') }}" class="small-box-footer">
                             Mas Informacion <i class="fas fa-arrow-circle-right"></i>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -218,7 +588,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -234,7 +604,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -250,7 +620,24 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totallppr }}</h3>
+                            <p>Total Pre-Rezago La Paz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -269,7 +656,7 @@
         @endif
 
         @if ($userRegional === 'COCHABAMBA')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -285,7 +672,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -301,7 +688,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -317,7 +704,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -333,7 +720,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totalcbbapr }}</h3>
+                            <p>Total Pre-Rezago Cochabamba</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -349,7 +752,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -368,7 +771,7 @@
         @endif
 
         @if ($userRegional === 'SANTA CRUZ')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -384,7 +787,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -400,7 +803,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -416,7 +819,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -432,7 +835,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totalsczpr }}</h3>
+                            <p>Total Pre-Rezago Santa Cruz</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -448,7 +867,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -467,7 +886,7 @@
         @endif
 
         @if ($userRegional === 'BENI')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -483,7 +902,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -499,7 +918,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -515,7 +934,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -531,7 +950,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totalbnpr }}</h3>
+                            <p>Total Pre-Rezago Beni</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -547,7 +982,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -566,7 +1001,7 @@
         @endif
 
         @if ($userRegional === 'ORURO')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -582,7 +1017,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -598,7 +1033,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -614,7 +1049,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -630,7 +1065,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totalorupr }}</h3>
+                            <p>Total Pre-Rezago Oruro</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -646,7 +1097,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -665,7 +1116,7 @@
         @endif
 
         @if ($userRegional === 'TARIJA')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -681,7 +1132,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -697,7 +1148,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -713,7 +1164,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -729,7 +1180,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totaltjpr }}</h3>
+                            <p>Total Pre-Rezago Tarija</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -745,7 +1212,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -764,7 +1231,7 @@
         @endif
 
         @if ($userRegional === 'SUCRE')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -780,7 +1247,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -796,7 +1263,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -812,7 +1279,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -828,7 +1295,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totalscrpr }}</h3>
+                            <p>Total Pre-Rezago Sucre</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -844,7 +1327,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -863,7 +1346,7 @@
         @endif
 
         @if ($userRegional === 'PANDO')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -879,7 +1362,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -895,7 +1378,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -911,7 +1394,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -927,7 +1410,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totalpnpr }}</h3>
+                            <p>Total Pre-Rezago Pando</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -943,7 +1442,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -962,7 +1461,7 @@
         @endif
 
         @if ($userRegional === 'POTOSI')
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -978,7 +1477,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Expedicion')
+            @hasrole('Expedicion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
@@ -994,7 +1493,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
@@ -1010,7 +1509,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">
@@ -1026,7 +1525,23 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+            @hasrole('Urbano|Auxiliar Urbano')
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ $totalptpr }}</h3>
+                            <p>Total Pre-Rezago Potosi</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="{{ route('packages.prerezago') }}" class="small-box-footer">
+                            Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            @endhasrole
+            @hasrole('Clasificacion|Auxiliar Clasificacion')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -1042,7 +1557,7 @@
                     </div>
                 </div>
             @endhasrole
-            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+            @hasrole('Urbano|Auxiliar Urbano')
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success">
                         <div class="inner">

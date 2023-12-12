@@ -12,11 +12,16 @@
             font-size: 12px;
         }
 
-        th, td {
+        .first-table th,
+        .first-table td {
             border: 1px solid #000;
             padding: 5px;
+            text-align: center;
+            line-height: 0.5;
         }
-
+        .date {
+            line-height: 0.5;
+        }
         thead {
             background-color: #f2f2f2;
         }
@@ -37,14 +42,32 @@
         .title {
             text-align: center;
         }
-        .firma {
-            text-align: center;
-            margin-top: 20px;
+        .second-table {
+            border: none;
+            margin: 20px auto;
+            /* Centra la segunda tabla en el medio */
             line-height: 0;
+            /* Ajusta el line-height para quitar el interlineado */
         }
 
-        .date {
-            line-height: 0.5;
+        .second-table th {
+            background-color: white;
+            /* Establece el fondo de los th a blanco */
+            border: none;
+            padding: 5px;
+            text-align: center;
+            /* Centra el texto en las celdas */
+            line-height: 0;
+            /* Ajusta el line-height para quitar el interlineado */
+        }
+
+        .second-table td {
+            border: none;
+            padding: 5px;
+            text-align: center;
+            /* Centra el texto en las celdas */
+            line-height: 0;
+            /* Ajusta el line-height para quitar el interlineado */
         }
     </style>
 </head>
@@ -58,12 +81,28 @@
             <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
         </div>
     </div>
-    <div class="date">
-        <p>Nombre del Usuario: {{ auth()->user()->name }}</p>
-        <p>Regional: {{ auth()->user()->Regional }}</p>
-        <p>Fecha: {{ now()->format('Y-m-d H:i') }}</p>
-    </div>
-    <table>
+    <table class="date">
+        <tbody>
+            @foreach ($packages as $package)
+            <tr>
+                <th style="text-align: left; font-weight: normal;">
+                    <p>Nombre del Usuario: {{ auth()->user()->name }}</p>
+                </th>
+                <th style="text-align: left; font-weight: normal;">Regional: {{ auth()->user()->Regional }}</th>
+            </tr>
+            <tr>
+                <td style="text-align: left; font-weight: normal;">
+                    <p>Fecha: {{ now()->format('Y-m-d H:i') }}</p>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            @break
+    @endforeach
+        </tbody>
+    </table>
+    <table class="first-table">
         <thead>
             <tr>
                 <th>No</th>
@@ -107,10 +146,18 @@
         </tbody>
     </table>
     <br>
-    <div class="firma">
-        <p>__________________________ </p>
-        <p>ENTREGADO POR</p>
-        <p>{{ auth()->user()->name }}</p>
+    <div>
+        <table class="second-table">
+            <td>
+                <p>__________________________</p>
+                <p>RECIBIDO POR</p>
+            </td>
+            <td>
+                <p>__________________________ </p>
+                <p>ENTREGADO POR</p>
+                <p>{{ auth()->user()->name }}</p>
+            </td>
+        </table>
     </div>
 </body>
 </html>

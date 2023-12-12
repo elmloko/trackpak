@@ -17,6 +17,13 @@
             padding: 5px;
         }
 
+        .first-table th,
+        .first-table td {
+            border: 1px solid #000;
+            padding: 5px;
+            line-height: 0.5;
+        }
+
         thead {
             background-color: #f2f2f2;
         }
@@ -44,6 +51,7 @@
         }
 
         .date {
+            border: none;
             line-height: 0.5;
         }
     </style>
@@ -58,12 +66,28 @@
             <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
         </div>
     </div>
-    <div class="date">
-        <p>Nombre del Usuario: {{ auth()->user()->name }}</p>
-        <p>Regional: {{ auth()->user()->Regional }}</p>
-        <p>Fecha: {{ now()->format('Y-m-d H:i') }}</p>
-    </div>
     <table>
+        <tbody>
+            @foreach ($packages as $package)
+            <tr>
+                <th style="border: none; text-align: left; font-weight: normal; line-height: 0.5;">
+                    <p>Nombre del Usuario: {{ auth()->user()->name }}</p>
+                </th>
+                <th style="border: none; text-align: left; font-weight: normal; line-height: 0.5;">Regional: {{ auth()->user()->Regional }}</th>
+            </tr>
+            <tr>
+                <td style="border: none; text-align: left; font-weight: normal; line-height: 0.5;">
+                    <p>Fecha: {{ now()->format('Y-m-d H:i') }}</p>
+                </td>
+                <td style="border: none; text-align: left; font-weight: normal; line-height: 0.5;">
+
+                </td>
+            </tr>
+            @break
+    @endforeach
+        </tbody>
+    </table>
+    <table class="first-table">
         <thead>
             <tr>
                 <th>No</th>
