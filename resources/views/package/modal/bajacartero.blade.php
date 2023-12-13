@@ -30,7 +30,7 @@
                         <p>¿En qué estado se entregó el paquete?</p>
                         <select name="estado" class="form-control" id="estadoSelect">
                             <option value="REPARTIDO">ENTREGADO</option>
-                            <option value="VENTANILLA">RETORNO</option>
+                            <option value="RETORNO">RETORNO</option>
                             <option value="PRE-REZAGO">PRE-REZAGO</option>
                         </select>
                     </div>
@@ -81,7 +81,7 @@
         var observacionespreDiv = document.getElementById('observacionespre');
 
         // Muestra u oculta el div de observaciones según la opción seleccionada
-        observacionesDiv.style.display = this.value === 'VENTANILLA' ? 'block' : 'none';
+        observacionesDiv.style.display = this.value === 'RETORNO' ? 'block' : 'none';
         observacionespreDiv.style.display = this.value === 'PRE-REZAGO' ? 'block' : 'none';
     });
 </script>

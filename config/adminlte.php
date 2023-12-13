@@ -372,7 +372,7 @@ return [
                         [
                             'text' => 'Prerezago',
                             'url' => 'packages/prerezago',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-archive',
                             'can'  => 'packages.prerezago',
                         ],
                     ],
@@ -404,6 +404,12 @@ return [
                         [
                             'text' => 'Entregas Cartero',
                             'url' => 'packages/carteros',
+                            'icon' => 'fas fa-cubes',
+                            'can'  => 'packages.carteros',
+                        ],
+                        [
+                            'text' => 'Despacho Cartero',
+                            'url' => 'packages/despachocartero',
                             'icon' => 'fas fa-envelope-open-text',
                             'can'  => 'packages.carteros',
                         ],
@@ -417,13 +423,13 @@ return [
                         [
                             'text' => 'Inventario Clasificacion',
                             'url' => 'packages/entregasclasificacion',
-                            'icon' => 'fas fa-cubes',
+                            'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.clasificacion',
                         ],
                         [
                             'text' => 'Inventario Ventanilla',
                             'url' => 'test/deleteado',
-                            'icon' => 'fas fa-archive',
+                            'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.delete',
                         ],
                         [
