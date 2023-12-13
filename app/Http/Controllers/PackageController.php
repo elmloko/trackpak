@@ -10,6 +10,7 @@ use App\Exports\ReencaminarExport;
 use App\Exports\InventarioExport;
 use App\Exports\PackageExport;
 use App\Exports\CarteroExport;
+use App\Exports\CarteroGeneralExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -774,6 +775,13 @@ class PackageController extends Controller
         $packages = Package::withTrashed()->where('ESTADO', 'REPARTIDO')->get();
         return Excel::download(new CarteroExport($fechaInicio, $fechaFin, $user), 'Cartero.xlsx');
     }
+    public function carterogeneralexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $packages = Package::withTrashed()->where('ESTADO', 'REPARTIDO')->get();
+        return Excel::download(new CarteroGeneralExport($fechaInicio, $fechaFin), 'Cartero General.xlsx');
+    }
     public function packagesallpdf(Request $request)
     {
     $fechaInicio = $request->input('fecha_inicio');
@@ -910,6 +918,26 @@ class PackageController extends Controller
 
         // Generate and return PDF
         $pdf = PDF::loadView('package.pdf.deleteadocarteropdf', ['packages' => $packages]);
+        return $pdf->download('Entregados Cartero.pdf');
+    }
+    public function deleteadogeneralcarteropdf(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+
+        $query = Package::withTrashed()
+            ->where('ESTADO', 'REPARTIDO');
+
+        if ($fechaInicio && $fechaFin) {
+            // Assuming 'deleted_at' is a timestamp field
+            $query->whereBetween('deleted_at', [$fechaInicio, $fechaFin]);
+        }
+
+        // Fetch the records
+        $packages = $query->get();
+
+        // Generate and return PDF
+        $pdf = PDF::loadView('package.pdf.deleteadogeneralcarteropdf', ['packages' => $packages]);
         return $pdf->download('Entregados Cartero.pdf');
     }
 }

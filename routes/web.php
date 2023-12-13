@@ -94,6 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::get('package/pdf/abandono/{id}', [PackageController::class, 'abandono'])->name('package.pdf.abandono');
     Route::get('package/pdf/carteropdf', [PackageController::class, 'carteropdf'])->name('package.pdf.carteropdf');
     Route::get('package/pdf/deleteadocarteropdf', [PackageController::class, 'deleteadocarteropdf'])->name('package.pdf.deleteadocarteropdf');
+    Route::get('package/pdf/deleteadogeneralcarteropdf', [PackageController::class, 'deleteadogeneralcarteropdf'])->name('package.pdf.deleteadogeneralcarteropdf');
     Route::get('package/pdf/asignarcartero', [PackageController::class, 'asignarcartero'])->name('package.pdf.asignarcartero');
     Route::get('package/pdf/prerezago', [PackageController::class, 'prerezago'])->name('package.pdf.prerezago');
     
@@ -104,6 +105,7 @@ Route::middleware('auth')->group(function () {
     Route::get('ventanilla/ventanillaexcel', [PackageController::class, 'ventanillaexcel'])->name('ventanilla.excel');
     Route::get('ventanilla/inventarioexcel', [PackageController::class, 'inventarioexcel'])->name('inventario.excel');
     Route::get('cartero/carteroexcel', [PackageController::class, 'carteroexcel'])->name('cartero.excel');
+    Route::get('cartero/carterogeneralexcel', [PackageController::class, 'carterogeneralexcel'])->name('carterogeneralexcel.excel');
 
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');

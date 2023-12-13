@@ -16,7 +16,7 @@
                                     <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
                             </div>
-                            <form method="get" action="{{ route('cartero.excel') }}" class="col-md-6">
+                            <form method="get" action="{{ route('carterogeneralexcel.excel') }}" class="col-md-6">
                                 @csrf
                                 <div class="form-row align-items-center">
                                     <div class="col-md-4">
@@ -34,7 +34,7 @@
                             </form>
                             <div class="col-lg-6">
                             </div>
-                            <form method="get" action="{{ route('package.pdf.deleteadocarteropdf') }}" class="col-md-6">
+                            <form method="get" action="{{ route('package.pdf.deleteadogeneralcarteropdf') }}" class="col-md-6">
                                 @csrf
                                 <div class="form-row align-items-center">
                                     <div class="col-md-4">
@@ -75,6 +75,7 @@
                                         <th>Peso(gr.)</th>
                                         <th>Tipo</th>
                                         <th>Estado</th>
+                                        <th>Cartero</th>
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
                                         <th>Fecha Baja</th>

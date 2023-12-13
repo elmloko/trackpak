@@ -8,17 +8,15 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use App\Models\Package;
 
-class CarteroExport implements FromCollection, WithHeadings, WithStyles
+class CarteroGeneralExport implements FromCollection, WithHeadings, WithStyles
 {
     protected $fechaInicio;
     protected $fechaFin;
-    protected $user;
 
-    public function __construct($fechaInicio, $fechaFin, $user)
+    public function __construct($fechaInicio, $fechaFin)
 {
     $this->fechaInicio = $fechaInicio;
     $this->fechaFin = $fechaFin;
-    $this->user = $user;
 }
 
     public function collection()
@@ -45,8 +43,7 @@ class CarteroExport implements FromCollection, WithHeadings, WithStyles
             $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
         }
 
-        $query->where('usercartero', $this->user);
-        return $query->get();
+        return $query->get();  // Agregar este return para obtener los resultados de la consulta
     }
 
 
@@ -64,6 +61,7 @@ class CarteroExport implements FromCollection, WithHeadings, WithStyles
             'TIPO',
             'ESTADO',
             'ADUANA',
+            'CARTERO',
             'FECHA BAJA',
         ];
     }
