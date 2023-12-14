@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\NationalController;
 use App\Http\Controllers\PcertificateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
@@ -108,6 +109,14 @@ Route::middleware('auth')->group(function () {
     Route::get('cartero/carteroexcel', [PackageController::class, 'carteroexcel'])->name('cartero.excel');
     Route::get('cartero/carterogeneralexcel', [PackageController::class, 'carterogeneralexcel'])->name('carterogeneralexcel.excel');
 
+    Route::get('/national', [NationalController::class, 'index'])->name('nationals.index');
+    Route::get('/national/create', [NationalController::class, 'create'])->name('nationals.create');
+    Route::post('/national', [NationalController::class, 'store'])->name('nationals.store');
+    Route::get('/national/{national}', [NationalController::class, 'show'])->name('nationals.show');
+    Route::get('/national/{national}/edit', [NationalController::class, 'edit'])->name('nationals.edit');
+    Route::put('/national/{national}', [NationalController::class, 'update'])->name('nationals.update');
+    Route::delete('/national/{national}', [NationalController::class, 'destroy'])->name('nationals.destroy');
+    
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');

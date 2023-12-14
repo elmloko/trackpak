@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('nacional', function (Blueprint $table) {
+        Schema::create('national', function (Blueprint $table) {
             $table->id();
             $table->string('CODIGO');
             $table->string('NOMBRESDESTINATARIO');
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('nacional');
+        Schema::dropIfExists('national');
     }
 };
