@@ -116,7 +116,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/national/{national}/edit', [NationalController::class, 'edit'])->name('nationals.edit');
     Route::put('/national/{national}', [NationalController::class, 'update'])->name('nationals.update');
     Route::delete('/national/{national}', [NationalController::class, 'destroy'])->name('nationals.destroy');
-    
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');

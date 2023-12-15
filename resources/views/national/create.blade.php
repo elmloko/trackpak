@@ -16,7 +16,7 @@
                         <span class="card-title">{{ __('Crear Nuevo Paquete Nacional') }}</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('national.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('nationals.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
                             @include('national.form')

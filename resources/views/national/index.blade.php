@@ -17,7 +17,7 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('national.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('nationals.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Crear Nuevo') }}
                                 </a>
                               </div>
@@ -77,8 +77,8 @@
 											<td>{{ $national->ESTADO }}</td>
 
                                             <td>
-                                                <form action="{{ route('national.destroy',$national->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-success" href="{{ route('national.edit',$national->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                                <form action="{{ route('nationals.destroy',$national->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-success" href="{{ route('nationals.edit',$national->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
