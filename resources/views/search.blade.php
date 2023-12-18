@@ -296,78 +296,96 @@
     </div>
 
     @if ($packages->count() > 0)
-    <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-        <div class="mb-4 text-black" tabindex="1">
-            @forelse ($packages as $package)
-                @if ($package->ESTADO == 'ENTREGADO')
-                    Su paquete <strong>{{ $package->CODIGO }}</strong> ha sido entregado!
-                @elseif ($package->ESTADO == 'CLASIFICACION')
-                    Su paquete <strong>{{ $package->CODIGO }}</strong> está en proceso de Distribución.
-                @elseif ($package->ESTADO == 'VENTANILLA')
-                    Su paquete <strong>{{ $package->CODIGO }}</strong> se encuentra en
-                    <strong>{{ $package->CUIDAD }}</strong>, en la ventanilla
-                    <strong>{{ $package->VENTANILLA }}</strong>
-                    @if ($package->ADUANA == 'SI')
-                        envío observado por <strong>ADUANA NACIONAL</strong>
+        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
+            <div class="mb-4 text-black" tabindex="1">
+                @forelse ($packages as $package)
+                    @if ($package->ESTADO == 'ENTREGADO')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> ha sido entregado!
+                    @elseif ($package->ESTADO == 'CLASIFICACION')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> está en proceso de Distribución.
+                    @elseif ($package->ESTADO == 'DESPACHO')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> esta en proceso de ser trasportado a
+                        Ventanilla en <strong>{{ $package->CUIDAD }}</strong>.
+                    @elseif ($package->ESTADO == 'PRE-REZAGO')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> esta en proceso de ser almacenado.
+                    @elseif ($package->ESTADO == 'REZAGO')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> fue almacenado.
+                    @elseif ($package->ESTADO == 'REENCAMINADO')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> fue encaminado a
+                        <strong>{{ $package->CUIDAD }}</strong>.
+                    @elseif ($package->ESTADO == 'CARTERO')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> esta en camino a su Domicilio.
+                    @elseif ($package->ESTADO == 'ASIGNADO')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> fue asignado por un cartero.
+                    @elseif ($package->ESTADO == 'REPARTIDO')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> fue entregado en el Domicilio asignado.
+                    @elseif ($package->ESTADO == 'VENTANILLA')
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> se encuentra en
+                        <strong>{{ $package->CUIDAD }}</strong>, en la ventanilla
+                        <strong>{{ $package->VENTANILLA }}</strong>
+                        @if ($package->ADUANA == 'SI')
+                            envío observado por <strong>ADUANA NACIONAL</strong>
+                        @endif
+                    @else
+                        Su paquete <strong>{{ $package->CODIGO }}</strong> tiene un estado no reconocido.
                     @endif
-                @else
-                    Su paquete <strong>{{ $package->CODIGO }}</strong> tiene un estado no reconocido.
-                @endif
 
-                @if (!$loop->last)
-                    <!-- Verifica si no es el último elemento -->
-                    <div class="mb-4 border-b border-gray-300"></div>
-                @endif
-            @empty
-                {{-- Este mensaje se mostrará solo si no hay resultados --}}
-                @isset($codigo)
-                    <p class="mb-4 text-black">No hay resultados para la búsqueda
-                        <b>"{{ $codigo }}"</b>
-                    </p>
-                @endisset
-            @endforelse
-        </div>
-    </div>
-    <!-- Sección de eventos -->
-    <section class="bg-white border-b py-8 text-center mt-8"> <!-- Añade "text-center" para centrar -->
-        <div class="container mx-auto flex flex-wrap pt-4 pb-12">
-            <div class="w-full">
-                <h3 class="font-bold text-3xl text-black mb-10">Últimos Eventos</h3>
-
+                    @if (!$loop->last)
+                        <!-- Verifica si no es el último elemento -->
+                        <div class="mb-4 border-b border-gray-300"></div>
+                    @endif
+                @empty
+                    {{-- Este mensaje se mostrará solo si no hay resultados --}}
+                    @isset($codigo)
+                        <p class="mb-4 text-black">No hay resultados para la búsqueda
+                            <b>"{{ $codigo }}"</b>
+                        </p>
+                    @endisset
+                @endforelse
             </div>
-            <div class="main">
-                <div class="containerbox">
-                    <ul class="timeline">
-                        @foreach ($event as $evento)
-                            <li class="text-black">
-                                <h3 class="heading">{{ $evento->action }}</h3>
-                                <span class="date ">{{ $evento->codigo }}</span>
-                                <span class="description">{{ $evento->descripcion }}</span><br>
-                                <span class="created-at">{{ $evento->created_at }}</span>
-                                <!-- Haz que los cuadrados de la línea de tiempo sean más grandes -->
-                                <span class="circle" style="width: 30px; height: 30px;"></span>
-                            </li>
-                        @endforeach
-                    </ul>
+        </div>
+        <!-- Sección de eventos -->
+        <section class="bg-white border-b py-8 text-center mt-8"> <!-- Añade "text-center" para centrar -->
+            <div class="container mx-auto flex flex-wrap pt-4 pb-12">
+                <div class="w-full">
+                    <h3 class="font-bold text-3xl text-black mb-10">Últimos Eventos</h3>
+
+                </div>
+                <div class="main">
+                    <div class="containerbox">
+                        <ul class="timeline">
+                            @foreach ($event as $evento)
+                                <li class="text-black">
+                                    <h3 class="heading">{{ $evento->action }}</h3>
+                                    <span class="date ">{{ $evento->codigo }}</span>
+                                    <span class="description">{{ $evento->descripcion }}</span><br>
+                                    <span class="created-at">{{ $evento->created_at }}</span>
+                                    <!-- Haz que los cuadrados de la línea de tiempo sean más grandes -->
+                                    <span class="circle" style="width: 30px; height: 30px;"></span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>   
+        </section>
     @else
-    {{-- Este mensaje se mostrará si no hay paquetes --}}
-    @isset($codigo)
-        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-            <p class="mb-4 text-black">No hay resultados para la búsqueda
-                <b>"{{ $codigo }}"</b>
-            </p>
-        </div>
+        {{-- Este mensaje se mostrará si no hay paquetes --}}
+        @isset($codigo)
+            <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
+                <p class="mb-4 text-black">No hay resultados para la búsqueda
+                    <b>"{{ $codigo }}"</b>
+                </p>
+            </div>
 
-        {{-- Nuevo div para el botón --}}
-        <div class="text-center mt-10">
-            <a href="/" class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Volver a la página principal</a>
-        </div>
-    @endisset
-@endif
+            {{-- Nuevo div para el botón --}}
+            <div class="text-center mt-10">
+                <a href="/"
+                    class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Volver
+                    a la página principal</a>
+            </div>
+        @endisset
+    @endif
 
 
     <!-- Change the colour #f8fafc to match the previous section colour -->

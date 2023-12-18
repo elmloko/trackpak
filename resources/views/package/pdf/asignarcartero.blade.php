@@ -170,7 +170,7 @@
         <tbody>
             @php $i = 1; @endphp <!-- Inicializa $i con 1 -->
             @foreach ($packages as $package)
-                @if ($package->CUIDAD === auth()->user()->Regional)
+                {{-- @if ($package->CUIDAD === auth()->user()->Regional) --}}
                     <tr>
                         <td>{{ $i }}</td>
                         <td>
@@ -185,7 +185,7 @@
                         <td>{{ $package->PRECIO }}</td>
                     </tr>
                     @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
-                @endif
+                {{-- @endif --}}
             @endforeach
         </tbody>
     </table>
