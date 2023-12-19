@@ -335,33 +335,33 @@ return [
                 // ],
             ],
         ],
-        // [
-        //     'text' => 'Paquetes Nacionales',
-        //     'icon' => 'fas fa-users',
-        //     'can'  => 'users.index',
-        //     'submenu' => [
-        //         [
-        //             'text' => 'Adminsion',
-        //             'url' => 'national',
-        //             'icon' => 'fas fa-user',
-        //         ],
-        //         [
-        //             'text' => 'Despacho',
-        //             'url' => '#',
-        //             'icon' => 'fas fa-lock',
-        //         ],
-        //         [
-        //             'text' => 'Expedicion',
-        //             'url' => '#',
-        //             'icon' => 'fas fa-key',
-        //         ],
-        //         [
-        //             'text' => 'Inventario Admision',
-        //             'url' => '#',
-        //             'icon' => 'fas fa-lock',
-        //         ],
-        //     ],
-        // ],
+        [
+            'text' => 'Paquetes Nacionales',
+            'icon' => 'fas fa-users',
+            'can'  => 'users.index',
+            'submenu' => [
+                [
+                    'text' => 'Adminsion',
+                    'url' => 'national',
+                    'icon' => 'fas fa-user',
+                ],
+                [
+                    'text' => 'Despacho',
+                    'url' => '#',
+                    'icon' => 'fas fa-lock',
+                ],
+                [
+                    'text' => 'Expedicion',
+                    'url' => '#',
+                    'icon' => 'fas fa-key',
+                ],
+                [
+                    'text' => 'Inventario Admision',
+                    'url' => '#',
+                    'icon' => 'fas fa-lock',
+                ],
+            ],
+        ],
         [
             'text' => 'Paquetes Ordinarios',
             'icon' => 'fas fa-archive',

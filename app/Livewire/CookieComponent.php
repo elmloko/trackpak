@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class CookieComponent extends Component
 {
-    public $showBar = true;
+    public $showBar = false;
 
     public function render()
     {
