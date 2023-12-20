@@ -481,11 +481,16 @@ return [
                 ],
                 [
                     'text' => 'Eventos',
-                    'url' => 'events',
+                    'url' => 'users',
                     'icon' => 'fas fa-calendar-alt',
-                    'can'  => '',
+                    'can'  => 'users.index',
                 ],
-                
+                [
+                    'text' => 'Mensajeria',
+                    'url' => 'mensajes',
+                    'icon' => 'fas fa-calendar-alt',
+                    'can'  => 'users.index',
+                ],
             ],
         ],
     ],

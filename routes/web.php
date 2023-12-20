@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\NationalController;
+use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\PcertificateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
@@ -124,7 +125,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
-    
+    //Mensajeria
+    Route::get('/mensajes', [MensajeController::class, 'index'])->name('mensajes.index');
+    Route::get('/mensaje/create', [MensajeController::class, 'create'])->name('mensajes.create');
+    // Route::get('/mensajes/{mensaje}', [MensajeController::class, 'show'])->name('mensajes.show');
+    Route::post('/mensaje', [MensajeController::class, 'store'])->name('mensajes.store');
+    Route::get('/mensaje/{mensaje}/edit', [MensajeController::class, 'edit'])->name('mensajes.edit');
+    Route::put('/mensaje/{mensaje}', [MensajeController::class, 'update'])->name('mensajes.update');
+    Route::delete('/mensaje/{mensaje}', [MensajeController::class, 'destroy'])->name('mensajes.destroy');
 
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
