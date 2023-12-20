@@ -2092,6 +2092,43 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
+CREATE TABLE IF NOT EXISTS `mensajes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `estado` char(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `mensajes` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `observacion` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `id_telefono` bigint unsigned DEFAULT NULL,
+  `fecha_creacion` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `telefono` (`id_telefono`),
+  CONSTRAINT `telefono` FOREIGN KEY (`id_telefono`) REFERENCES `packages` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `mensajes` (`id`, `estado`, `mensajes`, `observacion`, `id_telefono`, `fecha_creacion`) VALUES
+	(1, 'Enviado', 'Hola usuario', 'numero correcto', 9361, '2023-12-19 18:06:09'),
+	(2, 'Enviado', 'hola usuario', 'numero incorrecto', 10261, '2023-12-19 18:06:09'),
+	(3, 'Enviado', 'hola usuario', 'numero incorrecto', 7045, '2023-12-19 18:06:09'),
+	(4, 'Enviado', 'hola usuario', 'numero incorrecto', 7069, '2023-12-19 18:06:09'),
+	(5, 'Enviado', 'hola usuario', 'numero incorrecto', 12800, '2023-12-19 18:06:09'),
+	(8, 'No Enviado', 'sin Mensaje', 'numero incorrecto', 7065, '2023-12-19 18:06:09'),
+	(9, 'No Enviado', 'sin Mensaje', 'numero incorrecto', 7054, '2023-12-19 18:06:09'),
+	(10, 'Enviado', ' Su paquete está listo para ser recogido en la agencia. ¡Hasta pronto!\n', 'El número es correcto.', 7048, '2023-12-19 18:06:09'),
+	(11, 'No enviado', 'sin Mensaje', 'El número es incorrecto.', 7061, '2023-12-19 18:06:09'),
+	(12, 'Leido', ' Estamos ansiosos por su llegada. Lo esperamos con entusiasmo.\r', 'El número es correcto.', 7046, '2023-12-19 18:06:09'),
+	(13, 'No enviado', 'sin Mensaje', 'El número es incorrecto.', 7058, '2023-12-19 18:06:09'),
+	(14, 'Leido', ' Le esperamos con gusto en la agencia postal. Su paquete le aguarda.\r', 'El número es correcto.', 7049, '2023-12-19 18:06:09'),
+	(15, 'Leido', ' Estamos emocionados por su llegada. Le esperamos con anticipación.\r', 'El número es correcto.', 7050, '2023-12-19 18:06:09'),
+	(16, 'No enviado', 'sin Mensaje', 'El número es incorrecto.', 7056, '2023-12-19 18:06:09'),
+	(17, 'No enviado', 'sin Mensaje', 'El número es incorrecto.', 7060, '2023-12-19 18:06:09'),
+	(18, 'Leido', ' Le esperamos con gusto en la agencia postal. Su paquete le aguarda.\r', 'El número es correcto.', 7051, '2023-12-19 18:06:09'),
+	(19, 'No enviado', 'sin Mensaje', 'El número es incorrecto.', 7055, '2023-12-19 18:06:09'),
+	(20, 'No enviado', 'sin Mensaje', 'El número es incorrecto.', 7057, '2023-12-19 18:06:09'),
+	(21, 'Leido', ' Su paquete está listo para ser recogido en la agencia. ¡Hasta pronto!\r', 'El número es correcto.', 7047, '2023-12-19 18:06:09'),
+	(22, 'Enviado', ' Por favor, recuerde recoger su paquete en la agencia nacional de correos.\r', 'El número es correcto.', 7066, '2023-12-19 18:11:50'),
+	(23, 'Leido', ' Lo esperamos con gusto en la agencia de correos. Su paquete le aguarda.\r', 'El número es correcto.', 7068, '2023-12-19 18:13:40'),
+	(24, 'Leido', ' Su paquete está resguardado y listo para ser retirado. ¡No demore!.', 'El número es correcto.', 7070, '2023-12-19 18:20:17'),
+	(25, 'Leido', ' Estaremos atentos a su llegada. No dude en pasar por nuestra oficina.\r', 'El número es correcto.', 7067, '2023-12-19 18:22:41');
+
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -14205,7 +14242,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `Re
 	(7, 'Rodrigo Villa Sanjines', 'rodrigo.villa@correos.gob.bo', NULL, '$2y$10$b6aDZSzXjhB8LyewKqoEjOAvIeYFks32wmX/teQfsLn/Bz43mccxK', 'LA PAZ', 9883740, NULL, '2023-10-26 18:19:40', '2023-10-26 18:19:40'),
 	(8, 'Victor Antonio Tapia Quisbert', 'victor.tapia@correos.gob.bo', NULL, '$2y$10$gtWuAzWdTp9ZB9IWoqxDWu6z/jLb3Za86w8BNHszGQMEHfmY08xuq', 'LA PAZ', 6978733, NULL, '2023-10-26 18:20:40', '2023-10-26 18:20:40'),
 	(13, 'Omar Quispe Condori', 'omar.quispe@correos.gob.bo', NULL, '$2y$10$zZ/Ejx.ySxyCfucNThuReemHBpEqmcHV/C0jTo7BHMAFDNsFAi3VC', 'LA PAZ', 123456789, '3wzx4nOvDevcjs4aLBsXps3JJTE7I22nXSXhuLRUjTQiIaCiGUFdnDRGvaXm', '2023-11-06 14:21:40', '2023-11-28 16:12:31'),
-	(20, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$qqtW5Vo8krRvo5H.5JhKLOyHNpBNXtLe2Tk2//tMyxtb54E5l/t22', 'LA PAZ', 10909669, '6IEBQAeX10IwRZNqABAzlF111QZFV3IU1eSzimKuRB42kf8S4MagabpDkhqp', '2023-11-17 18:01:08', '2023-11-29 18:58:26'),
+	(20, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$qqtW5Vo8krRvo5H.5JhKLOyHNpBNXtLe2Tk2//tMyxtb54E5l/t22', 'LA PAZ', 10909669, 'VP3bOp1OpwwTco3P6zgowTpCvk8QxbwGkjw9I6vY3dxdK7GWMDvDYeDPPUUi', '2023-11-17 18:01:08', '2023-11-29 18:58:26'),
 	(21, 'Jose Luis Rodriguez Alvarez', 'jose.rodriguez@correos.gob.bo', NULL, '$2y$10$efOk9thUfdZbrMdVBnALPukoqJlqDJNI490CbFH68Mql69lFZBTQC', 'LA PAZ', 6950366, NULL, '2023-11-17 18:07:31', '2023-11-17 18:07:31'),
 	(22, 'Wike Mamani Apaza', 'wike.mamani@correos.gob.bo', NULL, '$2y$10$RS4SgMBy8.NiujCGasv1x.Bo9GIJPgHWYhNqzlqEOpMezzMi6Itma', 'LA PAZ', 6841118, 'xvDjF6SGhcFUU45a9qsZKtmFEzVqN5HMVj560BPGgCND9f8VVTdNSdnOJD9J', '2023-11-17 18:14:21', '2023-11-17 18:14:21'),
 	(23, 'Angel Gaston Zapata Ramos', 'angel.zapata@correos.gob.bo', NULL, '$2y$10$Qin2RlqRtzCo5/DsitohMOGIy85vlx6OZ.530TvxRSKBJjMMWmG36', 'LA PAZ', 13054887, NULL, '2023-11-27 15:46:35', '2023-11-27 15:46:35'),
