@@ -3,7 +3,6 @@ nombre clave TRACKPAK
 nombre del sistema TRACKINGBO
 
 Credenciales
-marco.espinoza@correos.gob.bo           MAER10909669LP  SuperAdmin
 caleb.conde@correos.gob.bo              CCH12767384LP   Urbano
 wike.mamani@correos.gob.bo              WMA6841118LP    Auxiliar Urbano
 omar.quispe@correos.gob.bo              12345678        Clasificacion

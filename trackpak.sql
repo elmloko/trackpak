@@ -2196,7 +2196,8 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(4, 'App\\Models\\User', 24),
 	(3, 'App\\Models\\User', 25),
 	(7, 'App\\Models\\User', 26),
-	(9, 'App\\Models\\User', 28);
+	(9, 'App\\Models\\User', 28),
+	(2, 'App\\Models\\User', 29);
 
 CREATE TABLE IF NOT EXISTS `nationals` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
@@ -14249,7 +14250,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `Re
 	(24, 'Luisa Gutierrez Arroyo', 'luisa.gutierrez@correos.gob.bo', NULL, '$2y$10$8cHku.ROeoyYDknO1Dg1jueoJ0zjwEg0TXNmcERYdM4r6OSf/im/i', 'LA PAZ', 8277686, NULL, '2023-12-04 13:42:46', '2023-12-04 13:42:46'),
 	(25, 'Caleb Conde Huanca', 'caleb.conde@correos.gob.bo', NULL, '$2y$10$.7SJZmANf1cSDi8OMeplcOE8WFF2E8qI1tLUwT.WPTBa.PwSqyLey', 'LA PAZ', 12767384, NULL, '2023-12-04 21:29:35', '2023-12-04 21:29:35'),
 	(26, 'Luis Enrique Gamarra Monje', 'luis.gamarra@correos.gob.bo', NULL, '$2y$10$QX9Mtvwg41isRCJ9rd1IfeHYbuzqmdaGRssAJj0vR1wYYv9O0UZDq', 'LA PAZ', 6900353, NULL, '2023-12-04 22:32:37', '2023-12-04 22:32:37'),
-	(28, 'Severina Caranavi', 'severina.caranavi@correos.gob.bo', NULL, '$2y$10$9KKxYDO4yUU146AaVA/1L.UiI.dOi2vFfLHmQYlQnbGNunkJAD3wy', 'LA PAZ', 12345678, NULL, '2023-12-13 15:10:29', '2023-12-13 15:10:29');
+	(28, 'Severina Caranavi', 'severina.caranavi@correos.gob.bo', NULL, '$2y$10$9KKxYDO4yUU146AaVA/1L.UiI.dOi2vFfLHmQYlQnbGNunkJAD3wy', 'LA PAZ', 12345678, NULL, '2023-12-13 15:10:29', '2023-12-13 15:10:29'),
+	(29, 'Alvaro Medrano', 'alvaro.medrano@correos.gob.bo', NULL, '$2y$10$8G1fvZawi7Bv6yenPeRdOOcQKwpJRAUJTaW7x.0NKqUC72SLkmDua', 'LA PAZ', 9199698, NULL, '2023-12-20 16:11:19', '2023-12-20 16:11:19');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
