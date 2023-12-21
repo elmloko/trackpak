@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mensaje;
+use App\Models\Package;
 use Illuminate\Http\Request;
 
 /**
@@ -19,9 +20,11 @@ class MensajeController extends Controller
     public function index()
     {
         $mensajes = Mensaje::paginate();
+        $packages = Package::paginate();
 
-        return view('mensaje.index', compact('mensajes'))
-            ->with('i', (request()->input('page', 1) - 1) * $mensajes->perPage());
+        return view('mensaje.index', compact('mensajes','packages'))
+            ->with('i', (request()->input('page', 1) - 1) * $mensajes->perPage())
+            ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
     }
 
     /**
