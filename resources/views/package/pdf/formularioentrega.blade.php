@@ -8,6 +8,11 @@
     <title>Formulario de Entrega</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+        }
+
         .center-text {
             text-align: center;
         }
@@ -25,12 +30,18 @@
             font-size: 11px;
         }
 
+        .centro {
+            margin-top: 0%;
+            margin-bottom: 0%;
+            margin-left: 14%
+        }
+
         table {
             width: 100%;
         }
 
         table td {
-            width: 50%;
+            width: 100%;
         }
 
         p {
@@ -50,7 +61,7 @@
                 <h2 class="normal-text" style="margin-top: 0;">FORMULARIO DE ENTREGA</h2>
                 <h3 class="normal-text">AGENCIA BOLIVIANA DE CORREOS</h3>
             </div>
-            <table>
+            <table class="centro">
                 <tr>
                     <td>
                         <p class="barcode">{!! DNS1D::getBarcodeHTML($package->CODIGO, 'C128', 1.25, 25) !!}</p>
