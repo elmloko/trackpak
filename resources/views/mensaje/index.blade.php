@@ -40,7 +40,11 @@
                                         <th>Estado</th>
                                         <th>Mensajes</th>
                                         <th>Observacion</th>
-                                        <th>Id Telefono</th>
+                                        <th>codigo</th>
+                                        <th>Telefono</th>
+
+                                        <th>Destinatario</th>
+
                                         <th>Fecha Creacion</th>
 
                                         <th></th>
@@ -54,11 +58,14 @@
                                             <td>{{ $mensaje->estado }}</td>
                                             <td>{{ $mensaje->mensajes }}</td>
                                             <td>{{ $mensaje->observacion }}</td>
-                                            <td>{{ $mensaje->id_telefono }}</td>
+                                            <td>{{ $mensaje->package->CODIGO }}</td>
+                                            <td>{{ $mensaje->package->TELEFONO }}</td>
+                                            <td>{{ $mensaje->package->DESTINATARIO }}</td>
                                             <td>{{ $mensaje->fecha_creacion }}</td>
 
                                             <td>
-                                                <form action="{{ route('mensajes.destroy', $mensaje->id) }}" method="POST">
+                                                <form action="{{ route('mensajes.destroy', $mensaje->id) }}"
+                                                    method="POST">
                                                     {{-- <a class="btn btn-sm btn-primary "
                                                         href="{{ route('mensajes.show', $mensaje->id) }}"><i
                                                             class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> --}}
