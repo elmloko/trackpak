@@ -481,7 +481,7 @@ return [
                 ],
                 [
                     'text' => 'Eventos',
-                    'url' => 'users',
+                    'url' => 'events',
                     'icon' => 'fas fa-calendar-alt',
                     'can'  => 'users.index',
                 ],
