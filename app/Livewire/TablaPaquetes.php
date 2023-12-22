@@ -83,7 +83,7 @@ class TablaPaquetes extends Component
             // Asigna el cartero a cada paquete
             Package::whereIn('id', $this->selectedPackages)
                 ->update([
-                    'ESTADO' => 'CARTERO',
+                    'ESTADO' => 'CARTERO', // Cambiado a 'CARTERO'
                     'usercartero' => $carteroSeleccionado,
                 ]);
 
@@ -109,9 +109,10 @@ class TablaPaquetes extends Component
                 ]);
             }
 
-            // Recupera los datos necesarios para el PDF
+            // Recupera los datos necesarios para el PDF después de actualizar el estado
             $user = auth()->user();
             $packages = Package::where('ESTADO', 'CARTERO')
+                ->whereIn('id', $this->selectedPackages)
                 ->where('usercartero', $carteroSeleccionado)
                 ->orderBy('created_at', 'desc')
                 ->get();
@@ -136,3 +137,4 @@ class TablaPaquetes extends Component
         }
     }
 }
+
