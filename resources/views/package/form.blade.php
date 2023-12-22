@@ -22,17 +22,29 @@
                 </div> 
                 <div class="form-group">
                     {{ Form::label('PESO (gr.)') }}
+                    {{ Form::text('PESO', $package->PESO, [
+                        'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
+                        'placeholder' => 'Expresa el Peso en Gramos',
+                        'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
+                        'oninput' => 'this.setCustomValidity("")',  // Limpiar mensaje de validación personalizado
+                        'pattern' => '^(\d+)?(\.\d{1,3})?$',
+                        'required' => 'required',
+                    ]) }}
+                    {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
+                </div> 
+                {{-- <div class="form-group">
+                    {{ Form::label('PESO (gr.)') }}
                     {{ Form::number('PESO', $package->PESO, [
                         'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
                         'placeholder' => 'Expresa el Peso en Gramos',
-                        'step' => '0.01',
+                        'step' => '0.001',
                         'title' => 'Ingrese un número válido con hasta dos decimales (ej. 1.25)',
                         'oninput' => 'validity.valid||(value="")',
                         'min' => '0',  // Establecer el valor mínimo
-                        'max' => '2.00',  // Establecer el valor máximo
+                        'max' => '2.000',  // Establecer el valor máximo
                     ]) }}
                     {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>                           
+                </div>                            --}}
                 <div class="form-group">
                     {{ Form::label('DESTINATARIO') }}
                     {{ Form::text('DESTINATARIO', strtoupper($package->DESTINATARIO), [

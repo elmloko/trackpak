@@ -54,37 +54,37 @@ class PackageController extends Controller
             'CUIDAD' => 'required',
             'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA',
             // 'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255',
-            'PESO' => 'required|numeric|between:0.01,2.00',
+            'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,3})?$/|between:0.001,2.000',
             'TIPO' => 'required|string',
             'ADUANA' => 'required|string',
         ]);
-    
+
         // Calcular el precio basado en el peso
         $peso = $request->input('PESO');
         $precio = 0;
-    
-        if ($peso >= 0.01 && $peso <= 0.5) {
+
+        if ($peso >= 0.001 && $peso <= 0.5) {
             $precio = 5;
         } elseif ($peso > 0.5) {
             $precio = 10;
         } // Puedes agregar más condiciones según tus requerimientos
-    
+
         // Agregar el precio al request antes de crear el paquete
         $request->merge(['PRECIO' => $precio]);
-        
+
         // Crear el paquete
         $package = Package::create($request->all());
-    
+
         // Extraer el ISO del país y traducción del código del país
         $iso = substr($request->input('CODIGO'), -2); // Obtener las dos últimas letras
         $countryTranslation = $this->getCountryTranslation($iso);
-    
+
         // Actualizar el paquete con el ISO del país y la traducción del código del país
         $package->update([
             'PAIS' => $iso,
             'ISO' => $countryTranslation,
         ]);
-    
+
         // Crear eventos relacionados con el paquete
         Event::create([
             'action' => 'ADMITIDO',
@@ -92,21 +92,19 @@ class PackageController extends Controller
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
-    
+
         Event::create([
             'action' => 'ADMISION',
             'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
             'user_id' => auth()->user()->id,
             'codigo' => $package->CODIGO,
         ]);
-    
+
         // Redireccionar con mensaje de éxito
         return redirect()->route('packages.clasificacion')
             ->with('success', 'Paquete Creado Con Éxito!');
     }
-    
 
-    
     // Función para obtener la traducción del código del país
     private function getCountryTranslation($iso)
     {
