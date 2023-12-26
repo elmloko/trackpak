@@ -10,7 +10,7 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('TIPO DE SERVICIO') }}
-                    {{ Form::select('TIPOSERVICIO', ['EMS' => 'EMS', 'CERTIFICADA' => 'CERTIFICADA', 'ORDINARIA' => 'ORDINARIA', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'SUPEREXPRESS' => 'SUPEREXPRESS', 'EXPRESS' => 'EXPRESS', 'AVISO RECIBO' => 'AVISO RECIBO'], $national->TIPOSERVICIO, ['class' => 'form-control' . ($errors->has('TIPOSERVICIO') ? ' is-invalid' : ''), 'placeholder' => 'Tipo de servicio postal nacional']) }}
+                    {{ Form::select('TIPOSERVICIO', ['EMS' => 'EMS', 'MI ENCOMIENDA' => 'MI ENCOMIENDA', 'PLIEGOS' => 'PLIEGOS', 'ORDINARIA' => 'ORDINARIA', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'SUPEREXPRESS' => 'SUPEREXPRESS', 'SACAS M' => 'SACAS M'], $national->TIPOSERVICIO, ['class' => 'form-control' . ($errors->has('TIPOSERVICIO') ? ' is-invalid' : ''), 'placeholder' => 'Tipo de servicio postal nacional', 'id' => 'tipo-correspondencia']) }}
                     {!! $errors->first('TIPOSERVICIO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
@@ -29,12 +29,12 @@
                         'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
                         'placeholder' => 'Expresa el Peso en Gramos',
                         'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
-                        'oninput' => 'this.setCustomValidity("")',  // Limpiar mensaje de validación personalizado
+                        'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
                         'pattern' => '^(\d+)?(\.\d{1,3})?$',
                         'required' => 'required',
                     ]) }}
                     {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
-                </div> 
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('PROVINCIA') }}
-                    {{ Form::select('PROVINCIA', ['LOCAL 1' => 'LOCAL 1', 'LOCAL 2' => 'LOCAL 2', 'LOCAL 3' => 'LOCAL 3', 'LOCAL 4' => 'LOCAL 4', 'CUIDAD CAPITAL' => 'CUIDAD CAPITAL', 'CUIDAD INTERMEDIA' => 'CUIDAD INTERMEDIA', 'TRINIDAD/COBIJA' => 'TRINIDAD/COBIJA', 'RIBERALTA/GUAYARAMERIN' => 'RIBERALTA/GUAYARAMERIN'], $national->PROVINCIA, ['class' => 'form-control' . ($errors->has('PROVINCIA') ? ' is-invalid' : ''), 'placeholder' => 'Destino Local', 'id' => 'local-select']) }}
+                    {{ Form::select('PROVINCIA', ['LOCAL 1' => 'LOCAL 1', 'LOCAL 2' => 'LOCAL 2', 'LOCAL 3' => 'LOCAL 3', 'LOCAL 4' => 'LOCAL 4', 'CUIDAD CAPITAL EMS' => 'CUIDAD CAPITAL EMS', 'CUIDAD INTERMEDIA EMS' => 'CUIDAD INTERMEDIA EMS', 'TRINIDAD/COBIJA EMS' => 'TRINIDAD/COBIJA EMS', 'RIBERALTA/GUAYARAMERIN EMS' => 'RIBERALTA/GUAYARAMERIN EMS', 'CUIDAD CAPITAL ME' => 'CUIDAD CAPITAL ME', 'TRINIDAD/COBIJA ME' => 'TRINIDAD/COBIJA ME', 'PROVINCIA-DENTRO ME' => 'PROVINCIA-DENTRO ME', 'PROVINCIA-OTRO ME' => 'PROVINCIA-OTRO ME', 'SERVICIO-LOCAL LC/AO' => 'SERVICIO-LOCAL LC/AO', 'SERVICIO-NACIONAL LC/AO' => 'SERVICIO-NACIONAL LC/AO','PROVINCIA-DENTRO LC/AO' => 'PROVINCIA-DENTRO LC/AO','PROVINCIA-OTRO LC/AO' => 'PROVINCIA-OTRO LC/AO','TRINIDAD/COBIJA LC/AO' => 'TRINIDAD/COBIJA LC/AO','RIBERALTA/GUAYARAMERIN LC/AO' => 'RIBERALTA/GUAYARAMERIN LC/AO','SERVICIO-LOCAL ECA' => 'SERVICIO-LOCAL ECA','SERVICIO-NACIONAL ECA' => 'SERVICIO-NACIONAL ECA','PROVINCIA-DENTRO ECA' => 'PROVINCIA-DENTRO ECA','PROVINCIA-OTRO ECA' => 'PROVINCIA-OTRO ECA','TRINIDAD/COBIJA ECA' => 'TRINIDAD/COBIJA ECA','RIBERALTA/GUAYARAMERIN ECA' => 'RIBERALTA/GUAYARAMERIN ECA','UNICO SE' => 'UNICO SE','SERVICIO-LOCAL PO' => 'SERVICIO-LOCAL PO','SERVICIO-NACIONAL PO' => 'SERVICIO-NACIONAL PO','PROVINCIA-DENTRO PO' => 'PROVINCIA-DENTRO PO','PROVINCIA-OTRO PO' => 'PROVINCIA-OTRO PO','SERVICIO-NACIONAL SM' => 'SERVICIO-NACIONAL SM','SERVICIO-PROVICIONAL SM' => 'SERVICIO-PROVICIONAL SM'], $national->PROVINCIA, ['class' => 'form-control' . ($errors->has('PROVINCIA') ? ' is-invalid' : ''), 'placeholder' => 'Destino Local', 'id' => 'provincia-select']) }}
                     {!! $errors->first('PROVINCIA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
@@ -110,3 +110,252 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Oculta todas las opciones de PROVINCIA al cargar la página
+        $('#provincia-select option').hide();
+
+        // Maneja el cambio en el select de TIPOCORRESPONDENCIA
+        $('#tipo-correspondencia').on('change', function() {
+            var tipo = $(this).val();
+
+            // Muestra u oculta las opciones de PROVINCIA según el tipo seleccionado
+            if (tipo === 'EMS') {
+                $('#provincia-select option').hide();
+                $('#provincia-select option[value="LOCAL 1"]').show();
+                $('#provincia-select option[value="LOCAL 2"]').show();
+                $('#provincia-select option[value="LOCAL 3"]').show();
+                $('#provincia-select option[value="LOCAL 4"]').show();
+                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').show();
+                $('#provincia-select option[value="CUIDAD INTERMEDIA EMS"]').show();
+                $('#provincia-select option[value="TRINIDAD/COBIJA EMS"]').show();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN EMS"]').show();
+                $('#provincia-select option[value="CUIDAD CAPITAL ME"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ME"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO LC/AO"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA LC/AO"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL ECA"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ECA"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ECA"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN ECA"]').hide();
+                $('#provincia-select option[value="UNICO SE"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL SM"]').hide();
+                $('#provincia-select option[value="SERVICIO-PROVICIONAL SM"]').hide();
+            } else if (tipo === 'MI ENCOMIENDA') {
+                $('#provincia-select option').hide();
+                $('#provincia-select option[value="LOCAL 1"]').hide();
+                $('#provincia-select option[value="LOCAL 2"]').hide();
+                $('#provincia-select option[value="LOCAL 3"]').hide();
+                $('#provincia-select option[value="LOCAL 4"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD INTERMEDIA EMS"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA EMS"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL ME"]').show();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ME"]').show();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ME"]').show();
+                $('#provincia-select option[value="PROVINCIA-OTRO ME"]').show();
+                $('#provincia-select option[value="SERVICIO-LOCAL LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO LC/AO"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA LC/AO"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL ECA"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ECA"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ECA"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN ECA"]').hide();
+                $('#provincia-select option[value="UNICO SE"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL SM"]').hide();
+                $('#provincia-select option[value="SERVICIO-PROVICIONAL SM"]').hide();
+            } else if (tipo === 'ORDINARIA') {
+                $('#provincia-select option').hide();
+                $('#provincia-select option[value="LOCAL 1"]').hide();
+                $('#provincia-select option[value="LOCAL 2"]').hide();
+                $('#provincia-select option[value="LOCAL 3"]').hide();
+                $('#provincia-select option[value="LOCAL 4"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD INTERMEDIA EMS"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA EMS"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL ME"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ME"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL LC/AO"]').show();
+                $('#provincia-select option[value="SERVICIO-NACIONAL LC/AO"]').show();
+                $('#provincia-select option[value="PROVINCIA-DENTRO LC/AO"]').show();
+                $('#provincia-select option[value="PROVINCIA-OTRO LC/AO"]').show();
+                $('#provincia-select option[value="TRINIDAD/COBIJA LC/AO"]').show();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN LC/AO"]').show();
+                $('#provincia-select option[value="SERVICIO-LOCAL ECA"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ECA"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ECA"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN ECA"]').hide();
+                $('#provincia-select option[value="UNICO SE"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL SM"]').hide();
+                $('#provincia-select option[value="SERVICIO-PROVICIONAL SM"]').hide();
+            } else if (tipo === 'ECA') {
+                $('#provincia-select option').hide();
+                $('#provincia-select option[value="LOCAL 1"]').hide();
+                $('#provincia-select option[value="LOCAL 2"]').hide();
+                $('#provincia-select option[value="LOCAL 3"]').hide();
+                $('#provincia-select option[value="LOCAL 4"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD INTERMEDIA EMS"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA EMS"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL ME"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ME"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO LC/AO"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA LC/AO"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL ECA"]').show();
+                $('#provincia-select option[value="SERVICIO-NACIONAL ECA"]').show();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ECA"]').show();
+                $('#provincia-select option[value="PROVINCIA-OTRO ECA"]').show();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ECA"]').show();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN ECA"]').show();
+                $('#provincia-select option[value="UNICO SE"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL SM"]').hide();
+                $('#provincia-select option[value="SERVICIO-PROVICIONAL SM"]').hide();
+            } else if (tipo === 'SUPEREXPRESS') {
+                $('#provincia-select option').hide();
+                $('#provincia-select option[value="LOCAL 1"]').hide();
+                $('#provincia-select option[value="LOCAL 2"]').hide();
+                $('#provincia-select option[value="LOCAL 3"]').hide();
+                $('#provincia-select option[value="LOCAL 4"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD INTERMEDIA EMS"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA EMS"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL ME"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ME"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO LC/AO"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA LC/AO"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL ECA"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ECA"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ECA"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN ECA"]').hide();
+                $('#provincia-select option[value="UNICO SE"]').show();
+                $('#provincia-select option[value="SERVICIO-LOCAL PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL SM"]').hide();
+                $('#provincia-select option[value="SERVICIO-PROVICIONAL SM"]').hide();
+            } else if (tipo === 'PLIEGOS') {
+                $('#provincia-select option').hide();
+                $('#provincia-select option[value="LOCAL 1"]').hide();
+                $('#provincia-select option[value="LOCAL 2"]').hide();
+                $('#provincia-select option[value="LOCAL 3"]').hide();
+                $('#provincia-select option[value="LOCAL 4"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD INTERMEDIA EMS"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA EMS"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL ME"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ME"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO LC/AO"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA LC/AO"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL ECA"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ECA"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ECA"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN ECA"]').hide();
+                $('#provincia-select option[value="UNICO SE"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL PO"]').show();
+                $('#provincia-select option[value="SERVICIO-NACIONAL PO"]').show();
+                $('#provincia-select option[value="PROVINCIA-DENTRO PO"]').show();
+                $('#provincia-select option[value="PROVINCIA-OTRO PO"]').show();
+                $('#provincia-select option[value="SERVICIO-NACIONAL SM"]').hide();
+                $('#provincia-select option[value="SERVICIO-PROVICIONAL SM"]').hide();
+            } else if (tipo === 'SACAS M') {
+                $('#provincia-select option').hide();
+                $('#provincia-select option[value="LOCAL 1"]').hide();
+                $('#provincia-select option[value="LOCAL 2"]').hide();
+                $('#provincia-select option[value="LOCAL 3"]').hide();
+                $('#provincia-select option[value="LOCAL 4"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD INTERMEDIA EMS"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA EMS"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN EMS"]').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL ME"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ME"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ME"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO LC/AO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO LC/AO"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA LC/AO"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN LC/AO"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL ECA"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO ECA"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO ECA"]').hide();
+                $('#provincia-select option[value="TRINIDAD/COBIJA ECA"]').hide();
+                $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN ECA"]').hide();
+                $('#provincia-select option[value="UNICO SE"]').hide();
+                $('#provincia-select option[value="SERVICIO-LOCAL PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-DENTRO PO"]').hide();
+                $('#provincia-select option[value="PROVINCIA-OTRO PO"]').hide();
+                $('#provincia-select option[value="SERVICIO-NACIONAL SM"]').show();
+                $('#provincia-select option[value="SERVICIO-PROVICIONAL SM"]').show();
+            } else {
+                $('#provincia-select option').hide();
+            }
+        });
+    });
+</script>

@@ -3,17 +3,105 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">   
+                            <div class="col">
+                                <h5 id="card_title">{{ __('Admision de Paquetes en Nacionales') }}</h5>
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="search">Busca:</label>
+                                            <input wire:model.lazy="search" type="text" class="form-control"
+                                                placeholder="Buscar...">
+                                        </div>
+                                    </div>
+                                    @hasrole('SuperAdmin|Administrador|Admision|Auxiliar Admision')
+                                    <div class="col-md-6">
+                                        <a href="{{ route('nationals.create') }}" class="btn btn-primary btn-md float-right"
+                                            data-placement="left">
+                                            {{ __('Crear Nuevo') }}
+                                        </a>
+                                    </div>
+                                    @endhasrole
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <!-- Formulario para generar Excel -->
+                                            <div class="col-md-6">
+                                                <form method="get" action="{{ route('ventanilla.excel') }}"
+                                                    class="col-md-12">
+                                                    @csrf
+                                                    <div class="form-row">
+                                                        <div class="col-md-4">
+                                                            <label for="excel_fecha_inicio">Fecha de inicio:</label>
+                                                            <input type="date" name="fecha_inicio"
+                                                                class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="excel_fecha_fin">Fecha de fin:</label>
+                                                            <input type="date" name="fecha_fin" class="form-control"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="cuidad">Ciudad:</label>
+                                                            <select name="cuidad" class="form-control">
+                                                                <option value="LA PAZ">LA PAZ</option>
+                                                                <option value="COCHABAMBA">COCHABAMBA</option>
+                                                                <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                                                <option value="BENI">BENI</option>
+                                                                <option value="PANDO">PANDO</option>
+                                                                <option value="TARIJA">TARIJA</option>
+                                                                <option value="SUCRE">SUCRE</option>
+                                                                <option value="ORURO">ORURO</option>
+                                                                <option value="POTOSI">PANDO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-12 mt-3 text-center">
+                                                            <button type="submit" class="btn btn-success"
+                                                                target="_blank">Generar Excel</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
 
-                            <span id="card_title">
-                                {{ __('Paquetes Nacionales') }}
-                            </span>
-
-                            <div class="float-right">
-                                <a href="{{ route('nationals.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Crear Nuevo') }}
-                                </a>
+                                            <!-- Formulario para generar PDF -->
+                                            <div class="col-md-6">
+                                                <form method="get" action="{{ route('package.pdf.ventanillapdf') }}"
+                                                    class="col-md-12">
+                                                    @csrf
+                                                    <div class="form-row">
+                                                        <div class="col-md-4">
+                                                            <label for="fecha_inicio">Fecha de inicio:</label>
+                                                            <input type="date" name="fecha_inicio"
+                                                                class="form-control" required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="fecha_fin">Fecha de fin:</label>
+                                                            <input type="date" name="fecha_fin" class="form-control"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="cuidad">Ciudad  :</label>
+                                                            <select name="cuidad" class="form-control">
+                                                                <option value="LA PAZ">LA PAZ</option>
+                                                                <option value="COCHABAMBA">COCHABAMBA</option>
+                                                                <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                                                <option value="BENI">BENI</option>
+                                                                <option value="PANDO">PANDO</option>
+                                                                <option value="TARIJA">TARIJA</option>
+                                                                <option value="SUCRE">SUCRE</option>
+                                                                <option value="ORURO">ORURO</option>
+                                                                <option value="POTOSI">PANDO</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-12 mt-3 text-center">
+                                                            <button type="submit" class="btn btn-danger">Generar
+                                                                PDF</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -73,9 +161,7 @@
                                             <td>{{ $national->IMPORTE }}</td>
                                             <td>{{ $national->USER }}</td>
                                             <td>{{ $national->ESTADO }}</td>
-                                            {{-- <td>{{ $national->PROVINCIA }}</td>
-                                            <td>{{ $national->MUNICIPIO }}</td> --}}
-                                            
+                                            {{-- <td>{{ $national->MUNICIPIO }}</td> --}}
                                             <td>
                                                 <form action="{{ route('nationals.destroy', $national->id) }}"
                                                     method="POST">
