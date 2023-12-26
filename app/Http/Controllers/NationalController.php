@@ -3,60 +3,67 @@
 namespace App\Http\Controllers;
 
 use App\Models\National;
+use App\Models\Event;
 use Illuminate\Http\Request;
-
-/**
- * Class NationalController
- * @package App\Http\Controllers
- */
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\User;
 class NationalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $nationals = National::paginate();
-
-        return view('national.index', compact('nationals'))
-            ->with('i', (request()->input('page', 1) - 1) * $nationals->perPage());
+        return view('national.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $national = new National();
         return view('national.create', compact('national'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+        public function store(Request $request)
     {
-        request()->validate(National::$rules);
+        try {
+            // Obtener el usuario autenticado
+            $user = auth()->user();
 
-        $national = National::create($request->all());
+            // Crear el modelo National con los valores deseados
+            $national = new National([
+                'ORIGEN' => $user->Regional,
+                'USER' => $user->name,
+                // Otros campos que puedas tener en tu formulario o en la tabla
+                'CODIGO' => $request->input('CODIGO'),
+                'TIPOSERVICIO' => $request->input('TIPOSERVICIO'),
+                'TIPOCORRESPONDENCIA' => $request->input('TIPOCORRESPONDENCIA'),
+                'CANTIDAD' => $request->input('CANTIDAD'),
+                'PESO' => $request->input('PESO'),
+                'DESTINO' => $request->input('DESTINO'),
+                'PROVINCIA' => $request->input('PROVINCIA'),
+                'DIRECCION' => $request->input('DIRECCION'),
+                'FACTURA' => $request->input('FACTURA'),
+                'IMPORTE' => $request->input('IMPORTE'),
+                'NOMBRESDESTINATARIO' => $request->input('NOMBRESDESTINATARIO'),
+                'TELEFONODESTINATARIO' => $request->input('TELEFONODESTINATARIO'),
+                'CIDESTINATARIO' => $request->input('CIDESTINATARIO'),
+                'NOMBRESREMITENTE' => $request->input('NOMBRESREMITENTE'),
+                'TELEFONOREMITENTE' => $request->input('TELEFONOREMITENTE'),
+                'CIREMITENTE' => $request->input('CIREMITENTE'),
+            ]);
 
-        return redirect()->route('nationals.index')
-            ->with('success', 'National created successfully.');
+            // Guardar el modelo en la base de datos
+            $national->save();
+
+            // Imprimir el contenido de $national para depuración
+            // dd($national);
+        } catch (\Exception $e) {
+            // Mostrar un mensaje de error o registrar el error
+            dd($e->getMessage());
+        }
+
+        // Resto del código...
+        return redirect()->route('nationals.index')->with('success', 'Paquete Creado Con Éxito!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $national = National::find($id);
@@ -64,12 +71,6 @@ class NationalController extends Controller
         return view('national.show', compact('national'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $national = National::find($id);
@@ -77,13 +78,6 @@ class NationalController extends Controller
         return view('national.edit', compact('national'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  National $national
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, National $national)
     {
         request()->validate(National::$rules);
@@ -91,19 +85,14 @@ class NationalController extends Controller
         $national->update($request->all());
 
         return redirect()->route('nationals.index')
-            ->with('success', 'National updated successfully');
+            ->with('success', 'Paquete Actualizado Con Éxito!');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
         $national = National::find($id)->delete();
 
         return redirect()->route('nationals.index')
-            ->with('success', 'National deleted successfully');
+            ->with('success', 'Paquete Eliminado Con Éxito!');
     }
 }

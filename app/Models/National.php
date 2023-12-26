@@ -36,10 +36,11 @@ class National extends Model
 		'CODIGO' => 'required',
 		'NOMBRESDESTINATARIO' => 'required',
 		'NOMBRESREMITENTE' => 'required',
-		// 'TELEFONODESTINATARIO' => 'required',
-		// 'TELEFONOREMITENTE' => 'required',
-		// 'CIDESTINATARIO' => 'required',
-		// 'CIREMITENTE' => 'required',
+		'TELEFONODESTINATARIO' => 'required',
+    	'TELEFONOREMITENTE' => 'required',
+    	'CIDESTINATARIO' => 'required',
+    	'CIREMITENTE' => 'required',
+    	'ESTADO' => 'required',
 		'CANTIDAD' => 'required',
 		'TIPOSERVICIO' => 'required',
 		'TIPOCORRESPONDENCIA' => 'required',
@@ -47,6 +48,10 @@ class National extends Model
 		'DESTINO' => 'required',
 		'FACTURA' => 'required',
 		'IMPORTE' => 'required',
+		'DIRECCION' => 'required',
+		'PROVINCIA' => 'required',
+		// 'MUNICIPIO' => 'required',
+		// 'ORIGEN' => 'required',
 		// 'ESTADO' => 'required',
     ];
 
@@ -60,20 +65,22 @@ class National extends Model
     protected $fillable = [	'CODIGO',
 							'NOMBRESDESTINATARIO',
 							'NOMBRESREMITENTE',
-							// 'TELEFONODESTINATARIO',
-							// 'TELEFONOREMITENTE',
-							// 'CIDESTINATARIO',
-							// 'CIREMITENTE',
+							'TELEFONODESTINATARIO',
+							'TELEFONOREMITENTE',
+							'CIDESTINATARIO',
+							'CIREMITENTE',
 							'CANTIDAD',
 							'TIPOSERVICIO',
 							'TIPOCORRESPONDENCIA',
 							'PESO',
 							'DESTINO',
 							'FACTURA',
-							// 'ESTADO',
-							'IMPORTE'];
-							
-
-
-
+							'ESTADO',
+							'IMPORTE',
+							'DIRECCION',
+							'MUNICIPIO',
+							'ORIGEN',
+							'PROVINCIA',
+							'USER'
+							];
 }

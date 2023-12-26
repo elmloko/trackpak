@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('Regional') }}
-            {{ Form::select('Regional', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $user->Regional, ['class' => 'form-control' . ($errors->has('Regional') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Regional']) }}
+            {{ Form::select('Regional', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'SUCRE' => 'SUCRE', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $user->Regional, ['class' => 'form-control' . ($errors->has('Regional') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Regional']) }}
             {!! $errors->first('Regional', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">

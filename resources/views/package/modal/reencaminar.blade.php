@@ -27,7 +27,7 @@
                 <!-- Agrega el campo de selección de ciudad debajo de la pregunta -->
                 <div class="form-group">
                     {{ Form::label('cuidadre', 'Seleccione la Ciudad:') }}
-                    {{ Form::select('cuidadre', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'CHUQUISACA' => 'CHUQUISACA', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], null, ['class' => 'form-control', 'placeholder' => 'Seleccione la Ciudad']) }}
+                    {{ Form::select('cuidadre', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'SUCRE' => 'SUCRE', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], null, ['class' => 'form-control', 'placeholder' => 'Seleccione la Ciudad']) }}
                 </div>
             </div>
 
