@@ -341,24 +341,43 @@ return [
             'can'  => 'users.index',
             'submenu' => [
                 [
-                    'text' => 'Adminsion',
-                    'url' => 'national',
-                    'icon' => 'fas fa-user',
+                    'text' => 'Todos Paquetes',
+                    'url' => '#',
+                    'icon' => 'fas fa-box',
                 ],
                 [
-                    'text' => 'Despacho',
-                    'url' => '#',
-                    'icon' => 'fas fa-lock',
+                    'text' => 'Admision',
+                    'icon' => 'fas fa-cube ',
+                    'can'  => 'packages.clasificacion',
+                    'submenu' => [
+                        [
+                            'text' => 'Registro Admision',
+                            'url' => 'national',
+                            'icon' => 'fas fa-user',
+                        ],
+                        [
+                            'text' => 'Despacho Admision',
+                            'url' => '#',
+                            'icon' => 'fas fa-lock',
+                        ],
+                    ],
                 ],
                 [
                     'text' => 'Expedicion',
-                    'url' => '#',
-                    'icon' => 'fas fa-key',
-                ],
-                [
-                    'text' => 'Inventario Admision',
-                    'url' => '#',
-                    'icon' => 'fas fa-lock',
+                    'icon' => 'fas fa-cube ',
+                    'can'  => 'packages.clasificacion',
+                    'submenu' => [
+                        [
+                            'text' => 'Clasificacion',
+                            'url' => '#',
+                            'icon' => 'fas fa-key',
+                        ],
+                        [
+                            'text' => 'Inventario Admision',
+                            'url' => '#',
+                            'icon' => 'fas fa-lock',
+                        ],
+                    ],
                 ],
             ],
         ],

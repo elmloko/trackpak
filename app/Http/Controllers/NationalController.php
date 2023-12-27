@@ -95,4 +95,23 @@ class NationalController extends Controller
         return redirect()->route('nationals.index')
             ->with('success', 'Paquete Eliminado Con Éxito!');
     }
+    public function agregarPaquete($nationalId)
+    {
+        $national = National::findOrFail($nationalId);
+
+        // Verifica si el paquete ya está seleccionado
+        if (!in_array($nationalId, $this->selectedPackages)) {
+            $this->selectedPackages[] = $nationalId;
+            $national->update(['ESTADO' => 'ASIGNADO']);
+            $national->touch();
+        }
+    }
+
+    public function quitarPaquete($nationalId)
+    {
+        $national = National::findOrFail($nationalId);
+        $this->selectedPackages = array_diff($this->selectedPackages, [$nationalId]);
+        $national->update(['ESTADO' => 'VENTANILLA']);
+        $national->touch();
+    }
 }
