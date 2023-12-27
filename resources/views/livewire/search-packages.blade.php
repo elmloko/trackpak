@@ -84,7 +84,10 @@
                                                         <th>Estado</th>
                                                         <th>Observaciones</th>
                                                         <th>Aduana</th>
+                                                        <th>Ultima Actualizacion</th>
+                                                        @hasrole('SuperAdmin|Administrador')
                                                         <th>Acciones</th>
+                                                        @endhasrole
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -103,6 +106,7 @@
                                                             <td>{{ $package->ESTADO }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->ADUANA }}</td>
+                                                            <td>{{ $package->updated_at }}</td>
                                                             <td>
                                                                 <form id="eliminarForm{{ $package->id }}"
                                                                     action="{{ route('packages.destroy', $package->id) }}"

@@ -32,7 +32,8 @@
                         'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
                         'pattern' => '^(\d+)?(\.\d{1,3})?$',
                         'required' => 'required',
-                    ]) }}
+                        'min' => '0',  // Establecer el valor mínimo
+                        'max' => '20.000',]) }}
                     {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
