@@ -18,15 +18,8 @@
                                                 <label for="search">Busca:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                             </div>
-                                            @hasrole('SuperAdmin|Administrador')
-                                                <div class="d-inline-block">
-                                                    <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
-                                                        {{ __('Crear Nuevo') }}
-                                                    </a>
-                                                </div>
-                                            @endhasrole
                                         </div>
-                                        <div class="col-lg-9 text-right">
+                                        {{-- <div class="col-lg-9 text-right">
                                             <form method="get" action="{{ route('packagesall.excel') }}">
                                                 @csrf
                                                 <div class="form-row align-items-center">
@@ -59,7 +52,7 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                        </div>
+                                        </div> --}}
                                     </div>                                    
                                 </div>
                                 <div class="card-body">

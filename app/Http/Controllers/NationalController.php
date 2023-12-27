@@ -14,6 +14,10 @@ class NationalController extends Controller
     {
         return view('national.index');
     }
+    public function total()
+    {
+        return view('national.total');
+    }
 
     public function create()
     {
