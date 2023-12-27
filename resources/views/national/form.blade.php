@@ -43,7 +43,7 @@
                     {!! $errors->first('DESTINO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('PROVINCIA') }}
+                    {{ Form::label('LOCALIDAD') }}
                     {{ Form::select('PROVINCIA', ['LOCAL 1' => 'LOCAL 1', 'LOCAL 2' => 'LOCAL 2', 'LOCAL 3' => 'LOCAL 3', 'LOCAL 4' => 'LOCAL 4', 'CUIDAD CAPITAL EMS' => 'CUIDAD CAPITAL EMS', 'CUIDAD INTERMEDIA EMS' => 'CUIDAD INTERMEDIA EMS', 'TRINIDAD/COBIJA EMS' => 'TRINIDAD/COBIJA EMS', 'RIBERALTA/GUAYARAMERIN EMS' => 'RIBERALTA/GUAYARAMERIN EMS', 'CUIDAD CAPITAL ME' => 'CUIDAD CAPITAL ME', 'TRINIDAD/COBIJA ME' => 'TRINIDAD/COBIJA ME', 'PROVINCIA-DENTRO ME' => 'PROVINCIA-DENTRO ME', 'PROVINCIA-OTRO ME' => 'PROVINCIA-OTRO ME', 'SERVICIO-LOCAL LC/AO' => 'SERVICIO-LOCAL LC/AO', 'SERVICIO-NACIONAL LC/AO' => 'SERVICIO-NACIONAL LC/AO','PROVINCIA-DENTRO LC/AO' => 'PROVINCIA-DENTRO LC/AO','PROVINCIA-OTRO LC/AO' => 'PROVINCIA-OTRO LC/AO','TRINIDAD/COBIJA LC/AO' => 'TRINIDAD/COBIJA LC/AO','RIBERALTA/GUAYARAMERIN LC/AO' => 'RIBERALTA/GUAYARAMERIN LC/AO','SERVICIO-LOCAL ECA' => 'SERVICIO-LOCAL ECA','SERVICIO-NACIONAL ECA' => 'SERVICIO-NACIONAL ECA','PROVINCIA-DENTRO ECA' => 'PROVINCIA-DENTRO ECA','PROVINCIA-OTRO ECA' => 'PROVINCIA-OTRO ECA','TRINIDAD/COBIJA ECA' => 'TRINIDAD/COBIJA ECA','RIBERALTA/GUAYARAMERIN ECA' => 'RIBERALTA/GUAYARAMERIN ECA','UNICO SE' => 'UNICO SE','SERVICIO-LOCAL PO' => 'SERVICIO-LOCAL PO','SERVICIO-NACIONAL PO' => 'SERVICIO-NACIONAL PO','PROVINCIA-DENTRO PO' => 'PROVINCIA-DENTRO PO','PROVINCIA-OTRO PO' => 'PROVINCIA-OTRO PO','SERVICIO-NACIONAL SM' => 'SERVICIO-NACIONAL SM','SERVICIO-PROVICIONAL SM' => 'SERVICIO-PROVICIONAL SM'], $national->PROVINCIA, ['class' => 'form-control' . ($errors->has('PROVINCIA') ? ' is-invalid' : ''), 'placeholder' => 'Destino Local', 'id' => 'provincia-select']) }}
                     {!! $errors->first('PROVINCIA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
@@ -57,11 +57,11 @@
                     {{ Form::number('FACTURA', $national->FACTURA, ['class' => 'form-control' . ($errors->has('FACTURA') ? ' is-invalid' : ''), 'placeholder' => 'Numero de Factura']) }}
                     {!! $errors->first('FACTURA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     {{ Form::label('IMPORTE (Bs.)') }}
                     {{ Form::number('IMPORTE', $national->IMPORTE, ['class' => 'form-control' . ($errors->has('IMPORTE') ? ' is-invalid' : ''), 'placeholder' => 'Importe expresado en Bs.', 'id' => 'importe-select']) }}
                     {!! $errors->first('IMPORTE', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                </div> --}}
             </div>
         </div>
         <hr>
