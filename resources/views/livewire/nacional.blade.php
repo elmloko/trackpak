@@ -74,7 +74,7 @@
                                         <th>Destino</th>
                                         <th>N° Factura</th>
                                         <th>Importe (Bs.)</th>
-                                        <th>Usuario</th>
+                                        {{-- <th>Usuario</th> --}}
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                         <th></th>
@@ -103,7 +103,7 @@
                                                 <td>{{ $national->DESTINO }}</td>
                                                 <td>{{ $national->FACTURA }}</td>
                                                 <td>{{ $national->IMPORTE }}</td>
-                                                <td>{{ $national->USER }}</td>
+                                                {{-- <td>{{ $national->USER }}</td> --}}
                                                 <td>{{ $national->ESTADO }}</td>
                                                 {{-- <td>{{ $national->MUNICIPIO }}</td> --}}
                                                 <td>

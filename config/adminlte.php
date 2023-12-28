@@ -357,7 +357,7 @@ return [
                         ],
                         [
                             'text' => 'Despacho Admision',
-                            'url' => '#',
+                            'url' => 'national/despachoadmision',
                             'icon' => 'fas fa-lock',
                         ],
                     ],

@@ -20,6 +20,7 @@ class Nacional extends Component
 
     public function render()
     {
+        $userasignado = auth()->user()->name;
         $nationals = National::where(function ($query) {
             $query->where('CODIGO', 'like', '%' . $this->search . '%')
                 ->orWhere('NOMBRESDESTINATARIO', 'like', '%' . $this->search . '%')
@@ -29,6 +30,8 @@ class Nacional extends Component
                 ->orWhere('FACTURA', 'like', '%' . $this->search . '%')
                 ->orWhere('created_at', 'like', '%' . $this->search . '%');
         })
+        ->whereIn('ESTADO', ['ADMISION'])
+        ->where('USER', $userasignado)
         ->when($this->selectedCity, function ($query) {
             $query->where('DESTINO', $this->selectedCity);
         })

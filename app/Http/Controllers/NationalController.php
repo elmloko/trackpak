@@ -18,6 +18,10 @@ class NationalController extends Controller
     {
         return view('national.total');
     }
+    public function despachoadmision()
+    {
+        return view('national.despachoadmision');
+    }
 
     public function create()
     {

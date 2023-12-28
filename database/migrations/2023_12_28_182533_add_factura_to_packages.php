@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('nationals', function (Blueprint $table) {
-            $table->timestamp('datedespachoadmision')->nullable();
+        Schema::table('FACTURA', function (Blueprint $table) {
+            //
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('nationals', function (Blueprint $table) {
-            $table->dropColumn('datedespachoadmision');
+        Schema::table('FACTURA', function (Blueprint $table) {
+            //
         });
     }
 };
