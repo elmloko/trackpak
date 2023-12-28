@@ -77,7 +77,6 @@
                                             <tr>
                                                 <td><input type="checkbox" wire:model="paquetesSeleccionados"
                                                         value="{{ $package->id }}"></td>
-                                                <td>{{ $package->estadoclasificacion }}</td>
                                                 <td>{{ $package->id }}</td>
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>

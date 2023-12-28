@@ -125,7 +125,7 @@
                                                     <th>Teléfono</th>
                                                     <th>País</th>
                                                     <th>Ciudad</th>
-                                                    <th>Dirección</th>
+                                                    <th>Zonificacion</th>
                                                     <th>Ventanilla</th>
                                                     <th>Peso (gr.)</th>
                                                     <th>Precio(Bs.)</th>
@@ -161,8 +161,7 @@
                                                     <td>{{ $package->ADUANA }}</td>
                                                     <td>{{ $package->updated_at }}</td>
                                                     <td>
-                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                        Urbano')
+                                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                                         <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                             data-target="#bajaModal{{ $package->id }}">
                                                             <i class="fa fa-arrow-down"></i>
