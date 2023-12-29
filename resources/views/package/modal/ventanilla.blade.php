@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label for="zona">Zona</label>
                             <select class="form-control" id="zona" name="zona">
-                                <!-- Puedes ajustar esto según las zonas disponibles en tu base de datos -->
+                                <option value="DND">DND</option>
                                 <option value="CALACOTO">CALACOTO</option>
                                 <option value="SAN PEDRO">SAN PEDRO</option>
                                 <option value="LOS ANDES">LOS ANDES</option>
@@ -64,13 +64,26 @@
                                 <option value="FLORIDA">FLORIDA</option>
                                 <option value="VILLA VICTORIA">VILLA VICTORIA</option>
                                 <option value="CIUDADELA FERROVIARIA">CIUDADELA FERROVIARIA</option>
-                                <option value="DND">DND</option>
-                                <option value="PG1">PG1</option>
-                                <option value="PG2">PG2</option>
-                                <option value="PG3">PG3</option>
-                                <option value="PG4">PG4</option>
-                                <option value="PG5">PG5</option>
-                                <!-- ... (agregar más opciones según sea necesario) ... -->
+                                <option value="PGA1">PG1</option>
+                                <option value="PGA2">PG2</option>
+                                <option value="PGA3">PG3</option>
+                                <option value="PGA4">PG4</option>
+                                <option value="PGA5">PG5</option>
+                                <option value="PGB1">PG1</option>
+                                <option value="PGB2">PG2</option>
+                                <option value="PGB3">PG3</option>
+                                <option value="PGB4">PG4</option>
+                                <option value="PGB5">PG5</option>
+                                <option value="PGC1">PG1</option>
+                                <option value="PGC2">PG2</option>
+                                <option value="PGC3">PG3</option>
+                                <option value="PGC4">PG4</option>
+                                <option value="PGC5">PG5</option>
+                                <option value="PGD1">PG1</option>
+                                <option value="PGD2">PG2</option>
+                                <option value="PGD3">PG3</option>
+                                <option value="PGD4">PG4</option>
+                                <option value="PGD5">PG5</option>
                             </select>
                         </div>
                     @else
