@@ -65,26 +65,26 @@
                                 <option value="FLORIDA">FLORIDA</option>
                                 <option value="VILLA VICTORIA">VILLA VICTORIA</option>
                                 <option value="CIUDADELA FERROVIARIA">CIUDADELA FERROVIARIA</option>
-                                <option value="PGA1">PG1</option>
-                                <option value="PGA2">PG2</option>
-                                <option value="PGA3">PG3</option>
-                                <option value="PGA4">PG4</option>
-                                <option value="PGA5">PG5</option>
-                                <option value="PGB1">PG1</option>
-                                <option value="PGB2">PG2</option>
-                                <option value="PGB3">PG3</option>
-                                <option value="PGB4">PG4</option>
-                                <option value="PGB5">PG5</option>
-                                <option value="PGC1">PG1</option>
-                                <option value="PGC2">PG2</option>
-                                <option value="PGC3">PG3</option>
-                                <option value="PGC4">PG4</option>
-                                <option value="PGC5">PG5</option>
-                                <option value="PGD1">PG1</option>
-                                <option value="PGD2">PG2</option>
-                                <option value="PGD3">PG3</option>
-                                <option value="PGD4">PG4</option>
-                                <option value="PGD5">PG5</option>
+                                <option value="PG1A">PG1A</option>
+                                <option value="PG2A">PG2A</option>
+                                <option value="PG3A">PG3A</option>
+                                <option value="PG4A">PG4A</option>
+                                <option value="PG5A">PG5A</option>
+                                <option value="PG1B">PG1B</option>
+                                <option value="PG2B">PG2B</option>
+                                <option value="PG3B">PG3B</option>
+                                <option value="PG4B">PG4B</option>
+                                <option value="PG5B">PG5B</option>
+                                <option value="PG1C">PG1C</option>
+                                <option value="PG2C">PG2C</option>
+                                <option value="PG3C">PG3C</option>
+                                <option value="PG4C">PG4C</option>
+                                <option value="PG5C">PG5C</option>
+                                <option value="PG1D">PG1D</option>
+                                <option value="PG2D">PG2D</option>
+                                <option value="PG3D">PG3D</option>
+                                <option value="PG4D">PG4D</option>
+                                <option value="PG5D">PG5D</option>
                             </select>
                         </div>
                     @else
