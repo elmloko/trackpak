@@ -48,7 +48,7 @@ class PackageController extends Controller
     {
         // Validación de datos
         $request->validate([
-            'CODIGO' => 'required|string|max:20',
+            // 'CODIGO' => 'required|string|max:20',
             'DESTINATARIO' => 'required|string|max:255',
             'TELEFONO' => 'required|numeric|regex:/^[0-9]+$/',
             'CUIDAD' => 'required',

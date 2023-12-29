@@ -29,7 +29,7 @@ class Package extends Model
 {
     use SoftDeletes;
     static $rules = [
-		'CODIGO' => 'required',
+		// 'CODIGO' => 'required',
 		'DESTINATARIO' => 'required',
     'CUIDAD' => 'required',
     'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA',
