@@ -498,19 +498,19 @@ return [
                         ],
                     ],
                 ],
-                [
-                    'text' => 'Eventos',
-                    'url' => 'events',
-                    'icon' => 'fas fa-calendar-alt',
-                    'can'  => 'users.index',
-                ],
-                [
-                    'text' => 'Mensajeria',
-                    'url' => 'mensajes',
-                    'icon' => 'fas fa-calendar-alt',
-                    'can'  => 'users.index',
-                ],
             ],
+        ],
+        [
+            'text' => 'Eventos',
+            'url' => 'events',
+            'icon' => 'fas fa-calendar-alt',
+            'can'  => 'users.index',
+        ],
+        [
+            'text' => 'Mensajeria',
+            'url' => 'mensajes',
+            'icon' => 'fas fa-calendar-alt',
+            'can'  => 'users.index',
         ],
     ],
 

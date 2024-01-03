@@ -32,7 +32,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users', [UserController::class, 'index'])->middleware('can:users.index')->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
     Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
@@ -60,29 +60,29 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/listas', [PackageController::class, 'listas'])->name('packages.listas');
 
     //Modulo Clasificacion
-    Route::get('packages/clasificacion', [PackageController::class, 'clasificacion'])->name('packages.clasificacion');
+    Route::get('packages/clasificacion', [PackageController::class, 'clasificacion'])->middleware('can:packages.clasificacion')->name('packages.clasificacion');
     Route::get('test/redirigidos', [PackageController::class, 'redirigidos'])->name('packages.redirigidos');
     Route::get('test/dirigido/{id}', [PackageController::class, 'dirigido'])->name('packages.dirigido');
-    Route::get('packages/entregasclasificacion', [PackageController::class, 'entregasclasificacion'])->name('packages.entregasclasificacion');
+    Route::get('packages/entregasclasificacion', [PackageController::class, 'entregasclasificacion'])->middleware('can:packages.clasificacion')->name('packages.entregasclasificacion');
 
     //Modulo Ventanilla
-    Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->name('packages.ventanilla');
-    Route::get('test/deleteado', [PackageController::class, 'deleteado'])->name('test.deleteado');
+    Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->middleware('can:packages.ventanilla')->name('packages.ventanilla');
+    Route::get('test/deleteado', [PackageController::class, 'deleteado'])->middleware('can:packages.delete')->name('test.deleteado');
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
     Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
     Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
     Route::get('packages/redirigir/{id}', [PackageController::class, 'redirigir'])->name('packages.redirigir');
-    Route::get('packages/prerezago', [PackageController::class, 'prerezago'])->name('packages.prerezago');
-    Route::get('packages/rezago', [PackageController::class, 'rezago'])->name('packages.rezago');
+    Route::get('packages/prerezago', [PackageController::class, 'prerezago'])->middleware('can:packages.prerezago')->name('packages.prerezago');
+    Route::get('packages/rezago', [PackageController::class, 'rezago'])->middleware('can:packages.rezago')->name('packages.rezago');
 
     //Modulo Cartero
-    Route::get('packages/carteros', [PackageController::class, 'carteros'])->name('packages.carteros');
-    Route::get('packages/inventariocartero', [PackageController::class, 'inventariocartero'])->name('packages.inventariocartero');
+    Route::get('packages/carteros', [PackageController::class, 'carteros'])->middleware('can:packages.carteros')->name('packages.carteros');
+    Route::get('packages/inventariocartero', [PackageController::class, 'inventariocartero'])->middleware('can:packages.inventariocartero')->name('packages.inventariocartero');
     Route::post('packages/{id}/deletecartero', [PackageController::class, 'deletecartero'])->name('packages.deletecartero');
     Route::post('packages/buscarPaqueteCartero', [PackageController::class, 'buscarPaqueteCartero'])->name('packages.buscarPaqueteCartero');
-    Route::get('packages/distribuicioncartero', [PackageController::class, 'distribuicioncartero'])->name('packages.distribuicioncartero');
-    Route::get('packages/generalcartero', [PackageController::class, 'generalcartero'])->name('packages.generalcartero');
-    Route::get('packages/despachocartero', [PackageController::class, 'despachocartero'])->name('packages.despachocartero');
+    Route::get('packages/distribuicioncartero', [PackageController::class, 'distribuicioncartero'])->middleware('can:packages.distribuicioncartero')->name('packages.distribuicioncartero');
+    Route::get('packages/generalcartero', [PackageController::class, 'generalcartero'])->middleware('can:packages.generalcartero')->name('packages.generalcartero');
+    Route::get('packages/despachocartero', [PackageController::class, 'despachocartero'])->middleware('can:packages.carteros')->name('packages.despachocartero');
     Route::get('packages/despachogeneralcartero', [PackageController::class, 'despachogeneralcartero'])->name('packages.despachogeneralcartero');
 
     // Reportes PDF
@@ -121,7 +121,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/national/total', [NationalController::class, 'total'])->name('national.total');
     Route::get('/national/despachoadmision', [NationalController::class, 'despachoadmision'])->name('national.despachoadmision');
     //Eventos
-    Route::get('/events', [EventController::class, 'index'])->name('events.index');
+    Route::get('/events', [EventController::class, 'index'])->middleware('can:users.index')->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::get('events/{events}', [EventController::class, 'show'])->name('events.show');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');
@@ -129,7 +129,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     //Mensajeria
-    Route::get('/mensajes', [MensajeController::class, 'index'])->name('mensajes.index');
+    Route::get('/mensajes', [MensajeController::class, 'index'])->middleware('can:users.index')->name('mensajes.index');
     Route::get('/mensaje/create', [MensajeController::class, 'create'])->name('mensajes.create');
     // Route::get('/mensajes/{mensaje}', [MensajeController::class, 'show'])->name('mensajes.show');
     Route::post('/mensaje', [MensajeController::class, 'store'])->name('mensajes.store');
