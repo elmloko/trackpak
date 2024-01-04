@@ -323,11 +323,11 @@ return [
                     'url' => 'users',
                     'icon' => 'fas fa-user',
                 ],
-                // [
-                //     'text' => 'Roles',
-                //     'url' => '#',
-                //     'icon' => 'fas fa-lock',
-                // ],
+                [
+                    'text' => 'Roles',
+                    'url' => 'roles',
+                    'icon' => 'fas fa-users-cog',
+                ],
                 // [
                 //     'text' => 'Permisos',
                 //     'url' => '#',

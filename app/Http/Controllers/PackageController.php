@@ -54,7 +54,7 @@ class PackageController extends Controller
             'CUIDAD' => 'required',
             'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA',
             // 'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255',
-            'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,3})?$/|between:0.001,2.000',
+            'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,3})?$/|between:0.001,5.000',
             'TIPO' => 'required|string',
             'ADUANA' => 'required|string',
         ]);

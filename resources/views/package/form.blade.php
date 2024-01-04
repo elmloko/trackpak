@@ -31,7 +31,7 @@
                         'pattern' => '^(\d+)?(\.\d{1,3})?$',
                         'required' => 'required',
                         'min' => '0', // Establecer el valor mínimo
-                        'max' => '2.000',
+                        'max' => '5.000',
                     ]) }}
                     {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>

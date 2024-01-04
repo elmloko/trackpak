@@ -8,6 +8,7 @@ use App\Http\Controllers\PcertificateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -137,6 +138,14 @@ Route::middleware('auth')->group(function () {
     Route::put('/mensaje/{mensaje}', [MensajeController::class, 'update'])->name('mensajes.update');
     Route::delete('/mensaje/{mensaje}', [MensajeController::class, 'destroy'])->name('mensajes.destroy');
 
+    //Roles
+    Route::get('/roles', [RoleController::class, 'index'])->middleware('can:users.index')->name('roles.index');
+    Route::get('/role/create', [RoleController::class, 'create'])->name('roles.create');
+    // Route::get('/role/{mensaje}', [RoleController::class, 'show'])->name('roles.show');
+    Route::post('/role', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::put('/role/{role}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
     });
