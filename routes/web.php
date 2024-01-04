@@ -10,6 +10,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,6 +66,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/permission/{permission}/edit', [PermissionController::class, 'edit'])->name('permissions.edit');
     Route::put('/permission/{permission}', [PermissionController::class, 'update'])->name('permissions.update');
     Route::delete('/permission/{permission}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
+
+    //Accesos
+    Route::get('/role-has-permissions', [RoleHasPermissionController::class, 'index'])->middleware('can:users.index')->name('role-has-permissions.index');
+    Route::get('/role-has-permission/create', [RoleHasPermissionController::class, 'create'])->name('role-has-permissions.create');
+    // Route::get('/role-has-permission/{roleHasPermission}', [RoleHasPermissionController::class, 'show'])->name('role-has-permissions.show');
+    Route::post('/role-has-permission', [RoleHasPermissionController::class, 'store'])->name('role-has-permissions.store');
+    Route::get('/role-has-permission/{roleHasPermission}/edit', [RoleHasPermissionController::class, 'edit'])->name('role-has-permissions.edit');
+    Route::put('/role-has-permission/{roleHasPermission', [RoleHasPermissionController::class, 'update'])->name('role-has-permissions.update');
+    Route::delete('/role-has-permission/{roleHasPermission}', [RoleHasPermissionController::class, 'destroy'])->name('role-has-permissions.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

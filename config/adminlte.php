@@ -333,6 +333,11 @@ return [
                     'url' => 'permissions',
                     'icon' => 'fas fa-key',
                 ],
+                [
+                    'text' => 'Accesos',
+                    'url' => 'role-has-permissions',
+                    'icon' => 'fas fa-key',
+                ],
             ],
         ],
         [
