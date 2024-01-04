@@ -20,9 +20,9 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('CANTIDAD DE ENVIOS') }}
-                    {{ Form::number('CANTIDAD', $national->CANTIDAD, ['class' => 'form-control' . ($errors->has('CANTIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Cantidad de envios']) }}
+                    {{ Form::number('CANTIDAD', $national->CANTIDAD ?? 1, ['class' => 'form-control' . ($errors->has('CANTIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Cantidad de envíos']) }}
                     {!! $errors->first('CANTIDAD', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                </div>                
                 <div class="form-group">
                     {{ Form::label('PESO (gr.)') }}
                     {{ Form::text('PESO', $national->PESO, [

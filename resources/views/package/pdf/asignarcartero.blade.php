@@ -160,6 +160,7 @@
                 <th>Código Rastreo</th>
                 <th>Destinatario</th>
                 <th>Dirección</th>
+                <th>Peso (Kg.)</th>
                 <th>Fecha y Hora</th>
                 <th>Razon</th>
                 <th>Accion</th>
@@ -178,6 +179,7 @@
                         </td>
                         <td>{{ $package->DESTINATARIO }}</td>
                         <td>{{ $package->ZONA }}</td>
+                        <td>{{ $package->PESO }}</td>
                         <td></td>
                         <td></td>
                         <td></td>
