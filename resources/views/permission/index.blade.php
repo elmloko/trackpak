@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Administracion Roles TrackinBO') }}
+                                {{ __('Administracion Permisos TrackinBO') }}
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm float-right"
+                                <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm float-right"
                                     data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
@@ -37,22 +37,23 @@
                                     <tr>
                                         <th>No</th>
 
-                                        <th>Rol</th>
+                                        <th>Ruta</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($roles as $role)
+                                    @foreach ($permissions as $permission)
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-                                            <td>{{ $role->name }}</td>
+                                            <td>{{ $permission->name }}</td>
 
                                             <td>
-                                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST">
+                                                <form action="{{ route('permissions.destroy', $permission->id) }}"
+                                                    method="POST">
                                                     <a class="btn btn-sm btn-success"
-                                                        href="{{ route('roles.edit', $role->id) }}"><i
+                                                        href="{{ route('permissions.edit', $permission->id) }}"><i
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
@@ -67,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $roles->links() !!}
+                {!! $permissions->links() !!}
             </div>
         </div>
     </div>

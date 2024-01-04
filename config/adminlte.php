@@ -328,11 +328,11 @@ return [
                     'url' => 'roles',
                     'icon' => 'fas fa-users-cog',
                 ],
-                // [
-                //     'text' => 'Permisos',
-                //     'url' => '#',
-                //     'icon' => 'fas fa-key',
-                // ],
+                [
+                    'text' => 'Permisos',
+                    'url' => 'permissions',
+                    'icon' => 'fas fa-key',
+                ],
             ],
         ],
         [

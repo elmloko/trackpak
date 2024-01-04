@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,24 @@ Route::middleware('auth')->group(function () {
     Route::get('users/excel', [UserController::class, 'excel'])->name('users.excel');
     Route::get('users/pdf', [UserController::class, 'pdf'])->name('users.pdf');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+
+    //Roles
+    Route::get('/roles', [RoleController::class, 'index'])->middleware('can:users.index')->name('roles.index');
+    Route::get('/role/create', [RoleController::class, 'create'])->name('roles.create');
+    // Route::get('/role/{role}', [RoleController::class, 'show'])->name('roles.show');
+    Route::post('/role', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::put('/role/{role}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
+
+    //Permisos
+    Route::get('/permissions', [PermissionController::class, 'index'])->middleware('can:users.index')->name('permissions.index');
+    Route::get('/permission/create', [PermissionController::class, 'create'])->name('permissions.create');
+    // Route::get('/permission/{permission}', [PermissionController::class, 'show'])->name('permissions.show');
+    Route::post('/permission', [PermissionController::class, 'store'])->name('permissions.store');
+    Route::get('/permission/{permission}/edit', [PermissionController::class, 'edit'])->name('permissions.edit');
+    Route::put('/permission/{permission}', [PermissionController::class, 'update'])->name('permissions.update');
+    Route::delete('/permission/{permission}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -138,14 +157,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/mensaje/{mensaje}', [MensajeController::class, 'update'])->name('mensajes.update');
     Route::delete('/mensaje/{mensaje}', [MensajeController::class, 'destroy'])->name('mensajes.destroy');
 
-    //Roles
-    Route::get('/roles', [RoleController::class, 'index'])->middleware('can:users.index')->name('roles.index');
-    Route::get('/role/create', [RoleController::class, 'create'])->name('roles.create');
-    // Route::get('/role/{mensaje}', [RoleController::class, 'show'])->name('roles.show');
-    Route::post('/role', [RoleController::class, 'store'])->name('roles.store');
-    Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
-    Route::put('/role/{role}', [RoleController::class, 'update'])->name('roles.update');
-    Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
+    
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
     });
