@@ -57,7 +57,7 @@ class PackageController extends Controller
             'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,3})?$/|between:0.001,10.000',
             'TIPO' => 'required|string',
             'ADUANA' => 'required|string',
-            'nrocasilla' => 'required|numeric|regex:/^[0-9]+$/',
+            // 'nrocasilla' => 'required|numeric|regex:/^[0-9]+$/',
         ]);
 
         // Calcular el precio basado en el peso
