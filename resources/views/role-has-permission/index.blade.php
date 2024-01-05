@@ -16,11 +16,12 @@
                                 {{ __('Role Has Permission') }}
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('role-has-permissions.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                            <div class="float-right">
+                                <a href="{{ route('role-has-permissions.create') }}"
+                                    class="btn btn-primary btn-sm float-right" data-placement="left">
+                                    {{ __('Create New') }}
                                 </a>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -35,9 +36,9 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Permission Id</th>
-										<th>Role Id</th>
+
+                                        <th>Permission Id</th>
+                                        <th>Role Id</th>
 
                                         <th></th>
                                     </tr>
@@ -46,22 +47,19 @@
                                     @foreach ($roleHasPermissions as $roleHasPermission)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $roleHasPermission->permission_id }}</td>
-											<td>{{ $roleHasPermission->role_id }}</td>
 
-                                            <td>
-                                                <form action="{{ route('role-has-permissions.destroy', $roleHasPermission->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-success" href="{{ route('role-has-permissions.edit', $roleHasPermission->id) }}">
-                                                        <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
-                                                    </a>
+                                            <td>{{ $permissions[$roleHasPermission->permission_id] }}</td>
+                                            <td>{{ $roles[$roleHasPermission->role_id] }}</td>
+
+                                            {{-- <td>
+                                                <form action="{{ route('role-has-permissions.destroy',$roleHasPermission->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('role-has-permissions.show',$roleHasPermission->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
-                                                    </button>
-                                                </form>                                                
-                                            </td>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                </form>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>

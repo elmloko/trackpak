@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\RoleHasPermission;
 use Illuminate\Http\Request;
+use App\Models\Permission;
+use App\Models\Role;
 
 /**
  * Class RoleHasPermissionController
@@ -19,21 +21,22 @@ class RoleHasPermissionController extends Controller
     public function index()
     {
         $roleHasPermissions = RoleHasPermission::paginate();
+        $permissions = Permission::pluck('name', 'id');
+        $roles = Role::pluck('name', 'id');
 
-        return view('role-has-permission.index', compact('roleHasPermissions'))
+        return view('role-has-permission.index', compact('roleHasPermissions', 'permissions', 'roles'))
             ->with('i', (request()->input('page', 1) - 1) * $roleHasPermissions->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roleHasPermission = new RoleHasPermission();
-        return view('role-has-permission.create', compact('roleHasPermission'));
+        $permissions = Permission::pluck('name', 'id');
+        $roles = Role::pluck('name', 'id');
+        
+        return view('role-has-permission.create', compact('roleHasPermission', 'permissions', 'roles'));
     }
+    
 
     /**
      * Store a newly created resource in storage.

@@ -49,5 +49,5 @@ class RoleHasPermission extends Model
         return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }
     
-
+    public $timestamps = false;
 }

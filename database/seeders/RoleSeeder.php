@@ -25,6 +25,10 @@ class RoleSeeder extends Seeder
         $role9 = Role::create(['name' => 'Auxiliar Adminsion']);
         $role10 = Role::create(['name' => 'Expedicion']);
         $role11 = Role::create(['name' => 'Auxiliar Expedicion']);
+        $role12 = Role::create(['name' => 'Casillas']);
+        $role13 = Role::create(['name' => 'ECA']);
+        $role14 = Role::create(['name' => 'DND']);
+        $role15 = Role::create(['name' => 'EMS']);
         // $role10 = Role::create(['name' => 'Despacho']);
         // $role11 = Role::create(['name' => 'Auxiliar Despacho']);
         // $role12 = Role::create(['name' => 'Enlace']);
@@ -45,7 +49,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'packages.entregasclasificacion'])->syncRoles([$role1,$role2,$role5,$role6]);
         Permission::create(['name' => 'packages.ventanilla'])->syncRoles([$role1,$role2,$role3,$role4]);
         Permission::create(['name' => 'packages.delete'])->syncRoles([$role1,$role2,$role3,$role4]);
-        Permission::create(['name' => 'packages.redirigidos'])->syncRoles([$role1,$role2,$role12,$role13]);
+        Permission::create(['name' => 'packages.redirigidos'])->syncRoles([$role1,$role2,$role10]);
         Permission::create(['name' => 'packages.distribuicioncartero'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'packages.carteros'])->syncRoles([$role1,$role2,$role7]);
         Permission::create(['name' => 'packages.inventariocartero'])->syncRoles([$role7]);
@@ -54,7 +58,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'packages.rezago'])->syncRoles([$role1,$role2,$role3]);
         Permission::create(['name' => 'packages.urbano'])->syncRoles([$role1,$role2,$role3,$role7]);
         Permission::create(['name' => 'packages.generalcartero'])->syncRoles([$role1,$role2,$role3]);
+        Permission::create(['name' => 'packages.casillas'])->syncRoles([$role1,$role2,$role12]);
+        Permission::create(['name' => 'packages.casillas'])->syncRoles([$role1,$role2,$role13]);
         Permission::create(['name' => 'national.total'])->syncRoles([$role1,$role2,$role8,$role9,$role10,$role11]);
         Permission::create(['name' => 'national.index'])->syncRoles([$role1,$role2,$role8,$role9]);
+        Permission::create(['name' => 'national.clasificacion'])->syncRoles([$role1,$role2,$role8,$role9,$role10,$role11]);
+        Permission::create(['name' => 'national.entrega'])->syncRoles([$role1,$role2,$role8,$role9]);
     }
 }
