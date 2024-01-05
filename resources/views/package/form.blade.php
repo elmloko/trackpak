@@ -22,7 +22,7 @@
                     {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('PESO (gr.)') }}
+                    {{ Form::label('PESO (Kg.)') }}
                     {{ Form::text('PESO', $package->PESO, [
                         'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
                         'placeholder' => 'Expresa el Peso en Gramos',
@@ -80,11 +80,22 @@
                     {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'SUCRE' => 'SUCRE', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $package->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Cuidad', 'id' => 'ciudad-select']) }}
                     {!! $errors->first('CUIDAD', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-
                 <div class="form-group">
                     {{ Form::label('VENTANILLA') }}
                     {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
                     {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('Nro DE CASILLERO POSTAL') }}
+                    {{ Form::number('nrocasilla', $package->nrocasilla, [
+                        'class' => 'form-control' . ($errors->has('nrocasilla') ? ' is-invalid' : ''),
+                        'placeholder' => 'Ingrese el numero de casillero postal',
+                        'pattern' => '^[0-9]*$', // Solo números
+                        'title' => 'Ingrese solo números',
+                        'autocomplete' => 'off', // Desactivar autocompletar
+                        'id' => 'casilla-select'
+                    ]) }}
+                    {!! $errors->first('nrocasilla', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
                     {{ Form::label('ADUANA') }}
@@ -261,4 +272,25 @@
             $(this).val($(this).val().toUpperCase());
         });
     });
+</script>
+<script>
+    // Función para mostrar u ocultar el campo de Nro DE CASILLERO POSTAL
+    function toggleCasillero() {
+        var ventanillaSelect = document.getElementById('ventanilla-select');
+        var casillaInput = document.getElementById('casilla-select');
+
+        // Habilitar o deshabilitar el campo según la opción seleccionada
+        casillaInput.disabled = ventanillaSelect.value !== 'CASILLAS';
+        
+        // Limpiar el valor si se deshabilita
+        if (!casillaInput.disabled) {
+            casillaInput.value = '';
+        }
+    }
+
+    // Asignar la función al evento onchange del campo de ventanilla
+    document.getElementById('ventanilla-select').onchange = toggleCasillero;
+
+    // Llamar a la función al cargar la página para establecer el estado inicial
+    window.onload = toggleCasillero;
 </script>

@@ -8,7 +8,7 @@ use App\Models\Event;
 use Illuminate\Support\Facades\Log;
 use Livewire\WithPagination;
 
-class VentanillaPackages extends Component
+class Casillas extends Component
 {
     use WithPagination;
 
@@ -30,17 +30,12 @@ class VentanillaPackages extends Component
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
-            ->where(function ($query) use ($userRegional) {
-                $query->where(function ($subQuery) {
-                    $subQuery->where('VENTANILLA', 'DND')
-                        ->orWhere('VENTANILLA', 'DD');
-                })
-                ->where('CUIDAD', $userRegional);
-            })
+            ->where('CUIDAD', $userRegional)
+            ->where('VENTANILLA', 'CASILLAS')
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.ventanilla-packages', [
+        return view('livewire.casillas', [
             'packages' => $packages,
         ]);
     }

@@ -64,6 +64,7 @@
                                         <th>Ventanilla</th>
                                         <th>Peso (gr.)</th>
                                         <th>Tipo</th>
+                                        <th>Nro Casilla</th>
                                         <th>Estado</th>
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
@@ -87,6 +88,7 @@
                                                 <td>{{ $package->VENTANILLA }}</td>
                                                 <td>{{ $package->PESO }}</td>
                                                 <td>{{ $package->TIPO }}</td>
+                                                <td>{{ $package->nrocasilla }}</td>
                                                 <td>{{ $package->ESTADO }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->ADUANA }}</td>

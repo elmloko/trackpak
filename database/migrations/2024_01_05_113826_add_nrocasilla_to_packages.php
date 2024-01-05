@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('FACTURA', function (Blueprint $table) {
-            //
+        Schema::table('packages', function (Blueprint $table) {
+            $table->text('nrocasilla')->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('FACTURA', function (Blueprint $table) {
-            //
+        Schema::table('packages', function (Blueprint $table) {
+            $table->dropColumn('nrocasilla');
         });
     }
 };

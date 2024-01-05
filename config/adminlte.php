@@ -429,6 +429,25 @@ return [
                     ],
                 ],
                 [
+                    'text' => 'Casillas',
+                    'icon' => 'fas fa-archive',
+                    'can'  => 'packages.ventanilla',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas Casillas',
+                            'url' => 'packages/casillas',
+                            'icon' => 'fas fa-box',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                        [
+                            'text' => 'Inventario Casillas',
+                            'url' => 'packages/casillasinventario',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                    ],
+                ],
+                [
                     'text' => 'Distribuicion',
                     'icon' => 'fas fa-boxes',
                     'can'  => 'packages.redirigidos',

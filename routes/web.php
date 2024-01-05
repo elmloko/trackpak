@@ -115,6 +115,12 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/despachocartero', [PackageController::class, 'despachocartero'])->middleware('can:packages.carteros')->name('packages.despachocartero');
     Route::get('packages/despachogeneralcartero', [PackageController::class, 'despachogeneralcartero'])->name('packages.despachogeneralcartero');
 
+    //Casillas
+    Route::get('packages/casillas', [PackageController::class, 'casillas'])->name('packages.casillas');
+    Route::get('packages/{id}/deletecasillas', [PackageController::class, 'deletecasillas'])->name('packages.deletecasillas');
+    Route::get('packages/casillasinventario', [PackageController::class, 'casillasinventario'])->name('packages.casillasinventario');
+    Route::post('packages/buscarPaquetecasilla', [PackageController::class, 'buscarPaquetecasilla'])->name('packages.buscarPaquetecasilla');
+
     // Reportes PDF
     Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
     Route::get('package/pdf/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('package.pdf.clasificacionpdf');

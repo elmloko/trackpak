@@ -4,13 +4,11 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Package;
-use App\Models\Event;
-use Illuminate\Support\Facades\Log;
 use Livewire\WithPagination;
 
-class VentanillaPackages extends Component
+class Casillasinventario extends Component
 {
-    use WithPagination;
+    use WithPagination; // Mueve el uso de WithPagination aquí
 
     public $search = '';
 
@@ -18,29 +16,25 @@ class VentanillaPackages extends Component
     {
         $userRegional = auth()->user()->Regional;
 
-        $packages = Package::where('ESTADO', 'VENTANILLA')
+        $packages = Package::onlyTrashed()
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('updated_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('deleted_at', 'like', '%' . $this->search . '%');
             })
-            ->where(function ($query) use ($userRegional) {
-                $query->where(function ($subQuery) {
-                    $subQuery->where('VENTANILLA', 'DND')
-                        ->orWhere('VENTANILLA', 'DD');
-                })
-                ->where('CUIDAD', $userRegional);
-            })
-            ->orderBy('updated_at', 'desc')
+            // Filtra por la 'CUIDAD' del usuario autenticado
+            ->whereIn('ESTADO', ['CASILLA'])
+            ->where('CUIDAD', $userRegional)
+            ->orderBy('deleted_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.ventanilla-packages', [
+        return view('livewire.casillasinventario', [
             'packages' => $packages,
         ]);
     }

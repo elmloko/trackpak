@@ -57,6 +57,7 @@ class PackageController extends Controller
             'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,3})?$/|between:0.001,10.000',
             'TIPO' => 'required|string',
             'ADUANA' => 'required|string',
+            'nrocasilla' => 'required|numeric|regex:/^[0-9]+$/',
         ]);
 
         // Calcular el precio basado en el peso
@@ -569,66 +570,66 @@ class PackageController extends Controller
         }
     }
     public function deletecartero($id, Request $request)
-{
-    $package = Package::find($id);
+    {
+        $package = Package::find($id);
 
-    if ($package) {
-        // Obtén el valor seleccionado del select
-        $nuevoEstado = $request->input('estado');
+        if ($package) {
+            // Obtén el valor seleccionado del select
+            $nuevoEstado = $request->input('estado');
 
-        // Guarda el nuevo estado en el paquete
-        $package->estado = $nuevoEstado;
+            // Guarda el nuevo estado en el paquete
+            $package->estado = $nuevoEstado;
 
-        // Verifica si el estado es "VENTANILLA"
-        if ($nuevoEstado == 'RETORNO') {
-            // Obtén la razón seleccionada desde el segundo select
-            $razonSeleccionada = $request->input('razon');
+            // Verifica si el estado es "VENTANILLA"
+            if ($nuevoEstado == 'RETORNO') {
+                // Obtén la razón seleccionada desde el segundo select
+                $razonSeleccionada = $request->input('razon');
 
-            // Llena la variable OBSERVACIONES con la razón seleccionada
-            $package->OBSERVACIONES = $razonSeleccionada;
-            Event::create([
-                'action' => 'DEVUELTO',
-                'descripcion' => 'El Cartero devolvio el paquete a Ventanilla',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-            $package->save();
-        } elseif ($nuevoEstado == 'PRE-REZAGO'){
-            // Obtén la razón seleccionada desde el tercer select
-            $razonSeleccionada = $request->input('razon');
+                // Llena la variable OBSERVACIONES con la razón seleccionada
+                $package->OBSERVACIONES = $razonSeleccionada;
+                Event::create([
+                    'action' => 'DEVUELTO',
+                    'descripcion' => 'El Cartero devolvio el paquete a Ventanilla',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $package->CODIGO,
+                ]);
+                $package->save();
+            } elseif ($nuevoEstado == 'PRE-REZAGO'){
+                // Obtén la razón seleccionada desde el tercer select
+                $razonSeleccionada = $request->input('razon');
 
-            // Llena la variable OBSERVACIONES con la razón seleccionada
-            $package->OBSERVACIONES = $razonSeleccionada;
-            Event::create([
-                'action' => 'PRE-REZAGO',
-                'descripcion' => 'El Cartero devolvio el paquete a Ventanilla y Ingreso a Almacen',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-            $package->update(['dateprerezago' => now()]);
-            $package->save();
-        }else {
-            // Si el estado no es "VENTANILLA", deja OBSERVACIONES en blanco
-            $package->OBSERVACIONES = "";
-            // Guarda el paquete actualizado
-            $package->save();
+                // Llena la variable OBSERVACIONES con la razón seleccionada
+                $package->OBSERVACIONES = $razonSeleccionada;
+                Event::create([
+                    'action' => 'PRE-REZAGO',
+                    'descripcion' => 'El Cartero devolvio el paquete a Ventanilla y Ingreso a Almacen',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $package->CODIGO,
+                ]);
+                $package->update(['dateprerezago' => now()]);
+                $package->save();
+            }else {
+                // Si el estado no es "VENTANILLA", deja OBSERVACIONES en blanco
+                $package->OBSERVACIONES = "";
+                // Guarda el paquete actualizado
+                $package->save();
 
-            // Crea un registro de evento solo si el estado 
-            Event::create([
-                'action' => 'ENTREGADO',
-                'descripcion' => 'Entrega de paquete con Cartero',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
+                // Crea un registro de evento solo si el estado 
+                Event::create([
+                    'action' => 'ENTREGADO',
+                    'descripcion' => 'Entrega de paquete con Cartero',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $package->CODIGO,
+                ]);
 
-            // Luego, elimina el paquete
-            $package->delete();
+                // Luego, elimina el paquete
+                $package->delete();
+            }
+            return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
+        } else {
+            return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
         }
-        return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
-    } else {
-        return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
     }
-}
 
     public function buscarPaquete(Request $request)
     {
@@ -637,6 +638,7 @@ class PackageController extends Controller
         $package = Package::where('CODIGO', $codigo)->first();
 
         if ($package) {
+            
             // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
             if ($package->ESTADO === 'DESPACHO' || $package->ESTADO === 'RETORNO') {
                 // Verificar que el destino sea igual a la regional del usuario
@@ -676,7 +678,74 @@ class PackageController extends Controller
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
         }
     }
+    public function buscarPaquetecasilla(Request $request)
+    {
+        $codigo = $request->input('codigo');
+        $zona = $request->input('zona');
+        $package = Package::where('CODIGO', $codigo)
+                        ->where('ESTADO', 'DESPACHO')
+                        ->where('VENTANILLA', 'CASILLAS')
+                        ->first();
 
+        if ($package) {
+            // Verificar que la regional del usuario coincide con la regional del paquete
+            if (auth()->user()->Regional == $package->CUIDAD) {
+                // Crear eventos solo si el estado es 'DESPACHO'
+                if ($package->ESTADO === 'DESPACHO') {
+                    Event::create([
+                        'action' => 'DISPONIBLE',
+                        'descripcion' => 'Paquete a la espera de ser recogido en Casillero Postal ' . $package->nrocasilla,
+                        'user_id' => auth()->user()->id,
+                        'codigo' => $package->CODIGO,
+                    ]);            
+                    Event::create([
+                        'action' => 'EN ENTREGA',
+                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.',
+                        'user_id' => auth()->user()->id,
+                        'codigo' => $package->CODIGO,
+                    ]);
+                }
+
+                // Cambiar el estado del paquete a "VENTANILLA"
+                $package->ZONA = $zona;
+                $package->ESTADO = 'VENTANILLA';
+                $package->save();
+
+                return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+            } else {
+                return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete con estado DESPACHO y ventanilla CASILLAS.');
+        }
+    }
+
+    public function deletecasillas(Request $request, $id)
+    {
+        $package = Package::find($id);
+
+        if ($package) {
+            // Registra el evento de entrega
+            Event::create([
+                'action' => 'ENTREGADO',
+                'descripcion' => 'Entrega de paquete en Casillero Postal en Oficina Regional',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+
+            // Cambia el estado del paquete a "ENTREGADO"
+            $package->estado = 'CASILLA';
+
+            // Guarda el paquete actualizado
+            $package->save();
+
+            // Elimina el paquete
+            $package->delete();
+            return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete para dar de baja o generar el PDF.');
+        }
+    }
 
     //VISTAS 
     public function clasificacion()
@@ -726,6 +795,14 @@ class PackageController extends Controller
     public function despachocartero()
     {
         return view('package.despachocartero');
+    }
+    public function casillas()
+    {
+        return view('package.casillas');
+    }
+    public function casillasinventario()
+    {
+        return view('package.casillasinventario');
     }
 
     //REPORTES EXCEL Y PDF
