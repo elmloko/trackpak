@@ -4,20 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Role
- *
- * @property $id
- * @property $name
- * @property $guard_name
- * @property $created_at
- * @property $updated_at
- *
- * @property ModelHasRole $modelHasRole
- * @property RoleHasPermission[] $roleHasPermissions
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Role extends Model
 {
     

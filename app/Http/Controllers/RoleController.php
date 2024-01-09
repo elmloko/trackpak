@@ -26,10 +26,13 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        request()->validate(Role::$rules);
-
+        $request->validate([
+            'name' => 'required|unique:roles',
+            // Otras reglas de validación según tus necesidades
+        ]);
+    
         $role = Role::create($request->all());
-
+    
         return redirect()->route('roles.index')
             ->with('success', 'Rol creado correctamente.');
     }
@@ -50,10 +53,16 @@ class RoleController extends Controller
 
     public function update(Request $request, Role $role)
     {
-        request()->validate(Role::$rules);
-
+        $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('roles')->ignore($role->id),
+            ],
+            // Otras reglas de validación según tus necesidades
+        ]);
+    
         $role->update($request->all());
-
+    
         return redirect()->route('roles.index')
             ->with('success', 'Role actualizado correctamente');
     }

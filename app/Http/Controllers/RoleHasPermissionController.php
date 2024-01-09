@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\RoleHasPermission;
 use Illuminate\Http\Request;
-use App\Models\Permission;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 /**
  * Class RoleHasPermissionController

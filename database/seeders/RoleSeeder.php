@@ -29,10 +29,10 @@ class RoleSeeder extends Seeder
         $role13 = Role::create(['name' => 'ECA']);
         $role14 = Role::create(['name' => 'DND']);
         $role15 = Role::create(['name' => 'EMS']);
+        $role16 = Role::create(['name' => 'Encargado']);
         // $role10 = Role::create(['name' => 'Despacho']);
         // $role11 = Role::create(['name' => 'Auxiliar Despacho']);
         // $role12 = Role::create(['name' => 'Enlace']);
-        // $role15 = Role::create(['name' => 'Encargado']); 
         // $role16 = Role::create(['name' => 'Almacen']);
         // $role17 = Role::create(['name' => 'Auxiliar Almacen']);
         // $role19 = Role::create(['name' => 'Operador']);
