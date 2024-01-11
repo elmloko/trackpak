@@ -454,6 +454,25 @@ return [
                     ],
                 ],
                 [
+                    'text' => 'ECA',
+                    'icon' => 'fas fa-archive',
+                    'can'  => 'packages.ventanilla',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas ECA',
+                            'url' => 'packages/eca',
+                            'icon' => 'fas fa-box',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                        [
+                            'text' => 'Inventario ECA',
+                            'url' => 'packages/ecainventario',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                    ],
+                ],
+                [
                     'text' => 'Distribuicion',
                     'icon' => 'fas fa-boxes',
                     'can'  => 'packages.redirigidos',

@@ -11,6 +11,7 @@ use App\Exports\EcaExport;
 use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
 use App\Exports\InventarioExport;
+use App\Exports\EcainventarioExport;
 use App\Exports\PackageExport;
 use App\Exports\CarteroExport;
 use App\Exports\CarteroGeneralExport;
@@ -804,6 +805,14 @@ class PackageController extends Controller
     {
         return view('package.casillasinventario');
     }
+    public function eca()
+    {
+        return view('package.eca');
+    }
+    public function ecainventario()
+    {
+        return view('package.ecainventario');
+    }
 
     //REPORTES EXCEL Y PDF
     public function packagesallexcel(Request $request)
@@ -841,6 +850,13 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
         return Excel::download(new InventarioExport($fechaInicio, $fechaFin), 'Inventario.xlsx');
+    }
+    public function ecainventarioexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
+        return Excel::download(new EcainventarioExport($fechaInicio, $fechaFin), 'Inventario.xlsx');
     }
     public function ventanillaexcel(Request $request)
     {

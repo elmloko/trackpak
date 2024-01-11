@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
 
-class Casillas extends Component
+class Eca extends Component
 {
     use WithPagination;
 
@@ -14,7 +14,7 @@ class Casillas extends Component
 
     public function render()
     {
-        $userRegional = auth()->user()->Regional;
+         $userRegional = auth()->user()->Regional;
 
         $packages = Package::where('ESTADO', 'VENTANILLA')
             ->when($this->search, function ($query) {
@@ -28,11 +28,11 @@ class Casillas extends Component
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where('CUIDAD', $userRegional)
-            ->where('VENTANILLA', 'CASILLAS')
+            ->where('VENTANILLA', 'ECA')
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.casillas', [
+        return view('livewire.eca', [
             'packages' => $packages,
         ]);
     }

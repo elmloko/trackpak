@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class InventarioExport implements FromCollection, WithHeadings, WithStyles
+class EcaExport implements FromCollection, WithHeadings, WithStyles
 {
     protected $fechaInicio;
     protected $fechaFin;
@@ -20,33 +20,38 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
     }
 
     public function collection()
-    {
-        $regional = auth()->user()->Regional;
-        $query = Package::withTrashed()->where('ESTADO', 'ENTREGADO')
-            ->whereIn('VENTANILLA', ['DD'])
-            ->select(
-                'CODIGO',
-                'DESTINATARIO',
-                'TELEFONO',
-                'PAIS',
-                'CUIDAD',
-                'ZONA',
-                'VENTANILLA',
-                'PESO',
-                'PRECIO',
-                'TIPO',
-                'ESTADO',
-                'ADUANA',
-                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
-            );
+{
+    $regional = auth()->user()->Regional;
 
-        if ($this->fechaInicio && $this->fechaFin) {
-            $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
-        }
+    $query = Package::where('ESTADO', 'VENTANILLA')
+        ->where('redirigido', 0)
+        ->whereIn('VENTANILLA', ['ECA'])
+        ->select(
+            'CODIGO',
+            'DESTINATARIO',
+            'TELEFONO',
+            'PAIS',
+            'CUIDAD',
+            'ZONA',
+            'VENTANILLA',
+            'PESO',
+            'PRECIO',
+            'TIPO',
+            'ESTADO',
+            'ADUANA',
+            'updated_at',
+            \DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_updated_at"),
+        );
 
-        $query->where('CUIDAD', $regional);
-        return $query->get();
+    if ($this->fechaInicio && $this->fechaFin) {
+        $query->whereBetween('updated_at', [$this->fechaInicio, $this->fechaFin]);
     }
+
+    $query->where('CUIDAD', $regional);
+
+    return $query->get();
+}
+
 
     public function headings(): array
     {
@@ -55,14 +60,16 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
             'DESTINATARIO',
             'TELEFONO',
             'PAIS',
-            'DESTINO',
+            'CUIDAD',
             'DIRECCION',
             'VENTANILLA',
             'PESO',
+            'PRECIO',
             'TIPO',
             'ESTADO',
             'ADUANA',
-            'FECHA BAJA',
+            'FECHA PENDIENTE'
+            
         ];
     }
 
@@ -91,3 +98,6 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
         ];
     }
 }
+
+
+

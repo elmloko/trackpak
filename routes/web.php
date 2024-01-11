@@ -153,6 +153,8 @@ Route::middleware('auth')->group(function () {
     Route::get('ventanilla/casillasexcel', [PackageController::class, 'casillasexcel'])->name('casillas.excel');
     Route::get('ventanilla/ecaexcel', [PackageController::class, 'ecaexcel'])->name('eca.excel');
     Route::get('ventanilla/inventarioexcel', [PackageController::class, 'inventarioexcel'])->name('inventario.excel');
+    Route::get('ventanilla/casillasinventarioexcel', [PackageController::class, 'casillasinventarioexcel'])->name('casillasinventarioexcel.excel');
+    Route::get('ventanilla/ecainventarioexcel', [PackageController::class, 'ecainventarioexcel'])->name('ecainventarioexcel.excel');
     Route::get('cartero/carteroexcel', [PackageController::class, 'carteroexcel'])->name('cartero.excel');
     Route::get('cartero/carterogeneralexcel', [PackageController::class, 'carterogeneralexcel'])->name('carterogeneralexcel.excel');
 

@@ -93,9 +93,9 @@
                 <th>No</th>
                 <th>Código Rastreo</th>
                 <th>Destinatario</th>
+                <th>Casillero</th>
                 <th>Teléfono</th>
                 <th>País</th>
-                <th>Ciudad</th>
                 <th>Dirección</th>
                 <th>Ventanilla</th>
                 <th>Peso (gr.)</th>
@@ -114,13 +114,13 @@
                     <td>{{ $i }}</td>
                     <td>{{ $package->CODIGO }}</td>
                     <td>{{ $package->DESTINATARIO }}</td>
+                    <td>{{ $package->nrocasilla }}</td>
                     <td>{{ $package->TELEFONO }}</td>
                     <td>{{ $package->PAIS }}</td>
                     <td>{{ $package->CUIDAD }}</td>
-                    <td>{{ $package->ZONA }}</td>
                     <td>{{ $package->VENTANILLA }}</td>
                     <td>{{ $package->PESO }} gr.</td>
-                    <td>{{ $package->PO }}</td>
+                    <td>{{ $package->TIPO }}</td>
                     <td>{{ $package->ESTADO }}</td>
                     <td>{{ $package->ADUANA }}</td>
                     <td>{{ $package->datedespachoclasificacion }}</td>
