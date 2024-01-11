@@ -41,11 +41,11 @@
         </div>
     </div>
 </div>
-{{-- <script>
+<script>
     // Agrega este bloque de script
     function reloadPageAfterDelay() {
         setTimeout(function () {
             location.reload(true);
         }, 1000);
     }
-</script> --}}
+</script>

@@ -569,6 +569,8 @@ class PackageController extends Controller
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
     }
+    
+
     public function deletecartero($id, Request $request)
     {
         $package = Package::find($id);
@@ -739,8 +741,18 @@ class PackageController extends Controller
             // Guarda el paquete actualizado
             $package->save();
 
+            // Genera el PDF de abandono
+            $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
+
+            // Abre el PDF en una nueva pestaña
+            $pdf->stream('Formulario de Entrega.pdf');
+
             // Elimina el paquete
             $package->delete();
+
+            return $pdf->stream('Formulario de Entrega.pdf');
+            // return response()->json(['success' => true]);
+            
             return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
         } else {
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete para dar de baja o generar el PDF.');
