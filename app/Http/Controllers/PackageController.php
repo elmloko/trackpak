@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Package;
 use App\Models\Event;
 use App\Exports\VentanillaExport;
+use App\Exports\VentanilladndExport;
+use App\Exports\CasillasExport;
+use App\Exports\EcaExport;
 use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
 use App\Exports\InventarioExport;
@@ -757,6 +760,10 @@ class PackageController extends Controller
     {
         return view('package.ventanilla');
     }
+    public function ventanilladnd()
+    {
+        return view('package.ventanilladnd');
+    }
     public function deleteado()
     {
         return view('package.deleteado');
@@ -841,6 +848,27 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $regional = $request->input('regional');
         return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanilla.xlsx');
+    }
+    public function ventanilladndexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $regional = $request->input('regional');
+        return Excel::download(new VentanilladndExport($fechaInicio, $fechaFin, $regional), 'ventanilladnd.xlsx');
+    }
+    public function casillasexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $regional = $request->input('regional');
+        return Excel::download(new CasillasExport($fechaInicio, $fechaFin, $regional), 'casillas.xlsx');
+    }
+    public function ecaexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $regional = $request->input('regional');
+        return Excel::download(new EcaExport($fechaInicio, $fechaFin, $regional), 'eca.xlsx');
     }
     public function carteroexcel(Request $request)
     {

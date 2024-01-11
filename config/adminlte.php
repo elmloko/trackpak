@@ -415,8 +415,14 @@ return [
                     'can'  => 'packages.ventanilla',
                     'submenu' => [
                         [
-                            'text' => 'Entregas Ventanilla',
+                            'text' => 'Entregas Ventanilla DD',
                             'url' => 'packages/ventanilla',
+                            'icon' => 'fas fa-truck',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                        [
+                            'text' => 'Entregas Ventanilla DND',
+                            'url' => 'packages/ventanilladnd',
                             'icon' => 'fas fa-truck',
                             'can'  => 'packages.ventanilla',
                         ],

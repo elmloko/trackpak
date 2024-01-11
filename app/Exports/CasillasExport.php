@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class VentanillaExport implements FromCollection, WithHeadings, WithStyles
+class CasillasExport implements FromCollection, WithHeadings, WithStyles
 {
     protected $fechaInicio;
     protected $fechaFin;
@@ -25,7 +25,7 @@ class VentanillaExport implements FromCollection, WithHeadings, WithStyles
 
     $query = Package::where('ESTADO', 'VENTANILLA')
         ->where('redirigido', 0)
-        ->whereIn('VENTANILLA', ['DD'])
+        ->whereIn('VENTANILLA', ['CASILLAS'])
         ->select(
             'CODIGO',
             'DESTINATARIO',

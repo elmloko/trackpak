@@ -6,12 +6,12 @@ use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
 
-class VentanillaPackages extends Component
+class Ventanilladnd extends Component
 {
     use WithPagination;
 
     public $search = '';
-
+    
     public function render()
     {
         $userRegional = auth()->user()->Regional;
@@ -30,15 +30,14 @@ class VentanillaPackages extends Component
             })
             ->where(function ($query) use ($userRegional) {
                 $query->where(function ($subQuery) {
-                    $subQuery->where('VENTANILLA', 'DD');
-                        // ->orWhere('VENTANILLA', 'DD');
+                    $subQuery->where('VENTANILLA', 'DND');
                 })
-                ->where('CUIDAD', $userRegional);
+                    ->where('CUIDAD', $userRegional);
             })
             ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.ventanilla-packages', [
+        return view('livewire.ventanilladnd', [
             'packages' => $packages,
         ]);
     }

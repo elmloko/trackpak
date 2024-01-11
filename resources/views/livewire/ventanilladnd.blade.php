@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 id="card_title">{{ __('Entregas de Paquetes para Casillas Postales') }}</h5>
+                                <h5 id="card_title">{{ __('Entregas de Paquetes en Ventanilla') }}</h5>
                                 <div class="col">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
@@ -22,14 +22,14 @@
                                                     data-target="#buscarPaqueteModal">
                                                     Añadir Paquete
                                                 </button>
-                                                @include('package.modal.ventanillacasilla')
+                                                @include('package.modal.ventanilla')
                                             </div>
                                         @endhasrole
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <!-- Formulario para generar Excel -->
                                                 <div class="col-md-6">
-                                                    <form method="get" action="{{ route('casillas.excel') }}"
+                                                    <form method="get" action="{{ route('ventanilladnd.excel') }}"
                                                         class="col-md-12">
                                                         @csrf
                                                         <div class="form-row">
@@ -72,10 +72,7 @@
                                                                 <label for="ventanilla">Ventanilla:</label>
                                                                 <select name="ventanilla" class="form-control">
                                                                     @if (auth()->user()->Regional == 'LA PAZ')
-                                                                        <option value="DD">DD</option>
                                                                         <option value="DND">DND</option>
-                                                                        <option value="CASILLAS">CASILLAS</option>
-                                                                        <option value="ECA">ECA</option>
                                                                     @else
                                                                         <option value="UNICA">UNICA</option>
                                                                     @endif
@@ -108,15 +105,14 @@
                                             <thead class="thead">
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Nro de Casillero</th>
                                                     <th>Código Rastreo</th>
                                                     <th>Destinatario</th>
                                                     <th>Teléfono</th>
                                                     <th>País</th>
                                                     <th>Ciudad</th>
-                                                    <th>Ubicacion</th>
-                                                    {{-- <th>Ventanilla</th> --}}
-                                                    <th>Peso (gr.)</th>
+                                                    <th>Zonificacion</th>
+                                                    <th>Ventanilla</th>
+                                                    <th>Peso (Kg.)</th>
                                                     <th>Precio(Bs.)</th>
                                                     <th>Tipo</th>
                                                     <th>Estado</th>
@@ -135,17 +131,16 @@
                                                         $package->ESTADO === 'VENTANILLA' &&
                                                             !$package->redirigido &&
                                                             $package->CUIDAD === auth()->user()->Regional &&
-                                                            in_array($package->VENTANILLA, ['CASILLAS']))
+                                                            in_array($package->VENTANILLA, ['DND']))
                                                         <tr>
                                                             <td>{{ $i++ }}</td>
-                                                            <td>{{ $package->nrocasilla }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }}</td>
                                                             <td>{{ $package->CUIDAD }}</td>
                                                             <td>{{ $package->ZONA }}</td>
-                                                            {{-- <td>{{ $package->VENTANILLA }}</td> --}}
+                                                            <td>{{ $package->VENTANILLA }}</td>
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->PRECIO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
@@ -162,7 +157,7 @@
                                                                         <i class="fa fa-arrow-down"></i>
                                                                         {{ __('Baja') }}
                                                                     </a>
-                                                                    @include('package.modal.bajacasilla')
+                                                                    @include('package.modal.baja')
                                                                 @endhasrole
                                                                 @hasrole('SuperAdmin|Administrador|Urbano')
                                                                     <a class="btn btn-sm btn-success"
@@ -170,6 +165,17 @@
                                                                         <i class="fa fa-fw fa-edit"></i>
                                                                         {{ __('Editar') }}
                                                                     </a>
+                                                                @endhasrole
+                                                                @hasrole('SuperAdmin|Administrador|Urbano')
+                                                                    @if (!$package->redirigido)
+                                                                        <a class="btn btn-sm btn-secondary" href="#"
+                                                                            data-toggle="modal"
+                                                                            data-target="#reencaminarModal{{ $package->id }}">
+                                                                            <i class="fas fa-arrow-up"></i>
+                                                                            {{ __('Reencaminar') }}
+                                                                        </a>
+                                                                        @include('package.modal.reencaminar')
+                                                                    @endif
                                                                 @endhasrole
                                                             </td>
                                                         </tr>

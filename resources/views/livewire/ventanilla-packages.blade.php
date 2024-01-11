@@ -33,28 +33,15 @@
                                                         class="col-md-12">
                                                         @csrf
                                                         <div class="form-row">
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-6">
                                                                 <label for="excel_fecha_inicio">Fecha de inicio:</label>
                                                                 <input type="date" name="fecha_inicio"
                                                                     class="form-control" required>
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-6">
                                                                 <label for="excel_fecha_fin">Fecha de fin:</label>
                                                                 <input type="date" name="fecha_fin"
                                                                     class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="ventanilla">Ventanilla:</label>
-                                                                <select name="ventanilla" class="form-control">
-                                                                    @if (auth()->user()->Regional == 'LA PAZ')
-                                                                        <option value="DD">DD</option>
-                                                                        <option value="DND">DND</option>
-                                                                        <option value="CASILLAS">CASILLAS</option>
-                                                                        <option value="ECA">ECA</option>
-                                                                    @else
-                                                                        <option value="UNICA">UNICA</option>
-                                                                    @endif
-                                                                </select>
                                                             </div>
                                                             <div class="col-md-12 mt-3 text-center">
                                                                 <button type="submit" class="btn btn-success"
@@ -86,9 +73,6 @@
                                                                 <select name="ventanilla" class="form-control">
                                                                     @if (auth()->user()->Regional == 'LA PAZ')
                                                                         <option value="DD">DD</option>
-                                                                        <option value="DND">DND</option>
-                                                                        <option value="CASILLAS">CASILLAS</option>
-                                                                        <option value="ECA">ECA</option>
                                                                     @else
                                                                         <option value="UNICA">UNICA</option>
                                                                     @endif
@@ -147,7 +131,7 @@
                                                         $package->ESTADO === 'VENTANILLA' &&
                                                             !$package->redirigido &&
                                                             $package->CUIDAD === auth()->user()->Regional &&
-                                                            in_array($package->VENTANILLA, ['DND', 'DD']))
+                                                            in_array($package->VENTANILLA, ['DD']))
                                                         <tr>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>

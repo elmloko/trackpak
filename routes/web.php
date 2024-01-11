@@ -4,9 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\NationalController;
 use App\Http\Controllers\MensajeController;
-use App\Http\Controllers\PcertificateController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ExportController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
@@ -97,6 +95,7 @@ Route::middleware('auth')->group(function () {
 
     //Modulo Ventanilla
     Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->middleware('can:packages.ventanilla')->name('packages.ventanilla');
+    Route::get('packages/ventanilladnd', [PackageController::class, 'ventanilladnd'])->middleware('can:packages.ventanilla')->name('packages.ventanilladnd');
     Route::get('test/deleteado', [PackageController::class, 'deleteado'])->middleware('can:packages.delete')->name('test.deleteado');
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
     Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
@@ -121,6 +120,12 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/casillasinventario', [PackageController::class, 'casillasinventario'])->name('packages.casillasinventario');
     Route::post('packages/buscarPaquetecasilla', [PackageController::class, 'buscarPaquetecasilla'])->name('packages.buscarPaquetecasilla');
 
+    //Casillas
+    Route::get('packages/eca', [PackageController::class, 'eca'])->name('packages.eca');
+    Route::get('packages/{id}/deleteeca', [PackageController::class, 'deleteeca'])->name('packages.deleteeca');
+    Route::get('packages/ecainventario', [PackageController::class, 'ecainventario'])->name('packages.ecainventario');
+    Route::post('packages/buscarPaqueteeca', [PackageController::class, 'buscarPaqueteeca'])->name('packages.buscarPaqueteeca');
+
     // Reportes PDF
     Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
     Route::get('package/pdf/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('package.pdf.clasificacionpdf');
@@ -144,6 +149,9 @@ Route::middleware('auth')->group(function () {
     Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
     Route::get('clasificacion/reencaminarexcel', [PackageController::class, 'reencaminarexcel'])->name('reencaminar.excel');
     Route::get('ventanilla/ventanillaexcel', [PackageController::class, 'ventanillaexcel'])->name('ventanilla.excel');
+    Route::get('ventanilla/ventanilladndexcel', [PackageController::class, 'ventanilladndexcel'])->name('ventanilladnd.excel');
+    Route::get('ventanilla/casillasexcel', [PackageController::class, 'casillasexcel'])->name('casillas.excel');
+    Route::get('ventanilla/ecaexcel', [PackageController::class, 'ecaexcel'])->name('eca.excel');
     Route::get('ventanilla/inventarioexcel', [PackageController::class, 'inventarioexcel'])->name('inventario.excel');
     Route::get('cartero/carteroexcel', [PackageController::class, 'carteroexcel'])->name('cartero.excel');
     Route::get('cartero/carterogeneralexcel', [PackageController::class, 'carterogeneralexcel'])->name('carterogeneralexcel.excel');
