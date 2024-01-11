@@ -404,7 +404,7 @@ class PackageController extends Controller
     public function delete(Request $request, $id)
     {
         $package = Package::find($id);
-
+    
         if ($package) {
             // Registra el evento de entrega
             Event::create([
@@ -413,22 +413,25 @@ class PackageController extends Controller
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
-
+    
             // Cambia el estado del paquete a "ENTREGADO"
             $package->estado = 'ENTREGADO';
-
+    
             // Guarda el paquete actualizado
             $package->save();
-
-            // Genera el PDF de abandono
-            $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
-
+    
+            // Determina qué formulario cargar según el valor de la variable ADUANA
+            $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+    
+            // Genera el PDF del formulario correspondiente
+            $pdf = PDF::loadView($formulario, compact('package', 'request'));
+    
             // Abre el PDF en una nueva pestaña
             $pdf->stream('Formulario de Entrega.pdf');
-
+    
             // Elimina el paquete
             $package->delete();
-
+    
             return $pdf->stream('Formulario de Entrega.pdf');
             // return response()->json(['success' => true]);
         } else {
@@ -436,31 +439,6 @@ class PackageController extends Controller
         }
     }
 
-    
-
-        // $package = Package::find($id);
-
-        // if ($package) {
-        //     Event::create([
-        //         'action' => 'ENTREGADO',
-        //         'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional',
-        //         'user_id' => auth()->user()->id,
-        //         'codigo' => $package->CODIGO,
-        //     ]);
-        //     // Cambia el estado del paquete a "ENTREGADO"
-        //     $package->estado = 'ENTREGADO';
-
-        //     // Guarda el paquete actualizado
-        //     $package->save();
-
-        //     // Luego, elimina el paquete
-        //     $package->delete();
-
-        //     return back()->with('success', 'Paquete se dio de Baja y cambió su estado a ENTREGADO con éxito.');
-        // } else {
-        //     return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
-        // }
-        // }
     public function restoring($id)
     {
         // Restaura el paquete con el ID dado
@@ -741,8 +719,11 @@ class PackageController extends Controller
             // Guarda el paquete actualizado
             $package->save();
 
+            // Determina qué formulario cargar según el valor de la variable ADUANA
+            $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+    
             // Genera el PDF de abandono
-            $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
+            $pdf = PDF::loadView($formulario, compact('package', 'request'));
 
             // Abre el PDF en una nueva pestaña
             $pdf->stream('Formulario de Entrega.pdf');
@@ -977,6 +958,15 @@ class PackageController extends Controller
         $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
         $code = $generator->getBarcode($package->CODIGO, $generator::TYPE_CODE_128);
         $pdf = PDF::loadView('package.pdf.formularioentrega', compact('package', 'request'));
+        $pdf->setPaper(9.5, 24);
+        return $pdf->stream();
+    }
+    public function formularioentrega2(Request $request, $id)
+    {
+        $package = Package::find($id);
+        $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+        $code = $generator->getBarcode($package->CODIGO, $generator::TYPE_CODE_128);
+        $pdf = PDF::loadView('package.pdf.formularioentrega2', compact('package', 'request'));
         $pdf->setPaper(9.5, 24);
         return $pdf->stream();
     }
