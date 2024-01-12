@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <a href="{{ route('packages.deletecasillas', $package->id) }}" class="btn btn-success">Confirmar Baja</a>
+                    <a href="{{ route('packages.deleteeca', $package->id) }}" class="btn btn-success">Confirmar Baja</a>
 
                 </div>
             </div>

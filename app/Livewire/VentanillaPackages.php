@@ -31,7 +31,7 @@ class VentanillaPackages extends Component
             ->where(function ($query) use ($userRegional) {
                 $query->where(function ($subQuery) {
                     $subQuery->where('VENTANILLA', 'DD');
-                        // ->orWhere('VENTANILLA', 'DD');
+                        // ->orWhere('VENTANILLA', 'DND');
                 })
                 ->where('CUIDAD', $userRegional);
             })

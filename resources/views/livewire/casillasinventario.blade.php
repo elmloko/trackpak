@@ -88,7 +88,7 @@
                                 <tbody>
                                     @php $i = 0; @endphp
                                     @foreach ($packages as $package)
-                                        @if ($package->ESTADO !== 'CASILLAS')
+                                        @if ($package->ESTADO == 'CASILLA')
                                             <tr>
                                                 <td>{{ ++$i }}</td>
                                                 <td>{{ $package->nrocasilla }}</td>

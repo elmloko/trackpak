@@ -784,6 +784,45 @@ class PackageController extends Controller
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete para dar de baja o generar el PDF.');
         }
     }
+    public function deleteeca(Request $request, $id)
+    {
+        $package = Package::find($id);
+
+        if ($package) {
+            // Registra el evento de entrega
+            Event::create([
+                'action' => 'ENTREGADO',
+                'descripcion' => 'Entrega de paquete en Casillero Postal en Oficina Regional',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+
+            // Cambia el estado del paquete a "ENTREGADO"
+            $package->estado = 'ENTREGADO';
+
+            // Guarda el paquete actualizado
+            $package->save();
+
+            // Determina qué formulario cargar según el valor de la variable ADUANA
+            $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+    
+            // Genera el PDF de abandono
+            $pdf = PDF::loadView($formulario, compact('package', 'request'));
+
+            // Abre el PDF en una nueva pestaña
+            $pdf->stream('Formulario de Entrega.pdf');
+
+            // Elimina el paquete
+            $package->delete();
+
+            return $pdf->stream('Formulario de Entrega.pdf');
+            // return response()->json(['success' => true]);
+            
+            return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete para dar de baja o generar el PDF.');
+        }
+    }
 
     //VISTAS 
     public function clasificacion()

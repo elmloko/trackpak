@@ -22,7 +22,7 @@
                                                     data-target="#buscarPaqueteModal">
                                                     Añadir Paquete
                                                 </button>
-                                                @include('package.modal.ventanilla')
+                                                @include('package.modal.ventanilladnd')
                                             </div>
                                         @endhasrole
                                         <div class="col-md-12">
@@ -110,7 +110,6 @@
                                                     <th>Teléfono</th>
                                                     <th>País</th>
                                                     <th>Ciudad</th>
-                                                    <th>Zonificacion</th>
                                                     <th>Ventanilla</th>
                                                     <th>Peso (Kg.)</th>
                                                     <th>Precio(Bs.)</th>
@@ -139,7 +138,6 @@
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }}</td>
                                                             <td>{{ $package->CUIDAD }}</td>
-                                                            <td>{{ $package->ZONA }}</td>
                                                             <td>{{ $package->VENTANILLA }}</td>
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->PRECIO }} </td>
