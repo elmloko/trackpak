@@ -703,6 +703,47 @@ class PackageController extends Controller
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete con estado DESPACHO y ventanilla CASILLAS.');
         }
     }
+    public function buscarPaqueteeca(Request $request)
+    {
+        $codigo = $request->input('codigo');
+        $zona = $request->input('zona');
+        $package = Package::where('CODIGO', $codigo)
+                        ->where('ESTADO', 'DESPACHO')
+                        ->where('VENTANILLA', 'ECA')
+                        ->first();
+
+        if ($package) {
+            // Verificar que la regional del usuario coincide con la regional del paquete
+            if (auth()->user()->Regional == $package->CUIDAD) {
+                // Crear eventos solo si el estado es 'DESPACHO'
+                if ($package->ESTADO === 'DESPACHO') {
+                    Event::create([
+                        'action' => 'DISPONIBLE',
+                        'descripcion' => 'Paquete a la espera de ser recogido en Casillero Postal ' . $package->nrocasilla,
+                        'user_id' => auth()->user()->id,
+                        'codigo' => $package->CODIGO,
+                    ]);            
+                    Event::create([
+                        'action' => 'EN ENTREGA',
+                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.',
+                        'user_id' => auth()->user()->id,
+                        'codigo' => $package->CODIGO,
+                    ]);
+                }
+
+                // Cambiar el estado del paquete a "VENTANILLA"
+                $package->ZONA = $zona;
+                $package->ESTADO = 'VENTANILLA';
+                $package->save();
+
+                return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+            } else {
+                return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete con estado DESPACHO y ventanilla CASILLAS.');
+        }
+    }
 
     public function deletecasillas(Request $request, $id)
     {

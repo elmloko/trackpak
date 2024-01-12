@@ -1,3 +1,10 @@
+-- --------------------------------------------------------
+-- Host:                         172.65.10.50
+-- Versión del servidor:         10.6.14-MariaDB - MariaDB Server
+-- SO del servidor:              Linux
+-- HeidiSQL Versión:             12.1.0.6537
+-- --------------------------------------------------------
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
@@ -7,9 +14,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Volcando estructura de base de datos para trackpak
 CREATE DATABASE IF NOT EXISTS `trackpak` /*!40100 DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci */;
 USE `trackpak`;
 
+-- Volcando estructura para tabla trackpak.events
 CREATE TABLE IF NOT EXISTS `events` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `action` varchar(255) NOT NULL,
@@ -21,8 +31,9 @@ CREATE TABLE IF NOT EXISTS `events` (
   PRIMARY KEY (`id`),
   KEY `events_user_id_foreign` (`user_id`),
   CONSTRAINT `events_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3615 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.events: ~3.522 rows (aproximadamente)
 INSERT INTO `events` (`id`, `action`, `user_id`, `codigo`, `created_at`, `updated_at`, `descripcion`) VALUES
 	(1, 'DESPACHO', 32, 'UV512459512UZ', '2023-12-12 13:20:17', '2023-12-12 13:20:17', 'Destino de Clasificacion hacia Ventanilla'),
 	(2, 'DESPACHO', 32, 'UV623345981UZ', '2023-12-12 13:20:17', '2023-12-12 13:20:17', 'Destino de Clasificacion hacia Ventanilla'),
@@ -3290,8 +3301,356 @@ INSERT INTO `events` (`id`, `action`, `user_id`, `codigo`, `created_at`, `update
 	(3264, 'EN ENTREGA', 33, 'UN120415781SE', '2024-01-05 15:34:29', '2024-01-05 15:34:29', 'Paquete Recibido en Oficina Postal Regional.'),
 	(3265, 'DISPONIBLE', 33, 'UN108627227SE', '2024-01-05 15:34:49', '2024-01-05 15:34:49', 'Paquete a la espera de ser recogido en Casillero Postal 8735'),
 	(3266, 'EN ENTREGA', 33, 'UN108627227SE', '2024-01-05 15:34:49', '2024-01-05 15:34:49', 'Paquete Recibido en Oficina Postal Regional.'),
-	(3267, 'ENTREGADO', 33, 'RP120371034MU', '2024-01-05 15:48:56', '2024-01-05 15:48:56', 'Entrega de paquete en ventanilla en Oficina Postal Regional');
+	(3267, 'ENTREGADO', 33, 'RP120371034MU', '2024-01-05 15:48:56', '2024-01-05 15:48:56', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3268, 'ENTREGADO', 25, 'UH052164693US', '2024-01-08 11:53:25', '2024-01-08 11:53:25', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3269, 'ENTREGADO', 25, 'LE165558153DE', '2024-01-09 07:12:18', '2024-01-09 07:12:18', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3270, 'ENTREGADO', 25, 'UA101035556MT', '2024-01-09 07:22:44', '2024-01-09 07:22:44', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3271, 'ENTREGADO', 25, 'UH692631554GB', '2024-01-09 07:23:12', '2024-01-09 07:23:12', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3272, 'ENTREGADO', 25, 'UH052232915US', '2024-01-09 07:31:44', '2024-01-09 07:31:44', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3273, 'ENTREGADO', 25, 'UJ156482111US', '2024-01-09 07:31:55', '2024-01-09 07:31:55', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3274, 'ENTREGADO', 25, 'UJ156547550US', '2024-01-09 07:32:03', '2024-01-09 07:32:03', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3275, 'ENTREGADO', 25, 'UJ156548351US', '2024-01-09 07:32:13', '2024-01-09 07:32:13', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3276, 'ENTREGADO', 25, 'UJ156549670US', '2024-01-09 07:32:21', '2024-01-09 07:32:21', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3277, 'ENTREGADO', 25, 'UJ601811868HK', '2024-01-09 07:32:30', '2024-01-09 07:32:30', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3278, 'ENTREGADO', 25, 'UP000038893CO', '2024-01-09 07:32:46', '2024-01-09 07:32:46', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3279, 'ENTREGADO', 25, 'UR481716430CA', '2024-01-09 07:32:54', '2024-01-09 07:32:54', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3280, 'ENTREGADO', 25, 'UA936895190US', '2024-01-09 07:34:15', '2024-01-09 07:34:15', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3281, 'CLASIFICACION', 7, 'UH052375635US', '2024-01-09 08:30:58', '2024-01-09 08:30:58', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3282, 'ADMISION', 7, 'UH052375635US', '2024-01-09 08:30:58', '2024-01-09 08:30:58', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3283, 'CLASIFICACION', 7, 'UH052357570US', '2024-01-09 08:40:13', '2024-01-09 08:40:13', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3284, 'ADMISION', 7, 'UH052357570US', '2024-01-09 08:40:13', '2024-01-09 08:40:13', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3285, 'CLASIFICACION', 7, 'UA473228069US', '2024-01-09 08:42:45', '2024-01-09 08:42:45', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3286, 'ADMISION', 7, 'UA473228069US', '2024-01-09 08:42:45', '2024-01-09 08:42:45', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3287, 'CLASIFICACION', 7, 'UY151746219DE', '2024-01-09 08:44:16', '2024-01-09 08:44:16', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3288, 'ADMISION', 7, 'UY151746219DE', '2024-01-09 08:44:16', '2024-01-09 08:44:16', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3289, 'CLASIFICACION', 7, 'UA936903130US', '2024-01-09 08:46:25', '2024-01-09 08:46:25', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3290, 'ADMISION', 7, 'UA936903130US', '2024-01-09 08:46:25', '2024-01-09 08:46:25', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3291, 'CLASIFICACION', 7, 'UC000361446US', '2024-01-09 09:02:22', '2024-01-09 09:02:22', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3292, 'ADMISION', 7, 'UC000361446US', '2024-01-09 09:02:22', '2024-01-09 09:02:22', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3293, 'CLASIFICACION', 7, 'RD000497841BO', '2024-01-09 09:34:10', '2024-01-09 09:34:10', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3294, 'ADMISION', 7, 'RD000497841BO', '2024-01-09 09:34:10', '2024-01-09 09:34:10', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3295, 'CLASIFICACION', 7, 'UH052380922US', '2024-01-09 09:35:47', '2024-01-09 09:35:47', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3296, 'ADMISION', 7, 'UH052380922US', '2024-01-09 09:35:47', '2024-01-09 09:35:47', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3297, 'CLASIFICACION', 7, 'UM980148197US', '2024-01-09 09:38:59', '2024-01-09 09:38:59', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3298, 'ADMISION', 7, 'UM980148197US', '2024-01-09 09:38:59', '2024-01-09 09:38:59', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3299, 'CLASIFICACION', 7, 'UO006688605ES', '2024-01-09 09:40:13', '2024-01-09 09:40:13', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3300, 'ADMISION', 7, 'UO006688605ES', '2024-01-09 09:40:13', '2024-01-09 09:40:13', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3301, 'CLASIFICACION', 7, 'UM214969210US', '2024-01-09 09:41:20', '2024-01-09 09:41:20', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3302, 'ADMISION', 7, 'UM214969210US', '2024-01-09 09:41:20', '2024-01-09 09:41:20', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3303, 'CLASIFICACION', 7, 'UM908344307US', '2024-01-09 09:42:30', '2024-01-09 09:42:30', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3304, 'ADMISION', 7, 'UM908344307US', '2024-01-09 09:42:30', '2024-01-09 09:42:30', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3305, 'CLASIFICACION', 7, 'UL200034530PE', '2024-01-09 09:44:44', '2024-01-09 09:44:44', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3306, 'ADMISION', 7, 'UL200034530PE', '2024-01-09 09:44:44', '2024-01-09 09:44:44', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3307, 'CLASIFICACION', 7, 'UL200039792PE', '2024-01-09 09:45:59', '2024-01-09 09:45:59', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3308, 'ADMISION', 7, 'UL200039792PE', '2024-01-09 09:45:59', '2024-01-09 09:45:59', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3309, 'DESPACHO', 7, 'UH052375635US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3310, 'DESPACHO', 7, 'UH052357570US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3311, 'DESPACHO', 7, 'UA473228069US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3312, 'DESPACHO', 7, 'UY151746219DE', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3313, 'DESPACHO', 7, 'UA936903130US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3314, 'DESPACHO', 7, 'UC000361446US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3315, 'DESPACHO', 7, 'RD000497841BO', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3316, 'DESPACHO', 7, 'UH052380922US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3317, 'DESPACHO', 7, 'UM980148197US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3318, 'DESPACHO', 7, 'UO006688605ES', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3319, 'DESPACHO', 7, 'UM214969210US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3320, 'DESPACHO', 7, 'UM908344307US', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3321, 'DESPACHO', 7, 'UL200034530PE', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3322, 'DESPACHO', 7, 'UL200039792PE', '2024-01-09 09:46:28', '2024-01-09 09:46:28', 'Destino de Clasificacion hacia Ventanilla'),
+	(3323, 'CLASIFICACION', 7, 'UH052369799US', '2024-01-09 09:59:57', '2024-01-09 09:59:57', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3324, 'ADMISION', 7, 'UH052369799US', '2024-01-09 09:59:57', '2024-01-09 09:59:57', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3325, 'CLASIFICACION', 7, 'UA106894401US', '2024-01-09 10:01:59', '2024-01-09 10:01:59', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3326, 'ADMISION', 7, 'UA106894401US', '2024-01-09 10:01:59', '2024-01-09 10:01:59', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3327, 'CLASIFICACION', 7, 'LL014426500FR', '2024-01-09 10:03:00', '2024-01-09 10:03:00', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3328, 'ADMISION', 7, 'LL014426500FR', '2024-01-09 10:03:00', '2024-01-09 10:03:00', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3329, 'CLASIFICACION', 7, 'UA932534978US', '2024-01-09 10:05:01', '2024-01-09 10:05:01', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3330, 'ADMISION', 7, 'UA932534978US', '2024-01-09 10:05:01', '2024-01-09 10:05:01', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3331, 'CLASIFICACION', 7, 'UH052336380US', '2024-01-09 10:08:21', '2024-01-09 10:08:21', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3332, 'ADMISION', 7, 'UH052336380US', '2024-01-09 10:08:21', '2024-01-09 10:08:21', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3333, 'CLASIFICACION', 7, 'UR479462484CA', '2024-01-09 10:11:01', '2024-01-09 10:11:01', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3334, 'ADMISION', 7, 'UR479462484CA', '2024-01-09 10:11:01', '2024-01-09 10:11:01', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3335, 'CLASIFICACION', 7, 'UR240281052DE', '2024-01-09 10:12:14', '2024-01-09 10:12:14', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3336, 'ADMISION', 7, 'UR240281052DE', '2024-01-09 10:12:14', '2024-01-09 10:12:14', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3337, 'CLASIFICACION', 7, 'UR233391083DE', '2024-01-09 10:13:02', '2024-01-09 10:13:02', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3338, 'ADMISION', 7, 'UR233391083DE', '2024-01-09 10:13:02', '2024-01-09 10:13:02', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3339, 'CLASIFICACION', 7, 'UM908188757US', '2024-01-09 10:13:59', '2024-01-09 10:13:59', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3340, 'ADMISION', 7, 'UM908188757US', '2024-01-09 10:13:59', '2024-01-09 10:13:59', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3341, 'CLASIFICACION', 7, 'UA936910674US', '2024-01-09 10:15:47', '2024-01-09 10:15:47', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3342, 'ADMISION', 7, 'UA936910674US', '2024-01-09 10:15:47', '2024-01-09 10:15:47', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3343, 'CLASIFICACION', 7, 'UG949917897GB', '2024-01-09 10:16:40', '2024-01-09 10:16:40', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3344, 'ADMISION', 7, 'UG949917897GB', '2024-01-09 10:16:40', '2024-01-09 10:16:40', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3345, 'CLASIFICACION', 7, 'UC029715335NO', '2024-01-09 10:18:50', '2024-01-09 10:18:50', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3346, 'ADMISION', 7, 'UC029715335NO', '2024-01-09 10:18:50', '2024-01-09 10:18:50', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3347, 'CLASIFICACION', 7, 'UA936910475US', '2024-01-09 10:20:07', '2024-01-09 10:20:07', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3348, 'ADMISION', 7, 'UA936910475US', '2024-01-09 10:20:07', '2024-01-09 10:20:07', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3349, 'CLASIFICACION', 7, 'UH052319996US', '2024-01-09 10:21:12', '2024-01-09 10:21:12', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3350, 'ADMISION', 7, 'UH052319996US', '2024-01-09 10:21:12', '2024-01-09 10:21:12', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3351, 'CLASIFICACION', 7, 'UL200039801PE', '2024-01-09 10:21:59', '2024-01-09 10:21:59', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3352, 'ADMISION', 7, 'UL200039801PE', '2024-01-09 10:21:59', '2024-01-09 10:21:59', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3353, 'CLASIFICACION', 7, 'UL200034557PE', '2024-01-09 10:22:52', '2024-01-09 10:22:52', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3354, 'ADMISION', 7, 'UL200034557PE', '2024-01-09 10:22:52', '2024-01-09 10:22:52', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3355, 'CLASIFICACION', 7, 'UL200039979PE', '2024-01-09 10:23:24', '2024-01-09 10:23:24', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3356, 'ADMISION', 7, 'UL200039979PE', '2024-01-09 10:23:24', '2024-01-09 10:23:24', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3357, 'DESPACHO', 7, 'UH052369799US', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3358, 'DESPACHO', 7, 'UA106894401US', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3359, 'DESPACHO', 7, 'LL014426500FR', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3360, 'DESPACHO', 7, 'UA932534978US', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3361, 'DESPACHO', 7, 'UH052336380US', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3362, 'DESPACHO', 7, 'UR479462484CA', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3363, 'DESPACHO', 7, 'UR240281052DE', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3364, 'DESPACHO', 7, 'UR233391083DE', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3365, 'DESPACHO', 7, 'UM908188757US', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3366, 'DESPACHO', 7, 'UA936910674US', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3367, 'DESPACHO', 7, 'UG949917897GB', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3368, 'DESPACHO', 7, 'UC029715335NO', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3369, 'DESPACHO', 7, 'UA936910475US', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3370, 'DESPACHO', 7, 'UH052319996US', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3371, 'DESPACHO', 7, 'UL200039801PE', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3372, 'DESPACHO', 7, 'UL200034557PE', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3373, 'DESPACHO', 7, 'UL200039979PE', '2024-01-09 10:23:38', '2024-01-09 10:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3374, 'CLASIFICACION', 7, 'UE399721548US', '2024-01-09 11:27:10', '2024-01-09 11:27:10', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3375, 'ADMISION', 7, 'UE399721548US', '2024-01-09 11:27:10', '2024-01-09 11:27:10', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3376, 'CLASIFICACION', 7, 'UM975439081US', '2024-01-09 11:30:22', '2024-01-09 11:30:22', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3377, 'ADMISION', 7, 'UM975439081US', '2024-01-09 11:30:22', '2024-01-09 11:30:22', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3378, 'CLASIFICACION', 7, 'UM908324259US', '2024-01-09 11:32:05', '2024-01-09 11:32:05', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3379, 'ADMISION', 7, 'UM908324259US', '2024-01-09 11:32:05', '2024-01-09 11:32:05', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3380, 'CLASIFICACION', 7, 'UJ156659318US', '2024-01-09 11:32:48', '2024-01-09 11:32:48', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3381, 'ADMISION', 7, 'UJ156659318US', '2024-01-09 11:32:48', '2024-01-09 11:32:48', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3382, 'CLASIFICACION', 7, 'UM214936021US', '2024-01-09 11:35:30', '2024-01-09 11:35:30', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3383, 'ADMISION', 7, 'UM214936021US', '2024-01-09 11:35:30', '2024-01-09 11:35:30', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3384, 'DESPACHO', 7, 'UE399721548US', '2024-01-09 11:37:46', '2024-01-09 11:37:46', 'Destino de Clasificacion hacia Ventanilla'),
+	(3385, 'DESPACHO', 7, 'UM975439081US', '2024-01-09 11:37:46', '2024-01-09 11:37:46', 'Destino de Clasificacion hacia Ventanilla'),
+	(3386, 'DESPACHO', 7, 'UM908324259US', '2024-01-09 11:37:46', '2024-01-09 11:37:46', 'Destino de Clasificacion hacia Ventanilla'),
+	(3387, 'DESPACHO', 7, 'UJ156659318US', '2024-01-09 11:37:46', '2024-01-09 11:37:46', 'Destino de Clasificacion hacia Ventanilla'),
+	(3388, 'DESPACHO', 7, 'UM214936021US', '2024-01-09 11:37:46', '2024-01-09 11:37:46', 'Destino de Clasificacion hacia Ventanilla'),
+	(3389, 'CLASIFICACION', 7, 'UM980199790US', '2024-01-09 11:42:42', '2024-01-09 11:42:42', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3390, 'ADMISION', 7, 'UM980199790US', '2024-01-09 11:42:42', '2024-01-09 11:42:42', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3391, 'CLASIFICACION', 7, 'UA106898805US', '2024-01-09 11:44:51', '2024-01-09 11:44:51', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3392, 'ADMISION', 7, 'UA106898805US', '2024-01-09 11:44:51', '2024-01-09 11:44:51', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3393, 'CLASIFICACION', 7, 'UM980195210US', '2024-01-09 11:46:03', '2024-01-09 11:46:03', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3394, 'ADMISION', 7, 'UM980195210US', '2024-01-09 11:46:03', '2024-01-09 11:46:03', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3395, 'DESPACHO', 7, 'UM980199790US', '2024-01-09 11:47:21', '2024-01-09 11:47:21', 'Destino de Clasificacion hacia Ventanilla'),
+	(3396, 'DESPACHO', 7, 'UA106898805US', '2024-01-09 11:47:21', '2024-01-09 11:47:21', 'Destino de Clasificacion hacia Ventanilla'),
+	(3397, 'DESPACHO', 7, 'UM980195210US', '2024-01-09 11:47:21', '2024-01-09 11:47:21', 'Destino de Clasificacion hacia Ventanilla'),
+	(3398, 'CLASIFICACION', 7, 'UH052207938US', '2024-01-09 11:51:36', '2024-01-09 11:51:36', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3399, 'ADMISION', 7, 'UH052207938US', '2024-01-09 11:51:36', '2024-01-09 11:51:36', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3400, 'CLASIFICACION', 7, 'UH052369958US', '2024-01-09 11:52:38', '2024-01-09 11:52:38', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3401, 'ADMISION', 7, 'UH052369958US', '2024-01-09 11:52:38', '2024-01-09 11:52:38', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3402, 'CLASIFICACION', 7, 'UH052327082US', '2024-01-09 11:55:09', '2024-01-09 11:55:09', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3403, 'ADMISION', 7, 'UH052327082US', '2024-01-09 11:55:09', '2024-01-09 11:55:09', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3404, 'DESPACHO', 7, 'UH052207938US', '2024-01-09 11:55:14', '2024-01-09 11:55:14', 'Destino de Clasificacion hacia Ventanilla'),
+	(3405, 'DESPACHO', 7, 'UH052369958US', '2024-01-09 11:55:14', '2024-01-09 11:55:14', 'Destino de Clasificacion hacia Ventanilla'),
+	(3406, 'DESPACHO', 7, 'UH052327082US', '2024-01-09 11:55:14', '2024-01-09 11:55:14', 'Destino de Clasificacion hacia Ventanilla'),
+	(3407, 'CLASIFICACION', 7, 'UM908341985US', '2024-01-09 12:00:38', '2024-01-09 12:00:38', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3408, 'ADMISION', 7, 'UM908341985US', '2024-01-09 12:00:38', '2024-01-09 12:00:38', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3409, 'CLASIFICACION', 7, 'UM980204795US', '2024-01-09 12:01:31', '2024-01-09 12:01:31', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3410, 'ADMISION', 7, 'UM980204795US', '2024-01-09 12:01:31', '2024-01-09 12:01:31', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3411, 'CLASIFICACION', 7, 'UM980203993US', '2024-01-09 12:02:49', '2024-01-09 12:02:49', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3412, 'ADMISION', 7, 'UM980203993US', '2024-01-09 12:02:49', '2024-01-09 12:02:49', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3413, 'CLASIFICACION', 7, 'LS134845123FR', '2024-01-09 12:03:39', '2024-01-09 12:03:39', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3414, 'ADMISION', 7, 'LS134845123FR', '2024-01-09 12:03:39', '2024-01-09 12:03:39', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3415, 'DESPACHO', 7, 'UM908341985US', '2024-01-09 12:03:47', '2024-01-09 12:03:47', 'Destino de Clasificacion hacia Ventanilla'),
+	(3416, 'DESPACHO', 7, 'UM980204795US', '2024-01-09 12:03:47', '2024-01-09 12:03:47', 'Destino de Clasificacion hacia Ventanilla'),
+	(3417, 'DESPACHO', 7, 'UM980203993US', '2024-01-09 12:03:47', '2024-01-09 12:03:47', 'Destino de Clasificacion hacia Ventanilla'),
+	(3418, 'DESPACHO', 7, 'LS134845123FR', '2024-01-09 12:03:47', '2024-01-09 12:03:47', 'Destino de Clasificacion hacia Ventanilla'),
+	(3419, 'CLASIFICACION', 7, 'UH052353096US', '2024-01-09 12:09:02', '2024-01-09 12:09:02', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3420, 'ADMISION', 7, 'UH052353096US', '2024-01-09 12:09:02', '2024-01-09 12:09:02', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3421, 'CLASIFICACION', 7, 'UM975418665US', '2024-01-09 12:09:54', '2024-01-09 12:09:54', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3422, 'ADMISION', 7, 'UM975418665US', '2024-01-09 12:09:54', '2024-01-09 12:09:54', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3423, 'CLASIFICACION', 7, 'RD000497858BO', '2024-01-09 12:11:13', '2024-01-09 12:11:13', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3424, 'ADMISION', 7, 'RD000497858BO', '2024-01-09 12:11:13', '2024-01-09 12:11:13', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3425, 'CLASIFICACION', 7, 'UM980203928US', '2024-01-09 12:11:58', '2024-01-09 12:11:58', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3426, 'ADMISION', 7, 'UM980203928US', '2024-01-09 12:11:58', '2024-01-09 12:11:58', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3427, 'DESPACHO', 7, 'UH052353096US', '2024-01-09 12:12:15', '2024-01-09 12:12:15', 'Destino de Clasificacion hacia Ventanilla'),
+	(3428, 'DESPACHO', 7, 'UM975418665US', '2024-01-09 12:12:15', '2024-01-09 12:12:15', 'Destino de Clasificacion hacia Ventanilla'),
+	(3429, 'DESPACHO', 7, 'RD000497858BO', '2024-01-09 12:12:15', '2024-01-09 12:12:15', 'Destino de Clasificacion hacia Ventanilla'),
+	(3430, 'DESPACHO', 7, 'UM980203928US', '2024-01-09 12:12:15', '2024-01-09 12:12:15', 'Destino de Clasificacion hacia Ventanilla'),
+	(3431, 'CLASIFICACION', 7, 'UC000317354US', '2024-01-09 14:34:30', '2024-01-09 14:34:30', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3432, 'ADMISION', 7, 'UC000317354US', '2024-01-09 14:34:30', '2024-01-09 14:34:30', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3433, 'CLASIFICACION', 7, 'LE147544285FR', '2024-01-09 14:38:08', '2024-01-09 14:38:08', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3434, 'ADMISION', 7, 'LE147544285FR', '2024-01-09 14:38:08', '2024-01-09 14:38:08', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3435, 'CLASIFICACION', 7, 'LL014479365FR', '2024-01-09 14:39:34', '2024-01-09 14:39:34', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3436, 'ADMISION', 7, 'LL014479365FR', '2024-01-09 14:39:34', '2024-01-09 14:39:34', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3437, 'CLASIFICACION', 7, 'UM908344046US', '2024-01-09 14:42:08', '2024-01-09 14:42:08', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3438, 'ADMISION', 7, 'UM908344046US', '2024-01-09 14:42:08', '2024-01-09 14:42:08', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3439, 'CLASIFICACION', 7, 'UM975400165US', '2024-01-09 14:43:27', '2024-01-09 14:43:27', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3440, 'ADMISION', 7, 'UM975400165US', '2024-01-09 14:43:27', '2024-01-09 14:43:27', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3441, 'CLASIFICACION', 7, 'UX621820515FR', '2024-01-09 14:44:26', '2024-01-09 14:44:26', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3442, 'ADMISION', 7, 'UX621820515FR', '2024-01-09 14:44:26', '2024-01-09 14:44:26', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3443, 'CLASIFICACION', 7, 'UM908169421US', '2024-01-09 14:46:13', '2024-01-09 14:46:13', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3444, 'ADMISION', 7, 'UM908169421US', '2024-01-09 14:46:13', '2024-01-09 14:46:13', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3445, 'CLASIFICACION', 7, 'UQ353071877DE', '2024-01-09 14:47:48', '2024-01-09 14:47:48', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3446, 'ADMISION', 7, 'UQ353071877DE', '2024-01-09 14:47:48', '2024-01-09 14:47:48', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3447, 'CLASIFICACION', 7, 'UH052371395US', '2024-01-09 14:54:38', '2024-01-09 14:54:38', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3448, 'ADMISION', 7, 'UH052371395US', '2024-01-09 14:54:38', '2024-01-09 14:54:38', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3449, 'CLASIFICACION', 7, 'UL200034543PE', '2024-01-09 14:56:15', '2024-01-09 14:56:15', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3450, 'ADMISION', 7, 'UL200034543PE', '2024-01-09 14:56:15', '2024-01-09 14:56:15', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3451, 'CLASIFICACION', 7, 'LX085973937FR', '2024-01-09 14:57:11', '2024-01-09 14:57:11', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3452, 'ADMISION', 7, 'LX085973937FR', '2024-01-09 14:57:11', '2024-01-09 14:57:11', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3453, 'CLASIFICACION', 7, 'UK009218827NO', '2024-01-09 14:57:53', '2024-01-09 14:57:53', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3454, 'ADMISION', 7, 'UK009218827NO', '2024-01-09 14:57:53', '2024-01-09 14:57:53', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3455, 'CLASIFICACION', 7, 'UJ156659321US', '2024-01-09 15:00:14', '2024-01-09 15:00:14', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3456, 'ADMISION', 7, 'UJ156659321US', '2024-01-09 15:00:14', '2024-01-09 15:00:14', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3457, 'CLASIFICACION', 7, 'UM980197670US', '2024-01-09 15:01:46', '2024-01-09 15:01:46', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3458, 'ADMISION', 7, 'UM980197670US', '2024-01-09 15:01:46', '2024-01-09 15:01:46', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3459, 'CLASIFICACION', 7, 'UH052363456US', '2024-01-09 15:03:24', '2024-01-09 15:03:24', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3460, 'ADMISION', 7, 'UH052363456US', '2024-01-09 15:03:24', '2024-01-09 15:03:24', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3461, 'CLASIFICACION', 7, 'UM908239079US', '2024-01-09 15:04:54', '2024-01-09 15:04:54', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3462, 'ADMISION', 7, 'UM908239079US', '2024-01-09 15:04:54', '2024-01-09 15:04:54', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3463, 'CLASIFICACION', 7, 'UC000337291US', '2024-01-09 15:05:50', '2024-01-09 15:05:50', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3464, 'ADMISION', 7, 'UC000337291US', '2024-01-09 15:05:50', '2024-01-09 15:05:50', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3465, 'CLASIFICACION', 7, 'LL014467138FR', '2024-01-09 15:06:36', '2024-01-09 15:06:36', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3466, 'ADMISION', 7, 'LL014467138FR', '2024-01-09 15:06:36', '2024-01-09 15:06:36', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3467, 'CLASIFICACION', 7, 'UM908354922US', '2024-01-09 15:07:34', '2024-01-09 15:07:34', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3468, 'ADMISION', 7, 'UM908354922US', '2024-01-09 15:07:34', '2024-01-09 15:07:34', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3469, 'CLASIFICACION', 7, 'UM908369476US', '2024-01-09 15:08:13', '2024-01-09 15:08:13', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3470, 'ADMISION', 7, 'UM908369476US', '2024-01-09 15:08:13', '2024-01-09 15:08:13', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3471, 'ENTREGADO', 25, 'RD000501661BO', '2024-01-09 15:08:23', '2024-01-09 15:08:23', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3472, 'ENTREGADO', 25, 'RD000501676BO', '2024-01-09 15:08:32', '2024-01-09 15:08:32', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3473, 'DESPACHO', 7, 'UC000317354US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3474, 'DESPACHO', 7, 'LE147544285FR', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3475, 'DESPACHO', 7, 'LL014479365FR', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3476, 'DESPACHO', 7, 'UM908344046US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3477, 'DESPACHO', 7, 'UM975400165US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3478, 'DESPACHO', 7, 'UX621820515FR', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3479, 'DESPACHO', 7, 'UM908169421US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3480, 'DESPACHO', 7, 'UQ353071877DE', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3481, 'DESPACHO', 7, 'UH052371395US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3482, 'DESPACHO', 7, 'UL200034543PE', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3483, 'DESPACHO', 7, 'LX085973937FR', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3484, 'DESPACHO', 7, 'UK009218827NO', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3485, 'DESPACHO', 7, 'UJ156659321US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3486, 'DESPACHO', 7, 'UM980197670US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3487, 'DESPACHO', 7, 'UH052363456US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3488, 'DESPACHO', 7, 'UM908239079US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3489, 'DESPACHO', 7, 'UC000337291US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3490, 'DESPACHO', 7, 'LL014467138FR', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3491, 'DESPACHO', 7, 'UM908354922US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3492, 'DESPACHO', 7, 'UM908369476US', '2024-01-09 15:08:33', '2024-01-09 15:08:33', 'Destino de Clasificacion hacia Ventanilla'),
+	(3493, 'CLASIFICACION', 7, 'UH052276377US', '2024-01-09 15:16:39', '2024-01-09 15:16:39', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3494, 'ADMISION', 7, 'UH052276377US', '2024-01-09 15:16:39', '2024-01-09 15:16:39', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3495, 'CLASIFICACION', 7, 'UH052381415US', '2024-01-09 15:17:39', '2024-01-09 15:17:39', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3496, 'ADMISION', 7, 'UH052381415US', '2024-01-09 15:17:39', '2024-01-09 15:17:39', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3497, 'CLASIFICACION', 7, 'UA005663616FR', '2024-01-09 15:18:27', '2024-01-09 15:18:27', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3498, 'ADMISION', 7, 'UA005663616FR', '2024-01-09 15:18:27', '2024-01-09 15:18:27', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3499, 'CLASIFICACION', 7, 'UC029055632NO', '2024-01-09 15:19:54', '2024-01-09 15:19:54', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3500, 'ADMISION', 7, 'UC029055632NO', '2024-01-09 15:19:54', '2024-01-09 15:19:54', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3501, 'CLASIFICACION', 7, 'UH052132228US', '2024-01-09 15:21:07', '2024-01-09 15:21:07', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3502, 'ADMISION', 7, 'UH052132228US', '2024-01-09 15:21:07', '2024-01-09 15:21:07', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3503, 'CLASIFICACION', 7, 'UH052238705US', '2024-01-09 15:22:09', '2024-01-09 15:22:09', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3504, 'ADMISION', 7, 'UH052238705US', '2024-01-09 15:22:09', '2024-01-09 15:22:09', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3505, 'CLASIFICACION', 7, 'RD000497874BO', '2024-01-09 15:23:28', '2024-01-09 15:23:28', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3506, 'ADMISION', 7, 'RD000497874BO', '2024-01-09 15:23:28', '2024-01-09 15:23:28', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3507, 'DESPACHO', 7, 'UH052276377US', '2024-01-09 15:23:38', '2024-01-09 15:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3508, 'DESPACHO', 7, 'UH052381415US', '2024-01-09 15:23:38', '2024-01-09 15:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3509, 'DESPACHO', 7, 'UA005663616FR', '2024-01-09 15:23:38', '2024-01-09 15:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3510, 'DESPACHO', 7, 'UC029055632NO', '2024-01-09 15:23:38', '2024-01-09 15:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3511, 'DESPACHO', 7, 'UH052132228US', '2024-01-09 15:23:38', '2024-01-09 15:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3512, 'DESPACHO', 7, 'UH052238705US', '2024-01-09 15:23:38', '2024-01-09 15:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3513, 'DESPACHO', 7, 'RD000497874BO', '2024-01-09 15:23:38', '2024-01-09 15:23:38', 'Destino de Clasificacion hacia Ventanilla'),
+	(3514, 'DISPONIBLE', 33, 'UH052132228US', '2024-01-09 15:37:17', '2024-01-09 15:37:17', 'Paquete a la espera de ser recogido en Casillero Postal 1022'),
+	(3515, 'EN ENTREGA', 33, 'UH052132228US', '2024-01-09 15:37:17', '2024-01-09 15:37:17', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3516, 'DISPONIBLE', 33, 'UH052238705US', '2024-01-09 15:42:16', '2024-01-09 15:42:16', 'Paquete a la espera de ser recogido en Casillero Postal 4887'),
+	(3517, 'EN ENTREGA', 33, 'UH052238705US', '2024-01-09 15:42:16', '2024-01-09 15:42:16', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3518, 'DISPONIBLE', 33, 'UA005663616FR', '2024-01-09 15:44:41', '2024-01-09 15:44:41', 'Paquete a la espera de ser recogido en Casillero Postal 8735'),
+	(3519, 'EN ENTREGA', 33, 'UA005663616FR', '2024-01-09 15:44:41', '2024-01-09 15:44:41', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3520, 'DISPONIBLE', 33, 'RD000497874BO', '2024-01-09 15:45:08', '2024-01-09 15:45:08', 'Paquete a la espera de ser recogido en Casillero Postal 23094'),
+	(3521, 'EN ENTREGA', 33, 'RD000497874BO', '2024-01-09 15:45:08', '2024-01-09 15:45:08', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3522, 'DISPONIBLE', 33, 'UC029055632NO', '2024-01-09 15:45:51', '2024-01-09 15:45:51', 'Paquete a la espera de ser recogido en Casillero Postal 5897'),
+	(3523, 'EN ENTREGA', 33, 'UC029055632NO', '2024-01-09 15:45:51', '2024-01-09 15:45:51', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3524, 'DISPONIBLE', 33, 'UH052381415US', '2024-01-09 15:46:29', '2024-01-09 15:46:29', 'Paquete a la espera de ser recogido en Casillero Postal '),
+	(3525, 'EN ENTREGA', 33, 'UH052381415US', '2024-01-09 15:46:29', '2024-01-09 15:46:29', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3526, 'DISPONIBLE', 33, 'UH052276377US', '2024-01-09 15:46:48', '2024-01-09 15:46:48', 'Paquete a la espera de ser recogido en Casillero Postal 1087'),
+	(3527, 'EN ENTREGA', 33, 'UH052276377US', '2024-01-09 15:46:48', '2024-01-09 15:46:48', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3528, 'DISPONIBLE', 25, 'UJ156659321US', '2024-01-10 07:49:07', '2024-01-10 07:49:07', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3529, 'EN ENTREGA', 25, 'UJ156659321US', '2024-01-10 07:49:07', '2024-01-10 07:49:07', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3530, 'DISPONIBLE', 25, 'UC000337291US', '2024-01-10 07:50:30', '2024-01-10 07:50:30', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3531, 'EN ENTREGA', 25, 'UC000337291US', '2024-01-10 07:50:30', '2024-01-10 07:50:30', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3532, 'DISPONIBLE', 25, 'UK009218827NO', '2024-01-10 07:51:01', '2024-01-10 07:51:01', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3533, 'EN ENTREGA', 25, 'UK009218827NO', '2024-01-10 07:51:01', '2024-01-10 07:51:01', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3534, 'DISPONIBLE', 25, 'UM908369476US', '2024-01-10 08:28:49', '2024-01-10 08:28:49', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3535, 'EN ENTREGA', 25, 'UM908369476US', '2024-01-10 08:28:49', '2024-01-10 08:28:49', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3536, 'DISPONIBLE', 25, 'UM975400165US', '2024-01-10 08:29:28', '2024-01-10 08:29:28', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3537, 'EN ENTREGA', 25, 'UM975400165US', '2024-01-10 08:29:28', '2024-01-10 08:29:28', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3538, 'DISPONIBLE', 25, 'UM908169421US', '2024-01-10 08:32:20', '2024-01-10 08:32:20', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3539, 'EN ENTREGA', 25, 'UM908169421US', '2024-01-10 08:32:20', '2024-01-10 08:32:20', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3540, 'DISPONIBLE', 25, 'UH052371395US', '2024-01-10 08:33:03', '2024-01-10 08:33:03', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3541, 'EN ENTREGA', 25, 'UH052371395US', '2024-01-10 08:33:03', '2024-01-10 08:33:03', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3542, 'DISPONIBLE', 25, 'LX085973937FR', '2024-01-10 08:33:45', '2024-01-10 08:33:45', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3543, 'EN ENTREGA', 25, 'LX085973937FR', '2024-01-10 08:33:45', '2024-01-10 08:33:45', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3544, 'DISPONIBLE', 25, 'UM908354922US', '2024-01-10 08:34:31', '2024-01-10 08:34:31', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3545, 'EN ENTREGA', 25, 'UM908354922US', '2024-01-10 08:34:31', '2024-01-10 08:34:31', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3546, 'DISPONIBLE', 25, 'UQ353071877DE', '2024-01-10 08:36:42', '2024-01-10 08:36:42', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3547, 'EN ENTREGA', 25, 'UQ353071877DE', '2024-01-10 08:36:42', '2024-01-10 08:36:42', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3548, 'DISPONIBLE', 25, 'UX621820515FR', '2024-01-10 08:37:15', '2024-01-10 08:37:15', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3549, 'EN ENTREGA', 25, 'UX621820515FR', '2024-01-10 08:37:15', '2024-01-10 08:37:15', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3550, 'DISPONIBLE', 25, 'UM908344046US', '2024-01-10 08:38:29', '2024-01-10 08:38:29', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3551, 'EN ENTREGA', 25, 'UM908344046US', '2024-01-10 08:38:29', '2024-01-10 08:38:29', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3552, 'DISPONIBLE', 25, 'LL014479365FR', '2024-01-10 08:38:53', '2024-01-10 08:38:53', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3553, 'EN ENTREGA', 25, 'LL014479365FR', '2024-01-10 08:38:53', '2024-01-10 08:38:53', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3554, 'DISPONIBLE', 25, 'LE147544285FR', '2024-01-10 08:39:24', '2024-01-10 08:39:24', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3555, 'EN ENTREGA', 25, 'LE147544285FR', '2024-01-10 08:39:24', '2024-01-10 08:39:24', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3556, 'DISPONIBLE', 25, 'UC000317354US', '2024-01-10 08:40:11', '2024-01-10 08:40:11', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3557, 'EN ENTREGA', 25, 'UC000317354US', '2024-01-10 08:40:11', '2024-01-10 08:40:11', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3558, 'DISPONIBLE', 25, 'UH052363456US', '2024-01-10 08:41:29', '2024-01-10 08:41:29', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3559, 'EN ENTREGA', 25, 'UH052363456US', '2024-01-10 08:41:29', '2024-01-10 08:41:29', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3560, 'DISPONIBLE', 25, 'UM908239079US', '2024-01-10 08:42:56', '2024-01-10 08:42:56', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3561, 'EN ENTREGA', 25, 'UM908239079US', '2024-01-10 08:42:56', '2024-01-10 08:42:56', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3562, 'DISPONIBLE', 25, 'UL200034543PE', '2024-01-10 08:43:25', '2024-01-10 08:43:25', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3563, 'EN ENTREGA', 25, 'UL200034543PE', '2024-01-10 08:43:25', '2024-01-10 08:43:25', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3564, 'DISPONIBLE', 25, 'LL014467138FR', '2024-01-10 08:44:04', '2024-01-10 08:44:04', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3565, 'EN ENTREGA', 25, 'LL014467138FR', '2024-01-10 08:44:04', '2024-01-10 08:44:04', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3566, 'DISPONIBLE', 25, 'UM980197670US', '2024-01-10 09:14:51', '2024-01-10 09:14:51', 'Paquete a la espera de ser recogido en ventanilla DD'),
+	(3567, 'EN ENTREGA', 25, 'UM980197670US', '2024-01-10 09:14:51', '2024-01-10 09:14:51', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3568, 'CLASIFICACION', 7, 'UC025738432NO', '2024-01-11 07:21:15', '2024-01-11 07:21:15', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3569, 'ADMISION', 7, 'UC025738432NO', '2024-01-11 07:21:15', '2024-01-11 07:21:15', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3570, 'CLASIFICACION', 7, 'RD000497863BO', '2024-01-11 07:22:35', '2024-01-11 07:22:35', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3571, 'ADMISION', 7, 'RD000497863BO', '2024-01-11 07:22:35', '2024-01-11 07:22:35', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3572, 'CLASIFICACION', 7, 'RD000497895BO', '2024-01-11 07:23:22', '2024-01-11 07:23:22', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3573, 'ADMISION', 7, 'RD000497895BO', '2024-01-11 07:23:22', '2024-01-11 07:23:22', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3574, 'DESPACHO', 7, 'UC025738432NO', '2024-01-11 07:23:36', '2024-01-11 07:23:36', 'Destino de Clasificacion hacia Ventanilla'),
+	(3575, 'DESPACHO', 7, 'RD000497863BO', '2024-01-11 07:23:36', '2024-01-11 07:23:36', 'Destino de Clasificacion hacia Ventanilla'),
+	(3576, 'DESPACHO', 7, 'RD000497895BO', '2024-01-11 07:23:36', '2024-01-11 07:23:36', 'Destino de Clasificacion hacia Ventanilla'),
+	(3577, 'CLASIFICACION', 7, 'UC029134012NO', '2024-01-11 08:12:36', '2024-01-11 08:12:36', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3578, 'ADMISION', 7, 'UC029134012NO', '2024-01-11 08:12:36', '2024-01-11 08:12:36', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3579, 'CLASIFICACION', 7, 'RD000497883BO', '2024-01-11 08:14:51', '2024-01-11 08:14:51', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3580, 'ADMISION', 7, 'RD000497883BO', '2024-01-11 08:14:51', '2024-01-11 08:14:51', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3581, 'CLASIFICACION', 7, 'RD000497914BO', '2024-01-11 08:16:41', '2024-01-11 08:16:41', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3582, 'ADMISION', 7, 'RD000497914BO', '2024-01-11 08:16:41', '2024-01-11 08:16:41', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3583, 'CLASIFICACION', 7, 'UB005789903FR', '2024-01-11 08:17:33', '2024-01-11 08:17:33', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3584, 'ADMISION', 7, 'UB005789903FR', '2024-01-11 08:17:33', '2024-01-11 08:17:33', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3585, 'CLASIFICACION', 7, 'LS134659611FR', '2024-01-11 08:18:34', '2024-01-11 08:18:34', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3586, 'ADMISION', 7, 'LS134659611FR', '2024-01-11 08:18:34', '2024-01-11 08:18:34', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3587, 'CLASIFICACION', 7, 'LA102535814FR', '2024-01-11 08:19:53', '2024-01-11 08:19:53', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3588, 'ADMISION', 7, 'LA102535814FR', '2024-01-11 08:19:53', '2024-01-11 08:19:53', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3589, 'DESPACHO', 7, 'UC029134012NO', '2024-01-11 08:20:03', '2024-01-11 08:20:03', 'Destino de Clasificacion hacia Ventanilla'),
+	(3590, 'DESPACHO', 7, 'RD000497883BO', '2024-01-11 08:20:03', '2024-01-11 08:20:03', 'Destino de Clasificacion hacia Ventanilla'),
+	(3591, 'DESPACHO', 7, 'RD000497914BO', '2024-01-11 08:20:03', '2024-01-11 08:20:03', 'Destino de Clasificacion hacia Ventanilla'),
+	(3592, 'DESPACHO', 7, 'UB005789903FR', '2024-01-11 08:20:03', '2024-01-11 08:20:03', 'Destino de Clasificacion hacia Ventanilla'),
+	(3593, 'DESPACHO', 7, 'LS134659611FR', '2024-01-11 08:20:03', '2024-01-11 08:20:03', 'Destino de Clasificacion hacia Ventanilla'),
+	(3594, 'DESPACHO', 7, 'LA102535814FR', '2024-01-11 08:20:03', '2024-01-11 08:20:03', 'Destino de Clasificacion hacia Ventanilla'),
+	(3595, 'DISPONIBLE', 33, 'UB005789903FR', '2024-01-11 08:44:15', '2024-01-11 08:44:15', 'Paquete a la espera de ser recogido en Casillero Postal 8735'),
+	(3596, 'EN ENTREGA', 33, 'UB005789903FR', '2024-01-11 08:44:15', '2024-01-11 08:44:15', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3597, 'DISPONIBLE', 33, 'RD000497883BO', '2024-01-11 08:44:39', '2024-01-11 08:44:39', 'Paquete a la espera de ser recogido en Casillero Postal 8735'),
+	(3598, 'EN ENTREGA', 33, 'RD000497883BO', '2024-01-11 08:44:39', '2024-01-11 08:44:39', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3599, 'DISPONIBLE', 33, 'RD000497914BO', '2024-01-11 08:45:00', '2024-01-11 08:45:00', 'Paquete a la espera de ser recogido en Casillero Postal 8735'),
+	(3600, 'EN ENTREGA', 33, 'RD000497914BO', '2024-01-11 08:45:00', '2024-01-11 08:45:00', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3601, 'DISPONIBLE', 33, 'UC029134012NO', '2024-01-11 08:45:19', '2024-01-11 08:45:19', 'Paquete a la espera de ser recogido en Casillero Postal '),
+	(3602, 'EN ENTREGA', 33, 'UC029134012NO', '2024-01-11 08:45:19', '2024-01-11 08:45:19', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3603, 'DISPONIBLE', 33, 'LS134659611FR', '2024-01-11 08:57:34', '2024-01-11 08:57:34', 'Paquete a la espera de ser recogido en ventanilla DND'),
+	(3604, 'EN ENTREGA', 33, 'LS134659611FR', '2024-01-11 08:57:34', '2024-01-11 08:57:34', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3605, 'ENTREGADO', 25, 'LL014479365FR', '2024-01-11 09:39:34', '2024-01-11 09:39:34', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3606, 'ENTREGADO', 25, 'LB213301089FR', '2024-01-11 09:40:58', '2024-01-11 09:40:58', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(3607, 'CLASIFICACION', 20, 'RR935638274ES', '2024-01-11 13:13:41', '2024-01-11 13:13:41', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(3608, 'ADMISION', 20, 'RR935638274ES', '2024-01-11 13:13:41', '2024-01-11 13:13:41', 'Llegada de Paquete en Oficina Postal Regional'),
+	(3609, 'DESPACHO', 20, 'RR935638274ES', '2024-01-11 13:13:49', '2024-01-11 13:13:49', 'Destino de Clasificacion hacia Ventanilla'),
+	(3610, 'DISPONIBLE', 20, 'RR935638274ES', '2024-01-11 13:14:05', '2024-01-11 13:14:05', 'Paquete a la espera de ser recogido en Casillero Postal 1542'),
+	(3611, 'EN ENTREGA', 20, 'RR935638274ES', '2024-01-11 13:14:05', '2024-01-11 13:14:05', 'Paquete Recibido en Oficina Postal Regional.'),
+	(3612, 'ENTREGADO', 20, 'RR935638274ES', '2024-01-11 13:14:10', '2024-01-11 13:14:10', 'Entrega de paquete en Casillero Postal en Oficina Regional'),
+	(3613, 'ESTADO', 20, 'RR935638274ES', '2024-01-11 13:14:36', '2024-01-11 13:14:36', 'Alta de Paquete'),
+	(3614, 'ESTADO', 20, 'RR935638274ES', '2024-01-11 13:14:43', '2024-01-11 13:14:43', 'Eliminación de Paquete');
 
+-- Volcando estructura para tabla trackpak.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `uuid` varchar(255) NOT NULL,
@@ -3304,7 +3663,9 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.failed_jobs: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla trackpak.mensajes
 CREATE TABLE IF NOT EXISTS `mensajes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `estado` char(20) DEFAULT NULL,
@@ -3315,8 +3676,9 @@ CREATE TABLE IF NOT EXISTS `mensajes` (
   PRIMARY KEY (`id`),
   KEY `telefono` (`id_telefono`),
   CONSTRAINT `telefono` FOREIGN KEY (`id_telefono`) REFERENCES `packages` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
+-- Volcando datos para la tabla trackpak.mensajes: ~23 rows (aproximadamente)
 INSERT INTO `mensajes` (`id`, `estado`, `mensajes`, `observacion`, `id_telefono`, `fecha_creacion`) VALUES
 	(1, 'Enviado', 'Hola usuario', 'numero correcto', 9361, '2023-12-19 18:06:09'),
 	(2, 'Enviado', 'hola usuario', 'numero incorrecto', 10261, '2023-12-19 18:06:09'),
@@ -3342,13 +3704,15 @@ INSERT INTO `mensajes` (`id`, `estado`, `mensajes`, `observacion`, `id_telefono`
 	(24, 'Leido', ' Su paquete estÃƒÂ¡ resguardado y listo para ser retirado. Ã‚Â¡No demore!.', 'El nÃƒÂºmero es correcto.', 7070, '2023-12-19 18:20:17'),
 	(25, 'Leido', ' Estaremos atentos a su llegada. No dude en pasar por nuestra oficina.\r', 'El nÃƒÂºmero es correcto.', 7067, '2023-12-19 18:22:41');
 
+-- Volcando estructura para tabla trackpak.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.migrations: ~28 rows (aproximadamente)
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
@@ -3379,6 +3743,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(29, '2023_12_14_121448_create_national_table', 14),
 	(30, '2023_12_15_150115_add_direccion_to_nationals', 15);
 
+-- Volcando estructura para tabla trackpak.model_has_permissions
 CREATE TABLE IF NOT EXISTS `model_has_permissions` (
   `permission_id` bigint(20) unsigned NOT NULL,
   `model_type` varchar(255) NOT NULL,
@@ -3388,7 +3753,9 @@ CREATE TABLE IF NOT EXISTS `model_has_permissions` (
   CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.model_has_permissions: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla trackpak.model_has_roles
 CREATE TABLE IF NOT EXISTS `model_has_roles` (
   `role_id` bigint(20) unsigned NOT NULL,
   `model_type` varchar(255) NOT NULL,
@@ -3398,6 +3765,7 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.model_has_roles: ~18 rows (aproximadamente)
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(1, 'App\\Models\\User', 20),
 	(2, 'App\\Models\\User', 29),
@@ -3419,6 +3787,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(8, 'App\\Models\\User', 39),
 	(9, 'App\\Models\\User', 28);
 
+-- Volcando estructura para tabla trackpak.nationals
 CREATE TABLE IF NOT EXISTS `nationals` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `CODIGO` varchar(255) DEFAULT NULL,
@@ -3445,8 +3814,9 @@ CREATE TABLE IF NOT EXISTS `nationals` (
   `USER` varchar(255) DEFAULT NULL,
   `datedespachoadmision` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.nationals: ~8 rows (aproximadamente)
 INSERT INTO `nationals` (`id`, `CODIGO`, `CANTIDAD`, `PESO`, `DESTINO`, `FACTURA`, `IMPORTE`, `TIPOSERVICIO`, `TIPOCORRESPONDENCIA`, `NOMBRESDESTINATARIO`, `TELEFONODESTINATARIO`, `CIDESTINATARIO`, `NOMBRESREMITENTE`, `TELEFONOREMITENTE`, `CIREMITENTE`, `ESTADO`, `created_at`, `updated_at`, `DIRECCION`, `PROVINCIA`, `MUNICIPIO`, `ORIGEN`, `USER`, `datedespachoadmision`) VALUES
 	(11, 'RR935638274ES', 1, 0.23, 'COCHABAMBA', 3416, 12, 'EMS', 'PAQUETE', 'Marco Antonio Espinoza Rojas', 2165165, 151561651, 'Omar Cabrejos', 1516156, 16516165, 'ADMISION', '2023-12-26 19:32:48', '2023-12-27 15:07:19', 'Sacaba', 'LOCAL 1', NULL, 'LA PAZ', 'Marco Antonio Espinoza Rojas', '2023-12-27 15:07:19'),
 	(12, 'RK996001089CH', 11, 156.00, 'SANTA CRUZ', 34565, 516515, 'CERTIFICADA', 'PAQUETE', 'Belen', 15615, 156151651, 'Jorge', 51651, 5165165, 'DESPACHO', '2023-12-26 19:43:02', '2023-12-27 15:07:49', 'Sacaba', 'CUIDAD CAPITAL', NULL, 'LA PAZ', 'Marco Antonio Espinoza Rojas', '2023-12-27 15:07:49'),
@@ -3457,6 +3827,7 @@ INSERT INTO `nationals` (`id`, `CODIGO`, `CANTIDAD`, `PESO`, `DESTINO`, `FACTURA
 	(17, 'RR9567567657ES', 1, 0.10, 'LA PAZ', 2752782, 3, 'EMS', 'PAQUETE', 'Marco Antonio Espinoza Rojas', 575757, 785785, 'Nadia Rodrigues', 857858, 785785, 'ADMISION', '2023-12-27 16:15:01', '2023-12-27 16:15:01', 'Sacaba', 'LOCAL 1', NULL, 'LA PAZ', 'Marco Antonio Espinoza Rojas', NULL),
 	(18, 'RR935638274ES', 2, 5.42, 'LA PAZ', 4114141, 56, 'EMS', NULL, 'Marco Antonio Espinoza Rojas', 4141414, 141414, 'Nadia Rodrigues', 14141, 1414, 'ADMISION', '2023-12-27 20:46:34', '2023-12-27 20:46:34', 'Sacaba', 'LOCAL 1', NULL, 'LA PAZ', 'Marco Antonio Espinoza Rojas', NULL);
 
+-- Volcando estructura para tabla trackpak.packages
 CREATE TABLE IF NOT EXISTS `packages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `CODIGO` varchar(255) NOT NULL,
@@ -3487,8 +3858,9 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `daterezago` timestamp NULL DEFAULT NULL,
   `nrocasilla` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22301 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.packages: ~11.335 rows (aproximadamente)
 INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUIDAD`, `ZONA`, `VENTANILLA`, `PESO`, `TIPO`, `ADUANA`, `ESTADO`, `ISO`, `PRECIO`, `OBSERVACIONES`, `FACTURA`, `created_at`, `updated_at`, `deleted_at`, `datedespachoclasificacion`, `date_redirigido`, `redirigido`, `cuidadre`, `REENCAMINAR`, `usercartero`, `dateprerezago`, `daterezago`, `nrocasilla`) VALUES
 	(7045, 'RP113421971MU', 'ADNULFO NUÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œEZ NAVA', 0, 'USA', 'SUCRE', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(7046, 'RP113425324MU', 'JESSICA K. GUZMAN LIENDRO', 0, 'USA', 'SUCRE', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
@@ -7582,9 +7954,9 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(11135, 'UD985348076NL', 'MAMANI MENESES  DILSON', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(11136, 'UD876899427NL', 'DELGADILLO BRENDA', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(11137, 'UN117488452SE', 'TERCEROS DE GUTIERREZ  ROXANA', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
-	(11138, 'UT397762363NL', 'SEBASTIAN ANTONIO SEBASTIAN ANTONIO', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
-	(11139, 'UM626947861US', 'GRAEDEL HANS', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL);
+	(11138, 'UT397762363NL', 'SEBASTIAN ANTONIO SEBASTIAN ANTONIO', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL);
 INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUIDAD`, `ZONA`, `VENTANILLA`, `PESO`, `TIPO`, `ADUANA`, `ESTADO`, `ISO`, `PRECIO`, `OBSERVACIONES`, `FACTURA`, `created_at`, `updated_at`, `deleted_at`, `datedespachoclasificacion`, `date_redirigido`, `redirigido`, `cuidadre`, `REENCAMINAR`, `usercartero`, `dateprerezago`, `daterezago`, `nrocasilla`) VALUES
+	(11139, 'UM626947861US', 'GRAEDEL HANS', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(11140, 'UO005062055ES', 'CASA LUNA MANDALA ', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(11141, 'LY430488101DE', 'MAMANI CHURA GERMAN', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(11142, 'UM889785091US', 'ALFARO LEHM ALEJANDRO', 0, '', 'COCHABAMBA', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
@@ -11636,9 +12008,9 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(15202, 'UV630149015UZ', 'ZUBIETA  MERUBIA SWAMY', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'UZ', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(15203, 'RP110201282MU', 'ZUERAS  ABASCAL SAMUEL', NULL, NULL, 'ORURO', '', 'ADUANA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'MU', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(15204, 'UV110771355DE', 'ZURITA   TOMAS', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'DE', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
-	(15205, 'UV110787718DE', 'ZURITA   TOMAS', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'DE', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
-	(15206, 'UA404333852SB', 'ZURITA  AJHUACHO HECTOR', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'SB', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL);
+	(15205, 'UV110787718DE', 'ZURITA   TOMAS', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'DE', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL);
 INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUIDAD`, `ZONA`, `VENTANILLA`, `PESO`, `TIPO`, `ADUANA`, `ESTADO`, `ISO`, `PRECIO`, `OBSERVACIONES`, `FACTURA`, `created_at`, `updated_at`, `deleted_at`, `datedespachoclasificacion`, `date_redirigido`, `redirigido`, `cuidadre`, `REENCAMINAR`, `usercartero`, `dateprerezago`, `daterezago`, `nrocasilla`) VALUES
+	(15206, 'UA404333852SB', 'ZURITA  AJHUACHO HECTOR', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'SB', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(15207, 'UA404400146SB', 'ZURITA  AJHUACHO HECTOR', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'SB', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(15208, 'UA405486642SB', 'ZURITA  AJHUACHO HECTOR', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'SB', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(15209, 'UV600220250UZ', 'ZURITA  LOPEZ JOSEPH', NULL, NULL, 'ORURO', '', 'UNICA', NULL, 'PAQUETE', NULL, 'VENTANILLA', 'UZ', NULL, '', NULL, '2023-11-23 16:00:00', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
@@ -14717,11 +15089,11 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(21942, 'UN004810485US', 'MEKA VTUBER', 69769312, 'US', 'LA PAZ', 'ZONA NORTE', 'DD', 0.06, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 08:08:39', '2023-12-29 07:35:09', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21943, 'UA100318508PE', 'EUGENIO COTER', 0, 'PE', 'LA PAZ', 'MIRAFLORES', 'DD', 0.02, 'SOBRE', 'NO', 'VENTANILLA', 'PERU', '5', NULL, NULL, '2023-12-27 08:09:27', '2023-12-29 07:33:29', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21944, 'UM908091395US', 'YVAN MOLINA SANCHEZ', 62714666, 'US', 'LA PAZ', 'SOPOCACHI', 'DD', 0.88, 'PAQUETE', 'SI', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2023-12-27 08:11:08', '2023-12-29 07:33:43', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(21945, 'UH052164693US', 'JANNNELLI CASTILO PAREDES', 0, 'US', 'LA PAZ', 'SAN PEDRO', 'DD', 0.02, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 08:13:26', '2023-12-29 07:32:07', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(21945, 'UH052164693US', 'JANNNELLI CASTILO PAREDES', 0, 'US', 'LA PAZ', 'SAN PEDRO', 'DD', 0.02, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 08:13:26', '2024-01-08 11:53:28', '2024-01-08 11:53:28', '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21946, 'UH052054239US', 'CHRISTOPHER VALENCIA', 0, 'US', 'LA PAZ', 'EL ALTO', 'DD', 0.18, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 08:14:23', '2024-01-02 12:08:53', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21947, 'UL200027803PE', 'HILANDERIA Y TEXTILES ILLIMANI SRL', 0, 'PE', 'LA PAZ', 'EL ALTO', 'DD', 0.02, 'SOBRE', 'NO', 'VENTANILLA', 'PERU', '5', NULL, NULL, '2023-12-27 08:15:37', '2024-01-02 12:07:43', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21948, 'UL200027763PE', 'ILLAMPU TEXTILES', 0, 'PE', 'LA PAZ', 'EL ALTO', 'DD', 0.02, 'SOBRE', 'NO', 'VENTANILLA', 'PERU', '5', NULL, NULL, '2023-12-27 08:16:35', '2024-01-02 12:07:53', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(21949, 'UP000038893CO', 'RAQUEL RODRIGUEZ', 0, 'CO', 'LA PAZ', 'CENTRO', 'DD', 0.12, 'SOBRE', 'NO', 'VENTANILLA', 'COLOMBIA', '5', NULL, NULL, '2023-12-27 08:17:42', '2023-12-29 07:25:18', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(21949, 'UP000038893CO', 'RAQUEL RODRIGUEZ', 0, 'CO', 'LA PAZ', 'CENTRO', 'DD', 0.12, 'SOBRE', 'NO', 'ENTREGADO', 'COLOMBIA', '5', NULL, NULL, '2023-12-27 08:17:42', '2024-01-09 07:32:48', '2024-01-09 07:32:48', '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21950, 'UE901091078DE', 'ISTITUTO CULTURAL BOLIVIANO ALEMAN', 0, 'DE', 'LA PAZ', 'SOPOCACHI', 'DD', 0.48, 'SOBRE', 'NO', 'VENTANILLA', 'GERMANY', '5', NULL, NULL, '2023-12-27 08:19:59', '2023-12-29 07:24:55', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21951, 'RD000497741BO', 'WILLY SAMUEL PADILLA CHAVEZ', 70331502, 'BO', 'LA PAZ', 'ALTO OBRAJES', 'DD', 0.01, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '5', NULL, NULL, '2023-12-27 08:22:35', '2023-12-29 07:33:15', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21952, 'RD000497731BO', 'PASTOR RENE LIMACHI', 0, 'BO', 'LA PAZ', 'EL ALTO', 'DD', 0.90, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '10', NULL, NULL, '2023-12-27 08:24:05', '2024-01-02 12:09:08', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -14729,9 +15101,9 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(21954, 'UM908115644US', 'JOSE ALDO MACHACA', 0, 'US', 'LA PAZ', 'PASANKERI', 'DD', 0.17, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 13:13:22', '2023-12-29 07:24:19', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21955, 'UM214596376US', 'BEATRIZ RODRIGUEZ CALISAYA', 0, 'US', 'LA PAZ', 'SOPOCACHI', 'DD', 0.16, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 14:05:25', '2023-12-29 07:31:43', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21956, 'LE392621956DE', 'MONICA ARGANI', 0, 'DE', 'LA PAZ', 'EL ALTO', 'DD', 0.10, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '5', NULL, NULL, '2023-12-27 14:06:07', '2024-01-02 12:08:09', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(21957, 'UJ156548351US', 'ANGEL SUAREZ', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.61, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2023-12-27 14:06:54', '2023-12-29 07:32:37', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(21958, 'UJ156549670US', 'ANGEL SUAREZ', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.36, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 14:07:29', '2023-12-29 07:32:22', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(21959, 'UJ156547550US', 'ANGEL SUAREZ', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.62, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2023-12-27 14:09:32', '2023-12-28 08:35:45', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(21957, 'UJ156548351US', 'ANGEL SUAREZ', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.61, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED STATES', '10', NULL, NULL, '2023-12-27 14:06:54', '2024-01-09 07:32:15', '2024-01-09 07:32:15', '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(21958, 'UJ156549670US', 'ANGEL SUAREZ', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.36, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 14:07:29', '2024-01-09 07:32:23', '2024-01-09 07:32:23', '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(21959, 'UJ156547550US', 'ANGEL SUAREZ', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.62, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED STATES', '10', NULL, NULL, '2023-12-27 14:09:32', '2024-01-09 07:32:05', '2024-01-09 07:32:05', '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21960, 'UH052048851US', 'MAX AUGUSTO REGUERIN', 0, 'US', 'LA PAZ', 'DND', 'DD', 0.06, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 14:11:27', '2023-12-29 11:01:30', '2023-12-29 11:01:30', '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21961, 'UH052152267US', 'EDWIN CAPA CHOQUE', 0, 'US', 'LA PAZ', 'EL ALTO', 'DD', 1.54, 'PAQUETE', 'SI', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2023-12-27 14:44:59', '2024-01-02 12:11:03', NULL, '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(21962, 'UH052199600US', 'GERALDIE BOLANOS', 0, 'US', 'LA PAZ', 'MIRAFLORES', 'DD', 0.02, 'SOBRE', 'NO', 'ENTREGADO', 'UNITED STATES', '5', NULL, NULL, '2023-12-27 14:52:51', '2024-01-05 06:27:46', '2024-01-05 06:27:46', '2023-12-27 14:55:40', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -14806,9 +15178,9 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(22034, 'UC000263041US', 'MARCO ANTONIO MENDEZ GUTIERREZ', 74078788, 'US', 'LA PAZ', 'PG1C', 'DD', 1.10, 'PAQUETE', 'SI', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-04 09:41:23', '2024-01-04 16:10:58', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22035, 'UQ683273615GB', 'JOSE LUIS BELTRAN GARCIA', 0, 'GB', 'LA PAZ', 'PG1A', 'DD', 0.84, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED KINGDOM', '10', NULL, NULL, '2024-01-04 09:42:39', '2024-01-04 16:12:38', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22036, 'UJ156601335US', 'ANGEL SUAREZ', 0, 'US', 'LA PAZ', 'PG1A', 'DD', 0.57, 'PAQUETE', 'SI', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-04 09:43:37', '2024-01-04 16:13:15', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22037, 'LB213301089FR', 'EDWIN MACHICADO TICONIPA', 76200549, 'FR', 'LA PAZ', 'PG1A', 'DD', 1.88, 'PAQUETE', 'SI', 'VENTANILLA', 'FRANCE', '10', NULL, NULL, '2024-01-04 09:44:49', '2024-01-04 16:14:04', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22038, 'RD000501661BO', 'JOSE LUIS ZARATE CARDOZO', 79131831, 'BO', 'LA PAZ', 'PG1A', 'DD', 0.72, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '10', NULL, NULL, '2024-01-04 09:49:03', '2024-01-04 16:14:29', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22039, 'RD000501676BO', 'JOSE LUIS ZARATE CARDOZO', 79131831, 'BO', 'LA PAZ', 'PG1A', 'DD', 0.77, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '10', 'SIN CODIGO', NULL, '2024-01-04 09:50:23', '2024-01-04 16:12:19', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22037, 'LB213301089FR', 'EDWIN MACHICADO TICONIPA', 76200549, 'FR', 'LA PAZ', 'PG1A', 'DD', 1.88, 'PAQUETE', 'SI', 'ENTREGADO', 'FRANCE', '10', NULL, NULL, '2024-01-04 09:44:49', '2024-01-11 09:40:59', '2024-01-11 09:40:59', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22038, 'RD000501661BO', 'JOSE LUIS ZARATE CARDOZO', 79131831, 'BO', 'LA PAZ', 'PG1A', 'DD', 0.72, 'PAQUETE', 'NO', 'ENTREGADO', 'BOLIVIA', '10', NULL, NULL, '2024-01-04 09:49:03', '2024-01-09 15:08:25', '2024-01-09 15:08:25', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22039, 'RD000501676BO', 'JOSE LUIS ZARATE CARDOZO', 79131831, 'BO', 'LA PAZ', 'PG1A', 'DD', 0.77, 'PAQUETE', 'NO', 'ENTREGADO', 'BOLIVIA', '10', 'SIN CODIGO', NULL, '2024-01-04 09:50:23', '2024-01-09 15:08:34', '2024-01-09 15:08:34', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22040, 'UQ683253616GB', 'GARY ERICK OROSCO CASTAÑON', 77272197, 'GB', 'LA PAZ', 'PG1A', 'DD', 0.39, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED KINGDOM', '5', NULL, NULL, '2024-01-04 09:51:21', '2024-01-04 16:12:55', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22041, 'UM975370928US', 'JOSE LUIS BELTRAN GARCIA', 0, 'US', 'LA PAZ', 'SOPOCACHI', 'DND', 0.14, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 09:53:16', '2024-01-04 15:40:54', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22042, 'UQ353071452DE', 'RODRIGO MORENO GUTIERREZ', 0, 'DE', 'LA PAZ', 'CALACOTO', 'DD', 0.20, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '5', NULL, NULL, '2024-01-04 09:54:45', '2024-01-04 15:41:36', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -14819,9 +15191,9 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(22047, 'UE266892082DE', 'JUAN JOSE BUSTILLOS LOZA', 0, 'DE', 'LA PAZ', 'DND', 'DD', 0.22, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '5', NULL, NULL, '2024-01-04 10:23:44', '2024-01-04 15:51:19', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22048, 'UH052269288US', 'ERICK LOPEZ MONZON', 0, 'US', 'LA PAZ', 'EL ALTO', 'DD', 0.36, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 10:25:07', '2024-01-04 15:37:08', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22049, 'UJ156592134US', 'MARICRUZ VELASCO', 68212143, 'US', 'LA PAZ', 'VINO TINTO', 'DD', 0.39, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 10:26:06', '2024-01-04 15:52:44', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22050, 'LE165558153DE', 'MAURICIO MENDOZA PERALES', 69748294, 'DE', 'LA PAZ', 'PURA PURA', 'DD', 0.27, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '5', NULL, NULL, '2024-01-04 10:27:09', '2024-01-04 15:29:25', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22050, 'LE165558153DE', 'MAURICIO MENDOZA PERALES', 69748294, 'DE', 'LA PAZ', 'PURA PURA', 'DD', 0.27, 'PAQUETE', 'NO', 'ENTREGADO', 'GERMANY', '5', NULL, NULL, '2024-01-04 10:27:09', '2024-01-09 07:12:22', '2024-01-09 07:12:22', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22051, 'UB179111017GB', 'WILMER FROILAN VILLCA MAMANI', 0, 'GB', 'LA PAZ', 'EL ALTO', 'DD', 0.43, 'SOBRE', 'NO', 'VENTANILLA', 'UNITED KINGDOM', '5', NULL, NULL, '2024-01-04 10:52:28', '2024-01-04 15:28:14', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22052, 'UJ156482111US', 'SOS CHILDREN"S VILLEGAS', 0, 'US', 'LA PAZ', 'ACHUMANI', 'DD', 0.18, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 10:56:29', '2024-01-04 15:27:12', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22052, 'UJ156482111US', 'SOS CHILDREN"S VILLEGAS', 0, 'US', 'LA PAZ', 'ACHUMANI', 'DD', 0.18, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 10:56:29', '2024-01-09 07:31:56', '2024-01-09 07:31:56', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22053, 'UJ156482227US', 'THE CHURCH OF JESUS CHRIST', 0, 'US', 'LA PAZ', 'FLORIDA', 'DD', 0.18, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 10:59:31', '2024-01-04 15:25:48', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22054, 'UJ156482213US', 'THE CHURCH OF JESUS CHRIST OF LATER DAY SAINTS', 0, 'US', 'LA PAZ', 'LA PORTADA', 'DD', 0.18, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 11:01:24', '2024-01-04 15:50:10', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22055, 'UJ156482139US', 'IGLECIA CRISTIANA EVANGELICA EMANUEL', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.18, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 11:06:38', '2024-01-04 15:47:36', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -14836,10 +15208,10 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(22064, 'UM975393518US', 'VICTOE HUGO SOLIZ KUNCAR', 73050775, 'US', 'LA PAZ', 'OBRAJES', 'DD', 0.26, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 12:16:04', '2024-01-04 16:01:23', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22065, 'UA408637443SB', 'YAMIL BENJAMIN VENEGAS MONTOYA', 78863301, 'SB', 'LA PAZ', 'CENTRO', 'DD', 0.06, 'PAQUETE', 'NO', 'VENTANILLA', 'SOLOMON ISLANDS', '5', NULL, NULL, '2024-01-04 12:19:59', '2024-01-04 15:20:37', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22066, 'UG918431399DE', 'SHIRLEY KATHERINE NAVIA TAPIA', 0, 'DE', 'LA PAZ', 'DND', 'DD', 0.06, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '5', NULL, NULL, '2024-01-04 12:21:08', '2024-01-04 15:14:16', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22067, 'UA101035556MT', 'ALFREDO FIGUEROA V', 0, 'MT', 'LA PAZ', 'SAN PEDRO', 'DD', 0.14, 'PAQUETE', 'NO', 'VENTANILLA', 'MALTA', '5', NULL, NULL, '2024-01-04 12:23:00', '2024-01-04 15:54:49', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22067, 'UA101035556MT', 'ALFREDO FIGUEROA V', 0, 'MT', 'LA PAZ', 'SAN PEDRO', 'DD', 0.14, 'PAQUETE', 'NO', 'ENTREGADO', 'MALTA', '5', NULL, NULL, '2024-01-04 12:23:00', '2024-01-09 07:22:46', '2024-01-09 07:22:46', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22068, 'UH691028002GB', 'WILMER FROILAN VILLCA MAMANI', 0, 'GB', 'LA PAZ', 'EL ALTO', 'DD', 0.13, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED KINGDOM', '5', NULL, NULL, '2024-01-04 12:29:44', '2024-01-04 15:28:48', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22069, 'UV593236901UZ', 'JOEGE JOE AMALLER LLANOS', 65613322, 'UZ', 'LA PAZ', 'SOPOCACHI', 'DD', 0.04, 'PAQUETE', 'NO', 'VENTANILLA', 'UZBEKISTAN', '5', NULL, NULL, '2024-01-04 12:32:26', '2024-01-04 15:57:54', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22070, 'UJ601811868HK', 'IGNACIO ERGUETA', 77716848, 'HK', 'LA PAZ', 'ACHUMANI', 'DD', 0.02, 'PAQUETE', 'NO', 'VENTANILLA', 'HONG KONG', '5', NULL, NULL, '2024-01-04 12:36:03', '2024-01-04 15:19:37', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22070, 'UJ601811868HK', 'IGNACIO ERGUETA', 77716848, 'HK', 'LA PAZ', 'ACHUMANI', 'DD', 0.02, 'PAQUETE', 'NO', 'ENTREGADO', 'HONG KONG', '5', NULL, NULL, '2024-01-04 12:36:03', '2024-01-09 07:32:31', '2024-01-09 07:32:31', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22071, 'UM980128025US', 'LUIS FERNANDO AGUILAR ZAPATA', 67067602, 'US', 'LA PAZ', 'BUENOS AIRES', 'DD', 0.07, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 12:39:08', '2024-01-04 15:59:49', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22072, 'UH678398405GB', 'GRACIELA CUBA OLLANES', 0, 'GB', 'LA PAZ', 'VILLA COPACABANA', 'DD', 0.22, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED KINGDOM', '5', NULL, NULL, '2024-01-04 12:39:47', '2024-01-04 15:19:17', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22073, 'UH052075300US', 'JENNY CHUQUIMIA', 0, 'US', 'LA PAZ', 'ALTO OBRAJES', 'DD', 0.38, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 12:45:00', '2024-01-04 15:13:33', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -14848,20 +15220,20 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(22076, 'UR482029004CA', 'S/N', 70667703, 'CA', 'LA PAZ', 'VILLA VICTORIA', 'DD', 0.47, 'PAQUETE', 'NO', 'VENTANILLA', 'CANADA', '5', 'SIN NOMBRE DES DESTINATARIO', NULL, '2024-01-04 12:54:25', '2024-01-04 15:10:33', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22077, 'UA936902655US', 'MARCELO TOTOLA', 76725600, 'US', 'LA PAZ', 'EL ALTO', 'DD', 1.13, 'PAQUETE', 'SI', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-04 12:56:13', '2024-01-04 15:12:38', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22078, 'UM908274186US', 'WILMER ALVAREZ', 71920227, 'US', 'LA PAZ', 'EL ALTO', 'DD', 0.11, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 12:57:42', '2024-01-04 15:05:36', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22079, 'UH692631554GB', 'ALFREDO FIGUEROA V', 0, 'GB', 'LA PAZ', 'SAN PEDRO', 'DD', 0.17, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED KINGDOM', '5', NULL, NULL, '2024-01-04 12:58:43', '2024-01-04 15:36:34', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22079, 'UH692631554GB', 'ALFREDO FIGUEROA V', 0, 'GB', 'LA PAZ', 'SAN PEDRO', 'DD', 0.17, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED KINGDOM', '5', NULL, NULL, '2024-01-04 12:58:43', '2024-01-09 07:23:14', '2024-01-09 07:23:14', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22080, 'UH052178661US', 'BERTMON ANTGZANA RODRIGUEZ', 78801414, 'US', 'LA PAZ', 'CALACOTO', 'DD', 0.07, 'SOBRE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 13:01:50', '2024-01-04 15:30:28', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22081, 'UH052196152US', 'EFRAIN FLORES', 0, 'US', 'LA PAZ', 'CALACOTO', 'DD', 0.09, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 13:15:59', '2024-01-04 15:09:12', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22082, 'UH052232915US', 'CARLA DELUCA', 60522943, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.20, 'SOBRE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 13:16:50', '2024-01-04 15:31:21', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22082, 'UH052232915US', 'CARLA DELUCA', 60522943, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.20, 'SOBRE', 'NO', 'ENTREGADO', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 13:16:50', '2024-01-09 07:31:46', '2024-01-09 07:31:46', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22083, 'UH693434768GB', 'RICARDO CUELLAR', 0, 'GB', 'LA PAZ', 'COTA COTA / CHASQUIPAMPA', 'DD', 0.14, 'SOBRE', 'NO', 'VENTANILLA', 'UNITED KINGDOM', '5', NULL, NULL, '2024-01-04 13:18:29', '2024-01-04 15:35:45', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22084, 'UA442713931MX', 'COMUNIDAD SCALABRIANA', 0, 'MX', 'LA PAZ', 'CIUDADELA FERROVIARIA', 'DD', 0.26, 'PAQUETE', 'NO', 'VENTANILLA', 'MEXICO', '5', NULL, NULL, '2024-01-04 13:20:54', '2024-01-04 15:33:54', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22085, 'UA442714909MX', 'COMUNIDAD SCALABRIANA', 0, 'MX', 'LA PAZ', 'CIUDADELA FERROVIARIA', 'DD', 0.25, 'SOBRE', 'NO', 'VENTANILLA', 'MEXICO', '5', NULL, NULL, '2024-01-04 13:21:30', '2024-01-04 15:32:51', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22086, 'UH052042814US', 'ABRAHAM ADEMAE AGUIRRE ROMERO', 0, 'US', 'LA PAZ', 'ACHACHICALA', 'DD', 0.12, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 13:23:39', '2024-01-04 15:34:40', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22087, 'UR481716430CA', 'JENNY MARTINEZ', 0, 'CA', 'LA PAZ', 'ACHUMANI', 'DD', 0.02, 'SOBRE', 'NO', 'VENTANILLA', 'CANADA', '5', NULL, NULL, '2024-01-04 13:26:10', '2024-01-04 15:04:32', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22087, 'UR481716430CA', 'JENNY MARTINEZ', 0, 'CA', 'LA PAZ', 'ACHUMANI', 'DD', 0.02, 'SOBRE', 'NO', 'ENTREGADO', 'CANADA', '5', NULL, NULL, '2024-01-04 13:26:10', '2024-01-09 07:32:56', '2024-01-09 07:32:56', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22088, 'UM214046056US', 'ANDREA AYLLON', 75870493, 'US', 'LA PAZ', 'AUQUISAMANA', 'DD', 0.44, 'SOBRE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 13:27:06', '2024-01-04 15:08:39', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22089, 'UA932532019US', 'JAVIER CABALLERO', 76700046, 'US', 'LA PAZ', 'CALACOTO', 'DD', 0.60, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-04 13:31:29', '2024-01-04 15:05:05', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22090, 'UH052313931US', 'MARGARET SELEME DE GUEVARA', 0, '31', 'LA PAZ', NULL, 'DD', 0.47, 'PAQUETE', 'NO', 'DESPACHO', '31', '5', NULL, NULL, '2024-01-04 13:32:47', '2024-01-04 15:21:17', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22091, 'UA473060505US', 'RAUL GONZALES GONZALES', 0, 'US', 'LA PAZ', 'ACHUMANI', 'DD', 0.23, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-04 13:34:27', '2024-01-04 15:06:48', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(22092, 'UA936895190US', 'MARCELO TOTOLA', 76725600, 'US', 'LA PAZ', 'PG3C', 'DD', 1.39, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-04 13:36:09', '2024-01-04 15:01:01', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22092, 'UA936895190US', 'MARCELO TOTOLA', 76725600, 'US', 'LA PAZ', 'PG3C', 'DD', 1.39, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED STATES', '10', NULL, NULL, '2024-01-04 13:36:09', '2024-01-09 07:34:16', '2024-01-09 07:34:16', '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22093, 'RD000501685BO', 'RUBEN Y LIDIA FERNANDEZ', 0, 'BO', 'LA PAZ', 'FLORIDA', 'DD', 0.05, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '5', NULL, NULL, '2024-01-04 13:37:09', '2024-01-04 16:01:49', NULL, '2024-01-04 13:38:24', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22094, 'UM869949508US', 'ERIKA VILCHES', 65101624, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.58, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-05 06:43:55', '2024-01-05 08:53:09', NULL, '2024-01-05 08:53:09', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(22095, 'UM214199397US', 'GERARDO URUGUAY', 75518811, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.58, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-05 06:46:11', '2024-01-05 08:53:09', NULL, '2024-01-05 08:53:09', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -14982,8 +15354,95 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(22210, 'UN108627227SE', 'ALEX FALCAO LUCAS FERNANDEZ', 0, 'SE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.45, 'PAQUETE', 'NO', 'VENTANILLA', 'SWEDEN', '5', NULL, NULL, '2024-01-05 14:59:47', '2024-01-05 15:34:49', NULL, '2024-01-05 15:06:01', NULL, 0, NULL, NULL, NULL, NULL, NULL, 8735),
 	(22211, 'UN118373592SE', 'LIZETH BERNABE CUSSI', 0, 'SE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.36, 'PAQUETE', 'NO', 'VENTANILLA', 'SWEDEN', '5', NULL, NULL, '2024-01-05 15:03:00', '2024-01-05 15:33:35', NULL, '2024-01-05 15:06:01', NULL, 0, NULL, NULL, NULL, NULL, NULL, 8735),
 	(22212, 'UC410968832GR', 'RADIO CLUB BOLIVIANO', 0, 'GR', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.03, 'SOBRE', 'NO', 'VENTANILLA', 'GREECE', '5', NULL, NULL, '2024-01-05 15:04:33', '2024-01-05 15:31:16', NULL, '2024-01-05 15:06:01', NULL, 0, NULL, NULL, NULL, NULL, NULL, 2111),
-	(22213, 'RD000497838BO', 'MASSIEL ANGELY NINA QUISPE', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.30, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '5', NULL, NULL, '2024-01-05 15:05:46', '2024-01-05 15:32:19', NULL, '2024-01-05 15:06:01', NULL, 0, NULL, NULL, NULL, NULL, NULL, 8735);
+	(22213, 'RD000497838BO', 'MASSIEL ANGELY NINA QUISPE', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.30, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '5', NULL, NULL, '2024-01-05 15:05:46', '2024-01-05 15:32:19', NULL, '2024-01-05 15:06:01', NULL, 0, NULL, NULL, NULL, NULL, NULL, 8735),
+	(22214, 'UH052375635US', 'MARC DEDRICK', 0, 'US', 'SANTA CRUZ', NULL, 'UNICA', 1.16, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 08:30:58', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22215, 'UH052357570US', 'ALEJANDRA SANCHEZ BALBOA', 0, 'US', 'SANTA CRUZ', NULL, 'UNICA', 1.13, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 08:40:13', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22216, 'UA473228069US', 'ROLANDO ARISPE MARABAL', 68837187, 'US', 'SANTA CRUZ', NULL, 'UNICA', 1.36, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 08:42:45', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22217, 'UY151746219DE', 'CARLOS IVAN ARDAYA SOLIZ', 78436477, 'DE', 'SANTA CRUZ', NULL, 'UNICA', 1.35, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-09 08:44:16', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22218, 'UA936903130US', 'DAVID ALEJANDRO JUSTINIANO GARCIA', 67800655, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.85, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 08:46:25', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22219, 'UC000361446US', 'GUSTAVO QUIROZ', 76317888, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.40, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 09:02:22', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22220, 'RD000497841BO', 'INMIBILARIA LAS MISIONES SA', 0, 'BO', 'SANTA CRUZ', NULL, 'UNICA', 1.59, 'SOBRE', 'NO', 'DESPACHO', 'BOLIVIA', '10', NULL, NULL, '2024-01-09 09:34:10', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22221, 'UH052380922US', 'YIMMY DAYAN FLORES VELASCO', 72688677, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.35, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 09:35:47', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22222, 'UM980148197US', 'EDUARDO MELGAR AYALA', 0, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.06, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 09:38:59', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22223, 'UO006688605ES', 'AA OBRERAS CORAZON DE JESUS', 0, 'ES', 'SANTA CRUZ', NULL, 'UNICA', 0.51, 'PAQUETE', 'NO', 'DESPACHO', 'SPAIN', '10', NULL, NULL, '2024-01-09 09:40:13', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22224, 'UM214969210US', 'PEDRO CERCANO', 71908158, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.10, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 09:41:20', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22225, 'UM908344307US', 'HASSAN ERICK BAKRY', 77655505, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.25, 'SOBRE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 09:42:30', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22226, 'UL200034530PE', 'TEXTILES ORIENTALES SA', 0, 'PE', 'SANTA CRUZ', NULL, 'UNICA', 0.01, 'SOBRE', 'NO', 'DESPACHO', 'PERU', '5', NULL, NULL, '2024-01-09 09:44:44', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22227, 'UL200039792PE', 'UNIVERSITARIA SAN ALBERTO HURTADO', 0, 'PE', 'SANTA CRUZ', NULL, 'UNICA', 0.01, 'SOBRE', 'NO', 'DESPACHO', 'PERU', '5', NULL, NULL, '2024-01-09 09:45:59', '2024-01-09 09:46:28', NULL, '2024-01-09 09:46:28', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22228, 'UH052369799US', 'NORA BALDERRAMA VDA LIZARAZU', 71487274, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.97, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 09:59:57', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22229, 'UA106894401US', 'JOSE FERNANDO VILLAROEL VELASCO', 6848842, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.12, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 10:01:59', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22230, 'LL014426500FR', 'ALI TORREZ MIGUEL', 73766295, 'FR', 'COCHABAMBA', NULL, 'UNICA', 0.43, 'PAQUETE', 'NO', 'DESPACHO', 'FRANCE', '5', NULL, NULL, '2024-01-09 10:03:00', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22231, 'UA932534978US', 'ELBERT FREDDY MENDOZA CATORCENO', 60783794, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.67, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 10:05:01', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22232, 'UH052336380US', 'YOLANDA GUZMAN', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.11, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 10:08:21', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22233, 'UR479462484CA', 'PAMELA TORRES ORIONA', 0, 'CA', 'COCHABAMBA', NULL, 'UNICA', 0.08, 'PAQUETE', 'NO', 'DESPACHO', 'CANADA', '5', NULL, NULL, '2024-01-09 10:11:01', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22234, 'UR240281052DE', 'IGNACIO SANCHEZ DE LOZADA', 0, 'DE', 'COCHABAMBA', NULL, 'UNICA', 0.02, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '5', NULL, NULL, '2024-01-09 10:12:14', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22235, 'UR233391083DE', 'LEONARDO PEREZ TERAN', 0, 'DE', 'COCHABAMBA', NULL, 'UNICA', 0.02, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '5', NULL, NULL, '2024-01-09 10:13:02', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22236, 'UM908188757US', 'PABLO NAVARRO', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.03, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 10:13:59', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22237, 'UA936910674US', 'RICARDO ANDRADE', 79975434, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.03, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 10:15:47', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22238, 'UG949917897GB', 'THE QUINTEROS FAMILY', 0, 'GB', 'COCHABAMBA', NULL, 'UNICA', 0.27, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED KINGDOM', '5', NULL, NULL, '2024-01-09 10:16:40', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22239, 'UC029715335NO', 'PADRINAMIENTO EJERCITO DE SALVACION', 0, 'NO', 'COCHABAMBA', NULL, 'UNICA', 0.31, 'PAQUETE', 'NO', 'DESPACHO', 'NORWAY', '5', NULL, NULL, '2024-01-09 10:18:50', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22240, 'UA936910475US', 'EDSON HANS MENDEZ SALAZAR', 772780915, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.72, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 10:20:07', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22241, 'UH052319996US', 'TERRY DONDINO', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.22, 'SOBRE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 10:21:12', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22242, 'UL200039801PE', 'PARROQUIA SAN GERARDO', 0, 'PE', 'COCHABAMBA', NULL, 'UNICA', 0.01, 'SOBRE', 'NO', 'DESPACHO', 'PERU', '5', NULL, NULL, '2024-01-09 10:21:59', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22243, 'UL200034557PE', 'HILATURA TEXTIL COCHABAMBA LTDA', 0, 'PE', 'COCHABAMBA', NULL, 'UNICA', 0.02, 'SOBRE', 'NO', 'DESPACHO', 'PERU', '5', NULL, NULL, '2024-01-09 10:22:52', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22244, 'UL200039979PE', 'SANTA ANA DE CALA CALA', 0, 'PE', 'COCHABAMBA', NULL, 'UNICA', 0.01, 'SOBRE', 'NO', 'DESPACHO', 'PERU', '5', NULL, NULL, '2024-01-09 10:23:24', '2024-01-09 10:23:38', NULL, '2024-01-09 10:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22245, 'UE399721548US', 'ANA MARIA RUIZ RUIZ', 72961495, 'US', 'TARIJA', NULL, 'UNICA', 0.95, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 11:27:10', '2024-01-09 11:37:46', NULL, '2024-01-09 11:37:46', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22246, 'UM975439081US', 'MELISA KAREN NIETO ANGULO', 67202380, 'US', 'TARIJA', NULL, 'UNICA', 1.19, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 11:30:22', '2024-01-09 11:37:46', NULL, '2024-01-09 11:37:46', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22247, 'UM908324259US', 'CASA COMANDO', 34085458, 'US', 'TARIJA', NULL, 'UNICA', 0.03, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 11:32:05', '2024-01-09 11:37:46', NULL, '2024-01-09 11:37:46', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22248, 'UJ156659318US', 'CLAUDIA URQUIZU CASTEDO', 0, 'US', 'TARIJA', NULL, 'UNICA', 0.03, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 11:32:48', '2024-01-09 11:37:46', NULL, '2024-01-09 11:37:46', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22249, 'UM214936021US', 'MATEO PUNA', 76192589, 'US', 'TARIJA', NULL, 'UNICA', 0.44, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 11:35:30', '2024-01-09 11:37:46', NULL, '2024-01-09 11:37:46', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22250, 'UM980199790US', 'BRYAN ALARCON RODRIGUEZ', 69618715, 'US', 'POTOSI', NULL, 'UNICA', 0.82, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 11:42:42', '2024-01-09 11:47:21', NULL, '2024-01-09 11:47:21', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22251, 'UA106898805US', 'EDSON ARANCIBIA MAMANI', 0, 'US', 'POTOSI', NULL, 'UNICA', 0.03, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 11:44:51', '2024-01-09 11:47:21', NULL, '2024-01-09 11:47:21', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22252, 'UM980195210US', 'BRYAN ALARCON RODRIGUEZ', 0, 'US', 'POTOSI', NULL, 'UNICA', 1.18, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 11:46:03', '2024-01-09 11:47:21', NULL, '2024-01-09 11:47:21', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22253, 'UH052207938US', 'EDMY  B DELGADO', 0, 'US', 'ORURO', NULL, 'UNICA', 0.08, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 11:51:36', '2024-01-09 11:55:14', NULL, '2024-01-09 11:55:14', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22254, 'UH052369958US', 'MIGUEL ANGEL ITMARI FARRAN', 0, 'US', 'ORURO', NULL, 'UNICA', 0.27, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 11:52:38', '2024-01-09 11:55:14', NULL, '2024-01-09 11:55:14', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22255, 'UH052327082US', 'EDMY  B DELGADO', 0, 'US', 'ORURO', NULL, 'UNICA', 0.46, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 11:55:09', '2024-01-09 11:55:14', NULL, '2024-01-09 11:55:14', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22256, 'UM908341985US', 'SILVIA GALVAN', 0, 'US', 'SUCRE', NULL, 'UNICA', 0.70, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 12:00:38', '2024-01-09 12:03:47', NULL, '2024-01-09 12:03:47', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22257, 'UM980204795US', 'CALEB MAMANI', 73410097, 'US', 'SUCRE', NULL, 'UNICA', 0.09, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 12:01:31', '2024-01-09 12:03:47', NULL, '2024-01-09 12:03:47', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22258, 'UM980203993US', 'ARTURO ESCALANTE ARENAS', 71159791, 'US', 'SUCRE', NULL, 'UNICA', 0.20, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 12:02:49', '2024-01-09 12:03:47', NULL, '2024-01-09 12:03:47', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22259, 'LS134845123FR', 'RENE RODRIGUEZ M', 0, 'FR', 'SUCRE', NULL, 'UNICA', 0.02, 'SOBRE', 'NO', 'DESPACHO', 'FRANCE', '5', NULL, NULL, '2024-01-09 12:03:39', '2024-01-09 12:03:47', NULL, '2024-01-09 12:03:47', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22260, 'UH052353096US', 'ORLANDO CRISPIN CH', 73996116, 'US', 'PANDO', NULL, 'UNICA', 0.80, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 12:09:02', '2024-01-09 12:12:15', NULL, '2024-01-09 12:12:15', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22261, 'UM975418665US', 'ORLANDO', 73996116, 'US', 'PANDO', NULL, 'UNICA', 0.78, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 12:09:54', '2024-01-09 12:12:15', NULL, '2024-01-09 12:12:15', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22262, 'RD000497858BO', 'ALYSSA PORTET', 0, 'BO', 'BENI', NULL, 'UNICA', 0.18, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '5', NULL, NULL, '2024-01-09 12:11:13', '2024-01-09 12:12:15', NULL, '2024-01-09 12:12:15', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22263, 'UM980203928US', 'BRYAN ALARCON RODRIGUEZ', 69618715, 'US', 'POTOSI', NULL, 'UNICA', 0.51, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 12:11:58', '2024-01-09 12:12:15', NULL, '2024-01-09 12:12:15', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22264, 'UC000317354US', 'PATRICIA CLARA MORAL', 70598494, 'US', 'LA PAZ', 'MIRAFLORES', 'DD', 1.00, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 14:34:30', '2024-01-10 08:40:11', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22265, 'LE147544285FR', 'JOSE LUIS ZARATE CARDOZO', 0, 'FR', 'LA PAZ', 'ROSARIO GRAN PODER', 'DD', 1.89, 'PAQUETE', 'NO', 'VENTANILLA', 'FRANCE', '10', NULL, NULL, '2024-01-09 14:38:08', '2024-01-10 08:39:24', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22266, 'LL014479365FR', 'EDWIN MACHICADO TICONIPA', 76200549, 'FR', 'LA PAZ', 'ROSARIO GRAN PODER', 'DD', 0.96, 'PAQUETE', 'SI', 'ENTREGADO', 'FRANCE', '10', NULL, NULL, '2024-01-09 14:39:34', '2024-01-11 09:39:36', '2024-01-11 09:39:36', '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22267, 'UM908344046US', 'CIEVOLOTH G COCA OLMOS PROCESSMAKER', 0, 'US', 'LA PAZ', 'LOS PINOS / SAN MIGUEL', 'DD', 0.12, 'SOBRE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 14:42:08', '2024-01-10 08:38:29', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22268, 'UM975400165US', 'JOSE LUIS BELTRAN GARCIA', 0, 'US', 'LA PAZ', 'SOPOCACHI', 'DD', 0.75, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 14:43:27', '2024-01-10 08:29:28', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22269, 'UX621820515FR', 'JOSE LUIS BELTRAN GARCIA', 0, 'FR', 'LA PAZ', 'SOPOCACHI', 'DD', 0.10, 'PAQUETE', 'NO', 'VENTANILLA', 'FRANCE', '5', NULL, NULL, '2024-01-09 14:44:26', '2024-01-10 08:37:15', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22270, 'UM908169421US', 'CHRISTAIN FELIX MAMANI', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.37, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 14:46:13', '2024-01-10 08:32:20', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22271, 'UQ353071877DE', 'OCTAVIO ALVAREZ C', 0, 'DE', 'LA PAZ', 'CALACOTO', 'DD', 0.19, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '5', NULL, NULL, '2024-01-09 14:47:48', '2024-01-10 08:36:42', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22272, 'UH052371395US', 'ELIZABTH ORTIZ', 75870273, 'US', 'LA PAZ', 'ACHUMANI', 'DD', 0.12, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 14:54:38', '2024-01-10 08:33:03', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22273, 'UL200034543PE', 'COPROCA', 0, 'PE', 'LA PAZ', 'EL ALTO', 'DD', 0.02, 'SOBRE', 'NO', 'VENTANILLA', 'PERU', '5', NULL, NULL, '2024-01-09 14:56:15', '2024-01-10 08:43:25', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22274, 'LX085973937FR', 'HUBERT DANIEL SANT ANDRE', 0, 'FR', 'LA PAZ', 'SOPOCACHI', 'DD', 0.44, 'PAQUETE', 'NO', 'VENTANILLA', 'FRANCE', '5', NULL, NULL, '2024-01-09 14:57:11', '2024-01-10 08:33:45', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22275, 'UK009218827NO', 'JOSE LUIS ZARATE CARDOZO', 0, 'NO', 'LA PAZ', 'ROSARIO GRAN PODER', 'DD', 0.11, 'PAQUETE', 'NO', 'VENTANILLA', 'NORWAY', '5', NULL, NULL, '2024-01-09 14:57:53', '2024-01-10 07:51:01', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22276, 'UJ156659321US', 'JUAN RODRIGUEZ BACARREZA', 0, 'US', 'LA PAZ', 'TEMBLADERANI', 'DD', 0.02, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:00:14', '2024-01-10 07:49:07', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22277, 'UM980197670US', 'PABLO ALBERTO OLMOS MACHICADO', 76292919, 'US', 'LA PAZ', 'FLORIDA', 'DD', 0.12, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:01:46', '2024-01-10 09:14:51', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22278, 'UH052363456US', 'DILAN GERSON AGUILAR PORTUGAL', 67077096, 'US', 'LA PAZ', 'MIRAFLORES', 'DD', 0.20, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:03:24', '2024-01-10 08:41:29', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22279, 'UM908239079US', 'STRAYEGIC ASSET MANAGEMENT LTD', 6727741, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.05, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:04:54', '2024-01-10 08:42:56', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22280, 'UC000337291US', 'JOSE ALDO MACHACA CARDENAS', 0, 'US', 'LA PAZ', 'PASANKERI', 'DD', 0.18, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:05:50', '2024-01-10 07:50:30', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22281, 'LL014467138FR', 'MENDEZ GUSTAVO', 0, 'FR', 'LA PAZ', 'CENTRO', 'DD', 0.25, 'PAQUETE', 'NO', 'VENTANILLA', 'FRANCE', '5', NULL, NULL, '2024-01-09 15:06:36', '2024-01-10 08:44:04', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22282, 'UM908354922US', 'STRAYEGIC ASSET MANAGEMENT LTD', 0, 'US', 'LA PAZ', 'CENTRO', 'DD', 0.05, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:07:34', '2024-01-10 08:34:31', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22283, 'UM908369476US', 'MARIO SALINAS', 76723552, 'US', 'LA PAZ', 'MIRAFLORES', 'DD', 0.11, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:08:13', '2024-01-10 08:28:49', NULL, '2024-01-09 15:08:33', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22284, 'UH052276377US', 'JACQUELINE VARGAS MURGA', 0, 'US', 'LA PAZ', 'ALMACEN', 'CASILLAS', 1.35, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 15:16:39', '2024-01-09 15:46:48', NULL, '2024-01-09 15:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, 1087),
+	(22285, 'UH052381415US', 'RENE MARCA', 0, 'US', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.51, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-09 15:17:39', '2024-01-09 15:46:29', NULL, '2024-01-09 15:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22286, 'UA005663616FR', 'CHILDFUND BOLIVIA', 0, 'FR', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.35, 'PAQUETE', 'NO', 'VENTANILLA', 'FRANCE', '5', NULL, NULL, '2024-01-09 15:18:27', '2024-01-09 15:44:41', NULL, '2024-01-09 15:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, 8735),
+	(22287, 'UC029055632NO', 'LA MISIOM ALIANZA DE NORUEGA', 0, 'NO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.10, 'PAQUETE', 'NO', 'VENTANILLA', 'NORWAY', '5', NULL, NULL, '2024-01-09 15:19:54', '2024-01-09 15:45:51', NULL, '2024-01-09 15:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, 5897),
+	(22288, 'UH052132228US', 'ALEJANDRA NAYELI CONDORI CAPACALLE', 0, 'US', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.05, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:21:07', '2024-01-09 15:37:17', NULL, '2024-01-09 15:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, 1022),
+	(22289, 'UH052238705US', 'YANET CHAITEYY', 0, 'US', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.34, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-09 15:22:09', '2024-01-09 15:42:16', NULL, '2024-01-09 15:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, 4887),
+	(22290, 'RD000497874BO', 'STEVE OLSEN', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.24, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '5', NULL, NULL, '2024-01-09 15:23:28', '2024-01-09 15:45:08', NULL, '2024-01-09 15:23:38', NULL, 0, NULL, NULL, NULL, NULL, NULL, 23094),
+	(22291, 'UC025738432NO', 'TAMILY LEON LIZARAZU', 0, 'NO', 'COCHABAMBA', NULL, 'UNICA', 0.11, 'PAQUETE', 'NO', 'DESPACHO', 'NORWAY', '5', NULL, NULL, '2024-01-11 07:21:15', '2024-01-11 07:23:36', NULL, '2024-01-11 07:23:36', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22292, 'RD000497863BO', 'AIDA ECHALAR OROSCO', 72883225, 'BO', 'SUCRE', NULL, 'UNICA', 0.81, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '10', NULL, NULL, '2024-01-11 07:22:35', '2024-01-11 07:23:36', NULL, '2024-01-11 07:23:36', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22293, 'RD000497895BO', 'ANTONIO FUENTES CONDORI', 0, 'BO', 'POTOSI', NULL, 'UNICA', 0.15, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '5', NULL, NULL, '2024-01-11 07:23:22', '2024-01-11 07:23:36', NULL, '2024-01-11 07:23:36', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22294, 'UC029134012NO', 'ALDEAS INFANTILES SOS', 14322, 'NO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.30, 'PAQUETE', 'NO', 'VENTANILLA', 'NORWAY', '5', NULL, NULL, '2024-01-11 08:12:36', '2024-01-11 08:45:19', NULL, '2024-01-11 08:20:03', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22295, 'RD000497883BO', 'CHILDFUND BOLIVIA', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.63, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '10', NULL, NULL, '2024-01-11 08:14:51', '2024-01-11 08:44:39', NULL, '2024-01-11 08:20:03', NULL, 0, NULL, NULL, NULL, NULL, NULL, 8735),
+	(22296, 'RD000497914BO', 'CHILDFUND BOLIVIA', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.05, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '5', NULL, NULL, '2024-01-11 08:16:41', '2024-01-11 08:45:00', NULL, '2024-01-11 08:20:03', NULL, 0, NULL, NULL, NULL, NULL, NULL, 8735),
+	(22297, 'UB005789903FR', 'CHILDFUND BOLIVIA', 0, 'FR', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.25, 'PAQUETE', 'NO', 'VENTANILLA', 'FRANCE', '5', NULL, NULL, '2024-01-11 08:17:33', '2024-01-11 08:44:15', NULL, '2024-01-11 08:20:03', NULL, 0, NULL, NULL, NULL, NULL, NULL, 8735),
+	(22298, 'LS134659611FR', 'VIETO VALDA MAMANI', 0, 'FR', 'LA PAZ', 'DND', 'DND', 0.49, 'PAQUETE', 'NO', 'VENTANILLA', 'FRANCE', '5', NULL, NULL, '2024-01-11 08:18:34', '2024-01-11 08:57:34', NULL, '2024-01-11 08:20:03', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(22299, 'LA102535814FR', 'GERALDINE J BOLAÑOS ARO', 0, 'FR', 'LA PAZ', NULL, 'DD', 0.32, 'PAQUETE', 'NO', 'DESPACHO', 'FRANCE', '5', NULL, NULL, '2024-01-11 08:19:53', '2024-01-11 08:20:03', NULL, '2024-01-11 08:20:03', NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
 
+-- Volcando estructura para tabla trackpak.password_reset_tokens
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
@@ -14991,7 +15450,9 @@ CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.password_reset_tokens: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla trackpak.permissions
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -15000,8 +15461,9 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.permissions: ~18 rows (aproximadamente)
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'users.index', 'web', '2023-12-12 22:38:17', '2023-12-12 22:38:17'),
 	(2, 'users.create', 'web', '2023-12-12 22:38:17', '2023-12-12 22:38:17'),
@@ -15022,6 +15484,7 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 	(17, 'packages.urbano', 'web', '2023-12-12 22:38:19', '2023-12-12 22:38:19'),
 	(18, 'packages.generalcartero', 'web', '2023-12-12 22:38:20', '2023-12-12 22:38:20');
 
+-- Volcando estructura para tabla trackpak.personal_access_tokens
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tokenable_type` varchar(255) NOT NULL,
@@ -15038,7 +15501,9 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.personal_access_tokens: ~0 rows (aproximadamente)
 
+-- Volcando estructura para tabla trackpak.roles
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -15047,8 +15512,9 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.roles: ~9 rows (aproximadamente)
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
 	(1, 'SuperAdmin', 'web', '2023-12-12 22:38:17', '2023-12-12 22:38:17'),
 	(2, 'Administrador', 'web', '2023-12-12 22:38:17', '2023-12-12 22:38:17'),
@@ -15060,6 +15526,7 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 	(8, 'Enlace', 'web', '2023-12-12 22:38:17', '2023-12-12 22:38:17'),
 	(9, 'Expedicion', 'web', '2023-12-12 22:38:17', '2023-12-12 22:38:17');
 
+-- Volcando estructura para tabla trackpak.role_has_permissions
 CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   `permission_id` bigint(20) unsigned NOT NULL,
   `role_id` bigint(20) unsigned NOT NULL,
@@ -15069,6 +15536,7 @@ CREATE TABLE IF NOT EXISTS `role_has_permissions` (
   CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.role_has_permissions: ~58 rows (aproximadamente)
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(1, 1),
 	(1, 2),
@@ -15129,6 +15597,7 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 	(18, 2),
 	(18, 3);
 
+-- Volcando estructura para tabla trackpak.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -15142,17 +15611,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Volcando datos para la tabla trackpak.users: ~18 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `Regional`, `ci`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(7, 'Rodrigo Villa Sanjines', 'rodrigo.villa@correos.gob.bo', NULL, '$2y$10$b6aDZSzXjhB8LyewKqoEjOAvIeYFks32wmX/teQfsLn/Bz43mccxK', 'LA PAZ', 9883740, 'yKZ1nD3doVGL4coVorjl6Gl5klPgRxGTAHuVLnKM1N8asx1FESzWHuiIXoxb', '2023-10-26 18:19:40', '2023-10-26 18:19:40'),
 	(8, 'Victor Antonio Tapia Quisbert', 'victor.tapia@correos.gob.bo', NULL, '$2y$10$gtWuAzWdTp9ZB9IWoqxDWu6z/jLb3Za86w8BNHszGQMEHfmY08xuq', 'LA PAZ', 6978733, NULL, '2023-10-26 18:20:40', '2023-10-26 18:20:40'),
-	(20, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$qqtW5Vo8krRvo5H.5JhKLOyHNpBNXtLe2Tk2//tMyxtb54E5l/t22', 'LA PAZ', 10909669, 'sfkNEXPTIGWiuE3ZOcXeGngy0MNp2CyZEqT7c4F1sN5iSFHxeGMjp2VvO9dn', '2023-11-17 18:01:08', '2023-11-29 18:58:26'),
+	(20, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$qqtW5Vo8krRvo5H.5JhKLOyHNpBNXtLe2Tk2//tMyxtb54E5l/t22', 'LA PAZ', 10909669, 'SRTrfI5eYuf2AqkD1D1oW9O20tT2tO7CwfBOq9qkOglKPU1g0bgclK86epaG', '2023-11-17 18:01:08', '2023-11-29 18:58:26'),
 	(21, 'Jose Luis Rodriguez Alvarez', 'jose.rodriguez@correos.gob.bo', NULL, '$2y$10$efOk9thUfdZbrMdVBnALPukoqJlqDJNI490CbFH68Mql69lFZBTQC', 'LA PAZ', 6950366, NULL, '2023-11-17 18:07:31', '2023-11-17 18:07:31'),
 	(22, 'Wike Mamani Apaza', 'wike.mamani@correos.gob.bo', NULL, '$2y$10$RS4SgMBy8.NiujCGasv1x.Bo9GIJPgHWYhNqzlqEOpMezzMi6Itma', 'LA PAZ', 6841118, 'xvDjF6SGhcFUU45a9qsZKtmFEzVqN5HMVj560BPGgCND9f8VVTdNSdnOJD9J', '2023-11-17 18:14:21', '2023-11-17 18:14:21'),
 	(23, 'Angel Gaston Zapata Ramos', 'angel.zapata@correos.gob.bo', NULL, '$2y$10$Qin2RlqRtzCo5/DsitohMOGIy85vlx6OZ.530TvxRSKBJjMMWmG36', 'LA PAZ', 13054887, NULL, '2023-11-27 15:46:35', '2023-11-27 15:46:35'),
 	(24, 'Luisa Gutierrez Arroyo', 'luisa.gutierrez@correos.gob.bo', NULL, '$2y$10$8cHku.ROeoyYDknO1Dg1jueoJ0zjwEg0TXNmcERYdM4r6OSf/im/i', 'LA PAZ', 8277686, NULL, '2023-12-04 13:42:46', '2023-12-04 13:42:46'),
-	(25, 'Caleb Conde Huanca', 'caleb.conde@correos.gob.bo', NULL, '$2y$10$.7SJZmANf1cSDi8OMeplcOE8WFF2E8qI1tLUwT.WPTBa.PwSqyLey', 'LA PAZ', 12767384, 'dqU9IDV3wFqUBm9A8JYaq1PK9d5bv6ceu75AtnT0TeG6gPynQqAn6nBDd87s', '2023-12-04 21:29:35', '2023-12-04 21:29:35'),
+	(25, 'Caleb Conde Huanca', 'caleb.conde@correos.gob.bo', NULL, '$2y$10$.7SJZmANf1cSDi8OMeplcOE8WFF2E8qI1tLUwT.WPTBa.PwSqyLey', 'LA PAZ', 12767384, 'ePhCZ6ML2atBLwmWa2kiE4Cx2DUQvEgARTuUM1vySS8nvO40L73WZX27QsE3', '2023-12-04 21:29:35', '2023-12-04 21:29:35'),
 	(28, 'Severina Caranavi', 'severina.caranavi@correos.gob.bo', NULL, '$2y$10$9KKxYDO4yUU146AaVA/1L.UiI.dOi2vFfLHmQYlQnbGNunkJAD3wy', 'LA PAZ', 12345678, NULL, '2023-12-13 15:10:29', '2023-12-13 15:10:29'),
 	(29, 'Alvaro Medrano', 'alvaro.medrano@correos.gob.bo', NULL, '$2y$10$8G1fvZawi7Bv6yenPeRdOOcQKwpJRAUJTaW7x.0NKqUC72SLkmDua', 'LA PAZ', 9199698, NULL, '2023-12-20 16:11:19', '2023-12-20 16:11:19'),
 	(32, 'Omar Quispe Condori', 'omar.quispe@correos.gob.bo', NULL, '$2y$10$XhJJaHDtoPhDJTpUqXGY0.nHSmM7kBp.iXoigw.g5.rQ2QjjKG9ze', 'LA PAZ', 8441338, NULL, '2023-12-28 06:06:22', '2024-01-05 13:46:52'),

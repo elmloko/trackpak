@@ -22,7 +22,7 @@
                                                     data-target="#buscarPaqueteModal">
                                                     Añadir Paquete
                                                 </button>
-                                                @include('package.modal.ventanillacasilla')
+                                                @include('package.modal.ventanillaeca')
                                             </div>
                                         @endhasrole
                                         <div class="col-md-12">
@@ -120,7 +120,6 @@
                                                     <th>Tipo</th>
                                                     <th>Estado</th>
                                                     <th>Observaciones</th>
-                                                    <th>Aduana</th>
                                                     <th>Fecha Pendiente</th>
                                                     <th>Acciones</th>
                                                 </tr>
@@ -149,7 +148,6 @@
                                                             <td>{{ $package->TIPO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
-                                                            <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
                                                                 @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
@@ -160,7 +158,7 @@
                                                                         <i class="fa fa-arrow-down"></i>
                                                                         {{ __('Baja') }}
                                                                     </a>
-                                                                    @include('package.modal.bajacasilla')
+                                                                    @include('package.modal.bajaeca')
                                                                 @endhasrole
                                                                 @hasrole('SuperAdmin|Administrador|Urbano')
                                                                     <a class="btn btn-sm btn-success"
