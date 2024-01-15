@@ -21,7 +21,6 @@
                         <div class="form-group">
                             <label for="zona">Zona</label>
                             <select class="form-control" id="zona" name="zona">
-                                <option value="DND">DND</option>
                                 <option value="EL ALTO">EL ALTO</option>
                                 <option value="CALACOTO">CALACOTO</option>
                                 <option value="SAN PEDRO">SAN PEDRO</option>
