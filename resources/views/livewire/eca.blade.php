@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 id="card_title">{{ __('Entregas de Paquetes para ECA Postal') }}</h5>
+                                <h5 id="card_title">{{ __('Entregas de Paquetes para Envíos de Correspondencia Agrupada') }}</h5>
                                 <div class="col">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
@@ -23,6 +23,7 @@
                                                     Añadir Paquete
                                                 </button>
                                                 @include('package.modal.ventanillaeca')
+                                                <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
                                             </div>
                                         @endhasrole
                                         <div class="col-md-12">
@@ -107,6 +108,7 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
+                                                    <th><input type="checkbox" wire:model="selectAll" wire:click="selectAll"></th>
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
                                                     <th>Destinatario</th>
@@ -135,6 +137,7 @@
                                                             $package->CUIDAD === auth()->user()->Regional &&
                                                             in_array($package->VENTANILLA, ['ECA']))
                                                         <tr>
+                                                            <td><input type="checkbox" value="{{ $package->id }}" wire:click="toggleSelectSingle({{ $package->id }})"></td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>
@@ -150,7 +153,7 @@
                                                             <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                                {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                     Urbano')
                                                                     <a class="btn btn-sm btn-warning" href="#"
                                                                         data-toggle="modal"
@@ -159,7 +162,7 @@
                                                                         {{ __('Baja') }}
                                                                     </a>
                                                                     @include('package.modal.bajaeca')
-                                                                @endhasrole
+                                                                @endhasrole --}}
                                                                 @hasrole('SuperAdmin|Administrador|Urbano')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">

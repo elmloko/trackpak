@@ -130,6 +130,7 @@ Route::middleware('auth')->group(function () {
     Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
     Route::get('package/pdf/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('package.pdf.clasificacionpdf');
     Route::post('package/pdf/despachopdf', [PackageController::class, 'despachopdf'])->name('package.pdf.despachopdf');
+    Route::post('package/pdf/despachoecapdf', [PackageController::class, 'despachoecapdf'])->name('package.pdf.despachoecapdf');
     Route::get('package/pdf/redirigidospdf', [PackageController::class, 'redirigidospdf'])->name('package.pdf.redirigidospdf');
     Route::get('package/pdf/ventanillapdf', [PackageController::class, 'ventanillapdf'])->name('package.pdf.ventanillapdf');
     Route::get('package/pdf/deleteadopdf', [PackageController::class, 'deleteadopdf'])->name('package.pdf.deleteadopdf');

@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h5 id="card_title">
-                                    {{ __('Inventario de ECA Paquetes de Casillas Postales') }}
+                                    {{ __('Inventario de Envíos de Correspondencia Agrupada') }}
                                 </h5>
                             </div>
                         </div>
