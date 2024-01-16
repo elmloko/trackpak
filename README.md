@@ -1,5 +1,5 @@
-Laravel 10 
-nombre clave TRACKPAK 
+Laravel 10
+nombre clave TRACKPAK
 nombre del sistema TRACKINGBO
 
 Credenciales
@@ -20,7 +20,7 @@ Utilize
  https://github.com/milon/barcode                               milon/barcode
  https://github.com/picqer/php-barcode-generator                picqer/php-barcode-generator
 
-SQL 
+SQL
  UPDATE `trackpak`.`packages`
  SET `ESTADO` = 'VENTANILLA';
 
@@ -32,4 +32,5 @@ DELETE FROM packages
 WHERE CUIDAD = 'LA PAZ';
 
 git pull origin main
- 
+
+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

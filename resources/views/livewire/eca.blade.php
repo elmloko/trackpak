@@ -108,7 +108,7 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
-                                                    <th><input type="checkbox" wire:model="selectAll" wire:click="selectAll"></th>
+                                                    {{-- <th><input type="checkbox" wire:model="selectAll" wire:click="selectAll"></th> --}}
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
                                                     <th>Destinatario</th>
