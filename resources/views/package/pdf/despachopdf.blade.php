@@ -135,7 +135,7 @@
                     <td>{{ $package->ZONA }}</td>
                     <td>{{ $package->VENTANILLA }}</td>
                     <td>{{ $package->PESO }} gr.</td>
-                    <td>{{ $package->PO }}</td>
+                    <td>{{ $package->TIPO }}</td>
                     <td>{{ $package->ESTADO }}</td>
                     <td>{{ $package->ADUANA }}</td>
                     <td>{{ $package->created_at }}</td>

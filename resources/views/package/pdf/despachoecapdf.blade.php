@@ -108,15 +108,16 @@
                 <th>No</th>
                 <th>Código Rastreo</th>
                 <th>Destinatario</th>
-                <th>Teléfono</th>
+                {{-- <th>Teléfono</th> --}}
                 <th>País</th>
                 <th>Ciudad</th>
                 <th>Dirección</th>
-                <th>Ventanilla</th>
+                <th>Servicio</th>
                 <th>Peso (gr.)</th>
+                <th>Tarifa (Bs.)</th>
                 <th>Tipo</th>
-                <th>Estado</th>
-                <th>Aduana</th>
+                {{-- <th>Estado</th> --}}
+                {{-- <th>Aduana</th> --}}
                 <th>Fecha Ingreso</th>
             </tr>
         </thead>
@@ -128,15 +129,16 @@
                     <td>{{ $i }}</td>
                     <td>{{ $package->CODIGO }}</td>
                     <td>{{ $package->DESTINATARIO }}</td>
-                    <td>{{ $package->TELEFONO }}</td>
+                    {{-- <td>{{ $package->TELEFONO }}</td> --}}
                     <td>{{ $package->PAIS }}</td>
                     <td>{{ $package->CUIDAD }}</td>
                     <td>{{ $package->ZONA }}</td>
                     <td>{{ $package->VENTANILLA }}</td>
                     <td>{{ $package->PESO }} gr.</td>
-                    <td>{{ $package->PO }}</td>
-                    <td>{{ $package->ESTADO }}</td>
-                    <td>{{ $package->ADUANA }}</td>
+                    <td></td>
+                    <td>{{ $package->TIPO }}</td>
+                    {{-- <td>{{ $package->ESTADO }}</td> --}}
+                    {{-- <td>{{ $package->ADUANA }}</td> --}}
                     <td>{{ $package->created_at }}</td>
                 </tr>
                 @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
