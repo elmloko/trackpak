@@ -111,7 +111,7 @@
                 {{-- <th>Teléfono</th> --}}
                 <th>País</th>
                 <th>Ciudad</th>
-                <th>Dirección</th>
+                <th>Codigo Proyecto</th>
                 <th>Servicio</th>
                 <th>Peso (gr.)</th>
                 <th>Tarifa (Bs.)</th>
