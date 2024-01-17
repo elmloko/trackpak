@@ -109,13 +109,14 @@
                                             <thead class="thead">
                                                 <tr>
                                                     {{-- <th><input type="checkbox" wire:model="selectAll" wire:click="selectAll"></th> --}}
+                                                    <th></th>
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
+                                                    <th>Codigo ECA</th>
                                                     <th>Destinatario</th>
                                                     <th>Teléfono</th>
                                                     <th>País</th>
                                                     <th>Ciudad</th>
-                                                    <th>Ubicacion</th>
                                                     {{-- <th>Ventanilla</th> --}}
                                                     <th>Peso (gr.)</th>
                                                     <th>Precio(Bs.)</th>
@@ -140,11 +141,11 @@
                                                             <td><input type="checkbox" value="{{ $package->id }}" wire:click="toggleSelectSingle({{ $package->id }})"></td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
+                                                            <td>{{ $package->ZONA }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }}</td>
                                                             <td>{{ $package->CUIDAD }}</td>
-                                                            <td>{{ $package->ZONA }}</td>
                                                             {{-- <td>{{ $package->VENTANILLA }}</td> --}}
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->PRECIO }} </td>

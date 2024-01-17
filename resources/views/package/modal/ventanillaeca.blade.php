@@ -17,6 +17,10 @@
                         <label for="codigo">Código del Paquete</label>
                         <input type="text" class="form-control" id="codigo" name="codigo">
                     </div>
+                    <div class="form-group">
+                        <label for="codigo">Código ECA</label>
+                        <input type="text" class="form-control" id="zona" name="zona">
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Buscar</button>
