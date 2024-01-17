@@ -147,8 +147,7 @@
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                                    Urbano')
+                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                                                     <a class="btn btn-sm btn-warning" href="#"
                                                                         data-toggle="modal"
                                                                         data-target="#bajaModal{{ $package->id }}">
