@@ -31,6 +31,9 @@ WHERE CUIDAD = 'LA PAZ';
 DELETE FROM packages
 WHERE CUIDAD = 'LA PAZ';
 
+DELETE FROM packages
+WHERE CUIDAD = 'LA PAZ' AND updated_at IS NULL;
+
 git pull origin main
 
 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

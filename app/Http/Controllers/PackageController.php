@@ -636,7 +636,7 @@ class PackageController extends Controller
                         ]);            
                         Event::create([
                             'action' => 'EN ENTREGA',
-                            'descripcion' => 'Paquete Recibido en Oficina Postal Regional.',
+                            'descripcion' => 'Paquete Recibido en Oficina Postal Regional.' . $package->CUIDAD,
                             'user_id' => auth()->user()->id,
                             'codigo' => $package->CODIGO,
                         ]);
@@ -684,7 +684,7 @@ class PackageController extends Controller
                     ]);            
                     Event::create([
                         'action' => 'EN ENTREGA',
-                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.',
+                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.'. $package->CUIDAD,
                         'user_id' => auth()->user()->id,
                         'codigo' => $package->CODIGO,
                     ]);
@@ -725,7 +725,7 @@ class PackageController extends Controller
                     ]);            
                     Event::create([
                         'action' => 'EN ENTREGA',
-                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.',
+                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.'. $package->CUIDAD,
                         'user_id' => auth()->user()->id,
                         'codigo' => $package->CODIGO,
                     ]);

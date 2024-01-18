@@ -18,7 +18,7 @@ class Eca extends Component
 
     public function render()
     {
-         $userRegional = auth()->user()->Regional;
+        $userRegional = auth()->user()->Regional;
 
         $packages = Package::where('ESTADO', 'VENTANILLA')
             ->when($this->search, function ($query) {
@@ -34,22 +34,23 @@ class Eca extends Component
             ->where('CUIDAD', $userRegional)
             ->where('VENTANILLA', 'ECA')
             ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.eca', [
             'packages' => $packages,
         ]);
     }
+
     public function selectAll()
     {
         $this->selectAll = !$this->selectAll;
-    
+
         if ($this->selectAll) {
             $this->paquetesSeleccionados = $this->getPackageIds();
         } else {
             $this->paquetesSeleccionados = [];
         }
-    }       
+    }
 
     public function toggleSelectSingle($packageId)
     {
@@ -59,6 +60,7 @@ class Eca extends Component
             $this->paquetesSeleccionados[] = $packageId;
         }
     }
+
     public function cambiarEstado()
     {
         // Obtener los paquetes seleccionados y actualizar su estado
@@ -67,7 +69,6 @@ class Eca extends Component
         // Actualizar estado de los paquetes
         Package::whereIn('id', $this->paquetesSeleccionados)->update([
             'ESTADO' => 'ENTREGADO',
-            // 'datedespachoclasificacion' => now(), // Guardar la fecha de despacho actual
         ]);
 
         // Crear evento para cada paquete despachado
@@ -82,15 +83,17 @@ class Eca extends Component
                     'user_id' => auth()->user()->id,
                     'codigo' => $paquete->CODIGO,
                 ]);
+
+                // Eliminar el paquete
+                $paquete->delete();
             }
         }
-        $this->resetSeleccion();
+
         // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView('package.pdf.despachoecapdf', ['packages' => $paquetesSeleccionados]);
 
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-        $paquete->delete();
 
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
@@ -100,6 +103,7 @@ class Eca extends Component
         // Restablecer la selección
         $this->resetSeleccion();
     }
+
     private function getPackageIds()
     {
         return Package::where('ESTADO', 'ENTREGADO')->pluck('id')->toArray();

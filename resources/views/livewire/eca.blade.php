@@ -108,7 +108,7 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
-                                                    {{-- <th><input type="checkbox" wire:model="selectAll" wire:click="selectAll"></th> --}}
+                                                    <th><input type="checkbox" wire:model="selectAll" wire:click="selectAll"></th>
                                                     <th></th>
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
@@ -138,7 +138,9 @@
                                                             $package->CUIDAD === auth()->user()->Regional &&
                                                             in_array($package->VENTANILLA, ['ECA']))
                                                         <tr>
-                                                            <td><input type="checkbox" value="{{ $package->id }}" wire:click="toggleSelectSingle({{ $package->id }})"></td>
+                                                            <td>
+                                                                <input type="checkbox" value="{{ $package->id }}" wire:click="toggleSelectSingle({{ $package->id }})">
+                                                            </td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->ZONA }}</td>
