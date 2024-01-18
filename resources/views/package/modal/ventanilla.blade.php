@@ -62,6 +62,7 @@
                                 <option value="COTA COTA / CHASQUIPAMPA">COTA COTA / CHASQUIPAMPA</option>
                                 <option value="LA PORTADA">LA PORTADA</option>
                                 <option value="FLORIDA">FLORIDA</option>
+                                <option value="PROVINCIA">PROVINCIA</option>
                                 <option value="VILLA VICTORIA">VILLA VICTORIA</option>
                                 <option value="CIUDADELA FERROVIARIA">CIUDADELA FERROVIARIA</option>
                                 <option value="PG1A">PG1A</option>

@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use Carbon\Carbon;
 use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
@@ -101,7 +100,6 @@ class ClasificacionPackages extends Component
         // Restablecer la selección
         $this->resetSeleccion();
     }
-
 
     private function getPackageIds()
     {
