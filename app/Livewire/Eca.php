@@ -18,7 +18,7 @@ class Eca extends Component
 
     public function render()
     {
-        $userRegional = auth()->user()->Regional;
+         $userRegional = auth()->user()->Regional;
 
         $packages = Package::where('ESTADO', 'VENTANILLA')
             ->when($this->search, function ($query) {
@@ -40,11 +40,8 @@ class Eca extends Component
             'packages' => $packages,
         ]);
     }
-
-    public function selectAll()
+    public function toggleSelectAll()
     {
-        $this->selectAll = !$this->selectAll;
-
         if ($this->selectAll) {
             $this->paquetesSeleccionados = $this->getPackageIds();
         } else {
@@ -60,7 +57,7 @@ class Eca extends Component
             $this->paquetesSeleccionados[] = $packageId;
         }
     }
-
+    
     public function cambiarEstado()
     {
         // Obtener los paquetes seleccionados y actualizar su estado
@@ -83,12 +80,11 @@ class Eca extends Component
                     'user_id' => auth()->user()->id,
                     'codigo' => $paquete->CODIGO,
                 ]);
-
                 // Eliminar el paquete
                 $paquete->delete();
             }
         }
-
+        $this->resetSeleccion();
         // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView('package.pdf.despachoecapdf', ['packages' => $paquetesSeleccionados]);
 
@@ -103,7 +99,6 @@ class Eca extends Component
         // Restablecer la selección
         $this->resetSeleccion();
     }
-
     private function getPackageIds()
     {
         return Package::where('ESTADO', 'ENTREGADO')->pluck('id')->toArray();
