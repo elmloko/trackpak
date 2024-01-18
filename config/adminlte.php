@@ -412,7 +412,7 @@ return [
                 [
                     'text' => 'Ventanilla',
                     'icon' => 'fas fa-window-maximize',
-                    'can'  => 'packages.ventanilla',
+                    'can'  => 'packages.ventanilladd',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla DD',
@@ -424,7 +424,7 @@ return [
                             'text' => 'Entregas Ventanilla DND',
                             'url' => 'packages/ventanilladnd',
                             'icon' => 'fas fa-truck',
-                            'can'  => 'packages.ventanilla',
+                            'can'  => 'packages.dnd',
                         ],
                         [
                             'text' => 'Prerezago',
@@ -437,38 +437,38 @@ return [
                 [
                     'text' => 'Casillas',
                     'icon' => 'fas fa-archive',
-                    'can'  => 'packages.ventanilla',
+                    'can'  => 'packages.casillas',
                     'submenu' => [
                         [
                             'text' => 'Entregas Casillas',
                             'url' => 'packages/casillas',
                             'icon' => 'fas fa-box',
-                            'can'  => 'packages.ventanilla',
+                            // 'can'  => '	packages.casillas',
                         ],
                         [
                             'text' => 'Inventario Casillas',
                             'url' => 'packages/casillasinventario',
                             'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.ventanilla',
+                            // 'can'  => '	packages.casillas',
                         ],
                     ],
                 ],
                 [
                     'text' => 'ECA',
                     'icon' => 'fas fa-archive',
-                    'can'  => 'packages.ventanilla',
+                    'can'  => 'packages.eca',
                     'submenu' => [
                         [
                             'text' => 'Entregas ECA',
                             'url' => 'packages/eca',
                             'icon' => 'fas fa-box',
-                            'can'  => 'packages.ventanilla',
+                            'can'  => 'packages.eca',
                         ],
                         [
                             'text' => 'Inventario ECA',
                             'url' => 'packages/ecainventario',
                             'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.ventanilla',
+                            'can'  => 'packages.eca',
                         ],
                     ],
                 ],

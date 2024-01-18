@@ -16,7 +16,7 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                        @hasrole('SuperAdmin|Administrador|Casillas')
                                             <div class="col-md-6 text-right">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buscarPaqueteModal">
@@ -154,8 +154,7 @@
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                                    Urbano')
+                                                                @hasrole('SuperAdmin|Administrador|Casillas')
                                                                     <a class="btn btn-sm btn-warning" href="#"
                                                                         data-toggle="modal"
                                                                         data-target="#bajaModal{{ $package->id }}">
@@ -164,7 +163,7 @@
                                                                     </a>
                                                                     @include('package.modal.bajacasilla')
                                                                 @endhasrole
-                                                                @hasrole('SuperAdmin|Administrador|Urbano')
+                                                                @hasrole('SuperAdmin|Administrador|Casillas')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">
                                                                         <i class="fa fa-fw fa-edit"></i>

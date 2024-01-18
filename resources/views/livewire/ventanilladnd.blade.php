@@ -16,7 +16,7 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                        @hasrole('SuperAdmin|Administrador|DND')
                                             <div class="col-md-6 text-right">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buscarPaqueteModal">
@@ -147,7 +147,7 @@
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                                                @hasrole('SuperAdmin|Administrador|DND')
                                                                     <a class="btn btn-sm btn-warning" href="#"
                                                                         data-toggle="modal"
                                                                         data-target="#bajaModal{{ $package->id }}">
@@ -156,14 +156,14 @@
                                                                     </a>
                                                                     @include('package.modal.baja')
                                                                 @endhasrole
-                                                                @hasrole('SuperAdmin|Administrador|Urbano')
+                                                                @hasrole('SuperAdmin|Administrador|DND')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">
                                                                         <i class="fa fa-fw fa-edit"></i>
                                                                         {{ __('Editar') }}
                                                                     </a>
                                                                 @endhasrole
-                                                                @hasrole('SuperAdmin|Administrador|Urbano')
+                                                                {{-- @hasrole('SuperAdmin|Administrador|DND')
                                                                     @if (!$package->redirigido)
                                                                         <a class="btn btn-sm btn-secondary" href="#"
                                                                             data-toggle="modal"
@@ -173,7 +173,7 @@
                                                                         </a>
                                                                         @include('package.modal.reencaminar')
                                                                     @endif
-                                                                @endhasrole
+                                                                @endhasrole --}}
                                                             </td>
                                                         </tr>
                                                     @endif

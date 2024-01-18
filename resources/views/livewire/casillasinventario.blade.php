@@ -106,7 +106,7 @@
                                                 <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
-                                                    @hasrole('SuperAdmin|Administrador|Urbano')
+                                                    @hasrole('SuperAdmin|Administrador|Casillas')
                                                         <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')

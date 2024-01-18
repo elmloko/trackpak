@@ -16,7 +16,7 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                        @hasrole('SuperAdmin|Administrador|ECA')
                                             <div class="col-md-6 text-right">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buscarPaqueteModal">
@@ -73,9 +73,6 @@
                                                                 <label for="ventanilla">Ventanilla:</label>
                                                                 <select name="ventanilla" class="form-control">
                                                                     @if (auth()->user()->Regional == 'LA PAZ')
-                                                                        <option value="DD">DD</option>
-                                                                        <option value="DND">DND</option>
-                                                                        <option value="CASILLAS">CASILLAS</option>
                                                                         <option value="ECA">ECA</option>
                                                                     @else
                                                                         <option value="UNICA">UNICA</option>
@@ -165,7 +162,7 @@
                                                                     </a>
                                                                     @include('package.modal.bajaeca')
                                                                 @endhasrole --}}
-                                                                @hasrole('SuperAdmin|Administrador|Urbano')
+                                                                @hasrole('SuperAdmin|Administrador|ECA')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">
                                                                         <i class="fa fa-fw fa-edit"></i>
