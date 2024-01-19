@@ -520,19 +520,25 @@ return [
                             'text' => 'Entregas Cartero',
                             'url' => 'packages/carteros',
                             'icon' => 'fas fa-cubes',
-                            'can'  => 'packages.carteros',
+                            'can'  => 'packages.inventariocartero',
+                        ],
+                        [
+                            'text' => 'Despacho Cartero',
+                            'url' => 'packages/despachocartero',
+                            'icon' => 'fas fa-envelope-open-text',
+                            'can'  => 'packages.inventariocartero',
+                        ],
+                        [
+                            'text' => 'Inventario Cartero',
+                            'url' => 'packages/inventariocartero',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.inventariocartero',
                         ],
                         [
                             'text' => 'Entregas Domicilio',
                             'url' => 'packages/carterosgeneral',
                             'icon' => 'fas fa-cubes',
                             'can'  => 'packages.ventanilla',
-                        ],
-                        [
-                            'text' => 'Despacho Cartero',
-                            'url' => 'packages/despachocartero',
-                            'icon' => 'fas fa-envelope-open-text',
-                            'can'  => 'packages.carteros',
                         ],
                         [
                             'text' => 'Despacho Domicilio',
@@ -546,12 +552,7 @@ return [
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.generalcartero',
                         ],
-                        [
-                            'text' => 'Inventario Cartero',
-                            'url' => 'packages/inventariocartero',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.inventariocartero',
-                        ],
+                        
                     ],
                 ],
                 [
