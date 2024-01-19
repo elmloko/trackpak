@@ -50,6 +50,7 @@ class TablaPaquetes extends Component
         if (!in_array($packageId, $this->selectedPackages)) {
             $this->selectedPackages[] = $packageId;
             $package->update(['ESTADO' => 'ASIGNADO']);
+            $package->update(['PRECIO' => '10']);
             $package->touch();
         }
     }
@@ -58,6 +59,18 @@ class TablaPaquetes extends Component
     {
         $package = Package::findOrFail($packageId);
         $this->selectedPackages = array_diff($this->selectedPackages, [$packageId]);
+
+         // Calcular el precio basado en el peso
+        $peso = $package->PESO;
+        $precio = 0;
+
+        if ($peso >= 0.001 && $peso <= 0.5) {
+            $precio = 5;
+        } elseif ($peso > 0.5) {
+            $precio = 10;
+        }
+        // Actualizar el estado con el precio calculado
+        $package->update(['PRECIO' => $precio]);
         $package->update(['ESTADO' => 'VENTANILLA']);
         $package->touch();
     }
