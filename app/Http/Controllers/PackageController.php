@@ -849,6 +849,10 @@ class PackageController extends Controller
     {
         return view('package.deleteado');
     }
+    public function deleteadodnd()
+    {
+        return view('package.deleteadodnd');
+    }
     public function carteros()
     {
         return view('package.carteros');

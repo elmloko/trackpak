@@ -407,12 +407,18 @@ return [
                             'icon' => 'fas fa-clipboard-list',
                             'can'  => 'packages.clasificacion',
                         ],
+                        [
+                            'text' => 'Inventario Clasificacion',
+                            'url' => 'packages/entregasclasificacion',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.clasificacion',
+                        ],
                     ],
                 ],
                 [
-                    'text' => 'Ventanilla',
+                    'text' => 'Ventanilla DD',
                     'icon' => 'fas fa-window-maximize',
-                    'can'  => 'packages.ventanilladd',
+                    'can'  => 'packages.ventanilla',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla DD',
@@ -421,16 +427,30 @@ return [
                             'can'  => 'packages.ventanilla',
                         ],
                         [
+                            'text' => 'Inventario Ventanilla DD',
+                            'url' => 'test/deleteado',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.delete',
+                        ],
+                        
+                    ],
+                ],
+                [
+                    'text' => 'Ventanilla DND',
+                    'icon' => 'fas fa-window-maximize',
+                    'can'  => 'packages.dnd',
+                    'submenu' => [
+                        [
                             'text' => 'Entregas Ventanilla DND',
                             'url' => 'packages/ventanilladnd',
                             'icon' => 'fas fa-truck',
                             'can'  => 'packages.dnd',
                         ],
                         [
-                            'text' => 'Prerezago',
-                            'url' => 'packages/prerezago',
-                            'icon' => 'fas fa-archive',
-                            'can'  => 'packages.prerezago',
+                            'text' => 'Inventario Ventanilla DND',
+                            'url' => 'test/deleteadodnd',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.dnd',
                         ],
                     ],
                 ],
@@ -508,27 +528,8 @@ return [
                             'icon' => 'fas fa-envelope-open-text',
                             'can'  => 'packages.carteros',
                         ],
-                    ],
-                ],
-                [
-                    'text' => 'Almacen',
-                    'icon' => 'fas fa-building',
-                    'can'  => 'packages.inventario',
-                    'submenu' => [
                         [
-                            'text' => 'Inventario Clasificacion',
-                            'url' => 'packages/entregasclasificacion',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.clasificacion',
-                        ],
-                        [
-                            'text' => 'Inventario Ventanilla',
-                            'url' => 'test/deleteado',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.delete',
-                        ],
-                        [
-                            'text' => 'Inventario General Cartero',
+                            'text' => 'Inventario Domicilio',
                             'url' => 'packages/generalcartero',
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.generalcartero',
@@ -539,6 +540,19 @@ return [
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.inventariocartero',
                         ],
+                    ],
+                ],
+                [
+                    'text' => 'Rezago',
+                    'icon' => 'fas fa-window-maximize',
+                    'can'  => 'packages.ventanilla',
+                    'submenu' => [
+                        [
+                            'text' => 'Prerezago',
+                            'url' => 'packages/prerezago',
+                            'icon' => 'fas fa-archive',
+                            'can'  => 'packages.prerezago',
+                        ],
                         [
                             'text' => 'Inventario Rezago',
                             'url' => 'packages/rezago',
@@ -547,6 +561,15 @@ return [
                         ],
                     ],
                 ],
+                // [
+                //     'text' => 'Almacen',
+                //     'icon' => 'fas fa-building',
+                //     'can'  => 'packages.inventario',
+                //     'submenu' => [
+                        
+                        
+                //     ],
+                // ],
             ],
         ],
         [

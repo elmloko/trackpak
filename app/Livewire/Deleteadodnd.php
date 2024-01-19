@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
 
-class Deleteado extends Component
+class Deleteadodnd extends Component
 {
     use WithPagination; // Mueve el uso de WithPagination aquí
 
@@ -31,11 +31,11 @@ class Deleteado extends Component
             // Filtra por la 'CUIDAD' del usuario autenticado
             ->whereIn('ESTADO', ['ENTREGADO'])
             ->where('CUIDAD', $userRegional)
-            ->where('VENTANILLA', 'DD')
+            ->where('VENTANILLA', 'DND')
             ->orderBy('deleted_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.deleteado', [
+        return view('livewire.deleteadodnd', [
             'packages' => $packages,
         ]);
     }
