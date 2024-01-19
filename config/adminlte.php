@@ -532,7 +532,7 @@ return [
                             'text' => 'Despacho Cartero',
                             'url' => 'packages/despachocartero',
                             'icon' => 'fas fa-envelope-open-text',
-                            'can'  => 'packages.carteros',
+                            'can'  => 'packages.ventanilla',
                         ],
                         [
                             'text' => 'Despacho Domicilio',
