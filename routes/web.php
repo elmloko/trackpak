@@ -114,6 +114,7 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/distribuicioncartero', [PackageController::class, 'distribuicioncartero'])->middleware('can:packages.distribuicioncartero')->name('packages.distribuicioncartero');
     Route::get('packages/generalcartero', [PackageController::class, 'generalcartero'])->middleware('can:packages.generalcartero')->name('packages.generalcartero');
     Route::get('packages/despachocartero', [PackageController::class, 'despachocartero'])->middleware('can:packages.carteros')->name('packages.despachocartero');
+    Route::get('packages/despachocarterogeneral', [PackageController::class, 'despachocarterogeneral'])->middleware('can:users.index')->name('packages.despachocarterogeneral');
     Route::get('packages/despachogeneralcartero', [PackageController::class, 'despachogeneralcartero'])->name('packages.despachogeneralcartero');
 
     //Casillas
