@@ -857,6 +857,10 @@ class PackageController extends Controller
     {
         return view('package.carteros');
     }
+    public function carterosgeneral()
+    {
+        return view('package.carterosgeneral');
+    }
     public function inventariocartero()
     {
         return view('package.inventariocartero');

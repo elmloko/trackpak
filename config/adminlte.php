@@ -523,6 +523,12 @@ return [
                             'can'  => 'packages.carteros',
                         ],
                         [
+                            'text' => 'Entregas Domicilio',
+                            'url' => 'packages/carterosgeneral',
+                            'icon' => 'fas fa-cubes',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                        [
                             'text' => 'Despacho Cartero',
                             'url' => 'packages/despachocartero',
                             'icon' => 'fas fa-envelope-open-text',
@@ -544,19 +550,19 @@ return [
                 ],
                 [
                     'text' => 'Rezago',
-                    'icon' => 'fas fa-window-maximize',
+                    'icon' => 'fas fa-database',
                     'can'  => 'packages.ventanilla',
                     'submenu' => [
                         [
                             'text' => 'Prerezago',
                             'url' => 'packages/prerezago',
-                            'icon' => 'fas fa-archive',
+                            'icon' => 'fas fa-cloud',
                             'can'  => 'packages.prerezago',
                         ],
                         [
                             'text' => 'Inventario Rezago',
                             'url' => 'packages/rezago',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-hdd',
                             'can'  => 'packages.rezago',
                         ],
                     ],

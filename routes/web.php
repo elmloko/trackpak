@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function () {
 
     //Modulo Cartero
     Route::get('packages/carteros', [PackageController::class, 'carteros'])->middleware('can:packages.carteros')->name('packages.carteros');
+    Route::get('packages/carterosgeneral', [PackageController::class, 'carterosgeneral'])->middleware('can:packages.ventanilla')->name('packages.carterosgeneral');
     Route::get('packages/inventariocartero', [PackageController::class, 'inventariocartero'])->middleware('can:packages.inventariocartero')->name('packages.inventariocartero');
     Route::post('packages/{id}/deletecartero', [PackageController::class, 'deletecartero'])->name('packages.deletecartero');
     Route::post('packages/buscarPaqueteCartero', [PackageController::class, 'buscarPaqueteCartero'])->name('packages.buscarPaqueteCartero');
