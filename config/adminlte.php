@@ -532,13 +532,13 @@ return [
                             'text' => 'Despacho Cartero',
                             'url' => 'packages/despachocartero',
                             'icon' => 'fas fa-envelope-open-text',
-                            'can'  => 'packages.ventanilla',
+                            'can'  => 'packages.carteros',
                         ],
                         [
                             'text' => 'Despacho Domicilio',
                             'url' => 'packages/despachocarterogeneral',
                             'icon' => 'fas fa-envelope-open-text',
-                            'can'  => 'users.index',
+                            'can'  => 'packages.ventanilla',
                         ],
                         [
                             'text' => 'Inventario Domicilio',
