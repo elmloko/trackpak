@@ -142,7 +142,7 @@
                                                             <td>{{ $package->ZONA }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>
-                                                            <td>{{ $package->PAIS }}</td>
+                                                            <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                             <td>{{ $package->CUIDAD }}</td>
                                                             {{-- <td>{{ $package->VENTANILLA }}</td> --}}
                                                             <td>{{ $package->PESO }} </td>

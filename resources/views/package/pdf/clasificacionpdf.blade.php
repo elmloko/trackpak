@@ -49,7 +49,6 @@
             margin-top: 20px;
             line-height: 0;
         }
-
         .date {
             border: none;
             line-height: 0.5;

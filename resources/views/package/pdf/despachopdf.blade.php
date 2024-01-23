@@ -69,12 +69,17 @@
             line-height: 0;
             /* Ajusta el line-height para quitar el interlineado */
         }
+        .cn {
+        text-align: center;
+        float: right; /* Alinear a la derecha */
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="logo">
             <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
+            <p class="cn">CN 33</p>
         </div>
         <div class="title">
             <h2>Manifiesto Área Clasificación</h2>

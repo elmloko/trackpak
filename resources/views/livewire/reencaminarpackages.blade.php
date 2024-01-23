@@ -113,7 +113,7 @@
                                                 <td>{{ $package->id }}</td>
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
-                                                <td>{{ $package->PAIS }}</td>
+                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                 <td>{{ $package->cuidadre }}</td>
                                                 <td>{{ $package->CUIDAD }}</td>
                                                 <td>{{ $package->TIPO }}</td>
