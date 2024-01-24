@@ -35,7 +35,8 @@ class ClasificacionPackages extends Component
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
-            ->where('usercartero', $userasignado)
+            // ->where('CUIDAD', 'LA PAZ')
+            // ->where('usercartero', $userasignado)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -64,9 +65,12 @@ class ClasificacionPackages extends Component
 
     public function cambiarEstado()
     {
-        // Obtener los paquetes seleccionados y actualizar su estado
-        $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)->get();
-
+            // Obtener los paquetes seleccionados y actualizar su estado
+        $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
+        ->when($this->selectedCity, function ($query) {
+            $query->where('CUIDAD', $this->selectedCity);
+        })
+        ->get();
         // Actualizar estado de los paquetes
         Package::whereIn('id', $this->paquetesSeleccionados)->update([
             'ESTADO' => 'DESPACHO',

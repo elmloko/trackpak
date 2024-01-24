@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <h5 id="card_title">{{ __('Registro de Paquetes Ordinarios') }}</h5>
                     <div class="row align-items-center">
-                        {{-- <div class="col-md-3">
+                        <div class="col-md-3">
                             <label for="cityFilter">Filtrar por Ciudad:</label>
                             <select wire:model="selectedCity" class="form-control" id="cityFilter">
                                 <option value=""></option>
@@ -20,8 +20,8 @@
                                 <option value="TARIJA">TARIJA</option>
                                 <!-- Agrega más opciones según tus necesidades -->
                             </select>
-                        </div> --}}
-                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="search">Busca:</label>
                                 <input wire:model.lazy="search" type="text" class="form-control"
@@ -50,81 +50,81 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         @if ($packages->count())
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th><input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
-                                        </th>
-                                        <th>No</th>
-                                        <th>Código Rastreo</th>
-                                        <th>Destinatario</th>
-                                        <th>Teléfono</th>
-                                        <th>País</th>
-                                        <th>Ciudad</th>
-                                        <th>Ventanilla</th>
-                                        <th>Peso (gr.)</th>
-                                        <th>Tipo</th>
-                                        <th>Nro Casilla</th>
-                                        <th>Estado</th>
-                                        <th>Observaciones</th>
-                                        <th>Aduana</th>
-                                        <th>Fecha Ingreso</th>
-                                        {{-- <th>Cartero</th> --}}
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($packages as $package)
-                                        @if ($package->ESTADO === 'CLASIFICACION')
-                                            <tr>
-                                                <td><input type="checkbox" wire:model="paquetesSeleccionados"
-                                                        value="{{ $package->id }}"></td>
-                                                <td>{{ $package->id }}</td>
-                                                <td>{{ $package->CODIGO }}</td>
-                                                <td>{{ $package->DESTINATARIO }}</td>
-                                                <td>{{ $package->TELEFONO }}</td>
-                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                <td>{{ $package->CUIDAD }}</td>
-                                                <td>{{ $package->VENTANILLA }}</td>
-                                                <td>{{ $package->PESO }}</td>
-                                                <td>{{ $package->TIPO }}</td>
-                                                <td>{{ $package->nrocasilla }}</td>
-                                                <td>{{ $package->ESTADO }}</td>
-                                                <td>{{ $package->OBSERVACIONES }}</td>
-                                                <td>{{ $package->ADUANA }}</td>
-                                                <td>{{ $package->created_at }}</td>
-                                                {{-- <td>{{ $package->usercartero }}</td> --}}
-                                                <td>
-                                                    @hasrole('SuperAdmin|Administrador|Clasificacion')
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <a class="btn btn-sm btn-success"
-                                                                    href="{{ route('packages.edit', $package->id) }}">
-                                                                    <i class="fa fa-fw fa-edit"></i>
-                                                                    {{ __('Editar') }}
-                                                                </a>
+                                <table class="table table-striped table-hover">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th><input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
+                                            </th>
+                                            <th>No</th>
+                                            <th>Código Rastreo</th>
+                                            <th>Destinatario</th>
+                                            <th>Teléfono</th>
+                                            <th>País</th>
+                                            <th>Ciudad</th>
+                                            <th>Ventanilla</th>
+                                            <th>Peso (gr.)</th>
+                                            <th>Tipo</th>
+                                            <th>Nro Casilla</th>
+                                            <th>Estado</th>
+                                            <th>Observaciones</th>
+                                            <th>Aduana</th>
+                                            <th>Fecha Ingreso</th>
+                                            {{-- <th>Cartero</th> --}}
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($packages as $package)
+                                            @if ($package->ESTADO === 'CLASIFICACION')
+                                                <tr>
+                                                    <td><input type="checkbox" wire:model="paquetesSeleccionados"
+                                                            value="{{ $package->id }}"></td>
+                                                    <td>{{ $package->id }}</td>
+                                                    <td>{{ $package->CODIGO }}</td>
+                                                    <td>{{ $package->DESTINATARIO }}</td>
+                                                    <td>{{ $package->TELEFONO }}</td>
+                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
+                                                    <td>{{ $package->CUIDAD }}</td>
+                                                    <td>{{ $package->VENTANILLA }}</td>
+                                                    <td>{{ $package->PESO }}</td>
+                                                    <td>{{ $package->TIPO }}</td>
+                                                    <td>{{ $package->nrocasilla }}</td>
+                                                    <td>{{ $package->ESTADO }}</td>
+                                                    <td>{{ $package->OBSERVACIONES }}</td>
+                                                    <td>{{ $package->ADUANA }}</td>
+                                                    <td>{{ $package->created_at }}</td>
+                                                    {{-- <td>{{ $package->usercartero }}</td> --}}
+                                                    <td>
+                                                        @hasrole('SuperAdmin|Administrador|Clasificacion')
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <a class="btn btn-sm btn-success"
+                                                                        href="{{ route('packages.edit', $package->id) }}">
+                                                                        <i class="fa fa-fw fa-edit"></i>
+                                                                        {{ __('Editar') }}
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <form
+                                                                        action="{{ route('packages.destroy', $package->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-danger btn-sm">
+                                                                            <i class="fa fa-fw fa-trash"></i>
+                                                                            {{ __('Eliminar') }}
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <form
-                                                                    action="{{ route('packages.destroy', $package->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                                        <i class="fa fa-fw fa-trash"></i>
-                                                                        {{ __('Eliminar') }}
-                                                                    </button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    @endhasrole
-                                                </td>
+                                                        @endhasrole
+                                                    </td>
 
-                                            </tr>
-                                        @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     {{ $packages->links() }}
