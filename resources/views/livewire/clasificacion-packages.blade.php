@@ -21,7 +21,7 @@
                                 <!-- Agrega más opciones según tus necesidades -->
                             </select>
                         </div> --}}
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="search">Busca:</label>
                                 <input wire:model.lazy="search" type="text" class="form-control"
@@ -69,6 +69,7 @@
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
                                         <th>Fecha Ingreso</th>
+                                        {{-- <th>Cartero</th> --}}
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -92,6 +93,7 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->created_at }}</td>
+                                                {{-- <td>{{ $package->usercartero }}</td> --}}
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|Clasificacion')
                                                         <div class="row">

@@ -64,6 +64,12 @@ class PackageController extends Controller
             // 'nrocasilla' => 'required|numeric|regex:/^[0-9]+$/',
         ]);
 
+        // Obtener el nombre de usuario del cartero actualmente autenticado
+        $userCartero = auth()->user()->name;
+
+        // Agregar el nombre del cartero al request antes de crear el paquete
+        $request->merge(['usercartero' => $userCartero]);
+        
         // Calcular el precio basado en el peso
         $peso = $request->input('PESO');
         $precio = 0;

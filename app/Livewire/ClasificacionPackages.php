@@ -19,6 +19,7 @@ class ClasificacionPackages extends Component
 
     public function render()
     {
+        $userasignado = auth()->user()->name;
         $packages = Package::where('ESTADO', 'CLASIFICACION')
         ->when($this->search, function ($query) {
             $query->where('CODIGO', 'like', '%' . $this->search . '%')
@@ -34,6 +35,7 @@ class ClasificacionPackages extends Component
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
+            ->where('usercartero', $userasignado)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
