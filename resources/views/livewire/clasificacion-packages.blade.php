@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <h5 id="card_title">{{ __('Registro de Paquetes Ordinarios') }}</h5>
                     <div class="row align-items-center">
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <label for="cityFilter">Filtrar por Ciudad:</label>
                             <select wire:model="selectedCity" class="form-control" id="cityFilter">
                                 <option value=""></option>
@@ -20,7 +20,7 @@
                                 <option value="TARIJA">TARIJA</option>
                                 <!-- Agrega más opciones según tus necesidades -->
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="search">Busca:</label>
