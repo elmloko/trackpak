@@ -455,6 +455,25 @@ return [
                     ],
                 ],
                 [
+                    'text' => 'Ventanilla UNICA',
+                    'icon' => 'fas fa-window-maximize',
+                    // 'can'  => 'packages.unica',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas Ventanilla UNICA',
+                            'url' => 'packages/ventanillaunica',
+                            'icon' => 'fas fa-truck',
+                            // 'can'  => 'packages.unica',
+                        ],
+                        [
+                            'text' => 'Inventario Ventanilla UNICA',
+                            'url' => 'test/deleteadounica',
+                            'icon' => 'fas fa-suitcase',
+                            // 'can'  => 'packages.unica',
+                        ],
+                    ],
+                ],
+                [
                     'text' => 'Casillas',
                     'icon' => 'fas fa-archive',
                     'can'  => 'packages.casillas',

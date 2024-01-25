@@ -15,7 +15,7 @@
                         ]) }}
                         {!! $errors->first('CODIGO', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
-                @endhasrole
+               
                 <div class="form-group">
                     {{ Form::label('TIPO', 'Tipo') }}
                     {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $package->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
@@ -59,6 +59,7 @@
                     ]) }}
                     {!! $errors->first('DESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
+                @endhasrole
                 <div class="form-group">
                     {{ Form::label('TELEFONO') }}
                     {{ Form::number('TELEFONO', $package->TELEFONO, [
@@ -73,6 +74,7 @@
 
                 <!-- Fin de las primeras columnas -->
             </div>
+            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
             <div class="col-md-6">
                 <!-- Segundas columnas del formulario -->
                 <div class="form-group">
@@ -102,6 +104,7 @@
                     {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}
                     {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
+                @endhasrole
                 @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                     <div class="form-group">
                         {{ Form::label('ZONA') }}

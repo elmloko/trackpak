@@ -851,6 +851,10 @@ class PackageController extends Controller
     {
         return view('package.ventanilladnd');
     }
+    public function ventanillaunica()
+    {
+        return view('package.ventanillaunica');
+    }
     public function deleteado()
     {
         return view('package.deleteado');

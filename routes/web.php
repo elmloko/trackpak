@@ -96,6 +96,7 @@ Route::middleware('auth')->group(function () {
     //Modulo Ventanilla
     Route::get('packages/ventanilla', [PackageController::class, 'ventanilla'])->middleware('can:packages.ventanilla')->name('packages.ventanilla');
     Route::get('packages/ventanilladnd', [PackageController::class, 'ventanilladnd'])->middleware('can:packages.dnd')->name('packages.ventanilladnd');
+    Route::get('packages/ventanillaunica', [PackageController::class, 'ventanillaunica'])->name('packages.ventanillaunica');
     Route::get('test/deleteado', [PackageController::class, 'deleteado'])->middleware('can:packages.delete')->name('test.deleteado');
     Route::get('test/deleteadodnd', [PackageController::class, 'deleteadodnd'])->middleware('can:packages.dnd')->name('test.deleteadodnd');
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
@@ -123,7 +124,7 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/casillasinventario', [PackageController::class, 'casillasinventario'])->name('packages.casillasinventario');
     Route::post('packages/buscarPaquetecasilla', [PackageController::class, 'buscarPaquetecasilla'])->name('packages.buscarPaquetecasilla');
 
-    //Casillas
+    //Eca
     Route::get('packages/eca', [PackageController::class, 'eca'])->name('packages.eca');
     Route::get('packages/{id}/deleteeca', [PackageController::class, 'deleteeca'])->name('packages.deleteeca');
     Route::get('packages/ecainventario', [PackageController::class, 'ecainventario'])->name('packages.ecainventario');
