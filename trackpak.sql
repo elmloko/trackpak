@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS `events` (
   PRIMARY KEY (`id`),
   KEY `events_user_id_foreign` (`user_id`),
   CONSTRAINT `events_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4859 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4879 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.events: ~4.744 rows (aproximadamente)
+-- Volcando datos para la tabla trackpak.events: ~4.698 rows (aproximadamente)
 INSERT INTO `events` (`id`, `action`, `user_id`, `codigo`, `created_at`, `updated_at`, `descripcion`) VALUES
 	(1, 'DESPACHO', 32, 'UV512459512UZ', '2023-12-12 13:20:17', '2023-12-12 13:20:17', 'Destino de Clasificacion hacia Ventanilla'),
 	(2, 'DESPACHO', 32, 'UV623345981UZ', '2023-12-12 13:20:17', '2023-12-12 13:20:17', 'Destino de Clasificacion hacia Ventanilla'),
@@ -4788,7 +4788,27 @@ INSERT INTO `events` (`id`, `action`, `user_id`, `codigo`, `created_at`, `update
 	(4855, 'CLASIFICACION', 43, 'UH052226821US', '2024-01-24 13:34:22', '2024-01-24 13:34:22', 'Clasificación del Paquete en Oficina Postal Regional'),
 	(4856, 'ADMISION', 43, 'UH052226821US', '2024-01-24 13:34:22', '2024-01-24 13:34:22', 'Llegada de Paquete en Oficina Postal Regional'),
 	(4857, 'CLASIFICACION', 7, 'UE913470775US', '2024-01-24 13:35:57', '2024-01-24 13:35:57', 'Clasificación del Paquete en Oficina Postal Regional'),
-	(4858, 'ADMISION', 7, 'UE913470775US', '2024-01-24 13:35:57', '2024-01-24 13:35:57', 'Llegada de Paquete en Oficina Postal Regional');
+	(4858, 'ADMISION', 7, 'UE913470775US', '2024-01-24 13:35:57', '2024-01-24 13:35:57', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4859, 'CLASIFICACION', 7, 'RD000649685BO', '2024-01-24 14:04:50', '2024-01-24 14:04:50', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4860, 'ADMISION', 7, 'RD000649685BO', '2024-01-24 14:04:50', '2024-01-24 14:04:50', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4861, 'CLASIFICACION', 7, 'RD000649715BO', '2024-01-24 14:07:42', '2024-01-24 14:07:42', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4862, 'ADMISION', 7, 'RD000649715BO', '2024-01-24 14:07:42', '2024-01-24 14:07:42', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4863, 'CLASIFICACION', 7, 'RD000649709BO', '2024-01-24 14:09:33', '2024-01-24 14:09:33', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4864, 'ADMISION', 7, 'RD000649709BO', '2024-01-24 14:09:33', '2024-01-24 14:09:33', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4865, 'CLASIFICACION', 43, 'UY151749665DE', '2024-01-24 14:09:42', '2024-01-24 14:09:42', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4866, 'ADMISION', 43, 'UY151749665DE', '2024-01-24 14:09:42', '2024-01-24 14:09:42', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4867, 'CLASIFICACION', 7, 'RD000649675BO', '2024-01-24 14:10:24', '2024-01-24 14:10:24', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4868, 'ADMISION', 7, 'RD000649675BO', '2024-01-24 14:10:24', '2024-01-24 14:10:24', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4869, 'CLASIFICACION', 7, 'RD000649694BO', '2024-01-24 14:10:59', '2024-01-24 14:10:59', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4870, 'ADMISION', 7, 'RD000649694BO', '2024-01-24 14:10:59', '2024-01-24 14:10:59', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4871, 'CLASIFICACION', 43, 'UA030392328IE', '2024-01-24 14:11:17', '2024-01-24 14:11:17', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4872, 'ADMISION', 43, 'UA030392328IE', '2024-01-24 14:11:17', '2024-01-24 14:11:17', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4873, 'CLASIFICACION', 7, 'RD000649665BO', '2024-01-24 14:11:50', '2024-01-24 14:11:50', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4874, 'ADMISION', 7, 'RD000649665BO', '2024-01-24 14:11:50', '2024-01-24 14:11:50', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4875, 'CLASIFICACION', 7, 'RD000649657BO', '2024-01-24 14:12:53', '2024-01-24 14:12:53', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4876, 'ADMISION', 7, 'RD000649657BO', '2024-01-24 14:12:53', '2024-01-24 14:12:53', 'Llegada de Paquete en Oficina Postal Regional'),
+	(4877, 'CLASIFICACION', 43, 'UH699679035GB', '2024-01-24 14:13:47', '2024-01-24 14:13:47', 'Clasificación del Paquete en Oficina Postal Regional'),
+	(4878, 'ADMISION', 43, 'UH699679035GB', '2024-01-24 14:13:47', '2024-01-24 14:13:47', 'Llegada de Paquete en Oficina Postal Regional');
 
 -- Volcando estructura para tabla trackpak.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -5002,9 +5022,9 @@ CREATE TABLE IF NOT EXISTS `packages` (
   `daterezago` timestamp NULL DEFAULT NULL,
   `nrocasilla` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23640 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23650 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.packages: ~9.774 rows (aproximadamente)
+-- Volcando datos para la tabla trackpak.packages: ~9.661 rows (aproximadamente)
 INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUIDAD`, `ZONA`, `VENTANILLA`, `PESO`, `TIPO`, `ADUANA`, `ESTADO`, `ISO`, `PRECIO`, `OBSERVACIONES`, `FACTURA`, `created_at`, `updated_at`, `deleted_at`, `datedespachoclasificacion`, `date_redirigido`, `redirigido`, `cuidadre`, `REENCAMINAR`, `usercartero`, `dateprerezago`, `daterezago`, `nrocasilla`) VALUES
 	(7045, 'RP113421971MU', 'ADNULFO NUÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¹Ã…â€œEZ NAVA', 0, 'USA', 'SUCRE', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
 	(7046, 'RP113425324MU', 'JESSICA K. GUZMAN LIENDRO', 0, 'USA', 'SUCRE', '', 'UNICA', 0.00, 'PAQUETE', '', 'VENTANILLA', NULL, NULL, '', NULL, '2023-10-10 16:28:13', NULL, NULL, NULL, NULL, 0, NULL, NULL, '', NULL, NULL, NULL),
@@ -14798,7 +14818,17 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(23636, 'UH052466844US', 'VANESSA GANTIER', 0, 'US', 'LA PAZ', NULL, 'DD', 0.98, 'PAQUETE', 'NO', 'CLASIFICACION', 'UNITED STATES', '10', NULL, NULL, '2024-01-24 13:30:38', '2024-01-24 13:30:38', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(23637, 'UE913470784US', 'LUCIANA CLAURE PARADA', 0, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.08, 'SOBRE', 'NO', 'CLASIFICACION', 'UNITED STATES', '5', NULL, NULL, '2024-01-24 13:32:56', '2024-01-24 13:32:56', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
 	(23638, 'UH052226821US', 'MARCELA ORTUSTE CAMACHO', 71526876, 'US', 'LA PAZ', NULL, 'DD', 1.65, 'PAQUETE', 'NO', 'CLASIFICACION', 'UNITED STATES', '10', NULL, NULL, '2024-01-24 13:34:22', '2024-01-24 13:34:22', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
-	(23639, 'UE913470775US', 'MAZARENA ROMERO CATEDO', 0, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.08, 'SOBRE', 'NO', 'CLASIFICACION', 'UNITED STATES', '5', NULL, NULL, '2024-01-24 13:35:57', '2024-01-24 13:35:57', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL);
+	(23639, 'UE913470775US', 'MAZARENA ROMERO CATEDO', 0, 'US', 'SANTA CRUZ', NULL, 'UNICA', 0.08, 'SOBRE', 'NO', 'CLASIFICACION', 'UNITED STATES', '5', NULL, NULL, '2024-01-24 13:35:57', '2024-01-24 13:35:57', NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL),
+	(23640, 'RD000649685BO', 'CARLOS HERNAN PAREDES ROMAN', 0, 'BO', 'SANTA CRUZ', NULL, 'UNICA', 0.12, 'SOBRE', 'NO', 'CLASIFICACION', 'BOLIVIA', '5', NULL, NULL, '2024-01-24 14:04:50', '2024-01-24 14:04:50', NULL, NULL, NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
+	(23641, 'RD000649715BO', 'W KOEBL', 0, 'BO', 'SANTA CRUZ', NULL, 'UNICA', 0.12, 'PAQUETE', 'NO', 'CLASIFICACION', 'BOLIVIA', '5', NULL, NULL, '2024-01-24 14:07:42', '2024-01-24 14:07:42', NULL, NULL, NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
+	(23642, 'RD000649709BO', 'CARLOS HERNAN PAREDES ROMAN', 0, 'BO', 'SANTA CRUZ', NULL, 'UNICA', 0.12, 'PAQUETE', 'NO', 'CLASIFICACION', 'BOLIVIA', '5', NULL, NULL, '2024-01-24 14:09:33', '2024-01-24 14:09:33', NULL, NULL, NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
+	(23643, 'UY151749665DE', 'CARLOS MOSCOSO', 0, 'DE', 'LA PAZ', NULL, 'DD', 1.49, 'PAQUETE', 'NO', 'CLASIFICACION', 'GERMANY', '10', NULL, NULL, '2024-01-24 14:09:42', '2024-01-24 14:09:42', NULL, NULL, NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL),
+	(23644, 'RD000649675BO', 'ALBA DANIELA TORRES CABRERA', 0, 'BO', 'SANTA CRUZ', NULL, 'UNICA', 0.10, 'PAQUETE', 'NO', 'CLASIFICACION', 'BOLIVIA', '5', NULL, NULL, '2024-01-24 14:10:24', '2024-01-24 14:10:24', NULL, NULL, NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
+	(23645, 'RD000649694BO', 'NORBERT HONNEN', 0, 'BO', 'SANTA CRUZ', NULL, 'UNICA', 0.12, 'PAQUETE', 'NO', 'CLASIFICACION', 'BOLIVIA', '5', NULL, NULL, '2024-01-24 14:10:59', '2024-01-24 14:10:59', NULL, NULL, NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
+	(23646, 'UA030392328IE', 'W.  ANDRES COSSIO OVANDO', 0, 'IE', 'LA PAZ', NULL, 'DD', 0.08, 'PAQUETE', 'NO', 'CLASIFICACION', 'IRELAND', '5', NULL, NULL, '2024-01-24 14:11:17', '2024-01-24 14:11:17', NULL, NULL, NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL),
+	(23647, 'RD000649665BO', 'CANDIDO VARGAS', 0, 'BO', 'SANTA CRUZ', NULL, 'UNICA', 0.12, 'PAQUETE', 'NO', 'CLASIFICACION', 'BOLIVIA', '5', NULL, NULL, '2024-01-24 14:11:50', '2024-01-24 14:11:50', NULL, NULL, NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
+	(23648, 'RD000649657BO', 'PETER AND ESTHER  ENNS', 0, 'BO', 'SANTA CRUZ', NULL, 'UNICA', 0.78, 'PAQUETE', 'NO', 'CLASIFICACION', 'BOLIVIA', '10', NULL, NULL, '2024-01-24 14:12:53', '2024-01-24 14:12:53', NULL, NULL, NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
+	(23649, 'UH699679035GB', 'ALEJANDRO RAFAEL MARCELO Y ALEJANDRA  EXTUDIA BOLIVIA', 0, 'GB', 'LA PAZ', NULL, 'DD', 0.78, 'PAQUETE', 'NO', 'CLASIFICACION', 'UNITED KINGDOM', '10', NULL, NULL, '2024-01-24 14:13:47', '2024-01-24 14:13:47', NULL, NULL, NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL);
 
 -- Volcando estructura para tabla trackpak.password_reset_tokens
 CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
