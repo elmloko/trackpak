@@ -98,6 +98,7 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/ventanilladnd', [PackageController::class, 'ventanilladnd'])->middleware('can:packages.dnd')->name('packages.ventanilladnd');
     Route::get('packages/ventanillaunica', [PackageController::class, 'ventanillaunica'])->name('packages.ventanillaunica');
     Route::get('test/deleteado', [PackageController::class, 'deleteado'])->middleware('can:packages.delete')->name('test.deleteado');
+    Route::get('test/deleteadounica', [PackageController::class, 'deleteadounica'])->name('test.deleteadounica');
     Route::get('test/deleteadodnd', [PackageController::class, 'deleteadodnd'])->middleware('can:packages.dnd')->name('test.deleteadodnd');
     Route::post('packages/buscarPaquete', [PackageController::class, 'buscarPaquete'])->name('packages.buscarPaquete');
     Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');

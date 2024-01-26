@@ -863,6 +863,10 @@ class PackageController extends Controller
     {
         return view('package.deleteadodnd');
     }
+    public function deleteadounica()
+    {
+        return view('package.deleteadounica');
+    }
     public function carteros()
     {
         return view('package.carteros');
