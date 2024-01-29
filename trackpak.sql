@@ -31,9 +31,9 @@ CREATE TABLE IF NOT EXISTS `events` (
   PRIMARY KEY (`id`),
   KEY `events_user_id_foreign` (`user_id`),
   CONSTRAINT `events_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5325 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5355 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.events: ~5.279 rows (aproximadamente)
+-- Volcando datos para la tabla trackpak.events: ~5.309 rows (aproximadamente)
 INSERT INTO `events` (`id`, `action`, `user_id`, `codigo`, `created_at`, `updated_at`, `descripcion`) VALUES
 	(1, 'DESPACHO', 32, 'UV512459512UZ', '2023-12-12 13:20:17', '2023-12-12 13:20:17', 'Destino de Clasificacion hacia Ventanilla'),
 	(2, 'DESPACHO', 32, 'UV623345981UZ', '2023-12-12 13:20:17', '2023-12-12 13:20:17', 'Destino de Clasificacion hacia Ventanilla'),
@@ -5254,7 +5254,37 @@ INSERT INTO `events` (`id`, `action`, `user_id`, `codigo`, `created_at`, `update
 	(5321, 'DISPONIBLE', 33, 'UQ489458609GB', '2024-01-26 07:09:40', '2024-01-26 07:09:40', 'Paquete a la espera de ser recogido en ventanilla DND'),
 	(5322, 'EN ENTREGA', 33, 'UQ489458609GB', '2024-01-26 07:09:40', '2024-01-26 07:09:40', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
 	(5323, 'DISPONIBLE', 33, 'UY147936684DE', '2024-01-26 07:10:09', '2024-01-26 07:10:09', 'Paquete a la espera de ser recogido en ventanilla DND'),
-	(5324, 'EN ENTREGA', 33, 'UY147936684DE', '2024-01-26 07:10:09', '2024-01-26 07:10:09', 'Paquete Recibido en Oficina Postal Regional.LA PAZ');
+	(5324, 'EN ENTREGA', 33, 'UY147936684DE', '2024-01-26 07:10:09', '2024-01-26 07:10:09', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5325, 'DISPONIBLE', 33, 'UO006765639ES', '2024-01-27 06:54:16', '2024-01-27 06:54:16', 'Paquete a la espera de ser recogido en Casillero Postal 3216'),
+	(5326, 'EN ENTREGA', 33, 'UO006765639ES', '2024-01-27 06:54:16', '2024-01-27 06:54:16', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5327, 'DISPONIBLE', 33, 'RD000498166BO', '2024-01-27 06:54:38', '2024-01-27 06:54:38', 'Paquete a la espera de ser recogido en Casillero Postal 2195'),
+	(5328, 'EN ENTREGA', 33, 'RD000498166BO', '2024-01-27 06:54:38', '2024-01-27 06:54:38', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5329, 'DISPONIBLE', 33, 'RD000498176BO', '2024-01-27 06:54:56', '2024-01-27 06:54:56', 'Paquete a la espera de ser recogido en Casillero Postal 14322'),
+	(5330, 'EN ENTREGA', 33, 'RD000498176BO', '2024-01-27 06:54:56', '2024-01-27 06:54:56', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5331, 'DISPONIBLE', 33, 'UP028009645LU', '2024-01-27 06:55:12', '2024-01-27 06:55:12', 'Paquete a la espera de ser recogido en Casillero Postal 8735'),
+	(5332, 'EN ENTREGA', 33, 'UP028009645LU', '2024-01-27 06:55:12', '2024-01-27 06:55:12', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5333, 'DISPONIBLE', 33, 'UE186346865LT', '2024-01-27 06:55:27', '2024-01-27 06:55:27', 'Paquete a la espera de ser recogido en Casillero Postal 2111'),
+	(5334, 'EN ENTREGA', 33, 'UE186346865LT', '2024-01-27 06:55:27', '2024-01-27 06:55:27', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5335, 'DISPONIBLE', 33, 'UE733036545DE', '2024-01-27 06:55:41', '2024-01-27 06:55:41', 'Paquete a la espera de ser recogido en Casillero Postal 10077'),
+	(5336, 'EN ENTREGA', 33, 'UE733036545DE', '2024-01-27 06:55:41', '2024-01-27 06:55:41', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5337, 'DISPONIBLE', 33, 'RD000498152BO', '2024-01-27 06:55:58', '2024-01-27 06:55:58', 'Paquete a la espera de ser recogido en Casillero Postal 3872'),
+	(5338, 'EN ENTREGA', 33, 'RD000498152BO', '2024-01-27 06:55:58', '2024-01-27 06:55:58', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5339, 'DISPONIBLE', 33, 'RD000498180BO', '2024-01-27 06:56:38', '2024-01-27 06:56:38', 'Paquete a la espera de ser recogido en Casillero Postal 7276'),
+	(5340, 'EN ENTREGA', 33, 'RD000498180BO', '2024-01-27 06:56:38', '2024-01-27 06:56:38', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5341, 'DISPONIBLE', 33, 'UA106896742US', '2024-01-27 06:56:53', '2024-01-27 06:56:53', 'Paquete a la espera de ser recogido en Casillero Postal 6182'),
+	(5342, 'EN ENTREGA', 33, 'UA106896742US', '2024-01-27 06:56:53', '2024-01-27 06:56:53', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5343, 'DISPONIBLE', 33, 'UY151595292DE', '2024-01-27 06:57:10', '2024-01-27 06:57:10', 'Paquete a la espera de ser recogido en Casillero Postal 7226'),
+	(5344, 'EN ENTREGA', 33, 'UY151595292DE', '2024-01-27 06:57:10', '2024-01-27 06:57:10', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5345, 'DISPONIBLE', 33, 'UY152583168DE', '2024-01-27 06:57:49', '2024-01-27 06:57:49', 'Paquete a la espera de ser recogido en Casillero Postal 14322'),
+	(5346, 'EN ENTREGA', 33, 'UY152583168DE', '2024-01-27 06:57:49', '2024-01-27 06:57:49', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5347, 'DISPONIBLE', 33, 'UY540238959DE', '2024-01-27 06:58:14', '2024-01-27 06:58:14', 'Paquete a la espera de ser recogido en Casillero Postal 14322'),
+	(5348, 'EN ENTREGA', 33, 'UY540238959DE', '2024-01-27 06:58:14', '2024-01-27 06:58:14', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5349, 'DISPONIBLE', 33, 'UY149757796DE', '2024-01-27 06:58:35', '2024-01-27 06:58:35', 'Paquete a la espera de ser recogido en Casillero Postal 14322'),
+	(5350, 'EN ENTREGA', 33, 'UY149757796DE', '2024-01-27 06:58:35', '2024-01-27 06:58:35', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5351, 'DISPONIBLE', 33, 'UY151697946DE', '2024-01-27 06:58:56', '2024-01-27 06:58:56', 'Paquete a la espera de ser recogido en Casillero Postal 14322'),
+	(5352, 'EN ENTREGA', 33, 'UY151697946DE', '2024-01-27 06:58:56', '2024-01-27 06:58:56', 'Paquete Recibido en Oficina Postal Regional.LA PAZ'),
+	(5353, 'DISPONIBLE', 33, 'UY151340195DE', '2024-01-27 06:59:17', '2024-01-27 06:59:17', 'Paquete a la espera de ser recogido en Casillero Postal 14322'),
+	(5354, 'EN ENTREGA', 33, 'UY151340195DE', '2024-01-27 06:59:17', '2024-01-27 06:59:17', 'Paquete Recibido en Oficina Postal Regional.LA PAZ');
 
 -- Volcando estructura para tabla trackpak.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -5371,10 +5401,12 @@ CREATE TABLE IF NOT EXISTS `model_has_roles` (
   CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.model_has_roles: ~42 rows (aproximadamente)
+-- Volcando datos para la tabla trackpak.model_has_roles: ~47 rows (aproximadamente)
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(1, 'App\\Models\\User', 20),
 	(2, 'App\\Models\\User', 41),
+	(2, 'App\\Models\\User', 67),
+	(2, 'App\\Models\\User', 71),
 	(3, 'App\\Models\\User', 25),
 	(4, 'App\\Models\\User', 22),
 	(4, 'App\\Models\\User', 24),
@@ -5414,7 +5446,10 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 	(13, 'App\\Models\\User', 63),
 	(13, 'App\\Models\\User', 64),
 	(13, 'App\\Models\\User', 65),
-	(13, 'App\\Models\\User', 66);
+	(13, 'App\\Models\\User', 66),
+	(13, 'App\\Models\\User', 68),
+	(13, 'App\\Models\\User', 69),
+	(13, 'App\\Models\\User', 70);
 
 -- Volcando estructura para tabla trackpak.nationals
 CREATE TABLE IF NOT EXISTS `nationals` (
@@ -15328,41 +15363,41 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(23681, 'UH052450274US', 'IVON ADELA R D ALECAR', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.67, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-25 06:50:12', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23682, 'UY540261816DE', 'JORGE HERBAS BALDERRAMA', 0, 'DE', 'COCHABAMBA', NULL, 'UNICA', 1.90, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 06:52:07', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23683, 'UY150768266DE', 'AHGELIRA STEMMER', 0, 'DE', 'COCHABAMBA', NULL, 'UNICA', 1.68, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 06:53:48', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23684, 'UY151697946DE', 'OFICINA NACIONAL PADRINAZGOS INTERNACIONALES', 0, 'DE', 'LA PAZ', NULL, 'CASILLAS', 1.78, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 06:58:53', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
+	(23684, 'UY151697946DE', 'OFICINA NACIONAL PADRINAZGOS INTERNACIONALES', 0, 'DE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 1.78, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '10', NULL, NULL, '2024-01-25 06:58:53', '2024-01-27 06:58:56', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
 	(23685, 'UY150565189DE', 'JOSE ANTONIO OLGUIN', 0, 'DE', 'COCHABAMBA', NULL, 'UNICA', 0.87, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:00:16', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23686, 'UC005064073IT', 'JAVIER MARTIN ARENAS', 73995901, 'IT', 'COCHABAMBA', NULL, 'UNICA', 1.73, 'PAQUETE', 'NO', 'DESPACHO', 'ITALY', '10', NULL, NULL, '2024-01-25 07:01:52', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23687, 'UY151595292DE', 'DAGMAR DUMCHEN', 0, 'DE', 'LA PAZ', NULL, 'CASILLAS', 1.84, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:02:38', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 7226),
+	(23687, 'UY151595292DE', 'DAGMAR DUMCHEN', 0, 'DE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 1.84, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:02:38', '2024-01-27 06:57:10', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 7226),
 	(23688, 'UY151833709DE', 'DHL EXPRESS POI NT', 69793903, 'DE', 'COCHABAMBA', NULL, 'UNICA', 1.97, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:03:25', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23689, 'UY152583168DE', 'S O S ORURO ALDEAS INFANTILES', 0, 'DE', 'LA PAZ', NULL, 'CASILLAS', 1.57, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:04:53', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
+	(23689, 'UY152583168DE', 'S O S ORURO ALDEAS INFANTILES', 0, 'DE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 1.57, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:04:53', '2024-01-27 06:57:49', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
 	(23690, 'UA470316935US', 'SHUN YAO', 77947642, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.23, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-25 07:05:09', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23691, 'UM980228902US', 'WILSON ORELLANA ROJAS', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.22, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-25 07:06:02', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23692, 'UA470322034US', 'RUBEN DARIO MENDOZA', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.50, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-25 07:06:58', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23693, 'UY152076515DE', 'LILIANA GABRIELA TELLEZ', 68420504, 'DE', 'COCHABAMBA', NULL, 'UNICA', 1.14, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:07:55', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23694, 'UE186346865LT', 'RADIO CLUB BOLIVIANO CP', 0, 'LT', 'LA PAZ', NULL, 'CASILLAS', 0.01, 'SOBRE', 'NO', 'DESPACHO', 'LITHUANIA', '5', NULL, NULL, '2024-01-25 07:10:29', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 2111),
+	(23694, 'UE186346865LT', 'RADIO CLUB BOLIVIANO CP', 0, 'LT', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.01, 'SOBRE', 'NO', 'VENTANILLA', 'LITHUANIA', '5', NULL, NULL, '2024-01-25 07:10:29', '2024-01-27 06:55:27', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 2111),
 	(23695, 'UA932553963US', 'NELSON HUGO CHOQUE', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.08, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-25 07:10:35', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23696, 'UA932551145US', 'RICARDO ANDRADE', 79975434, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.04, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-25 07:11:25', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23697, 'UT653040436NL', 'BRANDON BEJARANO PRADO', 69543254, 'NL', 'COCHABAMBA', NULL, 'UNICA', 0.08, 'PAQUETE', 'NO', 'DESPACHO', 'NETHERLANDS', '5', NULL, NULL, '2024-01-25 07:12:21', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23698, 'UR482811162CA', 'MICHAEL O"NELL', 0, 'CA', 'COCHABAMBA', NULL, 'UNICA', 0.14, 'PAQUETE', 'NO', 'DESPACHO', 'CANADA', '5', NULL, NULL, '2024-01-25 07:13:03', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23699, 'UE733036545DE', 'INSTITUTO DE ECOLOGIA BIBLIOTECA UMSA', 0, 'DE', 'LA PAZ', NULL, 'CASILLAS', 0.41, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '5', NULL, NULL, '2024-01-25 07:13:28', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 10077),
+	(23699, 'UE733036545DE', 'INSTITUTO DE ECOLOGIA BIBLIOTECA UMSA', 0, 'DE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.41, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '5', NULL, NULL, '2024-01-25 07:13:28', '2024-01-27 06:55:41', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 10077),
 	(23700, 'UM215155741US', 'MARIA JALDIN ARANCIBIA', 65326413, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.10, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-01-25 07:14:04', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23701, 'UR240846620DE', 'GABRIEL FLORES', 0, 'DE', 'COCHABAMBA', NULL, 'UNICA', 0.02, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '5', NULL, NULL, '2024-01-25 07:15:07', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23702, 'UO006765639ES', 'SEMINARIO TEOLOGICO HEBRON', 0, 'ES', 'LA PAZ', NULL, 'CASILLAS', 0.28, 'PAQUETE', 'NO', 'DESPACHO', 'SPAIN', '5', NULL, NULL, '2024-01-25 07:15:48', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 3216),
+	(23702, 'UO006765639ES', 'SEMINARIO TEOLOGICO HEBRON', 0, 'ES', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.28, 'PAQUETE', 'NO', 'VENTANILLA', 'SPAIN', '5', NULL, NULL, '2024-01-25 07:15:48', '2024-01-27 06:54:16', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 3216),
 	(23703, 'UR241016694DE', 'ALISSON DELGADILLO', 0, 'DE', 'COCHABAMBA', NULL, 'UNICA', 0.02, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '5', NULL, NULL, '2024-01-25 07:15:51', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23704, 'LJ004429753FR', 'ADAM CHAASI', 68167492, 'FR', 'COCHABAMBA', NULL, 'UNICA', 0.02, 'SOBRE', 'NO', 'DESPACHO', 'FRANCE', '5', NULL, NULL, '2024-01-25 07:17:09', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23705, 'UY540238959DE', 'SOS CHILDRENS VILLAGES BOLIVIA', 0, 'DE', 'LA PAZ', NULL, 'CASILLAS', 0.82, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:17:41', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
+	(23705, 'UY540238959DE', 'SOS CHILDRENS VILLAGES BOLIVIA', 0, 'DE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.82, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:17:41', '2024-01-27 06:58:14', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
 	(23706, 'UR483547932CA', 'JAVIER OABADO MAYOE', 0, 'CA', 'COCHABAMBA', NULL, 'UNICA', 0.11, 'SOBRE', 'NO', 'DESPACHO', 'CANADA', '5', NULL, NULL, '2024-01-25 07:18:17', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23707, 'UY150905280DE', 'HARTMUT SAYK', 0, 'DE', 'LA PAZ', NULL, 'CASILLAS', 1.86, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:19:04', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 139),
 	(23708, 'UH052471084US', 'VIVIAN SCHWARZ BLUM', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.53, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-25 07:19:11', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23709, 'UY151340195DE', 'ALDEAS INF. SOS BOLIVIA CARMEN BELEN', 0, 'DE', 'LA PAZ', NULL, 'CASILLAS', 1.01, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:21:21', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
+	(23709, 'UY151340195DE', 'ALDEAS INF. SOS BOLIVIA CARMEN BELEN', 0, 'DE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 1.01, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '10', NULL, NULL, '2024-01-25 07:21:21', '2024-01-27 06:59:17', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
 	(23710, 'RD000498142BO', 'MARLENE CRUZ TORRES', 0, 'BO', 'COCHABAMBA', NULL, 'UNICA', 0.15, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '5', NULL, NULL, '2024-01-25 07:22:23', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23711, 'RD000498137BO', 'ALEJANDRA CAUNA VICENTE', 0, 'BO', 'COCHABAMBA', NULL, 'UNICA', 0.14, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '5', NULL, NULL, '2024-01-25 07:23:22', '2024-01-25 07:24:15', NULL, '2024-01-25 07:24:15', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
-	(23712, 'UP028009645LU', 'LIONEL DINO MAMANI MERCADO CHILD FUND BOLIVIA', 0, 'LU', 'LA PAZ', NULL, 'CASILLAS', 0.72, 'PAQUETE', 'NO', 'DESPACHO', 'LUXEMBOURG', '10', NULL, NULL, '2024-01-25 07:24:12', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 8735),
-	(23713, 'UA106896742US', 'ARACELY VALDIVIA', 77770242, 'US', 'LA PAZ', NULL, 'CASILLAS', 1.53, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-25 07:26:14', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 6182),
-	(23714, 'UY149757796DE', 'ALDEAS INFANTILES SOS IN BOLIVIA', 0, 'DE', 'LA PAZ', NULL, 'CASILLAS', 0.59, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', 'PAQUETE EN MAL ESTADO , VUELTO A PARCHAR', NULL, '2024-01-25 07:36:01', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
-	(23715, 'RD000498176BO', 'ALDEAS INFANTILES SOS', 0, 'BO', 'LA PAZ', NULL, 'CASILLAS', 0.20, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '5', NULL, NULL, '2024-01-25 07:43:03', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
-	(23716, 'RD000498152BO', 'VAMOS JUNTOS C/O MISHELL MADANI HUANCA', 0, 'BO', 'LA PAZ', NULL, 'CASILLAS', 0.31, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '5', NULL, NULL, '2024-01-25 07:47:22', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 3872),
-	(23717, 'RD000498180BO', 'ELIAS BAUTISTA BAUTISTA', 0, 'BO', 'LA PAZ', NULL, 'CASILLAS', 0.84, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '10', NULL, NULL, '2024-01-25 07:49:31', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 7276),
-	(23718, 'RD000498166BO', 'GOETHE INSTITUD', 0, 'BO', 'LA PAZ', NULL, 'CASILLAS', 0.88, 'PAQUETE', 'NO', 'DESPACHO', 'BOLIVIA', '10', NULL, NULL, '2024-01-25 07:52:27', '2024-01-25 07:55:46', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 2195),
+	(23712, 'UP028009645LU', 'LIONEL DINO MAMANI MERCADO CHILD FUND BOLIVIA', 0, 'LU', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.72, 'PAQUETE', 'NO', 'VENTANILLA', 'LUXEMBOURG', '10', NULL, NULL, '2024-01-25 07:24:12', '2024-01-27 06:55:12', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 8735),
+	(23713, 'UA106896742US', 'ARACELY VALDIVIA', 77770242, 'US', 'LA PAZ', 'ALMACEN', 'CASILLAS', 1.53, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '10', NULL, NULL, '2024-01-25 07:26:14', '2024-01-27 06:56:53', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 6182),
+	(23714, 'UY149757796DE', 'ALDEAS INFANTILES SOS IN BOLIVIA', 0, 'DE', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.59, 'PAQUETE', 'NO', 'VENTANILLA', 'GERMANY', '10', 'PAQUETE EN MAL ESTADO , VUELTO A PARCHAR', NULL, '2024-01-25 07:36:01', '2024-01-27 06:58:35', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
+	(23715, 'RD000498176BO', 'ALDEAS INFANTILES SOS', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.20, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '5', NULL, NULL, '2024-01-25 07:43:03', '2024-01-27 06:54:56', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 14322),
+	(23716, 'RD000498152BO', 'VAMOS JUNTOS C/O MISHELL MADANI HUANCA', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.31, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '5', NULL, NULL, '2024-01-25 07:47:22', '2024-01-27 06:55:58', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 3872),
+	(23717, 'RD000498180BO', 'ELIAS BAUTISTA BAUTISTA', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.84, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '10', NULL, NULL, '2024-01-25 07:49:31', '2024-01-27 06:56:38', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 7276),
+	(23718, 'RD000498166BO', 'GOETHE INSTITUD', 0, 'BO', 'LA PAZ', 'ALMACEN', 'CASILLAS', 0.88, 'PAQUETE', 'NO', 'VENTANILLA', 'BOLIVIA', '10', NULL, NULL, '2024-01-25 07:52:27', '2024-01-27 06:54:38', NULL, '2024-01-25 07:55:46', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, 2195),
 	(23719, 'UY151040633DE', 'SCHWESTER RITA', 0, 'DE', 'SUCRE', NULL, 'UNICA', 1.75, 'PAQUETE', 'NO', 'DESPACHO', 'GERMANY', '10', NULL, NULL, '2024-01-25 08:05:52', '2024-01-25 08:22:21', NULL, '2024-01-25 08:22:21', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23720, 'UA106904792US', 'JUAN IGNACIO GUZMAN MARIACA', 77224482, 'US', 'LA PAZ', NULL, 'DND', 0.10, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-01-25 08:06:58', '2024-01-26 07:08:53', NULL, '2024-01-25 08:20:19', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL),
 	(23721, 'UM980224993US', 'CALEB MAMANI', 73410097, 'US', 'SUCRE', NULL, 'UNICA', 1.55, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-01-25 08:07:32', '2024-01-25 08:22:21', NULL, '2024-01-25 08:22:21', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
@@ -15592,13 +15627,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.users: ~41 rows (aproximadamente)
+-- Volcando datos para la tabla trackpak.users: ~46 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `Regional`, `ci`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(7, 'Rodrigo Villa Sanjines', 'rodrigo.villa@correos.gob.bo', NULL, '$2y$10$b6aDZSzXjhB8LyewKqoEjOAvIeYFks32wmX/teQfsLn/Bz43mccxK', 'LA PAZ', 9883740, 'JnG5xEa92tJrGruXSLjmfoBcIHrfh0HrbXKMH1O9V1p1jLfDfrPawwXESS2x', '2023-10-26 18:19:40', '2023-10-26 18:19:40'),
 	(8, 'Victor Antonio Tapia Quisbert', 'victor.tapia@correos.gob.bo', NULL, '$2y$10$gtWuAzWdTp9ZB9IWoqxDWu6z/jLb3Za86w8BNHszGQMEHfmY08xuq', 'LA PAZ', 6978733, NULL, '2023-10-26 18:20:40', '2023-10-26 18:20:40'),
-	(20, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$qqtW5Vo8krRvo5H.5JhKLOyHNpBNXtLe2Tk2//tMyxtb54E5l/t22', 'LA PAZ', 10909669, '5KLYMXFGbGrqaTgSBfurlh81uxbvmfhZWDoDf7Wiy7nNAr0kFzK8oeUhuCY1', '2023-11-17 18:01:08', '2023-11-29 18:58:26'),
+	(20, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$qqtW5Vo8krRvo5H.5JhKLOyHNpBNXtLe2Tk2//tMyxtb54E5l/t22', 'LA PAZ', 10909669, 'K4FxL6pqLPCPaWuugkMGymJLAfKmoAaIvpnbbAEyScC2SjBLa3Z0TNt6QGim', '2023-11-17 18:01:08', '2023-11-29 18:58:26'),
 	(21, 'Jose Luis Rodriguez Alvarez', 'jose.rodriguez@correos.gob.bo', NULL, '$2y$10$efOk9thUfdZbrMdVBnALPukoqJlqDJNI490CbFH68Mql69lFZBTQC', 'LA PAZ', 6950366, NULL, '2023-11-17 18:07:31', '2023-11-17 18:07:31'),
 	(22, 'Wike Mamani Apaza', 'wike.mamani@correos.gob.bo', NULL, '$2y$10$RS4SgMBy8.NiujCGasv1x.Bo9GIJPgHWYhNqzlqEOpMezzMi6Itma', 'LA PAZ', 6841118, 'xvDjF6SGhcFUU45a9qsZKtmFEzVqN5HMVj560BPGgCND9f8VVTdNSdnOJD9J', '2023-11-17 18:14:21', '2023-11-17 18:14:21'),
 	(23, 'Angel Gaston Zapata Ramos', 'angel.zapata@correos.gob.bo', NULL, '$2y$10$Qin2RlqRtzCo5/DsitohMOGIy85vlx6OZ.530TvxRSKBJjMMWmG36', 'LA PAZ', 13054887, NULL, '2023-11-27 15:46:35', '2023-11-27 15:46:35'),
@@ -15636,7 +15671,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `Re
 	(63, 'Rafael Eduardo Fernandez Figueroa', 'rafael.fernandez@correos.gob.bo', NULL, '$2y$10$SC3S9pwoxz0uZLVMUjx5cu6ZKztyjq6YDvAhrshySC9eIlj7AwP0y', 'TARIJA', 7211447, NULL, '2024-01-26 09:01:55', '2024-01-26 09:01:55'),
 	(64, 'Carlos Alberto Vásquez Gutiérrez', 'carlos.vazquez@correos.gob.bo', NULL, '$2y$10$gISPIvX9aMDBbt2/c19wyO.nk/JEbDnB1vZuYd6woeeIOa.XkWSXW', 'TARIJA', 7118998, NULL, '2024-01-26 09:02:37', '2024-01-26 09:02:37'),
 	(65, 'Roberto Aguanta Condori', 'roberto.aguanta@correos.gob.bo', NULL, '$2y$10$GwURPMeMqu3y2yo1x4fWvO6vnWfHTMaYdlBXwU8LO4s0Ug2aBWwzO', 'TARIJA', 10740071, NULL, '2024-01-26 09:03:20', '2024-01-26 09:03:20'),
-	(66, 'Rodrigo Paolo Roca', 'rodrigo.roca@correos.gob.bo', NULL, '$2y$10$xVCwHJRfvHBDcTXFHW7Za.GihxMRSltyYwEUDi5CRIKTSv.bp91Ei', 'BENI', 8708642, NULL, '2024-01-26 09:06:22', '2024-01-26 09:06:22');
+	(66, 'Rodrigo Paolo Roca', 'rodrigo.roca@correos.gob.bo', NULL, '$2y$10$xVCwHJRfvHBDcTXFHW7Za.GihxMRSltyYwEUDi5CRIKTSv.bp91Ei', 'BENI', 8708642, NULL, '2024-01-26 09:06:22', '2024-01-26 09:06:22'),
+	(67, 'Veronica Virginia Miranda Vaca', 'veronica.miranda@correos.gob.bo', NULL, '$2y$10$TTH6StRt5bfWi0S/61j0MeJYIUrEpoYm2VGQ.G6u.sMD2j.ACll4m', 'LA PAZ', 3477594, NULL, '2024-01-26 11:48:40', '2024-01-26 11:48:40'),
+	(68, 'Mardy Jimena Wilcarani Villca', 'mardy.wilcarani@correos.gob.bo', NULL, '$2y$10$d6jcrPTZooMo1cZ2BaDlWuS38k3SljoQT1QODzB/iPEE7SxSw63Ve', 'ORURO', 5743478, NULL, '2024-01-26 13:47:52', '2024-01-26 13:47:52'),
+	(69, 'Wilson Condori Santos', 'wilson.condori@correos.gob.bo', NULL, '$2y$10$q4uEKZ9PvZPSbXQ8Lw4by.A1EayuDB8LsioMmgdpiKTxploDPzq/C', 'ORURO', 7281679, NULL, '2024-01-26 13:48:36', '2024-01-26 13:48:36'),
+	(70, 'Hugo Daniel Cahauna Catari', 'hugo.cahuana@correos.gob.bo', NULL, '$2y$10$3qWQGuQtutE6EgYkV6cVIOp.IWMGx/wdl/xNDkumoqiqy.R9T24Vm', 'ORURO', 5759359, NULL, '2024-01-26 13:49:15', '2024-01-26 13:49:15'),
+	(71, 'Lizeth Claudia Salazar Rodriguez', 'lizeth.salazar@correos.gob.bo', NULL, '$2y$10$YrnXQNxuC0eXaz0U1QInZulVXqkAAeieQIjj/CGqFFoRWjGEqd.6m', 'LA PAZ', 9069584, NULL, '2024-01-26 14:01:35', '2024-01-26 14:01:35');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
