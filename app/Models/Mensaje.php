@@ -37,14 +37,8 @@ class Mensaje extends Model
      */
     protected $fillable = ['estado','mensajes','observacion','id_telefono','fecha_creacion'];
 
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function package()
-    {
-        return $this->hasOne('App\Models\Package', 'id', 'id_telefono');
-    }
-    
-
+      public function id_telefono()
+  {
+      return $this->belongsTo('App\Models\Package', 'id_telefono', 'id');
+}
 }

@@ -12,38 +12,22 @@ use Illuminate\Http\Request;
  */
 class MensajeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $mensajes = Mensaje::paginate();
+        $mensajes = Mensaje::with('id_telefono')->paginate();
         $packages = Package::paginate();
-
-        return view('mensaje.index', compact('mensajes','packages'))
+    
+        return view('mensaje.index', compact('mensajes', 'packages'))
             ->with('i', (request()->input('page', 1) - 1) * $mensajes->perPage())
             ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
-    }
+    }    
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $mensaje = new Mensaje();
         return view('mensaje.create', compact('mensaje'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate(Mensaje::$rules);
@@ -54,12 +38,6 @@ class MensajeController extends Controller
             ->with('success', 'Mensaje created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $mensaje = Mensaje::find($id);
@@ -67,12 +45,6 @@ class MensajeController extends Controller
         return view('mensaje.show', compact('mensaje'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $mensaje = Mensaje::find($id);
@@ -80,13 +52,6 @@ class MensajeController extends Controller
         return view('mensaje.edit', compact('mensaje'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Mensaje $mensaje
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Mensaje $mensaje)
     {
         request()->validate(Mensaje::$rules);
@@ -97,11 +62,6 @@ class MensajeController extends Controller
             ->with('success', 'Mensaje updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
         $mensaje = Mensaje::find($id)->delete();

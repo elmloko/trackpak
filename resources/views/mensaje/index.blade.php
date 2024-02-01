@@ -58,9 +58,9 @@
                                             <td>{{ $mensaje->estado }}</td>
                                             <td>{{ $mensaje->mensajes }}</td>
                                             <td>{{ $mensaje->observacion }}</td>
-                                            <td>{{ $mensaje->package->CODIGO }}</td>
-                                            <td>{{ $mensaje->package->TELEFONO }}</td>
-                                            <td>{{ $mensaje->package->DESTINATARIO }}</td>
+                                            <td>
+                                                {{ $mensaje->id_telefono->CODIGO }}
+                                            </td>
                                             <td>{{ $mensaje->fecha_creacion }}</td>
 
                                             <td>

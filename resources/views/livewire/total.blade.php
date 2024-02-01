@@ -29,8 +29,6 @@
                         <table class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
-                                    <th><input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
-                                    </th>
                                     <th>Codigo de Rastreo</th>
                                     <th>Nombres del Remitente</th>
                                     <th>Telefono de Remitente</th>
@@ -60,8 +58,6 @@
                                 @foreach ($nationals as $national)
                                     @if ($national->ESTADO === 'ADMISION')
                                         <tr>
-                                            <td><input type="checkbox" wire:model="paquetesSeleccionados"
-                                                    value="{{ $national->id }}"></td>
                                             <td>{{ $national->CODIGO }}</td>
                                             <td>{{ $national->NOMBRESREMITENTE }}</td>
                                             <td>{{ $national->TELEFONOREMITENTE }}</td>

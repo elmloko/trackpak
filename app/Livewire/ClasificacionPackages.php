@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Package;
+use App\Models\Bag;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -71,14 +72,16 @@ class ClasificacionPackages extends Component
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-    
+        // Contar la cantidad de paquetes seleccionados
+        $cantidadPaquetes = count($paquetesSeleccionados);
+        // Obtener la ciudad del primer paquete (si existe)
+        $ciudadPaquete = $paquetesSeleccionados->isNotEmpty() ? $paquetesSeleccionados->first()->CUIDAD : null;
         foreach ($paquetesSeleccionados as $paquete) {
             if ($paquete) {
                 $paquete->ESTADO = 'DESPACHO';
                 $paquete->datedespachoclasificacion = now()->toDateTimeString();
                 $paquete->save();
             }
-    
             Event::create([
                 'action' => 'DESPACHO',
                 'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
@@ -86,7 +89,13 @@ class ClasificacionPackages extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-    
+        Bag::create([
+            'OFDESTINO' => $ciudadPaquete,
+            'PAQUETES' => $cantidadPaquetes,
+            'NRODESPACHO' => 'TuValorAqui',
+            'OFCAMBIO' => auth()->user()->Regional,
+            'ESTADO' => 'APERTURA',
+        ]);
         // Restablecer la selección
         $this->resetSeleccion();
     

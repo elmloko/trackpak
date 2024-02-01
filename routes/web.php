@@ -6,6 +6,7 @@ use App\Http\Controllers\NationalController;
 use App\Http\Controllers\MensajeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\BagController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleHasPermissionController;
@@ -190,6 +191,15 @@ Route::middleware('auth')->group(function () {
     Route::put('/mensaje/{mensaje}', [MensajeController::class, 'update'])->name('mensajes.update');
     Route::delete('/mensaje/{mensaje}', [MensajeController::class, 'destroy'])->name('mensajes.destroy');
 
+    //Sacas
+    Route::get('/bags', [BagController::class, 'index'])->name('bags.index');
+    Route::get('/bag/create', [BagController::class, 'create'])->name('bags.create');
+    // Route::get('bags/{bags}', [BagController::class, 'show'])->name('bags.show');
+    Route::post('/bag', [BagController::class, 'store'])->name('bags.store');
+    Route::get('/bag/{bag}/edit', [BagController::class, 'edit'])->name('bags.edit');
+    Route::put('/bag/{bag}', [BagController::class, 'update'])->name('bags.update');
+    Route::delete('/bag/{bag}', [BagController::class, 'destroy'])->name('bags.destroy');
+    Route::put('/bags/close/{id}', [BagController::class, 'closeExpedition'])->name('bags.closeExpedition');
     
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));

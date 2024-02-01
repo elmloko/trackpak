@@ -522,6 +522,18 @@ return [
                             'icon' => 'fas fa-paper-plane',
                             'can'  => 'packages.redirigidos',
                         ],
+                        [
+                            'text' => 'Apertura Despacho',
+                            'url' => 'bags',
+                            'icon' => 'fas fa-box-open',
+                            'can'  => 'packages.redirigidos',
+                        ],
+                        [
+                            'text' => 'Cierre Despacho',
+                            'url' => 'bags',
+                            'icon' => 'fas fa-box',
+                            'can'  => 'packages.redirigidos',
+                        ],
                     ],
                 ], 
                 [
