@@ -22,10 +22,6 @@ class Mensaje extends Model
 {
     
     static $rules = [
-		'estado' => 'required',
-		'mensajes' => 'required',
-		'observacion' => 'required',
-		'id_telefono' => 'required',
     ];
 
     protected $perPage = 20;
@@ -35,10 +31,16 @@ class Mensaje extends Model
      *
      * @var array
      */
-    protected $fillable = ['estado','mensajes','observacion','id_telefono','fecha_creacion'];
+    protected $fillable = ['estado','mensajes','observacion','Intentos','id_telefono','fecha_creacion','fecha_actualizacion'];
 
-      public function id_telefono()
-  {
-      return $this->belongsTo('App\Models\Package', 'id_telefono', 'id');
-}
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function package()
+    {
+        return $this->hasOne('App\Models\Package', 'id', 'id_telefono');
+    }
+    
+
 }

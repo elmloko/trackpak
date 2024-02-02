@@ -1,7 +1,7 @@
-@extends('adminlte::page')
-@section('title', 'Paquetes Ordinarios')
+@extends('layouts.app')
+
 @section('template_title')
-    Paqueteria Postal
+    {{ __('Update') }} Mensaje
 @endsection
 
 @section('content')
@@ -28,5 +28,4 @@
             </div>
         </div>
     </section>
-    @include('footer')
 @endsection

@@ -16,12 +16,11 @@
                                 {{ __('Mensaje') }}
                             </span>
 
-                            <div class="float-right">
-                                <a href="{{ route('mensajes.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
-                                    {{ __('Create New') }}
+                             <div class="float-right">
+                                <a href="{{ route('mensajes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
                                 </a>
-                            </div>
+                              </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -36,16 +35,13 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-
-                                        <th>Estado</th>
-                                        <th>Mensajes</th>
-                                        <th>Observacion</th>
-                                        <th>codigo</th>
-                                        <th>Telefono</th>
-
+                                        <th>Codigo de Rastreo</th>
                                         <th>Destinatario</th>
-
-                                        <th>Fecha Creacion</th>
+                                        <th>Telefono</th>
+										<th>Mensajes</th>
+										<th>Observacion</th>
+                                        <th>Estado</th>
+										<th>Fecha Enviado</th>
 
                                         <th></th>
                                     </tr>
@@ -53,31 +49,14 @@
                                 <tbody>
                                     @foreach ($mensajes as $mensaje)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-
-                                            <td>{{ $mensaje->estado }}</td>
+                                            <td>{{ $loop->index + 1 }}</td>
+                                            <td>{{ $codigos[$loop->index] }}</td>
+                                            <td>{{ $destinatario[$loop->index] }}</td>
+                                            <td>{{ $telefono[$loop->index] }}</td>
                                             <td>{{ $mensaje->mensajes }}</td>
                                             <td>{{ $mensaje->observacion }}</td>
-                                            <td>
-                                                {{ $mensaje->id_telefono->CODIGO }}
-                                            </td>
-                                            <td>{{ $mensaje->fecha_creacion }}</td>
-
-                                            <td>
-                                                <form action="{{ route('mensajes.destroy', $mensaje->id) }}"
-                                                    method="POST">
-                                                    {{-- <a class="btn btn-sm btn-primary "
-                                                        href="{{ route('mensajes.show', $mensaje->id) }}"><i
-                                                            class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a> --}}
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('mensajes.edit', $mensaje->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                </form>
-                                            </td>
+                                            <td>{{ $mensaje->estado }}</td>
+                                            <td>{{ $mensaje->fecha_actualizacion }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
