@@ -33,7 +33,7 @@
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
-                                <input type="number" wire:model="cantidadSacasManual" placeholder="Ingrese el número de sacas" />
+                                <input type="number" wire:model="cantidadSacas" placeholder="Ingrese el número de sacas" />
                                 <!-- Botón para cambiar el estado y despachar -->
                                 <button wire:click="cambiarEstado">Despachar</button>
                             @endhasrole

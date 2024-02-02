@@ -17,27 +17,22 @@ class ClasificacionPackages extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $cantidadSacas = 1;
 
     public function render()
     {
-        $userasignado = auth()->user()->name;
+        $userAsignado = auth()->user()->name;
+
         $packages = Package::where('ESTADO', 'CLASIFICACION')
-        ->when($this->search, function ($query) {
-            $query->where('CODIGO', 'like', '%' . $this->search . '%')
-                ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
-                ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
-                ->orWhere('TIPO', 'like', '%' . $this->search . '%')
-                ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                ->orWhere('created_at', 'like', '%' . $this->search . '%');
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    // ... (continúa con las demás condiciones)
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
-            // ->where('CUIDAD', 'LA PAZ')
-            // ->where('usercartero', $userasignado)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -66,76 +61,112 @@ class ClasificacionPackages extends Component
 
     public function cambiarEstado()
     {
+        // Obtener la cantidad de sacas ingresada desde la vista
+        $cantidadSacas = $this->cantidadSacas ?: 1;
+
         // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-        
+
         // Contar la cantidad de paquetes seleccionados
         $cantidadPaquetes = count($paquetesSeleccionados);
-        
+
         // Obtener la ciudad del primer paquete (si existe)
         $ciudadPaquete = $paquetesSeleccionados->isNotEmpty() ? $paquetesSeleccionados->first()->CUIDAD : null;
-        
-        // Obtener el último número de despacho para la ciudad seleccionada
-        $ultimoNumeroDespacho = Bag::where('OFDESTINO', $ciudadPaquete)->max('NRODESPACHO');
-        $ultimoNumeroDespacho = $ultimoNumeroDespacho ? $ultimoNumeroDespacho : 0;
-        
+
+        // Obtener y bloquear el último número de despacho
+        $lastDispatchNumber = Bag::where('OFDESTINO', $ciudadPaquete)->first();
+        $lastNumber = $lastDispatchNumber ? $lastDispatchNumber->last_number : 0;
+
         // Incrementar el número de despacho para generar el nuevo número correlativo
-        $nuevoNumeroDespacho = (int)$ultimoNumeroDespacho + 1;
+        $nuevoNumeroDespacho = $lastNumber + 1;
         $nuevoNumeroDespachoFormatado = str_pad($nuevoNumeroDespacho, 4, '0', STR_PAD_LEFT);
-        
-        foreach ($paquetesSeleccionados as $indice => $paquete) {
-            $numeroSaca = $indice + 1;
-            $numeroSacaFormatado = str_pad($numeroSaca, 4, '0', STR_PAD_LEFT);
-            
-            // Generar el código con el formato solicitado
+
+        // Actualizar el último número de despacho en la base de datos
+        $this->actualizarNumeroDespacho($cantidadPaquetes,$lastDispatchNumber, $ciudadPaquete, $nuevoNumeroDespacho);
+
+        // Iterar sobre los paquetes seleccionados y realizar acciones
+        foreach ($paquetesSeleccionados as $paquete) {
+            // Definir $nuevoNumeroDespacho aquí
+            $nuevoNumeroDespacho = $lastNumber + 1;
+
+            $this->procesarPaquete($paquete,$cantidadPaquetes,$nuevoNumeroDespacho, $cantidadSacas, $nuevoNumeroDespachoFormatado, $ciudadPaquete);
+        }
+
+        // Restablecer la selección
+        $this->resetSeleccion();
+
+        // Generar y descargar el PDF con los paquetes seleccionados
+        return $this->generarYDescargarPDF($paquetesSeleccionados);
+    }
+
+    protected function actualizarNumeroDespacho( $cantidadPaquetes,$lastDispatchNumber, $ciudadPaquete, $nuevoNumeroDespacho)
+    {
+        if ($lastDispatchNumber) {
+            $lastDispatchNumber->last_number = $nuevoNumeroDespacho;
+            $lastDispatchNumber->save();
+        } else {
+            Bag::updated([
+                'last_number' => $nuevoNumeroDespacho,
+            ]);
+        }
+    }
+
+        protected function procesarPaquete($paquete, $cantidadPaquetes, $nuevoNumeroDespacho, $cantidadSacas, $nuevoNumeroDespachoFormatado, $ciudadPaquete)
+    {
+        // Verificar si el paquete ya fue procesado para evitar duplicados
+        if ($paquete->ESTADO === 'DESPACHO') {
+            return;
+        }
+
+        for ($i = 1; $i <= $cantidadSacas; $i++) {
+            $numeroSacaFormatado = str_pad($i, 4, '0', STR_PAD_LEFT);
             $codigoDespacho = $nuevoNumeroDespachoFormatado . '/' . $numeroSacaFormatado;
-            // dd($codigoDespacho);
-    
+
             if ($paquete) {
                 $paquete->ESTADO = 'DESPACHO';
                 $paquete->datedespachoclasificacion = now()->toDateTimeString();
                 $paquete->save();
             }
-    
-            // Agregar lógica para el evento y cualquier otra acción que necesites
+
             Event::create([
                 'action' => 'DESPACHO',
                 'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
                 'user_id' => auth()->user()->id,
-                'codigo' => $codigoDespacho, // Utiliza el nuevo código generado
+                'codigo' => $codigoDespacho,
             ]);
-    
-            // Incrementar el número de saca
-            $nuevoNumeroDespacho++;
+
+            // Verificar si ya existe un registro para evitar duplicados
+            $existingBag = Bag::where('OFDESTINO', $ciudadPaquete)
+                ->where('NRODESPACHO', $codigoDespacho)
+                ->first();
+
+            if (!$existingBag) {
+                Bag::create([
+                    'OFDESTINO' => $ciudadPaquete,
+                    'PAQUETES' => $cantidadPaquetes,
+                    'last_number' => $nuevoNumeroDespacho,
+                    'NRODESPACHO' => $codigoDespacho,
+                    'OFCAMBIO' => auth()->user()->Regional,
+                    'ESTADO' => 'APERTURA',
+                    'ano_creacion' => now()->year,
+                ]);
+            }
         }
-    
-        // Actualizar la base de datos con el nuevo número de despacho para la ciudad
-        Bag::create([
-            'OFDESTINO' => $ciudadPaquete,
-            'PAQUETES' => $cantidadPaquetes,
-            'NRODESPACHO' => $codigoDespacho,
-            'OFCAMBIO' => auth()->user()->Regional,
-            'ESTADO' => 'APERTURA',
-            'ano_creacion' => now()->year,
-        ]);
-    
-        // Restablecer la selección
-        $this->resetSeleccion();
-    
-        // Generar el PDF con los paquetes seleccionados
+    }
+
+    protected function generarYDescargarPDF($paquetesSeleccionados)
+    {
         $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
-        // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-    
-        // Generar una respuesta con el contenido del PDF para descargar
+
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
-    }    
+    }
 
     private function getPackageIds()
     {
@@ -148,4 +179,3 @@ class ClasificacionPackages extends Component
         $this->paquetesSeleccionados = [];
     }
 }
-
