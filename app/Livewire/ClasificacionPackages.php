@@ -93,6 +93,7 @@ class ClasificacionPackages extends Component
             
             // Generar el código con el formato solicitado
             $codigoDespacho = $nuevoNumeroDespachoFormatado . '/' . $numeroSacaFormatado;
+            // dd($codigoDespacho);
     
             if ($paquete) {
                 $paquete->ESTADO = 'DESPACHO';
@@ -116,7 +117,7 @@ class ClasificacionPackages extends Component
         Bag::create([
             'OFDESTINO' => $ciudadPaquete,
             'PAQUETES' => $cantidadPaquetes,
-            'NRODESPACHO' => $nuevoNumeroDespachoFormatado,
+            'NRODESPACHO' => $codigoDespacho,
             'OFCAMBIO' => auth()->user()->Regional,
             'ESTADO' => 'APERTURA',
             'ano_creacion' => now()->year,
