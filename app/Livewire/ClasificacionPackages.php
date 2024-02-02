@@ -95,6 +95,7 @@ class ClasificacionPackages extends Component
             'NRODESPACHO' => 'TuValorAqui',
             'OFCAMBIO' => auth()->user()->Regional,
             'ESTADO' => 'APERTURA',
+            'ano_creacion' => now()->year,
         ]);
         // Restablecer la selección
         $this->resetSeleccion();
@@ -108,9 +109,7 @@ class ClasificacionPackages extends Component
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
-
     }
-    
 
     private function getPackageIds()
     {
