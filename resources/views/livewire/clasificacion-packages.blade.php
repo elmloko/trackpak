@@ -33,9 +33,10 @@
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
-                                <input type="number" wire:model="cantidadSacas" placeholder="Ingrese el número de sacas" />
+                                <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
+                                {{-- <input type="number" wire:model="cantidadSacas" placeholder="Ingrese el número de sacas" />
                                 <!-- Botón para cambiar el estado y despachar -->
-                                <button wire:click="cambiarEstado">Despachar</button>
+                                <button wire:click="cambiarEstado">Despachar</button> --}}
                             @endhasrole
                         </div>
                         {{-- <form action="{{ route('package.pdf.despachopdf') }}" method="POST" target="_blank">

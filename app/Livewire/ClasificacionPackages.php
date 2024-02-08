@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Package;
-use App\Models\Bag;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -17,22 +16,27 @@ class ClasificacionPackages extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
-    public $cantidadSacas = 1;
 
     public function render()
     {
-        $userAsignado = auth()->user()->name;
-
+        $userasignado = auth()->user()->name;
         $packages = Package::where('ESTADO', 'CLASIFICACION')
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                    // ... (continúa con las demás condiciones)
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
+                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
+                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
+            // ->where('CUIDAD', 'LA PAZ')
+            // ->where('usercartero', $userasignado)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -61,9 +65,6 @@ class ClasificacionPackages extends Component
 
     public function cambiarEstado()
     {
-        // Obtener la cantidad de sacas ingresada desde la vista
-        $cantidadSacas = $this->cantidadSacas ?: 1;
-
         // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
             ->when($this->selectedCity, function ($query) {
@@ -71,61 +72,7 @@ class ClasificacionPackages extends Component
             })
             ->get();
 
-        // Contar la cantidad de paquetes seleccionados
-        $cantidadPaquetes = count($paquetesSeleccionados);
-
-        // Obtener la ciudad del primer paquete (si existe)
-        $ciudadPaquete = $paquetesSeleccionados->isNotEmpty() ? $paquetesSeleccionados->first()->CUIDAD : null;
-
-        // Obtener y bloquear el último número de despacho
-        $lastDispatchNumber = Bag::where('OFDESTINO', $ciudadPaquete)->first();
-        $lastNumber = $lastDispatchNumber ? $lastDispatchNumber->last_number : 0;
-
-        // Incrementar el número de despacho para generar el nuevo número correlativo
-        $nuevoNumeroDespacho = $lastNumber + 1;
-        $nuevoNumeroDespachoFormatado = str_pad($nuevoNumeroDespacho, 4, '0', STR_PAD_LEFT);
-
-        // Actualizar el último número de despacho en la base de datos
-        $this->actualizarNumeroDespacho($cantidadPaquetes,$lastDispatchNumber, $ciudadPaquete, $nuevoNumeroDespacho);
-
-        // Iterar sobre los paquetes seleccionados y realizar acciones
         foreach ($paquetesSeleccionados as $paquete) {
-            // Definir $nuevoNumeroDespacho aquí
-            $nuevoNumeroDespacho = $lastNumber + 1;
-
-            $this->procesarPaquete($paquete,$cantidadPaquetes,$nuevoNumeroDespacho, $cantidadSacas, $nuevoNumeroDespachoFormatado, $ciudadPaquete);
-        }
-
-        // Restablecer la selección
-        $this->resetSeleccion();
-
-        // Generar y descargar el PDF con los paquetes seleccionados
-        return $this->generarYDescargarPDF($paquetesSeleccionados);
-    }
-
-    protected function actualizarNumeroDespacho( $cantidadPaquetes,$lastDispatchNumber, $ciudadPaquete, $nuevoNumeroDespacho)
-    {
-        if ($lastDispatchNumber) {
-            $lastDispatchNumber->last_number = $nuevoNumeroDespacho;
-            $lastDispatchNumber->save();
-        } else {
-            Bag::updated([
-                'last_number' => $nuevoNumeroDespacho,
-            ]);
-        }
-    }
-
-        protected function procesarPaquete($paquete, $cantidadPaquetes, $nuevoNumeroDespacho, $cantidadSacas, $nuevoNumeroDespachoFormatado, $ciudadPaquete)
-    {
-        // Verificar si el paquete ya fue procesado para evitar duplicados
-        if ($paquete->ESTADO === 'DESPACHO') {
-            return;
-        }
-
-        for ($i = 1; $i <= $cantidadSacas; $i++) {
-            $numeroSacaFormatado = str_pad($i, 4, '0', STR_PAD_LEFT);
-            $codigoDespacho = $nuevoNumeroDespachoFormatado . '/' . $numeroSacaFormatado;
-
             if ($paquete) {
                 $paquete->ESTADO = 'DESPACHO';
                 $paquete->datedespachoclasificacion = now()->toDateTimeString();
@@ -136,37 +83,24 @@ class ClasificacionPackages extends Component
                 'action' => 'DESPACHO',
                 'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
                 'user_id' => auth()->user()->id,
-                'codigo' => $codigoDespacho,
+                'codigo' => $paquete->CODIGO,
             ]);
-
-            // Verificar si ya existe un registro para evitar duplicados
-            $existingBag = Bag::where('OFDESTINO', $ciudadPaquete)
-                ->where('NRODESPACHO', $codigoDespacho)
-                ->first();
-
-            if (!$existingBag) {
-                Bag::create([
-                    'OFDESTINO' => $ciudadPaquete,
-                    'PAQUETES' => $cantidadPaquetes,
-                    'last_number' => $nuevoNumeroDespacho,
-                    'NRODESPACHO' => $codigoDespacho,
-                    'OFCAMBIO' => auth()->user()->Regional,
-                    'ESTADO' => 'APERTURA',
-                    'ano_creacion' => now()->year,
-                ]);
-            }
         }
-    }
 
-    protected function generarYDescargarPDF($paquetesSeleccionados)
-    {
+        // Restablecer la selección
+        $this->resetSeleccion();
+
+        // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
+        // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
 
+        // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
     }
+
 
     private function getPackageIds()
     {
