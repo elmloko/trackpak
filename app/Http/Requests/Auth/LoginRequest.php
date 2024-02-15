@@ -4,6 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
@@ -24,12 +25,25 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules(): array
+    public function rules(Request $request): array
     {
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'g-recaptcha-response' => ['required', 'captcha'],
         ];
+        // Crear una instancia de ReCaptcha con la clave secreta
+        $recaptcha = new \ReCaptcha\ReCaptcha(env('RECAPTCHA_SECRET_KEY'));
+
+        // Verificar el reCAPTCHA
+        $response = $recaptcha->verify($request->input('g-recaptcha-response'), $_SERVER['REMOTE_ADDR']);
+
+        // Si la verificación no es exitosa, redirigir con un mensaje de error
+        if (!$response->isSuccess()) {
+            throw ValidationException::withMessages([
+                'g-recaptcha-response' => [trans('validation.captcha')],
+            ]);
+        }
     }
 
     /**
@@ -50,6 +64,7 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+        
     }
 
     /**
