@@ -282,8 +282,7 @@
                         </div>
                     </div>
                 </div>
-                <div
-                    class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg">
+                <div class="flex flex-col w-5/6 lg:w-1/3 mx-auto lg:mx-0 rounded-lg bg-white mt-4 sm:-mt-6 shadow-lg">
                     <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                         <div class="w-full p-8 text-3xl font-bold text-center">Artículos u Objetos Permitidos</div>
                         <div class="h-1 w-full gradient my-0 py-0 rounded-t"></div>
@@ -402,11 +401,13 @@
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Condiciones de Uso</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Condiciones de
+                                Uso</a>
                         </li>
                         <li class="mt-2 inline-block mr-2 md:block md:mr-0">
                             <a href="#"
-                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Aviso de Privacidad</a>
+                                class="no-underline hover:underline text-while-800 hover:text-blue-500">Aviso de
+                                Privacidad</a>
                         </li>
                     </ul>
                 </div>
@@ -529,6 +530,9 @@
                 <p class="mb-2 text-lg text-while">#EstamosSaliendoAdelante #RumboalBicentenario</p>
                 <p class="mb-2 text-lg text-while">&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
                     Boliviana de Correos</p>
+                <a href="mailto:mespinozarojas46@gmail.com" class="opacity-75"
+                    title="Marco Antonio Espinoza Rojas">Copyright © MAER
+                    {{ date('Y') }} </a>
                 <p class="text-lg text-while">Contacto: (591-2) 2152423 - Av. Mariscal Santa Cruz Esq. C. Oruro Edif.
                     Telecomunicaciones - agbc@correos.gob.bo</p>
             </div>
@@ -537,17 +541,19 @@
     <!-- jQuery if you need it
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   -->
-  <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-27HR41ZF2X"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'G-27HR41ZF2X');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-27HR41ZF2X');
     </script>
     <script>
-        
         var scrollpos = window.scrollY;
         var header = document.getElementById("header");
         var navcontent = document.getElementById("nav-content");
