@@ -395,6 +395,7 @@ return [
                     'text' => 'Todos Paquetes',
                     'url' => 'packages',
                     'icon' => 'fas fa-box',
+                    'can'  => 'packages',
                 ],
                 [
                     'text' => 'Clasificacion',
@@ -605,15 +606,6 @@ return [
                         ],
                     ],
                 ],
-                // [
-                //     'text' => 'Almacen',
-                //     'icon' => 'fas fa-building',
-                //     'can'  => 'packages.inventario',
-                //     'submenu' => [
-                        
-                        
-                //     ],
-                // ],
             ],
         ],
         [
