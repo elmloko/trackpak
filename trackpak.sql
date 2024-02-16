@@ -58,9 +58,9 @@ CREATE TABLE IF NOT EXISTS `events` (
   PRIMARY KEY (`id`),
   KEY `events_user_id_foreign` (`user_id`),
   CONSTRAINT `events_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla trackpak.events: ~6.000 rows (aproximadamente)
+-- Volcando datos para la tabla trackpak.events: ~6.001 rows (aproximadamente)
 INSERT INTO `events` (`id`, `action`, `user_id`, `codigo`, `created_at`, `updated_at`, `descripcion`) VALUES
 	(1, 'DESPACHO', 32, 'UV512459512UZ', '2023-12-12 13:20:17', '2023-12-12 13:20:17', 'Destino de Clasificacion hacia Ventanilla'),
 	(2, 'DESPACHO', 32, 'UV623345981UZ', '2023-12-12 13:20:17', '2023-12-12 13:20:17', 'Destino de Clasificacion hacia Ventanilla'),
@@ -6087,7 +6087,8 @@ INSERT INTO `events` (`id`, `action`, `user_id`, `codigo`, `created_at`, `update
 	(6127, 'ENTREGADO', 25, 'UH052543869US', '2024-02-15 07:22:51', '2024-02-15 07:22:51', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
 	(6128, 'ENTREGADO', 25, 'UM908681366US', '2024-02-15 07:22:59', '2024-02-15 07:22:59', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
 	(6129, 'ENTREGADO', 25, 'UM980248632US', '2024-02-15 07:23:06', '2024-02-15 07:23:06', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
-	(6130, 'ENTREGADO', 33, 'UM975456779US', '2024-02-15 08:55:14', '2024-02-15 08:55:14', 'Entrega de paquete en ventanilla en Oficina Postal Regional');
+	(6130, 'ENTREGADO', 33, 'UM975456779US', '2024-02-15 08:55:14', '2024-02-15 08:55:14', 'Entrega de paquete en ventanilla en Oficina Postal Regional'),
+	(6131, 'ENTREGADO', 24, 'UM215269338US', '2024-02-16 08:38:21', '2024-02-16 08:38:21', 'Entrega de paquete en ventanilla en Oficina Postal Regional');
 
 -- Volcando estructura para tabla trackpak.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -6107,41 +6108,36 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- Volcando estructura para tabla trackpak.mensajes
 CREATE TABLE IF NOT EXISTS `mensajes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `estado` char(20) DEFAULT NULL,
-  `mensajes` varchar(255) DEFAULT NULL,
-  `observacion` varchar(255) DEFAULT NULL,
-  `id_telefono` bigint(20) unsigned DEFAULT NULL,
+  `estado` char(20) NOT NULL,
+  `mensajes` varchar(255) NOT NULL,
+  `observacion` varchar(255) NOT NULL,
+  `Intentos` int(11) DEFAULT 0,
+  `entrega` varchar(20) DEFAULT NULL,
+  `id_telefono` bigint(20) unsigned NOT NULL,
   `fecha_creacion` datetime DEFAULT current_timestamp(),
+  `fecha_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `telefono` (`id_telefono`),
   CONSTRAINT `telefono` FOREIGN KEY (`id_telefono`) REFERENCES `packages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=314 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
--- Volcando datos para la tabla trackpak.mensajes: ~23 rows (aproximadamente)
-INSERT INTO `mensajes` (`id`, `estado`, `mensajes`, `observacion`, `id_telefono`, `fecha_creacion`) VALUES
-	(1, 'Enviado', 'Hola usuario', 'numero correcto', 9361, '2023-12-19 18:06:09'),
-	(2, 'Enviado', 'hola usuario', 'numero incorrecto', 10261, '2023-12-19 18:06:09'),
-	(3, 'Enviado', 'hola usuario', 'numero incorrecto', 7045, '2023-12-19 18:06:09'),
-	(4, 'Enviado', 'hola usuario', 'numero incorrecto', 7069, '2023-12-19 18:06:09'),
-	(5, 'Enviado', 'hola usuario', 'numero incorrecto', 12800, '2023-12-19 18:06:09'),
-	(8, 'No Enviado', 'sin Mensaje', 'numero incorrecto', 7065, '2023-12-19 18:06:09'),
-	(9, 'No Enviado', 'sin Mensaje', 'numero incorrecto', 7054, '2023-12-19 18:06:09'),
-	(10, 'Enviado', ' Su paquete estÃƒÂ¡ listo para ser recogido en la agencia. Ã‚Â¡Hasta pronto!\n', 'El nÃƒÂºmero es correcto.', 7048, '2023-12-19 18:06:09'),
-	(11, 'No enviado', 'sin Mensaje', 'El nÃƒÂºmero es incorrecto.', 7061, '2023-12-19 18:06:09'),
-	(12, 'Leido', ' Estamos ansiosos por su llegada. Lo esperamos con entusiasmo.\r', 'El nÃƒÂºmero es correcto.', 7046, '2023-12-19 18:06:09'),
-	(13, 'No enviado', 'sin Mensaje', 'El nÃƒÂºmero es incorrecto.', 7058, '2023-12-19 18:06:09'),
-	(14, 'Leido', ' Le esperamos con gusto en la agencia postal. Su paquete le aguarda.\r', 'El nÃƒÂºmero es correcto.', 7049, '2023-12-19 18:06:09'),
-	(15, 'Leido', ' Estamos emocionados por su llegada. Le esperamos con anticipaciÃƒÂ³n.\r', 'El nÃƒÂºmero es correcto.', 7050, '2023-12-19 18:06:09'),
-	(16, 'No enviado', 'sin Mensaje', 'El nÃƒÂºmero es incorrecto.', 7056, '2023-12-19 18:06:09'),
-	(17, 'No enviado', 'sin Mensaje', 'El nÃƒÂºmero es incorrecto.', 7060, '2023-12-19 18:06:09'),
-	(18, 'Leido', ' Le esperamos con gusto en la agencia postal. Su paquete le aguarda.\r', 'El nÃƒÂºmero es correcto.', 7051, '2023-12-19 18:06:09'),
-	(19, 'No enviado', 'sin Mensaje', 'El nÃƒÂºmero es incorrecto.', 7055, '2023-12-19 18:06:09'),
-	(20, 'No enviado', 'sin Mensaje', 'El nÃƒÂºmero es incorrecto.', 7057, '2023-12-19 18:06:09'),
-	(21, 'Leido', ' Su paquete estÃƒÂ¡ listo para ser recogido en la agencia. Ã‚Â¡Hasta pronto!\r', 'El nÃƒÂºmero es correcto.', 7047, '2023-12-19 18:06:09'),
-	(22, 'Enviado', ' Por favor, recuerde recoger su paquete en la agencia nacional de correos.\r', 'El nÃƒÂºmero es correcto.', 7066, '2023-12-19 18:11:50'),
-	(23, 'Leido', ' Lo esperamos con gusto en la agencia de correos. Su paquete le aguarda.\r', 'El nÃƒÂºmero es correcto.', 7068, '2023-12-19 18:13:40'),
-	(24, 'Leido', ' Su paquete estÃƒÂ¡ resguardado y listo para ser retirado. Ã‚Â¡No demore!.', 'El nÃƒÂºmero es correcto.', 7070, '2023-12-19 18:20:17'),
-	(25, 'Leido', ' Estaremos atentos a su llegada. No dude en pasar por nuestra oficina.\r', 'El nÃƒÂºmero es correcto.', 7067, '2023-12-19 18:22:41');
+-- Volcando datos para la tabla trackpak.mensajes: ~15 rows (aproximadamente)
+INSERT INTO `mensajes` (`id`, `estado`, `mensajes`, `observacion`, `Intentos`, `entrega`, `id_telefono`, `fecha_creacion`, `fecha_actualizacion`) VALUES
+	(299, 'Enviado', 'Hola, espero se encuentre bien, Somos la Agencia Boliviana de Correos, mediante la presente nos permitimos comunicarle que llegó su paquete o sobre a La Paz, por lo que ya puede pasar a recogerlo en la Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Cent', 'El número es correcto.estregadoPaquete EntregadoPaquete Entregado', 0, 'VENTANILLA', 15229, '2024-02-15 16:23:00', '2024-02-15 21:17:14'),
+	(300, 'Recibido', 'Hola, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo por nuestra oficina Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicaciones La', 'El número es correcto.estregadoPaquete EntregadoPaquete Entregado', 0, 'VENTANILLA', 15230, '2024-02-15 16:23:13', '2024-02-15 21:17:14'),
+	(301, 'Recibido', 'La Agencia Boliviana de Correos, mediante la presente le comunica que ya llegó su paquete o sobre, ¡ya puede pasar a recogerlo! en nuestra oficina Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicaciones La Paz de LUN-VIE de 8:30 a 18:30 ', 'El número es correcto.estregadoPaquete EntregadoPaquete Entregado', 0, 'VENTANILLA', 15231, '2024-02-15 16:23:24', '2024-02-15 21:17:14'),
+	(302, 'Recibido', 'Hola, Somos la Agencia Boliviana de Correos, nos permitimos comunicarle que llegó su paquete o sobre, ¡ya puede pasar a recogerlo! por nuestra oficina Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicaciones La Paz de LUN-VIE de 8:30 a 18', 'El número es correcto.estregadoPaquete EntregadoPaquete Entregado', 0, 'VENTANILLA', 15232, '2024-02-15 16:23:36', '2024-02-15 21:17:14'),
+	(303, 'Recibido', 'Hola, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo por nuestra oficina Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicaciones La', 'El número es correcto.estregadoPaquete EntregadoPaquete Entregado', 0, 'VENTANILLA', 15233, '2024-02-15 16:23:48', '2024-02-15 21:17:14'),
+	(304, 'Recibido', 'Saludos, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo en la oficina de la AGBC Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicac', 'El número es correcto.estregadoPaquete EntregadoPaquete Entregado', 0, 'VENTANILLA', 15234, '2024-02-15 16:23:59', '2024-02-15 21:17:14'),
+	(305, 'Recibido', 'Hola, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo por nuestra oficina Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicaciones La', 'El número es correcto.estregadoPaquete EntregadoPaquete Entregado', 0, 'VENTANILLA', 15235, '2024-02-15 16:24:13', '2024-02-15 21:17:14'),
+	(306, 'Enviado', 'Saludos, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo por la oficina de la AGBC Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunica', 'El número es correcto. y el mensaje fue reenviado', 3, 'VENTANILLA', 15236, '2024-02-15 16:24:26', '2024-02-15 22:51:00'),
+	(307, 'Recibido', 'Saludos, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo por la oficina de la AGBC Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunica', 'El número es correcto. y el mensaje fue reenviado', 3, 'VENTANILLA', 15237, '2024-02-15 16:24:39', '2024-02-15 22:42:39'),
+	(308, 'Enviado', 'Hola, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo por nuestra oficina Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicaciones La', 'El número es correcto. y el mensaje fue reenviado', 3, 'VENTANILLA', 15238, '2024-02-15 16:24:52', '2024-02-15 22:49:00'),
+	(309, 'Recibido', 'Hola, Somos la Agencia Boliviana de Correos, mediante la presente nos permitimos comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo de la oficina ubicada en la Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunic', 'El número es correcto. y el mensaje fue reenviado', 3, 'VENTANILLA', 15239, '2024-02-15 16:25:06', '2024-02-15 22:43:20'),
+	(310, 'Enviado', 'Hola, espero se encuentre bien, Somos la Agencia Boliviana de Correos, mediante la presente nos permitimos comunicarle que llegó su paquete o sobre a La Paz, por lo que ya puede pasar a recogerlo en la Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Cent', 'El número es correcto. y el mensaje fue reenviado', 3, 'VENTANILLA', 15240, '2024-02-15 16:25:17', '2024-02-15 22:47:00'),
+	(311, 'Recibido', 'La Agencia Boliviana de Correos, mediante la presente le comunica que ya llegó su paquete o sobre, ¡ya puede pasar a recogerlo! en nuestra oficina Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicaciones La Paz de LUN-VIE de 8:30 a 18:30 ', 'El número es correcto. y el mensaje fue reenviado', 3, 'VENTANILLA', 15241, '2024-02-15 16:25:30', '2024-02-15 22:37:54'),
+	(312, 'Recibido', 'Saludos, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo por la oficina de la AGBC Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunica', 'El número es correcto. y el mensaje fue reenviado', 3, 'VENTANILLA', 15242, '2024-02-15 16:25:41', '2024-02-15 22:47:24'),
+	(313, 'Recibido', 'Saludos, Somos la Agencia Boliviana de Correos, mediante la presente nos complace comunicarle que llegó su paquete o sobre, por lo que ya puede pasar a recogerlo en la oficina de la AGBC Av. Mariscal Santa Cruz, Esq. Calle Oruro, Edif. Centro de Comunicac', 'El número es correcto. y el mensaje fue reenviado', 3, 'VENTANILLA', 15243, '2024-02-15 16:25:55', '2024-02-15 22:38:31');
 
 -- Volcando estructura para tabla trackpak.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -16301,7 +16297,7 @@ INSERT INTO `packages` (`id`, `CODIGO`, `DESTINATARIO`, `TELEFONO`, `PAIS`, `CUI
 	(23836, 'UE400363244US', 'ANA MARIA RUIZ RUIZ', 0, 'US', 'TARIJA', NULL, 'UNICA', 0.54, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '10', NULL, NULL, '2024-02-08 08:09:14', '2024-02-08 09:57:22', NULL, '2024-02-08 09:57:22', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23837, 'UN004928144US', 'FABIO DIAZ', 0, 'US', 'LA PAZ', 'OBRAJES', 'DD', 0.04, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-02-08 08:09:55', '2024-02-14 10:22:32', NULL, '2024-02-08 08:51:47', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL),
 	(23838, 'UX839406865FR', 'CARLOS MAURICIO LIMA ORGAZ', 0, 'FR', 'LA PAZ', 'LLOJETA', 'DD', 0.37, 'PAQUETE', 'SI', 'VENTANILLA', 'FRANCE', '5', NULL, NULL, '2024-02-08 08:12:22', '2024-02-14 10:18:32', NULL, '2024-02-08 08:51:47', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL),
-	(23839, 'UM215269338US', 'FABRICIO JUAN DE DIOS CADENA RODRIG', 73031014, 'US', 'LA PAZ', 'CEMENTERIO', 'DD', 0.40, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-02-08 08:14:10', '2024-02-14 10:21:00', NULL, '2024-02-08 08:51:47', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL),
+	(23839, 'UM215269338US', 'FABRICIO JUAN DE DIOS CADENA RODRIG', 73031014, 'US', 'LA PAZ', 'CEMENTERIO', 'DD', 0.40, 'PAQUETE', 'NO', 'ENTREGADO', 'UNITED STATES', '5', NULL, NULL, '2024-02-08 08:14:10', '2024-02-16 08:38:23', '2024-02-16 08:38:23', '2024-02-08 08:51:47', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL),
 	(23840, 'UJ156868982US', 'S/NGUSTAVO DEHNE BARBERY', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.03, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-02-08 08:16:31', '2024-02-08 08:30:17', NULL, '2024-02-08 08:30:17', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
 	(23841, 'UN002497441US', 'S-N', 72048213, 'US', 'LA PAZ', 'PERIFERICA', 'DD', 0.32, 'PAQUETE', 'NO', 'VENTANILLA', 'UNITED STATES', '5', NULL, NULL, '2024-02-08 08:16:41', '2024-02-14 10:25:38', NULL, '2024-02-08 08:51:47', NULL, 0, NULL, NULL, 'Reynaldo Quisbert Mamani', NULL, NULL, NULL),
 	(23842, 'UC000424693US', 'AUGUSTO MALDONADO', 0, 'US', 'COCHABAMBA', NULL, 'UNICA', 0.45, 'PAQUETE', 'NO', 'DESPACHO', 'UNITED STATES', '5', NULL, NULL, '2024-02-08 08:17:14', '2024-02-08 08:30:17', NULL, '2024-02-08 08:30:17', NULL, 0, NULL, NULL, 'Rodrigo Villa Sanjines', NULL, NULL, NULL),
@@ -16576,7 +16572,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `Regional`, `ci`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(7, 'Rodrigo Villa Sanjines', 'rodrigo.villa@correos.gob.bo', NULL, '$2y$10$b6aDZSzXjhB8LyewKqoEjOAvIeYFks32wmX/teQfsLn/Bz43mccxK', 'LA PAZ', 9883740, 'BCNznTKjpdIXywjclqSiBJwBvYgi6r2dEkHO9LS6bOEZq1PhzSt4Y3mWYYKn', '2023-10-26 18:19:40', '2023-10-26 18:19:40'),
 	(8, 'Victor Antonio Tapia Quisbert', 'victor.tapia@correos.gob.bo', NULL, '$2y$10$gtWuAzWdTp9ZB9IWoqxDWu6z/jLb3Za86w8BNHszGQMEHfmY08xuq', 'LA PAZ', 6978733, NULL, '2023-10-26 18:20:40', '2023-10-26 18:20:40'),
-	(20, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$qqtW5Vo8krRvo5H.5JhKLOyHNpBNXtLe2Tk2//tMyxtb54E5l/t22', 'LA PAZ', 10909669, 'fpu2Ce1D5qlyMmop7zWZU4piy7QITEtU9q3g9DS2ykIrBLPiSm4zg0UhUNbP', '2023-11-17 18:01:08', '2023-11-29 18:58:26'),
+	(20, 'Marco Antonio Espinoza Rojas', 'marco.espinoza@correos.gob.bo', NULL, '$2y$10$qqtW5Vo8krRvo5H.5JhKLOyHNpBNXtLe2Tk2//tMyxtb54E5l/t22', 'LA PAZ', 10909669, 'HIyQCfkBtY7wnmJ0zsUpR6LBIeDQypPWeCSSFlVoIaJ2QULeBuYykDRx5GCY', '2023-11-17 18:01:08', '2023-11-29 18:58:26'),
 	(21, 'Jose Luis Rodriguez Alvarez', 'jose.rodriguez@correos.gob.bo', NULL, '$2y$10$efOk9thUfdZbrMdVBnALPukoqJlqDJNI490CbFH68Mql69lFZBTQC', 'LA PAZ', 6950366, NULL, '2023-11-17 18:07:31', '2023-11-17 18:07:31'),
 	(22, 'Wike Mamani Apaza', 'wike.mamani@correos.gob.bo', NULL, '$2y$10$RS4SgMBy8.NiujCGasv1x.Bo9GIJPgHWYhNqzlqEOpMezzMi6Itma', 'LA PAZ', 6841118, 'xvDjF6SGhcFUU45a9qsZKtmFEzVqN5HMVj560BPGgCND9f8VVTdNSdnOJD9J', '2023-11-17 18:14:21', '2023-11-17 18:14:21'),
 	(23, 'Angel Gaston Zapata Ramos', 'angel.zapata@correos.gob.bo', NULL, '$2y$10$Qin2RlqRtzCo5/DsitohMOGIy85vlx6OZ.530TvxRSKBJjMMWmG36', 'LA PAZ', 13054887, NULL, '2023-11-27 15:46:35', '2023-11-27 15:46:35'),
