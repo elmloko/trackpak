@@ -175,7 +175,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/national/total', [NationalController::class, 'total'])->name('national.total');
     Route::get('/national/despachoadmision', [NationalController::class, 'despachoadmision'])->name('national.despachoadmision');
     //Eventos
-    Route::get('/events', [EventController::class, 'index'])->middleware('can:users.index')->name('events.index');
+    Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::get('events/{events}', [EventController::class, 'show'])->name('events.show');
     Route::post('/events', [EventController::class, 'store'])->name('events.store');

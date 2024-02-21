@@ -612,7 +612,7 @@ return [
             'text' => 'Eventos',
             'url' => 'events',
             'icon' => 'fas fa-calendar-alt',
-            'can'  => 'users.index',
+            'can'  => 'packages',
         ],
         [
             'text' => 'Mensajeria',
