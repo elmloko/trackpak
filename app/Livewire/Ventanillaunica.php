@@ -25,6 +25,7 @@ class Ventanillaunica extends Component
                     ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
                     ->orWhere('ZONA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
