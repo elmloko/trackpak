@@ -21,6 +21,7 @@ class SearchPackages extends Component
             ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
             ->orWhere('ZONA', 'like', '%' . $this->search . '%')
             ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+            ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
             ->orWhere('PESO', 'like', '%' . $this->search . '%')
             ->orWhere('TIPO', 'like', '%' . $this->search . '%')
             ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
