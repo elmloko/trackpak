@@ -1093,7 +1093,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-6">
+                    {{-- <div class="col-lg-3 col-6">
                         <div class="small-box bg-light">
                             <div class="inner">
                                 <h3>{{ $totalmensajelei }}</h3>
@@ -1106,7 +1106,7 @@
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
