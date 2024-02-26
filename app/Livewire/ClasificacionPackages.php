@@ -106,7 +106,7 @@ class ClasificacionPackages extends Component
     {
         return Package::where('ESTADO', 'CLASIFICACION')->pluck('id')->toArray();
     }
-
+    // Restores paquetes
     private function resetSeleccion()
     {
         $this->selectAll = false;
