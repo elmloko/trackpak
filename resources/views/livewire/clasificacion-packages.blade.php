@@ -33,11 +33,8 @@
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
-                                {{-- <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button> --}}
-                                @livewire('modal-clasif')
-                                {{-- <input type="number" wire:model="cantidadSacas" placeholder="Ingrese el número de sacas" />
-                                <!-- Botón para cambiar el estado y despachar -->
-                                <button wire:click="cambiarEstado">Despachar</button> --}}
+                                <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
+                                <input type="checkbox" wire:model="findespacho"><p>Finalizar despacho</p>
                             @endhasrole
                         </div>
                         {{-- <form action="{{ route('package.pdf.despachopdf') }}" method="POST" target="_blank">
@@ -74,7 +71,6 @@
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
                                         <th>Fecha Ingreso</th>
-                                        {{-- <th>Cartero</th> --}}
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -98,7 +94,6 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->created_at }}</td>
-                                                {{-- <td>{{ $package->usercartero }}</td> --}}
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|Clasificacion')
                                                         <div class="row">
@@ -124,7 +119,6 @@
                                                         </div>
                                                     @endhasrole
                                                 </td>
-
                                             </tr>
                                         @endif
                                     @endforeach
@@ -149,11 +143,6 @@
 </div>
 
 <script>
-    document.addEventListener('livewire:load', function() {
-        Livewire.on('show-modal', function() {
-            $('#exampleModal').modal('show');
-        });
-    });
     document.addEventListener('DOMContentLoaded', function() {
         // Función para actualizar las opciones de ventanilla
         function actualizarVentanillas(ciudadSelect, ventanillaSelect, ventanillasPorCiudad) {

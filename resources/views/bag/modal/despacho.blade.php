@@ -15,10 +15,15 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 {{ Form::label('NUMERO DE SACAS') }}
                                 {{ Form::number('NROSACAS', $bag->NROSACAS, ['class' => 'form-control' . ($errors->has('NROSACAS') ? ' is-invalid' : ''), 'placeholder' => 'Ingrese Numero de Sacas']) }}
                                 {!! $errors->first('NROSACAS', '<div class="invalid-feedback">:message</div>') !!}
+                            </div> --}}
+                            <div class="form-group">
+                                {{ Form::label('ITINERARIO') }}
+                                {{ Form::select('ITINERARIO', ['POR AVION' => 'POR AVION', 'POR SUPERFICIE' => 'POR SUPERFICIE'], $bag->OFCAMBIO, ['class' => 'form-control' . ($errors->has('ITINERARIO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el metodo de envio', 'id' => 'ciudad-select']) }}
+                                {!! $errors->first('ITINERARIO', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -36,11 +41,7 @@
                                 ]) }}
                                 {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
-                            <div class="form-group">
-                                {{ Form::label('ITINERARIO') }}
-                                {{ Form::select('ITINERARIO', ['POR AVION' => 'POR AVION', 'POR SUPERFICIE' => 'POR SUPERFICIE'], $bag->OFCAMBIO, ['class' => 'form-control' . ($errors->has('ITINERARIO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el metodo de envio', 'id' => 'ciudad-select']) }}
-                                {!! $errors->first('ITINERARIO', '<div class="invalid-feedback">:message</div>') !!}
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
