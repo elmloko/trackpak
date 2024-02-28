@@ -16,6 +16,7 @@ class ClasificacionPackages extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $showModal = false;
 
     public function render()
     {
@@ -100,7 +101,17 @@ class ClasificacionPackages extends Component
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
     }
+    // Método para abrir el modal
+    public function openModal()
+    {
+        $this->showModal = true;
+    }
 
+    // Método para cerrar el modal
+    public function closeModal()
+    {
+        $this->showModal = false;
+    }
 
     private function getPackageIds()
     {

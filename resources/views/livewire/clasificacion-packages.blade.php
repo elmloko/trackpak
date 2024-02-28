@@ -33,7 +33,8 @@
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
-                                <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
+                                {{-- <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button> --}}
+                                @livewire('modal-clasif')
                                 {{-- <input type="number" wire:model="cantidadSacas" placeholder="Ingrese el número de sacas" />
                                 <!-- Botón para cambiar el estado y despachar -->
                                 <button wire:click="cambiarEstado">Despachar</button> --}}
@@ -53,81 +54,82 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         @if ($packages->count())
-                                <table class="table table-striped table-hover">
-                                    <thead class="thead">
-                                        <tr>
-                                            <th><input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
-                                            </th>
-                                            <th>No</th>
-                                            <th>Código Rastreo</th>
-                                            <th>Destinatario</th>
-                                            <th>Teléfono</th>
-                                            <th>País</th>
-                                            <th>Ciudad</th>
-                                            <th>Ventanilla</th>
-                                            <th>Peso (gr.)</th>
-                                            <th>Tipo</th>
-                                            <th>Nro Casilla</th>
-                                            <th>Estado</th>
-                                            <th>Observaciones</th>
-                                            <th>Aduana</th>
-                                            <th>Fecha Ingreso</th>
-                                            {{-- <th>Cartero</th> --}}
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($packages as $package)
-                                            @if ($package->ESTADO === 'CLASIFICACION')
-                                                <tr>
-                                                    <td><input type="checkbox" wire:model="paquetesSeleccionados"
-                                                            value="{{ $package->id }}"></td>
-                                                    <td>{{ $package->id }}</td>
-                                                    <td>{{ $package->CODIGO }}</td>
-                                                    <td>{{ $package->DESTINATARIO }}</td>
-                                                    <td>{{ $package->TELEFONO }}</td>
-                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                    <td>{{ $package->CUIDAD }}</td>
-                                                    <td>{{ $package->VENTANILLA }}</td>
-                                                    <td>{{ $package->PESO }}</td>
-                                                    <td>{{ $package->TIPO }}</td>
-                                                    <td>{{ $package->nrocasilla }}</td>
-                                                    <td>{{ $package->ESTADO }}</td>
-                                                    <td>{{ $package->OBSERVACIONES }}</td>
-                                                    <td>{{ $package->ADUANA }}</td>
-                                                    <td>{{ $package->created_at }}</td>
-                                                    {{-- <td>{{ $package->usercartero }}</td> --}}
-                                                    <td>
-                                                        @hasrole('SuperAdmin|Administrador|Clasificacion')
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <a class="btn btn-sm btn-success"
-                                                                        href="{{ route('packages.edit', $package->id) }}">
-                                                                        <i class="fa fa-fw fa-edit"></i>
-                                                                        {{ __('Editar') }}
-                                                                    </a>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <form
-                                                                        action="{{ route('packages.destroy', $package->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <button type="submit" class="btn btn-danger btn-sm">
-                                                                            <i class="fa fa-fw fa-trash"></i>
-                                                                            {{ __('Eliminar') }}
-                                                                        </button>
-                                                                    </form>
-                                                                </div>
+                            <table class="table table-striped table-hover">
+                                <thead class="thead">
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
+                                        </th>
+                                        <th>No</th>
+                                        <th>Código Rastreo</th>
+                                        <th>Destinatario</th>
+                                        <th>Teléfono</th>
+                                        <th>País</th>
+                                        <th>Ciudad</th>
+                                        <th>Ventanilla</th>
+                                        <th>Peso (gr.)</th>
+                                        <th>Tipo</th>
+                                        <th>Nro Casilla</th>
+                                        <th>Estado</th>
+                                        <th>Observaciones</th>
+                                        <th>Aduana</th>
+                                        <th>Fecha Ingreso</th>
+                                        {{-- <th>Cartero</th> --}}
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($packages as $package)
+                                        @if ($package->ESTADO === 'CLASIFICACION')
+                                            <tr>
+                                                <td><input type="checkbox" wire:model="paquetesSeleccionados"
+                                                        value="{{ $package->id }}"></td>
+                                                <td>{{ $package->id }}</td>
+                                                <td>{{ $package->CODIGO }}</td>
+                                                <td>{{ $package->DESTINATARIO }}</td>
+                                                <td>{{ $package->TELEFONO }}</td>
+                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
+                                                <td>{{ $package->CUIDAD }}</td>
+                                                <td>{{ $package->VENTANILLA }}</td>
+                                                <td>{{ $package->PESO }}</td>
+                                                <td>{{ $package->TIPO }}</td>
+                                                <td>{{ $package->nrocasilla }}</td>
+                                                <td>{{ $package->ESTADO }}</td>
+                                                <td>{{ $package->OBSERVACIONES }}</td>
+                                                <td>{{ $package->ADUANA }}</td>
+                                                <td>{{ $package->created_at }}</td>
+                                                {{-- <td>{{ $package->usercartero }}</td> --}}
+                                                <td>
+                                                    @hasrole('SuperAdmin|Administrador|Clasificacion')
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <a class="btn btn-sm btn-success"
+                                                                    href="{{ route('packages.edit', $package->id) }}">
+                                                                    <i class="fa fa-fw fa-edit"></i>
+                                                                    {{ __('Editar') }}
+                                                                </a>
                                                             </div>
-                                                        @endhasrole
-                                                    </td>
+                                                            <div class="col-md-6">
+                                                                <form
+                                                                    action="{{ route('packages.destroy', $package->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                                        <i class="fa fa-fw fa-trash"></i>
+                                                                        {{ __('Eliminar') }}
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    @endhasrole
+                                                </td>
 
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
                             <div class="row mt-3">
                                 <div class="col-md-6">
                                     {{ $packages->links() }}
@@ -145,7 +147,13 @@
         </div>
     </div>
 </div>
+
 <script>
+    document.addEventListener('livewire:load', function() {
+        Livewire.on('show-modal', function() {
+            $('#exampleModal').modal('show');
+        });
+    });
     document.addEventListener('DOMContentLoaded', function() {
         // Función para actualizar las opciones de ventanilla
         function actualizarVentanillas(ciudadSelect, ventanillaSelect, ventanillasPorCiudad) {
@@ -167,7 +175,7 @@
         // Obtiene referencias a los elementos de ciudad y ventanilla para el formulario de Excel
         const ciudadSelectExcel = document.querySelector('form[name="excelForm"] select[name="ciudad"]');
         const ventanillaSelectExcel = document.querySelector(
-        'form[name="excelForm"] select[name="ventanilla"]');
+            'form[name="excelForm"] select[name="ventanilla"]');
 
         // Define las opciones de ventanilla por ciudad para el formulario de Excel
         const ventanillasPorCiudadExcel = {
@@ -216,4 +224,3 @@
         actualizarVentanillas(ciudadSelectPDF, ventanillaSelectPDF, ventanillasPorCiudadPDF);
     });
 </script>
-
