@@ -53,11 +53,9 @@
                             <tbody>
                                 @foreach ($bags as $bag)
                                     <tr>
-                                        <td>{{ $bag->NRODESPACHO }}</td>
+                                        <td>{{ $bag->NROSACA }} / {{ $bag->NRODESPACHO }}</td>
                                         <td>{{ $bag->OFCAMBIO }}</td>
                                         <td>{{ $bag->OFDESTINO }}</td>
-                                        {{-- <td>{{ $bag->NROSACAS }}</td> --}}
-                                        {{-- <td>{{ $bag->PESO }}</td> --}}
                                         <td>{{ $bag->PAQUETES }}</td>
                                         {{-- <td>{{ $bag->ITINERARIO }}</td> --}}
                                         <td>{{ $bag->ESTADO }}</td>

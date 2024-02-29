@@ -16,23 +16,30 @@ class ClasificacionPackages extends Component
     public $search = '';
     public $selectAll = false;
     public $paquetesSeleccionados = [];
+    public $selectedCity = '';
     public $findespacho = false;
-    public $numeroSacaFormatado = 1; // Inicializamos el número de saca en 1
-    public $numeroDespachoFormatado = '001'; // Inicializamos el número de despacho en 001
+    public $nroDespacho = '001';
 
     public function render()
     {
+        $userasignado = auth()->user()->name;
         $packages = Package::where('ESTADO', 'CLASIFICACION')
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('PAIS', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
+            ->when($this->selectedCity, function ($query) {
+                $query->where('CUIDAD', $this->selectedCity);
+            })
+            // ->where('CUIDAD', 'LA PAZ')
+            // ->where('usercartero', $userasignado)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -61,109 +68,88 @@ class ClasificacionPackages extends Component
 
     public function cambiarEstado()
     {
-        // Incrementar el número de sacas solo cuando se hace clic en "Despachar"
-        $this->numeroSacaFormatado++;
-
-        // Obtener el estado actual del checkbox "Finalizar despacho"
-        $findespacho = $this->findespacho;
-
-        // Reiniciar el número de sacas y el número de despacho si se marca el checkbox "Finalizar despacho"
-        if ($findespacho) {
-            $this->numeroSacaFormatado = 1;
-            $this->numeroDespachoFormatado = 1;
+        // Obtener el último NROSACA de la base de datos
+        $ultimoSaco = Bag::max('NROSACA');
+    
+        // Incrementar el número de SACO solo si findespacho está marcado
+        if ($this->findespacho) {
+            $nroSaco = str_pad($ultimoSaco + 1, 4, '0', STR_PAD_LEFT);
         } else {
-            // Incrementar el número de despacho solo si el checkbox no está marcado
-            $this->numeroDespachoFormatado++;
+            if ($ultimoSaco === null) {
+                $nroSaco = '0001'; // Si no hay ningún valor, comenzar desde '0001'
+            } else {
+                $nroSaco = $ultimoSaco; // Mantener el mismo número de SACO
+            }
         }
-
-        // Formatear el número de despacho
-        $nuevoNumeroDespachoFormatado = str_pad($this->numeroDespachoFormatado, 3, '0', STR_PAD_LEFT);
-
-        // Calcular el número de saca actualizado
-        $numeroSacaFormatado = str_pad($this->numeroSacaFormatado, 3, '0', STR_PAD_LEFT);
-
+    
+        // Incrementar el número de despacho solo si findespacho no está marcado
+        if (!$this->findespacho) {
+            $ultimoDespacho = Bag::max('NRODESPACHO');
+            $this->nroDespacho = str_pad($ultimoDespacho + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            $this->nroDespacho = '0001'; // Resetear a '001' si findespacho está marcado
+        }
+    
         // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
-            ->where('ESTADO', 'CLASIFICACION')
+            ->when($this->selectedCity, function ($query) {
+                $query->where('CUIDAD', $this->selectedCity);
+            })
             ->get();
-
-        // Iterar sobre los paquetes seleccionados y realizar acciones
+    
         foreach ($paquetesSeleccionados as $paquete) {
-            // Procesar el paquete utilizando la función auxiliar
-            $this->procesarPaquete($paquete, $nuevoNumeroDespachoFormatado, $numeroSacaFormatado);
-
-            // Actualizar el estado del paquete
-            $paquete->ESTADO = 'DESPACHADO';
-            $paquete->save();
+            if ($paquete) {
+                $paquete->ESTADO = 'DESPACHO';
+                $paquete->datedespachoclasificacion = now()->toDateTimeString();
+                $paquete->save();
+            }
+    
+            Event::create([
+                'action' => 'DESPACHO',
+                'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+            ]);
         }
-
+    
+        // Crear la nueva bolsa
+        Bag::create([
+            'NRODESPACHO' => $this->nroDespacho,
+            'NROSACA' => $nroSaco, // Asignar el número de SACO
+            'ESTADO' => 'APERTURA',
+            'ano_creacion' => date('Y'),
+            'created_at' => now(),
+            'PAQUETES' => $paquetesSeleccionados->count(),
+            'PESO' => $paquetesSeleccionados->sum('PESO'),
+            'ITINERARIO' => $paquetesSeleccionados->pluck('CUIDAD')->implode(', '),
+            'OFCAMBIO' => auth()->user()->Regional,
+            'OFDESTINO' => $paquetesSeleccionados->first()->CUIDAD,
+        ]);
+    
         // Restablecer la selección
         $this->resetSeleccion();
-
-        // Generar y descargar el PDF con los paquetes seleccionados
-        return $this->generarYDescargarPDF($paquetesSeleccionados);
-    }
-
-    protected function procesarPaquete($paquete, $nuevoNumeroDespachoFormatado, $numeroSacaFormatado)
-    {
-        // Calcular el código de despacho
-        $codigoDespacho = $nuevoNumeroDespachoFormatado . '/' . $numeroSacaFormatado;
-
-        // Obtener los paquetes seleccionados y actualizar su estado
-        $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
-        ->where('ESTADO', 'CLASIFICACION')
-        ->get();
-        // Contar el número de paquetes seleccionados
-        $numeroPaquetesSeleccionados = count($paquetesSeleccionados);
-        // Crear un evento para el despacho
-        Event::create([
-            'action' => 'DESPACHO',
-            'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
-            'user_id' => auth()->user()->id,
-            'codigo' => $codigoDespacho,
-        ]);
-
-        // Obtener la ciudad del paquete
-        $ciudad = $paquete->CUIDAD;
-
-        // Crear o actualizar la bolsa de despacho
-        Bag::updateOrCreate(
-            [
-                'OFDESTINO' => $ciudad, // Actualizar OFDESTINO con la ciudad del paquete
-                'NRODESPACHO' => $codigoDespacho,
-            ],
-            [
-                'PAQUETES' => $numeroPaquetesSeleccionados,
-                'OFCAMBIO' => auth()->user()->Regional,
-                'ESTADO' => 'APERTURA',
-                'ano_creacion' => now()->year, // Asignando el año actual como valor para 'ano_creacion'
-            ]
-        );
-    }
-
-    protected function generarYDescargarPDF($paquetesSeleccionados)
-    {
+    
+        // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
+        // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-
+    
+        // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
     }
+    
 
     private function getPackageIds()
     {
         return Package::where('ESTADO', 'CLASIFICACION')->pluck('id')->toArray();
     }
 
+    // Restaurar selección
     private function resetSeleccion()
     {
         $this->selectAll = false;
         $this->paquetesSeleccionados = [];
-    }
-
-    public function contarPaquetesSeleccionados()
-    {
-        return count($this->paquetesSeleccionados);
     }
 }

@@ -8,6 +8,7 @@ class Bag extends Model
 {
     static $rules = [
         'NRODESPACHO' => 'required',
+        'NROSACA' => 'required',
         'OFCAMBIO' => 'required',
         'OFDESTINO' => 'required',
         'NROSACAS' => 'required',
@@ -20,7 +21,7 @@ class Bag extends Model
     protected $table = 'bags';
     protected $perPage = 20;
 
-    protected $fillable = ['NRODESPACHO', 'OFCAMBIO', 'OFDESTINO', 'NROSACAS', 'PESO', 'PAQUETES', 'ITINERARIO', 'ESTADO', 'ano_creacion'];
+    protected $fillable = ['NRODESPACHO', 'OFCAMBIO', 'OFDESTINO', 'NROSACAS', 'PESO', 'PAQUETES', 'ITINERARIO', 'ESTADO', 'ano_creacion','NROSACA'];
 
     public function packagesHasBag()
     {
