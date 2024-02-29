@@ -17,6 +17,7 @@ class Bag extends Model
         'ESTADO' => 'required',
     ];
 
+    protected $table = 'bags';
     protected $perPage = 20;
 
     protected $fillable = ['NRODESPACHO', 'OFCAMBIO', 'OFDESTINO', 'NROSACAS', 'PESO', 'PAQUETES', 'ITINERARIO', 'ESTADO', 'ano_creacion'];

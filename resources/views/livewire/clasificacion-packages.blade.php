@@ -33,8 +33,11 @@
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
-                                <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
-                                <input type="checkbox" wire:model="findespacho"><p>Finalizar despacho</p>
+                                <button wire:click="cambiarEstado" class="btn btn-warning">
+                                    {{ __('Despachar') }}
+                                </button>
+                                <input type="checkbox" wire:model="findespacho" id="findespacho">
+                                <label for="findespacho">{{ __('Finalizar despacho') }}</label>
                             @endhasrole
                         </div>
                         {{-- <form action="{{ route('package.pdf.despachopdf') }}" method="POST" target="_blank">
