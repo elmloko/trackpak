@@ -112,8 +112,11 @@ class DashboardController extends Controller
         $totallpret = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'RETORNO')->count();
         $totallprep = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'REPARTIDO')->count();
         $hoylpent = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'REPARTIDO')->whereDate('deleted_at', today())->count();
-        
-        $totalmensajeenv = $mensaje->where('estado', 'Enviado')->count();
+
+        $totalmensajeenv = $mensaje->where('estado', 'Enviado')->count()
+        + $mensaje->where('estado', 'Recibido')->count()
+        + $mensaje->where('estado', 'Leído')->count();
+    
         $totalmensajelei = $mensaje->where('estado', 'Leído')->count();
         $totalmensajenenv = $mensaje->where('estado', 'No enviado')->count();
         $totalmensaje = $mensaje->count();
