@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use App\Models\Bag;
+use App\Models\PackagesHasBag;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -70,7 +71,7 @@ class ClasificacionPackages extends Component
     {
         // Obtener el último NROSACA de la base de datos
         $ultimoSaco = Bag::max('NROSACA');
-    
+
         // Incrementar el número de SACO solo si findespacho está marcado
         if ($this->findespacho) {
             $nroSaco = str_pad($ultimoSaco + 1, 4, '0', STR_PAD_LEFT);
@@ -81,7 +82,7 @@ class ClasificacionPackages extends Component
                 $nroSaco = $ultimoSaco; // Mantener el mismo número de SACO
             }
         }
-    
+
         // Incrementar el número de despacho solo si findespacho no está marcado
         if (!$this->findespacho) {
             $ultimoDespacho = Bag::max('NRODESPACHO');
@@ -89,21 +90,21 @@ class ClasificacionPackages extends Component
         } else {
             $this->nroDespacho = '0001'; // Resetear a '001' si findespacho está marcado
         }
-    
+
         // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-    
+
         foreach ($paquetesSeleccionados as $paquete) {
             if ($paquete) {
                 $paquete->ESTADO = 'DESPACHO';
                 $paquete->datedespachoclasificacion = now()->toDateTimeString();
                 $paquete->save();
             }
-    
+
             Event::create([
                 'action' => 'DESPACHO',
                 'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
@@ -111,9 +112,9 @@ class ClasificacionPackages extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-    
+
         // Crear la nueva bolsa
-        Bag::create([
+        $bag = Bag::create([
             'NRODESPACHO' => $this->nroDespacho,
             'NROSACA' => $nroSaco, // Asignar el número de SACO
             'ESTADO' => 'APERTURA',
@@ -125,21 +126,30 @@ class ClasificacionPackages extends Component
             'OFCAMBIO' => auth()->user()->Regional,
             'OFDESTINO' => $paquetesSeleccionados->first()->CUIDAD,
         ]);
-    
+
+        // Vincular los paquetes seleccionados con la bolsa
+        foreach ($paquetesSeleccionados as $paquete) {
+            // Crear la relación en la tabla pivote 'packages_has_bags'
+            PackagesHasBag::create([
+                'bags_id' => $bag->id,  // Usar el id de la bolsa creada
+                'packages_id' => $paquete->id,
+            ]);
+        }
+
         // Restablecer la selección
         $this->resetSeleccion();
-    
+
         // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-    
+
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
     }
-    
+
 
     private function getPackageIds()
     {
