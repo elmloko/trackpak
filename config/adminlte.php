@@ -531,8 +531,8 @@ return [
                         ],
                         [
                             'text' => 'Cierre Despacho',
-                            'url' => 'bags',
-                            'icon' => 'fas fa-box',
+                            'url' => 'bag/bagsclose',
+                            'icon' => 'fas fa-box-open',
                             'can'  => 'packages.redirigidos',
                         ],
                     ],

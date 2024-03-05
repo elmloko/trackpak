@@ -122,7 +122,6 @@ class ClasificacionPackages extends Component
             'created_at' => now(),
             'PAQUETES' => $paquetesSeleccionados->count(),
             'PESO' => $paquetesSeleccionados->sum('PESO'),
-            'ITINERARIO' => $paquetesSeleccionados->pluck('CUIDAD')->implode(', '),
             'OFCAMBIO' => auth()->user()->Regional,
             'OFDESTINO' => $paquetesSeleccionados->first()->CUIDAD,
         ]);

@@ -72,7 +72,6 @@ class BagController extends Controller
 
         // Actualiza los campos adicionales
         $bag->update([
-            'NROSACAS' => $request->input('NROSACAS'),
             'PESO' => $request->input('PESO'),
             'ITINERARIO' => $request->input('ITINERARIO'),
             'ESTADO' => 'CIERRE',
@@ -83,5 +82,8 @@ class BagController extends Controller
         return redirect()->route('bags.index')
             ->with('success', 'Despacho cerrado con exito!');
     }
-
+    public function bagsclose()
+    {
+        return view('bag.bagsclose');
+    }
 }

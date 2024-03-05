@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\Bag;
 use Livewire\WithPagination;
 
-class Bags extends Component
+class Bagsclose extends Component
 {
     use WithPagination;
     public $search = '';
@@ -14,7 +14,7 @@ class Bags extends Component
     public $paquetesSeleccionados = [];
     public function render()
     {
-        $bags = Bag::where('ESTADO', 'APERTURA')
+        $bags = Bag::where('ESTADO', 'CIERRE')
             ->when($this->search, function ($query) {
                 $query->where('NRODESPACHO', 'like', '%' . $this->search . '%')
                     ->orWhere('OFCAMBIO', 'like', '%' . $this->search . '%')
@@ -29,10 +29,9 @@ class Bags extends Component
             ->orderBy('NROSACA', 'asc')
             ->paginate(10);
 
-        return view('livewire.bags', [
+        return view('livewire.bagsclose', [
             'bags' => $bags,
         ]);
-        return view('livewire.bags');
+        return view('livewire.bagsclose');
     }
-    
 }

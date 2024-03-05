@@ -200,6 +200,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/bag/{bag}', [BagController::class, 'update'])->name('bags.update');
     Route::delete('/bag/{bag}', [BagController::class, 'destroy'])->name('bags.destroy');
     Route::put('/bags/close/{id}', [BagController::class, 'closeExpedition'])->name('bags.closeExpedition');
+    Route::get('/bag/bagsclose', [BagController::class, 'bagsclose'])->name('bags.bagsclose');
     
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
