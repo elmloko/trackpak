@@ -77,8 +77,6 @@ class BagController extends Controller
             'ESTADO' => 'CIERRE',
         ]);
 
-        // Realiza cualquier otra lógica necesaria aquí
-
         return redirect()->route('bags.index')
             ->with('success', 'Despacho cerrado con exito!');
     }

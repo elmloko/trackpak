@@ -19,7 +19,6 @@ class ClasificacionPackages extends Component
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
     public $findespacho = false;
-    public $nroDespacho = '001';
 
     public function render()
     {
@@ -69,42 +68,55 @@ class ClasificacionPackages extends Component
 
     public function cambiarEstado()
     {
-        // Obtener el último NROSACA de la base de datos
-        $ultimoSaco = Bag::max('NROSACA');
-
-        // Incrementar el número de SACO solo si findespacho está marcado
-        if ($this->findespacho) {
-            $nroSaco = str_pad($ultimoSaco + 1, 4, '0', STR_PAD_LEFT);
-        } else {
-            if ($ultimoSaco === null) {
-                $nroSaco = '0001'; // Si no hay ningún valor, comenzar desde '0001'
+        // Obtener el último registro de bolsa
+        $lastBag = Bag::latest()->first();
+    
+        // Determinar el valor de NRODESPACHO
+        $nroDespacho = '';
+    
+        if ($lastBag) {
+            if ($lastBag->FIN == 'F') {
+                // Incrementar el número de despacho si el último registro tiene FIN = 'F'
+                $nroDespacho = str_pad($lastBag->NRODESPACHO + 1, 4, '0', STR_PAD_LEFT);
             } else {
-                $nroSaco = $ultimoSaco; // Mantener el mismo número de SACO
+                // Mantener el número de despacho si el último registro tiene FIN = 'N'
+                $nroDespacho = str_pad($lastBag->NRODESPACHO, 4, '0', STR_PAD_LEFT);
             }
-        }
-
-        // Incrementar el número de despacho solo si findespacho no está marcado
-        if (!$this->findespacho) {
-            $ultimoDespacho = Bag::max('NRODESPACHO');
-            $this->nroDespacho = str_pad($ultimoDespacho + 1, 4, '0', STR_PAD_LEFT);
         } else {
-            $this->nroDespacho = '0001'; // Resetear a '001' si findespacho está marcado
+            // Si no hay registros anteriores, iniciar con '0000'
+            $nroDespacho = '0001';
         }
-
+    
+        // Determinar el valor de NROSACA
+        $nroSaca = '';
+    
+        if ($lastBag) {
+            if ($lastBag->FIN == 'F') {
+                // Reiniciar el número de saca si el último registro tiene FIN = 'F'
+                $nroSaca = '0001';
+            } else {
+                // Incrementar el número de saca si el último registro tiene FIN = 'N'
+                $nroSaca = str_pad($lastBag->NROSACA + 1, 4, '0', STR_PAD_LEFT);
+            }
+        } else {
+            // Si no hay registros anteriores, iniciar con '0000'
+            $nroSaca = '0001';
+        }
+    
         // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-
+    
         foreach ($paquetesSeleccionados as $paquete) {
             if ($paquete) {
                 $paquete->ESTADO = 'DESPACHO';
                 $paquete->datedespachoclasificacion = now()->toDateTimeString();
                 $paquete->save();
             }
-
+    
             Event::create([
                 'action' => 'DESPACHO',
                 'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
@@ -112,11 +124,14 @@ class ClasificacionPackages extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-
+    
+        // Determinar el valor de FIN
+        $finValue = $this->findespacho ? 'F' : 'N';
+    
         // Crear la nueva bolsa
         $bag = Bag::create([
-            'NRODESPACHO' => $this->nroDespacho,
-            'NROSACA' => $nroSaco, // Asignar el número de SACO
+            'NRODESPACHO' => $nroDespacho,
+            'NROSACA' => $nroSaca,
             'ESTADO' => 'APERTURA',
             'ano_creacion' => date('Y'),
             'created_at' => now(),
@@ -124,8 +139,9 @@ class ClasificacionPackages extends Component
             'PESO' => $paquetesSeleccionados->sum('PESO'),
             'OFCAMBIO' => auth()->user()->Regional,
             'OFDESTINO' => $paquetesSeleccionados->first()->CUIDAD,
+            'FIN' => $finValue,
         ]);
-
+    
         // Vincular los paquetes seleccionados con la bolsa
         foreach ($paquetesSeleccionados as $paquete) {
             // Crear la relación en la tabla pivote 'packages_has_bags'
@@ -134,21 +150,20 @@ class ClasificacionPackages extends Component
                 'packages_id' => $paquete->id,
             ]);
         }
-
+    
         // Restablecer la selección
         $this->resetSeleccion();
-
+    
         // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
-        // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-
+    
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
     }
-
+    
 
     private function getPackageIds()
     {
