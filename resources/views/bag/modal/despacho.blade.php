@@ -41,7 +41,6 @@
                                 ]) }}
                                 {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
-                            
                         </div>
                     </div>
                 </div>

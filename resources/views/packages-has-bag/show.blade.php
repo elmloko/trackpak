@@ -1,7 +1,7 @@
-@extends('layouts.app')
-
+@extends('adminlte::page')
+@section('title', 'Paquetes Ordinarios')
 @section('template_title')
-    {{ $packagesHasBag->name ?? "{{ __('Show') Packages Has Bag" }}
+    Paqueteria Postal
 @endsection
 
 @section('content')
@@ -34,4 +34,5 @@
             </div>
         </div>
     </section>
+    @include('footer')
 @endsection

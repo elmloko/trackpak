@@ -9,6 +9,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\BagController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PackagesHasBagController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -201,6 +202,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/bag/{bag}', [BagController::class, 'destroy'])->name('bags.destroy');
     Route::put('/bags/close/{id}', [BagController::class, 'closeExpedition'])->name('bags.closeExpedition');
     Route::get('/bag/bagsclose', [BagController::class, 'bagsclose'])->name('bags.bagsclose');
+
+    //Sacas y paquetes
+    Route::get('/packages-has-bags', [PackagesHasBagController::class, 'index'])->name('packages-has-bags.index');
+    Route::get('/packages-has-bags/create', [PackagesHasBagController::class, 'create'])->name('packages-has-bags.create');
+    // Route::get('packages-has-bags/{bags}', [PackagesHasBagController::class, 'show'])->name('packages-has-bags.show');
+    Route::post('/packages-has-bags', [PackagesHasBagController::class, 'store'])->name('packages-has-bags.store');
+    Route::get('/packages-has-bags/{packages-has-bags}/edit', [PackagesHasBagController::class, 'edit'])->name('packages-has-bags.edit');
+    Route::put('/packages-has-bags/{packages-has-bags}', [PackagesHasBagController::class, 'update'])->name('packages-has-bags.update');
+    Route::delete('/packages-has-bags/{packages-has-bags}', [PackagesHasBagController::class, 'destroy'])->name('packages-has-bags.destroy');
     
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
