@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BagController extends Controller
 {
@@ -31,11 +32,12 @@ class BagController extends Controller
 
     public function show($id)
     {
-        $bag = Bag::find($id);
-
-        return view('bag.show', compact('bag'));
+        // Obtener la bolsa según el ID
+        $bag = Bag::findOrFail($id);
+        
+        // Pasar el ID de la bolsa a la vista
+        return view('bag.show', ['bagId' => $id]);
     }
-
     public function edit($id)
     {
         $bag = Bag::find($id);
@@ -67,7 +69,7 @@ class BagController extends Controller
         // Verifica si la bolsa existe
         if (!$bag) {
             return redirect()->route('bags.index')
-            ->with('success', 'El despacho no se pudo cerrar');
+                ->with('success', 'El despacho no se pudo cerrar');
         }
 
         // Actualiza los campos adicionales

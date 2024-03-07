@@ -25,6 +25,6 @@ class Bag extends Model
 
     public function packagesHasBag()
     {
-        return $this->hasOne('App\Models\PackagesHasBag', 'bags_id', 'id');
+        return $this->hasMany('App\Models\PackagesHasBag', 'bags_id', 'id');
     }
 }

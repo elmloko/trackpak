@@ -14,14 +14,14 @@
                                             placeholder="Buscar...">
                                     </div>
                                 </div>
-                                    <div class="col-md-6">
-                                        @hasrole('SuperAdmin|Administrador')
-                                        <a href="{{ route('bags.create') }}"
-                                            class="btn btn-primary btn-md float-right ml-2" data-placement="left">
+                                <div class="col-md-6">
+                                    @hasrole('SuperAdmin|Administrador')
+                                        <a href="{{ route('bags.create') }}" class="btn btn-primary btn-md float-right ml-2"
+                                            data-placement="left">
                                             {{ __('Crear Nuevo') }}
                                         </a>
-                                        @endhasrole
-                                    </div>
+                                    @endhasrole
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -62,13 +62,15 @@
                                         <td>{{ $bag->created_at }}</td>
                                         <td>
                                             @hasrole('SuperAdmin|Administrador|Expedicion')
-                                                                    <a class="btn btn-sm btn-warning" href="#"
-                                                                        data-toggle="modal"
-                                                                        data-target="#despachoModal{{ $bag->id }}">
-                                                                        <i class="fa fa-arrow-down"></i>
-                                                                        {{ __('Despacho') }}
-                                                                    </a>
-                                                                    @include('bag.modal.despacho')
+                                                <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                    data-target="#despachoModal{{ $bag->id }}">
+                                                    <i class="fa fa-arrow-down"></i>
+                                                    {{ __('Despacho') }}
+                                                </a>
+                                                @include('bag.modal.despacho')
+                                                {{-- <a class="btn btn-sm btn-info" href="{{ route('bags.show', $bag->id) }}">
+                                                    Ver Paquetes
+                                                </a> --}}
                                             @endhasrole
                                         </td>
                                     </tr>

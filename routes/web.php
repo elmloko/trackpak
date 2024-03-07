@@ -195,7 +195,7 @@ Route::middleware('auth')->group(function () {
     //Sacas
     Route::get('/bags', [BagController::class, 'index'])->name('bags.index');
     Route::get('/bag/create', [BagController::class, 'create'])->name('bags.create');
-    // Route::get('bags/{bags}', [BagController::class, 'show'])->name('bags.show');
+    Route::get('bags/{bags}', [BagController::class, 'show'])->name('bags.show');
     Route::post('/bag', [BagController::class, 'store'])->name('bags.store');
     Route::get('/bag/{bag}/edit', [BagController::class, 'edit'])->name('bags.edit');
     Route::put('/bag/{bag}', [BagController::class, 'update'])->name('bags.update');

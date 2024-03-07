@@ -43,8 +43,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  
                 <div class="modal-footer">
+                    <a class="btn btn-sm btn-info" href="{{ route('bags.show', $bag->id) }}">
+                        Ver Paquetes
+                    </a>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success">Confirmar Baja</button>
                 </div>
