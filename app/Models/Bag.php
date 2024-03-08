@@ -16,12 +16,13 @@ class Bag extends Model
         'PAQUETES' => 'required',
         'ITINERARIO' => 'required',
         'ESTADO' => 'required',
+        'TRASPORTE' => 'required',
     ];
 
     protected $table = 'bags';
     protected $perPage = 20;
 
-    protected $fillable = ['NRODESPACHO', 'OFCAMBIO', 'OFDESTINO', 'NROSACAS', 'PESO', 'PAQUETES', 'ITINERARIO', 'ESTADO', 'ano_creacion','NROSACA','FIN'];
+    protected $fillable = ['NRODESPACHO', 'OFCAMBIO', 'OFDESTINO', 'NROSACAS', 'PESO', 'PAQUETES', 'ITINERARIO', 'ESTADO', 'ano_creacion','NROSACA','FIN','TRASPORTE','HORARIO'];
 
     public function packagesHasBag()
     {

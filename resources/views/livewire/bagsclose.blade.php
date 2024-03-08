@@ -60,17 +60,6 @@
                                         <td>{{ $bag->ITINERARIO }}</td>
                                         <td>{{ $bag->ESTADO }}</td>
                                         <td>{{ $bag->created_at }}</td>
-                                        <td>
-                                            @hasrole('SuperAdmin|Administrador|Expedicion')
-                                                                    <a class="btn btn-sm btn-warning" href="#"
-                                                                        data-toggle="modal"
-                                                                        data-target="#despachoModal{{ $bag->id }}">
-                                                                        <i class="fa fa-arrow-down"></i>
-                                                                        {{ __('Despacho') }}
-                                                                    </a>
-                                                                    @include('bag.modal.despacho')
-                                            @endhasrole
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

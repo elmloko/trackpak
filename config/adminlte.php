@@ -535,12 +535,12 @@ return [
                             'icon' => 'fas fa-box-open',
                             'can'  => 'packages.redirigidos',
                         ],
-                        [
-                            'text' => 'Cierre Despacho',
-                            'url' => 'packages-has-bags',
-                            'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.redirigidos',
-                        ],
+                        // [
+                        //     'text' => 'Cierre Despacho',
+                        //     'url' => 'packages-has-bags',
+                        //     'icon' => 'fas fa-box-open',
+                        //     'can'  => 'packages.redirigidos',
+                        // ],
                     ],
                 ], 
                 [

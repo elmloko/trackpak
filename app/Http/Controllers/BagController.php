@@ -76,6 +76,8 @@ class BagController extends Controller
         $bag->update([
             'PESO' => $request->input('PESO'),
             'ITINERARIO' => $request->input('ITINERARIO'),
+            'TRASPORTE' => $request->input('TRASPORTE'),
+            'HORARIO' => $request->input('HORARIO'),
             'ESTADO' => 'CIERRE',
         ]);
 
