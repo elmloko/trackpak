@@ -71,13 +71,13 @@ class BagController extends Controller
             return redirect()->route('bags.index')
                 ->with('success', 'El despacho no se pudo cerrar');
         }
-
         // Actualiza los campos adicionales
         $bag->update([
-            'PESO' => $request->input('PESO'),
+            'PESOF' => $request->input('PESOF'),
             'ITINERARIO' => $request->input('ITINERARIO'),
             'TRASPORTE' => $request->input('TRASPORTE'),
             'HORARIO' => $request->input('HORARIO'),
+            'OBSERVACIONES' => $request->input('OBSERVACIONES'),
             'ESTADO' => 'CIERRE',
         ]);
 

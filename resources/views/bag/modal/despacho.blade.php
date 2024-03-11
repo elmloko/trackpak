@@ -50,9 +50,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ Form::label('PESO (Kg.)') }}
-                                {{ Form::text('PESO', $bag->PESO, [
-                                    'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
+                                {{ Form::label('PESOF (Kg.)') }}
+                                {{ Form::text('PESOF', $bag->PESOF, [
+                                    'class' => 'form-control' . ($errors->has('PESOF') ? ' is-invalid' : ''),
                                     'placeholder' => 'Expresa el Peso en Gramos',
                                     'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
                                     'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
@@ -61,12 +61,20 @@
                                     'min' => '0', // Establecer el valor mínimo
                                     'max' => '100.000',
                                 ]) }}
-                                {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
+                                {!! $errors->first('PESOF', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('HORARIO') }}
                                 {{ Form::select('HORARIO', ['' => 'Seleccione una opción', '08:00' => '08:00', '09:00' => '09:00', '10:00' => '10:00'], $bag->OFCAMBIO, ['class' => 'form-control' . ($errors->has('HORARIO') ? ' is-invalid' : ''), 'id' => 'horario-select']) }}
                                 {!! $errors->first('HORARIO', '<div class="invalid-feedback">:message</div>') !!}
+                            </div>
+                            <div class="form-group">
+                                {{ Form::label('OBSERVACIONES') }}
+                                {{ Form::text('OBSERVACIONES', strtoupper($bag->OBSERVACIONES), [
+                                    'class' => 'form-control' . ($errors->has('OBSERVACIONES') ? ' is-invalid' : ''),
+                                    'placeholder' => 'Observaciones de Saca',
+                                ]) }}
+                                {!! $errors->first('OBSERVACIONES', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                         </div>
                     </div>

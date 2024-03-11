@@ -68,6 +68,7 @@ class ClasificacionPackages extends Component
 
     public function cambiarEstado()
     {
+
         // Obtener el último registro de bolsa
         $lastBag = Bag::latest()->first();
     
@@ -128,6 +129,44 @@ class ClasificacionPackages extends Component
         // Determinar el valor de FIN
         $finValue = $this->findespacho ? 'F' : 'N';
     
+        // Definir las siglas
+        $siglasOrigen = [
+            'LA PAZ' => 'BOLPA',
+            'COCHABAMBA' => 'BOCBA',
+            'SANTA CRUZ' => 'BOSCA',
+            'POTOSI' => 'BOPTA',
+            'ORURO' => 'BOORA',
+            'BENI' => 'BOBNA',
+            'TARIJA' => 'BOTJA',
+            'SUCRE' => 'BOSRA',
+            'PANDO' => 'BOPNA',
+        ];
+
+        $siglasDestino = [
+            'POTOSI' => 'BOPTA',
+            'ORURO' => 'BOORA',
+            'BENI' => 'BOBNA',
+            'LA PAZ' => 'BOLPA',
+            'COCHABAMBA' => 'BOCBA',
+            'SANTA CRUZ' => 'BOSCA',
+            'TARIJA' => 'BOTJA',
+            'SUCRE' => 'BOSRA',
+            'PANDO' => 'BOPNA',
+        ];
+
+        // Obtener la ciudad de origen
+        $ciudadOrigen = auth()->user()->Regional;
+
+        // Obtener la ciudad de destino
+        $ciudadDestino = $paquetesSeleccionados->first()->CUIDAD;
+
+        // Transformar las siglas
+        $siglasOrigen = $siglasOrigen[$ciudadOrigen];
+        $siglasDestino = $siglasDestino[$ciudadDestino];
+
+        $marbete = $siglasOrigen . $siglasDestino . 'B' . 'UN' . substr(date('Y'), 3, 1) . $nroDespacho;
+        $receptaculo = $siglasOrigen . $siglasDestino . 'B' . 'UN' . substr(date('Y'), 3, 1) . $nroDespacho . $nroSaca;
+
         // Crear la nueva bolsa
         $bag = Bag::create([
             'NRODESPACHO' => $nroDespacho,
@@ -140,6 +179,11 @@ class ClasificacionPackages extends Component
             'OFCAMBIO' => auth()->user()->Regional,
             'OFDESTINO' => $paquetesSeleccionados->first()->CUIDAD,
             'FIN' => $finValue,
+            'OFCAM108' => $siglasOrigen,
+            'OFDES108' => $siglasDestino,
+            'MARBETE' => $marbete,
+            'RECEPTACULO' => $receptaculo,
+
         ]);
     
         // Vincular los paquetes seleccionados con la bolsa
@@ -163,7 +207,6 @@ class ClasificacionPackages extends Component
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
     }
-    
 
     private function getPackageIds()
     {

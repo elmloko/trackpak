@@ -37,13 +37,11 @@
                         <table class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
+                                    <th>Receptaculo</th>
                                     <th>Numero de Despacho</th>
                                     <th>Oficina de Cambio</th>
                                     <th>Oficina de Destino</th>
-                                    {{-- <th>Numero de Sacas</th> --}}
-                                    {{-- <th>Peso (Kg.)</th> --}}
                                     <th>Numero de Paquetes</th>
-                                    {{-- <th>Itinerario</th> --}}
                                     <th>Estado</th>
                                     <th>Fecha Apertura</th>
                                     <th>Acciones</th>
@@ -53,11 +51,11 @@
                             <tbody>
                                 @foreach ($bags as $bag)
                                     <tr>
+                                        <td>{{ $bag->RECEPTACULO }}</td>
                                         <td>{{ $bag->NROSACA }} / {{ $bag->NRODESPACHO }}</td>
                                         <td>{{ $bag->OFCAMBIO }}</td>
                                         <td>{{ $bag->OFDESTINO }}</td>
                                         <td>{{ $bag->PAQUETES }}</td>
-                                        {{-- <td>{{ $bag->ITINERARIO }}</td> --}}
                                         <td>{{ $bag->ESTADO }}</td>
                                         <td>{{ $bag->created_at }}</td>
                                         <td>
