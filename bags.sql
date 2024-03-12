@@ -21,16 +21,24 @@ CREATE TABLE IF NOT EXISTS `bags` (
   `NROSACA` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `OFCAMBIO` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `OFDESTINO` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `TRASPORTE` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `HORARIO` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `FIN` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `PESO` double(8,3) DEFAULT NULL,
+  `PESOF` double(8,3) DEFAULT NULL,
   `PAQUETES` int DEFAULT NULL,
   `ITINERARIO` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ESTADO` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'APERTURA',
+  `OBSERVACIONES` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `MARBETE` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `RECEPTACULO` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `OFCAM108` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `OFDES108` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ano_creacion` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -46,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   PRIMARY KEY (`id`),
   KEY `events_user_id_foreign` (`user_id`),
   CONSTRAINT `events_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9714 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9725 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- La exportación de datos fue deseleccionada.
 
@@ -195,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `packages_has_bags` (
   KEY `packages_id` (`packages_id`),
   CONSTRAINT `bags_has_packages_bags_id_foreign` FOREIGN KEY (`bags_id`) REFERENCES `bags` (`id`),
   CONSTRAINT `packages_has_bags_packages_id_foreign` FOREIGN KEY (`packages_id`) REFERENCES `packages` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=170 DEFAULT CHARSET=latin1;
 
 -- La exportación de datos fue deseleccionada.
 

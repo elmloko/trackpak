@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bag;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class BagController extends Controller
@@ -34,7 +35,7 @@ class BagController extends Controller
     {
         // Obtener la bolsa según el ID
         $bag = Bag::findOrFail($id);
-        
+
         // Pasar el ID de la bolsa a la vista
         return view('bag.show', ['bagId' => $id]);
     }
@@ -80,6 +81,17 @@ class BagController extends Controller
             'OBSERVACIONES' => $request->input('OBSERVACIONES'),
             'ESTADO' => 'CIERRE',
         ]);
+
+        // Genera el PDF
+        $pdf = PDF::loadView('bag.pdf.cn35', compact('bag') );
+
+        // Guarda o descarga el PDF según tus necesidades
+        // $pdf->save(storage_path('nombre_del_archivo.pdf'));
+        // o
+        // return $pdf->download('nombre_del_archivo.pdf');
+
+        // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
+        return $pdf->stream('CN35.pdf', ['Attachment' => false]);
 
         return redirect()->route('bags.index')
             ->with('success', 'Despacho cerrado con exito!');

@@ -38,7 +38,6 @@
                             <thead class="thead">
                                 <tr>
                                     <th>Despacho</th>
-                                    <th>Numero de Despacho</th>
                                     <th>Oficina de Cambio</th>
                                     <th>Oficina de Destino</th>
                                     <th>Peso (Kg.)</th>
@@ -53,18 +52,32 @@
                             </thead>
                             <tbody>
                                 @foreach ($bags as $bag)
-                                    <tr>
-                                        <td>{{ $bag->MARBETE }}</td>
-                                        <td>{{ $bag->NROSACA }} / {{ $bag->NRODESPACHO }}</td>
-                                        <td>{{ $bag->OFCAMBIO }}</td>
-                                        <td>{{ $bag->OFDESTINO }}</td>
-                                        <td>{{ $bag->PESOF }}</td>
-                                        <td>{{ $bag->PAQUETES }}</td>
-                                        <td>{{ $bag->ITINERARIO }}</td>
-                                        <td>{{ $bag->ESTADO }}</td>
-                                        <td>{{ $bag->OBSERVACIONES }}</td>
-                                        <td>{{ $bag->created_at }}</td>
-                                    </tr>
+                                    @if($bag->FIN == 'F')
+                                        <tr>
+                                            <td>{{ $bag->MARBETE }}</td>
+                                            <td>{{ $bag->OFCAMBIO }}</td>
+                                            <td>{{ $bag->OFDESTINO }}</td>
+                                            <td>{{ $bag->PESOF }}</td>
+                                            <td>{{ $bag->PAQUETES }}</td>
+                                            <td>{{ $bag->ITINERARIO }}</td>
+                                            <td>{{ $bag->ESTADO }}</td>
+                                            <td>{{ $bag->OBSERVACIONES }}</td>
+                                            <td>{{ $bag->created_at }}</td>
+                                            <td>
+                                                @hasrole('SuperAdmin|Administrador|Areo')
+                                                    <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                        data-target="#despachoModal{{ $bag->id }}">
+                                                        <i class="fa fa-arrow-down"></i>
+                                                        {{ __('Trasportar') }}
+                                                    </a>
+                                                    @include('bag.modal.despacho')
+                                                    {{-- <a class="btn btn-sm btn-info" href="{{ route('bags.show', $bag->id) }}">
+                                                        Ver Paquetes
+                                                    </a> --}}
+                                                @endhasrole
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

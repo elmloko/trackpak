@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>Paquetes asociados a la bolsa: {{ $bag->id }}</h2>
+    <h2>Paquetes asociados a la bolsa :{{ $bag->NROSACA }} / {{ $bag->NRODESPACHO }}</h2>
     <div class="card">
         <div class="card-body">
             <table class="table">

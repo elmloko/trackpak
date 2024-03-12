@@ -26,7 +26,7 @@ class Bagsclose extends Component
                     ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
-            ->orderBy('NROSACA', 'asc')
+            ->orderBy('MARBETE', 'asc')
             ->paginate(10);
 
         return view('livewire.bagsclose', [
