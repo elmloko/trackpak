@@ -132,6 +132,11 @@ Route::middleware('auth')->group(function () {
     Route::get('packages/ecainventario', [PackageController::class, 'ecainventario'])->name('packages.ecainventario');
     Route::post('packages/buscarPaqueteeca', [PackageController::class, 'buscarPaqueteeca'])->name('packages.buscarPaqueteeca');
 
+    Route::get('packages/encomiendas', [PackageController::class, 'encomiendas'])->name('packages.encomiendas');
+    Route::get('packages/encomiendasinventario', [PackageController::class, 'encomiendasinventario'])->name('packages.encomiendasinventario');
+    // Route::get('packages/{id}/deleteencomiendas', [PackageController::class, 'deleteencomiendas'])->name('packages.deleteencomiendas');
+    // Route::post('packages/buscarPaqueteencomiendas', [PackageController::class, 'buscarPaqueteeca'])->name('packages.buscarPaqueteencomiendas');
+
     // Reportes PDF
     Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
     Route::get('package/pdf/clasificacionpdf', [PackageController::class, 'clasificacionpdf'])->name('package.pdf.clasificacionpdf');
@@ -157,6 +162,7 @@ Route::middleware('auth')->group(function () {
     Route::get('clasificacion/reencaminarexcel', [PackageController::class, 'reencaminarexcel'])->name('reencaminar.excel');
     Route::get('ventanilla/ventanillaexcel', [PackageController::class, 'ventanillaexcel'])->name('ventanilla.excel');
     Route::get('ventanilla/ventanilladndexcel', [PackageController::class, 'ventanilladndexcel'])->name('ventanilladnd.excel');
+    Route::get('ventanilla/encomiendasexcel', [PackageController::class, 'encomiendasexcel'])->name('encomiendas.excel');
     Route::get('ventanilla/casillasexcel', [PackageController::class, 'casillasexcel'])->name('casillas.excel');
     Route::get('ventanilla/ecaexcel', [PackageController::class, 'ecaexcel'])->name('eca.excel');
     Route::get('ventanilla/inventarioexcel', [PackageController::class, 'inventarioexcel'])->name('inventario.excel');

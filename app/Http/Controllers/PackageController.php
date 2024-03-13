@@ -12,6 +12,7 @@ use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
 use App\Exports\InventarioExport;
 use App\Exports\EcainventarioExport;
+use App\Exports\EncomiendasExport;
 use App\Exports\PackageExport;
 use App\Exports\CarteroExport;
 use App\Exports\CarteroGeneralExport;
@@ -919,6 +920,14 @@ class PackageController extends Controller
     {
         return view('package.ecainventario');
     }
+    public function encomiendas()
+    {
+        return view('package.ventanillaencomiendas');
+    }
+    public function encomiendasinventario()
+    {
+        return view('package.encomiendasinventario');
+    }
 
     //REPORTES EXCEL Y PDF
     public function packagesallexcel(Request $request)
@@ -970,6 +979,13 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $regional = $request->input('regional');
         return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanilla.xlsx');
+    }
+    public function encomiendasexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $regional = $request->input('regional');
+        return Excel::download(new EncomiendasExport($fechaInicio, $fechaFin, $regional), 'ventanillaencomiendas.xlsx');
     }
     public function ventanilladndexcel(Request $request)
     {
