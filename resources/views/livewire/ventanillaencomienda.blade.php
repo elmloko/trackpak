@@ -117,7 +117,7 @@
                                                     <th>Peso (gr.)</th>
                                                     <th>Estado</th>
                                                     <th>Observaciones</th>
-                                                    <th>Fecha Pendiente</th>
+                                                    <th>Fecha</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
