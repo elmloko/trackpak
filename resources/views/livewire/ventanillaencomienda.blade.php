@@ -144,7 +144,7 @@
                                                             <td>{{ $package->PESO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
-                                                            <td>{{ $package->updated_at }}</td>
+                                                            <td>{{ $package->created_at }}</td>
                                                             <td>
                                                                 @hasrole('SuperAdmin|Administrador|ENCOMIENDAS')
                                                                     <a class="btn btn-sm btn-warning" href="#"
