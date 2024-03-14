@@ -527,7 +527,7 @@ return [
                             'text' => 'Inventario ENCOMIENDAS',
                             'url' => 'packages/encomiendasinventario',
                             'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.encomiendasinventario',
+                            'can'  => 'packages.encomiendas',
                         ],
                     ],
                 ],
