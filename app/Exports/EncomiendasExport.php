@@ -39,12 +39,12 @@ class EncomiendasExport implements FromCollection, WithHeadings, WithStyles
             'TIPO',
             'ESTADO',
             'ADUANA',
-            'updated_at',
+            'created_at',
             \DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_updated_at"),
         );
 
     if ($this->fechaInicio && $this->fechaFin) {
-        $query->whereBetween('updated_at', [$this->fechaInicio, $this->fechaFin]);
+        $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
     }
 
     $query->where('CUIDAD', $regional);
