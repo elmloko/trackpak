@@ -23,25 +23,22 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
     {
         $regional = auth()->user()->Regional;
         $query = Package::withTrashed()->where('ESTADO', 'ENTREGADO')
-            ->whereIn('VENTANILLA', ['DD'])
+            ->whereIn('VENTANILLA', ['ENCOMIENDAS'])
             ->select(
                 'CODIGO',
                 'DESTINATARIO',
                 'TELEFONO',
-                'PAIS',
                 'CUIDAD',
                 'ZONA',
                 'VENTANILLA',
                 'PESO',
-                'PRECIO',
-                'TIPO',
                 'ESTADO',
-                'ADUANA',
-                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
+                'OBSERVACIONES',
+                \DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
             );
 
         if ($this->fechaInicio && $this->fechaFin) {
-            $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
+            $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
         }
 
         $query->where('CUIDAD', $regional);
@@ -54,14 +51,12 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
             'CODIGO',
             'DESTINATARIO',
             'TELEFONO',
-            'PAIS',
             'DESTINO',
-            'DIRECCION',
+            'BANDEJA',
             'VENTANILLA',
             'PESO',
-            'TIPO',
             'ESTADO',
-            'ADUANA',
+            'OBSERVACIONES',
             'FECHA BAJA',
         ];
     }

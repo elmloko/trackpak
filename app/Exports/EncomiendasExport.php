@@ -29,17 +29,12 @@ class EncomiendasExport implements FromCollection, WithHeadings, WithStyles
         ->select(
             'CODIGO',
             'DESTINATARIO',
-            'TELEFONO',
-            'PAIS',
-            'CUIDAD',
             'ZONA',
+            'TELEFONO',
+            'CUIDAD',
             'VENTANILLA',
             'PESO',
-            'PRECIO',
-            'TIPO',
             'ESTADO',
-            'ADUANA',
-            'created_at',
             \DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_updated_at"),
         );
 
@@ -58,18 +53,13 @@ class EncomiendasExport implements FromCollection, WithHeadings, WithStyles
         return [
             'CODIGO',
             'DESTINATARIO',
+            'BANDEJA',
             'TELEFONO',
-            'PAIS',
             'CUIDAD',
-            'DIRECCION',
             'VENTANILLA',
             'PESO',
-            'PRECIO',
-            'TIPO',
             'ESTADO',
-            'ADUANA',
-            'FECHA PENDIENTE'
-            
+            'FECHA'
         ];
     }
 

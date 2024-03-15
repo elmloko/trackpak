@@ -964,7 +964,7 @@ class PackageController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioExport($fechaInicio, $fechaFin), 'Inventario.xlsx');
+        return Excel::download(new InventarioExport($fechaInicio, $fechaFin), 'Inventario Encomiendas.xlsx');
     }
     public function ecainventarioexcel(Request $request)
     {
