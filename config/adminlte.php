@@ -515,7 +515,7 @@ return [
                 [
                     'text' => 'ENCOMIENDAS',
                     'icon' => 'fas fa-archive',
-                    'can'  => 'packages.eca',
+                    'can'  => 'packages.encomiendas',
                     'submenu' => [
                         [
                             'text' => 'Entregas ENCOMIENDAS',
