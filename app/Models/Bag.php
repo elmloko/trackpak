@@ -22,7 +22,7 @@ class Bag extends Model
     protected $table = 'bags';
     protected $perPage = 20;
 
-    protected $fillable = ['NRODESPACHO', 'OFCAMBIO', 'OFDESTINO', 'NROSACAS', 'PESO', 'PAQUETES', 'ITINERARIO', 'ESTADO', 'ano_creacion','NROSACA','FIN','TRASPORTE','HORARIO','OBSERVACIONES','PESOF','MARBETE','OFCAM108','OFDES108','MARBETE','RECEPTACULO'];
+    protected $fillable = ['NRODESPACHO', 'OFCAMBIO', 'OFDESTINO', 'NROSACAS', 'PESO', 'PAQUETES', 'ITINERARIO', 'ESTADO', 'ano_creacion','NROSACA','FIN','TRASPORTE','HORARIO','OBSERVACIONES','PESOF','MARBETE','OFCAM108','OFDES108','MARBETE','RECEPTACULO','OBSERVACIONESG','NFACTURA'];
 
     public function packagesHasBag()
     {

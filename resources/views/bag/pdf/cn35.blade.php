@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartero</title>
+    <title>CN-35</title>
     <style>
         /* Estilos para la tabla */
         table {
@@ -83,7 +83,7 @@
     </tr>
     <tr>
       <td>Via:{{ $bag->ITINERARIO }}</td>
-      <td>Trans:{{ $bag->TRASPORTE }}</td>
+      <td></td>
       <td colspan="2"><p>{!! DNS1D::getBarcodeHTML($bag->RECEPTACULO, 'C128', 1.08, 40) !!}</p></td>
     </tr>
   </table>  

@@ -151,7 +151,6 @@ Route::middleware('auth')->group(function () {
     Route::get('package/pdf/asignarcartero', [PackageController::class, 'asignarcartero'])->name('package.pdf.asignarcartero');
     Route::get('package/pdf/prerezago', [PackageController::class, 'prerezago'])->name('package.pdf.prerezago');
     Route::post('national/pdf/despachopdf', [PackageController::class, 'despachopdf'])->name('national.pdf.despachopdf');
-    Route::get('bag/pdf/cn35', [BagController::class, 'cn35'])->name('bag.pdf.cn35');
     
     // Reportes Excel
     Route::get('package/packagesallexcel', [PackageController::class, 'packagesallexcel'])->name('packagesall.excel');
@@ -202,7 +201,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/bag/{bag}', [BagController::class, 'update'])->name('bags.update');
     Route::delete('/bag/{bag}', [BagController::class, 'destroy'])->name('bags.destroy');
     Route::put('/bags/close/{id}', [BagController::class, 'closeExpedition'])->name('bags.closeExpedition');
+    Route::put('/bags/go/{id}', [BagController::class, 'goExpedition'])->name('bags.goExpedition');
     Route::get('/bag/bagsclose', [BagController::class, 'bagsclose'])->name('bags.bagsclose');
+    Route::get('bag/pdf/cn35', [BagController::class, 'cn35'])->name('bag.pdf.cn35');
+    Route::get('bag/pdf/cn38', [BagController::class, 'cn38'])->name('bag.pdf.cn38');
 
     //Sacas y paquetes
     Route::get('/packages-has-bags', [PackagesHasBagController::class, 'index'])->name('packages-has-bags.index');

@@ -76,14 +76,46 @@ class BagController extends Controller
         $bag->update([
             'PESOF' => $request->input('PESOF'),
             'ITINERARIO' => $request->input('ITINERARIO'),
-            'TRASPORTE' => $request->input('TRASPORTE'),
-            'HORARIO' => $request->input('HORARIO'),
             'OBSERVACIONES' => $request->input('OBSERVACIONES'),
             'ESTADO' => 'CIERRE',
         ]);
 
         // Genera el PDF
-        $pdf = PDF::loadView('bag.pdf.cn35', compact('bag') );
+        $pdf = PDF::loadView('bag.pdf.cn35', compact('bag'));
+
+        return $pdf->stream('CN35.pdf', ['Attachment' => false]);
+
+        return redirect()->route('bags.index')
+            ->with('success', 'Despacho cerrado con exito!');
+    }
+
+    public function goExpedition($id, Request $request)
+    {
+        $bag = Bag::find($id);
+
+        // Verifica si la bolsa existe
+        if (!$bag) {
+            return redirect()->route('bags.index')
+                ->with('success', 'El despacho no se pudo cerrar');
+        }
+
+        // Obtén el valor del campo MARVETE
+        $marbete = $bag->MARBETE;
+
+        // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
+        Bag::where('MARBETE', $marbete)->update([
+            'TRASPORTE' => $request->input('TRASPORTE'),
+            'HORARIO' => $request->input('HORARIO'),
+            'OBSERVACIONESG' => $request->input('OBSERVACIONESG'),
+            'fecha_exp' => now(),
+            'ESTADO' => 'EXPEDICION',
+        ]);
+
+        // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
+        $bags = Bag::where('MARBETE', $marbete)->get();
+
+        // Genera el PDF
+        $pdf = PDF::loadView('bag.pdf.cn38', compact('bags'));
 
         // Guarda o descarga el PDF según tus necesidades
         // $pdf->save(storage_path('nombre_del_archivo.pdf'));
@@ -91,11 +123,12 @@ class BagController extends Controller
         // return $pdf->download('nombre_del_archivo.pdf');
 
         // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
-        return $pdf->stream('CN35.pdf', ['Attachment' => false]);
+        return $pdf->stream('CN38.pdf', ['Attachment' => false]);
 
         return redirect()->route('bags.index')
             ->with('success', 'Despacho cerrado con exito!');
     }
+
     public function bagsclose()
     {
         return view('bag.bagsclose');

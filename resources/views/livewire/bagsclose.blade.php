@@ -44,8 +44,8 @@
                                     <th>Numero de Paquetes</th>
                                     <th>Itinerario</th>
                                     <th>Estado</th>
+                                    <th>Observaciones</th>
                                     <th>Fecha Apertura</th>
-                                    <th>Obeservaciones</th>
                                     <th>Acciones</th>
                                     <th></th>
                                 </tr>
@@ -62,7 +62,7 @@
                                             <td>{{ $bag->ITINERARIO }}</td>
                                             <td>{{ $bag->ESTADO }}</td>
                                             <td>{{ $bag->OBSERVACIONES }}</td>
-                                            <td>{{ $bag->created_at }}</td>
+                                            <td>{{ $bag->updated_at }}</td>
                                             <td>
                                                 @hasrole('SuperAdmin|Administrador|Areo')
                                                     <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
@@ -70,7 +70,7 @@
                                                         <i class="fa fa-arrow-down"></i>
                                                         {{ __('Trasportar') }}
                                                     </a>
-                                                    @include('bag.modal.despacho')
+                                                    @include('bag.modal.cierre')
                                                     {{-- <a class="btn btn-sm btn-info" href="{{ route('bags.show', $bag->id) }}">
                                                         Ver Paquetes
                                                     </a> --}}
