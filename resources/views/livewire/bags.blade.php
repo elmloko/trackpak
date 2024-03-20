@@ -52,7 +52,7 @@
                                 @foreach ($bags as $bag)
                                     <tr>
                                         <td>{{ $bag->RECEPTACULO }}</td>
-                                        <td>{{ $bag->NROSACA }} / {{ $bag->NRODESPACHO }}</td>
+                                        <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}</td>
                                         <td>{{ $bag->OFCAMBIO }}</td>
                                         <td>{{ $bag->OFDESTINO }}</td>
                                         <td>{{ $bag->PAQUETES }}</td>
