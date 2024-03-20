@@ -92,16 +92,16 @@ class BagController extends Controller
     public function goExpedition($id, Request $request)
     {
         $bag = Bag::find($id);
-
+    
         // Verifica si la bolsa existe
         if (!$bag) {
             return redirect()->route('bags.index')
                 ->with('success', 'El despacho no se pudo cerrar');
         }
-
+    
         // Obtén el valor del campo MARVETE
         $marbete = $bag->MARBETE;
-
+    
         // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
         Bag::where('MARBETE', $marbete)->update([
             'TRASPORTE' => $request->input('TRASPORTE'),
@@ -110,23 +110,25 @@ class BagController extends Controller
             'fecha_exp' => now(),
             'ESTADO' => 'EXPEDICION',
         ]);
-
+    
+        // Calcula la suma de los campos PESOC y PAQUETES
+        $sum = Bag::where('MARBETE', $marbete)
+            ->select(DB::raw('SUM(PESOF) as sum_pesoc'), DB::raw('COUNT(ID) as sum_paquetes'))
+            ->first();
+    
         // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
         $bags = Bag::where('MARBETE', $marbete)->get();
-
+    
         // Genera el PDF
-        $pdf = PDF::loadView('bag.pdf.cn38', compact('bags'));
-
+        $pdf = PDF::loadView('bag.pdf.cn38', compact('bags', 'sum'));
+    
         // Guarda o descarga el PDF según tus necesidades
         // $pdf->save(storage_path('nombre_del_archivo.pdf'));
         // o
         // return $pdf->download('nombre_del_archivo.pdf');
-
+    
         // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
         return $pdf->stream('CN38.pdf', ['Attachment' => false]);
-
-        return redirect()->route('bags.index')
-            ->with('success', 'Despacho cerrado con exito!');
     }
 
     public function bagsclose()

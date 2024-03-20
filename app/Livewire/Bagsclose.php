@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Bag;
 use Livewire\WithPagination;
+use DB;
 
 class Bagsclose extends Component
 {
@@ -12,6 +13,7 @@ class Bagsclose extends Component
     public $search = '';
     public $selectAll = false;
     public $paquetesSeleccionados = [];
+
     public function render()
     {
         $bags = Bag::where('ESTADO', 'CIERRE')
@@ -29,9 +31,15 @@ class Bagsclose extends Component
             ->orderBy('MARBETE', 'asc')
             ->paginate(10);
 
+        // Calcular la suma de PESOF y PAQUETES por grupo de MARBETE
+        $sum = Bag::where('ESTADO', 'CIERRE')
+            ->select('MARBETE', DB::raw('SUM(PESOF) as sum_pesoc'), DB::raw('SUM(PAQUETES) as sum_paquetes'))
+            ->groupBy('MARBETE')
+            ->get();
+
         return view('livewire.bagsclose', [
             'bags' => $bags,
+            'sums' => $sum,
         ]);
-        return view('livewire.bagsclose');
     }
 }

@@ -33,6 +33,5 @@ class Bags extends Component
             'bags' => $bags,
         ]);
         return view('livewire.bags');
-    }
-    
+    }  
 }

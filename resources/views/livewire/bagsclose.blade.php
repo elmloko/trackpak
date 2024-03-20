@@ -14,14 +14,14 @@
                                             placeholder="Buscar...">
                                     </div>
                                 </div>
-                                    <div class="col-md-6">
-                                        @hasrole('SuperAdmin|Administrador')
-                                        <a href="{{ route('bags.create') }}"
-                                            class="btn btn-primary btn-md float-right ml-2" data-placement="left">
+                                <div class="col-md-6">
+                                    @hasrole('SuperAdmin|Administrador')
+                                        <a href="{{ route('bags.create') }}" class="btn btn-primary btn-md float-right ml-2"
+                                            data-placement="left">
                                             {{ __('Crear Nuevo') }}
                                         </a>
-                                        @endhasrole
-                                    </div>
+                                    @endhasrole
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -52,13 +52,25 @@
                             </thead>
                             <tbody>
                                 @foreach ($bags as $bag)
-                                    @if($bag->FIN == 'F')
+                                    @if ($bag->FIN == 'F')
                                         <tr>
                                             <td>{{ $bag->MARBETE }}</td>
                                             <td>{{ $bag->OFCAMBIO }}</td>
                                             <td>{{ $bag->OFDESTINO }}</td>
-                                            <td>{{ $bag->PESOF }}</td>
-                                            <td>{{ $bag->PAQUETES }}</td>
+                                            <td>
+                                                @foreach ($sums as $sum)
+                                                    @if ($sum->MARBETE == $bag->MARBETE)
+                                                        {{ $sum->sum_pesoc }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach ($sums as $sum)
+                                                    @if ($sum->MARBETE == $bag->MARBETE)
+                                                        {{ $sum->sum_paquetes }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                             <td>{{ $bag->ITINERARIO }}</td>
                                             <td>{{ $bag->ESTADO }}</td>
                                             <td>{{ $bag->OBSERVACIONES }}</td>
@@ -72,13 +84,14 @@
                                                     </a>
                                                     @include('bag.modal.cierre')
                                                     {{-- <a class="btn btn-sm btn-info" href="{{ route('bags.show', $bag->id) }}">
-                                                        Ver Paquetes
-                                                    </a> --}}
+                                                    Ver Paquetes
+                                                </a> --}}
                                                 @endhasrole
                                             </td>
                                         </tr>
                                     @endif
                                 @endforeach
+
                             </tbody>
                         </table>
                     </div>

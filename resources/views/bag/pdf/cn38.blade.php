@@ -123,9 +123,22 @@
                 @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
             @endforeach
         </tbody>
+        <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        DESPACHO TOTAL: {{ $sum->sum_paquetes }}
+                    </td>
+                    <td>
+                        PESO TOTAL: {{ $sum->sum_pesoc }}
+                    </td>
+                    <td></td>
+                </tr>
+        </tbody>
     </table>
-    <br>
-    <br>
     <br>
     <br>
     <br>
