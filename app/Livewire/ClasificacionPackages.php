@@ -19,6 +19,7 @@ class ClasificacionPackages extends Component
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
     public $findespacho = false;
+    public $lastBag;
 
     public function render()
     {
@@ -43,8 +44,12 @@ class ClasificacionPackages extends Component
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
+        // Recuperar el último registro de bolsa
+        $this->lastBag = Bag::latest()->first();
+
         return view('livewire.clasificacion-packages', [
             'packages' => $packages,
+            'lastBag' => $this->lastBag, // Pasar el último registro de bolsa a la vista
         ]);
     }
 
@@ -71,10 +76,10 @@ class ClasificacionPackages extends Component
 
         // Obtener el último registro de bolsa
         $lastBag = Bag::latest()->first();
-    
+
         // Determinar el valor de NRODESPACHO
         $nroDespacho = '';
-    
+
         if ($lastBag) {
             if ($lastBag->FIN == 'F') {
                 // Incrementar el número de despacho si el último registro tiene FIN = 'F'
@@ -87,10 +92,10 @@ class ClasificacionPackages extends Component
             // Si no hay registros anteriores, iniciar con '0000'
             $nroDespacho = '0001';
         }
-    
+
         // Determinar el valor de NROSACA
         $nroSaca = '';
-    
+
         if ($lastBag) {
             if ($lastBag->FIN == 'F') {
                 // Reiniciar el número de saca si el último registro tiene FIN = 'F'
@@ -103,21 +108,21 @@ class ClasificacionPackages extends Component
             // Si no hay registros anteriores, iniciar con '0000'
             $nroSaca = '0001';
         }
-    
+
         // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-    
+
         foreach ($paquetesSeleccionados as $paquete) {
             if ($paquete) {
                 $paquete->ESTADO = 'DESPACHO';
                 $paquete->datedespachoclasificacion = now()->toDateTimeString();
                 $paquete->save();
             }
-    
+
             Event::create([
                 'action' => 'DESPACHO',
                 'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
@@ -125,10 +130,10 @@ class ClasificacionPackages extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-    
+
         // Determinar el valor de FIN
         $finValue = $this->findespacho ? 'F' : 'N';
-    
+
         // Definir las siglas
         $siglasOrigen = [
             'LA PAZ' => 'BOLPA',
@@ -164,8 +169,13 @@ class ClasificacionPackages extends Component
         $siglasOrigen = $siglasOrigen[$ciudadOrigen];
         $siglasDestino = $siglasDestino[$ciudadDestino];
 
+        $pesoTotal = $paquetesSeleccionados->sum('PESO'); 
+
+        // Convertir el peso total a un entero manteniendo los ceros
+        $pesoEntero = str_pad(str_replace('.', '', $pesoTotal), 4, '0', STR_PAD_LEFT);
+
         $marbete = $siglasOrigen . $siglasDestino . 'B' . 'UN' . substr(date('Y'), 3, 1) . $nroDespacho;
-        $receptaculo = $siglasOrigen . $siglasDestino . 'B' . 'UN' . substr(date('Y'), 3, 1) . $nroDespacho . $nroSaca;
+        $receptaculo = $siglasOrigen . $siglasDestino . 'B' . 'UN' . substr(date('Y'), 3, 1) . $nroDespacho . $nroSaca . $pesoEntero;
 
         // Crear la nueva bolsa
         $bag = Bag::create([
@@ -185,7 +195,7 @@ class ClasificacionPackages extends Component
             'RECEPTACULO' => $receptaculo,
 
         ]);
-    
+
         // Vincular los paquetes seleccionados con la bolsa
         foreach ($paquetesSeleccionados as $paquete) {
             // Crear la relación en la tabla pivote 'packages_has_bags'
@@ -194,14 +204,14 @@ class ClasificacionPackages extends Component
                 'packages_id' => $paquete->id,
             ]);
         }
-    
+
         // Restablecer la selección
         $this->resetSeleccion();
-    
+
         // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
         $pdfContent = $pdf->output();
-    
+
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;

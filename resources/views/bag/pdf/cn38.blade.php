@@ -11,6 +11,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
+            
         }
 
         th,
@@ -52,9 +53,19 @@
             border: none;
             line-height: 0.5;
         }
+
         .cn {
-        text-align: center;
-        float: right; /* Alinear a la derecha */
+            text-align: center;
+            float: right;
+            /* Alinear a la derecha */
+        }
+
+        .special-text {
+            text-align: center;
+            font-size: 12px;
+            border: none;
+            font-weight: normal;
+            line-height: 0.1;
         }
     </style>
 </head>
@@ -75,7 +86,8 @@
             <tr>
                 <th style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
                     @foreach ($bags->take(1) as $bag)
-                        Oficina de Cambio:{{ $bag->OFCAMBIO }} - {{ $bag->OFCAM108 }} / Oficina de Destino:{{ $bag->OFDESTINO }} - {{ $bag->OFDES108 }}
+                        Oficina de Cambio:{{ $bag->OFCAMBIO }} - {{ $bag->OFCAM108 }} / Oficina de
+                        Destino:{{ $bag->OFDESTINO }} - {{ $bag->OFDES108 }}
                     @endforeach
                 </th>
                 <th style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
@@ -113,7 +125,7 @@
             @foreach ($bags as $bag)
                 <tr>
                     <td>{{ $i }}</td>
-                    <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}</td>
+                    <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}{{ $bag->FIN == 'F' ? 'F' : '' }}</td>
                     <td>{{ $bag->OFCAMBIO }}</td>
                     <td>{{ $bag->OFDESTINO }}</td>
                     <td>1</td>
@@ -124,30 +136,37 @@
             @endforeach
         </tbody>
         <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        DESPACHO TOTAL: {{ $sum->sum_paquetes }}
-                    </td>
-                    <td>
-                        PESO TOTAL: {{ $sum->sum_pesoc }}
-                    </td>
-                    <td></td>
-                </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    DESPACHO TOTAL: {{ $sum->sum_paquetes }}
+                </td>
+                <td>
+                    PESO TOTAL: {{ $sum->sum_pesoc }}
+                </td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
     <br>
     <br>
     <br>
     <br>
-    <div class="firma">
-        <p>__________________________ </p>
-        <p>ENTREGADO POR</p>
-        <p>{{ auth()->user()->name }}</p>
-    </div>
+    <table>
+        <td style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
+            <p class="special-text">__________________________</p>
+            <p class="special-text">RECIBIDO POR</p>
+            <p class="special-text">{{ $bag->TRASPORTE }}</p>
+        </td>
+        <td style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
+            <p class="special-text">__________________________ </p>
+            <p class="special-text">ENTREGADO POR</p>
+            <p class="special-text">{{ auth()->user()->name }}</p>
+        </td>
+    </table>
 </body>
 
 </html>

@@ -58,7 +58,7 @@
     <tr>
       <td colspan="2" class="text-center">{{ $bag->OFDESTINO }}</td>
       <td></td>
-      <td class="text-center">{{ $bag->FIN }}</td>
+      <h1 class="text-center">{{ $bag->FIN == 'F' ? 'F' : '' }}</h1>
     </tr>
     <tr>
       <td>Desp:BUN</td>

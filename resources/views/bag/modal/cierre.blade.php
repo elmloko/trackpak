@@ -60,14 +60,14 @@
                                     {!! $errors->first('TRASPORTE', '<div class="invalid-feedback">:message</div>') !!}
                                 </div>
                             @endif
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 {{ Form::label('NFACTURA') }}
                                 {{ Form::number('NFACTURA', strtoupper($bag->NFACTURA), [
                                     'class' => 'form-control' . ($errors->has('NFACTURA') ? ' is-invalid' : ''),
                                     'placeholder' => 'Observaciones de Saca',
                                 ]) }}
                                 {!! $errors->first('NFACTURA', '<div class="invalid-feedback">:message</div>') !!}
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">

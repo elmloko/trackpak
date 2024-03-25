@@ -48,11 +48,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-info" href="{{ route('bags.show', $bag->id) }}">
+                    <a class="btn btn-info" target="_blank" href="{{ route('bags.show', $bag->id) }}">
                         Ver Paquetes
                     </a>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Confirmar Baja</button>
+                    <button type="submit" class="btn btn-success" target="_blank">Confirmar Baja</button>
                 </div>
             </form>
         </div>

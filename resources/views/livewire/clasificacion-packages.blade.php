@@ -52,6 +52,7 @@
                     </div>
                 @endif
                 <div class="card-body">
+                    <h5 id="card_title">Ultima Saca Designada {{ $lastBag->NRODESPACHO }} / {{ $lastBag->NROSACA }}{{ $lastBag->FIN == 'F' ? 'F' : '' }}</h5>
                     <div class="table-responsive">
                         @if ($packages->count())
                             <table class="table table-striped table-hover">
