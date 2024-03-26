@@ -154,7 +154,9 @@ Route::middleware('auth')->group(function () {
     Route::get('package/pdf/deleteadogeneralcarteropdf', [PackageController::class, 'deleteadogeneralcarteropdf'])->name('package.pdf.deleteadogeneralcarteropdf');
     Route::get('package/pdf/asignarcartero', [PackageController::class, 'asignarcartero'])->name('package.pdf.asignarcartero');
     Route::get('package/pdf/prerezago', [PackageController::class, 'prerezago'])->name('package.pdf.prerezago');
-    Route::post('national/pdf/despachopdf', [PackageController::class, 'despachopdf'])->name('national.pdf.despachopdf');
+    Route::get('package/pdf/deleteadoencomiendaspdf', [PackageController::class, 'deleteadoencomiendaspdf'])->name('package.pdf.deleteadoencomiendaspdf');
+    
+
     
     // Reportes Excel
     Route::get('package/packagesallexcel', [PackageController::class, 'packagesallexcel'])->name('packagesall.excel');
