@@ -70,16 +70,13 @@
                                 <p class="small-text"><strong>Código Rastreo:</strong> {{ $package->CODIGO }}</p>
                                 <p class="small-text"><strong>Destinatario:</strong> {{ $package->DESTINATARIO }}</p>
                                 <p class="small-text"><strong>Ciudad:</strong> {{ $package->CUIDAD }}</p>
-                                <p class="small-text"><strong>Origen:</strong> {{ $package->PAIS }}</p>
                                 <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA }}</p>
                             </td>
                             <td>
                                 <p class="small-text"><strong>Usuario:</strong> {{ auth()->user()->name }}</p>
-                                <p class="small-text"><strong>Tipo:</strong> {{ $package->TIPO }}</p>
                                 <p class="small-text"><strong>Peso:</strong> {{ $package->PESO }} gr.</p>
                                 <p class="small-text"><strong>Precio:</strong> {{ $package->PRECIO }} Bs.</p>
-                                <p class="small-text"><strong>Entrega:</strong> {{ $package->ESTADO }}</p>
-                                <p class="small-text"><strong>Aduana:</strong> {{ $package->ADUANA }}</p>
+                                <p class="small-text"><strong>Estado:</strong> {{ $package->ESTADO }}</p>
                                 <p class="small-text"><strong>Fecha Entrega:</strong> {{ now()->format('Y-m-d H:i') }}
                                 </p>
                             </td>
