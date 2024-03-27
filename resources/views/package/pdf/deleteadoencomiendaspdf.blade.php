@@ -98,6 +98,7 @@
                 </div>
             </div>
         @endif
+        <br>
     @endforeach
 
 </body>
