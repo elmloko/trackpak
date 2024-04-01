@@ -34,11 +34,11 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
                 'PESO',
                 'ESTADO',
                 'OBSERVACIONES',
-                \DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
+                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
             );
 
         if ($this->fechaInicio && $this->fechaFin) {
-            $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
+            $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
         }
 
         $query->where('CUIDAD', $regional);

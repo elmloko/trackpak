@@ -32,7 +32,7 @@ class Ventanillaencomienda extends Component
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('updated_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->where(function ($query) use ($userRegional) {
                 $query->where(function ($subQuery) {
@@ -40,7 +40,7 @@ class Ventanillaencomienda extends Component
                 })
                     ->where('CUIDAD', $userRegional);
             })
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return view('livewire.ventanillaencomienda', [

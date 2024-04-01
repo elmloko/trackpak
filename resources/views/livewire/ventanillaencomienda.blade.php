@@ -16,20 +16,10 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        {{-- @hasrole('SuperAdmin|Administrador|Encomiendas')
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#buscarPaqueteModal">
-                                                    Añadir Paquete
-                                                </button>
-                                                @include('package.modal.ventanillaeca')
-                                                <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
-                                            </div>
-                                        @endhasrole --}}
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
                                             <div class="row">
                                                 <!-- Formulario para generar Excel -->
-                                                <div class="col-md-6">
+                                                <div class="col-md-9">
                                                     <form method="get" action="{{ route('encomiendas.excel') }}"
                                                         class="col-md-12">
                                                         @csrf
@@ -52,8 +42,9 @@
                                                     </form>
                                                 </div>
                                                 <!-- Formulario para generar PDF -->
-                                                <div class="col-md-6">
-                                                    <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
+                                                <div class="col-md-3">
+                                                    <button wire:click="cambiarEstado"
+                                                        class="btn btn-warning">Entregar</button>
                                                     {{-- <form method="get"
                                                         action="{{ route('package.pdf.ventanillapdf') }}"
                                                         class="col-md-12">
@@ -88,7 +79,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 @if ($message = Session::get('success'))
@@ -133,8 +123,9 @@
                                                             $package->CUIDAD === auth()->user()->Regional &&
                                                             in_array($package->VENTANILLA, ['ENCOMIENDAS']))
                                                         <tr>
-                                                            <td><input type="checkbox" wire:model="paquetesSeleccionados"
-                                                                value="{{ $package->id }}"></td>
+                                                            <td><input type="checkbox"
+                                                                    wire:model="paquetesSeleccionados"
+                                                                    value="{{ $package->id }}"></td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>

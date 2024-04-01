@@ -73,6 +73,7 @@
                                 <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA }}</p>
                             </td>
                             <td>
+                                <p class="small-text"><strong>Nro. Factura:</strong></p>
                                 <p class="small-text"><strong>Usuario:</strong> {{ auth()->user()->name }}</p>
                                 <p class="small-text"><strong>Peso:</strong> {{ $package->PESO }} gr.</p>
                                 <p class="small-text"><strong>Precio:</strong> {{ $package->PRECIO }} Bs.</p>
