@@ -70,7 +70,7 @@
                                             <td>
                                                 @hasrole('SuperAdmin|Administrador|Areo')
                                                     <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
-                                                        data-target="#despachoModal{{ $bag->id }}">
+                                                        data-target="#avisoModal{{ $bag->id }}">
                                                         <i class="fa fa-arrow-down"></i>
                                                         {{ __('Hoja de Aviso') }}
                                                     </a>

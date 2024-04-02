@@ -1,10 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" id="despachoModal{{ $bag->id }}" tabindex="-1" role="dialog" aria-labelledby="bajaModalLabel"
+<div class="modal fade" id="avisoModal{{ $bag->id }}" tabindex="-1" role="dialog" aria-labelledby="bajaModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="despachoModalLabel">Hoja de Aviso para {{ $bag->MARBETE }} </h5>
+                <h5 class="modal-title" id="avisoModalLabel">Hoja de Aviso para {{ $bag->MARBETE }} </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
