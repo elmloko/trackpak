@@ -193,7 +193,7 @@ class ClasificacionPackages extends Component
             'OFDES108' => $siglasDestino,
             'MARBETE' => $marbete,
             'RECEPTACULO' => $receptaculo,
-
+            'TIPO' => 'U',
         ]);
 
         // Vincular los paquetes seleccionados con la bolsa

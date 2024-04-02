@@ -56,7 +56,7 @@
                         @if ($lastBag)
                             Última Saca Designada {{ $lastBag->NRODESPACHO }} / {{ $lastBag->NROSACA }}{{ $lastBag->FIN == 'F' ? 'F' : '' }}
                         @else
-                            000/000
+                            No hay sacas registradas 000/000
                         @endif
                     </h5>
                     <div class="table-responsive">

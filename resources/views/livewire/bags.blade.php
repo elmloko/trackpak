@@ -42,6 +42,7 @@
                                     <th>Oficina de Cambio</th>
                                     <th>Oficina de Destino</th>
                                     <th>Numero de Paquetes</th>
+                                    <th>Peso Despachado</th>
                                     <th>Estado</th>
                                     <th>Fecha Apertura</th>
                                     <th>Acciones</th>
@@ -52,10 +53,11 @@
                                 @foreach ($bags as $bag)
                                     <tr>
                                         <td>{{ $bag->RECEPTACULO }}</td>
-                                        <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}</td>
+                                        <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}{{ $bag->FIN == 'F' ? 'F' : '' }}</td>
                                         <td>{{ $bag->OFCAMBIO }}</td>
                                         <td>{{ $bag->OFDESTINO }}</td>
                                         <td>{{ $bag->PAQUETES }}</td>
+                                        <td>{{ $bag->PESO }}</td>
                                         <td>{{ $bag->ESTADO }}</td>
                                         <td>{{ $bag->created_at }}</td>
                                         <td>

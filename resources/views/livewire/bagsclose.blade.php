@@ -72,12 +72,19 @@
                                                     <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                         data-target="#despachoModal{{ $bag->id }}">
                                                         <i class="fa fa-arrow-down"></i>
+                                                        {{ __('Hoja de Aviso') }}
+                                                    </a>
+                                                    @include('bag.modal.aviso')
+                                                @endhasrole
+                                            </td>
+                                            <td>
+                                                @hasrole('SuperAdmin|Administrador|Areo')
+                                                    <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                        data-target="#despachoModal{{ $bag->id }}">
+                                                        <i class="fa fa-arrow-down"></i>
                                                         {{ __('Trasportar') }}
                                                     </a>
                                                     @include('bag.modal.cierre')
-                                                    {{-- <a class="btn btn-sm btn-info" href="{{ route('bags.show', $bag->id) }}">
-                                                    Ver Paquetes
-                                                </a> --}}
                                                 @endhasrole
                                             </td>
                                         </tr>

@@ -92,16 +92,16 @@ class BagController extends Controller
     public function goExpedition($id, Request $request)
     {
         $bag = Bag::find($id);
-    
+
         // Verifica si la bolsa existe
         if (!$bag) {
             return redirect()->route('bags.index')
                 ->with('success', 'El despacho no se pudo cerrar');
         }
-    
+
         // Obtén el valor del campo MARVETE
         $marbete = $bag->MARBETE;
-    
+
         // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
         Bag::where('MARBETE', $marbete)->update([
             'TRASPORTE' => $request->input('TRASPORTE'),
@@ -110,25 +110,74 @@ class BagController extends Controller
             'fecha_exp' => now(),
             'ESTADO' => 'EXPEDICION',
         ]);
-    
+
         // Calcula la suma de los campos PESOC y PAQUETES
         $sum = Bag::where('MARBETE', $marbete)
             ->select(DB::raw('SUM(PESOF) as sum_pesoc'), DB::raw('COUNT(ID) as sum_paquetes'))
             ->first();
-    
+
         // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
         $bags = Bag::where('MARBETE', $marbete)->get();
-    
+
         // Genera el PDF
         $pdf = PDF::loadView('bag.pdf.cn38', compact('bags', 'sum'));
-    
+
         // Guarda o descarga el PDF según tus necesidades
         // $pdf->save(storage_path('nombre_del_archivo.pdf'));
         // o
         // return $pdf->download('nombre_del_archivo.pdf');
-    
+
         // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
         return $pdf->stream('CN38.pdf', ['Attachment' => false]);
+    }
+    public function avisoExpedition($id, Request $request)
+    {
+        // En primer lugar, obtenemos la instancia de la bolsa que estamos actualizando.
+        $bag = Bag::find($id);
+
+        // Verificar si la bolsa existe.
+        if (!$bag) {
+            return redirect()->route('bags.bagsclose')->with('error', 'La bolsa no existe.');
+        }
+
+        // Recuperar los valores enviados desde el formulario.
+        $sacar = $request->input('SACAR');
+        $sacam = $request->input('SACAM');
+        $pesor = $request->input('PESOR');
+        $pesom = $request->input('PESOM');
+        $paquetesr = $request->input('PAQUETESR');
+        $paquetesm = $request->input('PAQUETESM');
+
+        // Actualizar los campos correspondientes en la instancia de la bolsa.
+        $bag->SACAR = $sacar;
+        $bag->SACAM = $sacam;
+        $bag->PESOR = $pesor;
+        $bag->PESOM = $pesom;
+        $bag->PAQUETESR = $paquetesr;
+        $bag->PAQUETESM = $paquetesm;
+
+        // Guardar los cambios en la base de datos.
+        $bag->save();
+
+        $sum = Bag::where('ESTADO', 'CIERRE')
+            ->select(
+                'MARBETE',
+                DB::raw('SUM(PESOF) as sum_pesoc'),
+                DB::raw('SUM(PAQUETES) as sum_paquetes'),
+                DB::raw('SUM(CASE WHEN TIPO = "U" THEN 1 ELSE 0 END) as sum_tipo'),
+                DB::raw('SUM(NROSACA + SACAR + SACAM) as sum_total'),
+                DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
+                DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
+            )
+            ->groupBy('MARBETE')
+            ->get();
+
+
+        // Generar el PDF con los datos sumados
+        $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
+
+        // Devolver el PDF al navegador para su visualización
+        return $pdf->stream('CN31.pdf');
     }
 
     public function bagsclose()

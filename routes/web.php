@@ -201,8 +201,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/bag/{bag}', [BagController::class, 'update'])->name('bags.update');
     Route::delete('/bag/{bag}', [BagController::class, 'destroy'])->name('bags.destroy');
     Route::put('/bags/close/{id}', [BagController::class, 'closeExpedition'])->name('bags.closeExpedition');
+    Route::put('/bags/aviso/{id}', [BagController::class, 'avisoExpedition'])->name('bags.avisoExpedition');
     Route::put('/bags/go/{id}', [BagController::class, 'goExpedition'])->name('bags.goExpedition');
     Route::get('/bag/bagsclose', [BagController::class, 'bagsclose'])->name('bags.bagsclose');
+    Route::get('bag/pdf/cn31', [BagController::class, 'cn35'])->name('bag.pdf.cn31');
     Route::get('bag/pdf/cn35', [BagController::class, 'cn35'])->name('bag.pdf.cn35');
     Route::get('bag/pdf/cn38', [BagController::class, 'cn38'])->name('bag.pdf.cn38');
 
