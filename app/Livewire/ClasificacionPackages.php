@@ -194,6 +194,7 @@ class ClasificacionPackages extends Component
             'MARBETE' => $marbete,
             'RECEPTACULO' => $receptaculo,
             'TIPO' => 'U',
+            'T' => '0',
         ]);
 
         // Vincular los paquetes seleccionados con la bolsa

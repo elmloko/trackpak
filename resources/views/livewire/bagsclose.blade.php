@@ -68,7 +68,7 @@
                                             <td>{{ $bag->OBSERVACIONES }}</td>
                                             <td>{{ $bag->updated_at }}</td>
                                             <td>
-                                                @hasrole('SuperAdmin|Administrador|Areo')
+                                                @hasrole('SuperAdmin|Administrador|Expedicion')
                                                     <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                         data-target="#avisoModal{{ $bag->id }}">
                                                         <i class="fa fa-arrow-down"></i>
@@ -76,15 +76,15 @@
                                                     </a>
                                                     @include('bag.modal.aviso')
                                                 @endhasrole
-                                            </td>
-                                            <td>
                                                 @hasrole('SuperAdmin|Administrador|Areo')
-                                                    <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
-                                                        data-target="#despachoModal{{ $bag->id }}">
-                                                        <i class="fa fa-arrow-down"></i>
-                                                        {{ __('Trasportar') }}
-                                                    </a>
-                                                    @include('bag.modal.cierre')
+                                                    @if ($bag->T == 1)
+                                                        <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                            data-target="#despachoModal{{ $bag->id }}">
+                                                            <i class="fa fa-arrow-down"></i>
+                                                            {{ __('Trasportar') }}
+                                                        </a>
+                                                        @include('bag.modal.cierre')
+                                                    @endif
                                                 @endhasrole
                                             </td>
                                         </tr>

@@ -159,6 +159,10 @@ class BagController extends Controller
         // Guardar los cambios en la base de datos.
         $bag->save();
 
+        $bag->update([
+            'T' => '1',
+        ]);
+
         $sum = Bag::where('ESTADO', 'CIERRE')
             ->select(
                 'MARBETE',
