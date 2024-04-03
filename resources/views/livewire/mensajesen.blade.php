@@ -32,6 +32,7 @@
                                     <th>Codigo de Rastreo</th>
                                     <th>Destinatario</th>
                                     <th>Telefono</th>
+                                    <th>Ventanilla</th>
                                     <th>Estado</th>
                                     <th>Ciudad</th>
                                     <th>Mensajes</th>
@@ -48,6 +49,7 @@
                                             <td>{{ $mensaje->package->CODIGO }}</td>
                                             <td>{{ $mensaje->package->DESTINATARIO }}</td>
                                             <td>{{ $mensaje->package->TELEFONO }}</td>
+                                            <td>{{ $mensaje->package->VENTANILLA }}</td>
                                             <td>{{ $mensaje->package->ESTADO }}</td>
                                             <td>{{ $mensaje->package->CUIDAD }}</td>
                                             <td>{{ $mensaje->mensajes }}</td>
