@@ -11,7 +11,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
-            
+
         }
 
         th,
@@ -128,28 +128,82 @@
                     <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}{{ $bag->FIN == 'F' ? 'F' : '' }}</td>
                     <td>{{ $bag->OFCAMBIO }}</td>
                     <td>{{ $bag->OFDESTINO }}</td>
-                    <td>1</td>
+                    <td>1 ORDINARIO</td>
                     <td>{{ $bag->PESOF }}</td>
                     <td>{{ $bag->OBSERVACIONES }}</td>
                 </tr>
                 @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
             @endforeach
+            @foreach ($bags as $bag)
+                @php
+                    $nrosaca_number = (int) $bag->NROSACA + 1;
+                    $pesom_shown = false; // Variable para controlar si $bag->PESOM ya ha sido mostrado
+                    $pesor_shown = false; // Variable para controlar si $bag->PESOR ya ha sido mostrado
+                @endphp
+
+                @for ($j = 0; $j < $bag->SACAR; $j++)
+                    <tr>
+                        <td>{{ $i }}</td>
+                        <td>{{ $bag->NRODESPACHO }} / {{ str_pad($nrosaca_number, 4, '0', STR_PAD_LEFT) }}</td>
+                        <td>{{ $bag->OFCAMBIO }}</td>
+                        <td>{{ $bag->OFDESTINO }}</td>
+                        <td>1 CERTFICADO</td>
+                        <td>{{ $pesor_shown ? '' : $bag->PESOR }}</td>
+                        <!-- Solo mostrar si $bag->PESOR no ha sido mostrado antes -->
+                        <td>{{ $bag->OBSERVACIONES }}</td>
+                    </tr>
+                    @php
+                        if (!$pesor_shown) {
+                            $pesor_shown = true; // Marcar $bag->PESOR como mostrado
+                        }
+                        if (!$pesom_shown) {
+                            $pesom_shown = false; // Marcar $bag->PESOM como mostrado
+                        }
+                        $nrosaca_number++;
+                        $i++;
+                    @endphp
+                @endfor
+
+                @php
+                    $nrosaca_number = (int) $bag->NROSACA;
+                @endphp
+
+                @for ($k = 0; $k < $bag->SACAM; $k++)
+                    <tr>
+                        <td>{{ $i }}</td>
+                        <td>{{ $bag->NRODESPACHO }} / {{ str_pad($nrosaca_number, 4, '0', STR_PAD_LEFT) }}</td>
+                        <td>{{ $bag->OFCAMBIO }}</td>
+                        <td>{{ $bag->OFDESTINO }}</td>
+                        <td>1 SACA M</td>
+                        <td>{{ $pesom_shown ? '' : $bag->PESOM }}</td>
+                        <!-- Solo mostrar si $bag->PESOM no ha sido mostrado antes -->
+                        <td>{{ $bag->OBSERVACIONES }}</td>
+                    </tr>
+                    @php
+                        if (!$pesor_shown) {
+                            $pesor_shown = true; // Marcar $bag->PESOR como mostrado
+                        }
+                        if (!$pesom_shown) {
+                            $pesom_shown = true; // Marcar $bag->PESOM como mostrado
+                        }
+                        $nrosaca_number++;
+                        $i++;
+                    @endphp
+                @endfor
+            @endforeach
         </tbody>
-        <tbody>
+    </table>
+    <table>
+        <thead>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    DESPACHO TOTAL: {{ $sum->sum_paquetes }}
-                </td>
-                <td>
-                    PESO TOTAL: {{ $sum->sum_pesoc }}
-                </td>
-                <td></td>
+                <td>SACAS TOTAL</td>
+                <th>{{ $sum->sum_totalsaca }}</th>
+                <td>PESO TOTAL</td>
+                <th>{{ $sum->sum_totalpeso }}</th>
+                <td>PAQUETES TOTAL</td>
+                <th>{{ $sum->sum_totalpaquetes }}</th>
             </tr>
-        </tbody>
+        </thead>
     </table>
     <br>
     <br>

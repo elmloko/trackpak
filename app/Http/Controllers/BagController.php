@@ -113,7 +113,13 @@ class BagController extends Controller
 
         // Calcula la suma de los campos PESOC y PAQUETES
         $sum = Bag::where('MARBETE', $marbete)
-            ->select(DB::raw('SUM(PESOF) as sum_pesoc'), DB::raw('COUNT(ID) as sum_paquetes'))
+            ->select(
+                DB::raw('SUM(PESOF) as sum_pesoc'), 
+                DB::raw('COUNT(ID) as sum_paquetes'),
+                DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
+                DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
+                DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_totalsaca'),
+                )
             ->first();
 
         // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
