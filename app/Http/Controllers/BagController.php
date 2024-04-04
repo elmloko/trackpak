@@ -108,7 +108,54 @@ class BagController extends Controller
             'HORARIO' => $request->input('HORARIO'),
             'OBSERVACIONESG' => $request->input('OBSERVACIONESG'),
             'fecha_exp' => now(),
-            'ESTADO' => 'EXPEDICION',
+            'ESTADO' => 'TRASPORTADO',
+        ]);
+
+        // Calcula la suma de los campos PESOC y PAQUETES
+        $sum = Bag::where('MARBETE', $marbete)
+            ->select(
+                DB::raw('SUM(PESOF) as sum_pesoc'), 
+                DB::raw('COUNT(ID) as sum_paquetes'),
+                DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
+                DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
+                DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_totalsaca'),
+                )
+            ->first();
+
+        // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
+        $bags = Bag::where('MARBETE', $marbete)->get();
+
+        // Genera el PDF
+        $pdf = PDF::loadView('bag.pdf.cn38', compact('bags', 'sum'));
+
+        // Guarda o descarga el PDF según tus necesidades
+        // $pdf->save(storage_path('nombre_del_archivo.pdf'));
+        // o
+        // return $pdf->download('nombre_del_archivo.pdf');
+
+        // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
+        return $pdf->stream('CN38.pdf', ['Attachment' => false]);
+    }
+    public function returnExpedition($id, Request $request)
+    {
+        $bag = Bag::find($id);
+
+        // Verifica si la bolsa existe
+        if (!$bag) {
+            return redirect()->route('bags.index')
+                ->with('success', 'El despacho no se pudo cerrar');
+        }
+
+        // Obtén el valor del campo MARVETE
+        $marbete = $bag->MARBETE;
+
+        // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
+        Bag::where('MARBETE', $marbete)->update([
+            'TRASPORTE' => $request->input('TRASPORTE'),
+            'HORARIO' => $request->input('HORARIO'),
+            'OBSERVACIONESG' => $request->input('OBSERVACIONESG'),
+            'fecha_exp' => now(),
+            'ESTADO' => 'TRASPORTADO',
         ]);
 
         // Calcula la suma de los campos PESOC y PAQUETES
@@ -190,8 +237,62 @@ class BagController extends Controller
         return $pdf->stream('CN31.pdf');
     }
 
+    public function buscarPaquete(Request $request)
+    {
+        $codigo = $request->input('codigo');
+        $bag = Bag::where('CODIGO', $codigo)->first();
+
+        if ($bag) {
+            
+            // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
+            if ($bag->ESTADO === 'DESPACHO' || $bag->ESTADO === 'RETORNO') {
+                // Verificar que el destino sea igual a la regional del usuario
+                if (auth()->user()->Regional == $bag->CUIDAD) {
+                    if ($bag->ESTADO === 'DESPACHO') {
+                        // Event::create([
+                        //     'action' => 'DISPONIBLE',
+                        //     'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
+                        //     'user_id' => auth()->user()->id,
+                        //     'codigo' => $package->CODIGO,
+                        // ]);            
+                        // Event::create([
+                        //     'action' => 'EN ENTREGA',
+                        //     'descripcion' => 'Paquete Recibido en Oficina Postal Regional.' . $package->CUIDAD,
+                        //     'user_id' => auth()->user()->id,
+                        //     'codigo' => $package->CODIGO,
+                        // ]);
+                    }
+
+                    // Cambiar el estado del paquete a "VENTANILLA"
+                    $bag->ESTADO = 'VENTANILLA';
+                    $bag->save();
+
+                    return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+                } else {
+                    return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
+                }
+            } else {
+                // Si el estado es 'RETORNO', cambiar el estado a 'VENTANILLA' sin eventos adicionales
+                $bag->ESTADO = 'VENTANILLA';
+                $bag->save();
+
+                return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
+        }
+    }
+
     public function bagsclose()
     {
         return view('bag.bagsclose');
+    }
+    public function bagstrans()
+    {
+        return view('bag.bagstrans');
+    }
+    public function bagsopen()
+    {
+        return view('bag.bagsopen');
     }
 }

@@ -524,7 +524,7 @@ return [
                             'can'  => 'packages.redirigidos',
                         ],
                         [
-                            'text' => 'Apertura Despacho',
+                            'text' => 'Ingreso Despacho',
                             'url' => 'bags',
                             'icon' => 'fas fa-box-open',
                             'can'  => 'packages.redirigidos',
@@ -535,12 +535,18 @@ return [
                             'icon' => 'fas fa-box-open',
                             'can'  => 'packages.redirigidos',
                         ],
-                        // [
-                        //     'text' => 'Cierre Despacho',
-                        //     'url' => 'packages-has-bags',
-                        //     'icon' => 'fas fa-box-open',
-                        //     'can'  => 'packages.redirigidos',
-                        // ],
+                        [
+                            'text' => 'Expedicion Despacho',
+                            'url' => 'bag/bagstrans',
+                            'icon' => 'fas fa-box-open',
+                            'can'  => 'packages.redirigidos',
+                        ],
+                        [
+                            'text' => 'Apertura Despacho',
+                            'url' => 'bag/bagsopen',
+                            'icon' => 'fas fa-box-open',
+                            'can'  => 'packages.redirigidos',
+                        ],
                     ],
                 ], 
                 [
