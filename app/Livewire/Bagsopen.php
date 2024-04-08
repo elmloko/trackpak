@@ -16,7 +16,7 @@ class Bagsopen extends Component
 
     public function render()
     {
-        $bags = Bag::where('ESTADO', 'DESTINO')
+        $bags = Bag::where('ESTADO', 'EXPEDICION')
             ->when($this->search, function ($query) {
                 $query->where('NRODESPACHO', 'like', '%' . $this->search . '%')
                     ->orWhere('OFCAMBIO', 'like', '%' . $this->search . '%')
@@ -32,7 +32,7 @@ class Bagsopen extends Component
             ->paginate(10);
 
         // Calcular la suma de PESOF y PAQUETES por grupo de MARBETE
-        $sum = Bag::where('ESTADO', 'DESTINO')
+        $sum = Bag::where('ESTADO', 'EXPEDICION')
         ->select(
             'MARBETE', 
             DB::raw('SUM(PESOF) as sum_pesoc'), 

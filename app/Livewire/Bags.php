@@ -26,7 +26,7 @@ class Bags extends Component
                     ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
-            ->orderBy('NROSACA', 'asc')
+            ->orderBy('RECEPTACULO', 'asc')
             ->paginate(10);
 
         return view('livewire.bags', [

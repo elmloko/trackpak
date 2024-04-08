@@ -237,51 +237,31 @@ class BagController extends Controller
         return $pdf->stream('CN31.pdf');
     }
 
-    public function buscarPaquete(Request $request)
+    public function bagsadd(Request $request)
     {
         $codigo = $request->input('codigo');
-        $bag = Bag::where('CODIGO', $codigo)->first();
-
+        $bag = Bag::where('RECEPTACULO', $codigo)->first();
+    
         if ($bag) {
-            
-            // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
-            if ($bag->ESTADO === 'DESPACHO' || $bag->ESTADO === 'RETORNO') {
+            // Verificar que el estado del paquete sea 'TRASPORTADO'
+            if ($bag->ESTADO === 'TRASPORTADO') {
                 // Verificar que el destino sea igual a la regional del usuario
-                if (auth()->user()->Regional == $bag->CUIDAD) {
-                    if ($bag->ESTADO === 'DESPACHO') {
-                        // Event::create([
-                        //     'action' => 'DISPONIBLE',
-                        //     'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
-                        //     'user_id' => auth()->user()->id,
-                        //     'codigo' => $package->CODIGO,
-                        // ]);            
-                        // Event::create([
-                        //     'action' => 'EN ENTREGA',
-                        //     'descripcion' => 'Paquete Recibido en Oficina Postal Regional.' . $package->CUIDAD,
-                        //     'user_id' => auth()->user()->id,
-                        //     'codigo' => $package->CODIGO,
-                        // ]);
-                    }
-
-                    // Cambiar el estado del paquete a "VENTANILLA"
-                    $bag->ESTADO = 'VENTANILLA';
+                if (auth()->user()->Regional == $bag->OFDESTINO) {
+                    // Cambiar el estado del paquete a "EXPEDICION"
+                    $bag->ESTADO = 'EXPEDICION';
                     $bag->save();
-
-                    return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+                    return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a EXPEDICION.');
                 } else {
                     return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
                 }
             } else {
-                // Si el estado es 'RETORNO', cambiar el estado a 'VENTANILLA' sin eventos adicionales
-                $bag->ESTADO = 'VENTANILLA';
-                $bag->save();
-
-                return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+                return redirect()->back()->with('error', 'El estado del paquete no es TRASPORTADO.');
             }
         } else {
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
         }
     }
+    
 
     public function bagsclose()
     {
@@ -295,4 +275,5 @@ class BagController extends Controller
     {
         return view('bag.bagsopen');
     }
+    
 }

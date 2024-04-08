@@ -20,7 +20,7 @@
                                             data-target="#buscarPaqueteModal">
                                             Añadir Paquete
                                         </button>
-                                        @include('package.modal.ventanilladnd')
+                                        @include('bag.modal.add')
                                     </div>
                                 @endhasrole
                             </div>
@@ -54,7 +54,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($bags as $bag)
-                                    @if ($bag->FIN == 'F')
+                                    {{-- @if ($bag->FIN == 'F') --}}
                                         <tr>
                                             <td>{{ $bag->MARBETE }}</td>
                                             <td>{{ $bag->OFCAMBIO }}</td>
@@ -77,7 +77,7 @@
                                             <td>{{ $bag->ESTADO }}</td>
                                             <td>{{ $bag->OBSERVACIONES }}</td>
                                             <td>{{ $bag->updated_at }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 @hasrole('SuperAdmin|Administrador|Expedicion')
                                                     <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                         data-target="#avisoModal{{ $bag->id }}">
@@ -96,9 +96,9 @@
                                                         @include('bag.modal.cierre')
                                                     @endif
                                                 @endhasrole
-                                            </td>
+                                            </td> --}}
                                         </tr>
-                                    @endif
+                                    {{-- @endif --}}
                                 @endforeach
 
                             </tbody>

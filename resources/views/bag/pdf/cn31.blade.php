@@ -159,16 +159,13 @@
             <tr>
                 <td>Prioritario/no prioritario -LCAO</td>
                 <td>{{ $bag->SACAR }}</td>
-                @foreach ($sum as $item)
-                    <td>{{ $item->sum_tipo }}</td>
-                @endforeach
+                <td>{{ $sum->last()->sum_tipo }}</td>
+                <!-- Aquí estamos accediendo al primer elemento de la colección -->
                 <td>Envases en el despacho</td>
-                @foreach ($sum as $item)
-                    <td>{{ $item->sum_total }}</td>
-                @endforeach
-                @foreach ($sum as $item)
-                    <td>{{ $item->sum_total }}</td>
-                @endforeach
+                <td>{{ $sum->last()->sum_total }}</td>
+                <!-- Aquí estamos accediendo al primer elemento de la colección -->
+                <td>{{ $sum->last()->sum_total }}</td>
+                <!-- Aquí estamos accediendo al primer elemento de la colección -->
             </tr>
             <tr>
                 <td>Sacas M</td>
@@ -200,12 +197,8 @@
             </tr>
             <tr>
                 <td>LC /AO</td>
-                @foreach ($sum as $item)
-                    <td>{{ $item->sum_paquetes }}</td>
-                @endforeach
-                @foreach ($sum as $item)
-                    <td>{{ $item->sum_pesoc }}</td>
-                @endforeach
+                <td>{{ $sum->last()->sum_paquetes }}</td>
+                <td>{{ $sum->last()->sum_pesoc }}</td>
             </tr>
             <tr>
                 <td>SACAS M</td>
@@ -214,16 +207,11 @@
             </tr>
             <tr>
                 <td>Total</td>
-                @foreach ($sum as $item)
-                    <td>{{ $item->sum_totalpaquetes }}</td>
-                @endforeach
-                @foreach ($sum as $item)
-                    <td>{{ $item->sum_totalpeso }}</td>
-                @endforeach
-            </tr>
+                <td>{{ $sum->last()->sum_totalpaquetes }}</td>
+                <td>{{ $sum->last()->sum_totalpeso }}</td>
+                < </tr>
         </tbody>
     </table>
-    <p><b>2. Gastos de tránsito y gastos terminales</p>
     <br>
     <br>
     <br>
