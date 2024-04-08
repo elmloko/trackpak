@@ -66,7 +66,13 @@
                     <table class="centro">
                         <tr>
                             <td>
-                                <p class="barcode">{!! DNS1D::getBarcodeHTML($package->CODIGO, 'C128', 2.15, 40) !!}</p>
+                                <p class="barcode">
+                                    @if (!empty(trim($package->CODIGO)))
+                                        {!! DNS1D::getBarcodeHTML($package->CODIGO, 'C128', 2.15, 40) !!}
+                                    @else
+                                        ILEGIBLE
+                                    @endif
+                                </p>
                                 <p class="small-text"><strong>Código Rastreo:</strong> {{ $package->CODIGO }}</p>
                                 <p class="small-text"><strong>Destinatario:</strong> {{ $package->DESTINATARIO }}</p>
                                 <p class="small-text"><strong>Ciudad:</strong> {{ $package->CUIDAD }}</p>

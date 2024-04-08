@@ -68,7 +68,7 @@ class Ventanillaencomienda extends Component
         foreach ($paquetesSeleccionados as $paquete) {
             // Calcular el precio basado en el peso del paquete
             $peso = $paquete->PESO;
-            if ($peso >= 0.001 && $peso <= 0.5) {
+            if ($peso >= 0.000 && $peso <= 0.5) {
                 $precio = 5;
             } elseif ($peso > 0.5) {
                 $precio = 10;
