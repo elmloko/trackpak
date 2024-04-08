@@ -56,23 +56,11 @@
                                 @foreach ($bags as $bag)
                                     {{-- @if ($bag->FIN == 'F') --}}
                                         <tr>
-                                            <td>{{ $bag->MARBETE }}</td>
+                                            <td>{{ $bag->RECEPTACULO }}</td>
                                             <td>{{ $bag->OFCAMBIO }}</td>
                                             <td>{{ $bag->OFDESTINO }}</td>
-                                            <td>
-                                                @foreach ($sums as $sum)
-                                                    @if ($sum->MARBETE == $bag->MARBETE)
-                                                        {{ $sum->sum_pesoc }}
-                                                    @endif
-                                                @endforeach
-                                            </td>
-                                            <td>
-                                                @foreach ($sums as $sum)
-                                                    @if ($sum->MARBETE == $bag->MARBETE)
-                                                        {{ $sum->sum_paquetes }}
-                                                    @endif
-                                                @endforeach
-                                            </td>
+                                            <td>{{ $bag->PESO }}</td>
+                                            <td>{{ $bag->PAQUETES }}</td>
                                             <td>{{ $bag->ITINERARIO }}</td>
                                             <td>{{ $bag->ESTADO }}</td>
                                             <td>{{ $bag->OBSERVACIONES }}</td>
