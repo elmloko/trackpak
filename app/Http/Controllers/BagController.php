@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bag;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
@@ -78,6 +79,20 @@ class BagController extends Controller
             'ITINERARIO' => $request->input('ITINERARIO'),
             'OBSERVACIONES' => $request->input('OBSERVACIONES'),
             'ESTADO' => 'CIERRE',
+            'userbags' => auth()->user()->name,
+        ]);
+        Event::create([
+            'action' => 'PROCESADO',
+            'descripcion' => 'Saca Generada Marbete ' . $bag->RECEPTACULO . ' y Lista para Expedicion',
+            'user_id' => auth()->user()->id,
+            'codigo' => $bag->MARBETE,
+        ]);
+
+        Event::create([
+            'action' => 'CIERRE',
+            'descripcion' => 'Saca Generada por el Receptaculo ' . $bag->MARBETE . ' e Impreso CN35',
+            'user_id' => auth()->user()->id,
+            'codigo' => $bag->RECEPTACULO,
         ]);
 
         // Genera el PDF
@@ -109,21 +124,29 @@ class BagController extends Controller
             'OBSERVACIONESG' => $request->input('OBSERVACIONESG'),
             'fecha_exp' => now(),
             'ESTADO' => 'TRASPORTADO',
+            'userbags' => auth()->user()->name,
         ]);
 
         // Calcula la suma de los campos PESOC y PAQUETES
         $sum = Bag::where('MARBETE', $marbete)
             ->select(
-                DB::raw('SUM(PESOF) as sum_pesoc'), 
+                DB::raw('SUM(PESOF) as sum_pesoc'),
                 DB::raw('COUNT(ID) as sum_paquetes'),
                 DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
                 DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
                 DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_totalsaca'),
-                )
+            )
             ->first();
 
         // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
         $bags = Bag::where('MARBETE', $marbete)->get();
+
+        Event::create([
+            'action' => 'TRASPORTADO',
+            'descripcion' => 'Despacho en camino Oficina Destino CN38 y entregado a Trasporte de Cambio',
+            'user_id' => auth()->user()->id,
+            'codigo' => $bag->MARBETE,
+        ]);
 
         // Genera el PDF
         $pdf = PDF::loadView('bag.pdf.cn38', compact('bags', 'sum'));
@@ -136,53 +159,67 @@ class BagController extends Controller
         // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
         return $pdf->stream('CN38.pdf', ['Attachment' => false]);
     }
-    public function returnExpedition($id, Request $request)
-    {
-        $bag = Bag::find($id);
+    // public function returnExpedition($id, Request $request)
+    // {
+    //     $bag = Bag::find($id);
 
-        // Verifica si la bolsa existe
-        if (!$bag) {
-            return redirect()->route('bags.index')
-                ->with('success', 'El despacho no se pudo cerrar');
-        }
+    //     // Verifica si la bolsa existe
+    //     if (!$bag) {
+    //         return redirect()->route('bags.index')
+    //             ->with('success', 'El despacho no se pudo cerrar');
+    //     }
 
-        // Obtén el valor del campo MARVETE
-        $marbete = $bag->MARBETE;
+    //     // Obtén el valor del campo MARVETE
+    //     $marbete = $bag->MARBETE;
 
-        // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
-        Bag::where('MARBETE', $marbete)->update([
-            'TRASPORTE' => $request->input('TRASPORTE'),
-            'HORARIO' => $request->input('HORARIO'),
-            'OBSERVACIONESG' => $request->input('OBSERVACIONESG'),
-            'fecha_exp' => now(),
-            'ESTADO' => 'TRASPORTADO',
-        ]);
+    //     // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
+    //     Bag::where('MARBETE', $marbete)->update([
+    //         'TRASPORTE' => $request->input('TRASPORTE'),
+    //         'HORARIO' => $request->input('HORARIO'),
+    //         'OBSERVACIONESG' => $request->input('OBSERVACIONESG'),
+    //         'fecha_exp' => now(),
+    //         'ESTADO' => 'TRASPORTADO',
+    //     ]);
 
-        // Calcula la suma de los campos PESOC y PAQUETES
-        $sum = Bag::where('MARBETE', $marbete)
-            ->select(
-                DB::raw('SUM(PESOF) as sum_pesoc'), 
-                DB::raw('COUNT(ID) as sum_paquetes'),
-                DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
-                DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
-                DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_totalsaca'),
-                )
-            ->first();
+    //     // Calcula la suma de los campos PESOC y PAQUETES
+    //     $sum = Bag::where('MARBETE', $marbete)
+    //         ->select(
+    //             DB::raw('SUM(PESOF) as sum_pesoc'),
+    //             DB::raw('COUNT(ID) as sum_paquetes'),
+    //             DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
+    //             DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
+    //             DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_totalsaca'),
+    //         )
+    //         ->first();
 
-        // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
-        $bags = Bag::where('MARBETE', $marbete)->get();
+    //     Event::create([
+    //         'action' => 'PROCESADO',
+    //         'descripcion' => 'Saca Generada Marbete ' . $bag->RECEPTACULO . ' y Lista para Expedicion',
+    //         'user_id' => auth()->user()->id,
+    //         'codigo' => $bag->MARBETE,
+    //     ]);
 
-        // Genera el PDF
-        $pdf = PDF::loadView('bag.pdf.cn38', compact('bags', 'sum'));
+    //     Event::create([
+    //         'action' => 'CIERRE',
+    //         'descripcion' => 'Saca Generada por el Receptaculo ' . $bag->MARBETE . ' e Impreso',
+    //         'user_id' => auth()->user()->id,
+    //         'codigo' => $bag->RECEPTACULO,
+    //     ]);
 
-        // Guarda o descarga el PDF según tus necesidades
-        // $pdf->save(storage_path('nombre_del_archivo.pdf'));
-        // o
-        // return $pdf->download('nombre_del_archivo.pdf');
+    //     // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
+    //     $bags = Bag::where('MARBETE', $marbete)->get();
 
-        // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
-        return $pdf->stream('CN38.pdf', ['Attachment' => false]);
-    }
+    //     // Genera el PDF
+    //     $pdf = PDF::loadView('bag.pdf.cn38', compact('bags', 'sum'));
+
+    //     // Guarda o descarga el PDF según tus necesidades
+    //     // $pdf->save(storage_path('nombre_del_archivo.pdf'));
+    //     // o
+    //     // return $pdf->download('nombre_del_archivo.pdf');
+
+    //     // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
+    //     return $pdf->stream('CN38.pdf', ['Attachment' => false]);
+    // }
     public function avisoExpedition($id, Request $request)
     {
         // En primer lugar, obtenemos la instancia de la bolsa que estamos actualizando.
@@ -216,6 +253,13 @@ class BagController extends Controller
             'T' => '1',
         ]);
 
+        Event::create([
+            'action' => 'COMPROBADO',
+            'descripcion' => 'Despacho verificado CN31 y sacas añadidas al despacho, listo para Trasporte',
+            'user_id' => auth()->user()->id,
+            'codigo' => $bag->MARBETE,
+        ]);
+
         $sum = Bag::where('ESTADO', 'CIERRE')
             ->select(
                 'MARBETE',
@@ -229,7 +273,6 @@ class BagController extends Controller
             ->groupBy('MARBETE')
             ->get();
 
-
         // Generar el PDF con los datos sumados
         $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
 
@@ -241,14 +284,21 @@ class BagController extends Controller
     {
         $codigo = $request->input('codigo');
         $bag = Bag::where('RECEPTACULO', $codigo)->first();
-    
+
         if ($bag) {
             // Verificar que el estado del paquete sea 'TRASPORTADO'
             if ($bag->ESTADO === 'TRASPORTADO') {
                 // Verificar que el destino sea igual a la regional del usuario
                 if (auth()->user()->Regional == $bag->OFDESTINO) {
                     // Cambiar el estado del paquete a "EXPEDICION"
+                    Event::create([
+                        'action' => 'RECIBIDO',
+                        'descripcion' => 'Despacho '. $bag->MARBETE .' añadido en oficina de cambio y procesado para su entrega',
+                        'user_id' => auth()->user()->id,
+                        'codigo' => $bag->RECEPTACULO,
+                    ]);
                     $bag->ESTADO = 'EXPEDICION';
+                    $bag->userbags = auth()->user()->name;
                     $bag->save();
                     return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a EXPEDICION.');
                 } else {
@@ -261,7 +311,7 @@ class BagController extends Controller
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
         }
     }
-    
+
 
     public function bagsclose()
     {
@@ -275,5 +325,4 @@ class BagController extends Controller
     {
         return view('bag.bagsopen');
     }
-    
 }

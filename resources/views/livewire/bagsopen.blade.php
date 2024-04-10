@@ -48,13 +48,12 @@
                                     <th>Estado</th>
                                     <th>Observaciones</th>
                                     <th>Fecha Apertura</th>
-                                    <th>Acciones</th>
+                                    {{-- <th>Acciones</th> --}}
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($bags as $bag)
-                                    {{-- @if ($bag->FIN == 'F') --}}
                                         <tr>
                                             <td>{{ $bag->RECEPTACULO }}</td>
                                             <td>{{ $bag->OFCAMBIO }}</td>
@@ -86,7 +85,6 @@
                                                 @endhasrole
                                             </td> --}}
                                         </tr>
-                                    {{-- @endif --}}
                                 @endforeach
 
                             </tbody>

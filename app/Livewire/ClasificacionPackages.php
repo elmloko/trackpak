@@ -195,6 +195,13 @@ class ClasificacionPackages extends Component
             'RECEPTACULO' => $receptaculo,
             'TIPO' => 'U',
             'T' => '0',
+            'userbags' => auth()->user()->name,
+        ]);
+        Event::create([
+            'action' => 'APERTURA',
+            'descripcion' => 'Saca creada y llevada a Expedicion, Despacho ' . $bag->MARBETE . ' e Impreso CN33',
+            'user_id' => auth()->user()->id,
+            'codigo' => $bag->RECEPTACULO,
         ]);
 
         // Vincular los paquetes seleccionados con la bolsa
