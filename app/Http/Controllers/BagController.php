@@ -249,6 +249,79 @@ class BagController extends Controller
         // Guardar los cambios en la base de datos.
         $bag->save();
 
+        // Obtener los registros que deseas repetir
+        $originalRecords = Bag::where('id', $id)->get();
+
+        // Crear nuevos registros duplicados para SACAR
+        // Crear nuevos registros duplicados para SACAR
+        for ($i = 0; $i < $sacar; $i++) {
+            $counter = 0; // Inicializar contador
+            foreach ($originalRecords as $originalRecord) {
+                $duplicateRecord = new Bag();
+                // Copiar los valores de los campos necesarios
+                $duplicateRecord->NRODESPACHO = $originalRecord->NRODESPACHO;
+                $duplicateRecord->NROSACA = sprintf("%04d", $originalRecord->NROSACA + $i + 1);
+                $duplicateRecord->ESTADO = $originalRecord->ESTADO;
+                $duplicateRecord->ano_creacion = $originalRecord->ano_creacion;
+                $duplicateRecord->created_at = $originalRecord->created_at;
+                $duplicateRecord->OFCAMBIO = $originalRecord->OFCAMBIO;
+                $duplicateRecord->OFDESTINO = $originalRecord->OFDESTINO;
+                $duplicateRecord->OFCAM108 = $originalRecord->OFCAM108;
+                $duplicateRecord->OFDES108 = $originalRecord->OFDES108;
+                $duplicateRecord->MARBETE = $originalRecord->MARBETE;
+                $duplicateRecord->ITINERARIO = $originalRecord->ITINERARIO;
+                $duplicateRecord->TIPO = 'R';
+                $duplicateRecord->FIN = 'N';
+                $duplicateRecord->userbags = auth()->user()->name; // Asignar el nombre del usuario actual
+
+                // Guardar el registro duplicado
+                $duplicateRecord->save();
+
+                $counter++; // Incrementar contador
+                // Si es el último duplicado, asignar el valor de PESOR
+                if ($counter == count($originalRecords)) {
+                    $duplicateRecord->PESOF = $originalRecord->PESOR;
+                    $duplicateRecord->PAQUETES = $originalRecord->PAQUETESR;
+                    $duplicateRecord->save();
+                }
+            }
+        }
+
+        // Crear nuevos registros duplicados para SACAM
+        for ($i = $sacar; $i < $sacar + $sacam; $i++) {
+            $counter = 0; // Inicializar contador
+            foreach ($originalRecords as $originalRecord) {
+                $duplicateRecord = new Bag();
+                // Copiar los valores de los campos necesarios
+                $duplicateRecord->NRODESPACHO = $originalRecord->NRODESPACHO;
+                $duplicateRecord->NROSACA = sprintf("%04d", $originalRecord->NROSACA + $i + 1);
+                $duplicateRecord->ESTADO = $originalRecord->ESTADO;
+                $duplicateRecord->ano_creacion = $originalRecord->ano_creacion;
+                $duplicateRecord->created_at = $originalRecord->created_at;
+                $duplicateRecord->OFCAMBIO = $originalRecord->OFCAMBIO;
+                $duplicateRecord->OFDESTINO = $originalRecord->OFDESTINO;
+                $duplicateRecord->OFCAM108 = $originalRecord->OFCAM108;
+                $duplicateRecord->OFDES108 = $originalRecord->OFDES108;
+                $duplicateRecord->MARBETE = $originalRecord->MARBETE;
+                $duplicateRecord->ITINERARIO = $originalRecord->ITINERARIO;
+                $duplicateRecord->TIPO = 'M';
+                $duplicateRecord->FIN = 'N';
+                $duplicateRecord->userbags = auth()->user()->name; // Asignar el nombre del usuario actual
+
+                // Guardar el registro duplicado
+                $duplicateRecord->save();
+
+                $counter++; // Incrementar contador
+                // Si es el último duplicado, asignar el valor de PESOR
+                if ($counter == count($originalRecords)) {
+                    $duplicateRecord->PESOF = $originalRecord->PESOM;
+                    $duplicateRecord->PAQUETES = $originalRecord->PAQUETESM;
+                    $duplicateRecord->save();
+                }
+            }
+        }
+
+
         $bag->update([
             'T' => '1',
         ]);
@@ -293,7 +366,7 @@ class BagController extends Controller
                     // Cambiar el estado del paquete a "EXPEDICION"
                     Event::create([
                         'action' => 'RECIBIDO',
-                        'descripcion' => 'Despacho '. $bag->MARBETE .' añadido en oficina de cambio y procesado para su entrega',
+                        'descripcion' => 'Despacho ' . $bag->MARBETE . ' añadido en oficina de cambio y procesado para su entrega',
                         'user_id' => auth()->user()->id,
                         'codigo' => $bag->RECEPTACULO,
                     ]);
