@@ -68,15 +68,17 @@
                                             <td>{{ $bag->OBSERVACIONES }}</td>
                                             <td>{{ $bag->updated_at }}</td>
                                             <td>
-                                                @hasrole('SuperAdmin|Administrador|Expedicion')
-                                                    <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
-                                                        data-target="#avisoModal{{ $bag->id }}">
-                                                        <i class="fa fa-arrow-down"></i>
-                                                        {{ __('Hoja de Aviso') }}
-                                                    </a>
-                                                    @include('bag.modal.aviso')
+                                                @hasrole('Expedicion')
+                                                    @if ($bag->T == 0)
+                                                        <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                            data-target="#avisoModal{{ $bag->id }}">
+                                                            <i class="fa fa-arrow-down"></i>
+                                                            {{ __('Hoja de Aviso') }}
+                                                        </a>
+                                                        @include('bag.modal.aviso')
+                                                    @endif
                                                 @endhasrole
-                                                @hasrole('SuperAdmin|Administrador|Areo')
+                                                @hasrole('Areo')
                                                     @if ($bag->T == 1)
                                                         <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                             data-target="#despachoModal{{ $bag->id }}">
@@ -85,6 +87,22 @@
                                                         </a>
                                                         @include('bag.modal.cierre')
                                                     @endif
+                                                @endhasrole
+                                                @hasrole('SuperAdmin|Administrador')
+                                                        <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                            data-target="#avisoModal{{ $bag->id }}">
+                                                            <i class="fa fa-arrow-down"></i>
+                                                            {{ __('Hoja de Aviso') }}
+                                                        </a>
+                                                        @include('bag.modal.aviso')
+                                                @endhasrole
+                                                @hasrole('SuperAdmin|Administrador')
+                                                        <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                            data-target="#despachoModal{{ $bag->id }}">
+                                                            <i class="fa fa-arrow-down"></i>
+                                                            {{ __('Trasportar') }}
+                                                        </a>
+                                                        @include('bag.modal.cierre')
                                                 @endhasrole
                                             </td>
                                         </tr>

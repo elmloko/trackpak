@@ -159,12 +159,12 @@
             <tr>
                 <td>Prioritario/no prioritario -LCAO</td>
                 <td>{{ $bag->SACAR }}</td>
-                <td>{{ $sum->last()->sum_tipo }}</td>
+                <td>{{ $sum->first()->sum_tipo }}</td>
                 <!-- Aquí estamos accediendo al primer elemento de la colección -->
                 <td>Envases en el despacho</td>
-                <td>{{ $sum->last()->sum_total }}</td>
+                <td>{{ $sum->first()->sum_total }}</td>
                 <!-- Aquí estamos accediendo al primer elemento de la colección -->
-                <td>{{ $sum->last()->sum_total }}</td>
+                <td>{{ $sum->first()->sum_total }}</td>
                 <!-- Aquí estamos accediendo al primer elemento de la colección -->
             </tr>
             <tr>
@@ -197,8 +197,8 @@
             </tr>
             <tr>
                 <td>LC /AO</td>
-                <td>{{ $sum->last()->sum_paquetes }}</td>
-                <td>{{ $sum->last()->sum_pesoc }}</td>
+                <td>{{ $sum->first()->sum_paquetes }}</td>
+                <td>{{ $sum->first()->sum_pesoc }}</td>
             </tr>
             <tr>
                 <td>SACAS M</td>
@@ -207,8 +207,8 @@
             </tr>
             <tr>
                 <td>Total</td>
-                <td>{{ $sum->last()->sum_totalpaquetes }}</td>
-                <td>{{ $sum->last()->sum_totalpeso }}</td>
+                <td>{{ $sum->first()->sum_totalpaquetes }}</td>
+                <td>{{ $sum->first()->sum_totalpeso }}</td>
                 < </tr>
         </tbody>
     </table>
