@@ -159,67 +159,7 @@ class BagController extends Controller
         // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
         return $pdf->stream('CN38.pdf', ['Attachment' => false]);
     }
-    // public function returnExpedition($id, Request $request)
-    // {
-    //     $bag = Bag::find($id);
-
-    //     // Verifica si la bolsa existe
-    //     if (!$bag) {
-    //         return redirect()->route('bags.index')
-    //             ->with('success', 'El despacho no se pudo cerrar');
-    //     }
-
-    //     // Obtén el valor del campo MARVETE
-    //     $marbete = $bag->MARBETE;
-
-    //     // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
-    //     Bag::where('MARBETE', $marbete)->update([
-    //         'TRASPORTE' => $request->input('TRASPORTE'),
-    //         'HORARIO' => $request->input('HORARIO'),
-    //         'OBSERVACIONESG' => $request->input('OBSERVACIONESG'),
-    //         'fecha_exp' => now(),
-    //         'ESTADO' => 'TRASPORTADO',
-    //     ]);
-
-    //     // Calcula la suma de los campos PESOC y PAQUETES
-    //     $sum = Bag::where('MARBETE', $marbete)
-    //         ->select(
-    //             DB::raw('SUM(PESOF) as sum_pesoc'),
-    //             DB::raw('COUNT(ID) as sum_paquetes'),
-    //             DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
-    //             DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
-    //             DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_totalsaca'),
-    //         )
-    //         ->first();
-
-    //     Event::create([
-    //         'action' => 'PROCESADO',
-    //         'descripcion' => 'Saca Generada Marbete ' . $bag->RECEPTACULO . ' y Lista para Expedicion',
-    //         'user_id' => auth()->user()->id,
-    //         'codigo' => $bag->MARBETE,
-    //     ]);
-
-    //     Event::create([
-    //         'action' => 'CIERRE',
-    //         'descripcion' => 'Saca Generada por el Receptaculo ' . $bag->MARBETE . ' e Impreso',
-    //         'user_id' => auth()->user()->id,
-    //         'codigo' => $bag->RECEPTACULO,
-    //     ]);
-
-    //     // Obtén todos los registros de la tabla bags con el mismo valor en el campo MARBETE
-    //     $bags = Bag::where('MARBETE', $marbete)->get();
-
-    //     // Genera el PDF
-    //     $pdf = PDF::loadView('bag.pdf.cn38', compact('bags', 'sum'));
-
-    //     // Guarda o descarga el PDF según tus necesidades
-    //     // $pdf->save(storage_path('nombre_del_archivo.pdf'));
-    //     // o
-    //     // return $pdf->download('nombre_del_archivo.pdf');
-
-    //     // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
-    //     return $pdf->stream('CN38.pdf', ['Attachment' => false]);
-    // }
+    
     public function avisoExpedition($id, Request $request)
     {
         // En primer lugar, obtenemos la instancia de la bolsa que estamos actualizando.
@@ -253,10 +193,8 @@ class BagController extends Controller
         $originalRecords = Bag::where('id', $id)->get();
 
         // Crear nuevos registros duplicados para SACAR
-        // Crear nuevos registros duplicados para SACAR
         for ($i = 0; $i < $sacar; $i++) {
-            $counter = 0; // Inicializar contador
-            foreach ($originalRecords as $originalRecord) {
+            foreach ($originalRecords as $index => $originalRecord) {
                 $duplicateRecord = new Bag();
                 // Copiar los valores de los campos necesarios
                 $duplicateRecord->NRODESPACHO = $originalRecord->NRODESPACHO;
@@ -276,16 +214,9 @@ class BagController extends Controller
 
                 // Guardar el registro duplicado
                 $duplicateRecord->save();
-
-                $counter++; // Incrementar contador
-                // Si es el último duplicado, asignar el valor de PESOR
-                if ($counter == count($originalRecords)) {
-                    $duplicateRecord->PESOF = $originalRecord->PESOR;
-                    $duplicateRecord->PAQUETES = $originalRecord->PAQUETESR;
-                    $duplicateRecord->save();
-                }
             }
         }
+
 
         // Crear nuevos registros duplicados para SACAM
         for ($i = $sacar; $i < $sacar + $sacam; $i++) {
@@ -311,13 +242,6 @@ class BagController extends Controller
                 // Guardar el registro duplicado
                 $duplicateRecord->save();
 
-                $counter++; // Incrementar contador
-                // Si es el último duplicado, asignar el valor de PESOR
-                if ($counter == count($originalRecords)) {
-                    $duplicateRecord->PESOF = $originalRecord->PESOM;
-                    $duplicateRecord->PAQUETES = $originalRecord->PAQUETESM;
-                    $duplicateRecord->save();
-                }
             }
         }
 
