@@ -245,7 +245,6 @@ class BagController extends Controller
             }
         }
 
-
         $bag->update([
             'T' => '1',
         ]);
@@ -309,6 +308,19 @@ class BagController extends Controller
         }
     }
 
+    public function showExpedition(Request $request, $id)
+    {
+        foreach ($request->PAQUETES as $bagId => $paquetes) {
+            $bag = Bag::findOrFail($bagId);
+    
+            $bag->update([
+                'PAQUETES' => $paquetes,
+                'PESO' => $request->PESO[$bagId],
+            ]);
+        }
+    
+        return redirect()->back()->with('success', 'Datos actualizados correctamente');
+    }
 
     public function bagsclose()
     {

@@ -33,20 +33,30 @@ class Bagsclose extends Component
 
         // Calcular la suma de PESOF y PAQUETES por grupo de MARBETE
         $sum = Bag::where('ESTADO', 'CIERRE')
-        ->select(
-            'MARBETE', 
-            DB::raw('SUM(PESOF) as sum_pesoc'), 
-            DB::raw('SUM(PAQUETES) as sum_paquetes'), 
-            DB::raw('SUM(CASE WHEN TIPO = "U" THEN 1 ELSE 0 END) as sum_tipo'),
-            DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
-            DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes')
-        )
-        ->groupBy('MARBETE')
-        ->get();
+            ->select(
+                'MARBETE',
+                DB::raw('SUM(PESOF) as sum_pesoc'),
+                DB::raw('SUM(PAQUETES) as sum_paquetes'),
+                DB::raw('SUM(CASE WHEN TIPO = "U" THEN 1 ELSE 0 END) as sum_tipo'),
+                DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
+                DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes')
+            )
+            ->groupBy('MARBETE')
+            ->get();
+
+        $repeatedMarbetes = Bag::select('MARBETE')
+            ->where('ESTADO', 'CIERRE')
+            ->groupBy('MARBETE')
+            ->havingRaw('COUNT(*) > 1')
+            ->pluck('MARBETE')
+            ->toArray();
+
+        $repeatedBags = Bag::whereIn('MARBETE', $repeatedMarbetes)->get();
 
         return view('livewire.bagsclose', [
             'bags' => $bags,
             'sums' => $sum,
+            'repeatedBags' => $repeatedBags,
         ]);
     }
 }

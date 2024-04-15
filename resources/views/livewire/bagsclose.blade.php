@@ -89,20 +89,24 @@
                                                     @endif
                                                 @endhasrole
                                                 @hasrole('SuperAdmin|Administrador')
-                                                        <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
-                                                            data-target="#avisoModal{{ $bag->id }}">
-                                                            <i class="fa fa-arrow-down"></i>
-                                                            {{ __('Hoja de Aviso') }}
-                                                        </a>
-                                                        @include('bag.modal.aviso')
-                                                @endhasrole
-                                                @hasrole('SuperAdmin|Administrador')
-                                                        <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
-                                                            data-target="#despachoModal{{ $bag->id }}">
-                                                            <i class="fa fa-arrow-down"></i>
-                                                            {{ __('Trasportar') }}
-                                                        </a>
-                                                        @include('bag.modal.cierre')
+                                                    <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                        data-target="#showModal{{ $bag->id }}">
+                                                        <i class="fa fa-arrow-down"></i>
+                                                        {{ __('Editar') }}
+                                                    </a>
+                                                    @include('bag.modal.show')
+                                                    <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                        data-target="#avisoModal{{ $bag->id }}">
+                                                        <i class="fa fa-arrow-down"></i>
+                                                        {{ __('Hoja de Aviso') }}
+                                                    </a>
+                                                    @include('bag.modal.aviso')
+                                                    <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                        data-target="#despachoModal{{ $bag->id }}">
+                                                        <i class="fa fa-arrow-down"></i>
+                                                        {{ __('Trasportar') }}
+                                                    </a>
+                                                    @include('bag.modal.cierre')
                                                 @endhasrole
                                             </td>
                                         </tr>
