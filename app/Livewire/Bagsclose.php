@@ -17,19 +17,20 @@ class Bagsclose extends Component
     public function render()
     {
         $bags = Bag::where('ESTADO', 'CIERRE')
-            ->when($this->search, function ($query) {
-                $query->where('NRODESPACHO', 'like', '%' . $this->search . '%')
-                    ->orWhere('OFCAMBIO', 'like', '%' . $this->search . '%')
-                    ->orWhere('OFDESTINO', 'like', '%' . $this->search . '%')
-                    ->orWhere('NROSACAS', 'like', '%' . $this->search . '%')
-                    ->orWhere('PESO', 'like', '%' . $this->search . '%')
-                    ->orWhere('PAQUETES', 'like', '%' . $this->search . '%')
-                    ->orWhere('ITINERARIO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
-            })
-            ->orderBy('MARBETE', 'asc')
-            ->paginate(10);
+        ->where('FIN', 'F') // Agregar esta línea para la condición $bag->FIN == 'F'
+        ->when($this->search, function ($query) {
+            $query->where('NRODESPACHO', 'like', '%' . $this->search . '%')
+                ->orWhere('OFCAMBIO', 'like', '%' . $this->search . '%')
+                ->orWhere('OFDESTINO', 'like', '%' . $this->search . '%')
+                ->orWhere('NROSACAS', 'like', '%' . $this->search . '%')
+                ->orWhere('PESO', 'like', '%' . $this->search . '%')
+                ->orWhere('PAQUETES', 'like', '%' . $this->search . '%')
+                ->orWhere('ITINERARIO', 'like', '%' . $this->search . '%')
+                ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
+                ->orWhere('created_at', 'like', '%' . $this->search . '%');
+        })
+        ->orderBy('MARBETE', 'asc')
+        ->paginate(10);    
 
         // Calcular la suma de PESOF y PAQUETES por grupo de MARBETE
         $sum = Bag::where('ESTADO', 'CIERRE')
