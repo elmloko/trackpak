@@ -312,10 +312,14 @@ class BagController extends Controller
     {
         foreach ($request->PAQUETES as $bagId => $paquetes) {
             $bag = Bag::findOrFail($bagId);
+            
+            // Calcula el valor del receptáculo
+            $receptaculo = $bag->MARBETE . $bag->NROSACA . str_pad(str_replace('.', '',  $request->PESOF[$bagId]), 4, '0', STR_PAD_LEFT);
     
             $bag->update([
                 'PAQUETES' => $paquetes,
                 'PESOF' => $request->PESOF[$bagId],
+                'RECEPTACULO' => $receptaculo, // Agrega el valor calculado de receptáculo
             ]);
         }
     
