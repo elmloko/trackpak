@@ -128,13 +128,30 @@
                     <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}{{ $bag->FIN == 'F' ? 'F' : '' }}</td>
                     <td>{{ $bag->OFCAMBIO }}</td>
                     <td>{{ $bag->OFDESTINO }}</td>
-                    <td>1 ORDINARIO</td>
+                    <td>
+                        @switch($bag->TIPO)
+                            @case('U')
+                                1 ORDINARIO
+                            @break
+
+                            @case('M')
+                                1 SACA M
+                            @break
+
+                            @case('R')
+                                1 CERTIFICADO
+                            @break
+
+                            @default
+                                Desconocido
+                        @endswitch
+                    </td>
                     <td>{{ $bag->PESOF }}</td>
                     <td>{{ $bag->OBSERVACIONES }}</td>
                 </tr>
                 @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
             @endforeach
-            @foreach ($bags as $bag)
+            {{-- @foreach ($bags as $bag)
                 @php
                     $nrosaca_number = (int) $bag->NROSACA + 1;
                     $pesom_shown = false; // Variable para controlar si $bag->PESOM ya ha sido mostrado
@@ -190,16 +207,16 @@
                         $i++;
                     @endphp
                 @endfor
-            @endforeach
+            @endforeach --}}
         </tbody>
     </table>
     <table>
         <thead>
             <tr>
                 <td>SACAS TOTAL</td>
-                <th>{{ $sum->sum_totalsaca }}</th>
+                <th>{{ $sum->sum_paquetes }}</th>
                 <td>PESO TOTAL</td>
-                <th>{{ $sum->sum_totalpeso }}</th>
+                <th>{{ $sum->sum_pesoc }} Kg.</th>
                 <td>PAQUETES TOTAL</td>
                 <th>{{ $sum->sum_totalpaquetes }}</th>
             </tr>

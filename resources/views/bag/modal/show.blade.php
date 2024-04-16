@@ -43,8 +43,8 @@
                                                     {!! $errors->first("PAQUETES.$repeatedBag->id", '<div class="invalid-feedback">:message</div>') !!}
                                                 </td>
                                                 <td>
-                                                    {{ Form::text("PESO[$repeatedBag->id]", $repeatedBag->PESO, [
-                                                        'class' => 'form-control' . ($errors->has("PESO.$repeatedBag->id") ? ' is-invalid' : ''),
+                                                    {{ Form::text("PESOF[$repeatedBag->id]", $repeatedBag->PESOF, [
+                                                        'class' => 'form-control' . ($errors->has("PESOF.$repeatedBag->id") ? ' is-invalid' : ''),
                                                         'placeholder' => 'Expresa el Peso en Gramos',
                                                         'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
                                                         'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
@@ -53,7 +53,7 @@
                                                         'min' => '0', // Establecer el valor mínimo
                                                         'max' => '100.000',
                                                     ]) }}
-                                                    {!! $errors->first("PESO.$repeatedBag->id", '<div class="invalid-feedback">:message</div>') !!}
+                                                    {!! $errors->first("PESOF.$repeatedBag->id", '<div class="invalid-feedback">:message</div>') !!}
                                                 </td>                                                
                                             </tr>
                                         @endif

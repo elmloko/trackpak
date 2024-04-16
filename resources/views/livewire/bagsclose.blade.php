@@ -34,6 +34,7 @@
                                     <th>Oficina de Destino</th>
                                     <th>Peso (Kg.)</th>
                                     <th>Numero de Paquetes</th>
+                                    <th>Numero de Sacas</th>
                                     <th>Itinerario</th>
                                     <th>Estado</th>
                                     <th>Observaciones</th>
@@ -60,6 +61,13 @@
                                                 @foreach ($sums as $sum)
                                                     @if ($sum->MARBETE == $bag->MARBETE)
                                                         {{ $sum->sum_paquetes }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach ($sums as $sum)
+                                                    @if ($sum->MARBETE == $bag->MARBETE)
+                                                        {{ $sum->sum_sacas }}
                                                     @endif
                                                 @endforeach
                                             </td>

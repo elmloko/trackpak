@@ -315,7 +315,7 @@ class BagController extends Controller
     
             $bag->update([
                 'PAQUETES' => $paquetes,
-                'PESO' => $request->PESO[$bagId],
+                'PESOF' => $request->PESOF[$bagId],
             ]);
         }
     
