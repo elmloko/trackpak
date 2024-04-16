@@ -157,9 +157,9 @@
         </thead>
         <tbody>
             <tr>
-                <td>Prioritario/no prioritario -LCAO</td>
-                <td>{{ $bag->SACAR }}</td>
-                <td>{{ $sum->first()->sum_tipo }}</td>
+                <td>Prioritario/no prioritario LC/AO</td>
+                <td>{{ $sum->first()->sum_tipom }}</td>
+                <td>{{ $sum->last()->sum_tipo }}</td>
                 <!-- Aquí estamos accediendo al primer elemento de la colección -->
                 <td>Envases en el despacho</td>
                 <td>{{ $sum->first()->sum_total }}</td>
@@ -169,7 +169,7 @@
             </tr>
             <tr>
                 <td>Sacas M</td>
-                <td>{{ $bag->SACAM }}</td>
+                <td>{{ $sum->first()->sum_tipor }}</td>
                 <td>0</td>
                 <td>Envases que deben devolverse</td>
                 <td></td>
@@ -192,8 +192,8 @@
             </tr>
             <tr>
                 <td>CERTIFICADA</td>
-                <td>{{ $bag->PAQUETESR }}</td>
-                <td>{{ $bag->PESOR }}</td>
+                <td>{{ $sum->first()->sum_paqueter }}</td>
+                <td>{{ $sum->first()->sum_pesor }}</td>
             </tr>
             <tr>
                 <td>LC /AO</td>
@@ -202,8 +202,8 @@
             </tr>
             <tr>
                 <td>SACAS M</td>
-                <td>{{ $bag->PAQUETESM }}</td>
-                <td>{{ $bag->PESOM }}</td>
+                <td>{{ $sum->first()->sum_paquetem }}</td>
+                <td>{{ $sum->first()->sum_pesom }}</td>
             </tr>
             <tr>
                 <td>Total</td>

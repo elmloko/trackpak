@@ -49,6 +49,7 @@
 </head>
 
 <body>
+  @foreach ($bags as $bag)
   <table border="1">
     <tr>
       <td colspan="2" class="transparent-bottom-border">PARA :</td>
@@ -86,6 +87,8 @@
       <td></td>
       <td colspan="2"><p>{!! DNS1D::getBarcodeHTML($bag->RECEPTACULO, 'C128', 1.08, 40) !!}</p></td>
     </tr>
-  </table>  
+  </table> 
+  <br>
+  @endforeach 
 </body>
 </html>
