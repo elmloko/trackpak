@@ -17,6 +17,9 @@
                                             </div>
                                         </div>
                                         @hasrole('SuperAdmin|Administrador|Unica')
+                                            <div class="col-md-3">
+                                                <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
+                                            </div>
                                             <div class="col-md-6 text-right">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buscarPaqueteModal">
@@ -104,6 +107,9 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
+                                                    <th>
+                                                        {{-- <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll"> --}}
+                                                    </th>
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
                                                     <th>Destinatario</th>
@@ -133,6 +139,9 @@
                                                             $package->CUIDAD === auth()->user()->Regional &&
                                                             in_array($package->VENTANILLA, ['UNICA']))
                                                         <tr>
+                                                            <td><input type="checkbox"
+                                                                wire:model="paquetesSeleccionados"
+                                                                value="{{ $package->id }}"></td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>
