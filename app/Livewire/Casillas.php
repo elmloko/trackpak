@@ -26,10 +26,7 @@ class Casillas extends Component
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
-                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
+                    ->orWhere('nrocasilla', 'like', '%' . $this->search . '%')
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where('CUIDAD', $userRegional)
