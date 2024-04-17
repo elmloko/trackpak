@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $hoylpc = Package::where('ESTADO', 'DESPACHO')->whereDate('created_at', today())->count();
 
         //Reportes por mes Clasificacion mes
-        $meslpc = Package::where('ESTADO', 'DESPACHO')->whereMonth('created_at', now()->month)->count();
+        $meslpc = Package::withTrashed()->whereMonth('created_at', now()->month)->count();
 
         //Aplicando Filtros 
         $totalEntregados = $packages->where('ESTADO', 'ENTREGADO')->count();
