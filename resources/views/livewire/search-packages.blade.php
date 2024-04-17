@@ -70,7 +70,6 @@
                                                         <th>Teléfono</th>
                                                         <th>País</th>
                                                         <th>Ciudad</th>
-                                                        <th>Dirección</th>
                                                         <th>Ventanilla</th>
                                                         <th>Peso (gr.)</th>
                                                         <th>Tipo</th>
@@ -92,7 +91,6 @@
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                             <td>{{ $package->CUIDAD }}</td>
-                                                            <td>{{ $package->ZONA }}</td>
                                                             <td>{{ $package->VENTANILLA }}</td>
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
