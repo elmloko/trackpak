@@ -41,7 +41,7 @@ class Ventanilladnd extends Component
                     ->where('CUIDAD', $userRegional);
             })
             ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+            ->paginate(20);
 
         return view('livewire.ventanilladnd', [
             'packages' => $packages,
