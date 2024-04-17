@@ -158,7 +158,7 @@
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                @hasrole('SuperAdmin|Administrador|Unica')
+                                                                {{-- @hasrole('SuperAdmin|Administrador|Unica')
                                                                     <a class="btn btn-sm btn-warning" href="#"
                                                                         data-toggle="modal"
                                                                         data-target="#bajaModal{{ $package->id }}">
@@ -166,7 +166,7 @@
                                                                         {{ __('Baja') }}
                                                                     </a>
                                                                     @include('package.modal.baja')
-                                                                @endhasrole
+                                                                @endhasrole --}}
                                                                 @hasrole('SuperAdmin|Administrador|Unica')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">
