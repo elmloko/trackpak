@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 id="card_title">{{ __('Entregas de Paquetes en Ventanilla') }}</h5>
+                                <h5 id="card_title">{{ __('Entregas de Paquetes en Ventanilla DND') }}</h5>
                                 <div class="col">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
