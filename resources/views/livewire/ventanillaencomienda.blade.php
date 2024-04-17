@@ -103,7 +103,7 @@
                                                     <th>Destinatario</th>
                                                     <th>Bandeja</th>
                                                     <th>Teléfono</th>
-                                                    <th>Ciudad</th>
+                                                    {{-- <th>Ciudad</th> --}}
                                                     {{-- <th>Ventanilla</th> --}}
                                                     <th>Peso (gr.)</th>
                                                     <th>Estado</th>
@@ -131,7 +131,7 @@
                                                             <td>{{ $package->DESTINATARIO }}</td>
                                                             <td>{{ $package->ZONA }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>
-                                                            <td>{{ $package->CUIDAD }}</td>
+                                                            {{-- <td>{{ $package->CUIDAD }}</td> --}}
                                                             {{-- <td>{{ $package->VENTANILLA }}</td> --}}
                                                             <td>{{ $package->PESO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>

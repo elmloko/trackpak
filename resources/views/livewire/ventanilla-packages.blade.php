@@ -115,9 +115,9 @@
                                                     <th>Destinatario</th>
                                                     <th>Teléfono</th>
                                                     <th>País</th>
-                                                    <th>Ciudad</th>
+                                                    {{-- <th>Ciudad</th> --}}
                                                     <th>Zonificacion</th>
-                                                    <th>Ventanilla</th>
+                                                    {{-- <th>Ventanilla</th> --}}
                                                     <th>Peso (Kg.)</th>
                                                     <th>Precio(Bs.)</th>
                                                     <th>Tipo</th>
@@ -147,9 +147,9 @@
                                                             <td>{{ $package->DESTINATARIO }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                            <td>{{ $package->CUIDAD }}</td>
+                                                            {{-- <td>{{ $package->CUIDAD }}</td> --}}
                                                             <td>{{ $package->ZONA }}</td>
-                                                            <td>{{ $package->VENTANILLA }}</td>
+                                                            {{-- <td>{{ $package->VENTANILLA }}</td> --}}
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->PRECIO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
