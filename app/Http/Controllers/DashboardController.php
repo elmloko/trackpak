@@ -29,8 +29,9 @@ class DashboardController extends Controller
         //Reportes por mes Clasificacion mes
         $meslpc = Package::withTrashed()->whereMonth('created_at', now()->month)->count();
 
-        //Aplicando Filtros 
-        $totalEntregados = $packages->where('ESTADO', 'ENTREGADO')->count();
+        //Aplicando Filtros
+        $totalbaja = Package::onlyTrashed()->where('ESTADO', 'entregado')->count();
+        $totalEntregados = $packages->where('ESTADO', 'VENTANILLA')->count();
         $totalVentanilla = $packages->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'DD')->count();
         $totalClasificacion = $packages->where('ESTADO', 'CLASIFICACION')->count();
         $totalDespacho = $packages->where('ESTADO', 'DESPACHO')->count();
@@ -174,6 +175,7 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'data',
+            'totalbaja',
             'hoylpeeco',
             'totallpveco',
             'totallpeeco',

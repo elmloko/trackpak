@@ -51,8 +51,8 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ $totalRegistradosHoy }}</h3>
-                                <p>Total Registrados Hoy</p>
+                                <h3>{{ $totalEntregados }}</h3>
+                                <p>Paqutes por Entregar</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -198,7 +198,7 @@
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ $hoylpc }}</h3>
-                                <p>Total Hoy Clasificacion La Paz</p>
+                                <p>Total Hoy Clasificacion</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
