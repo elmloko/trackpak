@@ -52,10 +52,10 @@
                                             <td>{{ $mensaje->package->TELEFONO }}</td>
                                             <td>{{ $mensaje->package->VENTANILLA }}</td>
                                             <td>{{ $mensaje->package->ESTADO }}</td>
+                                            <td>{{ $mensaje->package->CUIDAD }}</td>
                                             <td>{{ $mensaje->mensajes }}</td>
                                             <td>{{ $mensaje->observacion }}</td>
                                             <td>{{ $mensaje->estado }}</td>
-                                            <td>{{ $mensaje->package->CUIDAD }}</td>
                                             <td>{{ $mensaje->fecha_actualizacion }}</td>
                                             <td>{{ $mensaje->package->updated_at ?? $mensaje->package->created_at }}</td>
                                         @endif
