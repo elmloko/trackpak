@@ -81,9 +81,16 @@
                                                         <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                             data-target="#avisoModal{{ $bag->id }}">
                                                             <i class="fa fa-arrow-down"></i>
-                                                            {{ __('Hoja de Aviso') }}
+                                                            {{ __('CN31') }}
                                                         </a>
                                                         @include('bag.modal.aviso')
+                                                    @elseif ($bag->T == 1)
+                                                        <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                            data-target="#showModal{{ $bag->id }}">
+                                                            <i class="fa fa-arrow-down"></i>
+                                                            {{ __('CN35') }}
+                                                        </a>
+                                                        @include('bag.modal.show')
                                                     @endif
                                                 @endhasrole
                                                 @hasrole('Areo')
@@ -100,13 +107,13 @@
                                                     <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                         data-target="#showModal{{ $bag->id }}">
                                                         <i class="fa fa-arrow-down"></i>
-                                                        {{ __('Editar') }}
+                                                        {{ __('CN35') }}
                                                     </a>
                                                     @include('bag.modal.show')
                                                     <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                         data-target="#avisoModal{{ $bag->id }}">
                                                         <i class="fa fa-arrow-down"></i>
-                                                        {{ __('Hoja de Aviso') }}
+                                                        {{ __('CN31') }}
                                                     </a>
                                                     @include('bag.modal.aviso')
                                                     <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"

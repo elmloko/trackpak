@@ -262,9 +262,15 @@ class BagController extends Controller
                 DB::raw('SUM(PESOF) as sum_pesoc'),
                 DB::raw('SUM(PAQUETES) as sum_paquetes'),
                 DB::raw('SUM(CASE WHEN TIPO = "U" THEN 1 ELSE 0 END) as sum_tipo'),
+                DB::raw('SUM(CASE WHEN TIPO = "R" THEN 1 ELSE 0 END) as sum_tipor'),
+                DB::raw('SUM(CASE WHEN TIPO = "M" THEN 1 ELSE 0 END) as sum_tipom'),
                 DB::raw('SUM(NROSACA + SACAR + SACAM) as sum_total'),
                 DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
                 DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
+                DB::raw('SUM(PAQUETESR) as sum_paqueter'),
+                DB::raw('SUM(PAQUETESM) as sum_paquetem'),
+                DB::raw('SUM(PESOM) as sum_pesom'),
+                DB::raw('SUM(PESOR) as sum_pesor'),
             )
             ->groupBy('MARBETE')
             ->get();
@@ -346,13 +352,13 @@ public function showExpedition(Request $request, $id)
             ->get();
 
     // // Genera el PDF con los datos actualizados
-    // $pdf = PDF::loadView('bag.pdf.cn35', compact('bags'));
+    $pdf = PDF::loadView('bag.pdf.cn35', compact('bags'));
 
     // // Retorna el PDF para su visualización
     // return $pdf->stream('CN35.pdf', ['Attachment' => false]);
 
     // Generar el PDF con los datos sumados
-    $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
+    // $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
 
     // Devolver el PDF al navegador para su visualización
     return $pdf->stream('CN31.pdf');
