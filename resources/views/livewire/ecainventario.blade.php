@@ -18,7 +18,7 @@
                                     <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
                             </div>
-                            {{-- <form method="get" action="{{ route('ecainventario.excel') }}" class="col-md-6">
+                            <form method="get" action="{{ route('inventarioECA.excel') }}" class="col-md-6">
                                 @csrf
                                 <div class="form-row align-items-center">
                                     <div class="col-md-4">
@@ -36,7 +36,7 @@
                             </form>
                             <div class="col-lg-6">
                             </div>
-                            <form method="get" action="{{ route('package.pdf.deleteadopdf') }}" class="col-md-6">
+                            {{-- <form method="get" action="{{ route('package.pdf.deleteadopdf') }}" class="col-md-6">
                                 @csrf
                                 <div class="form-row align-items-center">
                                     <div class="col-md-4">

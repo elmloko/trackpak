@@ -11,6 +11,9 @@ use App\Exports\EcaExport;
 use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
 use App\Exports\InventarioExport;
+use App\Exports\InventarioDDExport;
+use App\Exports\InventarioDNDExport;
+use App\Exports\InventarioECAExport;
 use App\Exports\EcainventarioExport;
 use App\Exports\EncomiendasExport;
 use App\Exports\PackageExport;
@@ -22,7 +25,6 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use \Milon\Barcode\DNS1D;
 use Picqer;
-
 /**
  * Class PackageController
  * @package App\Http\Controllers
@@ -965,6 +967,27 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
         return Excel::download(new InventarioExport($fechaInicio, $fechaFin), 'Inventario Encomiendas.xlsx');
+    }
+    public function inventarioDDexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
+        return Excel::download(new InventarioDDExport($fechaInicio, $fechaFin), 'Inventario DD Encomiendas.xlsx');
+    }
+    public function inventarioDNDexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
+        return Excel::download(new InventarioDNDExport($fechaInicio, $fechaFin), 'Inventario DND Encomiendas.xlsx');
+    }
+    public function inventarioECAexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
+        return Excel::download(new InventarioECAExport($fechaInicio, $fechaFin), 'Inventario ECA Encomiendas.xlsx');
     }
     public function ecainventarioexcel(Request $request)
     {

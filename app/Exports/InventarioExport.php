@@ -23,7 +23,7 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
     {
         $regional = auth()->user()->Regional;
         $query = Package::withTrashed()->where('ESTADO', 'ENTREGADO')
-            ->whereIn('VENTANILLA', ['ENCOMIENDAS'])
+            ->whereIn('VENTANILLA', ['DD'])
             ->select(
                 'CODIGO',
                 'DESTINATARIO',
