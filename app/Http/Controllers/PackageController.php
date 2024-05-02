@@ -14,6 +14,8 @@ use App\Exports\InventarioExport;
 use App\Exports\InventarioDDExport;
 use App\Exports\InventarioDNDExport;
 use App\Exports\InventarioECAExport;
+use App\Exports\InventarioCASIExport;
+use App\Exports\InventarioUNICAExport;
 use App\Exports\EcainventarioExport;
 use App\Exports\EncomiendasExport;
 use App\Exports\PackageExport;
@@ -25,7 +27,10 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use \Milon\Barcode\DNS1D;
 use Picqer;
+
 /**
+ * 
+ * 
  * Class PackageController
  * @package App\Http\Controllers
  */
@@ -973,28 +978,42 @@ class PackageController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioDDExport($fechaInicio, $fechaFin), 'Inventario DD Encomiendas.xlsx');
+        return Excel::download(new InventarioDDExport($fechaInicio, $fechaFin), 'Inventario DD.xlsx');
     }
     public function inventarioDNDexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioDNDExport($fechaInicio, $fechaFin), 'Inventario DND Encomiendas.xlsx');
+        return Excel::download(new InventarioDNDExport($fechaInicio, $fechaFin), 'Inventario DND .xlsx');
+    }
+    public function inventarioCASIexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
+        return Excel::download(new InventarioCASIExport($fechaInicio, $fechaFin), 'Inventario CASILLAS.xlsx');
     }
     public function inventarioECAexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioECAExport($fechaInicio, $fechaFin), 'Inventario ECA Encomiendas.xlsx');
+        return Excel::download(new InventarioECAExport($fechaInicio, $fechaFin), 'Inventario ECA.xlsx');
+    }
+    public function inventarioUNICAexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
+        return Excel::download(new InventarioUNICAExport($fechaInicio, $fechaFin), 'Inventario UNICA.xlsx');
     }
     public function ecainventarioexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new EcainventarioExport($fechaInicio, $fechaFin), 'Inventario.xlsx');
+        return Excel::download(new EcainventarioExport($fechaInicio, $fechaFin), 'Inventario. xlsx');
     }
     public function ventanillaexcel(Request $request)
     {
