@@ -17,6 +17,9 @@
                                             </div>
                                         </div>
                                         @hasrole('SuperAdmin|Administrador|Casillas')
+                                            <div class="col-md-3">
+                                                <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
+                                            </div>
                                             <div class="col-md-6 text-right">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buscarPaqueteModal">
@@ -107,6 +110,9 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
+                                                    <th>
+                                                        {{-- <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll"> --}}
+                                                    </th>
                                                     <th>No</th>
                                                     <th>Nro de Casillero</th>
                                                     <th>Código Rastreo</th>
@@ -137,6 +143,9 @@
                                                             $package->CUIDAD === auth()->user()->Regional &&
                                                             in_array($package->VENTANILLA, ['CASILLAS']))
                                                         <tr>
+                                                            <td><input type="checkbox"
+                                                                    wire:model="paquetesSeleccionados"
+                                                                    value="{{ $package->id }}"></td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->nrocasilla }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
@@ -154,7 +163,7 @@
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                @hasrole('SuperAdmin|Administrador|Casillas')
+                                                                {{-- @hasrole('SuperAdmin|Administrador|Casillas')
                                                                     <a class="btn btn-sm btn-warning" href="#"
                                                                         data-toggle="modal"
                                                                         data-target="#bajaModal{{ $package->id }}">
@@ -162,7 +171,7 @@
                                                                         {{ __('Baja') }}
                                                                     </a>
                                                                     @include('package.modal.bajacasilla')
-                                                                @endhasrole
+                                                                @endhasrole --}}
                                                                 @hasrole('SuperAdmin|Administrador|Casillas')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">

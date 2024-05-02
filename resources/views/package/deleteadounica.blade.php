@@ -3,6 +3,11 @@
 @section('title', 'Paquetes Ordinarios')
 
 @section('content')
-    @livewire('deleteadounica')
+    @hasrole('Unica')
+        @livewire('deleteadounica')
+    @endhasrole
+    @hasrole('SuperAdmin|Administrador')
+        @livewire('deleteadounicaadmin')
+    @endhasrole
     @include('footer')
 @endsection

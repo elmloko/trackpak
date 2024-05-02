@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 id="card_title">{{ __('Entregas de Paquetes en Ventanilla') }}</h5>
+                                <h5 id="card_title">{{ __('Entregas de Paquetes en Ventanilla UNICA') }}</h5>
                                 <div class="col">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
@@ -17,6 +17,9 @@
                                             </div>
                                         </div>
                                         @hasrole('SuperAdmin|Administrador|Unica')
+                                            <div class="col-md-3">
+                                                <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
+                                            </div>
                                             <div class="col-md-6 text-right">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buscarPaqueteModal">
@@ -104,6 +107,9 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
+                                                    <th>
+                                                        {{-- <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll"> --}}
+                                                    </th>
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
                                                     <th>Destinatario</th>
@@ -111,7 +117,7 @@
                                                     <th>País</th>
                                                     <th>Ciudad</th>
                                                     <th>Zonificacion</th>
-                                                    <th>Ventanilla</th>
+                                                    {{-- <th>Ventanilla</th> --}}
                                                     <th>Peso (Kg.)</th>
                                                     <th>Precio(Bs.)</th>
                                                     <th>Tipo</th>
@@ -133,6 +139,9 @@
                                                             $package->CUIDAD === auth()->user()->Regional &&
                                                             in_array($package->VENTANILLA, ['UNICA']))
                                                         <tr>
+                                                            <td><input type="checkbox"
+                                                                wire:model="paquetesSeleccionados"
+                                                                value="{{ $package->id }}"></td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>
@@ -140,7 +149,7 @@
                                                             <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                             <td>{{ $package->CUIDAD }}</td>
                                                             <td>{{ $package->ZONA }}</td>
-                                                            <td>{{ $package->VENTANILLA }}</td>
+                                                            {{-- <td>{{ $package->VENTANILLA }}</td> --}}
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->PRECIO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
@@ -149,7 +158,7 @@
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                @hasrole('SuperAdmin|Administrador|Unica')
+                                                                {{-- @hasrole('SuperAdmin|Administrador|Unica')
                                                                     <a class="btn btn-sm btn-warning" href="#"
                                                                         data-toggle="modal"
                                                                         data-target="#bajaModal{{ $package->id }}">
@@ -157,7 +166,7 @@
                                                                         {{ __('Baja') }}
                                                                     </a>
                                                                     @include('package.modal.baja')
-                                                                @endhasrole
+                                                                @endhasrole --}}
                                                                 @hasrole('SuperAdmin|Administrador|Unica')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">

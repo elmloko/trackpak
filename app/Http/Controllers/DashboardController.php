@@ -27,10 +27,11 @@ class DashboardController extends Controller
         $hoylpc = Package::where('ESTADO', 'DESPACHO')->whereDate('created_at', today())->count();
 
         //Reportes por mes Clasificacion mes
-        $meslpc = Package::where('ESTADO', 'DESPACHO')->whereMonth('created_at', now()->month)->count();
+        $meslpc = Package::withTrashed()->whereMonth('created_at', now()->month)->count();
 
-        //Aplicando Filtros 
-        $totalEntregados = $packages->where('ESTADO', 'ENTREGADO')->count();
+        //Aplicando Filtros
+        $totalbaja = Package::onlyTrashed()->where('ESTADO', 'entregado')->count();
+        $totalEntregados = $packages->where('ESTADO', 'VENTANILLA')->count();
         $totalVentanilla = $packages->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'DD')->count();
         $totalClasificacion = $packages->where('ESTADO', 'CLASIFICACION')->count();
         $totalDespacho = $packages->where('ESTADO', 'DESPACHO')->count();
@@ -56,6 +57,7 @@ class DashboardController extends Controller
         $totallpvdnd = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'DND')->count();
         $totallpvcs = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'CASILLAS')->count();
         $totallpveca = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'ECA')->count();
+        $totallpveco = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'ENCOMIENDAS')->count();
         $totalcbbav = $packages->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'VENTANILLA')->count();
         $totalsczv = $packages->where('CUIDAD', 'SANTA CRUZ')->where('ESTADO', 'VENTANILLA')->count();
         $totalbnv = $packages->where('CUIDAD', 'BENI')->where('ESTADO', 'VENTANILLA')->count();
@@ -67,6 +69,7 @@ class DashboardController extends Controller
 
         //Regional Detallado Entregado
         $totallpedd = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->count();
+        $totallpeeco = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'ENCOMIENDAS')->count();
         $totallpednd = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DND')->count();
         $totallpecs = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'CASILLA')->where('VENTANILLA', 'CASILLAS')->count();
         $totallpeeca = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'ECA')->count();
@@ -81,6 +84,7 @@ class DashboardController extends Controller
 
         //Reportes por dia Ventanilla
         $hoylpedd = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->whereDate('deleted_at', today())->count();
+        $hoylpeeco = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'ENCOMIENDAS')->whereDate('deleted_at', today())->count();
         $hoylpednd = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DND')->whereDate('deleted_at', today())->count();
         $hoylpecs = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'CASILLA')->where('VENTANILLA', 'CASILLAS')->whereDate('deleted_at', today())->count();
         $hoylpeeca = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'ECA')->whereDate('deleted_at', today())->count();
@@ -96,6 +100,7 @@ class DashboardController extends Controller
         //Reportes por dia Ventanilla Generado PRECIO
         $hoylpvdd = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->whereDate('deleted_at', today())->sum('PRECIO');
         $hoylpvdnd = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DND')->whereDate('deleted_at', today())->sum('PRECIO');
+        $hoylpveco = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'ENCOMIENDAS')->whereDate('deleted_at', today())->sum('PRECIO');
         $hoylpvcs = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'CASILLA')->where('VENTANILLA', 'CASILLAS')->whereDate('deleted_at', today())->sum('PRECIO');
         $hoylpveca = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'ECA')->whereDate('deleted_at', today())->sum('PRECIO');
         $hoycbbav = Package::onlyTrashed()->where('CUIDAD', 'COCHABAMBA')->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->sum('PRECIO');
@@ -112,8 +117,11 @@ class DashboardController extends Controller
         $totallpret = $packages->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'RETORNO')->count();
         $totallprep = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'REPARTIDO')->count();
         $hoylpent = Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'REPARTIDO')->whereDate('deleted_at', today())->count();
-        
-        $totalmensajeenv = $mensaje->where('estado', 'Enviado')->count();
+
+        $totalmensajeenv = $mensaje->where('estado', 'Enviado')->count()
+        + $mensaje->where('estado', 'Recibido')->count()
+        + $mensaje->where('estado', 'Leído')->count();
+    
         $totalmensajelei = $mensaje->where('estado', 'Leído')->count();
         $totalmensajenenv = $mensaje->where('estado', 'No enviado')->count();
         $totalmensaje = $mensaje->count();
@@ -167,6 +175,11 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'data',
+            'totalbaja',
+            'hoylpeeco',
+            'totallpveco',
+            'totallpeeco',
+            'hoylpveco',
             'totalmensaje',
             'totalmensajeenv',
             'totalmensajeHoy',

@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
-@livewire('ventanillaunica')
-@include('footer')
+    @hasrole('SuperAdmin|Administrador')
+        @livewire('ventanillaunicaadmin')
+    @endhasrole
+    @hasrole('Unica')
+        @livewire('ventanillaunica')
+    @endhasrole
+    @include('footer')
 @endsection

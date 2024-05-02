@@ -51,8 +51,8 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ $totalRegistradosHoy }}</h3>
-                                <p>Total Registrados Hoy</p>
+                                <h3>{{ $totalEntregados }}</h3>
+                                <p>Paqutes por Entregar</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -198,7 +198,7 @@
                         <div class="small-box bg-info">
                             <div class="inner">
                                 <h3>{{ $hoylpc }}</h3>
-                                <p>Total Hoy Clasificacion La Paz</p>
+                                <p>Total Hoy Clasificacion</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -225,6 +225,62 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $totallpveco }}</h3>
+                                <p>Total Paquetes en Ventanilla ENCOMIENDAS</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendas') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $totallpeeco }}</h3>
+                                <p>Total Entregados ENCOMIENDAS</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendasinventario') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $hoylpeeco }}</h3>
+                                <p>Total Hoy Entregados ENCOMIENDAS</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendasinventario') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $hoylpveco }} Bs.</h3>
+                                <p>Total Hoy Generado ENCOMIENDAS</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendasinventario') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-success">
                             <div class="inner">
@@ -290,7 +346,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanilladnd') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -304,7 +360,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadodnd') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -318,7 +374,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadodnd') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -332,7 +388,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadodnd') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -346,7 +402,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.casillas') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -360,7 +416,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.casillasinventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -374,7 +430,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.casillasinventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -388,7 +444,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.casillasinventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -402,7 +458,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.eca') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -416,7 +472,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ecainventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -430,7 +486,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ecainventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -444,7 +500,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ecainventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -472,7 +528,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -486,7 +542,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -500,7 +556,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -514,7 +570,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -529,7 +585,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -543,7 +599,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -557,7 +613,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -571,7 +627,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -585,7 +641,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -599,7 +655,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -613,7 +669,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -627,7 +683,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -641,7 +697,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -655,7 +711,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -669,7 +725,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -683,7 +739,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -697,7 +753,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -711,7 +767,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -725,7 +781,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -739,7 +795,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -753,7 +809,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -767,7 +823,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -781,7 +837,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -795,7 +851,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -809,7 +865,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -823,7 +879,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -837,7 +893,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -851,7 +907,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -865,7 +921,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -879,7 +935,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -893,7 +949,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -907,7 +963,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1112,6 +1168,79 @@
         </div>
     @endhasrole
 
+    @hasrole('ENCOMIENDAS')
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">Estadisticas Área de Ventanilla ENCOMIENDAS</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $totallpveco }}</h3>
+                                <p>Total Paquetes en Ventanilla ENCOMIENDAS</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendas') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $totallpeeco }}</h3>
+                                <p>Total Entregados ENCOMIENDAS</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendasinventario') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $hoylpeeco }}</h3>
+                                <p>Total Hoy Entregados ENCOMIENDAS</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendasinventario') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $hoylpveco }} Bs.</h3>
+                                <p>Total Hoy Generado ENCOMIENDAS</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendasinventario') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endhasrole
+
     @hasrole('Urbano|Auxiliar Urbano')
         <div class="card card-success">
             <div class="card-header">
@@ -1206,7 +1335,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ventanilladnd') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1220,7 +1349,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadodnd') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1234,7 +1363,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadodnd') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1248,7 +1377,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('test.deleteadodnd') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1279,7 +1408,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.casillasinventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1293,7 +1422,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.casillasinventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1307,7 +1436,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.casillasinventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1321,7 +1450,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.casillasinventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1352,7 +1481,7 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                            <a href="{{ route('packages.eca') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1366,7 +1495,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ecainventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1380,7 +1509,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ecainventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1394,7 +1523,7 @@
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
                             </div>
-                            <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                            <a href="{{ route('packages.ecainventario') }}" class="small-box-footer">
                                 Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -1457,7 +1586,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                                <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1471,7 +1600,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1485,7 +1614,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1499,7 +1628,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1532,7 +1661,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                                <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1546,7 +1675,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1560,7 +1689,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1574,7 +1703,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1607,7 +1736,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                                <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1621,7 +1750,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1635,7 +1764,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1649,7 +1778,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1682,7 +1811,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                                <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1696,7 +1825,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1710,7 +1839,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1724,7 +1853,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1757,7 +1886,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                                <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1771,7 +1900,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1785,7 +1914,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1799,7 +1928,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1832,7 +1961,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                                <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1846,7 +1975,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1860,7 +1989,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1874,7 +2003,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1907,7 +2036,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                                <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1921,7 +2050,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1935,7 +2064,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1949,7 +2078,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1982,7 +2111,7 @@
                                 <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
                                 </div>
-                                <a href="{{ route('packages.ventanilla') }}" class="small-box-footer">
+                                <a href="{{ route('packages.ventanillaunica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -1996,7 +2125,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -2010,7 +2139,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -2024,7 +2153,7 @@
                                 <div class="icon">
                                     <i class="fas fa-shopping-cart"></i>
                                 </div>
-                                <a href="{{ route('test.deleteado') }}" class="small-box-footer">
+                                <a href="{{ route('test.deleteadounica') }}" class="small-box-footer">
                                     Mas Informacion <i class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>

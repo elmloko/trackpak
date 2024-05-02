@@ -18,7 +18,7 @@
                                     <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
                             </div>
-                            <form method="get" action="{{ route('inventario.excel') }}" class="col-md-6">
+                            <form method="get" action="{{ route('inventarioDND.excel') }}" class="col-md-6">
                                 @csrf
                                 <div class="form-row align-items-center">
                                     <div class="col-md-4">
@@ -36,22 +36,6 @@
                             </form>
                             <div class="col-lg-6">
                             </div>
-                            <form method="get" action="{{ route('package.pdf.deleteadopdf') }}" class="col-md-6">
-                                @csrf
-                                <div class="form-row align-items-center">
-                                    <div class="col-md-4">
-                                        <label for="fecha_inicio">Fecha de inicio:</label>
-                                        <input type="date" name="fecha_inicio" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="fecha_fin">Fecha de fin:</label>
-                                        <input type="date" name="fecha_fin" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-danger">Generar PDF</button>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>

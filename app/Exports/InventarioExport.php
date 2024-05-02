@@ -28,15 +28,12 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
                 'CODIGO',
                 'DESTINATARIO',
                 'TELEFONO',
-                'PAIS',
                 'CUIDAD',
                 'ZONA',
                 'VENTANILLA',
                 'PESO',
-                'PRECIO',
-                'TIPO',
                 'ESTADO',
-                'ADUANA',
+                'OBSERVACIONES',
                 \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
             );
 
@@ -54,14 +51,12 @@ class InventarioExport implements FromCollection, WithHeadings, WithStyles
             'CODIGO',
             'DESTINATARIO',
             'TELEFONO',
-            'PAIS',
             'DESTINO',
-            'DIRECCION',
+            'BANDEJA',
             'VENTANILLA',
             'PESO',
-            'TIPO',
             'ESTADO',
-            'ADUANA',
+            'OBSERVACIONES',
             'FECHA BAJA',
         ];
     }

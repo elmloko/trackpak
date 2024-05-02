@@ -513,6 +513,25 @@ return [
                     ],
                 ],
                 [
+                    'text' => 'ENCOMIENDAS',
+                    'icon' => 'fas fa-archive',
+                    'can'  => 'packages.encomiendas',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas ENCOMIENDAS',
+                            'url' => 'packages/encomiendas',
+                            'icon' => 'fas fa-box',
+                            'can'  => 'packages.encomiendas',
+                        ],
+                        [
+                            'text' => 'Inventario ENCOMIENDAS',
+                            'url' => 'packages/encomiendasinventario',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.encomiendas',
+                        ],
+                    ],
+                ],
+                [
                     'text' => 'Distribuicion',
                     'icon' => 'fas fa-boxes',
                     'can'  => 'packages.redirigidos',
