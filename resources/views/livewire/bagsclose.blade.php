@@ -94,7 +94,7 @@
                                                     @endif
                                                 @endhasrole
                                                 @hasrole('Areo')
-                                                    @if ($bag->T == 1)
+                                                    @if ($bag->T == 2)
                                                         <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
                                                             data-target="#despachoModal{{ $bag->id }}">
                                                             <i class="fa fa-arrow-down"></i>

@@ -35,9 +35,9 @@ class Bagstrans extends Component
         $sum = Bag::where('ESTADO', 'TRASPORTADO    ')
         ->select(
             'MARBETE', 
-            DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
-            DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
-            DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_totalsaca'),
+            DB::raw('SUM(PESO)as sum_totalpeso'),
+            DB::raw('SUM(PAQUETES)as sum_totalpaquetes'),
+            DB::raw('COUNT(ID) as sum_totalsaca'),
         )
         ->groupBy('MARBETE')
         ->get();

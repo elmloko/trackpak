@@ -90,18 +90,19 @@ class BagController extends Controller
 
         Event::create([
             'action' => 'CIERRE',
-            'descripcion' => 'Saca Generada por el Receptaculo ' . $bag->MARBETE . ' e Impreso CN35',
+            'descripcion' => 'Saca Generada por el Receptaculo ' . $bag->MARBETE . ' .',
             'user_id' => auth()->user()->id,
             'codigo' => $bag->RECEPTACULO,
         ]);
+        return redirect()->route('bags.index')->with('success', 'Despacho cerrado con éxito!');
 
-        // Genera el PDF
-        $pdf = PDF::loadView('bag.pdf.cn35', compact('bag'));
+        // // Genera el PDF
+        // $pdf = PDF::loadView('bag.pdf.cn35', compact('bag'));
 
-        return $pdf->stream('CN35.pdf', ['Attachment' => false]);
+        // return $pdf->stream('CN35.pdf', ['Attachment' => false]);
 
-        return redirect()->route('bags.index')
-            ->with('success', 'Despacho cerrado con exito!');
+        // return redirect()->route('bags.index')
+        //     ->with('success', 'Despacho cerrado con exito!');
     }
 
     public function goExpedition($id, Request $request)
@@ -159,7 +160,7 @@ class BagController extends Controller
         // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
         return $pdf->stream('CN38.pdf', ['Attachment' => false]);
     }
-    
+
     public function avisoExpedition($id, Request $request)
     {
         // En primer lugar, obtenemos la instancia de la bolsa que estamos actualizando.
@@ -241,7 +242,6 @@ class BagController extends Controller
 
                 // Guardar el registro duplicado
                 $duplicateRecord->save();
-
             }
         }
 
@@ -314,25 +314,27 @@ class BagController extends Controller
         }
     }
 
-public function showExpedition(Request $request, $id)
-{
-    foreach ($request->PAQUETES as $bagId => $paquetes) {
-        $bag = Bag::findOrFail($bagId);
-        
-        // Calcula el valor del receptáculo
-        $receptaculo = $bag->MARBETE . $bag->NROSACA . str_pad(str_replace('.', '',  $request->PESOF[$bagId]), 4, '0', STR_PAD_LEFT);
+    public function showExpedition(Request $request, $id)
+    {
+        foreach ($request->PAQUETES as $bagId => $paquetes) {
+            $bag = Bag::findOrFail($bagId);
 
-        $bag->update([
-            'PAQUETES' => $paquetes,
-            'PESOF' => $request->PESOF[$bagId],
-            'RECEPTACULO' => $receptaculo, // Agrega el valor calculado de receptáculo
-        ]);
-    }
-    
-    // Obtiene los datos actualizados de las bolsas
-    $bags = Bag::whereIn('id', array_keys($request->PAQUETES))->get();
+            // Calcula el valor del receptáculo
+            $receptaculo = $bag->MARBETE . $bag->NROSACA . str_pad(str_replace('.', '',  $request->PESOF[$bagId]), 4, '0', STR_PAD_LEFT);
 
-    $sum = Bag::where('ESTADO', 'CIERRE')
+            $bag->update([
+                'PAQUETES' => $paquetes,
+                'PESOF' => $request->PESOF[$bagId],
+                'PESO' => $request->PESOF[$bagId],
+                'RECEPTACULO' => $receptaculo,
+                'T' => '2', // Agrega el valor calculado de receptáculo
+            ]);
+        }
+
+        // Obtiene los datos actualizados de las bolsas
+        $bags = Bag::whereIn('id', array_keys($request->PAQUETES))->get();
+
+        $sum = Bag::where('ESTADO', 'CIERRE')
             ->select(
                 'MARBETE',
                 DB::raw('SUM(PESOF) as sum_pesoc'),
@@ -351,18 +353,18 @@ public function showExpedition(Request $request, $id)
             ->groupBy('MARBETE')
             ->get();
 
-    // // Genera el PDF con los datos actualizados
-    $pdf = PDF::loadView('bag.pdf.cn35', compact('bags'));
+        // // Genera el PDF con los datos actualizados
+        $pdf = PDF::loadView('bag.pdf.cn35', compact('bags'));
 
-    // // Retorna el PDF para su visualización
-    // return $pdf->stream('CN35.pdf', ['Attachment' => false]);
+        // // Retorna el PDF para su visualización
+        // return $pdf->stream('CN35.pdf', ['Attachment' => false]);
 
-    // Generar el PDF con los datos sumados
-    // $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
+        // Generar el PDF con los datos sumados
+        // $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
 
-    // Devolver el PDF al navegador para su visualización
-    return $pdf->stream('CN31.pdf');
-}
+        // Devolver el PDF al navegador para su visualización
+        return $pdf->stream('CN35.pdf');
+    }
 
     public function bagsclose()
     {
@@ -375,5 +377,9 @@ public function showExpedition(Request $request, $id)
     public function bagsopen()
     {
         return view('bag.bagsopen');
+    }
+    public function bagsall()
+    {
+        return view('bag.bagsall');
     }
 }

@@ -225,6 +225,7 @@ Route::middleware('auth')->group(function () {
     Route::get('bag/pdf/cn31', [BagController::class, 'cn35'])->name('bag.pdf.cn31');
     Route::get('bag/pdf/cn35', [BagController::class, 'cn35'])->name('bag.pdf.cn35');
     Route::get('bag/pdf/cn38', [BagController::class, 'cn38'])->name('bag.pdf.cn38');
+    Route::get('/bag/bagsall', [BagController::class, 'bagsall'])->name('bags.bagsall');
 
     //Sacas y paquetes
     Route::get('/packages-has-bags', [PackagesHasBagController::class, 'index'])->name('packages-has-bags.index');

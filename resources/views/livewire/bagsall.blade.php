@@ -5,7 +5,7 @@
                 <div class="card-header">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="col">
-                            <h5 id="card_title">{{ __('Expedición de Paquetes en Nacionales') }}</h5>
+                            <h5 id="card_title">{{ __('Transito de Paquetes en Nacionales') }}</h5>
                             <div class="row align-items-center">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -14,19 +14,9 @@
                                             placeholder="Buscar...">
                                     </div>
                                 </div>
-                                @hasrole('SuperAdmin|Administrador|Urbano')
-                                    <div class="col-md-6 text-right">
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                            data-target="#buscarPaqueteModal">
-                                            Admitir Saca
-                                        </button>
-                                        @include('bag.modal.add')
-                                    </div>
-                                @endhasrole
                             </div>
                         </div>
                     </div>
-
                 </div>
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
@@ -42,29 +32,61 @@
                                     <th>Despacho</th>
                                     <th>Oficina de Cambio</th>
                                     <th>Oficina de Destino</th>
+                                    <th>Numero de Sacas</th>
                                     <th>Peso (Kg.)</th>
                                     <th>Numero de Paquetes</th>
                                     <th>Itinerario</th>
                                     <th>Estado</th>
                                     <th>Observaciones</th>
-                                    <th>Fecha Apertura</th>
+                                    <th>Fecha Expedicion</th>
                                     {{-- <th>Acciones</th> --}}
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($bags as $bag)
+                                    @if ($bag->FIN == 'F')
                                         <tr>
-                                            <td>{{ $bag->RECEPTACULO }}</td>
+                                            <td>{{ $bag->MARBETE }}</td>
                                             <td>{{ $bag->OFCAMBIO }}</td>
                                             <td>{{ $bag->OFDESTINO }}</td>
-                                            <td>{{ $bag->PESO }}</td>
-                                            <td>{{ $bag->PAQUETES }}</td>
+                                            <td>
+                                                @foreach ($sums as $sum)
+                                                    @if ($sum->MARBETE == $bag->MARBETE)
+                                                        {{ $sum->sum_totalsaca }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach ($sums as $sum)
+                                                    @if ($sum->MARBETE == $bag->MARBETE)
+                                                        {{ $sum->sum_totalpeso }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach ($sums as $sum)
+                                                    @if ($sum->MARBETE == $bag->MARBETE)
+                                                        {{ $sum->sum_totalpaquetes }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
                                             <td>{{ $bag->ITINERARIO }}</td>
                                             <td>{{ $bag->ESTADO }}</td>
                                             <td>{{ $bag->OBSERVACIONES }}</td>
                                             <td>{{ $bag->updated_at }}</td>
+                                            {{-- <td>
+                                                @hasrole('SuperAdmin|Administrador|Areo')
+                                                    <a class="btn btn-sm btn-warning" href="#" data-toggle="modal"
+                                                        data-target="#returnModal{{ $bag->id }}">
+                                                        <i class="fa fa-arrow-down"></i>
+                                                        {{ __('Return') }}
+                                                    </a>
+                                                    @include('bag.modal.return')
+                                                @endhasrole
+                                            </td> --}}
                                         </tr>
+                                    @endif
                                 @endforeach
 
                             </tbody>
