@@ -71,7 +71,15 @@
                                                     @endif
                                                 @endforeach
                                             </td>
-                                            <td>{{ $bag->ITINERARIO }}</td>
+                                            <td>
+                                                @if($bag->ITINERARIO && $bag->TRASPORTE && $bag->HORARIO)
+                                                    {{ $bag->ITINERARIO }} / {{ $bag->TRASPORTE }}={{ $bag->HORARIO }}
+                                                @elseif($bag->ITINERARIO && !$bag->TRASPORTE && !$bag->HORARIO)
+                                                    {{ $bag->ITINERARIO }}
+                                                @else
+                                                    <!-- Campo vacío -->
+                                                @endif
+                                            </td>
                                             <td>{{ $bag->ESTADO }}</td>
                                             <td>{{ $bag->OBSERVACIONES }}</td>
                                             <td>{{ $bag->updated_at }}</td>

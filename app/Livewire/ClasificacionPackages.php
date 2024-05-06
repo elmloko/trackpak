@@ -169,7 +169,7 @@ class ClasificacionPackages extends Component
         $siglasOrigen = $siglasOrigen[$ciudadOrigen];
         $siglasDestino = $siglasDestino[$ciudadDestino];
 
-        $pesoTotal = $paquetesSeleccionados->sum('PESO'); 
+        $pesoTotal = $paquetesSeleccionados->sum('PESO');
 
         // Convertir el peso total a un entero manteniendo los ceros
         $pesoEntero = str_pad(str_replace('.', '', $pesoTotal), 4, '0', STR_PAD_LEFT);
@@ -217,7 +217,7 @@ class ClasificacionPackages extends Component
         $this->resetSeleccion();
 
         // Generar el PDF con los paquetes seleccionados
-        $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
+        $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados, 'bag' => $bag]);
         $pdfContent = $pdf->output();
 
         // Generar una respuesta con el contenido del PDF para descargar

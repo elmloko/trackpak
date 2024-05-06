@@ -11,7 +11,11 @@
             border-collapse: collapse;
             font-size: 12px;
         }
-
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 5px;
+        }
         .first-table th,
         .first-table td {
             border: 1px solid #000;
@@ -19,9 +23,9 @@
             text-align: center;
             line-height: 0.5;
         }
-        .date {
+        /* .date {
             line-height: 0.5;
-        }
+        } */
         thead {
             background-color: #f2f2f2;
         }
@@ -86,27 +90,49 @@
             <h3>AGENCIA BOLIVIANA DE CORREOS</h3>
         </div>
     </div>
-    <table class="date">
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2">Operadores</th>
+                <th>Origen</th>
+                <td colspan="5">{{ $bag->OFCAMBIO }} - AGENCIA BOLIVIANA DE CORREOS</td>
+            </tr>
+            <tr>
+                <th>Destino</th>
+                <td colspan="5">{{ $bag->OFDESTINO }} - AGENCIA BOLIVIANA DE CORREOS</td>
+            </tr>
+        </thead>
         <tbody>
-            @foreach ($packages as $package)
             <tr>
-                <th style="text-align: left; font-weight: normal;">
-                    <p>Nombre del Usuario: {{ auth()->user()->name }}</p>
-                </th>
-                <th style="text-align: left; font-weight: normal;">Regional: {{ auth()->user()->Regional }}</th>
+                <th>Origen OE</th>
+                <th>Destino OE</th>
+                <th>Categoria</th>
+                <th>Sub-Clase</th>
+                <th>Año</th>
+                <th>Despacho No</th>
+                <th>Fecha</th>
             </tr>
             <tr>
-                <td style="text-align: left; font-weight: normal;">
-                    <p>Fecha: {{ now()->format('Y-m-d H:i') }}</p>
-                </td>
-                <td>
-
-                </td>
+                <td>{{ $bag->OFCAM108 }}</td>
+                <td>{{ $bag->OFDES108 }}</td>
+                <td>A</td>
+                <td>UR</td>
+                @php
+                    $ultimo_numero = substr($bag->ano_creacion, -1);
+                @endphp
+                <td>{{ $ultimo_numero }}</td>
+                <td>{{ $bag->NRODESPACHO }}/{{ $bag->ano_creacion }}</td>
+                <td>{{ now()->format('Y-m-d H:i') }}</td>
             </tr>
-            @break
-    @endforeach
+            <tr>
+                <th colspan="2" rowspan="2">Nombre del Usuario:</th>
+                <td colspan="5" rowspan="2">{{ auth()->user()->name }}</td>
+            </tr>
+            <tr>
+            </tr>
         </tbody>
     </table>
+    <br>
     <table class="first-table">
         <thead>
             <tr>
@@ -115,7 +141,6 @@
                 <th>Destinatario</th>
                 <th>Teléfono</th>
                 <th>País</th>
-                <th>Ciudad</th>
                 <th>Dirección</th>
                 <th>Ventanilla</th>
                 <th>Peso (gr.)</th>
@@ -136,7 +161,6 @@
                     <td>{{ $package->DESTINATARIO }}</td>
                     <td>{{ $package->TELEFONO }}</td>
                     <td>{{ $package->PAIS }}</td>
-                    <td>{{ $package->CUIDAD }}</td>
                     <td>{{ $package->ZONA }}</td>
                     <td>{{ $package->VENTANILLA }}</td>
                     <td>{{ $package->PESO }} gr.</td>
