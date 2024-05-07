@@ -54,7 +54,8 @@
                 <div class="card-body">
                     <h5 id="card_title">
                         @if ($lastBag)
-                            Última Saca Designada {{ $lastBag->NRODESPACHO }} / {{ $lastBag->NROSACA }}{{ $lastBag->FIN == 'F' ? 'F' : '' }}
+                            Última Saca Designada {{ $lastBag->NRODESPACHO }} /
+                            {{ $lastBag->NROSACA }}{{ $lastBag->FIN == 'F' ? 'F' : '' }}
                         @else
                             No hay sacas registradas 000/000
                         @endif
@@ -85,12 +86,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $i = 1; // Inicializa la variable $i
+                                    @endphp
                                     @foreach ($packages as $package)
                                         @if ($package->ESTADO === 'CLASIFICACION')
                                             <tr>
                                                 <td><input type="checkbox" wire:model="paquetesSeleccionados"
                                                         value="{{ $package->id }}"></td>
-                                                <td>{{ $package->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                 <td>{{ $package->TELEFONO }}</td>

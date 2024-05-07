@@ -116,12 +116,12 @@
                 <td>{{ $bag->OFCAM108 }}</td>
                 <td>{{ $bag->OFDES108 }}</td>
                 <td>A</td>
-                <td>UR</td>
+                <td>UN</td>
                 @php
                     $ultimo_numero = substr($bag->ano_creacion, -1);
                 @endphp
                 <td>{{ $ultimo_numero }}</td>
-                <td>{{ $bag->NRODESPACHO }}/{{ $bag->ano_creacion }}</td>
+                <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}{{ $bag->FIN == 'F' ? 'F' : '' }}-{{ $bag->ano_creacion }}</td>
                 <td>{{ now()->format('Y-m-d H:i') }}</td>
             </tr>
             <tr>

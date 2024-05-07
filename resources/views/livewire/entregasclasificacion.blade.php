@@ -128,6 +128,7 @@
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
                                         <th>Fecha Despacho</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -148,6 +149,31 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->datedespachoclasificacion }}</td>
+                                                <td>
+                                                    @hasrole('SuperAdmin|Administrador|Clasificacion')
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <a class="btn btn-sm btn-success"
+                                                                    href="{{ route('packages.edit', $package->id) }}">
+                                                                    <i class="fa fa-fw fa-edit"></i>
+                                                                    {{ __('Editar') }}
+                                                                </a>
+                                                            </div>
+                                                            {{-- <div class="col-md-6">
+                                                                <form
+                                                                    action="{{ route('packages.destroy', $package->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                                        <i class="fa fa-fw fa-trash"></i>
+                                                                        {{ __('Eliminar') }}
+                                                                    </button>
+                                                                </form>
+                                                            </div> --}}
+                                                        </div>
+                                                    @endhasrole
+                                                </td>
                                             </tr>
                                         @endif
                                     @endforeach

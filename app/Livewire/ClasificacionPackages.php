@@ -42,7 +42,7 @@ class ClasificacionPackages extends Component
             // ->where('CUIDAD', 'LA PAZ')
             // ->where('usercartero', $userasignado)
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(200);
 
         // Recuperar el último registro de bolsa
         $this->lastBag = Bag::latest()->first();

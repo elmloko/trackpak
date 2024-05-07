@@ -30,7 +30,7 @@ class Entregasclasificacion extends Component
             })
             ->where('ESTADO', 'DESPACHO')
             ->orderBy('datedespachoclasificacion', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.entregasclasificacion', [
             'packages' => $packages,
