@@ -328,9 +328,11 @@ class BagController extends Controller
                 'PESO' => $request->PESOF[$bagId],
                 'RECEPTACULO' => $receptaculo,
                 'T' => '2', // Agrega el valor calculado de receptáculo
+                'FIN' => 'N',
             ]);
         }
 
+        $bag->update(['FIN' => 'F']);
         // Obtiene los datos actualizados de las bolsas
         $bags = Bag::whereIn('id', array_keys($request->PAQUETES))->get();
 
@@ -353,16 +355,8 @@ class BagController extends Controller
             ->groupBy('MARBETE')
             ->get();
 
-        // // Genera el PDF con los datos actualizados
         $pdf = PDF::loadView('bag.pdf.cn35', compact('bags'));
 
-        // // Retorna el PDF para su visualización
-        // return $pdf->stream('CN35.pdf', ['Attachment' => false]);
-
-        // Generar el PDF con los datos sumados
-        // $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
-
-        // Devolver el PDF al navegador para su visualización
         return $pdf->stream('CN35.pdf');
     }
 
