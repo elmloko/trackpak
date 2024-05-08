@@ -121,7 +121,7 @@
                     $ultimo_numero = substr($bag->ano_creacion, -1);
                 @endphp
                 <td>{{ $ultimo_numero }}</td>
-                <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}{{ $bag->FIN == 'F' ? 'F' : '' }}-{{ $bag->ano_creacion }}</td>
+                <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}-{{ $bag->ano_creacion }}</td>
                 <td>{{ now()->format('Y-m-d H:i') }}</td>
             </tr>
             <tr>

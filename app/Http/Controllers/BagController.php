@@ -163,14 +163,23 @@ class BagController extends Controller
 
     public function avisoExpedition($id, Request $request)
     {
+
         // En primer lugar, obtenemos la instancia de la bolsa que estamos actualizando.
         $bag = Bag::find($id);
 
+        // Obtén el valor del campo MARVETE
+        $marbete = $bag->MARBETE;
+
+        // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
+        Bag::where('MARBETE', $marbete)->update([
+            'ITINERARIO' => $request->input('ITINERARIO'),
+            'OBSERVACIONES' => $request->input('OBSERVACIONES'),
+        ]);
+        
         // Verificar si la bolsa existe.
         if (!$bag) {
             return redirect()->route('bags.bagsclose')->with('error', 'La bolsa no existe.');
         }
-
         // Recuperar los valores enviados desde el formulario.
         $sacar = $request->input('SACAR');
         $sacam = $request->input('SACAM');
@@ -256,6 +265,7 @@ class BagController extends Controller
             'codigo' => $bag->MARBETE,
         ]);
 
+
         $sum = Bag::where('ESTADO', 'CIERRE')
             ->select(
                 'MARBETE',
@@ -281,7 +291,6 @@ class BagController extends Controller
         // Devolver el PDF al navegador para su visualización
         return $pdf->stream('CN31.pdf');
     }
-
     public function bagsadd(Request $request)
     {
         $codigo = $request->input('codigo');
