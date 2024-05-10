@@ -38,6 +38,7 @@
                                     <th>Mensajes</th>
                                     <th>Observacion</th>
                                     <th>Estado</th>
+                                    <th>Intentos</th>
                                     <th>Fecha Enviado</th>
                                     <th>Fecha Actualizacion</th>
                                 </tr>
@@ -56,6 +57,18 @@
                                             <td>{{ $mensaje->mensajes }}</td>
                                             <td>{{ $mensaje->observacion }}</td>
                                             <td>{{ $mensaje->estado }}</td>
+                                            <td>
+                                                @if($mensaje->Intentos == 0)
+                                                    PRIMERO
+                                                @elseif($mensaje->Intentos == 1)
+                                                    SEGUNDO
+                                                @elseif($mensaje->Intentos == 2)
+                                                    TERCERO
+                                                @else
+                                                    <!-- En caso de que no coincida con ningún valor -->
+                                                    Otro valor o lógica aquí
+                                                @endif
+                                            </td>
                                             <td>{{ $mensaje->fecha_actualizacion }}</td>
                                             <td>{{ $mensaje->package->updated_at ?? $mensaje->package->created_at }}</td>
                                         @endif
