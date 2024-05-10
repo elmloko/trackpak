@@ -95,7 +95,6 @@
                 <th>Casillero</th>
                 <th>Teléfono</th>
                 <th>País</th>
-                <th>Dirección</th>
                 <th>Ventanilla</th>
                 <th>Peso (gr.)</th>
                 <th>Tipo</th>
@@ -116,7 +115,6 @@
                     <td>{{ $package->nrocasilla }}</td>
                     <td>{{ $package->TELEFONO }}</td>
                     <td>{{ $package->PAIS }}</td>
-                    <td>{{ $package->CUIDAD }}</td>
                     <td>{{ $package->VENTANILLA }}</td>
                     <td>{{ $package->PESO }} gr.</td>
                     <td>{{ $package->TIPO }}</td>
