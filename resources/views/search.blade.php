@@ -295,7 +295,7 @@
         </svg>
     </div>
 
-    @if ($packages->count() > 0)
+     @if ($packages->count() > 0) 
         <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
             <div class="mb-4 text-black" tabindex="1">
                 @forelse ($packages as $package)
@@ -335,7 +335,6 @@
                         <div class="mb-4 border-b border-gray-300"></div>
                     @endif
                 @empty
-                    {{-- Este mensaje se mostrará solo si no hay resultados --}}
                     @isset($codigo)
                         <p class="mb-4 text-black">No hay resultados para la búsqueda
                             <b>"{{ $codigo }}"</b>
@@ -370,15 +369,12 @@
             </div>
         </section>
     @else
-        {{-- Este mensaje se mostrará si no hay paquetes --}}
         @isset($codigo)
             <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
                 <p class="mb-4 text-black">No hay resultados para la búsqueda
                     <b>"{{ $codigo }}"</b>
                 </p>
             </div>
-
-            {{-- Nuevo div para el botón --}}
             <div class="text-center mt-10">
                 <a href="/"
                     class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Volver
@@ -387,6 +383,34 @@
         @endisset
     @endif
 
+    {{-- @if ($result)
+        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
+            <div class="mb-4 text-black" tabindex="1">
+                @foreach ($result as $package)
+                    <p>
+                        Event Type: {{ $package['eventType'] }}
+                        <br>
+                        Event Date: {{ $package['eventDate'] }}
+                        <br>
+                        Office: {{ $package['office'] }}
+                        <br>
+                        Scanned: {{ $package['scanned'] }}
+                        <br>
+                        Workstation: {{ $package['workstation'] }}
+                        <br>
+                        Condition: {{ $package['condition'] }}
+                        <br>
+                        Next Office: {{ $package['nextOffice'] }}
+                    </p>
+                    <hr>
+                @endforeach
+            </div>
+        </div>
+    @else
+        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
+            <p class="mb-4 text-black">No hay resultados para la búsqueda.</p>
+        </div>
+    @endif --}}
 
     <!-- Change the colour #f8fafc to match the previous section colour -->
     <svg class="wave-top mt-10" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg"
