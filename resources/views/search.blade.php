@@ -382,8 +382,10 @@
                                         <span class="description">Oficina: {{ $result->office }}</span><br>
                                         {{-- <span class="description">Workstation: {{ $result->workstation }}</span><br>
                         <span class="description">Condition: {{ $result->condition }}</span><br> --}}
-                                        <span class="description">Siguiente Oficina:
-                                            {{ $result->nextOffice }}</span><br>
+                                        @if (isset($result->nextOffice) && !empty($result->nextOffice))
+                                            <span class="description">Siguiente Oficina:
+                                                {{ $result->nextOffice }}</span><br>
+                                        @endif
                                         <span class="description">{{ $result->eventDate }}</span><br>
                                         <!-- Haz que los cuadrados de la línea de tiempo sean más grandes -->
                                         <span class="circle" style="width: 30px; height: 30px;"></span>
