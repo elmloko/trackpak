@@ -295,7 +295,7 @@
         </svg>
     </div>
 
-     @if ($packages->count() > 0) 
+    @if ($packages->count() > 0)
         <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
             <div class="mb-4 text-black" tabindex="1">
                 @forelse ($packages as $package)
@@ -348,7 +348,6 @@
             <div class="container mx-auto flex flex-wrap pt-4 pb-12">
                 <div class="w-full">
                     <h3 class="font-bold text-3xl text-black mb-10">Últimos Eventos</h3>
-
                 </div>
                 <div class="main">
                     <div class="containerbox">
@@ -359,11 +358,39 @@
                                     <span class="date ">{{ $evento->codigo }}</span>
                                     <span class="description">{{ $evento->descripcion }}</span><br>
                                     <span class="created-at">{{ $evento->created_at }}</span>
-                                    <!-- Haz que los cuadrados de la línea de tiempo sean más grandes -->
                                     <span class="circle" style="width: 30px; height: 30px;"></span>
                                 </li>
                             @endforeach
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @elseif(isset($results))
+        <section class="bg-white border-b py-8 text-center mt-8"> <!-- Añade "text-center" para centrar -->
+            <div class="container mx-auto flex flex-wrap pt-4 pb-12">
+                <div class="w-full">
+                    <h3 class="font-bold text-3xl text-black mb-10">Últimos Eventos</h3>
+                    <div class="main">
+                        <div class="containerbox">
+                            <ul class="timeline">
+                                <!-- Mostrar los resultados de la API -->
+                                @foreach ($results as $result)
+                                    <li class="text-black">
+                                        <h3 class="heading">{{ $result->eventType }}</h3>
+                                        <span class="date ">{{ $result->mailitM_FID }}</span>
+                                        <span class="description">Oficina: {{ $result->office }}</span><br>
+                                        {{-- <span class="description">Workstation: {{ $result->workstation }}</span><br>
+                        <span class="description">Condition: {{ $result->condition }}</span><br> --}}
+                                        <span class="description">Siguiente Oficina:
+                                            {{ $result->nextOffice }}</span><br>
+                                        <span class="description">{{ $result->eventDate }}</span><br>
+                                        <!-- Haz que los cuadrados de la línea de tiempo sean más grandes -->
+                                        <span class="circle" style="width: 30px; height: 30px;"></span>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -383,34 +410,7 @@
         @endisset
     @endif
 
-    {{-- @if ($result)
-        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-            <div class="mb-4 text-black" tabindex="1">
-                @foreach ($result as $package)
-                    <p>
-                        Event Type: {{ $package['eventType'] }}
-                        <br>
-                        Event Date: {{ $package['eventDate'] }}
-                        <br>
-                        Office: {{ $package['office'] }}
-                        <br>
-                        Scanned: {{ $package['scanned'] }}
-                        <br>
-                        Workstation: {{ $package['workstation'] }}
-                        <br>
-                        Condition: {{ $package['condition'] }}
-                        <br>
-                        Next Office: {{ $package['nextOffice'] }}
-                    </p>
-                    <hr>
-                @endforeach
-            </div>
-        </div>
-    @else
-        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-            <p class="mb-4 text-black">No hay resultados para la búsqueda.</p>
-        </div>
-    @endif --}}
+
 
     <!-- Change the colour #f8fafc to match the previous section colour -->
     <svg class="wave-top mt-10" viewBox="0 0 1439 147" version="1.1" xmlns="http://www.w3.org/2000/svg"
