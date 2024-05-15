@@ -84,7 +84,7 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('VENTANILLA') }}
-                    {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
+                    {{ Form::select('VENTANILLA', ['ENCOMIENDA' => 'ENCOMIENDA','DND' => 'DND', 'DD' => 'DD', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
                     {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
