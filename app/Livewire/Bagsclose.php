@@ -16,7 +16,7 @@ class Bagsclose extends Component
 
     public function render()
     {
-        $bags = Bag::where('ESTADO', 'CIERRE')
+        $bags = Bag::where('ESTADO', 'APERTURA')
         ->where('FIN', 'F') // Agregar esta línea para la condición $bag->FIN == 'F'
         ->when($this->search, function ($query) {
             $query->where('NRODESPACHO', 'like', '%' . $this->search . '%')
@@ -33,7 +33,7 @@ class Bagsclose extends Component
         ->paginate(10);    
 
         // Calcular la suma de PESOF y PAQUETES por grupo de MARBETE
-        $sum = Bag::where('ESTADO', 'CIERRE')
+        $sum = Bag::where('ESTADO', 'APERTURA')
             ->select(
                 'MARBETE',
                 DB::raw('SUM(PESOF) as sum_pesoc'),
@@ -47,7 +47,7 @@ class Bagsclose extends Component
             ->get();
 
         $repeatedMarbetes = Bag::select('MARBETE')
-            ->where('ESTADO', 'CIERRE')
+            ->where('ESTADO', 'APERTURA')
             ->groupBy('MARBETE')
             ->havingRaw('COUNT(*) > 1')
             ->pluck('MARBETE')

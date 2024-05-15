@@ -548,14 +548,14 @@ return [
                             'icon' => 'fas fa-box-open',
                             'can'  => 'packages.todo',
                         ],
+                        // [
+                        //     'text' => 'Ingreso Despacho',
+                        //     'url' => 'bags',
+                        //     'icon' => 'fas fa-box-open',
+                        //     'can'  => 'packages.ingreso',
+                        // ],
                         [
                             'text' => 'Ingreso Despacho',
-                            'url' => 'bags',
-                            'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.ingreso',
-                        ],
-                        [
-                            'text' => 'Cierre Despacho',
                             'url' => 'bag/bagsclose',
                             'icon' => 'fas fa-box-open',
                             'can'  => 'packages.cierre',
