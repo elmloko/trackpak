@@ -22,20 +22,8 @@
                     {{ Form::label('CANTIDAD DE ENVIOS') }}
                     {{ Form::number('CANTIDAD', $national->CANTIDAD ?? 1, ['class' => 'form-control' . ($errors->has('CANTIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Cantidad de envíos']) }}
                     {!! $errors->first('CANTIDAD', '<div class="invalid-feedback">:message</div>') !!}
-                </div>                
-                <div class="form-group">
-                    {{ Form::label('PESO (gr.)') }}
-                    {{ Form::text('PESO', $national->PESO, [
-                        'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
-                        'placeholder' => 'Expresa el Peso en Gramos',
-                        'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
-                        'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
-                        'pattern' => '^(\d+)?(\.\d{1,3})?$',
-                        'required' => 'required',
-                        'min' => '0',  // Establecer el valor mínimo
-                        'max' => '20.000',]) }}
-                    {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
+
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -45,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('LOCALIDAD') }}
-                    {{ Form::select('PROVINCIA', ['LOCAL 1' => 'LOCAL 1', 'LOCAL 2' => 'LOCAL 2', 'LOCAL 3' => 'LOCAL 3', 'LOCAL 4' => 'LOCAL 4', 'CUIDAD CAPITAL EMS' => 'CUIDAD CAPITAL EMS', 'CUIDAD INTERMEDIA EMS' => 'CUIDAD INTERMEDIA EMS', 'TRINIDAD/COBIJA EMS' => 'TRINIDAD/COBIJA EMS', 'RIBERALTA/GUAYARAMERIN EMS' => 'RIBERALTA/GUAYARAMERIN EMS', 'CUIDAD CAPITAL ME' => 'CUIDAD CAPITAL ME', 'TRINIDAD/COBIJA ME' => 'TRINIDAD/COBIJA ME', 'PROVINCIA-DENTRO ME' => 'PROVINCIA-DENTRO ME', 'PROVINCIA-OTRO ME' => 'PROVINCIA-OTRO ME', 'SERVICIO-LOCAL LC/AO' => 'SERVICIO-LOCAL LC/AO', 'SERVICIO-NACIONAL LC/AO' => 'SERVICIO-NACIONAL LC/AO','PROVINCIA-DENTRO LC/AO' => 'PROVINCIA-DENTRO LC/AO','PROVINCIA-OTRO LC/AO' => 'PROVINCIA-OTRO LC/AO','TRINIDAD/COBIJA LC/AO' => 'TRINIDAD/COBIJA LC/AO','RIBERALTA/GUAYARAMERIN LC/AO' => 'RIBERALTA/GUAYARAMERIN LC/AO','SERVICIO-LOCAL ECA' => 'SERVICIO-LOCAL ECA','SERVICIO-NACIONAL ECA' => 'SERVICIO-NACIONAL ECA','PROVINCIA-DENTRO ECA' => 'PROVINCIA-DENTRO ECA','PROVINCIA-OTRO ECA' => 'PROVINCIA-OTRO ECA','TRINIDAD/COBIJA ECA' => 'TRINIDAD/COBIJA ECA','RIBERALTA/GUAYARAMERIN ECA' => 'RIBERALTA/GUAYARAMERIN ECA','UNICO SE' => 'UNICO SE','SERVICIO-LOCAL PO' => 'SERVICIO-LOCAL PO','SERVICIO-NACIONAL PO' => 'SERVICIO-NACIONAL PO','PROVINCIA-DENTRO PO' => 'PROVINCIA-DENTRO PO','PROVINCIA-OTRO PO' => 'PROVINCIA-OTRO PO','SERVICIO-NACIONAL SM' => 'SERVICIO-NACIONAL SM','SERVICIO-PROVICIONAL SM' => 'SERVICIO-PROVICIONAL SM'], $national->PROVINCIA, ['class' => 'form-control' . ($errors->has('PROVINCIA') ? ' is-invalid' : ''), 'placeholder' => 'Destino Local', 'id' => 'provincia-select']) }}
+                    {{ Form::select('PROVINCIA',['LOCAL 1' => 'LOCAL 1','LOCAL 2' => 'LOCAL 2','LOCAL 3' => 'LOCAL 3','LOCAL 4' => 'LOCAL 4','CUIDAD CAPITAL EMS' => 'CUIDAD CAPITAL EMS','CUIDAD INTERMEDIA EMS' => 'CUIDAD INTERMEDIA EMS','TRINIDAD/COBIJA EMS' => 'TRINIDAD/COBIJA EMS','RIBERALTA/GUAYARAMERIN EMS' => 'RIBERALTA/GUAYARAMERIN EMS','CUIDAD CAPITAL ME' => 'CUIDAD CAPITAL ME','TRINIDAD/COBIJA ME' => 'TRINIDAD/COBIJA ME','PROVINCIA-DENTRO ME' => 'PROVINCIA-DENTRO ME','PROVINCIA-OTRO ME' => 'PROVINCIA-OTRO ME','SERVICIO-LOCAL LC/AO' => 'SERVICIO-LOCAL LC/AO','SERVICIO-NACIONAL LC/AO' => 'SERVICIO-NACIONAL LC/AO','PROVINCIA-DENTRO LC/AO' => 'PROVINCIA-DENTRO LC/AO','PROVINCIA-OTRO LC/AO' => 'PROVINCIA-OTRO LC/AO','TRINIDAD/COBIJA LC/AO' => 'TRINIDAD/COBIJA LC/AO','RIBERALTA/GUAYARAMERIN LC/AO' => 'RIBERALTA/GUAYARAMERIN LC/AO','SERVICIO-LOCAL ECA' => 'SERVICIO-LOCAL ECA','SERVICIO-NACIONAL ECA' => 'SERVICIO-NACIONAL ECA','PROVINCIA-DENTRO ECA' => 'PROVINCIA-DENTRO ECA','PROVINCIA-OTRO ECA' => 'PROVINCIA-OTRO ECA','TRINIDAD/COBIJA ECA' => 'TRINIDAD/COBIJA ECA','RIBERALTA/GUAYARAMERIN ECA' => 'RIBERALTA/GUAYARAMERIN ECA','UNICO SE' => 'UNICO SE','SERVICIO-LOCAL PO' => 'SERVICIO-LOCAL PO','SERVICIO-NACIONAL PO' => 'SERVICIO-NACIONAL PO','PROVINCIA-DENTRO PO' => 'PROVINCIA-DENTRO PO','PROVINCIA-OTRO PO' => 'PROVINCIA-OTRO PO','SERVICIO-NACIONAL SM' => 'SERVICIO-NACIONAL SM','SERVICIO-PROVICIONAL SM' => 'SERVICIO-PROVICIONAL SM'],$national->PROVINCIA,['class' => 'form-control' . ($errors->has('PROVINCIA') ? ' is-invalid' : ''), 'placeholder' => 'Destino Local', 'id' => 'provincia-select']) }}
                     {!! $errors->first('PROVINCIA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
@@ -54,10 +42,24 @@
                     {!! $errors->first('DIRECCION', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
+                    {{ Form::label('PESO (gr.)') }}
+                    {{ Form::text('PESO', $national->PESO, [
+                        'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
+                        'placeholder' => 'Expresa el Peso en Gramos',
+                        'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
+                        'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
+                        'pattern' => '^(\d+)?(\.\d{1,3})?$',
+                        'required' => 'required',
+                        'min' => '0', // Establecer el valor mínimo
+                        'max' => '20.000',
+                    ]) }}
+                    {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                {{-- <div class="form-group">
                     {{ Form::label('N° DE FACTURA') }}
                     {{ Form::number('FACTURA', $national->FACTURA, ['class' => 'form-control' . ($errors->has('FACTURA') ? ' is-invalid' : ''), 'placeholder' => 'Numero de Factura']) }}
                     {!! $errors->first('FACTURA', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                </div> --}}
                 {{-- <div class="form-group">
                     {{ Form::label('IMPORTE (Bs.)') }}
                     {{ Form::number('IMPORTE', $national->IMPORTE, ['class' => 'form-control' . ($errors->has('IMPORTE') ? ' is-invalid' : ''), 'placeholder' => 'Importe expresado en Bs.', 'id' => 'importe-select']) }}
@@ -68,24 +70,6 @@
         <hr>
         <div class="row">
             <div class="col-md-6">
-                <h4>Datos del Destinatario</h4>
-                <div class="form-group">
-                    {{ Form::label('NOMBRES DEL DESTINATARIO') }}
-                    {{ Form::text('NOMBRESDESTINATARIO', strtoupper($national->NOMBRESDESTINATARIO), ['class' => 'form-control' . ($errors->has('NOMBRESDESTINATARIO') ? ' is-invalid' : ''), 'placeholder' => 'Nombres y Apellido del Destinatario']) }}
-                    {!! $errors->first('NOMBRESDESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <div class="form-group">
-                    {{ Form::label('TELEFONO DEL DESTINATARIO') }}
-                    {{ Form::number('TELEFONODESTINATARIO', $national->TELEFONODESTINATARIO, ['class' => 'form-control' . ($errors->has('TELEFONODESTINATARIO') ? ' is-invalid' : ''), 'placeholder' => 'Telefono del Destinatario']) }}
-                    {!! $errors->first('TELEFONODESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <div class="form-group">
-                    {{ Form::label('C.I. DESTINATARIO') }}
-                    {{ Form::number('CIDESTINATARIO', $national->CIDESTINATARIO, ['class' => 'form-control' . ($errors->has('CIDESTINATARIO') ? ' is-invalid' : ''), 'placeholder' => 'Celula de Identidad del Destinatario']) }}
-                    {!! $errors->first('CIDESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
-            <div class="col-md-6">
                 <h4>Datos del Remitente</h4>
                 <div class="form-group">
                     {{ Form::label('NOMBRE Y APELLIDO DEL REMITENTE') }}
@@ -94,13 +78,31 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('TELEFONO DEL REMITENTE') }}
-                    {{ Form::number('TELEFONOREMITENTE', $national->TELEFONOREMITENTE, ['class' => 'form-control' . ($errors->has('TELEFONOREMITENTE') ? ' is-invalid' : ''), 'placeholder' => 'Telefono del Remitente']) }}
+                    {{ Form::number('TELEFONOREMITENTE', $national->TELEFONOREMITENTE ?? 0, ['class' => 'form-control' . ($errors->has('TELEFONOREMITENTE') ? ' is-invalid' : ''), 'placeholder' => 'Telefono del Remitente']) }}
                     {!! $errors->first('TELEFONOREMITENTE', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
                     {{ Form::label('C.I. REMITENTE') }}
                     {{ Form::number('CIREMITENTE', $national->CIREMITENTE, ['class' => 'form-control' . ($errors->has('CIREMITENTE') ? ' is-invalid' : ''), 'placeholder' => 'Celula de Identidad del Remitente']) }}
                     {!! $errors->first('CIREMITENTE', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h4>Datos del Destinatario</h4>
+                <div class="form-group">
+                    {{ Form::label('NOMBRES DEL DESTINATARIO') }}
+                    {{ Form::text('NOMBRESDESTINATARIO', strtoupper($national->NOMBRESDESTINATARIO), ['class' => 'form-control' . ($errors->has('NOMBRESDESTINATARIO') ? ' is-invalid' : ''), 'placeholder' => 'Nombres y Apellido del Destinatario']) }}
+                    {!! $errors->first('NOMBRESDESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('TELEFONO DEL DESTINATARIO') }}
+                    {{ Form::number('TELEFONODESTINATARIO', $national->TELEFONODESTINATARIO  ?? 0, ['class' => 'form-control' . ($errors->has('TELEFONODESTINATARIO') ? ' is-invalid' : ''), 'placeholder' => 'Telefono del Destinatario']) }}
+                    {!! $errors->first('TELEFONODESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                <div class="form-group">
+                    {{ Form::label('C.I. DESTINATARIO') }}
+                    {{ Form::number('CIDESTINATARIO', $national->CIDESTINATARIO, ['class' => 'form-control' . ($errors->has('CIDESTINATARIO') ? ' is-invalid' : ''), 'placeholder' => 'Celula de Identidad del Destinatario']) }}
+                    {!! $errors->first('CIDESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
         </div>
@@ -125,11 +127,11 @@
             // Muestra u oculta las opciones de PROVINCIA según el tipo seleccionado
             if (tipo === 'EMS') {
                 $('#provincia-select option').hide();
+                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').show();
                 $('#provincia-select option[value="LOCAL 1"]').show();
                 $('#provincia-select option[value="LOCAL 2"]').show();
                 $('#provincia-select option[value="LOCAL 3"]').show();
                 $('#provincia-select option[value="LOCAL 4"]').show();
-                $('#provincia-select option[value="CUIDAD CAPITAL EMS"]').show();
                 $('#provincia-select option[value="CUIDAD INTERMEDIA EMS"]').show();
                 $('#provincia-select option[value="TRINIDAD/COBIJA EMS"]').show();
                 $('#provincia-select option[value="RIBERALTA/GUAYARAMERIN EMS"]').show();
