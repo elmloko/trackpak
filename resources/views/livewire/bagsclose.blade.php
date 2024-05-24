@@ -14,6 +14,14 @@
                                             placeholder="Buscar...">
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    @hasrole('SuperAdmin|Administrador')
+                                        <a href="{{ route('bags.create') }}" class="btn btn-primary btn-md float-right ml-2"
+                                            data-placement="left">
+                                            {{ __('Crear Nuevo') }}
+                                        </a>
+                                    @endhasrole
+                                </div>
                             </div>
                         </div>
                     </div>
