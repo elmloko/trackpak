@@ -367,17 +367,6 @@
             </div>
         </section>
     @elseif(isset($results))
-        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-            <div class="mb-4 text-black" tabindex="1">
-                @if (!empty($results))
-                    Su paquete <strong>{{ $results[0]->mailitM_FID }}</strong> fue encontrado. Estos son sus eventos:
-                    <!-- Aquí puedes agregar el bucle para mostrar los eventos del paquete -->
-                @else
-                    <!-- Aquí puedes manejar el caso en el que no se encontraron paquetes -->
-                    No se encontraron paquetes.
-                @endif
-            </div>
-        </div>
         <section class="bg-white border-b py-8 text-center mt-8"> <!-- Añade "text-center" para centrar -->
             <div class="container mx-auto flex flex-wrap pt-4 pb-12">
                 <div class="w-full">
@@ -392,7 +381,7 @@
                                         <span class="date ">{{ $result->mailitM_FID }}</span>
                                         <span class="description">Oficina: {{ $result->office }}</span><br>
                                         {{-- <span class="description">Workstation: {{ $result->workstation }}</span><br>
-                                            <span class="description">Condition: {{ $result->condition }}</span><br> --}}
+                        <span class="description">Condition: {{ $result->condition }}</span><br> --}}
                                         @if (isset($result->nextOffice) && !empty($result->nextOffice))
                                             <span class="description">Siguiente Oficina:
                                                 {{ $result->nextOffice }}</span><br>
