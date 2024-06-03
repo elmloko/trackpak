@@ -36,14 +36,10 @@
                                 <button wire:click="cambiarEstado" class="btn btn-warning">
                                     {{ __('Despachar') }}
                                 </button>
-                                <input type="checkbox" wire:model="findespacho" id="findespacho">
-                                <label for="findespacho">{{ __('Finalizar despacho') }}</label>
+                                {{-- <input type="checkbox" wire:model="findespacho" id="findespacho">
+                                <label for="findespacho">{{ __('Finalizar despacho') }}</label> --}}
                             @endhasrole
                         </div>
-                        {{-- <form action="{{ route('package.pdf.despachopdf') }}" method="POST" target="_blank">
-                            @csrf
-                            <button type="submit" class="btn btn-danger" data-placement="left">Imprimir</button>
-                        </form> --}}
                     </div>
                 </div>
                 @if ($message = Session::get('success'))
@@ -52,14 +48,14 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    <h5 id="card_title">
+                    {{-- <h5 id="card_title">
                         @if ($lastBag)
                             Última Saca Designada {{ $lastBag->NRODESPACHO }} /
                             {{ $lastBag->NROSACA }}{{ $lastBag->FIN == 'F' ? 'F' : '' }}
                         @else
                             No hay sacas registradas 000/000
                         @endif
-                    </h5>
+                    </h5> --}}
                     <div class="table-responsive">
                         @if ($packages->count())
                             <table class="table table-striped table-hover">
