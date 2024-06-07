@@ -214,21 +214,21 @@ class BagController extends Controller
     {
         // En primer lugar, obtenemos la instancia de la bolsa que estamos actualizando.
         $bag = Bag::find($id);
-    
+
         // Verificar si la bolsa existe.
         if (!$bag) {
             return redirect()->route('bags.bagsclose')->with('error', 'La bolsa no existe.');
         }
-    
+
         // Obtén el valor del campo MARVETE
         $marbete = $bag->MARBETE;
-    
+
         // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
         Bag::where('MARBETE', $marbete)->update([
             'ITINERARIO' => $request->input('ITINERARIO'),
             'OBSERVACIONES' => $request->input('OBSERVACIONES'),
         ]);
-    
+
         // Recuperar los valores enviados desde el formulario.
         $sacau = $request->input('SACAU');
         $sacar = $request->input('SACAR');
@@ -239,7 +239,7 @@ class BagController extends Controller
         $paquetesu = $request->input('PAQUETESU');
         $paquetesr = $request->input('PAQUETESR');
         $paquetesm = $request->input('PAQUETESM');
-    
+
         // Actualizar los campos correspondientes en la instancia de la bolsa.
         $bag->SACAU = $sacau;
         $bag->SACAR = $sacar;
@@ -250,39 +250,54 @@ class BagController extends Controller
         $bag->PAQUETESU = $paquetesu;
         $bag->PAQUETESR = $paquetesr;
         $bag->PAQUETESM = $paquetesm;
-    
+
         // Guardar los cambios en la base de datos.
         $bag->save();
-    
+
         // Obtener el número total de registros que se deben generar.
         $totalSacas = $sacar + $sacam + $sacau;
-    
+
         // Crear nuevos registros duplicados para SACAR, SACAM y SACAU
         for ($i = 0; $i < $totalSacas; $i++) {
             $duplicateRecord = $bag->replicate();
             $duplicateRecord->NROSACA = sprintf("%04d", $i + 1);
             $duplicateRecord->TIPO = $i < $sacar ? 'R' : ($i < $sacar + $sacam ? 'M' : 'U');
             $duplicateRecord->userbags = auth()->user()->name; // Asignar el nombre del usuario actual
-            $duplicateRecord->first = '0'; // Asignar el nombre del usuario actual
-    
+            $duplicateRecord->first = '0';
+
+            // Establecer T=0 solo para el primer registro original
+            if ($i == 0) {
+                $duplicateRecord->T = '1';
+                $duplicateRecord->first = '1';
+            } else {
+                // Mantener T como está para los registros duplicados
+                $duplicateRecord->T = $bag->T;
+            }
+            // Si es el último registro duplicado, establecer FIN = F
+            if ($i == $totalSacas - 1) {
+                $duplicateRecord->FIN = 'F';
+            } else {
+                $duplicateRecord->FIN = 'N';
+            }
+
             // Guardar el registro duplicado
             $duplicateRecord->save();
         }
 
         $bag->delete();
-        
+
         // Código restante para generar el PDF y devolver la respuesta
         $bag->update([
             'T' => '1',
         ]);
-    
+
         Event::create([
             'action' => 'COMPROBADO',
             'descripcion' => 'Despacho verificado CN31 y sacas añadidas al despacho, listo para Trasporte',
             'user_id' => auth()->user()->id,
             'codigo' => $bag->MARBETE,
         ]);
-    
+
         $sum = Bag::where('ESTADO', 'CIERRE')
             ->select(
                 'MARBETE',
@@ -301,9 +316,9 @@ class BagController extends Controller
             )
             ->groupBy('MARBETE')
             ->get();
-    
+
         $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
-    
+
         return $pdf->stream('CN31.pdf');
     }
 
