@@ -15,7 +15,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    @hasrole('SuperAdmin|Administrador')
+                                    @hasrole('SuperAdmin|Administrador|Expedicion')
                                         <a href="{{ route('bags.create') }}" class="btn btn-primary btn-md float-right ml-2"
                                             data-placement="left">
                                             {{ __('Crear Nuevo') }}
@@ -53,7 +53,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($bags as $bag)
-                                    @if ($bag->FIN == 'F')
+                                    @if ($bag->first == '1')
                                         <tr>
                                             <td>{{ $bag->MARBETE }}</td>
                                             <td>{{ $bag->OFCAMBIO }}</td>

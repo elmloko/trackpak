@@ -21,14 +21,63 @@ class BagController extends Controller
         $bag = new Bag();
         return view('bag.create', compact('bag'));
     }
-
     public function store(Request $request)
     {
-        request()->validate(Bag::$rules);
+        $request->validate([
+            'NRODESPACHO' => 'required|numeric',
+            'OFDESTINO' => 'required|string',
+        ]);
 
-        $bag = Bag::create($request->all());
+        // Formatear el campo NRODESPACHO con ceros a la izquierda
+        $nroDespacho = str_pad($request->input('NRODESPACHO'), 4, '0', STR_PAD_LEFT);
 
-        return redirect()->route('bags.index')
+        // Definir las siglas de origen y destino
+        $siglas = [
+            'LA PAZ' => 'BOLPA',
+            'COCHABAMBA' => 'BOCBA',
+            'SANTA CRUZ' => 'BOSCA',
+            'POTOSI' => 'BOPTA',
+            'ORURO' => 'BOORA',
+            'BENI' => 'BOBNA',
+            'TARIJA' => 'BOTJA',
+            'SUCRE' => 'BOSRA',
+            'PANDO' => 'BOPNA',
+        ];
+
+        // Obtener la ciudad de origen y destino
+        $ciudadOrigen = auth()->user()->Regional;
+        $ciudadDestino = $request->input('OFDESTINO');
+
+        // Verificar si la ciudad de origen y destino existen en las siglas
+        if (!isset($siglas[$ciudadOrigen]) || !isset($siglas[$ciudadDestino])) {
+            return redirect()->back()->withErrors('Ciudad de origen o destino no válidas.');
+        }
+
+        // Transformar las siglas
+        $siglasOrigen = $siglas[$ciudadOrigen];
+        $siglasDestino = $siglas[$ciudadDestino];
+
+        $marbete = $siglasOrigen . $siglasDestino . 'B' . 'UN' . substr(date('Y'), 3, 1) . $nroDespacho;
+
+        // Crear la nueva instancia de Bag y guardar en la base de datos
+        $bag = new Bag([
+            'NRODESPACHO' => $nroDespacho,
+            'OFCAMBIO' => $ciudadOrigen,
+            'OFDESTINO' => $ciudadDestino,
+            'ESTADO' => 'APERTURA',
+            'T' => '0',
+            'userbags' => auth()->user()->name,
+            'ano_creacion' => date('Y'),
+            'created_at' => now(),
+            'OFCAM108' => $siglasOrigen,
+            'OFDES108' => $siglasDestino,
+            'MARBETE' => $marbete,
+            'first' => '1',
+        ]);
+
+        $bag->save();
+
+        return redirect()->route('bags.bagsclose')
             ->with('success', 'Bag created successfully.');
     }
 
@@ -122,7 +171,7 @@ class BagController extends Controller
         Bag::where('MARBETE', $marbete)->update([
             'TRASPORTE' => $request->input('TRASPORTE'),
             'HORARIO' => $request->input('HORARIO'),
-            'OBSERVACIONESG' => $request->input('OBSERVACIONESG'),
+            'OBSERVACIONESG' => $request->input('OBSERVACIONES'),
             'fecha_exp' => now(),
             'ESTADO' => 'TRASPORTADO',
             'userbags' => auth()->user()->name,
@@ -163,109 +212,77 @@ class BagController extends Controller
 
     public function avisoExpedition($id, Request $request)
     {
-
         // En primer lugar, obtenemos la instancia de la bolsa que estamos actualizando.
         $bag = Bag::find($id);
-
+    
+        // Verificar si la bolsa existe.
+        if (!$bag) {
+            return redirect()->route('bags.bagsclose')->with('error', 'La bolsa no existe.');
+        }
+    
         // Obtén el valor del campo MARVETE
         $marbete = $bag->MARBETE;
-
+    
         // Actualiza los campos adicionales en los registros que tengan el mismo valor en el campo MARVETE
         Bag::where('MARBETE', $marbete)->update([
             'ITINERARIO' => $request->input('ITINERARIO'),
             'OBSERVACIONES' => $request->input('OBSERVACIONES'),
         ]);
-        
-        // Verificar si la bolsa existe.
-        if (!$bag) {
-            return redirect()->route('bags.bagsclose')->with('error', 'La bolsa no existe.');
-        }
+    
         // Recuperar los valores enviados desde el formulario.
+        $sacau = $request->input('SACAU');
         $sacar = $request->input('SACAR');
         $sacam = $request->input('SACAM');
+        $pesou = $request->input('PESOU');
         $pesor = $request->input('PESOR');
         $pesom = $request->input('PESOM');
+        $paquetesu = $request->input('PAQUETESU');
         $paquetesr = $request->input('PAQUETESR');
         $paquetesm = $request->input('PAQUETESM');
-
+    
         // Actualizar los campos correspondientes en la instancia de la bolsa.
+        $bag->SACAU = $sacau;
         $bag->SACAR = $sacar;
         $bag->SACAM = $sacam;
+        $bag->PESOU = $pesou;
         $bag->PESOR = $pesor;
         $bag->PESOM = $pesom;
+        $bag->PAQUETESU = $paquetesu;
         $bag->PAQUETESR = $paquetesr;
         $bag->PAQUETESM = $paquetesm;
-
+    
         // Guardar los cambios en la base de datos.
         $bag->save();
-
-        // Obtener los registros que deseas repetir
-        $originalRecords = Bag::where('id', $id)->get();
-
-        // Crear nuevos registros duplicados para SACAR
-        for ($i = 0; $i < $sacar; $i++) {
-            foreach ($originalRecords as $index => $originalRecord) {
-                $duplicateRecord = new Bag();
-                // Copiar los valores de los campos necesarios
-                $duplicateRecord->NRODESPACHO = $originalRecord->NRODESPACHO;
-                $duplicateRecord->NROSACA = sprintf("%04d", $originalRecord->NROSACA + $i + 1);
-                $duplicateRecord->ESTADO = $originalRecord->ESTADO;
-                $duplicateRecord->ano_creacion = $originalRecord->ano_creacion;
-                $duplicateRecord->created_at = $originalRecord->created_at;
-                $duplicateRecord->OFCAMBIO = $originalRecord->OFCAMBIO;
-                $duplicateRecord->OFDESTINO = $originalRecord->OFDESTINO;
-                $duplicateRecord->OFCAM108 = $originalRecord->OFCAM108;
-                $duplicateRecord->OFDES108 = $originalRecord->OFDES108;
-                $duplicateRecord->MARBETE = $originalRecord->MARBETE;
-                $duplicateRecord->ITINERARIO = $originalRecord->ITINERARIO;
-                $duplicateRecord->TIPO = 'R';
-                $duplicateRecord->FIN = 'N';
-                $duplicateRecord->userbags = auth()->user()->name; // Asignar el nombre del usuario actual
-
-                // Guardar el registro duplicado
-                $duplicateRecord->save();
-            }
+    
+        // Obtener el número total de registros que se deben generar.
+        $totalSacas = $sacar + $sacam + $sacau;
+    
+        // Crear nuevos registros duplicados para SACAR, SACAM y SACAU
+        for ($i = 0; $i < $totalSacas; $i++) {
+            $duplicateRecord = $bag->replicate();
+            $duplicateRecord->NROSACA = sprintf("%04d", $i + 1);
+            $duplicateRecord->TIPO = $i < $sacar ? 'R' : ($i < $sacar + $sacam ? 'M' : 'U');
+            $duplicateRecord->userbags = auth()->user()->name; // Asignar el nombre del usuario actual
+            $duplicateRecord->first = '0'; // Asignar el nombre del usuario actual
+    
+            // Guardar el registro duplicado
+            $duplicateRecord->save();
         }
 
-
-        // Crear nuevos registros duplicados para SACAM
-        for ($i = $sacar; $i < $sacar + $sacam; $i++) {
-            $counter = 0; // Inicializar contador
-            foreach ($originalRecords as $originalRecord) {
-                $duplicateRecord = new Bag();
-                // Copiar los valores de los campos necesarios
-                $duplicateRecord->NRODESPACHO = $originalRecord->NRODESPACHO;
-                $duplicateRecord->NROSACA = sprintf("%04d", $originalRecord->NROSACA + $i + 1);
-                $duplicateRecord->ESTADO = $originalRecord->ESTADO;
-                $duplicateRecord->ano_creacion = $originalRecord->ano_creacion;
-                $duplicateRecord->created_at = $originalRecord->created_at;
-                $duplicateRecord->OFCAMBIO = $originalRecord->OFCAMBIO;
-                $duplicateRecord->OFDESTINO = $originalRecord->OFDESTINO;
-                $duplicateRecord->OFCAM108 = $originalRecord->OFCAM108;
-                $duplicateRecord->OFDES108 = $originalRecord->OFDES108;
-                $duplicateRecord->MARBETE = $originalRecord->MARBETE;
-                $duplicateRecord->ITINERARIO = $originalRecord->ITINERARIO;
-                $duplicateRecord->TIPO = 'M';
-                $duplicateRecord->FIN = 'N';
-                $duplicateRecord->userbags = auth()->user()->name; // Asignar el nombre del usuario actual
-
-                // Guardar el registro duplicado
-                $duplicateRecord->save();
-            }
-        }
-
+        $bag->delete();
+        
+        // Código restante para generar el PDF y devolver la respuesta
         $bag->update([
             'T' => '1',
         ]);
-
+    
         Event::create([
             'action' => 'COMPROBADO',
             'descripcion' => 'Despacho verificado CN31 y sacas añadidas al despacho, listo para Trasporte',
             'user_id' => auth()->user()->id,
             'codigo' => $bag->MARBETE,
         ]);
-
-
+    
         $sum = Bag::where('ESTADO', 'CIERRE')
             ->select(
                 'MARBETE',
@@ -280,17 +297,16 @@ class BagController extends Controller
                 DB::raw('SUM(PAQUETESR) as sum_paqueter'),
                 DB::raw('SUM(PAQUETESM) as sum_paquetem'),
                 DB::raw('SUM(PESOM) as sum_pesom'),
-                DB::raw('SUM(PESOR) as sum_pesor'),
+                DB::raw('SUM(PESOR) as sum_pesor')
             )
             ->groupBy('MARBETE')
             ->get();
-
-        // Generar el PDF con los datos sumados
+    
         $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
-
-        // Devolver el PDF al navegador para su visualización
+    
         return $pdf->stream('CN31.pdf');
     }
+
     public function bagsadd(Request $request)
     {
         $codigo = $request->input('codigo');

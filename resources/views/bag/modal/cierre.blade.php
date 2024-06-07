@@ -77,11 +77,11 @@
                             </div>
                             <div class="form-group">
                                 {{ Form::label('OBSERVACIONES') }}
-                                {{ Form::text('OBSERVACIONESG', strtoupper($bag->OBSERVACIONESG), [
-                                    'class' => 'form-control' . ($errors->has('OBSERVACIONESG') ? ' is-invalid' : ''),
+                                {{ Form::text('OBSERVACIONES', strtoupper($bag->OBSERVACIONES), [
+                                    'class' => 'form-control' . ($errors->has('OBSERVACIONES') ? ' is-invalid' : ''),
                                     'placeholder' => 'Observaciones de Saca',
                                 ]) }}
-                                {!! $errors->first('OBSERVACIONESG', '<div class="invalid-feedback">:message</div>') !!}
+                                {!! $errors->first('OBSERVACIONES', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                         </div>
                     </div>

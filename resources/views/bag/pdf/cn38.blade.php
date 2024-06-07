@@ -102,7 +102,7 @@
                 </td>
                 <td style="border: none; text-align: left; font-weight: normal; line-height: 0.1;">
                     @foreach ($bags->take(1) as $bag)
-                        Observaciones:{{ $bag->OBSERVACIONESG }}
+                        Observaciones:{{ $bag->OBSERVACIONES }}
                     @endforeach
                 </td>
             </tr>

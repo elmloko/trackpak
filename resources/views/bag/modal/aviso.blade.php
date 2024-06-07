@@ -51,7 +51,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 {{ Form::label('SACA BLANCAS/AZULES') }}
-                                <p>{{ $sum->sum_tipo }}</p>
+                                {{ Form::text('SACAU', strtoupper($bag->SACAU), [
+                                    'class' => 'form-control' . ($errors->has('SACAU') ? ' is-invalid' : ''),
+                                    'placeholder' => 'Cantidad Total Saca M',
+                                ]) }}
+                                {!! $errors->first('SACAM', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('SACAS ROJAS') }}
@@ -73,7 +77,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 {{ Form::label('PESO') }}
-                                <p>{{ $sum->sum_pesoc }} Kg.</p>
+                                {{ Form::text('PESOU', strtoupper($bag->PESOU), [
+                                    'class' => 'form-control' . ($errors->has('PESOU') ? ' is-invalid' : ''),
+                                    'placeholder' => 'Peso Total Saca R',
+                                ]) }}
+                                {!! $errors->first('PESOU', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('PESO') }}
@@ -95,7 +103,11 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 {{ Form::label('PAQUETES') }}
-                                <p>{{ $sum->sum_paquetes }}</p>
+                                {{ Form::text('PAQUETESU', strtoupper($bag->PAQUETESU), [
+                                    'class' => 'form-control' . ($errors->has('PAQUETESU') ? ' is-invalid' : ''),
+                                    'placeholder' => 'Paquetes Total Saca R',
+                                ]) }}
+                                {!! $errors->first('PAQUETESU', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">
                                 {{ Form::label('PAQUETES') }}

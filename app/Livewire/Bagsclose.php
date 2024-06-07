@@ -17,7 +17,7 @@ class Bagsclose extends Component
     public function render()
     {
         $bags = Bag::where('ESTADO', 'APERTURA')
-        ->where('FIN', 'F') // Agregar esta línea para la condición $bag->FIN == 'F'
+        ->where('first', '1') // Agregar esta línea para la condición $bag->FIN == 'F'
         ->when($this->search, function ($query) {
             $query->where('NRODESPACHO', 'like', '%' . $this->search . '%')
                 ->orWhere('OFCAMBIO', 'like', '%' . $this->search . '%')
