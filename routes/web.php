@@ -43,7 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('users/{id}/delete', [PackageController::class, 'delete'])->name('users.delete');
-    Route::get('utest/deleteado', [UserController::class, 'deleteado'])->name('utest.deleteado');
+    Route::post('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    Route::post('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
     Route::put('utest/{id}/restoring', [UserController::class, 'restoring'])->name('users.restoring');
     Route::get('users/excel', [UserController::class, 'excel'])->name('users.excel');
     Route::get('users/pdf', [UserController::class, 'pdf'])->name('users.pdf');

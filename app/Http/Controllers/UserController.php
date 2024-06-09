@@ -4,34 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Exports\UserExport;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
-/**
- * Class UserController
- * @package App\Http\Controllers
- */
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $users = User::paginate();
+        $users = User::withTrashed()->paginate(); // Incluye usuarios eliminados
 
         return view('user.index', compact('users'))
             ->with('i', (request()->input('page', 1) - 1) * $users->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = new User();
@@ -39,12 +25,6 @@ class UserController extends Controller
         return view('user.create', compact('user','roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -70,12 +50,6 @@ class UserController extends Controller
             ->with('success', 'Usuario creado correctamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $user = User::find($id);
@@ -83,12 +57,6 @@ class UserController extends Controller
         return view('user.show', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = User::find($id);
@@ -97,13 +65,6 @@ class UserController extends Controller
         return view('user.edit', compact('user','roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  User $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         $request->validate([
@@ -125,56 +86,21 @@ class UserController extends Controller
             ->with('success', 'Usuario actualizado correctamente');
     }
 
-    
-
-
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+        $user = User::findOrFail($id);
+        $user->delete();
 
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
-    }
-    public function excel()
-    {
-        return Excel::download(new UserExport, 'UsuariosRegistrados.xlsx');
+            ->with('success', 'Usuario dado de baja correctamente');
     }
 
-    public function pdf()
+    public function restore($id)
     {
-        return Excel::download(new UserExport, 'UsuariosRegistrados.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
-    } 
-    public function delete($id)
-    {
-        $user = User::find($id)->delete();
+        $user = User::withTrashed()->findOrFail($id);
+        $user->restore();
 
-        return back()->with('success', 'Usuario se dio de Baja Con Exito!');
-    }
-    public function deleteado()
-    {
-        // Recupera todos los elementos eliminados (soft deleted)
-        $deleteadoUser = User::onlyTrashed()->paginate(20);
-
-        return view('users.deleteado', compact('deleteadoUser'));
-    }
-    public function restoring($id)
-    {
-        // Restaura el paquete con el ID dado
-        $user = User::withTrashed()->find($id);
-        // Verifica si se encontró un paquete eliminado con ese ID
-        if ($user) {
-            // Restaura el paquete
-            $user->restore();
-            return redirect()->route('users.index')
-                ->with('success', 'El paquete ha sido restaurado exitosamente');
-        } else {
-            return redirect()->route('users.index')
-                ->with('error', 'El paquete no pudo ser encontrado o restaurado');
-        }
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario reactivado correctamente');
     }
 }
