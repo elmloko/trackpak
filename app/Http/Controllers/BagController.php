@@ -171,7 +171,7 @@ class BagController extends Controller
         Bag::where('MARBETE', $marbete)->update([
             'TRASPORTE' => $request->input('TRASPORTE'),
             'HORARIO' => $request->input('HORARIO'),
-            'OBSERVACIONESG' => $request->input('OBSERVACIONES'),
+            'OBSERVACIONES' => $request->input('OBSERVACIONES'),
             'fecha_exp' => now(),
             'ESTADO' => 'TRASPORTADO',
             'userbags' => auth()->user()->name,
@@ -291,6 +291,10 @@ class BagController extends Controller
             'T' => '1',
         ]);
 
+        $sum = $sacau + $sacar + $sacam;
+        $sum1 = $pesou + $pesor + $pesom;
+        $sum2 = $paquetesu + $paquetesr + $paquetesm;
+
         Event::create([
             'action' => 'COMPROBADO',
             'descripcion' => 'Despacho verificado CN31 y sacas añadidas al despacho, listo para Trasporte',
@@ -298,26 +302,7 @@ class BagController extends Controller
             'codigo' => $bag->MARBETE,
         ]);
 
-        $sum = Bag::where('ESTADO', 'CIERRE')
-            ->select(
-                'MARBETE',
-                DB::raw('SUM(PESOF) as sum_pesoc'),
-                DB::raw('SUM(PAQUETES) as sum_paquetes'),
-                DB::raw('SUM(CASE WHEN TIPO = "U" THEN 1 ELSE 0 END) as sum_tipo'),
-                DB::raw('SUM(CASE WHEN TIPO = "R" THEN 1 ELSE 0 END) as sum_tipor'),
-                DB::raw('SUM(CASE WHEN TIPO = "M" THEN 1 ELSE 0 END) as sum_tipom'),
-                DB::raw('SUM(NROSACA + SACAR + SACAM) as sum_total'),
-                DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
-                DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
-                DB::raw('SUM(PAQUETESR) as sum_paqueter'),
-                DB::raw('SUM(PAQUETESM) as sum_paquetem'),
-                DB::raw('SUM(PESOM) as sum_pesom'),
-                DB::raw('SUM(PESOR) as sum_pesor')
-            )
-            ->groupBy('MARBETE')
-            ->get();
-
-        $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum'));
+        $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum' ,'sum1','sum2'));
 
         return $pdf->stream('CN31.pdf');
     }
