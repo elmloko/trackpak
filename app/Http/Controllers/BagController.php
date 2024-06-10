@@ -182,8 +182,8 @@ class BagController extends Controller
             ->select(
                 DB::raw('SUM(PESOF) as sum_pesoc'),
                 DB::raw('COUNT(ID) as sum_paquetes'),
-                DB::raw('SUM(PAQUETES) + SUM(PAQUETESR) + SUM(PAQUETESM) as sum_totalpaquetes'),
-                DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
+                DB::raw('SUM(PAQUETES) as sum_totalpaquetes'),
+                DB::raw('SUM(PESOF) as sum_totalpeso'),
                 DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_totalsaca'),
             )
             ->first();
