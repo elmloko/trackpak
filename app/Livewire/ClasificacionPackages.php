@@ -87,11 +87,52 @@ class ClasificacionPackages extends Component
             ]);
         }
 
-        // Restablecer la selección
-        $this->resetSeleccion();
+        // Obtener la ciudad de origen
+        $ciudadOrigen = auth()->user()->Regional;
+        // Obtener la ciudad de destino
+        $ciudadDestino = $paquetesSeleccionados->first()->CUIDAD;
 
-        // Generar el PDF con los paquetes seleccionados
-        $pdf = PDF::loadView('package.pdf.despachopdf', ['packages' => $paquetesSeleccionados]);
+        // Mapas de siglas
+        $siglasOrigen = [
+            'LA PAZ' => 'BOLPA',
+            'COCHABAMBA' => 'BOCBA',
+            'SANTA CRUZ' => 'BOSCA',
+            'POTOSI' => 'BOPTA',
+            'ORURO' => 'BOORA',
+            'BENI' => 'BOBNA',
+            'TARIJA' => 'BOTJA',
+            'SUCRE' => 'BOSRA',
+            'PANDO' => 'BOPNA',
+        ];
+
+        $siglasDestino = [
+            'POTOSI' => 'BOPTA',
+            'ORURO' => 'BOORA',
+            'BENI' => 'BOBNA',
+            'LA PAZ' => 'BOLPA',
+            'COCHABAMBA' => 'BOCBA',
+            'SANTA CRUZ' => 'BOSCA',
+            'TARIJA' => 'BOTJA',
+            'SUCRE' => 'BOSRA',
+            'PANDO' => 'BOPNA',
+        ];
+
+        // Transformar las siglas
+        $siglasOrigen = $siglasOrigen[$ciudadOrigen] ?? 'SIGLA DESCONOCIDA';
+        $siglasDestino = $siglasDestino[$ciudadDestino] ?? 'SIGLA DESCONOCIDA';
+
+        // Obtener el año del paquete (se asume que hay un campo 'created_at' o similar)
+        $anioPaquete = $paquetesSeleccionados->first()->created_at->format('Y');
+
+        // Generar el PDF con los paquetes seleccionados y las siglas
+        $pdf = PDF::loadView('package.pdf.despachopdf', [
+            'packages' => $paquetesSeleccionados,
+            'siglasOrigen' => $siglasOrigen,
+            'siglasDestino' => $siglasDestino,
+            'ciudadOrigen' => $ciudadOrigen,
+            'ciudadDestino' => $ciudadDestino,
+            'anioPaquete' => $anioPaquete
+        ]);
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
 

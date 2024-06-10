@@ -95,21 +95,12 @@
             <tr>
                 <th rowspan="2">Operadores</th>
                 <th>Origen</th>
-                <td colspan="5">  - AGENCIA BOLIVIANA DE CORREOS</td>
+                <td colspan="5">{{ $ciudadOrigen }} - AGENCIA BOLIVIANA DE CORREOS</td>
             </tr>
             <tr>
                 <th>Destino</th>
-                <td colspan="5">  - AGENCIA BOLIVIANA DE CORREOS</td>
+                <td colspan="5">{{ $ciudadDestino }} - AGENCIA BOLIVIANA DE CORREOS</td>
             </tr>
-            {{-- <tr>
-                <th rowspan="2">Operadores</th>
-                <th>Origen</th>
-                <td colspan="5">{{ $bag->OFCAMBIO }} - AGENCIA BOLIVIANA DE CORREOS</td>
-            </tr>
-            <tr>
-                <th>Destino</th>
-                <td colspan="5">{{ $bag->OFDESTINO }} - AGENCIA BOLIVIANA DE CORREOS</td>
-            </tr> --}}
         </thead>
         <tbody>
             <tr>
@@ -122,18 +113,12 @@
                 <th>Fecha</th>
             </tr>
             <tr>
-                <td> </td>
-                <td></td>
-                {{-- <td>{{ $bag->OFCAM108 }}</td>
-                <td>{{ $bag->OFDES108 }}</td> --}}
+                <td>{{ $siglasOrigen }}</td>
+                <td>{{ $siglasDestino }}</td>
                 <td>A</td>
                 <td>UN</td>
-                {{-- @php
-                    $ultimo_numero = substr($bag->ano_creacion, -1);
-                @endphp --}}
+                <td>{{ $anioPaquete }}</td>
                 <td></td>
-                <td></td>
-                {{-- <td>{{ $ultimo_numero }}</td> --}}
                 {{-- <td>{{ $bag->NRODESPACHO }} / {{ $bag->NROSACA }}-{{ $bag->ano_creacion }}</td> --}}
                 <td>{{ now()->format('Y-m-d H:i') }}</td>
             </tr>
