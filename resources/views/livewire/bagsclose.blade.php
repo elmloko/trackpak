@@ -61,7 +61,7 @@
                                             <td>
                                                 @foreach ($sums as $sum)
                                                     @if ($sum->MARBETE == $bag->MARBETE)
-                                                        {{ $sum->sum_pesoc }}
+                                                        {{ $sum->sum_totalpeso }}
                                                     @endif
                                                 @endforeach
                                             </td>

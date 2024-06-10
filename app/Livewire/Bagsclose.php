@@ -37,10 +37,10 @@ class Bagsclose extends Component
             ->select(
                 'MARBETE',
                 DB::raw('SUM(PESOF) as sum_pesoc'),
-                DB::raw('SUM(PAQUETES) as sum_paquetes'),
+                DB::raw('SUM(PAQUETESR) + SUM(PAQUETESM) + SUM(PAQUETESU) as sum_paquetes'),
                 DB::raw('COUNT(ID) + SUM(SACAR) + SUM(SACAM) as sum_sacas'),
                 DB::raw('SUM(CASE WHEN TIPO = "U" THEN 1 ELSE 0 END) as sum_tipo'),
-                DB::raw('SUM(PESOF) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
+                DB::raw('SUM(PESOU) + SUM(PESOR) + SUM(PESOM) as sum_totalpeso'),
                 DB::raw('SUM(PAQUETES) as sum_totalpaquetes')
             )
             ->groupBy('MARBETE')
