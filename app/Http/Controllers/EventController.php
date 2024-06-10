@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use GuzzleHttp\Client;
 
 /**
  * Class EventController
@@ -111,22 +112,48 @@ class EventController extends Controller
     public function search(Request $request)
     {
         $codigo = $request->input('codigo');
-        // Recupera todos los campos de la tabla 'packages'
+    
+        // Realiza la consulta a la base de datos para obtener los paquetes
         $packages = Package::where('CODIGO', $codigo)
-        ->take(5)
-        ->withTrashed()
-        ->get(); // Cambiado de 'first' a 'get' para obtener una colección
-
-// Resto del código...
-
-        // Realiza la lógica para buscar eventos basados en el código postal
+            ->take(5)
+            ->withTrashed()
+            ->get();
+    
+        // Realiza la consulta a la base de datos para obtener los eventos
         $event = Event::where('codigo', $codigo)
             ->where('action', '!=', 'ESTADO')
             ->orderBy('created_at', 'desc')
             ->get();
-
-            return view('search', compact('packages', 'event', 'codigo'));
+    
+        // Consumir la API para autenticación y obtener el token JWT
+        $client = new Client(['base_uri' => 'http://localhost:5254/']);
+        $response = $client->post('api/Autenticacion/Validar', [
+            'json' => [
+                'correo' => 'Correos',
+                'clave' => 'AGBClp2020'
+            ]
+        ]);
+        $body = json_decode($response->getBody());
+        $token = $body->token;
+    
+        // Usar el token JWT para hacer la búsqueda en la otra API
+        $response = $client->post('api/O_MAIL_OBJECTS/buscar', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Accept' => 'application/json',
+            ],
+            'json' => [
+                'id' => $codigo // Utilizando el valor del código
+            ]
+        ]);
+    
+        // Decodificar y obtener los resultados de la búsqueda
+        $results = json_decode($response->getBody());
+    
+        // Puedes devolver los resultados a tu vista junto con los paquetes y eventos
+        return view('search', compact('results', 'packages', 'event', 'codigo'));
     }
+    
     public function eventspdf()
     {
         $events = Event::orderByDesc('created_at')->get();
