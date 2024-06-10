@@ -335,6 +335,7 @@
                         <div class="mb-4 border-b border-gray-300"></div>
                     @endif
                 @empty
+                    {{-- Este mensaje se mostrará solo si no hay resultados --}}
                     @isset($codigo)
                         <p class="mb-4 text-black">No hay resultados para la búsqueda
                             <b>"{{ $codigo }}"</b>
@@ -348,6 +349,7 @@
             <div class="container mx-auto flex flex-wrap pt-4 pb-12">
                 <div class="w-full">
                     <h3 class="font-bold text-3xl text-black mb-10">Últimos Eventos</h3>
+
                 </div>
                 <div class="main">
                     <div class="containerbox">
@@ -358,6 +360,7 @@
                                     <span class="date ">{{ $evento->codigo }}</span>
                                     <span class="description">{{ $evento->descripcion }}</span><br>
                                     <span class="created-at">{{ $evento->created_at }}</span>
+                                    <!-- Haz que los cuadrados de la línea de tiempo sean más grandes -->
                                     <span class="circle" style="width: 30px; height: 30px;"></span>
                                 </li>
                             @endforeach
@@ -366,55 +369,16 @@
                 </div>
             </div>
         </section>
-    @elseif(isset($results))
-        <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-            <div class="mb-4 text-black" tabindex="1">
-                @if (!empty($results))
-                    Su paquete <strong>{{ $results[0]->mailitM_FID }}</strong> fue encontrado. Estos son sus eventos:
-                    <!-- Aquí puedes agregar el bucle para mostrar los eventos del paquete -->
-                @else
-                    <!-- Aquí puedes manejar el caso en el que no se encontraron paquetes -->
-                    No se encontraron paquetes.
-                @endif
-            </div>
-        </div>
-        <section class="bg-white border-b py-8 text-center mt-8"> <!-- Añade "text-center" para centrar -->
-            <div class="container mx-auto flex flex-wrap pt-4 pb-12">
-                <div class="w-full">
-                    <h3 class="font-bold text-3xl text-black mb-10">Últimos Eventos</h3>
-                    <div class="main">
-                        <div class="containerbox">
-                            <ul class="timeline">
-                                <!-- Mostrar los resultados de la API -->
-                                @foreach ($results as $result)
-                                    <li class="text-black">
-                                        <h3 class="heading">{{ $result->eventType }}</h3>
-                                        <span class="date ">{{ $result->mailitM_FID }}</span>
-                                        <span class="description">Oficina: {{ $result->office }}</span><br>
-                                        {{-- <span class="description">Workstation: {{ $result->workstation }}</span><br>
-                                            <span class="description">Condition: {{ $result->condition }}</span><br> --}}
-                                        @if (isset($result->nextOffice) && !empty($result->nextOffice))
-                                            <span class="description">Siguiente Oficina:
-                                                {{ $result->nextOffice }}</span><br>
-                                        @endif
-                                        <span class="description">{{ $result->eventDate }}</span><br>
-                                        <!-- Haz que los cuadrados de la línea de tiempo sean más grandes -->
-                                        <span class="circle" style="width: 30px; height: 30px;"></span>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     @else
+        {{-- Este mensaje se mostrará si no hay paquetes --}}
         @isset($codigo)
             <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
                 <p class="mb-4 text-black">No hay resultados para la búsqueda
                     <b>"{{ $codigo }}"</b>
                 </p>
             </div>
+
+            {{-- Nuevo div para el botón --}}
             <div class="text-center mt-10">
                 <a href="/"
                     class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Volver
@@ -422,7 +386,6 @@
             </div>
         @endisset
     @endif
-
 
 
     <!-- Change the colour #f8fafc to match the previous section colour -->
