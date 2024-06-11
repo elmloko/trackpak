@@ -12,6 +12,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PackagesHasBagController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,16 +27,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/search', [EventController::class, 'search'])->name('search');
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/users', [UserController::class, 'index'])->middleware('can:users.index')->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
     Route::post('/users', [UserController::class, 'store'])->name('users.store');
@@ -156,9 +159,9 @@ Route::middleware('auth')->group(function () {
     Route::get('package/pdf/asignarcartero', [PackageController::class, 'asignarcartero'])->name('package.pdf.asignarcartero');
     Route::get('package/pdf/prerezago', [PackageController::class, 'prerezago'])->name('package.pdf.prerezago');
     Route::get('package/pdf/deleteadoencomiendaspdf', [PackageController::class, 'deleteadoencomiendaspdf'])->name('package.pdf.deleteadoencomiendaspdf');
-    
 
-    
+
+
     // Reportes Excel
     Route::get('package/packagesallexcel', [PackageController::class, 'packagesallexcel'])->name('packagesall.excel');
     Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
@@ -235,7 +238,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/packages-has-bags/{packages-has-bags}/edit', [PackagesHasBagController::class, 'edit'])->name('packages-has-bags.edit');
     Route::put('/packages-has-bags/{packages-has-bags}', [PackagesHasBagController::class, 'update'])->name('packages-has-bags.update');
     Route::delete('/packages-has-bags/{packages-has-bags}', [PackagesHasBagController::class, 'destroy'])->name('packages-has-bags.destroy');
-    
+
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
     });
