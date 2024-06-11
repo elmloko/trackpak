@@ -3,12 +3,12 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Package;
+use App\Models\International;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-class VentanillaPackages extends Component
+class Internationaldd extends Component
 {
     use WithPagination;
 
@@ -21,7 +21,7 @@ class VentanillaPackages extends Component
     {
         $userRegional = auth()->user()->Regional;
 
-        $packages = Package::where('ESTADO', 'VENTANILLA')
+        $international = International::where('ESTADO', 'VENTANILLA')
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
@@ -39,9 +39,9 @@ class VentanillaPackages extends Component
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
 
-        return view('livewire.ventanilla-packages', [
-            'packages' => $packages,
-        ]);
+            return view('livewire.internationaldd', [
+                'internationals' => $international,
+            ]);
     }
     public function toggleSelectAll()
     {
@@ -54,7 +54,7 @@ class VentanillaPackages extends Component
     public function cambiarEstado()
     {
         // Obtener los paquetes seleccionados y actualizar su estado
-        $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
+        $paquetesSeleccionados = International::whereIn('id', $this->paquetesSeleccionados)
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
@@ -102,7 +102,7 @@ class VentanillaPackages extends Component
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
-        }, 'Formulario Ordinario DD.pdf');
+        }, 'Formulario Certificado DD.pdf');
     }    
 
     public function toggleSelectSingle($packageId)
@@ -115,7 +115,7 @@ class VentanillaPackages extends Component
     }
     private function getPackageIds()
     {
-        return Package::where('ESTADO', 'VENTANILLA')->pluck('id')->toArray();
+        return International::where('ESTADO', 'VENTANILLA')->pluck('id')->toArray();
     }
     // Restores paquetes
     private function resetSeleccion()

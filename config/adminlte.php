@@ -646,6 +646,108 @@ return [
             ],
         ],
         [
+            'text' => 'Paquetes Certificados',
+            'icon' => 'fas fa-archive',
+            'can'  => '',
+            'submenu' => [
+                [
+                    'text' => 'Todos Paquetes',
+                    'url' => 'internationals',
+                    'icon' => 'fas fa-box',
+                    'can'  => 'packages',
+                ],
+                [
+                    'text' => 'Ventanilla DD',
+                    'icon' => 'fas fa-window-maximize',
+                    'can'  => 'packages.ventanilla',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas Ventanilla DD',
+                            'url' => 'internationals/ventanilladd',
+                            'icon' => 'fas fa-truck',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                        [
+                            'text' => 'Inventario Ventanilla DD',
+                            'url' => 'international/deleteado',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.delete',
+                        ],
+                        
+                    ],
+                ],
+                [
+                    'text' => 'Urbano',
+                    'icon' => 'fas fa-building',
+                    'can'  => 'packages.urbano',
+                    'submenu' => [
+                        [
+                            'text' => 'Distribución Paquetes',
+                            'url' => 'packages/distribuicioncartero',
+                            'icon' => 'fas fa-box-open',
+                            'can'  => 'packages.distribuicioncartero',
+                        ],
+                        [
+                            'text' => 'Entregas Cartero',
+                            'url' => 'packages/carteros',
+                            'icon' => 'fas fa-cubes',
+                            'can'  => 'packages.inventariocartero',
+                        ],
+                        [
+                            'text' => 'Despacho Cartero',
+                            'url' => 'packages/despachocartero',
+                            'icon' => 'fas fa-envelope-open-text',
+                            'can'  => 'packages.inventariocartero',
+                        ],
+                        [
+                            'text' => 'Inventario Cartero',
+                            'url' => 'packages/inventariocartero',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.inventariocartero',
+                        ],
+                        [
+                            'text' => 'Entregas Domicilio',
+                            'url' => 'packages/carterosgeneral',
+                            'icon' => 'fas fa-cubes',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                        [
+                            'text' => 'Despacho Domicilio',
+                            'url' => 'packages/despachocarterogeneral',
+                            'icon' => 'fas fa-envelope-open-text',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                        [
+                            'text' => 'Inventario Domicilio',
+                            'url' => 'packages/generalcartero',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.generalcartero',
+                        ],
+                        
+                    ],
+                ],
+                // [
+                //     'text' => 'Rezago',
+                //     'icon' => 'fas fa-database',
+                //     'can'  => 'packages.ventanilla',
+                //     'submenu' => [
+                //         [
+                //             'text' => 'Prerezago',
+                //             'url' => 'packages/prerezago',
+                //             'icon' => 'fas fa-cloud',
+                //             'can'  => 'packages.prerezago',
+                //         ],
+                //         [
+                //             'text' => 'Inventario Rezago',
+                //             'url' => 'packages/rezago',
+                //             'icon' => 'fas fa-hdd',
+                //             'can'  => 'packages.rezago',
+                //         ],
+                //     ],
+                // ],
+            ],
+        ],
+        [
             'text' => 'Eventos',
             'url' => 'events',
             'icon' => 'fas fa-calendar-alt',

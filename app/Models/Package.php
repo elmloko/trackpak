@@ -5,26 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-/**
- * Class Package
- *
- * @property $id
- * @property $CODIGO
- * @property $DESTINATARIO
- * @property $TELEFONO
- * @property $PAIS
- * @property $CUIDAD
- * @property $ZONA
- * @property $VENTANILLA
- * @property $PESO
- * @property $TIPO
- * @property $ESTADO
- * @property $created_at
- * @property $updated_at
- *
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class Package extends Model
 {
     use SoftDeletes;

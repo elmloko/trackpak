@@ -12,6 +12,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PackagesHasBagController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InternationalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::get('users/{id}/delete', [PackageController::class, 'delete'])->name('users.delete');
-    Route::post('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
     Route::post('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
     Route::put('utest/{id}/restoring', [UserController::class, 'restoring'])->name('users.restoring');
     Route::get('users/excel', [UserController::class, 'excel'])->name('users.excel');
@@ -236,6 +236,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/packages-has-bags/{packages-has-bags}/edit', [PackagesHasBagController::class, 'edit'])->name('packages-has-bags.edit');
     Route::put('/packages-has-bags/{packages-has-bags}', [PackagesHasBagController::class, 'update'])->name('packages-has-bags.update');
     Route::delete('/packages-has-bags/{packages-has-bags}', [PackagesHasBagController::class, 'destroy'])->name('packages-has-bags.destroy');
+
+    Route::get('/internationals', [InternationalController::class, 'index'])->name('internationals.index');
+    Route::get('/internationals/create', [InternationalController::class, 'create'])->name('internationals.create');
+    Route::post('/internationals', [InternationalController::class, 'store'])->name('internationals.store');
+    // Route::get('/internationals/{id}', [InternationalController::class, 'show'])->name('internationals.show');
+    Route::get('/internationals/{id}/edit', [InternationalController::class, 'edit'])->name('internationals.edit');
+    Route::put('/internationals/{international}', [InternationalController::class, 'update'])->name('internationals.update');
+    Route::delete('/internationals/{id}', [InternationalController::class, 'destroy'])->name('internationals.destroy');
+    Route::get('internationals/ventanilladd', [InternationalController::class, 'ventanilladd'])->name('internationals.ventanilladd');
+    Route::post('internationals/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
     
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
