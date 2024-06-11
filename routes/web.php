@@ -245,7 +245,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/internationals/{international}', [InternationalController::class, 'update'])->name('internationals.update');
     Route::delete('/internationals/{id}', [InternationalController::class, 'destroy'])->name('internationals.destroy');
     Route::get('internationals/ventanilladd', [InternationalController::class, 'ventanilladd'])->name('internationals.ventanilladd');
-    Route::post('internationals/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
+    Route::get('/internationals/deleteadodd', [InternationalController::class, 'deleteadodd'])->name('internationals.deleteadodd');
+    Route::post('internationals/{id}/restore', [InternationalController::class, 'restore'])->name('internationals.restore');
     
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));

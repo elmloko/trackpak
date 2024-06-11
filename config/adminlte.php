@@ -669,7 +669,7 @@ return [
                         ],
                         [
                             'text' => 'Inventario Ventanilla DD',
-                            'url' => 'international/deleteado',
+                            'url' => 'internationals/deleteadodd',
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.delete',
                         ],

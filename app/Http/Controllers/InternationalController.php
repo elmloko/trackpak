@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\International;
+use App\Models\Event;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InternationalController extends Controller
 {
@@ -59,6 +61,13 @@ class InternationalController extends Controller
     public function destroy($id)
     {
         $international = International::findOrFail($id);
+
+        Event::create([
+            'action' => 'ESTADO',
+            'descripcion' => 'Baja de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $international->CODIGO,
+        ]);
         $international->delete();
 
         return redirect()->route('internationals.index')
@@ -67,6 +76,13 @@ class InternationalController extends Controller
     public function restore($id)
     {
         $international = International::withTrashed()->findOrFail($id);
+        Event::create([
+            'action' => 'ESTADO',
+            'descripcion' => 'Alta de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $international->CODIGO,
+        ]);
+        $international->update(['ESTADO' => 'VENTANILLA']);
         $international->restore();
 
         return redirect()->route('internationals.index')
@@ -75,5 +91,9 @@ class InternationalController extends Controller
     public function ventanilladd()
     {
         return view('international.ventanilladd');
+    }
+    public function deleteadodd()
+    {
+        return view('international.deleteadodd');
     }
 }
