@@ -111,6 +111,7 @@
                         <table class="table table-striped table-hover">
                             <thead class="thead">
                                 <tr>
+                                    <th></th>
                                     <th>No</th>
                                     <th>Codigo</th>
                                     <th>Destinatario</th>
@@ -125,7 +126,7 @@
                                     <th>Estado</th>
                                     <th>Precio</th>
                                     <th>Observaciones</th>
-                                    <th></th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
