@@ -18,18 +18,7 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                            <div class="col-md-1">
-                                                <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
-                                            </div>
-                                            {{-- <div class="col-md-3 text-right">
-                                                <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#buscarPaqueteModal">
-                                                    Añadir Paquete
-                                                </button>
-                                                @include('package.modal.ventanilla')
-                                            </div> --}}
-                                        @endhasrole
+
                                         <!-- Formulario para generar Excel -->
                                         <div class="col-md-6">
                                             <form method="get" action="{{ route('certificados.excel') }}"
@@ -38,13 +27,13 @@
                                                 <div class="form-row">
                                                     <div class="col-md-6">
                                                         <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                                        <input type="date" name="fecha_inicio"
-                                                            class="form-control" required>
+                                                        <input type="date" name="fecha_inicio" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                        <input type="date" name="fecha_fin"
-                                                            class="form-control" required>
+                                                        <input type="date" name="fecha_fin" class="form-control"
+                                                            required>
                                                     </div>
                                                     <div class="col-md-12 mt-3 text-center">
                                                         <button type="submit" class="btn btn-success"
@@ -53,7 +42,18 @@
                                                 </div>
                                             </form>
                                         </div>
-
+                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                            <div class="col-md-1">
+                                                <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
+                                            </div>
+                                            {{-- <div class="col-md-3 text-right">
+                                            <button class="btn btn-primary" data-toggle="modal"
+                                                data-target="#buscarPaqueteModal">
+                                                Añadir Paquete
+                                            </button>
+                                            @include('package.modal.ventanilla')
+                                        </div> --}}
+                                        @endhasrole
                                         <!-- Formulario para generar PDF -->
                                         {{-- <div class="col-md-6">
                                             <form method="get"
