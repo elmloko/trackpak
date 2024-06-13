@@ -9,30 +9,30 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="col">
                             <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="search">Busca:</label>
-                                        <input wire:model.lazy="search" type="text" class="form-control"
-                                            placeholder="Buscar...">
-                                    </div>
-                                </div>
-                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                    <div class="col-md-3">
-                                        <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
-                                    </div>
-                                    {{-- <div class="col-md-3 text-right">
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                            data-target="#buscarPaqueteModal">
-                                            Añadir Paquete
-                                        </button>
-                                        @include('package.modal.ventanilla')
-                                    </div> --}}
-                                @endhasrole
                                 <div class="col-md-12">
                                     <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="search">Busca:</label>
+                                                <input wire:model.lazy="search" type="text" class="form-control"
+                                                    placeholder="Buscar...">
+                                            </div>
+                                        </div>
+                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                            <div class="col-md-1">
+                                                <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
+                                            </div>
+                                            {{-- <div class="col-md-3 text-right">
+                                                <button class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#buscarPaqueteModal">
+                                                    Añadir Paquete
+                                                </button>
+                                                @include('package.modal.ventanilla')
+                                            </div> --}}
+                                        @endhasrole
                                         <!-- Formulario para generar Excel -->
                                         <div class="col-md-6">
-                                            <form method="get" action="{{ route('ventanilla.excel') }}"
+                                            <form method="get" action="{{ route('certificados.excel') }}"
                                                 class="col-md-12">
                                                 @csrf
                                                 <div class="form-row">
@@ -55,7 +55,7 @@
                                         </div>
 
                                         <!-- Formulario para generar PDF -->
-                                        <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
                                             <form method="get"
                                                 action="{{ route('package.pdf.ventanillapdf') }}"
                                                 class="col-md-12">
@@ -87,7 +87,7 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 

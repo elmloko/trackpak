@@ -247,6 +247,7 @@ Route::middleware('auth')->group(function () {
     Route::get('internationals/ventanilladd', [InternationalController::class, 'ventanilladd'])->name('internationals.ventanilladd');
     Route::get('/internationals/deleteadodd', [InternationalController::class, 'deleteadodd'])->name('internationals.deleteadodd');
     Route::post('internationals/{id}/restore', [InternationalController::class, 'restore'])->name('internationals.restore');
+    Route::get('internationals/certificadosexcel', [InternationalController::class, 'certificadosexcel'])->name('certificados.excel');
     
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
