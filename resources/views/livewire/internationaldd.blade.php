@@ -18,7 +18,6 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-
                                         <!-- Formulario para generar Excel -->
                                         <div class="col-md-6">
                                             <form method="get" action="{{ route('certificados.excel') }}"
@@ -54,40 +53,6 @@
                                             @include('package.modal.ventanilla')
                                         </div> --}}
                                         @endhasrole
-                                        <!-- Formulario para generar PDF -->
-                                        {{-- <div class="col-md-6">
-                                            <form method="get"
-                                                action="{{ route('package.pdf.ventanillapdf') }}"
-                                                class="col-md-12">
-                                                @csrf
-                                                <div class="form-row">
-                                                    <div class="col-md-4">
-                                                        <label for="fecha_inicio">Fecha de inicio:</label>
-                                                        <input type="date" name="fecha_inicio"
-                                                            class="form-control" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label for="fecha_fin">Fecha de fin:</label>
-                                                        <input type="date" name="fecha_fin"
-                                                            class="form-control" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label for="ventanilla">Ventanilla:</label>
-                                                        <select name="ventanilla" class="form-control">
-                                                            @if (auth()->user()->Regional == 'LA PAZ')
-                                                                <option value="DD">DD</option>
-                                                            @else
-                                                                <option value="UNICA">UNICA</option>
-                                                            @endif
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-12 mt-3 text-center">
-                                                        <button type="submit" class="btn btn-danger">Generar
-                                                            PDF</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div> --}}
                                     </div>
                                 </div>
 
