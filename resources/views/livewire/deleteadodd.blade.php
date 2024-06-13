@@ -18,7 +18,7 @@
                                     <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
                             </div>
-                            <form method="get" action="{{ route('inventarioDND.excel') }}" class="col-md-6">
+                            <form method="get" action="{{ route('inventarioDRD.excel') }}" class="col-md-6">
                                 @csrf
                                 <div class="form-row align-items-center">
                                     <div class="col-md-4">

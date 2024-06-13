@@ -7,6 +7,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Internationaldd;
+use App\Exports\Internationalinvdd;
 
 class InternationalController extends Controller
 {
@@ -94,7 +95,13 @@ class InternationalController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $regional = $request->input('regional');
-        return Excel::download(new Internationaldd($fechaInicio, $fechaFin, $regional), 'ventanillacertificados.xlsx');
+        return Excel::download(new Internationaldd($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados.xlsx');
+    }
+    public function inventarioDRDexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        return Excel::download(new Internationalinvdd($fechaInicio, $fechaFin), 'Inventario R.xlsx');
     }
     public function ventanilladd()
     {

@@ -248,7 +248,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/internationals/deleteadodd', [InternationalController::class, 'deleteadodd'])->name('internationals.deleteadodd');
     Route::post('internationals/{id}/restore', [InternationalController::class, 'restore'])->name('internationals.restore');
     Route::get('internationals/certificadosexcel', [InternationalController::class, 'certificadosexcel'])->name('certificados.excel');
-    
+    Route::get('internationals/inventarioDRDexcel', [InternationalController::class, 'inventarioDRDexcel'])->name('inventarioDRD.excel');
+
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));
     });
