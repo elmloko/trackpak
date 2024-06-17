@@ -19,7 +19,7 @@
                                             </div>
                                         </div>
                                         <!-- Formulario para generar Excel -->
-                                        <div class="col-md-6">
+                                        <div class="col-md-5">
                                             <form method="get" action="{{ route('certificados.excel') }}"
                                                 class="col-md-12">
                                                 @csrf
@@ -45,6 +45,11 @@
                                             <div class="col-md-1">
                                                 <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
                                             </div>
+                                            <div class="col-md-1">
+                                                <a href="{{ route('internationals.create') }}" class="btn btn-primary"  data-placement="left">
+                                                  {{ __('Crear Nuevo') }}
+                                                </a>
+                                            </div>
                                             {{-- <div class="col-md-3 text-right">
                                             <button class="btn btn-primary" data-toggle="modal"
                                                 data-target="#buscarPaqueteModal">
@@ -57,11 +62,6 @@
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="float-right">
-                            {{-- <a href="{{ route('internationals.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                              {{ __('Create New') }}
-                            </a> --}}
                         </div>
                     </div>
                 </div>

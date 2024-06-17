@@ -26,16 +26,61 @@ class InternationalController extends Controller
         return view('international.create', compact('international'));
     }
 
-    public function store(Request $request)
+        public function store(Request $request)
     {
-        request()->validate(International::$rules);
+        // Validación de datos
+        $request->validate([
+            'CODIGO' => 'required|string|max:20|regex:/^[A-Z0-9]+$/',
+            'DESTINATARIO' => 'required|string|max:255|regex:/^[A-Z\s]+$/',
+            // 'TELEFONO' => 'required|numeric',
+            // 'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255|regex:/^[A-Z\s]+$/',
+            // 'PESO' => 'required|string|regex:/^\d+(\.\d{1,3})?$/|between:0.001,10.000',
+            // 'TIPO' => 'required|string|in:PAQUETE GRANDE,PAQUETE PEQUEÑO,SOBRE',
+            // 'ADUANA' => 'required|string|in:SI,NO',
+            // 'VENTANILLA' => 'required|in:DND,DD',  // Asegúrate de que esta regla refleje correctamente el campo correspondiente
+            // 'usercartero' => 'required|string',  // Asegúrate de que esta regla refleje correctamente el campo correspondiente
+        ]);
 
-        $international = International::create($request->all());
+        // Obtener los datos del request y convertir a mayúsculas
+        $codigo = strtoupper($request->input('CODIGO'));
+        $destinatario = strtoupper($request->input('DESTINATARIO'));
+        $telefono = $request->input('TELEFONO');
+        $peso = $request->input('PESO');
+        $ventanilla = strtoupper($request->input('VENTANILLA')); // Asegúrate de que este campo sea capturado correctamente
+        $zona = strtoupper($request->input('ZONA'));
+        $tipo = strtoupper($request->input('TIPO'));
+        $aduana = strtoupper($request->input('ADUANA'));
+        $observaciones = strtoupper($request->input('OBSERVACIONES'));
+
+        // Obtener el nombre de usuario del cartero actualmente autenticado
+        $usercartero = strtoupper(auth()->user()->name ?? '');
+
+        // Crear la nueva instancia de International y guardar en la base de datos
+        $international = new International([
+            'CODIGO' => $codigo,
+            'DESTINATARIO' => $destinatario,
+            'TELEFONO' => $telefono,
+            'CUIDAD' => '', // Revisa qué valor debe ir aquí, asegúrate de que esté correcto
+            'ESTADO' => 'VENTANILLA', // Asegúrate de que ESTADO esté configurado correctamente
+            'VENTANILLA' => $ventanilla,
+            'ZONA' => $zona,
+            'PESO' => $peso,
+            'TIPO' => $tipo,
+            'ADUANA' => $aduana,
+            'OBSERVACIONES' => $observaciones,
+            'usercartero' => $usercartero,
+        ]);
+
+        try {
+            $international->save();
+        } catch (\Exception $e) {
+            return redirect()->route('internationals.index')
+                ->with('error', 'Error al crear el paquete: ' . $e->getMessage());
+        }
 
         return redirect()->route('internationals.index')
-            ->with('success', 'Creacion de Paquete con exito');
-    }
-
+            ->with('success', 'Creacion de Paquete con éxito');
+    } 
     public function show($id)
     {
         $international = International::find($id);
