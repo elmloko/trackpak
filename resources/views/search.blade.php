@@ -389,10 +389,14 @@
                                 @foreach ($results as $result)
                                     <li class="text-black">
                                         <h3 class="heading">{{ $result->eventType }}</h3>
-                                        <span class="date ">{{ $result->mailitM_FID }}</span>
-                                        <span class="description">Oficina: {{ $result->office }}</span><br>
-                                        {{-- <span class="description">Workstation: {{ $result->workstation }}</span><br>
-                                            <span class="description">Condition: {{ $result->condition }}</span><br> --}}
+                                        <span class="date">{{ $result->mailitM_FID }}</span>
+
+                                        @if (!empty($result->office))
+                                            <span class="description">Oficina: {{ $result->office }}</span><br>
+                                        @else
+                                            <span class="description">País: {{ $country }}</span><br>
+                                        @endif
+
                                         @if (isset($result->nextOffice) && !empty($result->nextOffice))
                                             <span class="description">Siguiente Oficina:
                                                 {{ $result->nextOffice }}</span><br>
