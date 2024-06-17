@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Package;
+use App\Models\International;
 use App\Models\User;
 use App\Models\Mensaje;
 use Carbon\Carbon;
@@ -15,6 +16,7 @@ class DashboardController extends Controller
     {
         $packages = Package::all();
         $mensaje = Mensaje::all();
+        $international = International::all();
         $totalPaquetes = $packages->count();
         $totalUsuarios = User::count();
         $userRegional = auth()->user()->Regional;
@@ -126,7 +128,13 @@ class DashboardController extends Controller
         $totalmensajenenv = $mensaje->where('estado', 'No enviado')->count();
         $totalmensaje = $mensaje->count();
         $totalmensajeHoy = Mensaje::whereDate('fecha_creacion', Carbon::today())->count();
+        
 
+        $totallpvr = $international->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'DD')->count();
+        $totallpvren = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->count();
+        $hoylpvr = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->whereDate('deleted_at', today())->count();
+        $hoylpvhh = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->whereDate('deleted_at', today())->sum('PRECIO');
+        
         //Datos por mes 
         $dataByMonth = Package::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"), DB::raw('COUNT(*) as total'))
             ->groupBy('month')
@@ -175,6 +183,11 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'data',
+            'international',
+            'totallpvren',  
+            'totallpvr',
+            'hoylpvr',
+            'hoylpvhh',
             'totalbaja',
             'hoylpeeco',
             'totallpveco',
