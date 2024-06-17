@@ -8,17 +8,9 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use GuzzleHttp\Client;
 
-/**
- * Class EventController
- * @package App\Http\Controllers
- */
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $events = Event::paginate();
@@ -27,23 +19,12 @@ class EventController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $events->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $event = new Event();
         return view('event.create', compact('event'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         request()->validate(Event::$rules);
@@ -54,12 +35,6 @@ class EventController extends Controller
             ->with('success', 'Event created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $event = Event::find($id);
@@ -67,12 +42,6 @@ class EventController extends Controller
         return view('event.show', compact('event'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $event = Event::find($id);
@@ -80,13 +49,6 @@ class EventController extends Controller
         return view('event.edit', compact('event'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  Event $event
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Event $event)
     {
         request()->validate(Event::$rules);
@@ -97,11 +59,6 @@ class EventController extends Controller
             ->with('success', 'Event updated successfully');
     }
 
-    /**
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
-     */
     public function destroy($id)
     {
         $event = Event::find($id)->delete();
