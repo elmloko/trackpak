@@ -51,6 +51,7 @@ class InternationalController extends Controller
         $tipo = strtoupper($request->input('TIPO'));
         $aduana = strtoupper($request->input('ADUANA'));
         $observaciones = strtoupper($request->input('OBSERVACIONES'));
+        $ciudad = auth()->user()->Regional;
 
         // Obtener el nombre de usuario del cartero actualmente autenticado
         $usercartero = strtoupper(auth()->user()->name ?? '');
@@ -60,7 +61,7 @@ class InternationalController extends Controller
             'CODIGO' => $codigo,
             'DESTINATARIO' => $destinatario,
             'TELEFONO' => $telefono,
-            'CUIDAD' => '', // Revisa qué valor debe ir aquí, asegúrate de que esté correcto
+            'CUIDAD' => $ciudad,// Revisa qué valor debe ir aquí, asegúrate de que esté correcto
             'ESTADO' => 'VENTANILLA', // Asegúrate de que ESTADO esté configurado correctamente
             'VENTANILLA' => $ventanilla,
             'ZONA' => $zona,
