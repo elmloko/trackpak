@@ -26,7 +26,7 @@ class InternationalController extends Controller
         return view('international.create', compact('international'));
     }
 
-        public function store(Request $request)
+    public function store(Request $request)
     {
         // Validación de datos
         $request->validate([
@@ -61,7 +61,7 @@ class InternationalController extends Controller
             'CODIGO' => $codigo,
             'DESTINATARIO' => $destinatario,
             'TELEFONO' => $telefono,
-            'CUIDAD' => $ciudad,// Revisa qué valor debe ir aquí, asegúrate de que esté correcto
+            'CUIDAD' => $ciudad, // Revisa qué valor debe ir aquí, asegúrate de que esté correcto
             'ESTADO' => 'VENTANILLA', // Asegúrate de que ESTADO esté configurado correctamente
             'VENTANILLA' => $ventanilla,
             'ZONA' => $zona,
@@ -81,7 +81,7 @@ class InternationalController extends Controller
 
         return redirect()->route('internationals.index')
             ->with('success', 'Creacion de Paquete con éxito');
-    } 
+    }
     public function show($id)
     {
         $international = International::find($id);
@@ -92,17 +92,24 @@ class InternationalController extends Controller
     public function edit($id)
     {
         $international = International::find($id);
-
         return view('international.edit', compact('international'));
     }
 
     public function update(Request $request, International $international)
     {
-        request()->validate(International::$rules);
+        $request->validate(International::$rules);
 
+        $codigo = $international->CODIGO;
         $international->update($request->all());
 
-        return redirect()->route('internationals.index')
+        Event::create([
+            'action' => 'ESTADO',
+            'descripcion' => 'Edición de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $codigo, // Utiliza el código obtenido previamente
+        ]);
+
+        return redirect()->route('internationals.ventanilladd')
             ->with('success', 'Actualizacion de Paquete con exito');
     }
 

@@ -46,8 +46,9 @@
                                                 <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
                                             </div>
                                             <div class="col-md-1">
-                                                <a href="{{ route('internationals.create') }}" class="btn btn-primary"  data-placement="left">
-                                                  {{ __('Crear Nuevo') }}
+                                                <a href="{{ route('internationals.create') }}" class="btn btn-primary"
+                                                    data-placement="left">
+                                                    {{ __('Crear Nuevo') }}
                                                 </a>
                                             </div>
                                             {{-- <div class="col-md-3 text-right">
@@ -122,22 +123,25 @@
                                             <td>{{ $international->PRECIO }}</td>
                                             <td>{{ $international->OBSERVACIONES }}</td>
                                             <td>
-
-                                                <form
-                                                    action="{{ route('internationals.destroy', $international->id) }}"
-                                                    method="POST">
-                                                    @hasrole('SuperAdmin|Administrador|Urbano')
-                                                        <a class="btn btn-sm btn-success"
-                                                            href="{{ route('internationals.edit', $international->id) }}"><i
-                                                                class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                @hasrole('SuperAdmin|Administrador|Urbano')
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('internationals.edit', $international->id) }}">
+                                                        <i class="fa fa-fw fa-edit"></i>
+                                                        {{ __('Editar') }}
+                                                    </a>
+                                                @endhasrole
+                                                @hasrole('SuperAdmin|Administrador')
+                                                    <form
+                                                        action="{{ route('internationals.destroy', $international->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                    @endhasrole
-                                                    @hasrole('SuperAdmin|Administrador')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i
-                                                                class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                    @endhasrole
-                                                </form>
+                                                        <button type="submit" class="btn btn-sm btn-danger">
+                                                            <i class="fa fa-fw fa-trash"></i>
+                                                            {{ __('Eliminar') }}
+                                                        </button>
+                                                    </form>
+                                                @endhasrole
                                             </td>
                                         </tr>
                                     @endif
