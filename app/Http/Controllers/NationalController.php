@@ -916,8 +916,11 @@ class NationalController extends Controller
             // Guardar el modelo en la base de datos
             $national->save();
 
-            // Resto del código...
-            return redirect()->route('nationals.index')->with('success', 'Paquete Creado Con Éxito!');
+            // Generar el PDF
+            $pdf = PDF::loadView('bag.pdf.cn22', compact('national'));
+
+            // Descargar el PDF
+            return $pdf->download('CN22.pdf');
         } catch (\Exception $e) {
             // Mostrar un mensaje de error o registrar el error
             dd($e->getMessage());

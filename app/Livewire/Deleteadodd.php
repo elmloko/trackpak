@@ -21,7 +21,6 @@ class Deleteadodd extends Component
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
                     ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
