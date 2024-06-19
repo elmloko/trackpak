@@ -41,6 +41,7 @@
                                     <th>Estado</th>
                                     <th>Precio</th>
                                     <th>Observaciones</th>
+                                    <th>Fecha</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,6 +65,7 @@
                                         <td>{{ $international->ESTADO }}</td>
                                         <td>{{ $international->PRECIO }}</td>
                                         <td>{{ $international->OBSERVACIONES }}</td>
+                                        <td>{{ $international->created_at }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
