@@ -917,7 +917,7 @@ class NationalController extends Controller
             $national->save();
 
             // Generar el PDF
-            $pdf = PDF::loadView('bag.pdf.cn22', compact('national'));
+            $pdf = PDF::loadView('national.pdf.cn22', compact('national'));
 
             // Descargar el PDF
             return $pdf->download('CN22.pdf');

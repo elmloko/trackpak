@@ -157,9 +157,7 @@ Route::middleware('auth')->group(function () {
     Route::get('package/pdf/asignarcartero', [PackageController::class, 'asignarcartero'])->name('package.pdf.asignarcartero');
     Route::get('package/pdf/prerezago', [PackageController::class, 'prerezago'])->name('package.pdf.prerezago');
     Route::get('package/pdf/deleteadoencomiendaspdf', [PackageController::class, 'deleteadoencomiendaspdf'])->name('package.pdf.deleteadoencomiendaspdf');
-    
 
-    
     // Reportes Excel
     Route::get('package/packagesallexcel', [PackageController::class, 'packagesallexcel'])->name('packagesall.excel');
     Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
@@ -189,6 +187,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/national/{national}', [NationalController::class, 'destroy'])->name('nationals.destroy');
     Route::get('/national/total', [NationalController::class, 'total'])->name('national.total');
     Route::get('/national/despachoadmision', [NationalController::class, 'despachoadmision'])->name('national.despachoadmision');
+    Route::get('/national/pdf/cn22', [PackageController::class, 'cn22'])->name('national.pdf.cn22');
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
