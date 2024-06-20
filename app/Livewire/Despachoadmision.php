@@ -24,6 +24,7 @@ class Despachoadmision extends Component
                 ->orWhere('FACTURA', 'like', '%' . $this->search . '%')
                 ->orWhere('created_at', 'like', '%' . $this->search . '%');
         })
+        ->whereIn('ESTADO', ['DESPACHO'])
         ->where('ORIGEN', $userorigen)
         ->orderBy('created_at', 'desc')
         ->paginate(10);
