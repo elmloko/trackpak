@@ -673,7 +673,25 @@ return [
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.delete',
                         ],
-                        
+                    ],
+                ],
+                [
+                    'text' => 'Ventanilla DND',
+                    'icon' => 'fas fa-window-maximize',
+                    'can'  => 'packages.ventanilla',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas Ventanilla DND',
+                            'url' => 'internationals/ventanilladnd',
+                            'icon' => 'fas fa-truck',
+                            'can'  => 'packages.ventanilla',
+                        ],
+                        [
+                            'text' => 'Inventario Ventanilla DND',
+                            'url' => 'internationals/deleteadodnd',
+                            'icon' => 'fas fa-suitcase',
+                            'can'  => 'packages.delete',
+                        ],
                     ],
                 ],
                 [

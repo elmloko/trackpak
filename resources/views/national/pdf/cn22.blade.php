@@ -128,7 +128,9 @@
                     <tr>
                     </tr>
                     <tr>
-                        <td rowspan="3">BO | RP</td>
+                        <td rowspan="3">BO | 
+                            <?php echo substr($national->CODIGO, 0, 2); ?>
+                        </td>
                         <td colspan="3" rowspan="5">El destinatario firmante, cuyo nombre y dirección figuran en
                             el envío,
                             certifica que los datos indicados en la declaración son correctos y que este envío no
@@ -148,7 +150,7 @@
             </table>
         </div>
     </div>
-    
+
 </body>
 
 </html>

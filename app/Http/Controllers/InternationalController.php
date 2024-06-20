@@ -7,7 +7,9 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Internationaldd;
+use App\Exports\Internationaldnd;
 use App\Exports\Internationalinvdd;
+use App\Exports\Internationalinvdnd;
 
 class InternationalController extends Controller
 {
@@ -148,13 +150,26 @@ class InternationalController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $regional = $request->input('regional');
-        return Excel::download(new Internationaldd($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados.xlsx');
+        return Excel::download(new Internationaldd($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados DD.xlsx');
     }
     public function inventarioDRDexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
-        return Excel::download(new Internationalinvdd($fechaInicio, $fechaFin), 'Inventario R.xlsx');
+        return Excel::download(new Internationalinvdd($fechaInicio, $fechaFin), 'Inventario Certificados DD.xlsx');
+    }
+    public function certificadosdndexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $regional = $request->input('regional');
+        return Excel::download(new Internationaldnd($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados DND.xlsx');
+    }
+    public function inventarioDNDexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        return Excel::download(new Internationalinvdnd($fechaInicio, $fechaFin), 'Inventario Certificados DND.xlsx');
     }
     public function ventanilladd()
     {
@@ -163,5 +178,13 @@ class InternationalController extends Controller
     public function deleteadodd()
     {
         return view('international.deleteadodd');
+    }
+    public function ventanilladnd()
+    {
+        return view('international.ventanilladnd');
+    }
+    public function deleteadodnd()
+    {
+        return view('international.deleteadodnd');
     }
 }
