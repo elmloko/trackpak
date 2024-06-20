@@ -34,13 +34,12 @@ class InternationalController extends Controller
         $request->validate([
             'CODIGO' => 'required|string|max:20|regex:/^[A-Z0-9]+$/',
             'DESTINATARIO' => 'required|string|max:255|regex:/^[A-Z\s]+$/',
-            // 'TELEFONO' => 'required|numeric',
-            // 'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255|regex:/^[A-Z\s]+$/',
-            // 'PESO' => 'required|string|regex:/^\d+(\.\d{1,3})?$/|between:0.001,10.000',
-            // 'TIPO' => 'required|string|in:PAQUETE GRANDE,PAQUETE PEQUEÑO,SOBRE',
-            // 'ADUANA' => 'required|string|in:SI,NO',
-            // 'VENTANILLA' => 'required|in:DND,DD',  // Asegúrate de que esta regla refleje correctamente el campo correspondiente
-            // 'usercartero' => 'required|string',  // Asegúrate de que esta regla refleje correctamente el campo correspondiente
+            'TELEFONO' => 'required|numeric',
+            'ZONA' => 'required|string|max:255|regex:/^[A-Z\s]+$/',
+            'PESO' => 'required|string|regex:/^\d+(\.\d{1,3})?$/|between:0.001,10.000',
+            'TIPO' => 'required|string|in:PAQUETE GRANDE,PAQUETE PEQUEÑO,SOBRE',
+            'ADUANA' => 'required|string|in:SI,NO',
+            'VENTANILLA' => 'required|in:DND,DD',
         ]);
 
         // Obtener los datos del request y convertir a mayúsculas
