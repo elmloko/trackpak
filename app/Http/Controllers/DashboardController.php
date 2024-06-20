@@ -134,6 +134,10 @@ class DashboardController extends Controller
         $totallpvren = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->count();
         $hoylpvr = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->whereDate('deleted_at', today())->count();
         $hoylpvhh = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->whereDate('deleted_at', today())->sum('PRECIO');
+        $totallpvrr = $international->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'DND')->count();
+        $totallpvrenn = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DND')->count();
+        $hoylpvrr = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DND')->whereDate('deleted_at', today())->count();
+        $hoylpvhhh = International::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DND')->whereDate('deleted_at', today())->sum('PRECIO');
         
         //Datos por mes 
         $dataByMonth = Package::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"), DB::raw('COUNT(*) as total'))
@@ -184,6 +188,10 @@ class DashboardController extends Controller
         return view('dashboard', compact(
             'data',
             'international',
+            'totallpvrr',
+            'totallpvrenn',
+            'hoylpvrr',
+            'hoylpvhhh',
             'totallpvren',  
             'totallpvr',
             'hoylpvr',

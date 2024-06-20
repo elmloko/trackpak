@@ -229,7 +229,7 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{ $totallpvr }}</h3>
-                                <p>Total Paquetes en Ventanilla CERTIFICADO</p>
+                                <p>Total Paquetes en Ventanilla CERTIFICADO DD</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -243,7 +243,7 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{ $totallpvren }}</h3>
-                                <p>Total Paquetes en Ventanilla CERTIFICADO</p>
+                                <p>Total Entregados CERTIFICADO DD</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -257,7 +257,7 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{ $hoylpvr }}</h3>
-                                <p>Total Hoy Entregados CERTIFICADO</p>
+                                <p>Total Hoy Entregados CERTIFICADO DD</p>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
@@ -271,7 +271,63 @@
                         <div class="small-box bg-success">
                             <div class="inner">
                                 <h3>{{ $hoylpvhh }} Bs.</h3>
-                                <p>Total Hoy Generado CERTIFICADO</p>
+                                <p>Total Hoy Generado CERTIFICADO DD</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendasinventario') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $totallpvrr }}</h3>
+                                <p>Total Paquetes en Ventanilla CERTIFICADO DND</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('internationals.ventanilladd') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $totallpvrenn }}</h3>
+                                <p>Total Entregados CERTIFICADO DND</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendas') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $hoylpvrr }}</h3>
+                                <p>Total Hoy Entregados CERTIFICADO DND</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <a href="{{ route('packages.encomiendasinventario') }}" class="small-box-footer">
+                                Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>{{ $hoylpvhhh }} Bs.</h3>
+                                <p>Total Hoy Generado CERTIFICADO DND</p>
                             </div>
                             <div class="icon">
                                 <i class="fas fa-shopping-cart"></i>
