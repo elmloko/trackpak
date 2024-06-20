@@ -678,7 +678,7 @@ return [
                 [
                     'text' => 'Ventanilla DND',
                     'icon' => 'fas fa-window-maximize',
-                    'can'  => 'packages.ventanilla',
+                    'can'  => 'packages.dnd',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla DND',
