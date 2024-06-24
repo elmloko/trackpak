@@ -27,7 +27,7 @@ class Internationaldd extends Component
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('ZONA', 'like', '%' . $this->search . '%')
-                    ->orWhere('updated_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->where(function ($query) use ($userRegional) {
                 $query->where(function ($subQuery) {
@@ -36,7 +36,7 @@ class Internationaldd extends Component
                 })
                 ->where('CUIDAD', $userRegional);
             })
-            ->orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(20);
 
             return view('livewire.internationaldd', [
