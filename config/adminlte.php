@@ -343,26 +343,28 @@ return [
         [
             'text' => 'Paquetes Nacionales',
             'icon' => 'fas fa-users',
-            'can'  => 'users.index',
+            'can'  => '',
             'submenu' => [
                 [
                     'text' => 'Todos Paquetes',
-                    'url' => 'national/total',
+                    'can'  => 'packages',
                     'icon' => 'fas fa-box',
                 ],
                 [
                     'text' => 'Admision',
                     'icon' => 'fas fa-cube ',
-                    'can'  => 'packages.clasificacion',
+                    'can'  => 'national',
                     'submenu' => [
                         [
                             'text' => 'Registro Admision',
                             'url' => 'national',
                             'icon' => 'fas fa-user',
+                            'can'  => 'national',
                         ],
                         [
                             'text' => 'Despacho Admision',
                             'url' => 'national/despachoadmision',
+                            'can'  => 'national',
                             'icon' => 'fas fa-lock',
                         ],
                     ],
