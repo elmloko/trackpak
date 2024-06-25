@@ -347,6 +347,7 @@ return [
             'submenu' => [
                 [
                     'text' => 'Todos Paquetes',
+                    'url' => 'national/total',
                     'can'  => 'packages',
                     'icon' => 'fas fa-box',
                 ],
