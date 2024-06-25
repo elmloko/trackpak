@@ -30,7 +30,7 @@
                                                 placeholder="Buscar...">
                                         </div>
                                     </div>
-                                    @hasrole('SuperAdmin|Administrador|Admision|Auxiliar Admision')
+                                    @hasrole('SuperAdmin|Administrador|Enlace')
                                         <div class="col-md-6">
                                             <a href="{{ route('nationals.create') }}"
                                                 class="btn btn-primary btn-md float-right ml-2" data-placement="left">
