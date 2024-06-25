@@ -188,6 +188,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/national/total', [NationalController::class, 'total'])->name('national.total');
     Route::get('/national/despachoadmision', [NationalController::class, 'despachoadmision'])->name('national.despachoadmision');
     Route::get('/national/pdf/cn22', [PackageController::class, 'cn22'])->name('national.pdf.cn22');
+    Route::get('national/despachoadmisionexcel', [NationalController::class, 'despachoadmisionexcel'])->name('despachoadmision.excel');
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');

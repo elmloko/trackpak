@@ -7,6 +7,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\despachoadmision;
 use App\Models\User;
 
 class NationalController extends Controller
@@ -971,6 +972,14 @@ class NationalController extends Controller
         return redirect()->route('nationals.index')
             ->with('success', 'Paquete Eliminado Con Éxito!');
     }
+
+    public function despachoadmisionexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        return Excel::download(new despachoadmision($fechaInicio, $fechaFin), 'Kardex Ventanilla.xlsx');
+    }
+
     public function agregarPaquete($nationalId)
     {
         $national = National::findOrFail($nationalId);

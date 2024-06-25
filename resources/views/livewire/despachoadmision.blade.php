@@ -5,97 +5,29 @@
                 <div class="card-header">
                     <h5 id="card_title">{{ __('Despacho de Paquetes Ordinarios') }}</h5>
                     <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="search">Busca:</label>
-                                <input wire:model.lazy="search" type="text" class="form-control"
-                                    placeholder="Buscar...">
-                            </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <form method="get" action="{{ route('clasificacion.excel') }}" class="mb-3">
+                                    <div class="form-group">
+                                        <label for="search">Busca:</label>
+                                        <input wire:model.lazy="search" type="text" class="form-control"
+                                            placeholder="Buscar...">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <form method="get" action="{{ route('despachoadmision.excel') }}" class="mb-3">
                                         @csrf
                                         <div class="form-row align-items-center">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label for="excel_fecha_inicio">Fecha de inicio:</label>
                                                 <input type="date" name="fecha_inicio" class="form-control" required>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-5">
                                                 <label for="excel_fecha_fin">Fecha de fin:</label>
                                                 <input type="date" name="fecha_fin" class="form-control" required>
                                             </div>
                                             <div class="col-md-3">
-                                                <label for="ciudad">Ciudad:</label>
-                                                <select name="ciudad" class="form-control" required>
-                                                    <option value="LA PAZ">LA PAZ</option>
-                                                    <option value="COCHABAMBA">COCHABAMBA</option>
-                                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
-                                                    <option value="ORURO">ORURO</option>
-                                                    <option value="POTOSI">POTOSI</option>
-                                                    <option value="SUCRE">SUCRE</option>
-                                                    <option value="BENI">BENI</option>
-                                                    <option value="PANDO">PANDO</option>
-                                                    <option value="TARIJA">TARIJA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ventanilla">Ventanilla:</label>
-                                                <select name="ventanilla" class="form-control" required>
-                                                    <option value="DND">DND</option>
-                                                    <option value="DD">DD</option>
-                                                    <option value="ECA">ECA</option>
-                                                    <option value="CASILLAS">CASILLAS</option>
-                                                    <option value="UNICA">UNICA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-12 text-center mt-3">
                                                 <button type="submit" class="btn btn-success">Generar Excel</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-6">
-                                    <form method="get" action="{{ route('package.pdf.clasificacionpdf') }}"
-                                        name="pdfForm">
-                                        @csrf
-                                        <div class="form-row align-items-center">
-                                            <div class="col-md-3">
-                                                <label for="pdf_fecha_inicio">Fecha de inicio:</label>
-                                                <input type="date" name="fecha_inicio" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="pdf_fecha_fin">Fecha de fin:</label>
-                                                <input type="date" name="fecha_fin" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ciudad">Ciudad:</label>
-                                                <select name="ciudad" class="form-control" required>
-                                                    <option value="LA PAZ">LA PAZ</option>
-                                                    <option value="COCHABAMBA">COCHABAMBA</option>
-                                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
-                                                    <option value="ORURO">ORURO</option>
-                                                    <option value="POTOSI">POTOSI</option>
-                                                    <option value="SUCRE">SUCRE</option>
-                                                    <option value="BENI">BENI</option>
-                                                    <option value="PANDO">PANDO</option>
-                                                    <option value="TARIJA">TARIJA</option>
-                                                    <!-- Agrega más opciones según tus necesidades -->
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ventanilla">Ventanilla:</label>
-                                                <select name="ventanilla" class="form-control" required>
-                                                    <option value="DND">DND</option>
-                                                    <option value="DD">DD</option>
-                                                    <option value="ECA">ECA</option>
-                                                    <option value="CASILLAS">CASILLAS</option>
-                                                    <option value="UNICA">UNICA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-12 text-center mt-3">
-                                                <button type="submit" class="btn btn-danger">Generar PDF</button>
                                             </div>
                                         </div>
                                     </form>
