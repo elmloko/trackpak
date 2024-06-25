@@ -39,7 +39,8 @@ class ApiController extends Controller
         return response()->json([
             'CODIGO' => $package->CODIGO,
             'DESTINATARIO' => $package->DESTINATARIO,
-            'UBICACION' => $package->CUIDAD . ', ' . $package->PAIS . ', ' . $package->ZONA
+            'UBICACION' => $package->CUIDAD . ', ' . $package->PAIS . ', ' . $package->ZONA,
+            'ESTADO' => $package->ESTADO,
         ]);
     }
     
