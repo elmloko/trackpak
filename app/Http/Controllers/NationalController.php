@@ -41,6 +41,7 @@ class NationalController extends Controller
             $provincia = strtoupper($request->input('PROVINCIA'));
             $peso = $request->input('PESO');
             $cantidad = $request->input('CANTIDAD');
+            $descripcion = $request->input('DESCRIPCION');
 
             // Calcular el precio basado en el peso y la provincia
             if ($peso >= 0.001 && $peso <= 0.020) {
@@ -909,6 +910,7 @@ class NationalController extends Controller
                 'NOMBRESREMITENTE' => $request->input('NOMBRESREMITENTE'),
                 'TELEFONOREMITENTE' => $request->input('TELEFONOREMITENTE'),
                 'CIREMITENTE' => $request->input('CIREMITENTE'),
+                'DESCRIPCION' => $request->input('DESCRIPCION'),
             ]);
             // Agregar el precio al request antes de crear el paquete
             $request->merge(['IMPORTE' => $importe]);

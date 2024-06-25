@@ -23,6 +23,11 @@
                     {{ Form::number('CANTIDAD', $national->CANTIDAD ?? 1, ['class' => 'form-control' . ($errors->has('CANTIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Cantidad de envíos']) }}
                     {!! $errors->first('CANTIDAD', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
+                <div class="form-group">
+                    {{ Form::label('DESCRIPCION (QUE ES LO QUE ENVIA)') }}
+                    {{ Form::text('DESCRIPCION', strtoupper($national->DESCRIPCION), ['class' => 'form-control' . ($errors->has('DESCRIPCION') ? ' is-invalid' : ''), 'style' => 'text-transform: uppercase;', 'placeholder' => 'Describe que es lo que envia el Remitente(POCAS PALABRAS)']) }}
+                    {!! $errors->first('DESCRIPCION', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
 
             </div>
             <div class="col-md-6">

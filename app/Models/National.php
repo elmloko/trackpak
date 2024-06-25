@@ -50,6 +50,7 @@ class National extends Model
 		'IMPORTE' => 'required',
 		'DIRECCION' => 'required',
 		'PROVINCIA' => 'required',
+		'DESCRIPCION' => 'required',
 		// 'MUNICIPIO' => 'required',
 		// 'ORIGEN' => 'required',
 		// 'ESTADO' => 'required',
@@ -81,6 +82,7 @@ class National extends Model
 							'MUNICIPIO',
 							'ORIGEN',
 							'PROVINCIA',
-							'USER'
+							'USER',
+							'DESCRIPCION'
 							];
 }
