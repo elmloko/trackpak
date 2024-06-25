@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Package;
 use App\Models\International;
+use App\Models\National;
 use App\Models\User;
 use App\Models\Mensaje;
 use Carbon\Carbon;
@@ -16,8 +17,9 @@ class DashboardController extends Controller
     {
         $packages = Package::all();
         $mensaje = Mensaje::all();
+        $national = National::all();
         $international = International::all();
-        $totalPaquetes = $packages->count();
+        $totalPaquetes = $packages->count()+$national->count()+$international->count();
         $totalUsuarios = User::count();
         $userRegional = auth()->user()->Regional;
 
@@ -34,7 +36,7 @@ class DashboardController extends Controller
 
         //Aplicando Filtros
         $totalbaja = Package::onlyTrashed()->where('ESTADO', 'entregado')->count();
-        $totalEntregados = $packages->where('ESTADO', 'VENTANILLA')->count();
+        $totalEntregados = $packages->where('ESTADO', 'VENTANILLA')->count()+ $international->where('ESTADO', 'VENTANILLA')->count();
         $totalVentanilla = $packages->where('ESTADO', 'VENTANILLA')->where('VENTANILLA', 'DD')->count();
         $totalClasificacion = $packages->where('ESTADO', 'CLASIFICACION')->count();
         $totalDespacho = $packages->where('ESTADO', 'DESPACHO')->count();
@@ -188,6 +190,7 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'data',
+            'national',
             'international',
             'totallpvrr',
             'totallpvrenn',
