@@ -41,6 +41,7 @@ class ApiController extends Controller
             'DESTINATARIO' => $package->DESTINATARIO,
             'UBICACION' => $package->CUIDAD . ', ' . $package->PAIS . ', ' . $package->ZONA,
             'ESTADO' => $package->ESTADO,
+            'TELEFONO' => $package->TELEFONO,
         ]);
     }
     
