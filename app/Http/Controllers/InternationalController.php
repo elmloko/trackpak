@@ -35,7 +35,7 @@ class InternationalController extends Controller
             'CODIGO' => 'required|string|max:20|regex:/^[A-Z0-9]+$/',
             'DESTINATARIO' => 'required|string|max:255|regex:/^[A-Z\s]+$/',
             // 'TELEFONO' => 'required|numeric',
-            'ZONA' => 'required|string|max:255|regex:/^[A-Z\s]+$/',
+            // 'ZONA' => 'required|string|max:255|regex:/^[A-Z\s]+$/',
             'PESO' => 'required|string|regex:/^\d+(\.\d{1,3})?$/|between:0.001,10.000',
             'TIPO' => 'required|string|in:PAQUETE GRANDE,PAQUETE PEQUEÑO,SOBRE',
             'ADUANA' => 'required|string|in:SI,NO',
