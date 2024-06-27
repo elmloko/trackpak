@@ -83,6 +83,8 @@ class National extends Model
 							'ORIGEN',
 							'PROVINCIA',
 							'USER',
-							'DESCRIPCION'
+							'DESCRIPCION',
+							'OBSERVACION',
+							'datedespachocartero'
 							];
 }
