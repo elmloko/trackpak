@@ -41,7 +41,7 @@
                             'CEMENTERIO' => 'CEMENTERIO',
                             'MALLASILLA' => 'MALLASILLA',
                             'VILLA SALOME' => 'VILLA SALOME',
-                            'LOS PINOS / SAN MIGUEL' => 'LOS PINOS / SAN MIGUEL',
+                            'LOS PINOS-SAN MIGUEL' => 'LOS PINOS-SAN MIGUEL',
                             'VILLA FATIMA' => 'VILLA FATIMA',
                             'PASANKERI' => 'PASANKERI',
                             'ALTO OBRAJES' => 'ALTO OBRAJES',
