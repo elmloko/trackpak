@@ -1,7 +1,7 @@
-@extends('layouts.app')
-
+@extends('adminlte::page')
+@section('title', 'Paquetes Ordinarios')
 @section('template_title')
-    {{ __('Update') }} National
+    Paqueteria Postal
 @endsection
 
 @section('content')
@@ -16,9 +16,8 @@
                         <span class="card-title">{{ __('Update') }} National</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('nationals.update', $national->id) }}" role="form"
-                            enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                        <form method="POST" action="{{ route('nationals.update', $national->id) }}" role="form" enctype="multipart/form-data">
+                            {{ method_field('PUT') }}
                             @csrf
 
                             @include('national.form')
@@ -29,4 +28,5 @@
             </div>
         </div>
     </section>
+    @include('footer')
 @endsection

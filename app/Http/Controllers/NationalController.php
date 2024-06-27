@@ -24,6 +24,10 @@ class NationalController extends Controller
     {
         return view('national.despachoadmision');
     }
+    public function nacionaldespacho()
+    {
+        return view('national.nacionaldespacho');
+    }
 
     public function create()
     {
@@ -957,12 +961,20 @@ class NationalController extends Controller
 
     public function update(Request $request, National $national)
     {
-        request()->validate(National::$rules);
+        $request->validate(National::$rules);
 
+        $codigo = $national->CODIGO;
         $national->update($request->all());
 
+        Event::create([
+            'action' => 'ESTADO',
+            'descripcion' => 'Edición de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $codigo, // Utiliza el código obtenido previamente
+        ]);
+
         return redirect()->route('nationals.index')
-            ->with('success', 'Paquete Actualizado Con Éxito!');
+            ->with('success', 'Actualizacion de Paquete con exito');
     }
 
     public function destroy($id)
@@ -979,24 +991,43 @@ class NationalController extends Controller
         $fechaFin = $request->input('fecha_fin');
         return Excel::download(new despachoadmision($fechaInicio, $fechaFin), 'Kardex Ventanilla.xlsx');
     }
-
-    public function agregarPaquete($nationalId)
+    public function buscarPaquete(Request $request)
     {
-        $national = National::findOrFail($nationalId);
+        $codigo = $request->input('codigo');
+        $package = National::where('CODIGO', $codigo)->first();
 
-        // Verifica si el paquete ya está seleccionado
-        if (!in_array($nationalId, $this->selectedPackages)) {
-            $this->selectedPackages[] = $nationalId;
-            $national->update(['ESTADO' => 'ASIGNADO']);
-            $national->touch();
+        if ($package) {
+            
+            // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
+            if ($package->ESTADO === 'DESPACHO' || $package->ESTADO === 'RETORNO') {
+                // Verificar que el destino sea igual a la regional del usuario
+                if (auth()->user()->Regional == $package->CUIDAD) {
+                    if ($package->ESTADO === 'DESPACHO') {           
+                        Event::create([
+                            'action' => 'EMS',
+                            'descripcion' => 'Paquete Recibido en Oficina EMS.' . $package->ORIGEN,
+                            'user_id' => auth()->user()->id,
+                            'codigo' => $package->CODIGO,
+                        ]);
+                    }
+
+                    // Cambiar el estado del paquete a "CLASIFICACION"
+                    $package->ESTADO = 'CLASIFICACION';
+                    $package->save();
+
+                    return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+                } else {
+                    return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
+                }
+            } else {
+                // Si el estado es 'RETORNO', cambiar el estado a 'VENTANILLA' sin eventos adicionales
+                $package->ESTADO = 'CLASIFICACION';
+                $package->save();
+
+                return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
         }
-    }
-
-    public function quitarPaquete($nationalId)
-    {
-        $national = National::findOrFail($nationalId);
-        $this->selectedPackages = array_diff($this->selectedPackages, [$nationalId]);
-        $national->update(['ESTADO' => 'VENTANILLA']);
-        $national->touch();
     }
 }

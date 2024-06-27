@@ -187,8 +187,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/national/{national}', [NationalController::class, 'destroy'])->name('nationals.destroy');
     Route::get('/national/total', [NationalController::class, 'total'])->name('national.total');
     Route::get('/national/despachoadmision', [NationalController::class, 'despachoadmision'])->name('national.despachoadmision');
-    Route::get('/national/pdf/cn22', [PackageController::class, 'cn22'])->name('national.pdf.cn22');
+    Route::get('/national/pdf/cn22', [NationalController::class, 'cn22'])->name('national.pdf.cn22');
     Route::get('national/despachoadmisionexcel', [NationalController::class, 'despachoadmisionexcel'])->name('despachoadmision.excel');
+    Route::get('/national/nacionaldespacho', [NationalController::class, 'nacionaldespacho'])->name('national.nacionaldespacho');
+    Route::post('national/buscarPaquete', [NationalController::class, 'buscarPaquete'])->name('national.buscarPaquete');
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');

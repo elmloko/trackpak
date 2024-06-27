@@ -377,11 +377,11 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Clasificacion',
-                            'url' => '#',
+                            'url' => 'national/nacionaldespacho',
                             'icon' => 'fas fa-key',
                         ],
                         [
-                            'text' => 'Inventario Admision',
+                            'text' => 'Despacho',
                             'url' => '#',
                             'icon' => 'fas fa-lock',
                         ],
