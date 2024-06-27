@@ -10,4 +10,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/prueba/{codigo}', [ApiController::class, 'show']);
-Route::post('/api/ventanillaingreso', 'VentanillaIngresoController@ventanillaIngreso');
+Route::post('/ventanilla', [ApiController::class, 'ventanilla']);
