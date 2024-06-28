@@ -145,13 +145,6 @@ class BagController extends Controller
         ]);
         return redirect()->route('bags.index')->with('success', 'Despacho cerrado con éxito!');
 
-        // // Genera el PDF
-        // $pdf = PDF::loadView('bag.pdf.cn35', compact('bag'));
-
-        // return $pdf->stream('CN35.pdf', ['Attachment' => false]);
-
-        // return redirect()->route('bags.index')
-        //     ->with('success', 'Despacho cerrado con exito!');
     }
 
     public function goExpedition($id, Request $request)

@@ -39,6 +39,7 @@
                                     {{ Form::select(
                                         'TRASPORTE',
                                         [
+                                            '' => 'Primero seleccione un itinerario',
                                             'TRANS VARSOVIA' => 'TRANS VARSOVIA',
                                             'TRANS DORADO' => 'TRANS DORADO',
                                             'TRANS ELITE' => 'TRANS ELITE',
@@ -72,7 +73,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ Form::label('HORARIO', 'Horario') }}
-                                {{ Form::input('time', 'HORARIO', $bag->OFCAMBIO, ['class' => 'form-control' . ($errors->has('HORARIO') ? ' is-invalid' : ''), 'id' => 'horario-input']) }}
+                                {{ Form::input('time', 'HORARIO', $bag->HORARIO, ['class' => 'form-control' . ($errors->has('HORARIO') ? ' is-invalid' : ''), 'id' => 'horario-input']) }}
                                 {!! $errors->first('HORARIO', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">
