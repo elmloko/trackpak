@@ -7,6 +7,15 @@
                         <div class="col">
                             <h5 id="card_title">{{ __('Admision de Paquetes en Nacionales') }}</h5>
                             <div class="row align-items-center">
+                                @hasrole('SuperAdmin|Administrador|')
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="search">Busca:</label>
+                                            <input wire:model.lazy="search" type="text" class="form-control"
+                                                placeholder="Buscar...">
+                                        </div>
+                                    </div>
+                                @endhasrole
                                 <div class="col-md-2">
                                     <label for="cityFilter">Filtrar por Ciudad:</label>
                                     <select wire:model="selectedCity" class="form-control" id="cityFilter">
@@ -23,28 +32,12 @@
                                         <!-- Agrega más opciones según tus necesidades -->
                                     </select>
                                 </div>
-                                <div class="col-md-4">
+                                
+                                <div class="col-md-8 text-right">
                                     <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
 
                                     @include('national.modal.ems')
                                 </div>
-                                @hasrole('SuperAdmin|Administrador|')
-                                    <div class="col-md-2 text-right">
-                                        <div class="form-group">
-                                            <label for="search">Busca:</label>
-                                            <input wire:model.lazy="search" type="text" class="form-control"
-                                                placeholder="Buscar...">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2 ">
-                                        <div class="form-group">
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#buscarPaqueteModal">
-                                                Añadir Paquete
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                @endhasrole
                             </div>
                         </div>
                     </div>
