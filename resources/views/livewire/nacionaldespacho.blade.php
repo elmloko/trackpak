@@ -24,22 +24,35 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="search">Busca:</label>
-                                        <input wire:model.lazy="search" type="text" class="form-control"
-                                            placeholder="Buscar...">
-                                    </div>
+                                    <label for="carteroFilter">Asignar a Cartero:</label>
+                                    <select wire:model="selectedCartero" class="form-control" id="carteroFilter">
+                                        <option value="">Seleccione un Cartero</option>
+                                        @foreach ($carteros as $cartero)
+                                            <option value="{{ $cartero->id }}">{{ $cartero->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
+
+                                    @include('national.modal.ems')
                                 </div>
                                 @hasrole('SuperAdmin|Administrador|')
-                                    <div class="col-md-8 text-right">
-                                        <button wire:click="cambiarEstado"
-                                            class="btn btn-warning">Despachar</button>
-                                        <button class="btn btn-primary" data-toggle="modal"
-                                            data-target="#buscarPaqueteModal">
-                                            Añadir Paquete
-                                        </button>
-                                        @include('national.modal.ems')
+                                    <div class="col-md-2 text-right">
+                                        <div class="form-group">
+                                            <label for="search">Busca:</label>
+                                            <input wire:model.lazy="search" type="text" class="form-control"
+                                                placeholder="Buscar...">
+                                        </div>
                                     </div>
+                                    <div class="col-md-2 ">
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" data-toggle="modal" data-target="#buscarPaqueteModal">
+                                                Añadir Paquete
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
                                 @endhasrole
                             </div>
                         </div>

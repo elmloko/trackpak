@@ -85,6 +85,7 @@ class National extends Model
 							'USER',
 							'DESCRIPCION',
 							'OBSERVACION',
-							'datedespachocartero'
+							'datedespachocartero',
+							'cartero_id'
 							];
 }

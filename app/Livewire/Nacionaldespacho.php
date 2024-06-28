@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\National;
+use App\Models\User;
 use Carbon\Carbon;
 use App\Models\Event;
 use Livewire\WithPagination;
@@ -17,6 +18,7 @@ class Nacionaldespacho extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $selectedCartero = null;
 
     public function render()
     {
@@ -38,10 +40,14 @@ class Nacionaldespacho extends Component
         ->orderBy('created_at', 'desc')
         ->paginate(10);
 
+        $carteros = User::role('Cartero')->get(); // Obtener usuarios con el rol 'Cartero'
+
         return view('livewire.nacionaldespacho', [
             'nationals' => $nationals,
+            'carteros' => $carteros,
         ]);
     }
+
     public function toggleSelectAll()
     {
         if ($this->selectAll) {
@@ -59,15 +65,23 @@ class Nacionaldespacho extends Component
             $this->paquetesSeleccionados[] = $nationalId;
         }
     }
+
     public function cambiarEstado()
     {
+        if (!$this->selectedCartero) {
+            // Manejar error si no se seleccionó un cartero
+            session()->flash('error', 'Debe seleccionar un cartero.');
+            return;
+        }
+
         // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = National::whereIn('id', $this->paquetesSeleccionados)->get();
 
         // Actualizar estado de los paquetes
         National::whereIn('id', $this->paquetesSeleccionados)->update([
             'ESTADO' => 'CARTERO',
-            'datedespachocartero' => now(), // Guardar la fecha de despacho actual
+            'datedespachocartero' => now(),
+            'cartero_id' => $this->selectedCartero, // Asignar cartero
         ]);
 
         // Crear evento para cada paquete despachado
@@ -86,7 +100,7 @@ class Nacionaldespacho extends Component
         }
 
         // Generar el PDF con los paquetes seleccionados
-        $pdf = PDF::loadView('national.pdf.despachopdf', ['nationals' => $paquetesSeleccionados]);
+        $pdf = PDF::loadView('national.pdf.despachoemspdf', ['nationals' => $paquetesSeleccionados]);
 
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
@@ -94,7 +108,7 @@ class Nacionaldespacho extends Component
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
-        }, 'Despacho_Admision.pdf');
+        }, 'Despacho_EMS.pdf');
 
         // Restablecer la selección
         $this->resetSeleccion();

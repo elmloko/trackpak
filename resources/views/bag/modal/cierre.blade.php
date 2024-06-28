@@ -71,8 +71,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ Form::label('HORARIO') }}
-                                {{ Form::select('HORARIO', ['' => 'Seleccione una opción', '08:00' => '08:00', '09:00' => '09:00', '10:00' => '10:00'], $bag->OFCAMBIO, ['class' => 'form-control' . ($errors->has('HORARIO') ? ' is-invalid' : ''), 'id' => 'horario-select']) }}
+                                {{ Form::label('HORARIO', 'Horario') }}
+                                {{ Form::input('time', 'HORARIO', $bag->OFCAMBIO, ['class' => 'form-control' . ($errors->has('HORARIO') ? ' is-invalid' : ''), 'id' => 'horario-input']) }}
                                 {!! $errors->first('HORARIO', '<div class="invalid-feedback">:message</div>') !!}
                             </div>
                             <div class="form-group">
