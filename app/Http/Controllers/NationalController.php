@@ -1030,4 +1030,17 @@ class NationalController extends Controller
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
         }
     }
+    public function devolver($id, Request $request)
+    {
+        // Encontrar el paquete por ID
+        $national = National::findOrFail($id);
+
+        // Actualizar el estado y la observación
+        $national->update([
+            'ESTADO' => 'DESPACHO',
+            'OBSERVACION' => 'PAQUETE OBSERVADO POR AREA EXPEDICION',
+        ]);
+
+        return redirect()->route('national.nacionaldespacho')->with('success', 'Paquete actualizado correctamente.');
+    }
 }

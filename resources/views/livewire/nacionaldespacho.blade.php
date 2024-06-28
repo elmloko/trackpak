@@ -108,9 +108,14 @@
                                                             class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    {{-- <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i>
-                                                        {{ __('Eliminar') }}</button> --}}
+                                                </form>
+                                                <form action="{{ route('national.devolver', $national->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-warning btn-sm">
+                                                        Devolver
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>

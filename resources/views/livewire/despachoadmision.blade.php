@@ -63,7 +63,7 @@
                                         <th>Destino</th>
                                         <th>Peso (Kg.)</th>
                                         <th>Importe (Bs.)</th>
-                                        <th>N° Factura</th>
+                                        <th>Observaciones</th>
                                         <th>Usuario</th>
                                         <th>Estado</th>
                                     </tr>
@@ -88,7 +88,7 @@
                                                 <td>{{ $national->DESTINO }}</td>
                                                 <td>{{ $national->PESO }}</td>
                                                 <td>{{ $national->IMPORTE }}</td>
-                                                <td>{{ $national->FACTURA }}</td>
+                                                <td>{{ $national->OBSERVACION }}</td>
                                                 <td>{{ $national->USER }}</td>
                                                 <td>{{ $national->ESTADO }}</td>
                                             </tr>
