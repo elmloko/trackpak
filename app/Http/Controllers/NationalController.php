@@ -1001,7 +1001,7 @@ class NationalController extends Controller
             // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
             if ($package->ESTADO === 'DESPACHO' || $package->ESTADO === 'RETORNO') {
                 // Verificar que el destino sea igual a la regional del usuario
-                if (auth()->user()->Regional == $package->CUIDAD) {
+                if (auth()->user()->Regional == $package->ORIGEN) { 
                     if ($package->ESTADO === 'DESPACHO') {           
                         Event::create([
                             'action' => 'EMS',
