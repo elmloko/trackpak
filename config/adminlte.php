@@ -373,17 +373,19 @@ return [
                 [
                     'text' => 'Expedicion',
                     'icon' => 'fas fa-cube ',
-                    'can'  => 'packages.clasificacion',
+                    'can'  => 'national',
                     'submenu' => [
                         [
                             'text' => 'Clasificacion',
                             'url' => 'national/nacionaldespacho',
                             'icon' => 'fas fa-key',
+                            'can'  => 'national',
                         ],
                         [
                             'text' => 'Expedición',
                             'url' => 'national/nacionalcartero',
                             'icon' => 'fas fa-lock',
+                            'can'  => 'national',
                         ],
                     ],
                 ],
