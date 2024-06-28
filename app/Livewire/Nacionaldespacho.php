@@ -51,7 +51,7 @@ class Nacionaldespacho extends Component
     public function toggleSelectAll()
     {
         if ($this->selectAll) {
-            $this->paquetesSeleccionados = $this->getPackageIds(); // Cambiar aquí
+            $this->paquetesSeleccionados = $this->getPackageIds();
         } else {
             $this->paquetesSeleccionados = [];
         }
@@ -114,9 +114,26 @@ class Nacionaldespacho extends Component
         $this->resetSeleccion();
     }
 
-    private function getPackageIds() // Corregir el nombre del método
+    private function getPackageIds()
     {
-        return National::where('ESTADO', 'ADMISION')->pluck('id')->toArray();
+        $userasignado = auth()->user()->name;
+
+        return National::where(function ($query) {
+            $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                ->orWhere('NOMBRESDESTINATARIO', 'like', '%' . $this->search . '%')
+                ->orWhere('TIPOSERVICIO', 'like', '%' . $this->search . '%')
+                ->orWhere('TIPOCORRESPONDENCIA', 'like', '%' . $this->search . '%')
+                ->orWhere('DESTINO', 'like', '%' . $this->search . '%')
+                ->orWhere('FACTURA', 'like', '%' . $this->search . '%')
+                ->orWhere('created_at', 'like', '%' . $this->search . '%');
+        })
+        ->whereIn('ESTADO', ['CLASIFICACION'])
+        ->where('USER', $userasignado)
+        ->when($this->selectedCity, function ($query) {
+            $query->where('DESTINO', $this->selectedCity);
+        })
+        ->pluck('id')
+        ->toArray();
     }
 
     private function resetSeleccion()
