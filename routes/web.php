@@ -193,6 +193,7 @@ Route::middleware('auth')->group(function () {
     Route::post('national/buscarPaquete', [NationalController::class, 'buscarPaquete'])->name('national.buscarPaquete');
     Route::put('/national/{id}/devolver', [NationalController::class, 'devolver'])->name('national.devolver');
     Route::get('/national/nacionalcartero', [NationalController::class, 'nacionalcartero'])->name('national.nacionalcartero');
+    Route::get('/national/nacionalexpedision', [NationalController::class, 'nacionalexpedision'])->name('national.nacionalexpedision');
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');

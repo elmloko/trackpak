@@ -32,6 +32,10 @@ class NationalController extends Controller
     {
         return view('national.nacionalcartero');
     }
+    public function nacionalexpedision()
+    {
+        return view('national.nacionalexpedision');
+    }
 
     public function create()
     {

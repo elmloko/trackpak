@@ -66,7 +66,7 @@ class Nacionalcarterogeneral extends Component
 
         // Actualizar estado de los paquetes
         National::whereIn('id', $this->paquetesSeleccionados)->update([
-            'ESTADO' => 'DESPACHO',
+            'ESTADO' => 'EXPEDICION',
             'datedespachoadmision' => now(), // Guardar la fecha de despacho actual
         ]);
 
@@ -101,7 +101,7 @@ class Nacionalcarterogeneral extends Component
     }
     private function getPackageIds() // Corregir el nombre del método
     {
-        return National::where('ESTADO', 'ADMISION')->pluck('id')->toArray();
+        return National::where('ESTADO', 'CARTERO')->pluck('id')->toArray();
     }
 
     private function resetSeleccion()

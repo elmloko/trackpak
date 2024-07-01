@@ -387,6 +387,12 @@ return [
                             'icon' => 'fas fa-lock',
                             'can'  => 'national',
                         ],
+                        [
+                            'text' => 'Inventario Expedición',
+                            'url' => 'national/nacionalexpedision',
+                            'icon' => 'fas fa-lock',
+                            'can'  => 'national',
+                        ],
                     ],
                 ],
             ],
