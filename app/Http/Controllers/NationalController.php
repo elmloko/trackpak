@@ -36,7 +36,14 @@ class NationalController extends Controller
     {
         return view('national.nacionalexpedision');
     }
-
+    public function nacionalunica()
+    {
+        return view('national.nacionalunica');
+    }
+    public function nacionalunicainventario()
+    {
+        return view('national.nacionalunicainventario');
+    }
     public function create()
     {
         $national = new National();

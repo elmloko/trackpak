@@ -395,6 +395,25 @@ return [
                         ],
                     ],
                 ],
+                [
+                    'text' => 'Regional',
+                    'icon' => 'fas fa-cube ',
+                    'can'  => 'national',
+                    'submenu' => [
+                        [
+                            'text' => 'Entregas Regional',
+                            'url' => 'national/nacionalunica',
+                            'icon' => 'fas fa-key',
+                            'can'  => 'national',
+                        ],
+                        [
+                            'text' => 'Inventario Regional',
+                            'url' => 'national/nacionalunicainventario',
+                            'icon' => 'fas fa-lock',
+                            'can'  => 'national',
+                        ],
+                    ],
+                ],
             ],
         ],
         [

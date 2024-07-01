@@ -194,6 +194,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/national/{id}/devolver', [NationalController::class, 'devolver'])->name('national.devolver');
     Route::get('/national/nacionalcartero', [NationalController::class, 'nacionalcartero'])->name('national.nacionalcartero');
     Route::get('/national/nacionalexpedision', [NationalController::class, 'nacionalexpedision'])->name('national.nacionalexpedision');
+    Route::get('/national/nacionalunica', [NationalController::class, 'nacionalunica'])->name('national.nacionalunica');
+    Route::get('/national/nacionalunicainventario', [NationalController::class, 'nacionalunicainventario'])->name('national.nacionalunicainventario');
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
