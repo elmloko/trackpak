@@ -373,7 +373,7 @@ return [
                 [
                     'text' => 'Expedicion',
                     'icon' => 'fas fa-cube ',
-                    'can'  => 'packages.inventariocartero',
+                    'can'  => 'national',
                     'submenu' => [
                         [
                             'text' => 'Clasificacion',
@@ -385,7 +385,7 @@ return [
                             'text' => 'Expedición',
                             'url' => 'national/nacionalcartero',
                             'icon' => 'fas fa-lock',
-                            'can'  => 'packages.inventariocartero',
+                            'can'  => 'national',
                         ],
                     ],
                 ],

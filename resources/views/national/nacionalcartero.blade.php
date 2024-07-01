@@ -5,6 +5,11 @@
 @endsection
 
 @section('content')
-    @livewire('nacionalcartero')
+    @hasrole('Unica')
+        @livewire('nacionalcartero')
+    @endhasrole
+    @hasrole('SuperAdmin|Administrador')
+        @livewire('nacionalcarterogeneral')
+    @endhasrole
     @include('footer')
 @endsection

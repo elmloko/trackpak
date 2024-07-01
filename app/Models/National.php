@@ -4,34 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class National
- *
- * @property $id
- * @property $CODIGO
- * @property $NOMBRESDESTINATARIO
- * @property $NOMBRESREMITENTE
- * @property $TELEFONODESTINATARIO
- * @property $TELEFONOREMITENTE
- * @property $CIDESTINATARIO
- * @property $CIREMITENTE
- * @property $CANTIDAD
- * @property $TIPOSERVICIO
- * @property $TIPOCORRESPONDENCIA
- * @property $PESO
- * @property $DESTINO
- * @property $FACTURA
- * @property $IMPORTE
- * @property $ESTADO
- * @property $created_at
- * @property $updated_at
- *
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
 class National extends Model
 {
-    
+    public function cartero()
+    {
+        return $this->belongsTo(User::class, 'cartero_id');
+    }
     static $rules = [
 		'CODIGO' => 'required',
 		'NOMBRESDESTINATARIO' => 'required',
@@ -58,11 +36,6 @@ class National extends Model
 
     protected $perPage = 20;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
     protected $fillable = [	'CODIGO',
 							'NOMBRESDESTINATARIO',
 							'NOMBRESREMITENTE',
