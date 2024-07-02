@@ -1037,13 +1037,52 @@ class NationalController extends Controller
                     $package->ESTADO = 'CLASIFICACION';
                     $package->save();
 
-                    return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+                    return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a CLASIFICACION con éxito.');
                 } else {
                     return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
                 }
             } else {
                 // Si el estado es 'RETORNO', cambiar el estado a 'VENTANILLA' sin eventos adicionales
                 $package->ESTADO = 'CLASIFICACION';
+                $package->save();
+
+                return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a CLASIFICACION con éxito.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
+        }
+    }
+    public function llegarPaquete(Request $request)
+    {
+        $codigo = $request->input('codigo');
+        $package = National::where('CODIGO', $codigo)->first();
+
+        if ($package) {
+            
+            // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
+            if ($package->ESTADO === 'EXPEDICION' || $package->ESTADO === 'RETORNO') {
+                // Verificar que el destino sea igual a la regional del usuario
+                if (auth()->user()->Regional == $package->ORIGEN) { 
+                    if ($package->ESTADO === 'EXPEDICION') {           
+                        Event::create([
+                            'action' => 'EMS',
+                            'descripcion' => 'Paquete Recibido en Oficina EMS.' . $package->ORIGEN,
+                            'user_id' => auth()->user()->id,
+                            'codigo' => $package->CODIGO,
+                        ]);
+                    }
+
+                    // Cambiar el estado del paquete a "CLASIFICACION"
+                    $package->ESTADO = 'VENTANILLA';
+                    $package->save();
+
+                    return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+                } else {
+                    return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
+                }
+            } else {
+                // Si el estado es 'RETORNO', cambiar el estado a 'VENTANILLA' sin eventos adicionales
+                $package->ESTADO = 'VENTANILLA';
                 $package->save();
 
                 return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');

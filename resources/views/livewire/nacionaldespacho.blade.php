@@ -52,7 +52,6 @@
                                             </button>
                                         </div>
                                     </div>
-                                    
                                 @endhasrole
                             </div>
                         </div>

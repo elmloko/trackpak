@@ -8,7 +8,7 @@
                             <h5 id="card_title">{{ __('Admision de Paquetes en Nacionales') }}</h5>
                             <div class="row align-items-center">
                                 @hasrole('SuperAdmin|Administrador|')
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="search">Busca:</label>
                                             <input wire:model.lazy="search" type="text" class="form-control"
@@ -16,27 +16,17 @@
                                         </div>
                                     </div>
                                 @endhasrole
-                                <div class="col-md-2">
-                                    <label for="cityFilter">Filtrar por Ciudad:</label>
-                                    <select wire:model="selectedCity" class="form-control" id="cityFilter">
-                                        <option value=""></option>
-                                        <option value="LA PAZ">LA PAZ</option>
-                                        <option value="COCHABAMBA">COCHABAMBA</option>
-                                        <option value="SANTA CRUZ">SANTA CRUZ</option>
-                                        <option value="ORURO">ORURO</option>
-                                        <option value="POTOSI">POTOSI</option>
-                                        <option value="SUCRE">SUCRE</option>
-                                        <option value="BENI">BENI</option>
-                                        <option value="PANDO">PANDO</option>
-                                        <option value="TARIJA">TARIJA</option>
-                                        <!-- Agrega más opciones según tus necesidades -->
-                                    </select>
-                                </div>
-                                
-                                <div class="col-md-8 text-right">
-                                    <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
-
+                                <div class="col-md-7 text-right">
+                                    <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
                                     @include('national.modal.ems')
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" data-toggle="modal" data-target="#llegarPaqueteModal">
+                                            Añadir Paquete
+                                        </button>
+                                        @include('national.modal.llegar')
+                                    </div>
                                 </div>
                             </div>
                         </div>

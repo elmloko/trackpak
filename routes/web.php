@@ -197,6 +197,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/national/nacionalunica', [NationalController::class, 'nacionalunica'])->name('national.nacionalunica');
     Route::get('/national/nacionalunicainventario', [NationalController::class, 'nacionalunicainventario'])->name('national.nacionalunicainventario');
     Route::get('/national/nacionalexpedisionexcel', [NationalController::class, 'nacionalexpedisionexcel'])->name('nacionalexpedision.excel');
+    Route::post('national/llegarPaquete', [NationalController::class, 'llegarPaquete'])->name('national.llegarPaquete');
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
