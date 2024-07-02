@@ -86,7 +86,7 @@ class Nacionalunica extends Component
         }
 
         // Generar el PDF con los paquetes seleccionados
-        $pdf = PDF::loadView('national.pdf.despachopdf', ['nationals' => $paquetesSeleccionados]);
+        $pdf = PDF::loadView('package.pdf.formularioentrega', ['nationals' => $paquetesSeleccionados]);
 
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();

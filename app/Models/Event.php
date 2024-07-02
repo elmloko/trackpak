@@ -20,31 +20,29 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Event extends Model
 {
-    
-    static $rules = [
-		'action' => 'required',
-		'user_id' => 'required',
-		'codigo' => 'required',
+
+  static $rules = [
+    'action' => 'required',
+    'user_id' => 'required',
+    'codigo' => 'required',
     'descripcion' => 'required',
-    ];
+  ];
 
-    protected $perPage = 20;
+  protected $perPage = 20;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['action','user_id','codigo','descripcion'];
+  /**
+   * Attributes that should be mass-assignable.
+   *
+   * @var array
+   */
+  protected $fillable = ['action', 'user_id', 'codigo', 'descripcion'];
 
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function user()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
-    }
-    
-
+  /**
+   * @return \Illuminate\Database\Eloquent\Relations\HasOne
+   */
+  public function user()
+  {
+    return $this->hasOne('App\Models\User', 'id', 'user_id');
+  }
 }

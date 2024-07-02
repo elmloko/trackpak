@@ -14,14 +14,18 @@ class SearchEvent extends Component
 
     public function render()
     {
-        $event = Event::where('codigo', 'like', '%' . $this->search . '%')
-            ->orWhere('user_id', 'like', '%' . $this->search . '%')
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+        $event = Event::with(['user' => function($query) {
+            $query->withTrashed();
+        }])
+        ->where('codigo', 'like', '%' . $this->search . '%')
+        ->orWhere('user_id', 'like', '%' . $this->search . '%')
+        ->orWhere('action', 'like', '%' . $this->search . '%')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
-        return view('livewire.events-packages', [
-            'events' => $event,
-        ]);
+    return view('livewire.events-packages', [
+        'events' => $event,
+    ]);
     }
 }
 
