@@ -7,12 +7,30 @@
                         <div class="col">
                             <h5 id="card_title">{{ __('Admision de Paquetes en Nacionales') }}</h5>
                             <div class="row align-items-center">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="search">Busca:</label>
                                         <input wire:model.lazy="search" type="text" class="form-control"
                                             placeholder="Buscar...">
                                     </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <form method="get" action="{{ route('nacionalexpedision.excel') }}" class="mb-3">
+                                        @csrf
+                                        <div class="form-row align-items-center">
+                                            <div class="col-md-4">
+                                                <label for="excel_fecha_inicio">Fecha de inicio:</label>
+                                                <input type="date" name="fecha_inicio" class="form-control" required>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <label for="excel_fecha_fin">Fecha de fin:</label>
+                                                <input type="date" name="fecha_fin" class="form-control" required>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <button type="submit" class="btn btn-success">Generar Excel</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

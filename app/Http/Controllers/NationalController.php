@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\despachoadmision;
+use App\Exports\nacionalexpedision;
 use App\Models\User;
 
 class NationalController extends Controller
@@ -1005,6 +1006,12 @@ class NationalController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         return Excel::download(new despachoadmision($fechaInicio, $fechaFin), 'Kardex Ventanilla.xlsx');
+    }
+    public function nacionalexpedisionexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        return Excel::download(new nacionalexpedision($fechaInicio, $fechaFin), 'Kardex Cartero.xlsx');
     }
     public function buscarPaquete(Request $request)
     {
