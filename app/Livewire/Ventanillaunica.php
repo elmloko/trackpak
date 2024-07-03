@@ -118,4 +118,9 @@ class Ventanillaunica extends Component
         $this->selectAll = false;
         $this->paquetesSeleccionados = [];
     }
+    public function updatedSearch()
+    {
+        $this->selectAll = false;
+        $this->paquetesSeleccionados = array_intersect($this->paquetesSeleccionados, $this->getPackageIds());
+    }
 }
