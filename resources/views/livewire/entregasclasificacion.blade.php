@@ -18,15 +18,15 @@
                                     <form method="get" action="{{ route('clasificacion.excel') }}" class="mb-3">
                                         @csrf
                                         <div class="form-row align-items-center">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label for="excel_fecha_inicio">Fecha de inicio:</label>
                                                 <input type="date" name="fecha_inicio" class="form-control" required>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label for="excel_fecha_fin">Fecha de fin:</label>
                                                 <input type="date" name="fecha_fin" class="form-control" required>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label for="ciudad">Ciudad:</label>
                                                 <select name="ciudad" class="form-control" required>
                                                     <option value="LA PAZ">LA PAZ</option>
@@ -38,16 +38,6 @@
                                                     <option value="BENI">BENI</option>
                                                     <option value="PANDO">PANDO</option>
                                                     <option value="TARIJA">TARIJA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ventanilla">Ventanilla:</label>
-                                                <select name="ventanilla" class="form-control" required>
-                                                    <option value="DND">DND</option>
-                                                    <option value="DD">DD</option>
-                                                    <option value="ECA">ECA</option>
-                                                    <option value="CASILLAS">CASILLAS</option>
-                                                    <option value="UNICA">UNICA</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-12 text-center mt-3">
@@ -61,15 +51,15 @@
                                         name="pdfForm">
                                         @csrf
                                         <div class="form-row align-items-center">
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label for="pdf_fecha_inicio">Fecha de inicio:</label>
                                                 <input type="date" name="fecha_inicio" class="form-control" required>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label for="pdf_fecha_fin">Fecha de fin:</label>
                                                 <input type="date" name="fecha_fin" class="form-control" required>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <label for="ciudad">Ciudad:</label>
                                                 <select name="ciudad" class="form-control" required>
                                                     <option value="LA PAZ">LA PAZ</option>
@@ -82,16 +72,6 @@
                                                     <option value="PANDO">PANDO</option>
                                                     <option value="TARIJA">TARIJA</option>
                                                     <!-- Agrega más opciones según tus necesidades -->
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ventanilla">Ventanilla:</label>
-                                                <select name="ventanilla" class="form-control" required>
-                                                    <option value="DND">DND</option>
-                                                    <option value="DD">DD</option>
-                                                    <option value="ECA">ECA</option>
-                                                    <option value="CASILLAS">CASILLAS</option>
-                                                    <option value="UNICA">UNICA</option>
                                                 </select>
                                             </div>
                                             <div class="col-md-12 text-center mt-3">

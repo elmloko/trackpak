@@ -17,10 +17,8 @@
                                                 </div>
                                             </div>
                                             @hasrole('SuperAdmin|Administrador|Unica')
-                                                <div class="col-md-3">
-                                                    <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
-                                                </div>
                                                 <div class="col-md-6 text-right">
+                                                    <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
                                                     <button class="btn btn-primary" data-toggle="modal"
                                                         data-target="#buscarPaqueteModal">
                                                         Añadir Paquete
