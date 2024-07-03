@@ -29,12 +29,8 @@ class Ventanillaunica extends Component
                     ->orWhere('ZONA', 'like', '%' . $this->search . '%')
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
-            ->where(function ($query) use ($userRegional) {
-                $query->where(function ($subQuery) {
-                    $subQuery->where('VENTANILLA', 'UNICA');
-                })
-                ->where('CUIDAD', $userRegional);
-            })
+            ->where('CUIDAD', $userRegional) // Asegúrate de que 'CUIDAD' esté correctamente escrito en la base de datos
+            ->where('VENTANILLA', 'UNICA')
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
 

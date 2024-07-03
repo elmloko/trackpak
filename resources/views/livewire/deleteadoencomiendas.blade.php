@@ -98,7 +98,7 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
-                                                    @hasrole('SuperAdmin|Administrador|ENCOMIENDAS')
+                                                    @hasrole('SuperAdmin|Administrador')
                                                         <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
                                                             @csrf
                                                             @method('PUT')
