@@ -26,7 +26,7 @@ class Ventanilladnd extends Component
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ZONA', 'like', '%' . $this->search . '%')
+                    ->orWhere('ZONA', 'like', $this->search . '%') 
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where(function ($query) use ($userRegional) {

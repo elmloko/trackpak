@@ -26,7 +26,7 @@ class Ventanillaunica extends Component
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ZONA', 'like', '%' . $this->search . '%')
+                    ->orWhere('ZONA', 'like', $this->search . '%') 
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where('CUIDAD', $userRegional) // Asegúrate de que 'CUIDAD' esté correctamente escrito en la base de datos
