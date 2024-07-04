@@ -941,8 +941,11 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
-        return Excel::download(new PackageExport($fechaInicio, $fechaFin), 'Almacen.xlsx');
+        $ciudad = $request->input('ciudad');
+        
+        return Excel::download(new PackageExport($fechaInicio, $fechaFin ,$ciudad), 'Almacen.xlsx');
     }
+
     public function clasificacionexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
@@ -1005,7 +1008,7 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
+        
         return Excel::download(new InventarioUNICAExport($fechaInicio, $fechaFin), 'Inventario UNICA.xlsx');
     }
     public function ecainventarioexcel(Request $request)
@@ -1020,7 +1023,7 @@ class PackageController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $regional = $request->input('regional');
-        return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanilla.xlsx');
+        return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanillaUNICA.xlsx');
     }
     public function encomiendasexcel(Request $request)
     {

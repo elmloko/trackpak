@@ -22,8 +22,10 @@ class InventarioUNICAExport implements FromCollection, WithHeadings, WithStyles
     public function collection()
     {
         $regional = auth()->user()->Regional;
-        $query = Package::withTrashed()->where('ESTADO', 'ENTREGADO')
-            ->whereIn('VENTANILLA', ['UNICA'])
+        $query = Package::withTrashed()
+            ->where('ESTADO', 'ENTREGADO')
+            ->where('VENTANILLA', 'UNICA')
+            ->where('CUIDAD', $regional)
             ->select(
                 'CODIGO',
                 'DESTINATARIO',
@@ -34,13 +36,13 @@ class InventarioUNICAExport implements FromCollection, WithHeadings, WithStyles
                 'PESO',
                 'ESTADO',
                 'OBSERVACIONES',
-                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
+                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at")
             );
 
         if ($this->fechaInicio && $this->fechaFin) {
             $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
         }
-        $query->where('CUIDAD', $regional);
+
         return $query->get();
     }
 
@@ -50,8 +52,8 @@ class InventarioUNICAExport implements FromCollection, WithHeadings, WithStyles
             'CODIGO',
             'DESTINATARIO',
             'TELEFONO',
-            'DESTINO',
-            'BANDEJA',
+            'CUIDAD',
+            'ZONA',
             'VENTANILLA',
             'PESO',
             'ESTADO',
@@ -62,21 +64,16 @@ class InventarioUNICAExport implements FromCollection, WithHeadings, WithStyles
 
     public function styles(Worksheet $sheet)
     {
-        // Establece el espaciado entre las tablas
-        $sheet->getStyle('A1:L1')->getAlignment()->setVertical('center');
-        $sheet->getStyle('A1:L1')->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('A1:L1')->getFont()->setBold(true);
+        $sheet->getStyle('A1:J1')->getAlignment()->setVertical('center');
+        $sheet->getStyle('A1:J1')->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A1:J1')->getFont()->setBold(true);
 
-        // Establece un espaciado adicional después de cada fila de datos
-        $sheet->getStyle('A2:L' . ($sheet->getHighestRow()))->getAlignment()->setVertical('center');
-        $sheet->getStyle('A2:L' . ($sheet->getHighestRow()))->getAlignment()->setHorizontal('center');
+        $sheet->getStyle('A2:J' . ($sheet->getHighestRow()))->getAlignment()->setVertical('center');
+        $sheet->getStyle('A2:J' . ($sheet->getHighestRow()))->getAlignment()->setHorizontal('center');
 
-        // Ajusta el espaciado según tus necesidades
-        // $sheet->getStyle('A:L')->getAlignment()->setVertical('center');
-        $sheet->getStyle('A:L')->getFont()->setSize(12);
+        $sheet->getStyle('A:J')->getFont()->setSize(12);
 
-        // Autoajusta el ancho de las columnas
-        foreach(range('A', 'L') as $column) {
+        foreach (range('A', 'J') as $column) {
             $sheet->getColumnDimension($column)->setAutoSize(true);
         }
 

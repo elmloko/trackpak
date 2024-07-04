@@ -13,46 +13,44 @@
                                         </h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-3">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="search">Busca:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        {{-- <div class="col-lg-9 text-right">
-                                            <form method="get" action="{{ route('packagesall.excel') }}">
+                                        <div class="col-md-6">
+                                            <form method="get" action="{{ route('packagesall.excel') }}" class="mb-3">
                                                 @csrf
                                                 <div class="form-row align-items-center">
                                                     <div class="col-md-4">
-                                                        <label for="fecha_inicio">Fecha de inicio:</label>
+                                                        <label for="excel_fecha_inicio">Fecha de inicio:</label>
                                                         <input type="date" name="fecha_inicio" class="form-control" required>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <label for="fecha_fin">Fecha de fin:</label>
+                                                        <label for="excel_fecha_fin">Fecha de fin:</label>
                                                         <input type="date" name="fecha_fin" class="form-control" required>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
+                                                        <label for="ciudad">Ciudad:</label>
+                                                        <select name="ciudad" class="form-control" required>
+                                                            <option value="LA PAZ">LA PAZ</option>
+                                                            <option value="COCHABAMBA">COCHABAMBA</option>
+                                                            <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                                            <option value="ORURO">ORURO</option>
+                                                            <option value="POTOSI">POTOSI</option>
+                                                            <option value="SUCRE">SUCRE</option>
+                                                            <option value="BENI">BENI</option>
+                                                            <option value="PANDO">PANDO</option>
+                                                            <option value="TARIJA">TARIJA</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-12 text-center mt-3">
+                                                        <button type="submit" class="btn btn-success">Generar Excel</button>
                                                     </div>
                                                 </div>
                                             </form>
-                                            <form method="get" action="{{ route('package.pdf.packagesall') }}">
-                                                @csrf
-                                                <div class="form-row align-items-center">
-                                                    <div class="col-md-4">
-                                                        <label for="fecha_inicio">Fecha de inicio:</label>
-                                                        <input type="date" name="fecha_inicio" class="form-control" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label for="fecha_fin">Fecha de fin:</label>
-                                                        <input type="date" name="fecha_fin" class="form-control" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <button type="submit" class="btn btn-danger" target="_blank">Generar PDF</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div> --}}
+                                        </div>
                                     </div>                                    
                                 </div>
                                 <div class="card-body">
