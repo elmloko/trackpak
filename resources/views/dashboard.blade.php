@@ -2020,6 +2020,16 @@
                     </div>
                 </div>
             </div>
+            <div style="text-align: center;">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunica">Entregar Paqueteria Postal</a>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunicarecibir">Recibir Paqueteria Postal</a>
+                    </div>
+                </div>
+            </div>
         @endhasrole
     @endif
 
@@ -2092,6 +2102,16 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunica">Entregar Paqueteria Postal</a>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunicarecibir">Recibir Paqueteria Postal</a>
                     </div>
                 </div>
             </div>
@@ -2170,6 +2190,16 @@
                     </div>
                 </div>
             </div>
+            <div style="text-align: center;">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunica">Entregar Paqueteria Postal</a>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunicarecibir">Recibir Paqueteria Postal</a>
+                    </div>
+                </div>
+            </div>
         @endhasrole
     @endif
 
@@ -2242,6 +2272,16 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunica">Entregar Paqueteria Postal</a>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunicarecibir">Recibir Paqueteria Postal</a>
                     </div>
                 </div>
             </div>
@@ -2320,6 +2360,16 @@
                     </div>
                 </div>
             </div>
+            <div style="text-align: center;">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunica">Entregar Paqueteria Postal</a>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunicarecibir">Recibir Paqueteria Postal</a>
+                    </div>
+                </div>
+            </div>
         @endhasrole
     @endif
 
@@ -2392,6 +2442,16 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunica">Entregar Paqueteria Postal</a>
+                    </div>
+                    <div class="col-6">
+                        <a class="btn btn-warning btn-lg btn-block" href="https://correos.gob.bo:8000/packages/ventanillaunicarecibir">Recibir Paqueteria Postal</a>
                     </div>
                 </div>
             </div>
