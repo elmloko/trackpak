@@ -676,6 +676,53 @@ class PackageController extends Controller
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
         }
     }
+    public function buscarPaqueteunica(Request $request)
+    {
+        $codigo = $request->input('codigo');
+        $zona = $request->input('zona');
+        $package = Package::where('CODIGO', $codigo)->first();
+
+        if ($package) {
+            
+            // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
+            if ($package->ESTADO === 'DESPACHO' || $package->ESTADO === 'RETORNO') {
+                // Verificar que el destino sea igual a la regional del usuario
+                if (auth()->user()->Regional == $package->CUIDAD) {
+                    if ($package->ESTADO === 'DESPACHO') {
+                        Event::create([
+                            'action' => 'DISPONIBLE',
+                            'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
+                            'user_id' => auth()->user()->id,
+                            'codigo' => $package->CODIGO,
+                        ]);            
+                        Event::create([
+                            'action' => 'EN ENTREGA',
+                            'descripcion' => 'Paquete Recibido en Oficina Postal Regional.' . $package->CUIDAD,
+                            'user_id' => auth()->user()->id,
+                            'codigo' => $package->CODIGO,
+                        ]);
+                    }
+
+                    // Cambiar el estado del paquete a "VENTANILLA"
+                    $package->ZONA = $zona;
+                    $package->ESTADO = 'RECIBIDO';
+                    $package->save();
+
+                    return redirect()->back()->with('success', 'Paquete se Recibio con éxito y cambió su estado a RECIBIDO con éxito.');
+                } else {
+                    return redirect()->back()->with('error', 'El paquete no está destinado a la regional del usuario.');
+                }
+            } else {
+                // Si el estado es 'RETORNO', cambiar el estado a 'VENTANILLA' sin eventos adicionales
+                $package->ESTADO = 'RECIBIDO';
+                $package->save();
+
+                return redirect()->back()->with('success', 'Paquete se movió a Ventanilla con éxito y cambió su estado a VENTANILLA con éxito.');
+            }
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el paquete.');
+        }
+    }
     public function buscarPaquetecasilla(Request $request)
     {
         $codigo = $request->input('codigo');
@@ -862,6 +909,10 @@ class PackageController extends Controller
     public function ventanillaunica()
     {
         return view('package.ventanillaunica');
+    }
+    public function ventanillaunicarecibir()
+    {
+        return view('package.ventanillaunicarecibir');
     }
     public function deleteado()
     {

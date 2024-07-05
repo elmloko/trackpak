@@ -18,11 +18,7 @@
                                         </div>
                                         @hasrole('SuperAdmin|Administrador|Unica')
                                                 <div class="col-md-6 text-right">
-                                                    <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
-                                                    <button class="btn btn-primary" data-toggle="modal"
-                                                        data-target="#buscarPaqueteModal">
-                                                        Añadir Paquete
-                                                    </button>
+                                                    <button wire:click="cambiarEstado" class="btn btn-warning">Entregar y Dar de Baja</button>
                                                     @include('package.modal.ventanilla')
                                                 </div>
                                             @endhasrole
@@ -172,7 +168,7 @@
                                                                         {{ __('Editar') }}
                                                                     </a>
                                                                 @endhasrole
-                                                                @hasrole('SuperAdmin|Administrador|Unica')
+                                                                {{-- @hasrole('SuperAdmin|Administrador|Unica')
                                                                     @if (!$package->redirigido)
                                                                         <a class="btn btn-sm btn-secondary" href="#"
                                                                             data-toggle="modal"
@@ -182,7 +178,7 @@
                                                                         </a>
                                                                         @include('package.modal.reencaminar')
                                                                     @endif
-                                                                @endhasrole
+                                                                @endhasrole --}}
                                                             </td>
                                                         </tr>
                                                     @endif

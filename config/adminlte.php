@@ -491,13 +491,19 @@ return [
                     'can'  => 'packages.unica',
                     'submenu' => [
                         [
-                            'text' => 'Entregas Ventanilla UNICA',
+                            'text' => 'Recibir Paqueteria Postal',
+                            'url' => 'packages/ventanillaunicarecibir',
+                            'icon' => 'fas fa-truck',
+                            'can'  => 'packages.unica',
+                        ],
+                        [
+                            'text' => 'Entregas Paqueteria Postal',
                             'url' => 'packages/ventanillaunica',
                             'icon' => 'fas fa-truck',
                             'can'  => 'packages.unica',
                         ],
                         [
-                            'text' => 'Inventario Ventanilla UNICA',
+                            'text' => 'Inventario Paqueteria Postal',
                             'url' => 'test/deleteadounica',
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.unica',
