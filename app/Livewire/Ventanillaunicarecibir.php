@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class Ventanillaunicarecibir extends Component
 {
@@ -75,9 +74,6 @@ class Ventanillaunicarecibir extends Component
             })
             ->get();
     
-        // Determinar el formulario según una condición
-        $formulario = ($paquetesSeleccionados->first()->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-    
         foreach ($paquetesSeleccionados as $paquete) {
             // Calcular el precio basado en el peso del paquete
             $peso = $paquete->PESO;
@@ -103,20 +99,8 @@ class Ventanillaunicarecibir extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-    
         // Restablecer la selección
         $this->resetSeleccion();
-    
-        // Generar el PDF con los paquetes seleccionados
-        $pdf = PDF::loadView($formulario, ['packages' => $paquetesSeleccionados]);
-    
-        // Obtener el contenido del PDF
-        $pdfContent = $pdf->output();
-    
-        // Generar una respuesta con el contenido del PDF para descargar
-        return response()->streamDownload(function () use ($pdfContent) {
-            echo $pdfContent;
-        }, 'Formulario Entrega UNICA.pdf');
     }
 
     public function toggleSelectSingle($packageId)
