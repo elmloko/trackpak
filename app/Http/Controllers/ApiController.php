@@ -39,6 +39,8 @@ class ApiController extends Controller
             'TELEFONO' => $package->TELEFONO,
             'ZONA' => $package->ZONA,
             'ADUANA' => $package->ADUANA,
+            'CUIDAD' => $package->CUIDAD,
+            'VENTANILLA' => $package->VENTANILLA,
         ]);
     }
     public function ventanilla(Request $request)
