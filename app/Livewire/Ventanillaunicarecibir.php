@@ -18,6 +18,7 @@ class Ventanillaunicarecibir extends Component
 
     public function render()
     {
+        $userRegional = auth()->user()->Regional;
         $packages = Package::where('ESTADO', 'RECIBIDO')
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
@@ -26,6 +27,7 @@ class Ventanillaunicarecibir extends Component
                     ->orWhere('ZONA', 'like', $this->search . '%') 
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
+            ->where('CUIDAD', $userRegional)
             ->where('VENTANILLA', 'UNICA')
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
