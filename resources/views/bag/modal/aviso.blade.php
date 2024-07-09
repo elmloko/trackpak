@@ -22,20 +22,6 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            {{-- <div class="form-group">
-                                {{ Form::label('CONTROL PESO (Kg.)') }}
-                                {{ Form::text('PESOF', $bag->PESOF, [
-                                    'class' => 'form-control' . ($errors->has('PESOF') ? ' is-invalid' : ''),
-                                    'placeholder' => 'Expresa el Peso en Gramos',
-                                    'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
-                                    'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
-                                    'pattern' => '^(\d+)?(\.\d{1,3})?$',
-                                    'required' => 'required',
-                                    'min' => '0', // Establecer el valor mínimo
-                                    'max' => '100.000',
-                                ]) }}
-                                {!! $errors->first('PESOF', '<div class="invalid-feedback">:message</div>') !!}
-                            </div> --}}
                             <div class="form-group">
                                 {{ Form::label('OBSERVACIONES') }}
                                 {{ Form::text('OBSERVACIONES', strtoupper($bag->OBSERVACIONES), [

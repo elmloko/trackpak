@@ -192,14 +192,8 @@ class BagController extends Controller
         ]);
 
         // Genera el PDF
-        $pdf = PDF::loadView('bag.pdf.cn38', compact('bags', 'sum'));
-
-        // Guarda o descarga el PDF según tus necesidades
-        // $pdf->save(storage_path('nombre_del_archivo.pdf'));
-        // o
-        // return $pdf->download('nombre_del_archivo.pdf');
-
-        // Puedes usar la vista que has proporcionado en tu pregunta como plantilla para el PDF
+        $pdf = PDF::download('bag.pdf.cn38', compact('bags', 'sum'));
+        
         return $pdf->stream('CN38.pdf', ['Attachment' => false]);
     }
 
@@ -282,6 +276,8 @@ class BagController extends Controller
         // Código restante para generar el PDF y devolver la respuesta
         $bag->update([
             'T' => '1',
+            'ITINERARIO' => $request->input('ITINERARIO'),
+            'OBSERVACIONES' => $request->input('OBSERVACIONES'),
         ]);
 
         $sum = $sacau + $sacar + $sacam;
@@ -297,7 +293,7 @@ class BagController extends Controller
 
         $pdf = PDF::loadView('bag.pdf.cn31', compact('bag', 'sum' ,'sum1','sum2'));
 
-        return $pdf->stream('CN31.pdf');
+        return $pdf->download('CN31.pdf');
     }
 
     public function bagsadd(Request $request)
@@ -375,7 +371,7 @@ class BagController extends Controller
 
         $pdf = PDF::loadView('bag.pdf.cn35', compact('bags'));
 
-        return $pdf->stream('CN35.pdf');
+        return $pdf->download('CN35.pdf');
     }
 
     public function bagsclose()
