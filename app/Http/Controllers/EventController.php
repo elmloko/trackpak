@@ -329,7 +329,7 @@ class EventController extends Controller
             ->get();
 
         // Consumir la API para autenticación y obtener el token JWT
-        $client = new Client(['base_uri' => 'http://localhost:5254/']);
+        $client = new Client(['base_uri' => 'http://172.65.10.37/']);
         $response = $client->post('api/Autenticacion/Validar', [
             'json' => [
                 'correo' => 'Correos',
