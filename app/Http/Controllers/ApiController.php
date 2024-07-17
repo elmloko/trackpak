@@ -10,6 +10,14 @@ use App\Models\User;
 
 class ApiController extends Controller
 {
+    public function index()
+    {
+        // Obtener todos los paquetes
+        $packages = Package::all();
+
+        // Devolver los datos de los paquetes en formato JSON
+        return response()->json($packages);
+    }
     public function store(Request $request)
     {
         // Método de prueba para recibir datos y devolver una respuesta

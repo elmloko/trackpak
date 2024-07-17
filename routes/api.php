@@ -12,4 +12,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('predefined.token')->group(function () {
     Route::get('/prueba/{codigo}', [ApiController::class, 'show']);
     Route::post('/ventanilla', [ApiController::class, 'ventanilla']);
+    Route::get('/packages', [ApiController::class, 'index']);
 });
