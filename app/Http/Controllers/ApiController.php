@@ -13,7 +13,7 @@ class ApiController extends Controller
     public function index()
     {
         // Obtener todos los paquetes
-        $packages = Package::all();
+        $packages = Package::withTrashed()->get();
 
         // Devolver los datos de los paquetes en formato JSON
         return response()->json($packages);
