@@ -309,7 +309,7 @@ class EventController extends Controller
     public function search(Request $request)
     {
         $codigo = $request->input('codigo');
-        
+
         // Extraer los últimos dos caracteres del código
         $lastTwoChars = substr($codigo, -2);
 
@@ -352,6 +352,11 @@ class EventController extends Controller
 
         // Decodificar y obtener los resultados de la búsqueda
         $results = json_decode($response->getBody());
+
+        // Ordenar los resultados por fecha descendente
+        usort($results, function ($a, $b) {
+            return strtotime($b->eventDate) - strtotime($a->eventDate);
+        });
 
         // Puedes devolver los resultados a tu vista junto con los paquetes y eventos
         return view('search', compact('results', 'packages', 'event', 'codigo', 'country'));
