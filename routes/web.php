@@ -244,6 +244,23 @@ Route::middleware('auth')->group(function () {
     Route::get('bag/pdf/cn38', [BagController::class, 'cn38'])->name('bag.pdf.cn38');
     Route::get('/bag/bagsall', [BagController::class, 'bagsall'])->name('bags.bagsall');
 
+    Route::get('/internationals', [InternationalController::class, 'index'])->name('internationals.index');
+    Route::get('/internationals/create', [InternationalController::class, 'create'])->name('internationals.create');
+    Route::post('/internationals', [InternationalController::class, 'store'])->name('internationals.store');
+    // Route::get('/internationals/{id}', [InternationalController::class, 'show'])->name('internationals.show');
+    Route::get('/internationals/{id}/edit', [InternationalController::class, 'edit'])->name('internationals.edit');
+    Route::put('/internationals/{international}', [InternationalController::class, 'update'])->name('internationals.update');
+    Route::delete('/internationals/{id}', [InternationalController::class, 'destroy'])->name('internationals.destroy');
+    Route::get('internationals/ventanilladd', [InternationalController::class, 'ventanilladd'])->name('internationals.ventanilladd');
+    Route::get('/internationals/deleteadodd', [InternationalController::class, 'deleteadodd'])->name('internationals.deleteadodd');
+    Route::post('internationals/{id}/restore', [InternationalController::class, 'restore'])->name('internationals.restore');
+    Route::get('internationals/certificadosexcel', [InternationalController::class, 'certificadosexcel'])->name('certificados.excel');
+    Route::get('internationals/inventarioDRDexcel', [InternationalController::class, 'inventarioDRDexcel'])->name('inventarioDRD.excel');
+    Route::get('internationals/ventanilladnd', [InternationalController::class, 'ventanilladnd'])->name('internationals.ventanilladnd');
+    Route::get('/internationals/deleteadodnd', [InternationalController::class, 'deleteadodnd'])->name('internationals.deleteadodnd');
+    Route::get('internationals/certificadosdndexcel', [InternationalController::class, 'certificadosdndexcel'])->name('certificadosdnd.excel');
+    Route::get('internationals/inventarioDNDexcel', [InternationalController::class, 'inventarioDNDexcel'])->name('inventarioDND.excel');
+
     //Sacas y paquetes
     Route::get('/packages-has-bags', [PackagesHasBagController::class, 'index'])->name('packages-has-bags.index');
     Route::get('/packages-has-bags/create', [PackagesHasBagController::class, 'create'])->name('packages-has-bags.create');
