@@ -20,6 +20,7 @@
         "milon/barcode": "^10.0",
         "picqer/php-barcode-generator": "^2.4",
         "spatie/laravel-permission": "^5.11",
+        "tymon/jwt-auth": "^2.1",
         "wire-elements/modal": "^2.0"
     },
     "require-dev": {
