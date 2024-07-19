@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Event;
 use App\Models\National;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,35 @@ class ApiController extends Controller
         // Devolver los datos de los paquetes en formato JSON
         return response()->json($packages);
     }
+
+    public function delete(Request $request, $codigo)
+    {
+        $package = Package::where('CODIGO', $codigo)->first();
+    
+        if ($package) {
+            // Registra el evento de entrega
+            Event::create([
+                'action' => 'ENTREGADO',
+                'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional (SISTEMA ATM)',
+                'user_id' => 84,  // Asignar un ID de usuario predeterminado o ajustarlo según tus necesidades
+                'codigo' => $package->CODIGO,
+            ]);
+    
+            // Cambia el estado del paquete a "ENTREGADO"
+            $package->estado = 'ENTREGADO';
+    
+            // Guarda el paquete actualizado
+            $package->save();
+    
+            // Elimina el paquete (soft delete)
+            $package->delete();
+    
+            return response()->json(['success' => true, 'message' => 'Paquete eliminado y evento registrado.']);
+        } else {
+            return response()->json(['error' => 'No se pudo encontrar el paquete para dar de baja.'], 404);
+        }
+    }
+
     public function store(Request $request)
     {
         // Método de prueba para recibir datos y devolver una respuesta
