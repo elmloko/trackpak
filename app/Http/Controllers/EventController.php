@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use GuzzleHttp\Client;
 
 class EventController extends Controller
 {
