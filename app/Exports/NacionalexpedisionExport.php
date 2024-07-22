@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class Nacionalexpedision implements FromCollection, WithHeadings, WithStyles
+class NacionalexpedisionExport implements FromCollection, WithHeadings, WithStyles
 {
 
     protected $fechaInicio;
