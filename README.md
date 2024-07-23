@@ -21,7 +21,7 @@ To solve these problems, a modern and efficient system for tracking parcels nati
   https://spatie.be/docs/laravel-permission/v5/introduction    	spatie/laravel-permission
   https://laravel-livewire.com/                             				livewire/livewire
   https://github.com/wire-elements/modal/tree/1.0.0     	        wire-elements/modal
-  https://github.com/milon/barcode                               		milon/barcode
+  https://github.com/milon/barcode                               			milon/barcode
   https://github.com/picqer/php-barcode-generator              	picqer/php-barcode-generator
   https://github.com/biscolab/laravel-recaptcha				biscolab/laravel-recaptcha
   https://jwt-auth.readthedocs.io/en/develop/					tymon/jwt-auth
