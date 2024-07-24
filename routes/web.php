@@ -259,7 +259,8 @@ Route::middleware('auth')->group(function () {
     Route::get('internationals/ventanilladnd', [InternationalController::class, 'ventanilladnd'])->name('internationals.ventanilladnd');
     Route::get('/internationals/deleteadodnd', [InternationalController::class, 'deleteadodnd'])->name('internationals.deleteadodnd');
     Route::get('internationals/certificadosdndexcel', [InternationalController::class, 'certificadosdndexcel'])->name('certificadosdnd.excel');
-    Route::get('internationals/inventarioDNDexcel', [InternationalController::class, 'inventarioDNDexcel'])->name('inventarioDND.excel');
+    Route::get('internationals/inventarioDNDexcel', [InternationalController::class, 'inventarioDNDexcel'])->name('inventarioDND.excel2'); // Cambia el nombre aquí
+    
 
     //Sacas y paquetes
     Route::get('/packages-has-bags', [PackagesHasBagController::class, 'index'])->name('packages-has-bags.index');

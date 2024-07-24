@@ -295,6 +295,13 @@
         </svg>
     </div>
 
+    <!-- Botón para ir a la página principal -->
+    <div class="text-center mt-10 mb-10">
+        <a href="/"
+            class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Volver
+            a la página principal</a>
+    </div>
+
     @if ($packages->count() > 0)
         <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
             <div class="mb-4 text-black" tabindex="1">
@@ -419,7 +426,7 @@
                     <b>"{{ $codigo }}"</b>
                 </p>
             </div>
-            <div class="text-center mt-10">
+            <div class="text-center mt-10 mb-10">
                 <a href="/"
                     class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Volver
                     a la página principal</a>
