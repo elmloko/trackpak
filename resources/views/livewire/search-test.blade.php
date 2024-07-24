@@ -15,10 +15,12 @@
                     <input type="text" name="codigo" placeholder="Ingresa tu código de rastreo"
                         class="w-full py-3 px-4 mx-3 border rounded-full text-black" style="width: 100%;"
                         pattern=".{13,13}" required title="El código de rastreo debe tener 13 dígitos">
-                </div>
-                <div class="g-recaptcha" data-sitekey="6LcJRHQpAAAAABKCk7seFIHEImEUo2Q31tPLpSjX"></div>
-                <button type="submit"
+                        <button type="submit"
                     class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Buscar</button>
+                </div>
+                <div class="mt-4">
+                    <div class="g-recaptcha flex justify-center mt-4" data-sitekey="6LcJRHQpAAAAABKCk7seFIHEImEUo2Q31tPLpSjX"></div>
+                </div>
             </form>
         </div>
         <!-- Columna Derecha -->
