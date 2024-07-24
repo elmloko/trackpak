@@ -7,6 +7,7 @@ use App\Models\Package;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use GuzzleHttp\Client;
+use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
 
 class EventController extends Controller
 {
@@ -308,6 +309,11 @@ class EventController extends Controller
 
     public function search(Request $request)
     {
+        $request->validate([
+            'codigo' => 'required|size:13',
+            'g-recaptcha-response' => 'required|captcha'
+        ]);
+
         $codigo = $request->input('codigo');
 
         // Validar que el campo 'codigo' no esté vacío
@@ -366,6 +372,7 @@ class EventController extends Controller
         // Puedes devolver los resultados a tu vista junto con los paquetes y eventos
         return view('search', compact('results', 'packages', 'event', 'codigo', 'country'));
     }
+
 
 
     public function eventspdf()
