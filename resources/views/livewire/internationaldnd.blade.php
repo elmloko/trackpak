@@ -51,13 +51,17 @@
                                                     {{ __('Crear Nuevo') }}
                                                 </a>
                                             </div>
-                                            {{-- <div class="col-md-3 text-right">
-                                            <button class="btn btn-primary" data-toggle="modal"
-                                                data-target="#buscarPaqueteModal">
-                                                Añadir Paquete
-                                            </button>
-                                            @include('package.modal.ventanilla')
-                                        </div> --}}
+                                            <div>
+                                                <form wire:submit.prevent="import">
+                                                    <input type="file" wire:model="file">
+                                                    <button type="submit">Importar</button>
+                                                </form>
+                                                @if (session()->has('message'))
+                                                    <div class="alert alert-success">
+                                                        {{ session('message') }}
+                                                    </div>
+                                                @endif
+                                            </div>
                                         @endhasrole
                                     </div>
                                 </div>
