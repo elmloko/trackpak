@@ -310,6 +310,11 @@ class EventController extends Controller
     {
         $codigo = $request->input('codigo');
 
+        // Validar que el campo 'codigo' no esté vacío
+        if (empty($codigo)) {
+            return redirect()->back()->withErrors(['codigo' => 'El campo código no puede estar vacío.']);
+        }
+
         // Extraer los últimos dos caracteres del código
         $lastTwoChars = substr($codigo, -2);
 
@@ -318,11 +323,9 @@ class EventController extends Controller
 
         // Realiza la consulta a la base de datos para obtener los paquetes
         $packages = Package::where('CODIGO', $codigo)
-        ->take(5)
-        ->withTrashed()
-        ->get(); // Cambiado de 'first' a 'get' para obtener una colección
-
-// Resto del código...
+            ->take(5)
+            ->withTrashed()
+            ->get(); // Cambiado de 'first' a 'get' para obtener una colección
 
         // Realiza la lógica para buscar eventos basados en el código postal
         $event = Event::where('codigo', $codigo)
@@ -363,6 +366,7 @@ class EventController extends Controller
         // Puedes devolver los resultados a tu vista junto con los paquetes y eventos
         return view('search', compact('results', 'packages', 'event', 'codigo', 'country'));
     }
+
 
     public function eventspdf()
     {
