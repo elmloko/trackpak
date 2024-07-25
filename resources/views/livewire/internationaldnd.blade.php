@@ -51,18 +51,23 @@
                                                     {{ __('Crear Nuevo') }}
                                                 </a>
                                             </div>
-                                            <div>
-                                                <form wire:submit.prevent="import">
-                                                    <input type="file" wire:model="file">
-                                                    <button type="submit">Importar</button>
-                                                </form>
-                                                <a href="{{ route('plantilladnd.excel') }}" class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
-                                                @if (session()->has('message'))
-                                                    <div class="alert alert-success">
-                                                        {{ session('message') }}
-                                                    </div>
-                                                @endif
-                                            </div>
+                                        @endhasrole
+                                        @hasrole('SuperAdmin|Administrador')
+                                        <div>
+                                            <form wire:submit.prevent="import" class="form-inline">
+                                                <div class="form-group mb-2">
+                                                    <label for="fileUpload" class="sr-only">Archivo Excel</label>
+                                                    <input type="file" wire:model="file" class="form-control-file" id="fileUpload" accept=".xlsx,.xls">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary mb-2">Importar</button>
+                                                <a href="{{ route('plantilladd.excel') }}" class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
+                                            </form>
+                                            @if (session()->has('message'))
+                                                <div class="alert alert-success mt-2">
+                                                    {{ session('message') }}
+                                                </div>
+                                            @endif
+                                        </div>
                                         @endhasrole
                                     </div>
                                 </div>
