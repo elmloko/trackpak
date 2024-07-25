@@ -12,9 +12,6 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PackagesHasBagController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Livewire\Internationaldnd;
-
-use App\Http\Controllers\ApiController;
 use App\Http\Controllers\InternationalController;
 use Illuminate\Support\Facades\Route;
 
@@ -261,6 +258,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/internationals/deleteadodnd', [InternationalController::class, 'deleteadodnd'])->name('internationals.deleteadodnd');
     Route::get('internationals/certificadosdndexcel', [InternationalController::class, 'certificadosdndexcel'])->name('certificadosdnd.excel');
     Route::get('internationals/inventarioDNDexcel', [InternationalController::class, 'inventarioDNDexcel'])->name('inventarioDND.excel2'); // Cambia el nombre aquí
+    Route::get('internationals/plantillaeexcel', [InternationalController::class, 'plantillaeexcel'])->name('plantillae.excel');
+    Route::get('internationals/plantilladdexcel', [InternationalController::class, 'plantilladdexcel'])->name('plantilladd.excel');
+    Route::get('internationals/plantilladndexcel', [InternationalController::class, 'plantilladndexcel'])->name('plantilladnd.excel');
+
     //Sacas y paquetes
     Route::get('/packages-has-bags', [PackagesHasBagController::class, 'index'])->name('packages-has-bags.index');
     Route::get('/packages-has-bags/create', [PackagesHasBagController::class, 'create'])->name('packages-has-bags.create');

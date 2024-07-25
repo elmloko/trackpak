@@ -89,6 +89,7 @@
                                                             </div>
                                                             <button type="submit"
                                                                 class="btn btn-primary mb-2">Importar</button>
+                                                                <a href="{{ route('plantillae.excel') }}" class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
                                                         </form>
                                                         @if (session()->has('message'))
                                                             <div class="alert alert-success mt-2">

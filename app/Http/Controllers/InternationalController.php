@@ -10,6 +10,9 @@ use App\Exports\Internationaldd;
 use App\Exports\Internationaldnd;
 use App\Exports\Internationalinvdd;
 use App\Exports\Internationalinvdnd;
+use App\Exports\PlantillaeExport;
+use App\Exports\PlantilladdExport;
+use App\Exports\PlantilladndExport;
 
 class InternationalController extends Controller
 {
@@ -169,6 +172,19 @@ class InternationalController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         return Excel::download(new Internationalinvdnd($fechaInicio, $fechaFin), 'Inventario Certificados DND.xlsx');
+    }
+
+    public function plantillaeexcel()
+    {
+        return Excel::download(new PlantillaeExport, 'Plantilla Encomienda.xlsx');
+    }
+    public function plantilladdexcel()
+    {
+        return Excel::download(new PlantilladdExport, 'Plantilla DD.xlsx');
+    }
+    public function plantilladndexcel()
+    {
+        return Excel::download(new PlantilladndExport, 'Plantilla DND.xlsx');
     }
     public function ventanilladd()
     {

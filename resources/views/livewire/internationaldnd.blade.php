@@ -56,6 +56,7 @@
                                                     <input type="file" wire:model="file">
                                                     <button type="submit">Importar</button>
                                                 </form>
+                                                <a href="{{ route('plantilladnd.excel') }}" class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
                                                 @if (session()->has('message'))
                                                     <div class="alert alert-success">
                                                         {{ session('message') }}
