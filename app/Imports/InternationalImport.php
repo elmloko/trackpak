@@ -10,12 +10,12 @@ class InternationalImport implements ToModel
     public function model(array $row)
     {
         return new International([
-            'CODIGO' => $row[0],
-            'DESTINATARIO' => $row[1],
+            'CODIGO' => strtoupper($row[0]),
+            'DESTINATARIO' => strtoupper($row[1]),
             'TELEFONO' => is_numeric($row[2]) ? $row[2] : null,
             'PESO' => is_numeric($row[3]) ? floatval($row[3]) : null,
-            'ADUANA' => $row[4],
-            'ZONA' => $row[5],
+            'ADUANA' => strtoupper($row[4]),
+            'ZONA' => strtoupper($row[5]),
             'CUIDAD' => 'LA PAZ',
             'VENTANILLA' =>  'DND',
             'ESTADO' => 'VENTANILLA',
