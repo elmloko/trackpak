@@ -5,17 +5,21 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\International;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\DdcImport;
 
 class Internationaldd extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     public $search = '';
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $file; // Agregar esta línea
 
     public function render()
     {
@@ -104,6 +108,17 @@ class Internationaldd extends Component
             echo $pdfContent;
         }, 'Formulario Certificado DD.pdf');
     }    
+
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|mimes:xls,xlsx',
+        ]);
+
+        Excel::import(new DdcImport, $this->file->path());
+
+        session()->flash('message', 'Archivo importado exitosamente.');
+    }
 
     public function toggleSelectSingle($packageId)
     {

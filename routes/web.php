@@ -262,7 +262,6 @@ Route::middleware('auth')->group(function () {
     Route::get('internationals/certificadosdndexcel', [InternationalController::class, 'certificadosdndexcel'])->name('certificadosdnd.excel');
     Route::get('internationals/inventarioDNDexcel', [InternationalController::class, 'inventarioDNDexcel'])->name('inventarioDND.excel2'); // Cambia el nombre aquí
     Route::get('/international/import', InternationalController::class)->name('international.import');
-    Route::get('/international/import', Internationaldnd::class)->name('international.import');
     //Sacas y paquetes
     Route::get('/packages-has-bags', [PackagesHasBagController::class, 'index'])->name('packages-has-bags.index');
     Route::get('/packages-has-bags/create', [PackagesHasBagController::class, 'create'])->name('packages-has-bags.create');

@@ -51,13 +51,22 @@
                                                     {{ __('Crear Nuevo') }}
                                                 </a>
                                             </div>
-                                            {{-- <div class="col-md-3 text-right">
-                                            <button class="btn btn-primary" data-toggle="modal"
-                                                data-target="#buscarPaqueteModal">
-                                                Añadir Paquete
-                                            </button>
-                                            @include('package.modal.ventanilla')
-                                        </div> --}}
+                                        @endhasrole
+                                        @hasrole('SuperAdmin|Administrador')
+                                        <div>
+                                            <form wire:submit.prevent="import" class="form-inline">
+                                                <div class="form-group mb-2">
+                                                    <label for="fileUpload" class="sr-only">Archivo Excel</label>
+                                                    <input type="file" wire:model="file" class="form-control-file" id="fileUpload" accept=".xlsx,.xls">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary mb-2">Importar</button>
+                                            </form>
+                                            @if (session()->has('message'))
+                                                <div class="alert alert-success mt-2">
+                                                    {{ session('message') }}
+                                                </div>
+                                            @endif
+                                        </div>                                        
                                         @endhasrole
                                     </div>
                                 </div>
