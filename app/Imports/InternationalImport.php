@@ -4,20 +4,21 @@ namespace App\Imports;
 
 use App\Models\International;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class InternationalImport implements ToModel
+class InternationalImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
         return new International([
-            'CODIGO' => strtoupper($row[0]),
-            'DESTINATARIO' => strtoupper($row[1]),
-            'TELEFONO' => is_numeric($row[2]) ? $row[2] : null,
-            'PESO' => is_numeric($row[3]) ? floatval($row[3]) : null,
-            'ADUANA' => strtoupper($row[4]),
-            'ZONA' => strtoupper($row[5]),
+            'CODIGO' => strtoupper($row['codigo'] ?? ''),
+            'DESTINATARIO' => strtoupper($row['destinatario'] ?? ''),
+            'TELEFONO' => isset($row['telefono']) && is_numeric($row['telefono']) ? $row['telefono'] : null,
+            'PESO' => isset($row['peso']) && is_numeric($row['peso']) ? floatval($row['peso']) : null,
+            'ADUANA' => strtoupper($row['aduana'] ?? ''),
+            'ZONA' => strtoupper($row['zona'] ?? ''),
             'CUIDAD' => 'LA PAZ',
-            'VENTANILLA' =>  'DND',
+            'VENTANILLA' => 'DND',
             'ESTADO' => 'VENTANILLA',
             'TIPO' => 'PAQUETE',
             'created_at' => now(),
