@@ -5,17 +5,21 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\EncomiendasImport;
 
 class Ventanillaencomienda extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     public $search = '';
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $file; // Agregar esta línea
 
     public function render()
     {
@@ -108,6 +112,16 @@ class Ventanillaencomienda extends Component
         } else {
             $this->paquetesSeleccionados[] = $packageId;
         }
+    }
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|mimes:xls,xlsx',
+        ]);
+
+        Excel::import(new EncomiendasImport, $this->file->path());
+
+        session()->flash('message', 'Archivo importado exitosamente.');
     }
     private function getPackageIds()
     {
