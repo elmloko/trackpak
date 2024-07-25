@@ -18,12 +18,34 @@
                                             </div>
                                             @hasrole('SuperAdmin|Administrador|Unica')
                                                 <div class="col-md-6 text-right">
-                                                    <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
+                                                    <button wire:click="cambiarEstado"
+                                                        class="btn btn-warning">Entregar</button>
                                                     <button class="btn btn-primary" data-toggle="modal"
                                                         data-target="#buscarPaqueteModal">
                                                         Añadir Paquete
                                                     </button>
                                                     @include('package.modal.ventanilla')
+                                                </div>
+                                            @endhasrole
+                                            @hasrole('SuperAdmin|Administrador')
+                                                <div>
+                                                    <form wire:submit.prevent="import" class="form-inline">
+                                                        <div class="form-group mb-2">
+                                                            <label for="fileUpload" class="sr-only">Archivo Excel</label>
+                                                            <input type="file" wire:model="file"
+                                                                class="form-control-file" id="fileUpload"
+                                                                accept=".xlsx,.xls">
+                                                        </div>
+                                                        <button type="submit"
+                                                            class="btn btn-primary mb-2">Importar</button>
+                                                        <a href="{{ route('plantillaunica.excel') }}"
+                                                            class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
+                                                    </form>
+                                                    @if (session()->has('message'))
+                                                        <div class="alert alert-success mt-2">
+                                                            {{ session('message') }}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             @endhasrole
                                             <div class="col-md-12">
@@ -35,7 +57,8 @@
                                                             @csrf
                                                             <div class="form-row">
                                                                 <div class="col-md-6">
-                                                                    <label for="excel_fecha_inicio">Fecha de inicio:</label>
+                                                                    <label for="excel_fecha_inicio">Fecha de
+                                                                        inicio:</label>
                                                                     <input type="date" name="fecha_inicio"
                                                                         class="form-control" required>
                                                                 </div>
@@ -80,7 +103,8 @@
                                                                     </select>
                                                                 </div>
                                                                 <div class="col-md-12 mt-3 text-center">
-                                                                    <button type="submit" class="btn btn-danger">Generar
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger">Generar
                                                                         PDF</button>
                                                                 </div>
                                                             </div>
@@ -131,27 +155,27 @@
                                                         $i = 1; // Inicializa la variable $i
                                                     @endphp
                                                     @foreach ($packages as $package)
-                                                            <tr>
-                                                                <td><input type="checkbox"
+                                                        <tr>
+                                                            <td><input type="checkbox"
                                                                     wire:model="paquetesSeleccionados"
                                                                     value="{{ $package->id }}"></td>
-                                                                <td>{{ $i++ }}</td>
-                                                                <td>{{ $package->CODIGO }}</td>
-                                                                <td>{{ $package->DESTINATARIO }}</td>
-                                                                <td>{{ $package->TELEFONO }}</td>
-                                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                                <td>{{ $package->CUIDAD }}</td>
-                                                                <td>{{ $package->ZONA }}</td>
-                                                                {{-- <td>{{ $package->VENTANILLA }}</td> --}}
-                                                                <td>{{ $package->PESO }} </td>
-                                                                <td>{{ $package->PRECIO }} </td>
-                                                                <td>{{ $package->TIPO }}</td>
-                                                                <td>{{ $package->ESTADO }}</td>
-                                                                <td>{{ $package->OBSERVACIONES }}</td>
-                                                                <td>{{ $package->ADUANA }}</td>
-                                                                <td>{{ $package->updated_at }}</td>
-                                                                <td>
-                                                                    {{-- @hasrole('SuperAdmin|Administrador|Unica')
+                                                            <td>{{ $i++ }}</td>
+                                                            <td>{{ $package->CODIGO }}</td>
+                                                            <td>{{ $package->DESTINATARIO }}</td>
+                                                            <td>{{ $package->TELEFONO }}</td>
+                                                            <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
+                                                            <td>{{ $package->CUIDAD }}</td>
+                                                            <td>{{ $package->ZONA }}</td>
+                                                            {{-- <td>{{ $package->VENTANILLA }}</td> --}}
+                                                            <td>{{ $package->PESO }} </td>
+                                                            <td>{{ $package->PRECIO }} </td>
+                                                            <td>{{ $package->TIPO }}</td>
+                                                            <td>{{ $package->ESTADO }}</td>
+                                                            <td>{{ $package->OBSERVACIONES }}</td>
+                                                            <td>{{ $package->ADUANA }}</td>
+                                                            <td>{{ $package->updated_at }}</td>
+                                                            <td>
+                                                                {{-- @hasrole('SuperAdmin|Administrador|Unica')
                                                                         <a class="btn btn-sm btn-warning" href="#"
                                                                             data-toggle="modal"
                                                                             data-target="#bajaModal{{ $package->id }}">
@@ -160,26 +184,26 @@
                                                                         </a>
                                                                         @include('package.modal.baja')
                                                                     @endhasrole --}}
-                                                                    @hasrole('SuperAdmin|Administrador|Unica')
-                                                                        <a class="btn btn-sm btn-success"
-                                                                            href="{{ route('packages.edit', $package->id) }}">
-                                                                            <i class="fa fa-fw fa-edit"></i>
-                                                                            {{ __('Editar') }}
+                                                                @hasrole('SuperAdmin|Administrador|Unica')
+                                                                    <a class="btn btn-sm btn-success"
+                                                                        href="{{ route('packages.edit', $package->id) }}">
+                                                                        <i class="fa fa-fw fa-edit"></i>
+                                                                        {{ __('Editar') }}
+                                                                    </a>
+                                                                @endhasrole
+                                                                @hasrole('SuperAdmin|Administrador|Unica')
+                                                                    @if (!$package->redirigido)
+                                                                        <a class="btn btn-sm btn-secondary" href="#"
+                                                                            data-toggle="modal"
+                                                                            data-target="#reencaminarModal{{ $package->id }}">
+                                                                            <i class="fas fa-arrow-up"></i>
+                                                                            {{ __('Reencaminar') }}
                                                                         </a>
-                                                                    @endhasrole
-                                                                    @hasrole('SuperAdmin|Administrador|Unica')
-                                                                        @if (!$package->redirigido)
-                                                                            <a class="btn btn-sm btn-secondary" href="#"
-                                                                                data-toggle="modal"
-                                                                                data-target="#reencaminarModal{{ $package->id }}">
-                                                                                <i class="fas fa-arrow-up"></i>
-                                                                                {{ __('Reencaminar') }}
-                                                                            </a>
-                                                                            @include('package.modal.reencaminar')
-                                                                        @endif
-                                                                    @endhasrole
-                                                                </td>
-                                                            </tr>
+                                                                        @include('package.modal.reencaminar')
+                                                                    @endif
+                                                                @endhasrole
+                                                            </td>
+                                                        </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>

@@ -261,6 +261,7 @@ Route::middleware('auth')->group(function () {
     Route::get('internationals/plantillaeexcel', [InternationalController::class, 'plantillaeexcel'])->name('plantillae.excel');
     Route::get('internationals/plantilladdexcel', [InternationalController::class, 'plantilladdexcel'])->name('plantilladd.excel');
     Route::get('internationals/plantilladndexcel', [InternationalController::class, 'plantilladndexcel'])->name('plantilladnd.excel');
+    Route::get('internationals/plantillaunicaexcel', [InternationalController::class, 'plantillaunicaexcel'])->name('plantillaunica.excel');
 
     //Sacas y paquetes
     Route::get('/packages-has-bags', [PackagesHasBagController::class, 'index'])->name('packages-has-bags.index');

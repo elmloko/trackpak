@@ -13,6 +13,7 @@ use App\Exports\Internationalinvdnd;
 use App\Exports\PlantillaeExport;
 use App\Exports\PlantilladdExport;
 use App\Exports\PlantilladndExport;
+use App\Exports\PlantillaunicaExport;
 
 class InternationalController extends Controller
 {
@@ -185,6 +186,10 @@ class InternationalController extends Controller
     public function plantilladndexcel()
     {
         return Excel::download(new PlantilladndExport, 'Plantilla DND.xlsx');
+    }
+    public function plantillaunicaexcel()
+    {
+        return Excel::download(new PlantillaunicaExport, 'Plantilla UNICA.xlsx');
     }
     public function ventanilladd()
     {

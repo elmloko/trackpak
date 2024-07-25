@@ -5,17 +5,21 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UnicaImport;
 
 class Ventanillaunicaadmin extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     public $search = '';
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $file; // Agregar esta línea
 
     public function render()
     {
@@ -105,6 +109,18 @@ class Ventanillaunicaadmin extends Component
             $this->paquetesSeleccionados[] = $packageId;
         }
     }
+    
+    public function import()
+    {
+        $this->validate([
+            'file' => 'required|mimes:xls,xlsx',
+        ]);
+
+        Excel::import(new UnicaImport, $this->file->path());
+
+        session()->flash('message', 'Archivo importado exitosamente.');
+    }
+
     private function getPackageIds()
     {
         return Package::where('ESTADO', 'VENTANILLA')->pluck('id')->toArray();
