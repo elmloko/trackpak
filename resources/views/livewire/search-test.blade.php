@@ -7,7 +7,7 @@
                 RASTREA TU CODIGO
             </h1>
             <p class="leading-normal text-2xl mb-6">
-                Este es un servicio de seguimiento de codigo rastreo postales a nivel internacional/nacional de la Agencia Boliviana de Correos
+                Este es un servicio de seguimiento de codigo rastreo postales a nivel internacional / nacional de la Agencia Boliviana de Correos
             </p>
             <form method="GET" action="{{ route('search') }}" class="w-full">
                 @csrf
