@@ -29,7 +29,7 @@ class ApiController extends Controller
     {
         try {
             // Llamar al procedimiento almacenado
-            $packages = DB::select('CALL GetSoftDeletedPackages()');
+            $packages = DB::select('CALL GetAllPackagesSoft()');
 
             // Devolver los datos de los paquetes en formato JSON
             return response()->json($packages);
@@ -42,7 +42,7 @@ class ApiController extends Controller
     public function delete(Request $request, $codigo)
     {
         $package = Package::where('CODIGO', $codigo)->first();
-    
+
         if ($package) {
             // Registra el evento de entrega
             Event::create([
@@ -51,16 +51,16 @@ class ApiController extends Controller
                 'user_id' => 84,  // Asignar un ID de usuario predeterminado o ajustarlo según tus necesidades
                 'codigo' => $package->CODIGO,
             ]);
-    
+
             // Cambia el estado del paquete a "ENTREGADO"
             $package->estado = 'ENTREGADO';
-    
+
             // Guarda el paquete actualizado
             $package->save();
-    
+
             // Elimina el paquete (soft delete)
             $package->delete();
-    
+
             return response()->json(['success' => true, 'message' => 'Paquete eliminado y evento registrado.']);
         } else {
             return response()->json(['error' => 'No se pudo encontrar el paquete para dar de baja.'], 404);
@@ -980,7 +980,7 @@ class ApiController extends Controller
                 'SERVICIO-NACIONAL SM' => 85,
                 'SERVICIO-PROVINCIONAL SM' => 104,
             ];
-        } 
+        }
 
         throw new \Exception("Peso fuera de rango para tarificación.");
     }
