@@ -27,11 +27,16 @@ class ApiController extends Controller
     }
     public function softdeletes()
     {
-        // Obtener todos los paquetes
-        $packages = Package::onlyTrashed()->get();
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetSoftDeletedPackages()');
 
-        // Devolver los datos de los paquetes en formato JSON
-        return response()->json($packages);
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function delete(Request $request, $codigo)
