@@ -103,6 +103,11 @@ php artisan optimize
 ```bash
 php artisan jwt:secret
 ```
+* Capturing Entries:
+
+```bash
+php artisan pulse:check
+```
 
 ## License
 
