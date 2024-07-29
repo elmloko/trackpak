@@ -17,14 +17,15 @@ To solve these problems, a modern and efficient system for tracking parcels nati
   https://laravel-excel.com/                                    				maatwebsite/excel
   https://github.com/barryvdh/laravel-dompdf                    		barryvdh/laravel-dompdf
   https://github.com/awais-vteams/laravel-crud-generator        	ibex/crud-generator
-  https://github.com/jeroennoten/Laravel-AdminLTE               	jeroennoten/laravel-adminlte
-  https://spatie.be/docs/laravel-permission/v5/introduction    	spatie/laravel-permission
+  https://github.com/jeroennoten/Laravel-AdminLTE               		jeroennoten/laravel-adminlte
+  https://spatie.be/docs/laravel-permission/v5/introduction    		spatie/laravel-permission
   https://laravel-livewire.com/                             				livewire/livewire
-  https://github.com/wire-elements/modal/tree/1.0.0     	        wire-elements/modal
+  https://github.com/wire-elements/modal/tree/1.0.0     	     		wire-elements/modal
   https://github.com/milon/barcode                               			milon/barcode
-  https://github.com/picqer/php-barcode-generator              	picqer/php-barcode-generator
+  https://github.com/picqer/php-barcode-generator              		picqer/php-barcode-generator
   https://github.com/biscolab/laravel-recaptcha				biscolab/laravel-recaptcha
   https://jwt-auth.readthedocs.io/en/develop/					tymon/jwt-auth
+  https://laravel.com/docs/11.x/pulse							laravel/pulse
 
 ## Installation
 
