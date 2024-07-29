@@ -12,13 +12,20 @@ use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         try {
-            // Llamar al procedimiento almacenado
-            $packages = DB::select('CALL GetAllPackages()');
+            // Parámetros de paginación
+            $perPage = $request->input('per_page', 15); // Cantidad de registros por página
+            $page = $request->input('page', 1); // Página actual
 
-            // Devolver los resultados como JSON
+            // Calcular el offset
+            $offset = ($page - 1) * $perPage;
+
+            // Llamar al procedimiento almacenado con limitación de registros
+            $packages = DB::select('CALL GetPackagesLimited(?, ?)', [$offset, $perPage]);
+
+            // Devolver los datos de los paquetes en formato JSON
             return response()->json($packages);
         } catch (\Exception $e) {
             // Manejo de errores
