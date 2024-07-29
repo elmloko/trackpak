@@ -29,7 +29,7 @@ class ApiController extends Controller
     {
         try {
             // Parámetros de paginación
-            $perPage = $request->input('per_page', 15); // Cantidad de registros por página
+            $perPage = $request->input('per_page', 100); // Cantidad de registros por página
             $page = $request->input('page', 1); // Página actual
 
             // Calcular el offset
