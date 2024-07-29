@@ -12,38 +12,24 @@ use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         try {
-            // Parámetros de paginación
-            $perPage = $request->input('per_page', 15); // Cantidad de registros por página
-            $page = $request->input('page', 1); // Página actual
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackages()');
 
-            // Calcular el offset
-            $offset = ($page - 1) * $perPage;
-
-            // Llamar al procedimiento almacenado con limitación de registros
-            $packages = DB::select('CALL GetPackagesLimited(?, ?)', [$offset, $perPage]);
-
-            // Devolver los datos de los paquetes en formato JSON
+            // Devolver los resultados como JSON
             return response()->json($packages);
         } catch (\Exception $e) {
             // Manejo de errores
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    public function softdeletes(Request $request)
+    public function softdeletes()
     {
         try {
-            // Parámetros de paginación
-            $perPage = $request->input('per_page', 100); // Cantidad de registros por página
-            $page = $request->input('page', 1); // Página actual
-
-            // Calcular el offset
-            $offset = ($page - 1) * $perPage;
-
-            // Llamar al procedimiento almacenado con limitación de registros
-            $packages = DB::select('CALL GetSoftDeletedPackagesLimited(?, ?)', [$offset, $perPage]);
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetSoftDeletedPackages()');
 
             // Devolver los datos de los paquetes en formato JSON
             return response()->json($packages);
