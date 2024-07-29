@@ -8,16 +8,22 @@ use App\Models\National;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
     public function index()
     {
-        // Obtener todos los paquetes
-        $packages = Package::all();
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackages()');
 
-        // Devolver los datos de los paquetes en formato JSON
-        return response()->json($packages);
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
     public function softdeletes()
     {
