@@ -34,6 +34,7 @@ class User extends Authenticatable
     {
         return 'profile/username';
     }
+
     protected $fillable = [
         'name',
         'email',

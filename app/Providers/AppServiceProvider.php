@@ -3,22 +3,19 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use illuminate\Pagination\Paginator;
+use Illuminate\Pagination\Paginator;
 use Validator;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User; // Importa la clase User correcta
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
+
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         Paginator::useBootstrap();
@@ -27,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
             $response = $recaptcha->verify($value, $_SERVER['REMOTE_ADDR']);
 
             return $response->isSuccess();
+        });
+
+        Gate::define('viewPulse', function (?User $user) {
+            return $user !== null;
         });
     }
 }
