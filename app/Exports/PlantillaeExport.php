@@ -25,7 +25,6 @@ class PlantillaeExport implements FromCollection, WithHeadings, WithStyles
             'TELEFONO', 
             'PESO', 
             'ZONA', 
-            'TIPO'
         ];
     }
 
