@@ -6,7 +6,7 @@ use App\Models\International;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class InternationalImport implements ToModel, WithHeadingRow
+class DndImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
