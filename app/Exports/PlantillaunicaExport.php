@@ -26,6 +26,7 @@ class PlantillaunicaExport implements FromCollection, WithHeadings, WithStyles
             'PESO', 
             'ADUANA', 
             'ZONA', 
+            'CUIDAD', 
         ];
     }
 
