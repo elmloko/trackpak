@@ -113,7 +113,6 @@
                                 @foreach ($internationals as $international)
                                     @if (
                                         $international->ESTADO === 'VENTANILLA' &&
-                                            !$international->redirigido &&
                                             $international->CUIDAD === auth()->user()->Regional &&
                                             in_array($international->VENTANILLA, ['DND']))
                                         <tr>

@@ -7,7 +7,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Internationaldd;
-use App\Exports\Internationaldnd;
+use App\Exports\InternationaldndExport;
 use App\Exports\Internationalinvdd;
 use App\Exports\Internationalinvdnd;
 use App\Exports\PlantillaeExport;
@@ -166,7 +166,7 @@ class InternationalController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $regional = $request->input('regional');
-        return Excel::download(new Internationaldnd($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados DND.xlsx');
+        return Excel::download(new InternationaldndExport($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados DND.xlsx');
     }
     public function inventarioDNDexcel(Request $request)
     {

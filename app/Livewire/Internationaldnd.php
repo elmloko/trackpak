@@ -9,7 +9,7 @@ use App\Models\International;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\InternationalImport;
+use App\Imports\InternationaldndExport;
 
 class Internationaldnd extends Component
 {
@@ -126,7 +126,7 @@ class Internationaldnd extends Component
             'file' => 'required|mimes:xls,xlsx',
         ]);
 
-        Excel::import(new InternationalImport, $this->file->path());
+        Excel::import(new InternationaldndExport, $this->file->path());
 
         session()->flash('message', 'Archivo importado exitosamente.');
     }
