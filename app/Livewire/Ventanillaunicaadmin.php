@@ -20,6 +20,7 @@ class Ventanillaunicaadmin extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $file;
     public $fechaInicio;
     public $fechaFin;
 
