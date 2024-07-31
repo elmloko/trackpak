@@ -15,6 +15,9 @@ class Ventanillaunicarecibir extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $zona = '';
+    public $paqueteSeleccionado = null;
+    public $showModal = false; // Variable para controlar la visibilidad del modal
 
     public function render()
     {
@@ -48,28 +51,43 @@ class Ventanillaunicarecibir extends Component
 
     public function buscarPaquete()
     {
-        // Buscar el paquete por el código ingresado
         $package = Package::where('CODIGO', $this->search)->first();
+        $userRegional = auth()->user()->Regional;
         
-        // Si el paquete es encontrado, cambiar su estado a RECIBIDO
         if ($package) {
-            $package->ESTADO = 'RECIBIDO';
-            $package->save();
-            
-            // Agregar un mensaje de éxito a la sesión
-            session()->flash('success', 'El estado del paquete ha sido actualizado a RECIBIDO.');
+            if ($userRegional === $package->CUIDAD) {
+                $package->ESTADO = 'RECIBIDO';
+                $package->save();
+
+                $this->paqueteSeleccionado = $package->id;
+                $this->zona = $package->ZONA;
+                $this->showModal = true; // Mostrar el modal
+
+                session()->flash('success', 'El estado del paquete ha sido actualizado a RECIBIDO.');
+            } else {
+                session()->flash('error', 'No se puede recibir el paquete porque no pertenece a la misma regional.');
+            }
         } else {
-            // Agregar un mensaje de error a la sesión
             session()->flash('error', 'Paquete no encontrado.');
         }
         
-        // Reiniciar la búsqueda
         $this->search = '';
+    }
+
+    public function guardarZona()
+    {
+        if ($this->paqueteSeleccionado) {
+            $package = Package::find($this->paqueteSeleccionado);
+            $package->ZONA = $this->zona;
+            $package->save();
+
+            session()->flash('success', 'La ZONA del paquete ha sido actualizada.');
+            $this->showModal = false; // Ocultar el modal
+        }
     }
 
     public function cambiarEstado()
     {
-        // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
@@ -77,7 +95,6 @@ class Ventanillaunicarecibir extends Component
             ->get();
     
         foreach ($paquetesSeleccionados as $paquete) {
-            // Calcular el precio basado en el peso del paquete
             $peso = $paquete->PESO;
             if ($peso >= 0.000 && $peso <= 0.5) {
                 $precio = 5;
@@ -85,15 +102,12 @@ class Ventanillaunicarecibir extends Component
                 $precio = 10;
             }
     
-            // Actualizar el precio del paquete
             $paquete->PRECIO = $precio;
             $paquete->save();
     
-            // Actualizar el estado del paquete
             $paquete->ESTADO = 'VENTANILLA';
             $paquete->save();
     
-            // Crear un evento
             Event::create([
                 'action' => 'RECEPCIONADO',
                 'descripcion' => 'Paquete llego a ventanilla en Oficina Postal Regional',
@@ -101,7 +115,6 @@ class Ventanillaunicarecibir extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-        // Restablecer la selección
         $this->resetSeleccion();
     }
 
@@ -129,5 +142,10 @@ class Ventanillaunicarecibir extends Component
     {
         $this->selectAll = false;
         $this->paquetesSeleccionados = array_intersect($this->paquetesSeleccionados, $this->getPackageIds());
+    }
+
+    public function cerrarModal()
+    {
+        $this->showModal = false; // Método para cerrar el modal desde la vista
     }
 }
