@@ -10,6 +10,7 @@ use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UnicaImport;
+use App\Exports\VentanillaunicadminExport;
 
 class Ventanillaunicaadmin extends Component
 {
@@ -19,7 +20,8 @@ class Ventanillaunicaadmin extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
-    public $file; // Agregar esta línea
+    public $fechaInicio;
+    public $fechaFin;
 
     public function render()
     {
@@ -47,6 +49,12 @@ class Ventanillaunicaadmin extends Component
             $this->paquetesSeleccionados = [];
         }
     }
+
+    public function exportExcel()
+    {
+        return Excel::download(new VentanillaunicadminExport($this->fechaInicio, $this->fechaFin), 'ventanilla_unica_admin.xlsx');
+    }
+
     public function cambiarEstado()
     {
         // Obtener los paquetes seleccionados y actualizar su estado

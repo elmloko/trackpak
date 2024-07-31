@@ -52,24 +52,19 @@
                                                 <div class="row">
                                                     <!-- Formulario para generar Excel -->
                                                     <div class="col-md-6">
-                                                        <form method="get" action="{{ route('ventanilla.excel') }}"
-                                                            class="col-md-12">
+                                                        <form method="get" wire:submit.prevent="exportExcel" class="col-md-12">
                                                             @csrf
                                                             <div class="form-row">
                                                                 <div class="col-md-6">
-                                                                    <label for="excel_fecha_inicio">Fecha de
-                                                                        inicio:</label>
-                                                                    <input type="date" name="fecha_inicio"
-                                                                        class="form-control" required>
+                                                                    <label for="fecha_inicio">Fecha de inicio:</label>
+                                                                    <input type="date" wire:model="fechaInicio" class="form-control" required>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                                    <input type="date" name="fecha_fin"
-                                                                        class="form-control" required>
+                                                                    <label for="fecha_fin">Fecha de fin:</label>
+                                                                    <input type="date" wire:model="fechaFin" class="form-control" required>
                                                                 </div>
                                                                 <div class="col-md-12 mt-3 text-center">
-                                                                    <button type="submit" class="btn btn-success"
-                                                                        target="_blank">Generar Excel</button>
+                                                                    <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
                                                                 </div>
                                                             </div>
                                                         </form>
