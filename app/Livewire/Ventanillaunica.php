@@ -6,7 +6,9 @@ use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
+use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\VentanillaunicaExport;
 
 class Ventanillaunica extends Component
 {
@@ -16,6 +18,8 @@ class Ventanillaunica extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $fechaInicio;
+    public $fechaFin;
 
     public function render()
     {
@@ -46,6 +50,12 @@ class Ventanillaunica extends Component
             $this->paquetesSeleccionados = [];
         }
     }
+
+    public function exportExcel()
+    {
+        return Excel::download(new VentanillaunicaExport($this->fechaInicio, $this->fechaFin), 'ventanilla_unica.xlsx');
+    }
+    
     public function cambiarEstado()
     {
         // Obtener los paquetes seleccionados y actualizar su estado
