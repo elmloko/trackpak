@@ -19,7 +19,9 @@ class Ventanillaencomienda extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
-    public $file; // Agregar esta línea
+    public $observaciones = '';
+    public $selectedPackageId = null;
+    public $file;
 
     public function render()
     {
@@ -122,6 +124,24 @@ class Ventanillaencomienda extends Component
         Excel::import(new EncomiendasImport, $this->file->path());
 
         session()->flash('message', 'Archivo importado exitosamente.');
+    }
+    public function openModal($packageId)
+    {
+        $this->selectedPackageId = $packageId;
+        $package = Package::find($packageId);
+        $this->selectedCity = $package->CUIDAD;
+        $this->observaciones = $package->OBSERVACIONES;
+    }
+
+    public function updatePackage()
+    {
+        $package = Package::find($this->selectedPackageId);
+        $package->CUIDAD = $this->selectedCity;
+        $package->OBSERVACIONES = $this->observaciones;
+        $package->save();
+
+        $this->reset(['selectedCity', 'observaciones', 'selectedPackageId']);
+        session()->flash('message', 'Paquete actualizado exitosamente.');
     }
     private function getPackageIds()
     {
