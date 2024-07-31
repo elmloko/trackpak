@@ -133,7 +133,7 @@
                                                                         {{ __('Editar') }}
                                                                     </a>
                                                                     <button wire:click="openModal({{ $package->id }})" class="btn btn-sm btn-info">
-                                                                        <i class="fa fa-edit"></i> Actualizar
+                                                                        <i class="fa fa-edit"></i> Reencaminar
                                                                     </button>
                                                                 @endhasrole
                                                             </td>
