@@ -60,7 +60,7 @@
                                                     <input type="file" wire:model="file" class="form-control-file" id="fileUpload" accept=".xlsx,.xls">
                                                 </div>
                                                 <button type="submit" class="btn btn-primary mb-2">Importar</button>
-                                                <a href="{{ route('plantilladd.excel') }}" class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
+                                                <a href="{{ route('plantilladnd.excel') }}" class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
                                             </form>
                                             @if (session()->has('message'))
                                                 <div class="alert alert-success mt-2">
