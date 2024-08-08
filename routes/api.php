@@ -15,5 +15,6 @@ Route::middleware('predefined.token')->group(function () {
     Route::get('/packages', [ApiController::class, 'index']);
     Route::get('/softdeletes', [ApiController::class, 'softdeletes']);
     Route::get('/callventanilla', [ApiController::class, 'callventanilla']);
+    Route::get('/callclasi', [ApiController::class, 'callclasi']);
     Route::post('/delete/{codigo}', [ApiController::class, 'delete']);
 });
