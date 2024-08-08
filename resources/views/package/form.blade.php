@@ -192,8 +192,6 @@
                     {{ Form::text('OBSERVACIONES', strtoupper($package->OBSERVACIONES), [
                         'class' => 'form-control' . ($errors->has('OBSERVACIONES') ? ' is-invalid' : ''),
                         'placeholder' => 'Observaciones',
-                        // 'pattern' => '^[A-Z]+$',
-                        'title' => 'Ingrese solo letras mayúsculas',
                         'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
                         'maxlength' => '255',
                     ]) }}

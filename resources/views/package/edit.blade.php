@@ -16,9 +16,9 @@
                         <span class="card-title">{{ __('Actualizar') }} Paquetes</span>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('packages.update', $package->id) }}"  method="POST">
-                            @method('PUT')
+                        <form action="{{ route('packages.update', $package->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
 
                             @include('package.form')
 

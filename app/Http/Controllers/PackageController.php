@@ -40,10 +40,10 @@ class PackageController extends Controller
     {
         // Obtener la regional del usuario actual (puedes ajustar esto según tu lógica de autenticación)
         $userCuidad = auth()->user()->Regional;
-        
+
         // Filtrar los paquetes por la regional del usuario
         $packages = Package::where('CUIDAD', $userCuidad)->paginate(20);
-        
+
         return view('package.index', compact('packages'))
             ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());
     }
@@ -77,7 +77,7 @@ class PackageController extends Controller
 
         // Agregar el nombre del cartero al request antes de crear el paquete
         $request->merge(['usercartero' => $userCartero]);
-        
+
         // Calcular el precio basado en el peso
         $peso = $request->input('PESO');
         $precio = 0;
@@ -367,10 +367,10 @@ class PackageController extends Controller
             'ZW' => 'ZIMBABWE',
             // Agrega más traducciones según sea necesario
         ];
-    
+
         // Devolver la traducción o el mismo ISO si no se encuentra la traducción
         return isset($translations[$iso]) ? $translations[$iso] : $iso;
-    }    
+    }
 
     public function show($id)
     {
@@ -387,19 +387,42 @@ class PackageController extends Controller
 
     public function update(Request $request, Package $package)
     {
-        request()->validate(Package::$rules);
-
-        // Obtener el código del paquete antes de la actualización
-        $codigo = $package->CODIGO;
+        $request->validate([
+            'DESTINATARIO' => 'nullable|string|max:255',
+            'TELEFONO' => 'nullable|integer|max:99999999999',
+            'PAIS' => 'nullable|string|max:255',
+            'CUIDAD' => 'nullable|string|max:255',
+            'ZONA' => 'nullable|string|max:255',
+            'VENTANILLA' => 'nullable|string|max:255',
+            'PESO' => 'nullable|string|max:50',
+            'TIPO' => 'nullable|string|max:255',
+            'ADUANA' => 'nullable|string|max:255',
+            'ESTADO' => 'nullable|string|max:255',
+            'ISO' => 'nullable|string',
+            'PRECIO' => 'nullable|string',
+            'OBSERVACIONES' => 'nullable|string|max:255',
+            'FACTURA' => 'nullable|integer|max:99999999999',
+            'datedespachoclasificacion' => 'nullable|date',
+            'date_redirigido' => 'nullable|date',
+            'redirigido' => 'nullable|boolean',
+            'cuidadre' => 'nullable|string',
+            'REENCAMINAR' => 'nullable|string',
+            'usercartero' => 'nullable|string',
+            'dateprerezago' => 'nullable|date',
+            'daterezago' => 'nullable|date',
+            'nrocasilla' => 'nullable|integer|max:99999999999',
+        ]);
 
         $package->update($request->all());
+
         Event::create([
             'action' => 'ESTADO',
             'descripcion' => 'Edición de Paquete',
             'user_id' => auth()->user()->id,
-            'codigo' => $codigo, // Utiliza el código obtenido previamente
+            'codigo' => $package->CODIGO,
         ]);
-        return redirect()->route('packages.clasificacion')
+
+        return redirect()->route('packages.index')
             ->with('success', 'Paquete Actualizado Con Éxito!');
     }
     public function destroy($id)
@@ -422,7 +445,7 @@ class PackageController extends Controller
     public function delete(Request $request, $id)
     {
         $package = Package::find($id);
-    
+
         if ($package) {
             // Registra el evento de entrega
             Event::create([
@@ -431,25 +454,25 @@ class PackageController extends Controller
                 'user_id' => auth()->user()->id,
                 'codigo' => $package->CODIGO,
             ]);
-    
+
             // Cambia el estado del paquete a "ENTREGADO"
             $package->estado = 'ENTREGADO';
-    
+
             // Guarda el paquete actualizado
             $package->save();
-    
+
             // Determina qué formulario cargar según el valor de la variable ADUANA
             $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-    
+
             // Genera el PDF del formulario correspondiente
             $pdf = PDF::loadView($formulario, compact('package', 'request'));
-    
+
             // Abre el PDF en una nueva pestaña
             $pdf->stream('Formulario de Entrega.pdf');
-    
+
             // Elimina el paquete
             $package->delete();
-    
+
             return $pdf->stream('Formulario de Entrega.pdf');
             // return response()->json(['success' => true]);
         } else {
@@ -565,7 +588,7 @@ class PackageController extends Controller
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
     }
-    
+
 
     public function deletecartero($id, Request $request)
     {
@@ -592,7 +615,7 @@ class PackageController extends Controller
                     'codigo' => $package->CODIGO,
                 ]);
                 $package->save();
-            } elseif ($nuevoEstado == 'PRE-REZAGO'){
+            } elseif ($nuevoEstado == 'PRE-REZAGO') {
                 // Obtén la razón seleccionada desde el tercer select
                 $razonSeleccionada = $request->input('razon');
 
@@ -606,7 +629,7 @@ class PackageController extends Controller
                 ]);
                 $package->update(['dateprerezago' => now()]);
                 $package->save();
-            }else {
+            } else {
                 // Si el estado no es "VENTANILLA", deja OBSERVACIONES en blanco
                 $package->OBSERVACIONES = "";
                 // Guarda el paquete actualizado
@@ -636,7 +659,7 @@ class PackageController extends Controller
         $package = Package::where('CODIGO', $codigo)->first();
 
         if ($package) {
-            
+
             // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
             if ($package->ESTADO === 'DESPACHO' || $package->ESTADO === 'RETORNO') {
                 // Verificar que el destino sea igual a la regional del usuario
@@ -647,7 +670,7 @@ class PackageController extends Controller
                             'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
                             'user_id' => auth()->user()->id,
                             'codigo' => $package->CODIGO,
-                        ]);            
+                        ]);
                         Event::create([
                             'action' => 'EN ENTREGA',
                             'descripcion' => 'Paquete Recibido en Oficina Postal Regional.' . $package->CUIDAD,
@@ -683,7 +706,7 @@ class PackageController extends Controller
         $package = Package::where('CODIGO', $codigo)->first();
 
         if ($package) {
-            
+
             // Verificar que el estado del paquete sea 'DESPACHO' o 'RETORNO'
             if ($package->ESTADO === 'DESPACHO' || $package->ESTADO === 'RETORNO') {
                 // Verificar que el destino sea igual a la regional del usuario
@@ -694,7 +717,7 @@ class PackageController extends Controller
                             'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ' . $package->VENTANILLA,
                             'user_id' => auth()->user()->id,
                             'codigo' => $package->CODIGO,
-                        ]);            
+                        ]);
                         Event::create([
                             'action' => 'EN ENTREGA',
                             'descripcion' => 'Paquete Recibido en Oficina Postal Regional.' . $package->CUIDAD,
@@ -728,9 +751,9 @@ class PackageController extends Controller
         $codigo = $request->input('codigo');
         $zona = $request->input('zona');
         $package = Package::where('CODIGO', $codigo)
-                        ->where('ESTADO', 'DESPACHO')
-                        ->where('VENTANILLA', 'CASILLAS')
-                        ->first();
+            ->where('ESTADO', 'DESPACHO')
+            ->where('VENTANILLA', 'CASILLAS')
+            ->first();
 
         if ($package) {
             // Verificar que la regional del usuario coincide con la regional del paquete
@@ -742,10 +765,10 @@ class PackageController extends Controller
                         'descripcion' => 'Paquete a la espera de ser recogido en Casillero Postal ' . $package->nrocasilla,
                         'user_id' => auth()->user()->id,
                         'codigo' => $package->CODIGO,
-                    ]);            
+                    ]);
                     Event::create([
                         'action' => 'EN ENTREGA',
-                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.'. $package->CUIDAD,
+                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.' . $package->CUIDAD,
                         'user_id' => auth()->user()->id,
                         'codigo' => $package->CODIGO,
                     ]);
@@ -769,9 +792,9 @@ class PackageController extends Controller
         $codigo = $request->input('codigo');
         $zona = $request->input('zona');
         $package = Package::where('CODIGO', $codigo)
-                        ->where('ESTADO', 'DESPACHO')
-                        ->where('VENTANILLA', 'ECA')
-                        ->first();
+            ->where('ESTADO', 'DESPACHO')
+            ->where('VENTANILLA', 'ECA')
+            ->first();
 
         if ($package) {
             // Verificar que la regional del usuario coincide con la regional del paquete
@@ -783,10 +806,10 @@ class PackageController extends Controller
                         'descripcion' => 'Paquete a la espera de ser recogido en Casillero Postal ' . $package->nrocasilla,
                         'user_id' => auth()->user()->id,
                         'codigo' => $package->CODIGO,
-                    ]);            
+                    ]);
                     Event::create([
                         'action' => 'EN ENTREGA',
-                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.'. $package->CUIDAD,
+                        'descripcion' => 'Paquete Recibido en Oficina Postal Regional.' . $package->CUIDAD,
                         'user_id' => auth()->user()->id,
                         'codigo' => $package->CODIGO,
                     ]);
@@ -827,7 +850,7 @@ class PackageController extends Controller
 
             // Determina qué formulario cargar según el valor de la variable ADUANA
             $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-    
+
             // Genera el PDF de abandono
             $pdf = PDF::loadView($formulario, compact('package', 'request'));
 
@@ -839,7 +862,7 @@ class PackageController extends Controller
 
             return $pdf->stream('Formulario de Entrega.pdf');
             // return response()->json(['success' => true]);
-            
+
             return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
         } else {
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete para dar de baja o generar el PDF.');
@@ -866,7 +889,7 @@ class PackageController extends Controller
 
             // Determina qué formulario cargar según el valor de la variable ADUANA
             $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-    
+
             // Genera el PDF de abandono
             $pdf = PDF::loadView($formulario, compact('package', 'request'));
 
@@ -878,7 +901,7 @@ class PackageController extends Controller
 
             return $pdf->stream('Formulario de Entrega.pdf');
             // return response()->json(['success' => true]);
-            
+
             return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
         } else {
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete para dar de baja o generar el PDF.');
@@ -993,8 +1016,8 @@ class PackageController extends Controller
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $ciudad = $request->input('ciudad');
-        
-        return Excel::download(new PackageExport($fechaInicio, $fechaFin ,$ciudad), 'Almacen.xlsx');
+
+        return Excel::download(new PackageExport($fechaInicio, $fechaFin, $ciudad), 'Almacen.xlsx');
     }
 
     public function clasificacionexcel(Request $request)
@@ -1012,7 +1035,7 @@ class PackageController extends Controller
 
         return Excel::download(new ClasificacionExport($fechaInicio, $fechaFin), 'Clasificacion.xlsx');
     }
-    
+
     public function reencaminarexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
@@ -1059,7 +1082,7 @@ class PackageController extends Controller
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
-        
+
         return Excel::download(new InventarioUNICAExport($fechaInicio, $fechaFin), 'Inventario UNICA.xlsx');
     }
     public function ecainventarioexcel(Request $request)
@@ -1121,19 +1144,19 @@ class PackageController extends Controller
     }
     public function packagesallpdf(Request $request)
     {
-    $fechaInicio = $request->input('fecha_inicio');
-    $fechaFin = $request->input('fecha_fin');
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
 
-    $query = Package::query();
+        $query = Package::query();
 
-    if ($fechaInicio && $fechaFin) {
-        $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+        if ($fechaInicio && $fechaFin) {
+            $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+        }
+
+        $packages = $query->get();
+        $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
+        return $pdf->download('Almacen.pdf');
     }
-
-    $packages = $query->get();
-    $pdf = PDF::loadview('package.pdf.packagesall', ['packages' => $packages]);
-    return $pdf->download('Almacen.pdf');
-    }   
     public function clasificacionpdf(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
@@ -1207,7 +1230,7 @@ class PackageController extends Controller
         $query = Package::withTrashed()->where('ESTADO', 'ENTREGADO');
 
         if ($fechaInicio && $fechaFin) {
-        $query->whereBetween('deleted_at', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('deleted_at', [$fechaInicio, $fechaFin]);
         }
 
         $packages = $query->get();
