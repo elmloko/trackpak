@@ -39,6 +39,20 @@ class ApiController extends Controller
         }
     }
 
+    public function callventanilla()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanilla()');
+
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
     public function delete(Request $request, $codigo)
     {
         $package = Package::where('CODIGO', $codigo)->first();
