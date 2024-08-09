@@ -11,6 +11,7 @@ use App\Exports\InternationaldndExport;
 use App\Exports\InternationalcasillasExport;
 use App\Exports\Internationalinvdd;
 use App\Exports\Internationalinvdnd;
+use App\Exports\Internationalinvcasillas;
 use App\Exports\PlantillaeExport;
 use App\Exports\PlantilladdExport;
 use App\Exports\PlantilladndExport;
@@ -178,13 +179,12 @@ class InternationalController extends Controller
         $regional = $request->input('regional');
         return Excel::download(new InternationalcasillasExport($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados Casillas.xlsx');
     }
-    public function inventarioDNDexcel(Request $request)
+    public function inventarioiDNDexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         return Excel::download(new Internationalinvdnd($fechaInicio, $fechaFin), 'Inventario Certificados DND.xlsx');
     }
-
     public function plantillaeexcel()
     {
         return Excel::download(new PlantillaeExport, 'Plantilla Encomienda.xlsx');
@@ -209,10 +209,6 @@ class InternationalController extends Controller
     {
         return view('international.ventanilladd');
     }
-    public function deleteadodd()
-    {
-        return view('international.deleteadodd');
-    }
     public function ventanilladnd()
     {
         return view('international.ventanilladnd');
@@ -221,12 +217,16 @@ class InternationalController extends Controller
     {
         return view('international.ventanillacasillas');
     }
-    public function deleteadocasillas()
+    public function deleteadodd()
     {
-        return view('international.deleteadocasillas');
+        return view('international.deleteadodd');
     }
     public function deleteadodnd()
     {
         return view('international.deleteadodnd');
+    }
+    public function deleteadocasillas()
+    {
+        return view('international.deleteadocasillas');
     }
 }

@@ -255,12 +255,12 @@ Route::middleware('auth')->group(function () {
     Route::get('internationals/certificadosexcel', [InternationalController::class, 'certificadosexcel'])->name('certificados.excel');
     Route::get('internationals/inventarioDRDexcel', [InternationalController::class, 'inventarioDRDexcel'])->name('inventarioDRD.excel');
     Route::get('internationals/ventanilladnd', [InternationalController::class, 'ventanilladnd'])->name('internationals.ventanilladnd');
-    Route::get('internationals/ventanilladnd', [InternationalController::class, 'ventanilladnd'])->name('internationals.ventanilladnd');
     Route::get('internationals/ventanillacasillas', [InternationalController::class, 'ventanillacasillas'])->name('internationals.ventanillacasillas');
+    Route::get('/internationals/deleteadodnd', [InternationalController::class, 'deleteadodnd'])->name('internationals.deleteadodnd');
     Route::get('/internationals/deleteadocasillas', [InternationalController::class, 'deleteadocasillas'])->name('internationals.deleteadocasillas');
     Route::get('internationals/certificadosdndexcel', [InternationalController::class, 'certificadosdndexcel'])->name('certificadosdnd.excel');
     Route::get('internationals/certificadoscasillasexcel', [InternationalController::class, 'certificadoscasillasexcel'])->name('certificadoscasillas.excel');
-    Route::get('internationals/inventarioDNDexcel', [InternationalController::class, 'inventarioDNDexcel'])->name('inventarioDND.excel2'); // Cambia el nombre aquí
+    Route::get('internationals/inventarioiDNDexcel', [InternationalController::class, 'inventarioiDNDexcel'])->name('inventarioiDND.excel');
     Route::get('internationals/plantillaeexcel', [InternationalController::class, 'plantillaeexcel'])->name('plantillae.excel');
     Route::get('internationals/plantilladdexcel', [InternationalController::class, 'plantilladdexcel'])->name('plantilladd.excel');
     Route::get('internationals/plantilladndexcel', [InternationalController::class, 'plantilladndexcel'])->name('plantilladnd.excel');
