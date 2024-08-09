@@ -168,14 +168,14 @@
                                                                     </a>
                                                                     @include('package.modal.baja')
                                                                 @endhasrole --}}
-                                                                @hasrole('SuperAdmin|Administrador|Urbano')
+                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">
                                                                         <i class="fa fa-fw fa-edit"></i>
                                                                         {{ __('Editar') }}
                                                                     </a>
                                                                 @endhasrole
-                                                                @hasrole('SuperAdmin|Administrador|Urbano')
+                                                                @hasrole('SuperAdmin|Administrador')
                                                                     @if (!$package->redirigido)
                                                                         <a class="btn btn-sm btn-secondary" href="#"
                                                                             data-toggle="modal"
