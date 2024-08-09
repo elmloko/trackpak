@@ -11,101 +11,88 @@
                             'pattern' => '^[A-Z0-9]+$', // Solo letras mayúsculas y números, al menos uno
                             'title' => 'Ingrese solo letras mayúsculas y números',
                             'maxlength' => '20',
-                            // 'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
                         ]) }}
                         {!! $errors->first('CODIGO', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
-               
-                <div class="form-group">
-                    {{ Form::label('TIPO', 'Tipo') }}
-                    {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $package->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
-                    {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <div class="form-group">
-                    {{ Form::label('PESO (Kg.)') }}
-                    {{ Form::text('PESO', $package->PESO, [
-                        'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
-                        'placeholder' => 'Expresa el Peso en Gramos',
-                        'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
-                        'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
-                        'pattern' => '^(\d+)?(\.\d{1,3})?$',
-                        'required' => 'required',
-                        'min' => '0', // Establecer el valor mínimo
-                        'max' => '10.000',
-                    ]) }}
-                    {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                {{-- <div class="form-group">
-                    {{ Form::label('PESO (gr.)') }}
-                    {{ Form::number('PESO', $package->PESO, [
-                        'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
-                        'placeholder' => 'Expresa el Peso en Gramos',
-                        'step' => '0.001',
-                        'title' => 'Ingrese un número válido con hasta dos decimales (ej. 1.25)',
-                        'oninput' => 'validity.valid||(value="")',
-                        'min' => '0',  // Establecer el valor mínimo
-                        'max' => '2.000',  // Establecer el valor máximo
-                    ]) }}
-                    {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>                            --}}
-                <div class="form-group">
-                    {{ Form::label('DESTINATARIO') }}
-                    {{ Form::text('DESTINATARIO', strtoupper($package->DESTINATARIO), [
-                        'class' => 'form-control' . ($errors->has('DESTINATARIO') ? ' is-invalid' : ''),
-                        'placeholder' => 'Destinatario',
-                        // 'pattern' => '^[A-Z]+$',
-                        // 'title' => 'Ingrese solo letras mayúsculas',
-                        // 'style' => 'text-transform: uppercase;', // Mostrar todo en mayúsculas visualmente
-                    ]) }}
-                    {!! $errors->first('DESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
                 @endhasrole
-                <div class="form-group">
-                    {{ Form::label('TELEFONO') }}
-                    {{ Form::number('TELEFONO', $package->TELEFONO, [
-                        'class' => 'form-control' . ($errors->has('TELEFONO') ? ' is-invalid' : ''),
-                        'placeholder' => 'Telefono',
-                        'pattern' => '^[0-9]*$', // Solo números
-                        'title' => 'Ingrese solo números',
-                        'autocomplete' => 'off', // Desactivar autocompletar
-                    ]) }}
-                    {!! $errors->first('TELEFONO', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-
-                <!-- Fin de las primeras columnas -->
+                @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion|Urbano')
+                    <div class="form-group">
+                        {{ Form::label('DESTINATARIO') }}
+                        {{ Form::text('DESTINATARIO', strtoupper($package->DESTINATARIO), [
+                            'class' => 'form-control' . ($errors->has('DESTINATARIO') ? ' is-invalid' : ''),
+                            'placeholder' => 'Destinatario',
+                        ]) }}
+                        {!! $errors->first('DESTINATARIO', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('TELEFONO') }}
+                        {{ Form::number('TELEFONO', $package->TELEFONO, [
+                            'class' => 'form-control' . ($errors->has('TELEFONO') ? ' is-invalid' : ''),
+                            'placeholder' => 'Telefono',
+                            'pattern' => '^[0-9]*$', // Solo números
+                            'title' => 'Ingrese solo números',
+                            'autocomplete' => 'off', // Desactivar autocompletar
+                        ]) }}
+                        {!! $errors->first('TELEFONO', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                @endhasrole
+                @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                    <div class="form-group">
+                        {{ Form::label('PESO (Kg.)') }}
+                        {{ Form::text('PESO', $package->PESO, [
+                            'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
+                            'placeholder' => 'Expresa el Peso en Gramos',
+                            'title' => 'Ingrese un número válido con hasta tres decimales (ej. 1.251)',
+                            'oninput' => 'this.setCustomValidity("")', // Limpiar mensaje de validación personalizado
+                            'pattern' => '^(\d+)?(\.\d{1,3})?$',
+                            'required' => 'required',
+                            'min' => '0', // Establecer el valor mínimo
+                            'max' => '10.000',
+                        ]) }}
+                        {!! $errors->first('PESO', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                @endhasrole
+                @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion|Urbano')
+                    <div class="form-group">
+                        {{ Form::label('TIPO', 'Tipo') }}
+                        {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $package->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
+                        {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                @endhasrole
+                @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                    <div class="form-group">
+                        {{ Form::label('CIUDAD') }}
+                        {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'SUCRE' => 'SUCRE', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $package->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ciudad', 'id' => 'ciudad-select']) }}
+                        {!! $errors->first('CUIDAD', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                @endhasrole
             </div>
-            @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
             <div class="col-md-6">
-                <!-- Segundas columnas del formulario -->
-                <div class="form-group">
-                    {{ Form::label('CUIDAD') }}
-                    {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'SUCRE' => 'SUCRE', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $package->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Cuidad', 'id' => 'ciudad-select']) }}
-                    {!! $errors->first('CUIDAD', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <div class="form-group">
-                    {{ Form::label('VENTANILLA') }}
-                    {{ Form::select('VENTANILLA', ['ECA' => 'ECA','UNICA' => 'UNICA','ENCOMIENDA' => 'ENCOMIENDA','DND' => 'DND', 'DD' => 'DD', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
-                    {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <div class="form-group">
-                    {{ Form::label('Nro DE CASILLERO POSTAL') }}
-                    {{ Form::number('nrocasilla', $package->nrocasilla, [
-                        'class' => 'form-control' . ($errors->has('nrocasilla') ? ' is-invalid' : ''),
-                        'placeholder' => 'Ingrese el numero de casillero postal',
-                        'pattern' => '^[0-9]*$', // Solo números
-                        'title' => 'Ingrese solo números',
-                        'autocomplete' => 'off', // Desactivar autocompletar
-                        'id' => 'casilla-select'
-                    ]) }}
-                    {!! $errors->first('nrocasilla', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-                <div class="form-group">
-                    {{ Form::label('ADUANA') }}
-                    {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}
-                    {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+                    <div class="form-group">
+                        {{ Form::label('VENTANILLA') }}
+                        {{ Form::select('VENTANILLA', ['ECA' => 'ECA', 'UNICA' => 'UNICA', 'ENCOMIENDA' => 'ENCOMIENDA', 'DND' => 'DND', 'DD' => 'DD', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
+                        {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('Nro DE CASILLERO POSTAL') }}
+                        {{ Form::number('nrocasilla', $package->nrocasilla, [
+                            'class' => 'form-control' . ($errors->has('nrocasilla') ? ' is-invalid' : ''),
+                            'placeholder' => 'Ingrese el numero de casillero postal',
+                            'pattern' => '^[0-9]*$', // Solo números
+                            'title' => 'Ingrese solo números',
+                            'autocomplete' => 'off', // Desactivar autocompletar
+                            'id' => 'casilla-select',
+                        ]) }}
+                        {!! $errors->first('nrocasilla', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('ADUANA') }}
+                        {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}
+                        {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
                 @endhasrole
-                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                @hasrole('SuperAdmin|Administrador|Urbano')
                     <div class="form-group">
                         {{ Form::label('ZONA') }}
                         {{ Form::select(
@@ -186,7 +173,6 @@
                         {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 @endhasrole
-
                 <div class="form-group">
                     {{ Form::label('OBSERVACIONES') }}
                     {{ Form::text('OBSERVACIONES', strtoupper($package->OBSERVACIONES), [
@@ -197,7 +183,6 @@
                     ]) }}
                     {!! $errors->first('OBSERVACIONES', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
-                <!-- Fin de las segundas columnas -->
             </div>
         </div>
     </div>
@@ -282,7 +267,7 @@
 
         // Habilitar o deshabilitar el campo según la opción seleccionada
         casillaInput.disabled = ventanillaSelect.value !== 'CASILLAS';
-        
+
         // Limpiar el valor si se deshabilita
         if (!casillaInput.disabled) {
             casillaInput.value = '';
