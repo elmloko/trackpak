@@ -737,53 +737,22 @@ return [
                     ],
                 ],
                 [
-                    'text' => 'Urbano',
-                    'icon' => 'fas fa-building',
-                    'can'  => 'packages.urbano',
+                    'text' => 'Ventanilla Casillas',
+                    'icon' => 'fas fa-window-maximize',
+                    'can'  => 'packages.casillas',
                     'submenu' => [
                         [
-                            'text' => 'Distribución Paquetes',
-                            'url' => 'packages/distribuicioncartero',
-                            'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.distribuicioncartero',
+                            'text' => 'Entregas Ventanilla Casillas',
+                            'url' => 'internationals/ventanillacasillas',
+                            'icon' => 'fas fa-truck',
+                            'can'  => 'packages.casillas',
                         ],
                         [
-                            'text' => 'Entregas Cartero',
-                            'url' => 'packages/carteros',
-                            'icon' => 'fas fa-cubes',
-                            'can'  => 'packages.inventariocartero',
-                        ],
-                        [
-                            'text' => 'Despacho Cartero',
-                            'url' => 'packages/despachocartero',
-                            'icon' => 'fas fa-envelope-open-text',
-                            'can'  => 'packages.inventariocartero',
-                        ],
-                        [
-                            'text' => 'Inventario Cartero',
-                            'url' => 'packages/inventariocartero',
+                            'text' => 'Inventario Ventanilla Casillas',
+                            'url' => 'internationals/deleteadocasillas',
                             'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.inventariocartero',
+                            'can'  => 'packages.casillas',
                         ],
-                        [
-                            'text' => 'Entregas Domicilio',
-                            'url' => 'packages/carterosgeneral',
-                            'icon' => 'fas fa-cubes',
-                            'can'  => 'packages.ventanilla',
-                        ],
-                        [
-                            'text' => 'Despacho Domicilio',
-                            'url' => 'packages/despachocarterogeneral',
-                            'icon' => 'fas fa-envelope-open-text',
-                            'can'  => 'packages.ventanilla',
-                        ],
-                        [
-                            'text' => 'Inventario Domicilio',
-                            'url' => 'packages/generalcartero',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.generalcartero',
-                        ],
-                        
                     ],
                 ],
                 // [

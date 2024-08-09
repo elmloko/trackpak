@@ -8,12 +8,15 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Internationaldd;
 use App\Exports\InternationaldndExport;
+use App\Exports\InternationalcasillasExport;
 use App\Exports\Internationalinvdd;
 use App\Exports\Internationalinvdnd;
 use App\Exports\PlantillaeExport;
 use App\Exports\PlantilladdExport;
 use App\Exports\PlantilladndExport;
 use App\Exports\PlantillaunicaExport;
+use App\Exports\PlantillacasillasExport;
+
 
 class InternationalController extends Controller
 {
@@ -168,6 +171,13 @@ class InternationalController extends Controller
         $regional = $request->input('regional');
         return Excel::download(new InternationaldndExport($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados DND.xlsx');
     }
+    public function certificadoscasillasexcel(Request $request)
+    {
+        $fechaInicio = $request->input('fecha_inicio');
+        $fechaFin = $request->input('fecha_fin');
+        $regional = $request->input('regional');
+        return Excel::download(new InternationalcasillasExport($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados Casillas.xlsx');
+    }
     public function inventarioDNDexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
@@ -191,6 +201,10 @@ class InternationalController extends Controller
     {
         return Excel::download(new PlantillaunicaExport, 'Plantilla UNICA.xlsx');
     }
+    public function plantillacasillasexcel()
+    {
+        return Excel::download(new PlantillacasillasExport, 'Plantilla Casillas.xlsx');
+    }
     public function ventanilladd()
     {
         return view('international.ventanilladd');
@@ -202,6 +216,14 @@ class InternationalController extends Controller
     public function ventanilladnd()
     {
         return view('international.ventanilladnd');
+    }
+    public function ventanillacasillas()
+    {
+        return view('international.ventanillacasillas');
+    }
+    public function deleteadocasillas()
+    {
+        return view('international.deleteadocasillas');
     }
     public function deleteadodnd()
     {
