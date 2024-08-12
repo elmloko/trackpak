@@ -67,6 +67,23 @@ class ApiController extends Controller
         }
     }
 
+    public function getEventsByCodigo($codigo)
+    {
+        // Verificar si el código se repite
+        $codigoCount = Event::where('codigo', $codigo)->count();
+
+        // Si el código se repite, obtener los eventos
+        if ($codigoCount > 1) {
+            $events = Event::where('codigo', $codigo)->get();
+            return response()->json($events);
+        } else {
+            // Si el código no se repite, retornar un mensaje
+            return response()->json([
+                'message' => 'El código no se repite o no existe.'
+            ], 404);
+        }
+    }
+
     public function delete(Request $request, $codigo)
     {
         $package = Package::where('CODIGO', $codigo)->first();

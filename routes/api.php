@@ -17,4 +17,5 @@ Route::middleware('predefined.token')->group(function () {
     Route::get('/callventanilla', [ApiController::class, 'callventanilla']);
     Route::get('/callclasi', [ApiController::class, 'callclasi']);
     Route::post('/delete/{codigo}', [ApiController::class, 'delete']);
+    Route::get('/events/repeated-codes/{codigo}', [ApiController::class, 'getEventsByCodigo']);
 });
