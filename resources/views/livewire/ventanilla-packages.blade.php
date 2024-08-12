@@ -124,48 +124,60 @@
                                                     <th>Estado</th>
                                                     <th>Observaciones</th>
                                                     <th>Aduana</th>
+                                                    <th>Tiempo Transcurrido</th>
                                                     <th>Fecha Pendiente</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $i = 1; // Inicializa la variable $i
-                                                @endphp
                                                 @foreach ($packages as $package)
-                                                    @if (
-                                                        $package->ESTADO === 'VENTANILLA' &&
-                                                            !$package->redirigido &&
-                                                            $package->CUIDAD === auth()->user()->Regional &&
-                                                            in_array($package->VENTANILLA, ['DD']))
-                                                        <tr>
-                                                            <td><input type="checkbox"
-                                                                    wire:model="paquetesSeleccionados"
-                                                                    value="{{ $package->id }}"></td>
-                                                            <td>{{ $i++ }}</td>
-                                                            <td>{{ $package->CODIGO }}</td>
-                                                            <td>{{ $package->DESTINATARIO }}</td>
-                                                            <td>{{ $package->TELEFONO }}</td>
-                                                            <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                            {{-- <td>{{ $package->CUIDAD }}</td> --}}
-                                                            <td>{{ $package->ZONA }}</td>
-                                                            {{-- <td>{{ $package->VENTANILLA }}</td> --}}
-                                                            <td>{{ $package->PESO }} </td>
-                                                            <td>{{ $package->PRECIO }} </td>
-                                                            <td>{{ $package->TIPO }}</td>
-                                                            <td>{{ $package->ESTADO }}</td>
-                                                            <td>{{ $package->OBSERVACIONES }}</td>
-                                                            <td>{{ $package->ADUANA }}</td>
-                                                            <td>{{ $package->updated_at }}</td>
-                                                            <td>
-                                                                {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                                    Urbano')
-                                                                    <a class="btn btn-sm btn-warning" href="#"
+                                                    @php
+                                                        $timeDifference = \Carbon\CarbonInterval::seconds($package->time_difference);
+                                                        $daysDifference = $timeDifference->totalDays;
+                                                        $colorClass = '';
+                
+                                                        if ($daysDifference < 3) {
+                                                            $colorClass = 'text-success'; // Verde
+                                                        } elseif ($daysDifference >= 3 && $daysDifference < 7) {
+                                                            $colorClass = 'text-warning'; // Amarillo
+                                                        } else {
+                                                            $colorClass = 'text-danger'; // Rojo
+                                                        }
+                                                    @endphp
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $package->CODIGO }}</td>
+                                                        <td>{{ $package->DESTINATARIO }}</td>
+                                                        <td>{{ $package->TELEFONO }}</td>
+                                                        <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
+                                                        <td>{{ $package->ZONA }}</td>
+                                                        <td>{{ $package->PESO }}</td>
+                                                        <td>{{ $package->PRECIO }}</td>
+                                                        <td>{{ $package->TIPO }}</td>
+                                                        <td>{{ $package->ESTADO }}</td>
+                                                        <td>{{ $package->OBSERVACIONES }}</td>
+                                                        <td>{{ $package->ADUANA }}</td>
+                                                        <td>{{ $package->updated_at }}</td>
+                                                        <td class="{{ $colorClass }}">
+                                                            {{ $timeDifference->cascade()->forHumans() }}
+                                                        </td>
+                                                        <td>
+                                                            @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                                                <a class="btn btn-sm btn-success"
+                                                                    href="{{ route('packages.edit', $package->id) }}">
+                                                                    <i class="fa fa-fw fa-edit"></i>
+                                                                    {{ __('Editar') }}
+                                                                </a>
+                                                            @endhasrole
+                                                            @hasrole('SuperAdmin|Administrador')
+                                                                @if (!$package->redirigido)
+                                                                    <a class="btn btn-sm btn-secondary" href="#"
                                                                         data-toggle="modal"
-                                                                        data-target="#bajaModal{{ $package->id }}">
-                                                                        <i class="fa fa-arrow-down"></i>
-                                                                        {{ __('Baja') }}
+                                                                        data-target="#reencaminarModal{{ $package->id }}">
+                                                                        <i class="fas fa-arrow-up"></i>
+                                                                        {{ __('Reencaminar') }}
                                                                     </a>
+<<<<<<< Updated upstream
                                                                     @include('package.modal.baja')
                                                                 @endhasrole --}}
                                                                 @hasrole('SuperAdmin|Administrador|Urbano')
@@ -189,6 +201,13 @@
                                                             </td>
                                                         </tr>
                                                     @endif
+=======
+                                                                    @include('package.modal.reencaminar')
+                                                                @endif
+                                                            @endhasrole
+                                                        </td>
+                                                    </tr>
+>>>>>>> Stashed changes
                                                 @endforeach
                                             </tbody>
                                         </table>

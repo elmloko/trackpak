@@ -21,20 +21,18 @@ class VentanillaPackages extends Component
     {
         $userRegional = auth()->user()->Regional;
 
-        $packages = Package::where('ESTADO', 'VENTANILLA')
+        $packages = Package::selectRaw('*, TIMESTAMPDIFF(SECOND, created_at, updated_at) as time_difference')
+            ->where('ESTADO', 'VENTANILLA')
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ZONA', 'like', $this->search . '%') 
+                    ->orWhere('ZONA', 'like', $this->search . '%')
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where(function ($query) use ($userRegional) {
-                $query->where(function ($subQuery) {
-                    $subQuery->where('VENTANILLA', 'DD');
-                        // ->orWhere('VENTANILLA', 'DND');
-                })
-                ->where('CUIDAD', $userRegional);
+                $query->where('VENTANILLA', 'DD')
+                    ->where('CUIDAD', $userRegional);
             })
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
@@ -59,10 +57,10 @@ class VentanillaPackages extends Component
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-    
+
         // Determinar el formulario según una condición
         $formulario = ($paquetesSeleccionados->first()->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-    
+
         foreach ($paquetesSeleccionados as $paquete) {
             // Calcular el precio basado en el peso del paquete
             $peso = $paquete->PESO;
@@ -71,16 +69,16 @@ class VentanillaPackages extends Component
             } elseif ($peso > 0.5) {
                 $precio = 10;
             }
-    
+
             // Actualizar el precio del paquete
             $paquete->PRECIO = $precio;
             $paquete->save();
-    
+
             // Actualizar el estado del paquete
             $paquete->ESTADO = 'ENTREGADO';
             $paquete->save();
             $paquete->delete();
-    
+
             // Crear un evento
             Event::create([
                 'action' => 'ENTREGADO',
@@ -89,21 +87,21 @@ class VentanillaPackages extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-    
+
         // Restablecer la selección
         $this->resetSeleccion();
-    
+
         // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView($formulario, ['packages' => $paquetesSeleccionados]);
-    
+
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-    
+
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Formulario Ordinario DD.pdf');
-    }    
+    }
 
     public function toggleSelectSingle($packageId)
     {
