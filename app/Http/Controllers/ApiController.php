@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Package;
 use App\Models\Event;
 use App\Models\National;
+use App\Models\International;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -124,26 +125,42 @@ class ApiController extends Controller
     }
     public function show($codigo)
     {
-        // Buscar el paquete por el código proporcionado
-        $package = Package::where('CODIGO', $codigo)->first();
-
-        // Verificar si se encontró el paquete
-        if (!$package) {
+        // Buscar el paquete por el código proporcionado en ambos modelos
+        $package = Package::withTrashed()->where('CODIGO', $codigo)->first();
+        $international = International::withTrashed()->where('CODIGO', $codigo)->first();
+    
+        // Verificar si se encontró en alguno de los dos modelos
+        if (!$package && !$international) {
             return response()->json(['error' => 'Package not found'], 404);
         }
-
-        // Devolver los datos del paquete
-        return response()->json([
-            'CODIGO' => $package->CODIGO,
-            'DESTINATARIO' => $package->DESTINATARIO,
-            'UBICACION' => $package->CUIDAD . ', ' . $package->PAIS . ', ' . $package->ZONA,
-            'ESTADO' => $package->ESTADO,
-            'TELEFONO' => $package->TELEFONO,
-            'ZONA' => $package->ZONA,
-            'ADUANA' => $package->ADUANA,
-            'CUIDAD' => $package->CUIDAD,
-            'VENTANILLA' => $package->VENTANILLA,
-        ]);
+    
+        // Si se encuentra en el modelo Package
+        if ($package) {
+            return response()->json([
+                'CODIGO' => $package->CODIGO,
+                'DESTINATARIO' => $package->DESTINATARIO,
+                'ESTADO' => $package->ESTADO,
+                'TELEFONO' => $package->TELEFONO,
+                'ZONA' => $package->ZONA,
+                'ADUANA' => $package->ADUANA,
+                'CUIDAD' => $package->CUIDAD,
+                'VENTANILLA' => $package->VENTANILLA,
+            ]);
+        }
+    
+        // Si se encuentra en el modelo International
+        if ($international) {
+            return response()->json([
+                'CODIGO' => $international->CODIGO,
+                'DESTINATARIO' => $international->DESTINATARIO,
+                'ESTADO' => $international->ESTADO,
+                'TELEFONO' => $international->TELEFONO,
+                'ZONA' => $international->ZONA,
+                'ADUANA' => $international->ADUANA,
+                'CUIDAD' => $international->CUIDAD,
+                'VENTANILLA' => $international->VENTANILLA,
+            ]);
+        }
     }
     public function ventanilla(Request $request)
     {
