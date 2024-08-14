@@ -159,19 +159,6 @@ class InternationalController extends Controller
         $regional = $request->input('regional');
         return Excel::download(new Internationaldd($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados DD.xlsx');
     }
-    public function inventarioDRDexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        return Excel::download(new Internationalinvdd($fechaInicio, $fechaFin), 'Inventario Certificados DD.xlsx');
-    }
-    public function certificadosdndexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $regional = $request->input('regional');
-        return Excel::download(new InternationaldndExport($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados DND.xlsx');
-    }
     public function certificadoscasillasexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
