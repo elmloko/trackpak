@@ -12,30 +12,27 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-8">
                                 <div class="form-group">
                                     <label for="search">Busca:</label>
                                     <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
                             </div>
-                            <form method="get" action="{{ route('inventarioDND.excel') }}" class="col-md-6">
-                                @csrf
-                                <div class="form-row align-items-center">
-                                    <div class="col-md-4">
-                                        <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                        <input type="date" name="fecha_inicio" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="excel_fecha_fin">Fecha de fin:</label>
-                                        <input type="date" name="fecha_fin" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
-                                    </div>
+                            <form wire:submit.prevent="export" class="form-row align-items-center">
+                                <div class="col-md-4">
+                                    <label for="fecha_inicio">Fecha de inicio:</label>
+                                    <input type="date" wire:model="fecha_inicio" class="form-control" required>
+                                    @error('fecha_inicio') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="fecha_fin">Fecha de fin:</label>
+                                    <input type="date" wire:model="fecha_fin" class="form-control" required>
+                                    @error('fecha_fin') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Generar Excel</button>
                                 </div>
                             </form>
-                            <div class="col-lg-6">
-                            </div>
                         </div>
                     </div>
                 </div>
