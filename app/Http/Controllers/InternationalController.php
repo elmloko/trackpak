@@ -6,12 +6,8 @@ use App\Models\International;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\Internationaldd;
-use App\Exports\InternationaldndExport;
 use App\Exports\InternationalcasillasExport;
-use App\Exports\Internationalinvdd;
 use App\Exports\Internationalinvdnd;
-use App\Exports\Internationalinvcasillas;
 use App\Exports\PlantillaeExport;
 use App\Exports\PlantilladdExport;
 use App\Exports\PlantilladndExport;
@@ -151,13 +147,6 @@ class InternationalController extends Controller
 
         return redirect()->route('internationals.index')
             ->with('success', 'Alta de Paquete con exito');
-    }
-    public function certificadosexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $regional = $request->input('regional');
-        return Excel::download(new Internationaldd($fechaInicio, $fechaFin, $regional), 'Ventanilla Certificados DD.xlsx');
     }
     public function certificadoscasillasexcel(Request $request)
     {

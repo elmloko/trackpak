@@ -3,7 +3,7 @@
         <div class="col-sm-12">
             <div class="card-header">
                 <h5 id="card_title">
-                    {{ __('PAQUTERIA CERTIFICADA') }}
+                    {{ __('PAQUTERIA CERTIFICADA DD') }}
                 </h5>
                 <div class="card-header">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -20,24 +20,19 @@
                                         </div>
                                         <!-- Formulario para generar Excel -->
                                         <div class="col-md-5">
-                                            <form method="get" action="{{ route('certificados.excel') }}"
-                                                class="col-md-12">
-                                                @csrf
-                                                <div class="form-row">
-                                                    <div class="col-md-6">
-                                                        <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                                        <input type="date" name="fecha_inicio" class="form-control"
-                                                            required>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                        <input type="date" name="fecha_fin" class="form-control"
-                                                            required>
-                                                    </div>
-                                                    <div class="col-md-12 mt-3 text-center">
-                                                        <button type="submit" class="btn btn-success"
-                                                            target="_blank">Generar Excel</button>
-                                                    </div>
+                                            <form wire:submit.prevent="export" class="form-row align-items-center">
+                                                <div class="col-md-4">
+                                                    <label for="fecha_inicio">Fecha de inicio:</label>
+                                                    <input type="date" wire:model="fecha_inicio" class="form-control" required>
+                                                    @error('fecha_inicio') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="fecha_fin">Fecha de fin:</label>
+                                                    <input type="date" wire:model="fecha_fin" class="form-control" required>
+                                                    @error('fecha_fin') <span class="text-danger">{{ $message }}</span> @enderror
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button type="submit" class="btn btn-success">Generar Excel</button>
                                                 </div>
                                             </form>
                                         </div>

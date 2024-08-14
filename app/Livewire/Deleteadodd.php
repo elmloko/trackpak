@@ -5,12 +5,16 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\International;
 use Livewire\WithPagination;
+use App\Exports\Internationalinvdd;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Deleteadodd extends Component
 {
     use WithPagination; // Mueve el uso de WithPagination aquí
 
     public $search = '';
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -37,5 +41,14 @@ class Deleteadodd extends Component
         return view('livewire.deleteadodd', [
             'packages' => $packages,
         ]);
+    }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new Internationalinvdd($this->fecha_inicio, $this->fecha_fin), 'Inventario Certificados DD.xlsx');
     }
 }

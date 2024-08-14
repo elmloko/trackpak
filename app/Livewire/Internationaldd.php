@@ -10,6 +10,7 @@ use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\DdcImport;
+use App\Exports\InternationalddExport;
 
 class Internationaldd extends Component
 {
@@ -19,7 +20,9 @@ class Internationaldd extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
-    public $file; // Agregar esta línea
+    public $file;
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -128,6 +131,17 @@ class Internationaldd extends Component
             $this->paquetesSeleccionados[] = $packageId;
         }
     }
+
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new InternationalddExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Certificados DD.xlsx');
+    }
+
     private function getPackageIds()
     {
         return International::where('ESTADO', 'VENTANILLA')->pluck('id')->toArray();
