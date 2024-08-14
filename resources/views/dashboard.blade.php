@@ -1757,7 +1757,7 @@
         </div>
     @endhasrole
 
-    @hasrole('SuperAdmin|Administrador|Expedicion')
+    {{-- @hasrole('SuperAdmin|Administrador|Expedicion')
         <div class="card card-secondary">
             <div class="card-header">
                 <h3 class="card-title">Estadisticas Área de Expedicion</h3>
@@ -1786,9 +1786,9 @@
                 </div>
             </div>
         </div>
-    @endhasrole
+    @endhasrole --}}
 
-    @if ($userRegional === 'COCHABAMBA')
+    {{-- @if ($userRegional === 'COCHABAMBA')
         @hasrole('Unica')
             <div class="card card-success">
                 <div class="card-header">
@@ -2456,69 +2456,7 @@
                 </div>
             </div>
         @endhasrole
-    @endif
-
-    {{-- <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card card-danger">
-                        <div class="card-header">
-                            <h3 class="card-title">Estadistica de Paquetes Total en Regionales</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="pieChart"
-                                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Estadistica de Comparacion por Mes</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart">
-                                <canvas id="areaChart"
-                                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card card-success">
-                <div class="card-header">
-                    <h3 class="card-title">Estadisticas de Comparacion de Areas</h3>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart">
-                        <canvas id="stackedBarChart"
-                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                    </div>
-                </div>
-            </div>
-    </section> --}}
+    @endif --}}
 
     @include('footer')
 @stop
