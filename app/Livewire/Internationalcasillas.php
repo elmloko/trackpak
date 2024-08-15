@@ -10,6 +10,7 @@ use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\CasillaImport;
+use App\Exports\InternationalcasillasExport;
 
 class Internationalcasillas extends Component
 {
@@ -19,7 +20,9 @@ class Internationalcasillas extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
-    public $file; // Agregar esta línea
+    public $file; 
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -136,6 +139,15 @@ class Internationalcasillas extends Component
         } else {
             session()->flash('error', 'El archivo no es válido o no ha sido cargado correctamente.');
         }
+    }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new InternationalcasillasExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Certificados DD.xlsx');
     }
 
     private function getPackageIds()
