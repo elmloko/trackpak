@@ -93,13 +93,10 @@
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|DD')
-                                                        <form action="{{ route('internationals.restore', $package->id) }}"
-                                                            method="POST" style="display:inline;">
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-sm btn-success">
-                                                                <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
-                                                            </button>
-                                                        </form>
+                                                        <button wire:click="restorePackage({{ $package->id }})"
+                                                            class="btn btn-sm btn-info">
+                                                            <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
+                                                        </button>
                                                     @endhasrole
                                                 </td>
                                             </tr>a

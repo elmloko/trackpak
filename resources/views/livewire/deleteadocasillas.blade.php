@@ -15,7 +15,8 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="search">Busca:</label>
-                                    <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                    <input wire:model.lazy="search" type="text" class="form-control"
+                                        placeholder="Buscar...">
                                 </div>
                             </div>
                             <form wire:submit.prevent="exportExcel" class="col-md-6">
@@ -86,12 +87,10 @@
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|Casillas')
-                                                    <form action="{{ route('internationals.restore', $package->id) }}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-sm btn-success">
+                                                        <button wire:click="restorePackage({{ $package->id }})"
+                                                            class="btn btn-sm btn-info">
                                                             <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
                                                         </button>
-                                                    </form>
                                                     @endhasrole
                                                 </td>
                                             </tr>

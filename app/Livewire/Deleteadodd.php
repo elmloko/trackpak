@@ -7,6 +7,7 @@ use App\Models\International;
 use Livewire\WithPagination;
 use App\Exports\Internationalinvdd;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Event;
 
 class Deleteadodd extends Component
 {
@@ -50,5 +51,22 @@ class Deleteadodd extends Component
         ]);
 
         return Excel::download(new Internationalinvdd($this->fecha_inicio, $this->fecha_fin), 'Inventario Certificados DD.xlsx');
+    }
+    public function restorePackage($id)
+    {
+        $package = International::withTrashed()->find($id);
+        if ($package) {
+            Event::create([
+                'action' => 'ESTADO',
+                'descripcion' => 'Alta de Paquete',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+            $package->update(['ESTADO' => 'VENTANILLA']);
+            $package->restore();
+            session()->flash('success', 'El paquete ha sido restaurado exitosamente');
+        } else {
+            session()->flash('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
     }
 }

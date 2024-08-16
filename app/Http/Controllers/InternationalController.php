@@ -131,21 +131,6 @@ class InternationalController extends Controller
         return redirect()->route('internationals.index')
             ->with('success', 'Baja de Paquete con exito');
     }
-    public function restore($id)
-    {
-        $international = International::withTrashed()->findOrFail($id);
-        Event::create([
-            'action' => 'ESTADO',
-            'descripcion' => 'Alta de Paquete',
-            'user_id' => auth()->user()->id,
-            'codigo' => $international->CODIGO,
-        ]);
-        $international->update(['ESTADO' => 'VENTANILLA']);
-        $international->restore();
-
-        return redirect()->route('internationals.index')
-            ->with('success', 'Alta de Paquete con exito');
-    }
     public function plantillaeexcel()
     {
         return Excel::download(new PlantillaeExport, 'Plantilla Encomienda.xlsx');

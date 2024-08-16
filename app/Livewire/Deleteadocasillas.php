@@ -7,6 +7,7 @@ use App\Models\International;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\Internationalinvcasillas;
+use App\Models\Event;
 
 class Deleteadocasillas extends Component
 {
@@ -46,5 +47,22 @@ class Deleteadocasillas extends Component
         return view('livewire.deleteadocasillas', [
             'packages' => $packages,
         ]);
+    }
+    public function restorePackage($id)
+    {
+        $package = International::withTrashed()->find($id);
+        if ($package) {
+            Event::create([
+                'action' => 'ESTADO',
+                'descripcion' => 'Alta de Paquete',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+            $package->update(['ESTADO' => 'VENTANILLA']);
+            $package->restore();
+            session()->flash('success', 'El paquete ha sido restaurado exitosamente');
+        } else {
+            session()->flash('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
     }
 }
