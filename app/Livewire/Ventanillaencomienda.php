@@ -10,6 +10,7 @@ use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\EncomiendasImport;
+use App\Exports\EncomiendasExport;
 
 class Ventanillaencomienda extends Component
 {
@@ -22,6 +23,8 @@ class Ventanillaencomienda extends Component
     public $observaciones = '';
     public $selectedPackageId = null;
     public $file;
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -125,6 +128,17 @@ class Ventanillaencomienda extends Component
 
         session()->flash('message', 'Archivo importado exitosamente.');
     }
+
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new EncomiendasExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios ENCOMIENDA.xlsx');
+    }
+    
     public function openModal($packageId)
     {
         $this->selectedPackageId = $packageId;

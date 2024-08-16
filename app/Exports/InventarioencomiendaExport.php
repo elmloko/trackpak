@@ -8,7 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class InventarioExport implements FromCollection, WithHeadings, WithStyles
+class InventarioencomiendaExport implements FromCollection, WithHeadings, WithStyles
 {
     protected $fechaInicio;
     protected $fechaFin;

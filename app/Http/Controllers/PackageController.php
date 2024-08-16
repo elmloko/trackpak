@@ -10,30 +10,20 @@ use App\Exports\CasillasExport;
 use App\Exports\EcaExport;
 use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
-use App\Exports\InventarioExport;
 use App\Exports\InventarioDDExport;
 use App\Exports\InventarioDNDExport;
 use App\Exports\InventarioECAExport;
 use App\Exports\InventarioCASIExport;
 use App\Exports\InventarioUNICAExport;
 use App\Exports\EcainventarioExport;
-use App\Exports\EncomiendasExport;
 use App\Exports\PackageExport;
 use App\Exports\CarteroExport;
 use App\Exports\CarteroGeneralExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use \Milon\Barcode\DNS1D;
 use Picqer;
 
-/**
- * 
- * 
- * Class PackageController
- * @package App\Http\Controllers
- */
 class PackageController extends Controller
 {
     public function index()
@@ -502,6 +492,7 @@ class PackageController extends Controller
                 ->with('error', 'El paquete no pudo ser encontrado o restaurado');
         }
     }
+    
     public function redirigir(Request $request, $id)
     {
         $package = Package::find($id);
@@ -1043,13 +1034,6 @@ class PackageController extends Controller
         $ciudad = $request->input('ciudad');
         return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin, $ciudad), 'Rencaminar.xlsx');
     }
-    public function inventarioexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioExport($fechaInicio, $fechaFin), 'Inventario Encomiendas.xlsx');
-    }
     public function inventarioDDexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
@@ -1098,13 +1082,6 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $regional = $request->input('regional');
         return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanillaUNICA.xlsx');
-    }
-    public function encomiendasexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $regional = $request->input('regional');
-        return Excel::download(new EncomiendasExport($fechaInicio, $fechaFin, $regional), 'ventanillaencomiendas.xlsx');
     }
     public function ventanilladndexcel(Request $request)
     {
