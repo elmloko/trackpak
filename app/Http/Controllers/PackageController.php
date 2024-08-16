@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Package;
 use App\Models\Event;
 use App\Exports\ReencaminarExport;
-use App\Exports\CarteroExport;
-use App\Exports\CarteroGeneralExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -831,21 +829,6 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $ciudad = $request->input('ciudad');
         return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin, $ciudad), 'Rencaminar.xlsx');
-    }
-    public function carteroexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $user = auth()->user();
-        $packages = Package::withTrashed()->where('ESTADO', 'REPARTIDO')->get();
-        return Excel::download(new CarteroExport($fechaInicio, $fechaFin, $user), 'Cartero.xlsx');
-    }
-    public function carterogeneralexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $packages = Package::withTrashed()->where('ESTADO', 'REPARTIDO')->get();
-        return Excel::download(new CarteroGeneralExport($fechaInicio, $fechaFin), 'Cartero General.xlsx');
     }
     public function packagesallpdf(Request $request)
     {

@@ -13,43 +13,31 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="buscar">Buscar:</label>
-                                    <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                    <input wire:model.lazy="search" type="text" class="form-control"
+                                        placeholder="Buscar...">
                                 </div>
                             </div>
-                            <form method="get" action="{{ route('cartero.excel') }}" class="col-md-6">
-                                @csrf
-                                <div class="form-row align-items-center">
-                                    <div class="col-md-4">
-                                        <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                        <input type="date" name="fecha_inicio" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="excel_fecha_fin">Fecha de fin:</label>
-                                        <input type="date" name="fecha_fin" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
-                                    </div>
-                                </div>
-                            </form>
                             <div class="col-lg-6">
-                            </div>
-                            <form method="get" action="{{ route('package.pdf.deleteadocarteropdf') }}" class="col-md-6">
-                                @csrf
-                                <div class="form-row align-items-center">
+                                <form wire:submit.prevent="export" class="form-row align-items-center">
                                     <div class="col-md-4">
                                         <label for="fecha_inicio">Fecha de inicio:</label>
-                                        <input type="date" name="fecha_inicio" class="form-control" required>
+                                        <input type="date" wire:model="fecha_inicio" class="form-control" required>
+                                        @error('fecha_inicio')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label for="fecha_fin">Fecha de fin:</label>
-                                        <input type="date" name="fecha_fin" class="form-control" required>
+                                        <input type="date" wire:model="fecha_fin" class="form-control" required>
+                                        @error('fecha_fin')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="submit" class="btn btn-danger">Generar PDF</button>
+                                        <button type="submit" class="btn btn-success">Generar Excel</button>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -69,17 +57,13 @@
                                         <th>Destinatario</th>
                                         <th>Telefono</th>
                                         <th>Pais</th>
-                                        <th>Ciudad</th>
                                         <th>Zona</th>
                                         <th>Ventanilla</th>
                                         <th>Peso(gr.)</th>
                                         <th>Tipo</th>
                                         <th>Estado</th>
                                         <th>Observaciones</th>
-                                        <th>Aduana</th>
                                         <th>Fecha Baja</th>
-                                        <th>Acciones</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,35 +71,21 @@
                                         $i = 0; // Inicializa la variable $i
                                     @endphp
                                     @foreach ($packages as $package)
-                                    @if ($package->ESTADO !== 'ENTREGADO')
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            <td>{{ $package->CODIGO }}</td>
-                                            <td>{{ $package->DESTINATARIO }}</td>
-                                            <td>{{ $package->TELEFONO }}</td>
-                                            <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                            <td>{{ $package->CIUDAD }}</td>
-                                            <td>{{ $package->ZONA }}</td>
-                                            <td>{{ $package->VENTANILLA }}</td>
-                                            <td>{{ $package->PESO }} </td>
-                                            <td>{{ $package->TIPO }}</td>
-                                            <td>{{ $package->ESTADO }}</td>
-                                            <td>{{ $package->usercartero }}</td>
-                                            <td>{{ $package->OBSERVACIONES }}</td>
-                                            <td>{{ $package->ADUANA }}</td>
-                                            <td>{{ $package->deleted_at }}</td>
-                                            <td>
-                                                @hasrole('SuperAdmin|Administrador|Urbano')
-                                                    <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-sm btn-info">
-                                                            <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
-                                                        </button>
-                                                    </form>
-                                                @endhasrole
-                                            </td>
-                                        </tr>
+                                        @if ($package->ESTADO !== 'ENTREGADO')
+                                            <tr>
+                                                <td>{{ ++$i }}</td>
+                                                <td>{{ $package->CODIGO }}</td>
+                                                <td>{{ $package->DESTINATARIO }}</td>
+                                                <td>{{ $package->TELEFONO }}</td>
+                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
+                                                <td>{{ $package->ZONA }}</td>
+                                                <td>{{ $package->VENTANILLA }}</td>
+                                                <td>{{ $package->PESO }} </td>
+                                                <td>{{ $package->TIPO }}</td>
+                                                <td>{{ $package->ESTADO }}</td>
+                                                <td>{{ $package->OBSERVACIONES }}</td>
+                                                <td>{{ $package->deleted_at }}</td>
+                                            </tr>
                                         @endif
                                     @endforeach
                                 </tbody>
