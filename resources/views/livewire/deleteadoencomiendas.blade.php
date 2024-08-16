@@ -38,8 +38,6 @@
                                     <button type="submit" class="btn btn-success">Generar Excel</button>
                                 </div>
                             </form>
-                            <div class="col-lg-6">
-                            </div>
                         </div>
                     </div>
                 </div>

@@ -7,6 +7,8 @@ use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\VentanilladndExport;
 
 class Ventanilladnd extends Component
 {
@@ -16,6 +18,8 @@ class Ventanilladnd extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $fecha_inicio;
+    public $fecha_fin;
     
     public function render()
     {
@@ -112,6 +116,16 @@ class Ventanilladnd extends Component
             $this->paquetesSeleccionados[] = $packageId;
         }
     }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new VentanilladndExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios DND.xlsx');
+    }
+
     private function getPackageIds()
     {
         return Package::where('ESTADO', 'VENTANILLA')->pluck('id')->toArray();
