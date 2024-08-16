@@ -4,17 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use App\Models\Event;
-use App\Exports\VentanillaExport;
-use App\Exports\VentanilladndExport;
 use App\Exports\CasillasExport;
 use App\Exports\EcaExport;
 use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
-use App\Exports\InventarioDDExport;
-use App\Exports\InventarioDNDExport;
 use App\Exports\InventarioECAExport;
 use App\Exports\InventarioCASIExport;
-use App\Exports\InventarioUNICAExport;
 use App\Exports\EcainventarioExport;
 use App\Exports\PackageExport;
 use App\Exports\CarteroExport;
@@ -1047,13 +1042,6 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
         return Excel::download(new InventarioECAExport($fechaInicio, $fechaFin), 'Inventario ECA.xlsx');
-    }
-    public function inventarioUNICAexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-
-        return Excel::download(new InventarioUNICAExport($fechaInicio, $fechaFin), 'Inventario UNICA.xlsx');
     }
     public function ecainventarioexcel(Request $request)
     {

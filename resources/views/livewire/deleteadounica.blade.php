@@ -15,7 +15,8 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="search">Busca:</label>
-                                    <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                    <input wire:model.lazy="search" type="text" class="form-control"
+                                        placeholder="Buscar...">
                                 </div>
                             </div>
                             <form method="get" action="{{ route('inventarioUNICA.excel') }}" class="col-md-6">
@@ -30,28 +31,13 @@
                                         <input type="date" name="fecha_fin" class="form-control" required>
                                     </div>
                                     <div class="col-md-4">
-                                        <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
+                                        <button type="submit" class="btn btn-success" target="_blank">Generar
+                                            Excel</button>
                                     </div>
                                 </div>
                             </form>
                             <div class="col-lg-6">
                             </div>
-                            {{-- <form method="get" action="{{ route('package.pdf.deleteadopdf') }}" class="col-md-6">
-                                @csrf
-                                <div class="form-row align-items-center">
-                                    <div class="col-md-4">
-                                        <label for="fecha_inicio">Fecha de inicio:</label>
-                                        <input type="date" name="fecha_inicio" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="fecha_fin">Fecha de fin:</label>
-                                        <input type="date" name="fecha_fin" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-danger">Generar PDF</button>
-                                    </div>
-                                </div>
-                            </form> --}}
                         </div>
                     </div>
                 </div>
@@ -105,13 +91,10 @@
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|Unica')
-                                                        <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <button type="submit" class="btn btn-sm btn-info">
-                                                                <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
-                                                            </button>
-                                                        </form>
+                                                        <button wire:click="restorePackage({{ $package->id }})"
+                                                            class="btn btn-sm btn-info">
+                                                            <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
+                                                        </button>
                                                     @endhasrole
                                                 </td>
                                             </tr>
