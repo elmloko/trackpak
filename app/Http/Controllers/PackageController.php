@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use App\Models\Event;
-use App\Exports\EcaExport;
-use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
-use App\Exports\InventarioECAExport;
-use App\Exports\EcainventarioExport;
-use App\Exports\PackageExport;
 use App\Exports\CarteroExport;
 use App\Exports\CarteroGeneralExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -994,36 +989,12 @@ class PackageController extends Controller
         return view('package.encomiendasinventario');
     }
 
-    //REPORTES EXCEL Y PDF
-    public function packagesallexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $ciudad = $request->input('ciudad');
-
-        return Excel::download(new PackageExport($fechaInicio, $fechaFin, $ciudad), 'Almacen.xlsx');
-    }
-
     public function reencaminarexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
         $fechaFin = $request->input('fecha_fin');
         $ciudad = $request->input('ciudad');
         return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin, $ciudad), 'Rencaminar.xlsx');
-    }
-    public function inventarioECAexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioECAExport($fechaInicio, $fechaFin), 'Inventario ECA.xlsx');
-    }
-    public function ecainventarioexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new EcainventarioExport($fechaInicio, $fechaFin), 'Inventario. xlsx');
     }
     public function carteroexcel(Request $request)
     {
