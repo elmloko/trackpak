@@ -17,6 +17,14 @@
                     {{ Form::number('TELEFONO', $international->TELEFONO, ['class' => 'form-control' . ($errors->has('TELEFONO') ? ' is-invalid' : ''), 'placeholder' => 'Telefono']) }}
                     {!! $errors->first('TELEFONO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
+                @hasrole('SuperAdmin|Administrador|Casillas')
+                <div class="form-group">
+                    {{ Form::label('Nro. Casilla') }}
+                    {{ Form::text('ZONA', $international->ZONA, ['class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''), 'placeholder' => 'Nro Casilla Postal']) }}
+                    {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+                @endhasrole
+                
                 <div class="form-group">
                     {{ Form::label('ZONA') }}
                     {{ Form::select(
@@ -101,7 +109,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     {{ Form::label('VENTANILLA') }}
-                    {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD'], $international->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
+                    {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD','CASILLAS' => 'CASILLAS'], $international->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
                     {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
