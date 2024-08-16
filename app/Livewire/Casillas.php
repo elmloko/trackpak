@@ -7,6 +7,8 @@ use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CasillasExport;
 
 class Casillas extends Component
 {
@@ -16,6 +18,8 @@ class Casillas extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -107,6 +111,15 @@ class Casillas extends Component
         } else {
             $this->paquetesSeleccionados[] = $packageId;
         }
+    }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new CasillasExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios Casillas.xlsx');
     }
     private function getPackageIds()
     {

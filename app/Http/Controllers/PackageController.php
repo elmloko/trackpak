@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use App\Models\Event;
-use App\Exports\CasillasExport;
 use App\Exports\EcaExport;
 use App\Exports\ClasificacionExport;
 use App\Exports\ReencaminarExport;
 use App\Exports\InventarioECAExport;
-use App\Exports\InventarioCASIExport;
 use App\Exports\EcainventarioExport;
 use App\Exports\PackageExport;
 use App\Exports\CarteroExport;
@@ -1029,13 +1027,6 @@ class PackageController extends Controller
         $ciudad = $request->input('ciudad');
         return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin, $ciudad), 'Rencaminar.xlsx');
     }
-    public function inventarioCASIexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioCASIExport($fechaInicio, $fechaFin), 'Inventario CASILLAS.xlsx');
-    }
     public function inventarioECAexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
@@ -1049,13 +1040,6 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
         return Excel::download(new EcainventarioExport($fechaInicio, $fechaFin), 'Inventario. xlsx');
-    }
-    public function casillasexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $regional = $request->input('regional');
-        return Excel::download(new CasillasExport($fechaInicio, $fechaFin, $regional), 'casillas.xlsx');
     }
     public function ecaexcel(Request $request)
     {
