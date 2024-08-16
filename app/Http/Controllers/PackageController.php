@@ -403,83 +403,6 @@ class PackageController extends Controller
         return redirect()->route('packages.index')
             ->with('success', 'Paquete Actualizado Con Éxito!');
     }
-    public function destroy($id)
-    {
-        $package = Package::find($id); // Encuentra el paquete
-        $codigo = $package->CODIGO; // Obtiene el código antes de eliminar el paquete
-        $package->forceDelete(); // Elimina el paquete
-
-        Event::create([
-            'action' => 'ESTADO',
-            'descripcion' => 'Eliminación de Paquete',
-            'user_id' => auth()->user()->id,
-            'codigo' => $codigo, // Utiliza el código obtenido previamente
-        ]);
-
-        return redirect()->route('packages.clasificacion')
-            ->with('success', 'Paquete Eliminado Con Éxito!');
-    }
-
-    public function delete(Request $request, $id)
-    {
-        $package = Package::find($id);
-
-        if ($package) {
-            // Registra el evento de entrega
-            Event::create([
-                'action' => 'ENTREGADO',
-                'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-
-            // Cambia el estado del paquete a "ENTREGADO"
-            $package->estado = 'ENTREGADO';
-
-            // Guarda el paquete actualizado
-            $package->save();
-
-            // Determina qué formulario cargar según el valor de la variable ADUANA
-            $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-
-            // Genera el PDF del formulario correspondiente
-            $pdf = PDF::loadView($formulario, compact('package', 'request'));
-
-            // Abre el PDF en una nueva pestaña
-            $pdf->stream('Formulario de Entrega.pdf');
-
-            // Elimina el paquete
-            $package->delete();
-
-            return $pdf->stream('Formulario de Entrega.pdf');
-            // return response()->json(['success' => true]);
-        } else {
-            return response()->json(['error' => 'No se pudo encontrar el paquete para dar de baja o generar el PDF.']);
-        }
-    }
-
-    public function restoring($id)
-    {
-        // Restaura el paquete con el ID dado
-        $package = Package::withTrashed()->find($id);
-        // Verifica si se encontró un paquete eliminado con ese ID
-        if ($package) {
-            Event::create([
-                'action' => 'ESTADO',
-                'descripcion' => 'Alta de Paquete',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-            $package->update(['ESTADO' => 'VENTANILLA']);
-            // Restaura el paquete
-            $package->restore();
-            return redirect()->route('packages.ventanilla')
-                ->with('success', 'El paquete ha sido restaurado exitosamente');
-        } else {
-            return redirect()->route('packages.ventanilla')
-                ->with('error', 'El paquete no pudo ser encontrado o restaurado');
-        }
-    }
     
     public function redirigir(Request $request, $id)
     {
@@ -553,14 +476,6 @@ class PackageController extends Controller
             $package->estado = 'REENCAMINADO';
             $package->date_redirigido = now();
             $package->save();
-
-            // Emitir evento para abrir el modal
-            // $this->emit('abrirModal', [
-            //     'codigo' => $package->CODIGO,
-            //     'destinatario' => $package->DESTINATARIO,
-            //     'cuidad' => $package->CUIDAD,
-            //     'ventanilla' => $package->VENTANILLA,
-            // ]);
 
             return back()->with('success', 'Paquete se dio de Reencamino con éxito y cambió su estado a REENCAMINADO.');
         } else {
@@ -805,85 +720,6 @@ class PackageController extends Controller
             }
         } else {
             return redirect()->back()->with('error', 'No se pudo encontrar el paquete con estado DESPACHO y ventanilla CASILLAS.');
-        }
-    }
-
-    public function deletecasillas(Request $request, $id)
-    {
-        $package = Package::find($id);
-
-        if ($package) {
-            // Registra el evento de entrega
-            Event::create([
-                'action' => 'ENTREGADO',
-                'descripcion' => 'Entrega de paquete en Casillero Postal en Oficina Regional',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-
-            // Cambia el estado del paquete a "ENTREGADO"
-            $package->estado = 'CASILLA';
-
-            // Guarda el paquete actualizado
-            $package->save();
-
-            // Determina qué formulario cargar según el valor de la variable ADUANA
-            $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-
-            // Genera el PDF de abandono
-            $pdf = PDF::loadView($formulario, compact('package', 'request'));
-
-            // Abre el PDF en una nueva pestaña
-            $pdf->stream('Formulario de Entrega.pdf');
-
-            // Elimina el paquete
-            $package->delete();
-
-            return $pdf->stream('Formulario de Entrega.pdf');
-            // return response()->json(['success' => true]);
-
-            return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
-        } else {
-            return redirect()->back()->with('error', 'No se pudo encontrar el paquete para dar de baja o generar el PDF.');
-        }
-    }
-    public function deleteeca(Request $request, $id)
-    {
-        $package = Package::find($id);
-
-        if ($package) {
-            // Registra el evento de entrega
-            Event::create([
-                'action' => 'ENTREGADO',
-                'descripcion' => 'Entrega de paquete en Casillero Postal en Oficina Regional',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-
-            // Cambia el estado del paquete a "ENTREGADO"
-            $package->estado = 'ENTREGADO';
-
-            // Guarda el paquete actualizado
-            $package->save();
-
-            // Determina qué formulario cargar según el valor de la variable ADUANA
-            $formulario = ($package->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-
-            // Genera el PDF de abandono
-            $pdf = PDF::loadView($formulario, compact('package', 'request'));
-
-            // Abre el PDF en una nueva pestaña
-            $pdf->stream('Formulario de Entrega.pdf');
-
-            // Elimina el paquete
-            $package->delete();
-
-            return $pdf->stream('Formulario de Entrega.pdf');
-            // return response()->json(['success' => true]);
-
-            return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
-        } else {
-            return redirect()->back()->with('error', 'No se pudo encontrar el paquete para dar de baja o generar el PDF.');
         }
     }
 
