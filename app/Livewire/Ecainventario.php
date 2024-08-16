@@ -5,16 +5,21 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\EcainventarioExport;
+use App\Models\Event;
 
 class Ecainventario extends Component
 {
     use WithPagination; // Mueve el uso de WithPagination aquí
 
     public $search = '';
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
-         $userRegional = auth()->user()->Regional;
+        $userRegional = auth()->user()->Regional;
 
         $packages = Package::onlyTrashed()
             ->when($this->search, function ($query) {
@@ -37,5 +42,31 @@ class Ecainventario extends Component
         return view('livewire.ecainventario', [
             'packages' => $packages,
         ]);
+    }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new EcainventarioExport($this->fecha_inicio, $this->fecha_fin), 'Inventario Ordinario ECA.xlsx');
+    }
+    public function restorePackage($id)
+    {
+        $package = Package::withTrashed()->find($id);
+        if ($package) {
+            Event::create([
+                'action' => 'ESTADO',
+                'descripcion' => 'Alta de Paquete',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+            $package->update(['ESTADO' => 'VENTANILLA']);
+            $package->restore();
+            session()->flash('success', 'El paquete ha sido restaurado exitosamente');
+        } else {
+            session()->flash('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
     }
 }

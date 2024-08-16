@@ -6,7 +6,8 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 id="card_title">{{ __('Entregas de Paquetes para Envíos de Correspondencia Agrupada') }}</h5>
+                                <h5 id="card_title">
+                                    {{ __('Entregas de Paquetes para Envíos de Correspondencia Agrupada') }}</h5>
                                 <div class="col">
                                     <div class="row align-items-center">
                                         <div class="col-md-6">
@@ -16,43 +17,47 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        @hasrole('SuperAdmin|Administrador|ECA')
-                                            <div class="col-md-6 text-right">
-                                                <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#buscarPaqueteModal">
-                                                    Añadir Paquete
-                                                </button>
-                                                @include('package.modal.ventanillaeca')
-                                                <button wire:click="cambiarEstado" class="btn btn-warning">Despachar</button>
-                                            </div>
-                                        @endhasrole
+
                                         <div class="col-md-12">
                                             <div class="row">
                                                 <!-- Formulario para generar Excel -->
                                                 <div class="col-md-6">
-                                                    <form method="get" action="{{ route('eca.excel') }}"
-                                                        class="col-md-12">
-                                                        @csrf
-                                                        <div class="form-row">
-                                                            <div class="col-md-6">
-                                                                <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                                                <input type="date" name="fecha_inicio"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                                <input type="date" name="fecha_fin"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-12 mt-3 text-center">
-                                                                <button type="submit" class="btn btn-success"
-                                                                    target="_blank">Generar Excel</button>
-                                                            </div>
+                                                    <form wire:submit.prevent="export"
+                                                        class="form-row align-items-center">
+                                                        <div class="col-md-4">
+                                                            <label for="fecha_inicio">Fecha de inicio:</label>
+                                                            <input type="date" wire:model="fecha_inicio"
+                                                                class="form-control" required>
+                                                            @error('fecha_inicio')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="fecha_fin">Fecha de fin:</label>
+                                                            <input type="date" wire:model="fecha_fin"
+                                                                class="form-control" required>
+                                                            @error('fecha_fin')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="submit" class="btn btn-success">Generar
+                                                                Excel</button>
                                                         </div>
                                                     </form>
                                                 </div>
-
-                                                <!-- Formulario para generar PDF -->
+                                                @hasrole('SuperAdmin|Administrador|ECA')
+                                                    <div class="col-md-6 text-right">
+                                                        <button class="btn btn-primary" data-toggle="modal"
+                                                            data-target="#buscarPaqueteModal">
+                                                            Añadir Paquete
+                                                        </button>
+                                                        @include('package.modal.ventanillaeca')
+                                                        <button wire:click="cambiarEstado"
+                                                            class="btn btn-warning">Despachar</button>
+                                                    </div>
+                                                @endhasrole
+                                                {{-- <!-- Formulario para generar PDF -->
                                                 <div class="col-md-6">
                                                     <form method="get"
                                                         action="{{ route('package.pdf.ventanillapdf') }}"
@@ -85,7 +90,7 @@
                                                             </div>
                                                         </div>
                                                     </form>
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
 
@@ -105,7 +110,8 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
-                                                    <th><input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
+                                                    <th><input type="checkbox" wire:model="selectAll"
+                                                            wire:click="toggleSelectAll">
                                                     </th>
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
@@ -114,9 +120,7 @@
                                                     <th>Teléfono</th>
                                                     <th>País</th>
                                                     <th>Ciudad</th>
-                                                    {{-- <th>Ventanilla</th> --}}
                                                     <th>Peso (gr.)</th>
-                                                    <th>Precio(Bs.)</th>
                                                     <th>Tipo</th>
                                                     <th>Estado</th>
                                                     <th>Observaciones</th>
@@ -135,8 +139,9 @@
                                                             $package->CUIDAD === auth()->user()->Regional &&
                                                             in_array($package->VENTANILLA, ['ECA']))
                                                         <tr>
-                                                            <td><input type="checkbox" wire:model="paquetesSeleccionados"
-                                                                value="{{ $package->id }}"></td>
+                                                            <td><input type="checkbox"
+                                                                    wire:model="paquetesSeleccionados"
+                                                                    value="{{ $package->id }}"></td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->ZONA }}</td>
@@ -144,24 +149,12 @@
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                             <td>{{ $package->CUIDAD }}</td>
-                                                            {{-- <td>{{ $package->VENTANILLA }}</td> --}}
                                                             <td>{{ $package->PESO }} </td>
-                                                            <td>{{ $package->PRECIO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
-                                                                    Urbano')
-                                                                    <a class="btn btn-sm btn-warning" href="#"
-                                                                        data-toggle="modal"
-                                                                        data-target="#bajaModal{{ $package->id }}">
-                                                                        <i class="fa fa-arrow-down"></i>
-                                                                        {{ __('Baja') }}
-                                                                    </a>
-                                                                    @include('package.modal.bajaeca')
-                                                                @endhasrole --}}
                                                                 @hasrole('SuperAdmin|Administrador|ECA')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">

@@ -7,6 +7,8 @@ use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\EcaExport;
 
 class Eca extends Component
 {
@@ -15,6 +17,8 @@ class Eca extends Component
     public $search = '';
     public $selectAll = false;
     public $paquetesSeleccionados = [];
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -98,6 +102,15 @@ class Eca extends Component
 
         // Restablecer la selección
         $this->resetSeleccion();
+    }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new EcaExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios ECA.xlsx');
     }
     private function getPackageIds()
     {
