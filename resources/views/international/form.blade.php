@@ -18,98 +18,99 @@
                     {!! $errors->first('TELEFONO', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 @hasrole('SuperAdmin|Administrador|Casillas')
-                <div class="form-group">
-                    {{ Form::label('Nro. Casilla') }}
-                    {{ Form::text('ZONA', $international->ZONA, ['class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''), 'placeholder' => 'Nro Casilla Postal']) }}
-                    {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                    <div class="form-group">
+                        {{ Form::label('Nro. Casilla') }}
+                        {{ Form::text('ZONA', $international->ZONA, ['class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''), 'placeholder' => 'Nro Casilla Postal']) }}
+                        {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
                 @endhasrole
-                
-                <div class="form-group">
-                    {{ Form::label('ZONA') }}
-                    {{ Form::select(
-                        'ZONA',
-                        [
-                            'DND' => 'DND',
-                            'EL ALTO' => 'EL ALTO',
-                            'CALACOTO' => 'CALACOTO',
-                            'SAN PEDRO' => 'SAN PEDRO',
-                            'LOS ANDES' => 'LOS ANDES',
-                            'SEGUENCOMA' => 'SEGUENCOMA',
-                            'VILLA PABON' => 'VILLA PABON',
-                            'VILLA ARMONIA' => 'VILLA ARMONIA',
-                            'IRPAVI' => 'IRPAVI',
-                            'CENTRO' => 'CENTRO',
-                            'VILLA NUEVA POTOSI' => 'VILLA NUEVA POTOSI',
-                            'AUQUISAMANA' => 'AUQUISAMAÑA',
-                            'ROSARIO GRAN PODER' => 'ROSARIO GRAN PODER',
-                            'VILLA EL CARMEN' => 'VILLA EL CARMEN',
-                            'ACHUMANI' => 'ACHUMANI',
-                            'MIRAFLORES' => 'MIRAFLORES',
-                            'CEMENTERIO' => 'CEMENTERIO',
-                            'MALLASILLA' => 'MALLASILLA',
-                            'VILLA SALOME' => 'VILLA SALOME',
-                            'LOS PINOS / SAN MIGUEL' => 'LOS PINOS / SAN MIGUEL',
-                            'VILLA FATIMA' => 'VILLA FATIMA',
-                            'PASANKERI' => 'PASANKERI',
-                            'ALTO OBRAJES' => 'ALTO OBRAJES',
-                            'PURA PURA' => 'PURA PURA',
-                            'OBRAJES' => 'OBRAJES',
-                            'VILLA COPACABANA' => 'VILLA COPACABANA',
-                            'LLOJETA' => 'LLOJETA',
-                            'BUENOS AIRES' => 'BUENOS AIRES',
-                            'ACHACHICALA' => 'ACHACHICALA',
-                            'TEMBLADERANI' => 'TEMBLADERANI',
-                            'SOPOCACHI' => 'SOPOCACHI',
-                            'ZONA NORTE' => 'ZONA NORTE',
-                            'PAMPAHASSI' => 'PAMPAHASSI',
-                            'VINO TINTO' => 'VINO TINTO',
-                            'BELLA VISTA / BOLONIA' => 'BELLA VISTA / BOLONIA',
-                            'VILLA SAN ANTONIO' => 'VILLA SAN ANTONIO',
-                            'MUNAYPATA' => 'MUNAYPATA',
-                            'SAN SEBASTIAN' => 'SAN SEBASTIAN',
-                            'PERIFERICA' => 'PERIFERICA',
-                            'COTA COTA / CHASQUIPAMPA' => 'COTA COTA / CHASQUIPAMPA',
-                            'LA PORTADA' => 'LA PORTADA',
-                            'FLORIDA' => 'FLORIDA',
-                            'VILLA VICTORIA' => 'VILLA VICTORIA',
-                            'CIUDADELA FERROVIARIA' => 'CIUDADELA FERROVIARIA',
-                            'PG1A' => 'PG1A',
-                            'PG2A' => 'PG2A',
-                            'PG3A' => 'PG3A',
-                            'PG4A' => 'PG4A',
-                            'PG5A' => 'PG5A',
-                            'PG1B' => 'PG1B',
-                            'PG2B' => 'PG2B',
-                            'PG3B' => 'PG3B',
-                            'PG4B' => 'PG4B',
-                            'PG5B' => 'PG5B',
-                            'PG1C' => 'PG1C',
-                            'PG2C' => 'PG2C',
-                            'PG3C' => 'PG3C',
-                            'PG4C' => 'PG4C',
-                            'PG5C' => 'PG5C',
-                            'PG1D' => 'PG1D',
-                            'PG2D' => 'PG2D',
-                            'PG3D' => 'PG3D',
-                            'PG4D' => 'PG4D',
-                            'PG5D' => 'PG5D',
-                            'RETURN' => 'RETURN'
-                        ],
-                        $international->ZONA,
-                        [
-                            'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
-                            'placeholder' => 'Seleccione la Zona',
-                        ],
-                    ) }}
+                @hasrole('SuperAdmin|Administrador|Urbano')
+                    <div class="form-group">
+                        {{ Form::label('ZONA') }}
+                        {{ Form::select(
+                            'ZONA',
+                            [
+                                'DND' => 'DND',
+                                'EL ALTO' => 'EL ALTO',
+                                'CALACOTO' => 'CALACOTO',
+                                'SAN PEDRO' => 'SAN PEDRO',
+                                'LOS ANDES' => 'LOS ANDES',
+                                'SEGUENCOMA' => 'SEGUENCOMA',
+                                'VILLA PABON' => 'VILLA PABON',
+                                'VILLA ARMONIA' => 'VILLA ARMONIA',
+                                'IRPAVI' => 'IRPAVI',
+                                'CENTRO' => 'CENTRO',
+                                'VILLA NUEVA POTOSI' => 'VILLA NUEVA POTOSI',
+                                'AUQUISAMANA' => 'AUQUISAMAÑA',
+                                'ROSARIO GRAN PODER' => 'ROSARIO GRAN PODER',
+                                'VILLA EL CARMEN' => 'VILLA EL CARMEN',
+                                'ACHUMANI' => 'ACHUMANI',
+                                'MIRAFLORES' => 'MIRAFLORES',
+                                'CEMENTERIO' => 'CEMENTERIO',
+                                'MALLASILLA' => 'MALLASILLA',
+                                'VILLA SALOME' => 'VILLA SALOME',
+                                'LOS PINOS / SAN MIGUEL' => 'LOS PINOS / SAN MIGUEL',
+                                'VILLA FATIMA' => 'VILLA FATIMA',
+                                'PASANKERI' => 'PASANKERI',
+                                'ALTO OBRAJES' => 'ALTO OBRAJES',
+                                'PURA PURA' => 'PURA PURA',
+                                'OBRAJES' => 'OBRAJES',
+                                'VILLA COPACABANA' => 'VILLA COPACABANA',
+                                'LLOJETA' => 'LLOJETA',
+                                'BUENOS AIRES' => 'BUENOS AIRES',
+                                'ACHACHICALA' => 'ACHACHICALA',
+                                'TEMBLADERANI' => 'TEMBLADERANI',
+                                'SOPOCACHI' => 'SOPOCACHI',
+                                'ZONA NORTE' => 'ZONA NORTE',
+                                'PAMPAHASSI' => 'PAMPAHASSI',
+                                'VINO TINTO' => 'VINO TINTO',
+                                'BELLA VISTA / BOLONIA' => 'BELLA VISTA / BOLONIA',
+                                'VILLA SAN ANTONIO' => 'VILLA SAN ANTONIO',
+                                'MUNAYPATA' => 'MUNAYPATA',
+                                'SAN SEBASTIAN' => 'SAN SEBASTIAN',
+                                'PERIFERICA' => 'PERIFERICA',
+                                'COTA COTA / CHASQUIPAMPA' => 'COTA COTA / CHASQUIPAMPA',
+                                'LA PORTADA' => 'LA PORTADA',
+                                'FLORIDA' => 'FLORIDA',
+                                'VILLA VICTORIA' => 'VILLA VICTORIA',
+                                'CIUDADELA FERROVIARIA' => 'CIUDADELA FERROVIARIA',
+                                'PG1A' => 'PG1A',
+                                'PG2A' => 'PG2A',
+                                'PG3A' => 'PG3A',
+                                'PG4A' => 'PG4A',
+                                'PG5A' => 'PG5A',
+                                'PG1B' => 'PG1B',
+                                'PG2B' => 'PG2B',
+                                'PG3B' => 'PG3B',
+                                'PG4B' => 'PG4B',
+                                'PG5B' => 'PG5B',
+                                'PG1C' => 'PG1C',
+                                'PG2C' => 'PG2C',
+                                'PG3C' => 'PG3C',
+                                'PG4C' => 'PG4C',
+                                'PG5C' => 'PG5C',
+                                'PG1D' => 'PG1D',
+                                'PG2D' => 'PG2D',
+                                'PG3D' => 'PG3D',
+                                'PG4D' => 'PG4D',
+                                'PG5D' => 'PG5D',
+                                'RETURN' => 'RETURN',
+                            ],
+                            $international->ZONA,
+                            [
+                                'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
+                                'placeholder' => 'Seleccione la Zona',
+                            ],
+                        ) }}
 
-                    {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
+                        {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                @endhasrole
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     {{ Form::label('VENTANILLA') }}
-                    {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD','CASILLAS' => 'CASILLAS'], $international->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
+                    {{ Form::select('VENTANILLA', ['DND' => 'DND', 'DD' => 'DD', 'CASILLAS' => 'CASILLAS'], $international->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
                     {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
                 <div class="form-group">
