@@ -1062,13 +1062,6 @@ class PackageController extends Controller
         $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
         return Excel::download(new EcainventarioExport($fechaInicio, $fechaFin), 'Inventario. xlsx');
     }
-    public function ventanillaexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $regional = $request->input('regional');
-        return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanillaUNICA.xlsx');
-    }
     public function casillasexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
