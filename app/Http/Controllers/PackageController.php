@@ -1004,22 +1004,6 @@ class PackageController extends Controller
         return Excel::download(new PackageExport($fechaInicio, $fechaFin, $ciudad), 'Almacen.xlsx');
     }
 
-    public function clasificacionexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $ciudad = $request->input('ciudad');
-        $ventanilla = $request->input('ventanilla');
-
-        $packages = Package::where('ESTADO', 'CLASIFICACION')
-            ->where('CUIDAD', $ciudad)
-            ->where('VENTANILLA', $ventanilla)
-            ->whereBetween('created_at', [$fechaInicio, $fechaFin])
-            ->get();
-
-        return Excel::download(new ClasificacionExport($fechaInicio, $fechaFin), 'Clasificacion.xlsx');
-    }
-
     public function reencaminarexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');

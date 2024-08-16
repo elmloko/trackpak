@@ -36,8 +36,6 @@
                                 <button wire:click="cambiarEstado" class="btn btn-warning">
                                     {{ __('Despachar') }}
                                 </button>
-                                {{-- <input type="checkbox" wire:model="findespacho" id="findespacho">
-                                <label for="findespacho">{{ __('Finalizar despacho') }}</label> --}}
                             @endhasrole
                         </div>
                     </div>
@@ -48,14 +46,6 @@
                     </div>
                 @endif
                 <div class="card-body">
-                    {{-- <h5 id="card_title">
-                        @if ($lastBag)
-                            Última Saca Designada {{ $lastBag->NRODESPACHO }} /
-                            {{ $lastBag->NROSACA }}{{ $lastBag->FIN == 'F' ? 'F' : '' }}
-                        @else
-                            No hay sacas registradas 000/000
-                        @endif
-                    </h5> --}}
                     <div class="table-responsive">
                         @if ($packages->count())
                             <table class="table table-striped table-hover">
@@ -115,16 +105,10 @@
                                                                 </a>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <form
-                                                                    action="{{ route('packages.destroy', $package->id) }}"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger btn-sm">
-                                                                        <i class="fa fa-fw fa-trash"></i>
-                                                                        {{ __('Eliminar') }}
-                                                                    </button>
-                                                                </form>
+                                                                <button wire:click="eliminarPaquete({{ $package->id }})"
+                                                                    class="btn btn-sm btn-danger">
+                                                                    <i class="fas fa-trash-alt"></i> Eliminar
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     @endhasrole
@@ -151,75 +135,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Función para actualizar las opciones de ventanilla
-        function actualizarVentanillas(ciudadSelect, ventanillaSelect, ventanillasPorCiudad) {
-            const ciudadSeleccionada = ciudadSelect.value;
-            const opcionesVentanilla = ventanillasPorCiudad[ciudadSeleccionada] || [];
-
-            // Borra las opciones existentes
-            ventanillaSelect.innerHTML = '';
-
-            // Agrega las nuevas opciones
-            opcionesVentanilla.forEach(opcion => {
-                const optionElement = document.createElement('option');
-                optionElement.value = opcion;
-                optionElement.text = opcion;
-                ventanillaSelect.appendChild(optionElement);
-            });
-        }
-
-        // Obtiene referencias a los elementos de ciudad y ventanilla para el formulario de Excel
-        const ciudadSelectExcel = document.querySelector('form[name="excelForm"] select[name="ciudad"]');
-        const ventanillaSelectExcel = document.querySelector(
-            'form[name="excelForm"] select[name="ventanilla"]');
-
-        // Define las opciones de ventanilla por ciudad para el formulario de Excel
-        const ventanillasPorCiudadExcel = {
-            'LA PAZ': ['DND', 'DD', 'CASILLAS', 'ECA'],
-            'COCHABAMBA': ['UNICA'],
-            'SANTA CRUZ': ['UNICA'],
-            'ORURO': ['UNICA'],
-            'SUCRE': ['UNICA'],
-            'POTOSI': ['UNICA'],
-            'BENI': ['UNICA'],
-            'PANDO': ['UNICA'],
-            'TARIJA': ['UNICA'],
-        };
-
-        // Escucha el cambio en la selección de la ciudad para el formulario de Excel
-        ciudadSelectExcel.addEventListener('change', function() {
-            actualizarVentanillas(ciudadSelectExcel, ventanillaSelectExcel, ventanillasPorCiudadExcel);
-        });
-
-        // Inicializa las opciones de ventanilla para el formulario de Excel
-        actualizarVentanillas(ciudadSelectExcel, ventanillaSelectExcel, ventanillasPorCiudadExcel);
-
-        // Obtiene referencias a los elementos de ciudad y ventanilla para el formulario de PDF
-        const ciudadSelectPDF = document.querySelector('form[name="pdfForm"] select[name="ciudad"]');
-        const ventanillaSelectPDF = document.querySelector('form[name="pdfForm"] select[name="ventanilla"]');
-
-        // Define las opciones de ventanilla por ciudad para el formulario de PDF
-        const ventanillasPorCiudadPDF = {
-            'LA PAZ': ['DND', 'DD', 'CASILLAS', 'ECA'],
-            'COCHABAMBA': ['UNICA'],
-            'SANTA CRUZ': ['UNICA'],
-            'ORURO': ['UNICA'],
-            'SUCRE': ['UNICA'],
-            'POTOSI': ['UNICA'],
-            'BENI': ['UNICA'],
-            'PANDO': ['UNICA'],
-            'TARIJA': ['UNICA'],
-        };
-
-        // Escucha el cambio en la selección de la ciudad para el formulario de PDF
-        ciudadSelectPDF.addEventListener('change', function() {
-            actualizarVentanillas(ciudadSelectPDF, ventanillaSelectPDF, ventanillasPorCiudadPDF);
-        });
-
-        // Inicializa las opciones de ventanilla para el formulario de PDF
-        actualizarVentanillas(ciudadSelectPDF, ventanillaSelectPDF, ventanillasPorCiudadPDF);
-    });
-</script>

@@ -18,7 +18,6 @@ class ClasificacionExport implements FromCollection, WithHeadings, WithStyles
         $ciudad = request()->input('ciudad'); // Obtén la ciudad seleccionada del formulario
 
         $query = Package::where('ESTADO', 'DESPACHO')
-            ->where('CUIDAD', $ciudad) // Agrega la condición para la ciudad
             ->select(
                 'CODIGO',
                 'DESTINATARIO',

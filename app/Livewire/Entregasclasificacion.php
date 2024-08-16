@@ -5,17 +5,20 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ClasificacionExport;
 
 class Entregasclasificacion extends Component
 {
     use WithPagination;
 
     public $search = '';
+    public $fecha_inicio;
+    public $fecha_fin;
+    public $ciudad;
 
     public function render()
     {
-        // $userRegional = auth()->user()->Regional;
-
         $packages = Package::where('ESTADO', 'DESPACHO')
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
@@ -35,5 +38,17 @@ class Entregasclasificacion extends Component
         return view('livewire.entregasclasificacion', [
             'packages' => $packages,
         ]);
+    }
+
+    public function exportToExcel()
+    {
+        // Validación simple
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        // Lógica de exportación a Excel
+        return Excel::download(new ClasificacionExport($this->fecha_inicio, $this->fecha_fin), 'Clasificacion.xlsx');
     }
 }
