@@ -74,7 +74,6 @@
                                                     <th>Destinatario</th>
                                                     <th>Teléfono</th>
                                                     <th>País</th>
-                                                    <th>Ventanilla</th>
                                                     <th>Peso (Kg.)</th>
                                                     <th>Tipo</th>
                                                     <th>Estado</th>
@@ -103,7 +102,6 @@
                                                             <td>{{ $package->DESTINATARIO }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                            <td>{{ $package->VENTANILLA }}</td>
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>

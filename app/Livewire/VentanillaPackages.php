@@ -7,6 +7,8 @@ use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\VentanillaExport;
 
 class VentanillaPackages extends Component
 {
@@ -16,6 +18,8 @@ class VentanillaPackages extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -32,7 +36,6 @@ class VentanillaPackages extends Component
             ->where(function ($query) use ($userRegional) {
                 $query->where(function ($subQuery) {
                     $subQuery->where('VENTANILLA', 'DD');
-                        // ->orWhere('VENTANILLA', 'DND');
                 })
                 ->where('CUIDAD', $userRegional);
             })
@@ -112,6 +115,15 @@ class VentanillaPackages extends Component
         } else {
             $this->paquetesSeleccionados[] = $packageId;
         }
+    }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+
+        return Excel::download(new VentanillaExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios DD.xlsx');
     }
     private function getPackageIds()
     {

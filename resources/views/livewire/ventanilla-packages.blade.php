@@ -9,88 +9,52 @@
                                 <h5 id="card_title">{{ __('Entregas de Paquetes en Ventanilla DD') }}</h5>
                                 <div class="col">
                                     <div class="row align-items-center">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="search">Busca:</label>
-                                                <input wire:model.lazy="search" type="text" class="form-control"
-                                                    placeholder="Buscar...">
-                                            </div>
-                                        </div>
                                         @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
-                                            <div class="col-md-3">
+                                            <div class="col-md-12 text-right">
                                                 <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
-                                            </div>
-                                            <div class="col-md-3 text-right">
                                                 <button class="btn btn-primary" data-toggle="modal"
                                                     data-target="#buscarPaqueteModal">
                                                     Añadir Paquete
                                                 </button>
                                                 @include('package.modal.ventanilla')
                                             </div>
-                                        @endhasrole
-                                        <div class="col-md-12">
+                                        @endhasrole<div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="search">Busca:</label>
+                                                <input wire:model.lazy="search" type="text" class="form-control"
+                                                    placeholder="Buscar...">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-6">
                                             <div class="row">
-                                                <!-- Formulario para generar Excel -->
                                                 <div class="col-md-6">
-                                                    <form method="get" action="{{ route('ventanilla.excel') }}"
-                                                        class="col-md-12">
-                                                        @csrf
-                                                        <div class="form-row">
-                                                            <div class="col-md-6">
-                                                                <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                                                <input type="date" name="fecha_inicio"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                                <input type="date" name="fecha_fin"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-12 mt-3 text-center">
-                                                                <button type="submit" class="btn btn-success"
-                                                                    target="_blank">Generar Excel</button>
-                                                            </div>
+                                                    <form wire:submit.prevent="export"
+                                                        class="form-row align-items-center">
+                                                        <div class="col-md-4">
+                                                            <label for="fecha_inicio">Fecha de inicio:</label>
+                                                            <input type="date" wire:model="fecha_inicio"
+                                                                class="form-control" required>
+                                                            @error('fecha_inicio')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
-                                                    </form>
-                                                </div>
-
-                                                <!-- Formulario para generar PDF -->
-                                                <div class="col-md-6">
-                                                    <form method="get"
-                                                        action="{{ route('package.pdf.ventanillapdf') }}"
-                                                        class="col-md-12">
-                                                        @csrf
-                                                        <div class="form-row">
-                                                            <div class="col-md-4">
-                                                                <label for="fecha_inicio">Fecha de inicio:</label>
-                                                                <input type="date" name="fecha_inicio"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="fecha_fin">Fecha de fin:</label>
-                                                                <input type="date" name="fecha_fin"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="ventanilla">Ventanilla:</label>
-                                                                <select name="ventanilla" class="form-control">
-                                                                    @if (auth()->user()->Regional == 'LA PAZ')
-                                                                        <option value="DD">DD</option>
-                                                                    @else
-                                                                        <option value="UNICA">UNICA</option>
-                                                                    @endif
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-12 mt-3 text-center">
-                                                                <button type="submit" class="btn btn-danger">Generar
-                                                                    PDF</button>
-                                                            </div>
+                                                        <div class="col-md-4">
+                                                            <label for="fecha_fin">Fecha de fin:</label>
+                                                            <input type="date" wire:model="fecha_fin"
+                                                                class="form-control" required>
+                                                            @error('fecha_fin')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <button type="submit" class="btn btn-success">Generar
+                                                                Excel</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 @if ($message = Session::get('success'))
@@ -107,19 +71,13 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
-                                                    <th>
-                                                        {{-- <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll"> --}}
-                                                    </th>
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
                                                     <th>Destinatario</th>
                                                     <th>Teléfono</th>
                                                     <th>País</th>
-                                                    {{-- <th>Ciudad</th> --}}
                                                     <th>Zonificacion</th>
-                                                    {{-- <th>Ventanilla</th> --}}
                                                     <th>Peso (Kg.)</th>
-                                                    <th>Precio(Bs.)</th>
                                                     <th>Tipo</th>
                                                     <th>Estado</th>
                                                     <th>Observaciones</th>
@@ -147,28 +105,16 @@
                                                             <td>{{ $package->DESTINATARIO }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                            {{-- <td>{{ $package->CUIDAD }}</td> --}}
                                                             <td>{{ $package->ZONA }}</td>
-                                                            {{-- <td>{{ $package->VENTANILLA }}</td> --}}
                                                             <td>{{ $package->PESO }} </td>
-                                                            <td>{{ $package->PRECIO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
                                                             <td>{{ $package->ESTADO }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
-                                                                {{-- @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
+                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                     Urbano')
-                                                                    <a class="btn btn-sm btn-warning" href="#"
-                                                                        data-toggle="modal"
-                                                                        data-target="#bajaModal{{ $package->id }}">
-                                                                        <i class="fa fa-arrow-down"></i>
-                                                                        {{ __('Baja') }}
-                                                                    </a>
-                                                                    @include('package.modal.baja')
-                                                                @endhasrole --}}
-                                                                @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
                                                                     <a class="btn btn-sm btn-success"
                                                                         href="{{ route('packages.edit', $package->id) }}">
                                                                         <i class="fa fa-fw fa-edit"></i>

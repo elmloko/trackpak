@@ -1034,20 +1034,6 @@ class PackageController extends Controller
         $ciudad = $request->input('ciudad');
         return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin, $ciudad), 'Rencaminar.xlsx');
     }
-    public function inventarioDDexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioDDExport($fechaInicio, $fechaFin), 'Inventario DD.xlsx');
-    }
-    public function inventarioDNDexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $packages = Package::withTrashed()->where('ESTADO', 'ENTREGADO')->get();
-        return Excel::download(new InventarioDNDExport($fechaInicio, $fechaFin), 'Inventario DND .xlsx');
-    }
     public function inventarioCASIexcel(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
@@ -1082,13 +1068,6 @@ class PackageController extends Controller
         $fechaFin = $request->input('fecha_fin');
         $regional = $request->input('regional');
         return Excel::download(new VentanillaExport($fechaInicio, $fechaFin, $regional), 'ventanillaUNICA.xlsx');
-    }
-    public function ventanilladndexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $regional = $request->input('regional');
-        return Excel::download(new VentanilladndExport($fechaInicio, $fechaFin, $regional), 'ventanilladnd.xlsx');
     }
     public function casillasexcel(Request $request)
     {
@@ -1232,12 +1211,6 @@ class PackageController extends Controller
         $pdf->setPaper(9.5, 24);
         return $pdf->stream();
     }
-    // public function abandono(Request $request, $id)
-    // {
-    //     $package = Package::find($id);
-    //     $pdf = PDF::loadView('package.pdf.abandono', compact('package', 'request'));
-    //     return $pdf->stream();
-    // }
     public function carteropdf()
     {
         $packages = Package::where('ESTADO', 'CARTERO')->get();
