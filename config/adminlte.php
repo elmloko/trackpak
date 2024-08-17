@@ -320,6 +320,12 @@ return [
             'icon' => 'fas fa-user',
         ],
         [
+            'text' => 'Logs',
+            'url' => '/log-viewer',
+            'can'  => 'users.index',
+            'icon' => 'fas fa-user',
+        ],
+        [
             'text' => 'Usuarios',
             'icon' => 'fas fa-users',
             'can'  => 'users.index',
