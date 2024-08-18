@@ -314,18 +314,6 @@ return [
             'icon' => 'fas fa-user',
         ],
         [
-            'text' => 'Rendimiento',
-            'url' => '/pulse',
-            'can'  => 'users.index',
-            'icon' => 'fas fa-user',
-        ],
-        [
-            'text' => 'Logs',
-            'url' => '/log-viewer',
-            'can'  => 'users.index',
-            'icon' => 'fas fa-user',
-        ],
-        [
             'text' => 'Usuarios',
             'icon' => 'fas fa-users',
             'can'  => 'users.index',
@@ -793,6 +781,18 @@ return [
             'url' => 'mensajes',
             'icon' => 'fas fa-calendar-alt',
             'can'  => 'users.index',
+        ],
+        [
+            'text' => 'Rendimiento',
+            'url' => '/pulse',
+            'can'  => 'users.index',
+            'icon' => 'fas fa-user',
+        ],
+        [
+            'text' => 'Logs',
+            'url' => '/log-viewer',
+            'can'  => 'users.index',
+            'icon' => 'fas fa-user',
         ],
     ],
 
