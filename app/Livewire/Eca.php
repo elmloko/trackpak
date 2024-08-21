@@ -142,6 +142,12 @@ class Eca extends Component
 
         $this->reset(['selectedCity', 'observaciones', 'selectedPackageId']);
         session()->flash('message', 'Paquete actualizado exitosamente.');
+
+        $pdf = PDF::loadView('livewire.pdf.reencaminarentrega', compact('package'));
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'Formulario de Rencaminamiento.pdf');
     }
     private function getPackageIds()
     {
