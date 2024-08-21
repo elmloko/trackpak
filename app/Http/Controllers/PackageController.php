@@ -402,33 +402,6 @@ class PackageController extends Controller
             ->with('success', 'Paquete Actualizado Con Éxito!');
     }
     
-    public function redirigir(Request $request, $id)
-    {
-        $package = Package::find($id);
-
-        if ($package) {
-            // Cambia el estado del paquete a "redirigido"
-            $package->redirigido = true;
-            Event::create([
-                'action' => 'PRE-ENTREGA',
-                'descripcion' => 'Correccion de Destino de paquete a Oficina Postal Regional',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-
-            $package->estado = 'REENCAMINADO';
-
-            // Obtén la fecha y hora actual y guárdala en el campo 'fecha_hora_redirigido'
-            $package->date_redirigido = now();
-
-            // Guarda el paquete actualizado
-            $package->save();
-
-            return back()->with('success', 'Paquete se dio de Reencamino con exito y cambió su estado a REENCAMINADO con éxito.');
-        } else {
-            return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
-        }
-    }
     public function dirigido($id)
     {
         $package = Package::find($id);

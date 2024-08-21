@@ -20,19 +20,27 @@
                                             <div class="row">
                                                 <!-- Formulario para generar Excel -->
                                                 <div class="col-md-9">
-                                                    <form wire:submit.prevent="export" class="form-row align-items-center">
+                                                    <form wire:submit.prevent="export"
+                                                        class="form-row align-items-center">
                                                         <div class="col-md-4">
                                                             <label for="fecha_inicio">Fecha de inicio:</label>
-                                                            <input type="date" wire:model="fecha_inicio" class="form-control" required>
-                                                            @error('fecha_inicio') <span class="text-danger">{{ $message }}</span> @enderror
+                                                            <input type="date" wire:model="fecha_inicio"
+                                                                class="form-control" required>
+                                                            @error('fecha_inicio')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="fecha_fin">Fecha de fin:</label>
-                                                            <input type="date" wire:model="fecha_fin" class="form-control" required>
-                                                            @error('fecha_fin') <span class="text-danger">{{ $message }}</span> @enderror
+                                                            <input type="date" wire:model="fecha_fin"
+                                                                class="form-control" required>
+                                                            @error('fecha_fin')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <button type="submit" class="btn btn-success">Generar Excel</button>
+                                                            <button type="submit" class="btn btn-success">Generar
+                                                                Excel</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -53,7 +61,9 @@
                                                             </div>
                                                             <button type="submit"
                                                                 class="btn btn-primary mb-2">Importar</button>
-                                                                <a href="{{ route('plantillae.excel') }}" class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
+                                                            <a href="{{ route('plantillae.excel') }}"
+                                                                class="btn btn-secondary mb-2 ml-2">Descargar Modelo
+                                                                Excel</a>
                                                         </form>
                                                         @if (session()->has('message'))
                                                             <div class="alert alert-success mt-2">
@@ -122,14 +132,18 @@
                                                             <td>{{ $package->created_at }}</td>
                                                             <td>
                                                                 @hasrole('SuperAdmin|Administrador|ENCOMIENDAS')
-                                                                    <a class="btn btn-sm btn-success"
-                                                                        href="{{ route('packages.edit', $package->id) }}">
-                                                                        <i class="fa fa-fw fa-edit"></i>
-                                                                        {{ __('Editar') }}
-                                                                    </a>
-                                                                    <button wire:click="openModal({{ $package->id }})" class="btn btn-sm btn-info">
-                                                                        <i class="fa fa-edit"></i> Reencaminar
-                                                                    </button>
+                                                                    <div class="d-flex" role="group"
+                                                                        aria-label="Acciones">
+                                                                        <a class="btn btn-sm btn-success"
+                                                                            href="{{ route('packages.edit', $package->id) }}" style="margin-right: 10px;">
+                                                                            <i class="fa fa-fw fa-edit"></i>
+                                                                            {{ __('Editar') }}
+                                                                        </a>
+                                                                        <button wire:click="openModal({{ $package->id }})"
+                                                                            class="btn btn-sm btn-info">
+                                                                            <i class="fa fa-edit"></i> Reencaminar
+                                                                        </button>
+                                                                    </div>
                                                                 @endhasrole
                                                             </td>
                                                         </tr>
@@ -155,13 +169,14 @@
         </div>
     </div>
     <!-- Modal -->
-    @if($selectedPackageId)
+    @if ($selectedPackageId)
         <div class="modal show d-block" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Actualizar Paquete</h5>
-                        <button type="button" class="close" wire:click="$set('selectedPackageId', null)" aria-label="Close">
+                        <h5 class="modal-title">Reencaminar Paquete</h5>
+                        <button type="button" class="close" wire:click="$set('selectedPackageId', null)"
+                            aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -185,13 +200,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="observaciones">Observaciones</label>
-                                <input type="text" wire:model="observaciones" class="form-control" id="observaciones">
+                                <input type="text" wire:model="observaciones" class="form-control"
+                                    id="observaciones">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" wire:click="$set('selectedPackageId', null)">Cerrar</button>
-                        <button type="button" wire:click="updatePackage" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" class="btn btn-secondary"
+                            wire:click="$set('selectedPackageId', null)">Cerrar</button>
+                        <button type="button" wire:click="updatePackage" class="btn btn-primary">Guardar
+                            cambios</button>
                     </div>
                 </div>
             </div>

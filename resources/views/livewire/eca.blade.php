@@ -57,43 +57,8 @@
                                                             class="btn btn-warning">Despachar</button>
                                                     </div>
                                                 @endhasrole
-                                                {{-- <!-- Formulario para generar PDF -->
-                                                <div class="col-md-6">
-                                                    <form method="get"
-                                                        action="{{ route('package.pdf.ventanillapdf') }}"
-                                                        class="col-md-12">
-                                                        @csrf
-                                                        <div class="form-row">
-                                                            <div class="col-md-4">
-                                                                <label for="fecha_inicio">Fecha de inicio:</label>
-                                                                <input type="date" name="fecha_inicio"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="fecha_fin">Fecha de fin:</label>
-                                                                <input type="date" name="fecha_fin"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <label for="ventanilla">Ventanilla:</label>
-                                                                <select name="ventanilla" class="form-control">
-                                                                    @if (auth()->user()->Regional == 'LA PAZ')
-                                                                        <option value="ECA">ECA</option>
-                                                                    @else
-                                                                        <option value="UNICA">UNICA</option>
-                                                                    @endif
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-12 mt-3 text-center">
-                                                                <button type="submit" class="btn btn-danger">Generar
-                                                                    PDF</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div> --}}
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 @if ($message = Session::get('success'))
@@ -156,11 +121,19 @@
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
                                                                 @hasrole('SuperAdmin|Administrador|ECA')
-                                                                    <a class="btn btn-sm btn-success"
-                                                                        href="{{ route('packages.edit', $package->id) }}">
-                                                                        <i class="fa fa-fw fa-edit"></i>
-                                                                        {{ __('Editar') }}
-                                                                    </a>
+                                                                    <div class="d-flex" role="group"
+                                                                        aria-label="Acciones">
+                                                                        <a class="btn btn-sm btn-success"
+                                                                            href="{{ route('packages.edit', $package->id) }}"
+                                                                            style="margin-right: 10px;">
+                                                                            <i class="fa fa-fw fa-edit"></i>
+                                                                            {{ __('Editar') }}
+                                                                        </a>
+                                                                        <button wire:click="openModal({{ $package->id }})"
+                                                                            class="btn btn-sm btn-info">
+                                                                            <i class="fa fa-edit"></i> Reencaminar
+                                                                        </button>
+                                                                    </div>
                                                                 @endhasrole
                                                             </td>
                                                         </tr>
@@ -185,4 +158,51 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    @if ($selectedPackageId)
+        <div class="modal show d-block" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Reencaminar Paquete</h5>
+                        <button type="button" class="close" wire:click="$set('selectedPackageId', null)"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="city">Ciudad</label>
+                                <select wire:model="selectedCity" class="form-control" id="city">
+                                    <option value="">Seleccione una ciudad</option>
+                                    <option value="LA PAZ">LA PAZ</option>
+                                    <option value="COCHABAMBA">COCHABAMBA</option>
+                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                    <option value="ORURO">ORURO</option>
+                                    <option value="POTOSI">POTOSI</option>
+                                    <option value="SUCRE">SUCRE</option>
+                                    <option value="BENI">BENI</option>
+                                    <option value="PANDO">PANDO</option>
+                                    <option value="TARIJA">TARIJA</option>
+                                    <!-- Añade las ciudades necesarias -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="observaciones">Observaciones</label>
+                                <input type="text" wire:model="observaciones" class="form-control"
+                                    id="observaciones">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            wire:click="$set('selectedPackageId', null)">Cerrar</button>
+                        <button type="button" wire:click="updatePackage" class="btn btn-primary">Guardar
+                            cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>

@@ -109,7 +109,6 @@ Route::middleware('auth')->group(function () {
     Route::post('packages/buscarPaqueteunica', [PackageController::class, 'buscarPaqueteunica'])->name('packages.buscarPaqueteunica');
     Route::get('packages/{id}/delete', [PackageController::class, 'delete'])->name('packages.delete');
     Route::put('test/{id}/restoring', [PackageController::class, 'restoring'])->name('packages.restoring');
-    Route::get('packages/redirigir/{id}', [PackageController::class, 'redirigir'])->name('packages.redirigir');
     Route::get('packages/prerezago', [PackageController::class, 'prerezago'])->middleware('can:packages.prerezago')->name('packages.prerezago');
     Route::get('packages/rezago', [PackageController::class, 'rezago'])->middleware('can:packages.rezago')->name('packages.rezago');
 

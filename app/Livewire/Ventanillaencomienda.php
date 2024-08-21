@@ -150,9 +150,18 @@ class Ventanillaencomienda extends Component
     public function updatePackage()
     {
         $package = Package::find($this->selectedPackageId);
+
+        Event::create([
+            'action' => 'REENCAMINADO',
+            'descripcion' => 'Correccion de Destino de paquete a Oficina Postal Regional',
+            'user_id' => auth()->user()->id,
+            'codigo' => $package->CODIGO,
+        ]);
+
         $package->CUIDAD = $this->selectedCity;
         $package->OBSERVACIONES = $this->observaciones;
         $package->save();
+        
 
         $this->reset(['selectedCity', 'observaciones', 'selectedPackageId']);
         session()->flash('message', 'Paquete actualizado exitosamente.');

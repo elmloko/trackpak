@@ -20,6 +20,8 @@ class Casillas extends Component
     public $selectedCity = '';
     public $fecha_inicio;
     public $fecha_fin;
+    public $selectedPackageId = null;
+    public $observaciones = '';
 
     public function render()
     {
@@ -121,6 +123,35 @@ class Casillas extends Component
 
         return Excel::download(new CasillasExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios Casillas.xlsx');
     }
+
+    public function openModal($packageId)
+    {
+        $this->selectedPackageId = $packageId;
+        $package = Package::find($packageId);
+        $this->selectedCity = $package->CUIDAD;
+        $this->observaciones = $package->OBSERVACIONES;
+    }
+
+    public function updatePackage()
+    {
+        $package = Package::find($this->selectedPackageId);
+        
+        Event::create([
+            'action' => 'REENCAMINADO',
+            'descripcion' => 'Correccion de Destino de paquete a Oficina Postal Regional',
+            'user_id' => auth()->user()->id,
+            'codigo' => $package->CODIGO,
+        ]);
+
+        $package->CUIDAD = $this->selectedCity;
+        $package->OBSERVACIONES = $this->observaciones;
+        $package->ESTADO = 'CLASIFICACION';
+        $package->save();
+
+        $this->reset(['selectedCity', 'observaciones', 'selectedPackageId']);
+        session()->flash('message', 'Paquete actualizado exitosamente.');
+    }
+    
     private function getPackageIds()
     {
         return Package::where('ESTADO', 'VENTANILLA')->pluck('id')->toArray();

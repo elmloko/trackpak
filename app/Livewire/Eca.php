@@ -19,6 +19,9 @@ class Eca extends Component
     public $paquetesSeleccionados = [];
     public $fecha_inicio;
     public $fecha_fin;
+    public $selectedCity = '';
+    public $selectedPackageId = null;
+    public $observaciones = '';
 
     public function render()
     {
@@ -111,6 +114,34 @@ class Eca extends Component
         ]);
 
         return Excel::download(new EcaExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios ECA.xlsx');
+    }
+
+    public function openModal($packageId)
+    {
+        $this->selectedPackageId = $packageId;
+        $package = Package::find($packageId);
+        $this->selectedCity = $package->CUIDAD;
+        $this->observaciones = $package->OBSERVACIONES;
+    }
+
+    public function updatePackage()
+    {
+        $package = Package::find($this->selectedPackageId);
+        
+        Event::create([
+            'action' => 'REENCAMINADO',
+            'descripcion' => 'Correccion de Destino de paquete a Oficina Postal Regional',
+            'user_id' => auth()->user()->id,
+            'codigo' => $package->CODIGO,
+        ]);
+
+        $package->CUIDAD = $this->selectedCity;
+        $package->OBSERVACIONES = $this->observaciones;
+        $package->ESTADO = 'CLASIFICACION';
+        $package->save();
+
+        $this->reset(['selectedCity', 'observaciones', 'selectedPackageId']);
+        session()->flash('message', 'Paquete actualizado exitosamente.');
     }
     private function getPackageIds()
     {
