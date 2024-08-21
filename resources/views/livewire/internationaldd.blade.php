@@ -95,7 +95,6 @@
                                     <th>Tipo</th>
                                     <th>Aduana</th>
                                     <th>Estado</th>
-                                    <th>Precio</th>
                                     <th>Observaciones</th>
                                     <th>Fecha</th>
                                     <th>Acciones</th>
@@ -126,7 +125,6 @@
                                             <td>{{ $international->TIPO }}</td>
                                             <td>{{ $international->ADUANA }}</td>
                                             <td>{{ $international->ESTADO }}</td>
-                                            <td>{{ $international->PRECIO }}</td>
                                             <td>{{ $international->OBSERVACIONES }}</td>
                                             <td>{{ $international->created_at }}</td>
                                             <td>
