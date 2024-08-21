@@ -98,8 +98,6 @@
                                                     <th>Destinatario</th>
                                                     <th>Bandeja</th>
                                                     <th>Teléfono</th>
-                                                    {{-- <th>Ciudad</th> --}}
-                                                    {{-- <th>Ventanilla</th> --}}
                                                     <th>Peso (gr.)</th>
                                                     <th>Estado</th>
                                                     <th>Observaciones</th>
