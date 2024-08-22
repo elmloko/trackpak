@@ -76,6 +76,13 @@ class Deleteado extends Component
     {
         $package = Package::withTrashed()->find($id);
 
+        Event::create([
+            'action' => 'ESTADO',
+            'descripcion' => 'Reimprimir PDF de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $package->CODIGO,
+        ]);
+
         if ($package) {
             $formulario = $package->ADUANA == 'SI' ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
 

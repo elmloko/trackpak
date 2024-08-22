@@ -25,10 +25,10 @@ class Deleteadoencomiendas extends Component
         $packages = Package::onlyTrashed()
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
-                ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                ->orWhere('ZONA', 'like', $this->search . '%') 
-                ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('ZONA', 'like', $this->search . '%')
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             // Filtra por la 'CUIDAD' del usuario autenticado
             ->whereIn('ESTADO', ['ENTREGADO'])
@@ -72,6 +72,13 @@ class Deleteadoencomiendas extends Component
     public function reprintPDF($id)
     {
         $package = Package::withTrashed()->find($id);
+
+        Event::create([
+            'action' => 'ESTADO',
+            'descripcion' => 'Reimprimir PDF de Paquete',
+            'user_id' => auth()->user()->id,
+            'codigo' => $package->CODIGO,
+        ]);
 
         if ($package) {
             $formulario = $package->ADUANA == 'SI' ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
