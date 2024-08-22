@@ -6,7 +6,7 @@
 
 @section('content')
     @hasrole('SuperAdmin|Administrador')
-        @livewire('ventanillaunicaadmin')
+        @livewire('ventanillaunicarecibiradmin')
     @endhasrole
     @hasrole('Unica')
         @livewire('ventanillaunicarecibir')
