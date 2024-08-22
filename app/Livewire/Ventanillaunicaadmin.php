@@ -31,13 +31,13 @@ class Ventanillaunicaadmin extends Component
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ZONA', 'like', $this->search . '%') 
+                    ->orWhere('ZONA', 'like', $this->search . '%')
                     ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where('VENTANILLA', 'UNICA')
             ->orderBy('updated_at', 'desc')
             ->paginate(20);
-    
+
         return view('livewire.ventanillaunicaadmin', [
             'packages' => $packages,
         ]);
@@ -64,10 +64,16 @@ class Ventanillaunicaadmin extends Component
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-    
-        // Determinar el formulario según una condición
-        $formulario = ($paquetesSeleccionados->first()->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-    
+
+        // Determinar el formulario según la condición de ADUANA
+        $primerPaquete = $paquetesSeleccionados->first();
+
+        if ($primerPaquete && $primerPaquete->ADUANA == 'SI') {
+            $formulario = 'package.pdf.formularioentrega';
+        } else {
+            $formulario = 'package.pdf.formularioentrega2';
+        }
+
         foreach ($paquetesSeleccionados as $paquete) {
             // Calcular el precio basado en el peso del paquete
             $peso = $paquete->PESO;
@@ -76,16 +82,16 @@ class Ventanillaunicaadmin extends Component
             } elseif ($peso > 0.5) {
                 $precio = 10;
             }
-    
+
             // Actualizar el precio del paquete
             $paquete->PRECIO = $precio;
             $paquete->save();
-    
+
             // Actualizar el estado del paquete
             $paquete->ESTADO = 'ENTREGADO';
             $paquete->save();
             $paquete->delete();
-    
+
             // Crear un evento
             Event::create([
                 'action' => 'ENTREGADO',
@@ -94,21 +100,21 @@ class Ventanillaunicaadmin extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-    
+
         // Restablecer la selección
         $this->resetSeleccion();
-    
+
         // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView($formulario, ['packages' => $paquetesSeleccionados]);
-    
+
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-    
+
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Formulario Entrega UNICA.pdf');
-    }    
+    }
 
     public function toggleSelectSingle($packageId)
     {
@@ -118,7 +124,7 @@ class Ventanillaunicaadmin extends Component
             $this->paquetesSeleccionados[] = $packageId;
         }
     }
-    
+
     public function import()
     {
         $this->validate([

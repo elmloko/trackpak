@@ -69,8 +69,14 @@ class Internationaldnd extends Component
             })
             ->get();
 
-        // Determinar el formulario según una condición
-        $formulario = ($paquetesSeleccionados->first()->ADUANA == 'SI') ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+        // Determinar el formulario según la condición de ADUANA
+        $primerPaquete = $paquetesSeleccionados->first();
+
+        if ($primerPaquete && $primerPaquete->ADUANA == 'SI') {
+            $formulario = 'package.pdf.formularioentrega';
+        } else {
+            $formulario = 'package.pdf.formularioentrega2';
+        }
 
         foreach ($paquetesSeleccionados as $paquete) {
             // Calcular el precio basado en el peso del paquete
