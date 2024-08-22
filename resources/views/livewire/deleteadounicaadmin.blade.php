@@ -92,13 +92,13 @@
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        {{-- @hasrole('SuperAdmin|Administrador')
+                                                        @hasrole('SuperAdmin|Administrador')
                                                             <button wire:click="restorePackage({{ $package->id }})"
                                                                 class="btn btn-sm btn-info">
                                                                 <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
                                                             </button>
-                                                        @endhasrole --}}
-                                                        @hasrole('SuperAdmin|Administrador|DD')
+                                                        @endhasrole
+                                                        @hasrole('SuperAdmin|Administrador|Unica')
                                                             <button wire:click="reprintPDF({{ $package->id }})"
                                                                 class="btn btn-sm btn-warning">
                                                                 <i class="fa fa-print"></i> Reimprimir

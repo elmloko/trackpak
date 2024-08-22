@@ -91,7 +91,7 @@
                                                                 <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
                                                             </button>
                                                         @endhasrole
-                                                        @hasrole('SuperAdmin|Administrador|DD')
+                                                        @hasrole('SuperAdmin|Administrador|ENCOMIENDAS')
                                                             <button wire:click="reprintPDF({{ $package->id }})"
                                                                 class="btn btn-sm btn-warning">
                                                                 <i class="fa fa-print"></i> Reimprimir
