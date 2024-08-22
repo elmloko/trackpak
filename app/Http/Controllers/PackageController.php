@@ -454,7 +454,6 @@ class PackageController extends Controller
         }
     }
 
-
     public function deletecartero($id, Request $request)
     {
         $package = Package::find($id);

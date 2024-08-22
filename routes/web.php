@@ -138,8 +138,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('packages/encomiendas', [PackageController::class, 'encomiendas'])->name('packages.encomiendas');
     Route::get('packages/encomiendasinventario', [PackageController::class, 'encomiendasinventario'])->name('packages.encomiendasinventario');
-    // Route::get('packages/{id}/deleteencomiendas', [PackageController::class, 'deleteencomiendas'])->name('packages.deleteencomiendas');
-    // Route::post('packages/buscarPaqueteencomiendas', [PackageController::class, 'buscarPaqueteeca'])->name('packages.buscarPaqueteencomiendas');
 
     // Reportes PDF
     Route::get('package/pdf/packagesallpdf', [PackageController::class, 'packagesallpdf'])->name('package.pdf.packagesall');
@@ -163,22 +161,7 @@ Route::middleware('auth')->group(function () {
 
     
     // Reportes Excel
-    Route::get('package/packagesallexcel', [PackageController::class, 'packagesallexcel'])->name('packagesall.excel');
-    Route::get('clasificacion/clasificacionexcel', [PackageController::class, 'clasificacionexcel'])->name('clasificacion.excel');
     Route::get('clasificacion/reencaminarexcel', [PackageController::class, 'reencaminarexcel'])->name('reencaminar.excel');
-    Route::get('ventanilla/ventanillaexcel', [PackageController::class, 'ventanillaexcel'])->name('ventanilla.excel');
-    Route::get('ventanilla/ventanilladndexcel', [PackageController::class, 'ventanilladndexcel'])->name('ventanilladnd.excel');
-    Route::get('ventanilla/encomiendasexcel', [PackageController::class, 'encomiendasexcel'])->name('encomiendas.excel');
-    Route::get('ventanilla/casillasexcel', [PackageController::class, 'casillasexcel'])->name('casillas.excel');
-    Route::get('ventanilla/ecaexcel', [PackageController::class, 'ecaexcel'])->name('eca.excel');
-    Route::get('ventanilla/inventarioexcel', [PackageController::class, 'inventarioexcel'])->name('inventario.excel');
-    Route::get('ventanilla/inventarioDDexcel', [PackageController::class, 'inventarioDDexcel'])->name('inventarioDD.excel');
-    Route::get('ventanilla/inventarioDNDexcel', [PackageController::class, 'inventarioDNDexcel'])->name('inventarioDND.excel');
-    Route::get('ventanilla/inventarioECAexcel', [PackageController::class, 'inventarioECAexcel'])->name('inventarioECA.excel');
-    Route::get('ventanilla/inventarioCASIexcel', [PackageController::class, 'inventarioCASIexcel'])->name('inventarioCASI.excel');
-    Route::get('ventanilla/inventarioUNICAexcel', [PackageController::class, 'inventarioUNICAexcel'])->name('inventarioUNICA.excel');
-    Route::get('ventanilla/casillasinventarioexcel', [PackageController::class, 'casillasinventarioexcel'])->name('casillasinventarioexcel.excel');
-    Route::get('ventanilla/ecainventarioexcel', [PackageController::class, 'ecainventarioexcel'])->name('ecainventarioexcel.excel');
     Route::get('cartero/carteroexcel', [PackageController::class, 'carteroexcel'])->name('cartero.excel');
     Route::get('cartero/carterogeneralexcel', [PackageController::class, 'carterogeneralexcel'])->name('carterogeneralexcel.excel');
 
@@ -251,15 +234,12 @@ Route::middleware('auth')->group(function () {
     Route::get('internationals/ventanilladd', [InternationalController::class, 'ventanilladd'])->name('internationals.ventanilladd');
     Route::get('/internationals/deleteadodd', [InternationalController::class, 'deleteadodd'])->name('internationals.deleteadodd');
     Route::post('internationals/{id}/restore', [InternationalController::class, 'restore'])->name('internationals.restore');
-    Route::get('internationals/certificadosexcel', [InternationalController::class, 'certificadosexcel'])->name('certificados.excel');
-    Route::get('internationals/inventarioDRDexcel', [InternationalController::class, 'inventarioDRDexcel'])->name('inventarioDRD.excel');
     Route::get('internationals/ventanilladnd', [InternationalController::class, 'ventanilladnd'])->name('internationals.ventanilladnd');
     Route::get('internationals/ventanillacasillas', [InternationalController::class, 'ventanillacasillas'])->name('internationals.ventanillacasillas');
     Route::get('/internationals/deleteadodnd', [InternationalController::class, 'deleteadodnd'])->name('internationals.deleteadodnd');
     Route::get('/internationals/deleteadocasillas', [InternationalController::class, 'deleteadocasillas'])->name('internationals.deleteadocasillas');
-    Route::get('internationals/certificadosdndexcel', [InternationalController::class, 'certificadosdndexcel'])->name('certificadosdnd.excel');
-    Route::get('internationals/certificadoscasillasexcel', [InternationalController::class, 'certificadoscasillasexcel'])->name('certificadoscasillas.excel');
-    Route::get('internationals/inventarioiDNDexcel', [InternationalController::class, 'inventarioiDNDexcel'])->name('inventarioiDND.excel');
+
+    //Plantillas Importar
     Route::get('internationals/plantillaeexcel', [InternationalController::class, 'plantillaeexcel'])->name('plantillae.excel');
     Route::get('internationals/plantilladdexcel', [InternationalController::class, 'plantilladdexcel'])->name('plantilladd.excel');
     Route::get('internationals/plantilladndexcel', [InternationalController::class, 'plantilladndexcel'])->name('plantilladnd.excel');

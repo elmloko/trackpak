@@ -52,7 +52,7 @@ class Deleteadoidnd extends Component
             'fecha_fin' => 'required|date',
         ]);
 
-        return Excel::download(new Internationalinvdnd($this->fecha_inicio, $this->fecha_fin), 'Inventario Certificados DD.xlsx');
+        return Excel::download(new Internationalinvdnd($this->fecha_inicio, $this->fecha_fin), 'Inventario Certificados DND.xlsx');
     }
     public function restorePackage($id)
     {
