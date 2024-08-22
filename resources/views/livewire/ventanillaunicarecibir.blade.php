@@ -82,15 +82,6 @@
                                                                         {{ __('Editar') }}
                                                                     </a>
                                                                 @endhasrole
-                                                                @hasrole('SuperAdmin|Administrador|Unica')
-                                                                    @if (!$package->redirigido)
-                                                                        <a class="btn btn-sm btn-secondary" href="#" data-toggle="modal" data-target="#reencaminarModal{{ $package->id }}">
-                                                                            <i class="fas fa-arrow-up"></i>
-                                                                            {{ __('Reencaminar') }}
-                                                                        </a>
-                                                                        @include('package.modal.reencaminar')
-                                                                    @endif
-                                                                @endhasrole
                                                             </td>
                                                         </tr>
                                                     @endforeach
