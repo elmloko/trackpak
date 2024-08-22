@@ -41,7 +41,7 @@ class Deleteadounica extends Component
             ->orderBy('deleted_at', 'desc')
             ->paginate(10);
 
-        return view('livewire.deleteado', [
+        return view('livewire.deleteadounica', [
             'packages' => $packages,
         ]);
     }

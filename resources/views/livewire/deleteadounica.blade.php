@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h5 id="card_title">
-                                    {{ __('Inventario de Paquetes en Entregados en Ventanilla') }}
+                                    {{ __('Inventario de Paquetes en Entregados en Ventanilla UNICA') }}
                                 </h5>
                             </div>
                         </div>
@@ -91,18 +91,10 @@
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        {{-- @hasrole('SuperAdmin|Administrador')
-                                                            <button wire:click="restorePackage({{ $package->id }})"
-                                                                class="btn btn-sm btn-info">
-                                                                <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
-                                                            </button>
-                                                        @endhasrole --}}
-                                                        @hasrole('SuperAdmin|Administrador|Unica')
-                                                            <button wire:click="reprintPDF({{ $package->id }})"
-                                                                class="btn btn-sm btn-warning">
-                                                                <i class="fa fa-print"></i> Reimprimir
-                                                            </button>
-                                                        @endhasrole
+                                                        <button wire:click="reprintPDF({{ $package->id }})"
+                                                            class="btn btn-sm btn-warning">
+                                                            <i class="fa fa-print"></i> Reimprimir
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
