@@ -18,40 +18,27 @@
                                     <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                 </div>
                             </div>
-                            <form method="get" action="{{ route('inventarioUNICA.excel') }}" class="col-md-6">
-                                @csrf
-                                <div class="form-row align-items-center">
-                                    <div class="col-md-4">
-                                        <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                        <input type="date" name="fecha_inicio" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="excel_fecha_fin">Fecha de fin:</label>
-                                        <input type="date" name="fecha_fin" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
-                                    </div>
+                            <form wire:submit.prevent="export" class="form-row align-items-center">
+                                <div class="col-md-4">
+                                    <label for="fecha_inicio">Fecha de inicio:</label>
+                                    <input type="date" wire:model="fecha_inicio" class="form-control" required>
+                                    @error('fecha_inicio')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="fecha_fin">Fecha de fin:</label>
+                                    <input type="date" wire:model="fecha_fin" class="form-control" required>
+                                    @error('fecha_fin')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Generar Excel</button>
                                 </div>
                             </form>
                             <div class="col-lg-6">
                             </div>
-                            {{-- <form method="get" action="{{ route('package.pdf.deleteadopdf') }}" class="col-md-6">
-                                @csrf
-                                <div class="form-row align-items-center">
-                                    <div class="col-md-4">
-                                        <label for="fecha_inicio">Fecha de inicio:</label>
-                                        <input type="date" name="fecha_inicio" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="fecha_fin">Fecha de fin:</label>
-                                        <input type="date" name="fecha_fin" class="form-control" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <button type="submit" class="btn btn-danger">Generar PDF</button>
-                                    </div>
-                                </div>
-                            </form> --}}
                         </div>
                     </div>
                 </div>
@@ -104,15 +91,20 @@
                                                 <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
-                                                    @hasrole('SuperAdmin|Administrador|Unica')
-                                                        <form action="{{ route('packages.restoring', $package->id) }}" method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <button type="submit" class="btn btn-sm btn-info">
+                                                    <div class="btn-group" role="group">
+                                                        {{-- @hasrole('SuperAdmin|Administrador')
+                                                            <button wire:click="restorePackage({{ $package->id }})"
+                                                                class="btn btn-sm btn-info">
                                                                 <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
                                                             </button>
-                                                        </form>
-                                                    @endhasrole
+                                                        @endhasrole --}}
+                                                        @hasrole('SuperAdmin|Administrador|DD')
+                                                            <button wire:click="reprintPDF({{ $package->id }})"
+                                                                class="btn btn-sm btn-warning">
+                                                                <i class="fa fa-print"></i> Reimprimir
+                                                            </button>
+                                                        @endhasrole
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endif

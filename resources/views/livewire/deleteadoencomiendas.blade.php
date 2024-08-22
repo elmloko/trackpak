@@ -84,12 +84,20 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
-                                                    @hasrole('SuperAdmin|Administrador')
-                                                        <button wire:click="restorePackage({{ $package->id }})"
-                                                            class="btn btn-sm btn-info">
-                                                            <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
-                                                        </button>
-                                                    @endhasrole
+                                                    <div class="btn-group" role="group">
+                                                        @hasrole('SuperAdmin|Administrador')
+                                                            <button wire:click="restorePackage({{ $package->id }})"
+                                                                class="btn btn-sm btn-info" style="margin-right: 10px;">
+                                                                <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
+                                                            </button>
+                                                        @endhasrole
+                                                        @hasrole('SuperAdmin|Administrador|DD')
+                                                            <button wire:click="reprintPDF({{ $package->id }})"
+                                                                class="btn btn-sm btn-warning">
+                                                                <i class="fa fa-print"></i> Reimprimir
+                                                            </button>
+                                                        @endhasrole
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endif

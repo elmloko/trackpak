@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use App\Exports\Internationalinvdd;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Event;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Deleteadodd extends Component
 {
@@ -67,6 +68,22 @@ class Deleteadodd extends Component
             session()->flash('success', 'El paquete ha sido restaurado exitosamente');
         } else {
             session()->flash('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
+    }
+    public function reprintPDF($id)
+    {
+        $package = International::withTrashed()->find($id);
+
+        if ($package) {
+            $formulario = $package->ADUANA == 'SI' ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+
+            $pdf = Pdf::loadView($formulario, ['packages' => collect([$package])]);
+
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->stream();
+            }, 'Formulario Certificado DD.pdf');
+        } else {
+            session()->flash('error', 'No se pudo encontrar el paquete.');
         }
     }
 }

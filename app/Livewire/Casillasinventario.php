@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\InventarioCASIExport;
 use App\Models\Event;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Casillasinventario extends Component
 {
@@ -67,6 +68,22 @@ class Casillasinventario extends Component
             session()->flash('success', 'El paquete ha sido restaurado exitosamente');
         } else {
             session()->flash('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
+    }
+    public function reprintPDF($id)
+    {
+        $package = Package::withTrashed()->find($id);
+
+        if ($package) {
+            $formulario = $package->ADUANA == 'SI' ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+
+            $pdf = Pdf::loadView($formulario, ['packages' => collect([$package])]);
+
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->stream();
+            }, 'Formulario Ordinario Casillas.pdf');
+        } else {
+            session()->flash('error', 'No se pudo encontrar el paquete.');
         }
     }
 }

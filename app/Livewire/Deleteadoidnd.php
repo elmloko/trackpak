@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use App\Exports\Internationalinvdnd;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Event;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Deleteadoidnd extends Component
 {
@@ -68,6 +69,22 @@ class Deleteadoidnd extends Component
             session()->flash('success', 'El paquete ha sido restaurado exitosamente');
         } else {
             session()->flash('error', 'El paquete no pudo ser encontrado o restaurado');
+        }
+    }
+    public function reprintPDF($id)
+    {
+        $package = International::withTrashed()->find($id);
+
+        if ($package) {
+            $formulario = $package->ADUANA == 'SI' ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+
+            $pdf = Pdf::loadView($formulario, ['packages' => collect([$package])]);
+
+            return response()->streamDownload(function () use ($pdf) {
+                echo $pdf->stream();
+            }, 'Formulario Certificado DND.pdf');
+        } else {
+            session()->flash('error', 'No se pudo encontrar el paquete.');
         }
     }
 }
