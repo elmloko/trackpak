@@ -364,6 +364,9 @@ class EventController extends Controller
         // Decodificar y obtener los resultados de la búsqueda
         $results = json_decode($response->getBody());
 
+        // Eliminar duplicados
+        $results = array_unique($results, SORT_REGULAR);
+
         // Ordenar los resultados por fecha descendente
         usort($results, function ($a, $b) {
             return strtotime($b->eventDate) - strtotime($a->eventDate);
@@ -372,8 +375,6 @@ class EventController extends Controller
         // Puedes devolver los resultados a tu vista junto con los paquetes y eventos
         return view('search', compact('results', 'packages', 'event', 'codigo', 'country'));
     }
-
-
 
     public function eventspdf()
     {
