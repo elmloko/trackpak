@@ -364,8 +364,8 @@ class EventController extends Controller
         // Decodificar y obtener los resultados de la búsqueda
         $results = json_decode($response->getBody());
 
-        // Eliminar duplicados
-        $results = array_unique($results, SORT_REGULAR);
+        // // Eliminar duplicados
+        // $results = array_unique($results, SORT_REGULAR);
 
         // Ordenar los resultados por fecha descendente
         usort($results, function ($a, $b) {
