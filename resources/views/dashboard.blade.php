@@ -28,6 +28,7 @@
         @livewire('dashboard-encomienda')
     @endhasrole
     @hasrole('SuperAdmin|Administrador|ECA')
+        @livewire('dashboard-eca')
     @endhasrole
     @hasrole('Unica')
     @endhasrole
