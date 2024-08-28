@@ -15,6 +15,7 @@
     @hasrole('Clasificacion|Auxiliar Clasificacion')
     @endhasrole
     @hasrole('ENCOMIENDAS')
+        @livewire('dashboard-encomienda')
     @endhasrole
     @hasrole('Urbano|Auxiliar Urbano')
         @livewire('dashboard-urbano')
