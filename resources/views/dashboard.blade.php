@@ -8,7 +8,25 @@
 @stop
 
 @section('content')
-
+    @hasrole('SuperAdmin')
+    @endhasrole
+    @hasrole('Administrador')
+    @endhasrole
+    @hasrole('Clasificacion|Auxiliar Clasificacion')
+    @endhasrole
+    @hasrole('ENCOMIENDAS')
+    @endhasrole
+    @hasrole('Urbano|Auxiliar Urbano')
+        @livewire('dashboard-urbano')
+    @endhasrole
+    @hasrole('DND')
+    @endhasrole
+    @hasrole('Casillas')
+    @endhasrole
+    @hasrole('ECA')
+    @endhasrole
+    @hasrole('Unica')
+    @endhasrole
     @include('footer')
 @stop
 
