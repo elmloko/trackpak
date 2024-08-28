@@ -20,6 +20,7 @@
         @livewire('dashboard-urbano')
     @endhasrole
     @hasrole('DND')
+        @livewire('dashboarddnd')
     @endhasrole
     @hasrole('Casillas')
     @endhasrole
