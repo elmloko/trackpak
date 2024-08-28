@@ -8,7 +8,7 @@ use App\Models\National;
 use App\Models\International;
 use Illuminate\Support\Facades\Cache;
 
-class DashboardAdmin extends Component
+class DashboardAdmini extends Component
 {
     public $totalPaquetes;
     public $totalRegistradosHoy;
@@ -39,9 +39,9 @@ class DashboardAdmin extends Component
                 ->count();
         });
     }
-
+    
     public function render()
     {
-        return view('livewire.dashboard-admin');
+        return view('livewire.dashboard-admini');
     }
 }
