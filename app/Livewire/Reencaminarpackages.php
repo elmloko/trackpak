@@ -15,6 +15,9 @@ class Reencaminarpackages extends Component
     public $search = '';
     public $fecha_inicio;
     public $fecha_fin;
+    public $editPackageId;
+    public $editCiudad;
+    public $editVentanilla;
 
     public function render()
     {
@@ -45,5 +48,29 @@ class Reencaminarpackages extends Component
         ]);
     
         return Excel::download(new ReencaminarExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios DND.xlsx');
+    }
+    public function editPackage($id)
+    {
+        $package = Package::findOrFail($id);
+        $this->editPackageId = $package->id;
+        $this->editCiudad = $package->CUIDAD;
+        $this->editVentanilla = $package->VENTANILLA;
+    }
+
+    public function updatePackage()
+    {
+        $package = Package::findOrFail($this->editPackageId);
+        $package->CUIDAD = $this->editCiudad;
+        $package->VENTANILLA = $this->editVentanilla;
+        $package->ESTADO = 'CLASIFICACION';
+        $package->save();
+
+        // Reset fields
+        $this->reset(['editPackageId', 'editCiudad', 'editVentanilla']);
+
+        // Close the modal
+        $this->dispatch('closeModal');
+
+        session()->flash('message', 'Paquete actualizado exitosamente.');
     }
 }
