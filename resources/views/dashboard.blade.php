@@ -8,9 +8,6 @@
 @stop
 
 @section('content')
-    @hasrole('SuperAdmin')
-        {{-- @livewire('dashboard-su') --}}
-    @endhasrole
     @hasrole('SuperAdmin|Administrador')
         @livewire('dashboard-admini')
     @endhasrole
@@ -32,7 +29,8 @@
     @hasrole('SuperAdmin|Administrador|ECA')
         @livewire('dashboard-eca')
     @endhasrole
-    @hasrole('Unica')
+    @hasrole('SuperAdmin|Administrador|Unica')
+        @livewire('dashboard-unica')
     @endhasrole
     @include('footer')
 @stop
