@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use App\Models\National;
+use App\Models\User;
+
 use App\Models\International;
 use Illuminate\Support\Facades\Cache;
 
@@ -13,6 +15,8 @@ class DashboardAdmini extends Component
     public $totalPaquetes;
     public $totalRegistradosHoy;
     public $totalEntregadosHoy;
+    public $totalUsuarios;
+    public $totalEntregados;
 
     public function mount()
     {
@@ -29,17 +33,27 @@ class DashboardAdmini extends Component
             return $packageCount + $nationalCount + $internationalCount;
         });
 
-        $this->totalRegistradosHoy = Cache::remember('totalRegistradosHoy', 600, function () {
-            return Package::whereDate('created_at', today())->count();
-        });
-
         $this->totalEntregadosHoy = Cache::remember('totalEntregadosHoy', 600, function () {
-            return Package::onlyTrashed()
+            $packageEntregados = Package::onlyTrashed()
                 ->whereDate('deleted_at', today())
                 ->count();
+
+            $internationalEntregados = International::onlyTrashed()
+                ->whereDate('deleted_at', today())
+                ->count();
+
+            return $packageEntregados + $internationalEntregados;
+        });
+        $this->totalUsuarios = Cache::remember('totalUsuarios', 600, function () {
+            return User::count();
+        });
+        $this->totalEntregados = Cache::remember('totalEntregados', 600, function () {
+            $packageCount = Package::where('ESTADO', 'VENTANILLA')->count();
+            $internationalCount = International::where('ESTADO', 'VENTANILLA')->count();
+            return $packageCount + $internationalCount;
         });
     }
-    
+
     public function render()
     {
         return view('livewire.dashboard-admini');

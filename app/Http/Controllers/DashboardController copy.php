@@ -25,8 +25,7 @@ class DashboardController extends Controller
 
         // Aplica el filtro de fecha antes de obtenermes la colección
         $totalRegistradosHoy = Package::whereDate('created_at', today())->count();
-        $totalEntregadosHoy = Package::onlyTrashed()->whereDate('deleted_at', today())->count() 
-                    + International::onlyTrashed()->whereDate('deleted_at', today())->count();
+        $totalEntregadosHoy = Package::onlyTrashed()->whereDate('deleted_at', today())->count() + International::onlyTrashed()->whereDate('deleted_at', today())->count();
         $totalReencaminadoHoy = Package::whereDate('date_redirigido', today())->count();
         //Reportes por dia Clasificacion
         $hoylpc = Package::where('ESTADO', 'DESPACHO')->whereDate('created_at', today())->count();

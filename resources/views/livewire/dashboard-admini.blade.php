@@ -10,6 +10,20 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-3 col-6">
+                <div class="small-box bg-light  ">
+                    <div class="inner">
+                        <h3>{{ $totalUsuarios }}</h3>
+                        <p>Total Usuarios</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <a href="{{ route('users.index') }}" class="small-box-footer">
+                        Mas Informacion <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
                 <div class="small-box bg-dark">
                     <div class="inner">
                         <h3>{{ $totalPaquetes }}</h3>
@@ -26,8 +40,8 @@
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>{{ $totalRegistradosHoy }}</h3>
-                        <p>Total Registrados Hoy</p>
+                        <h3>{{ $totalEntregados }}</h3>
+                        <p>Paqutes por Entregar</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
