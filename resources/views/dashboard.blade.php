@@ -12,7 +12,8 @@
     @endhasrole
     @hasrole('Administrador')
     @endhasrole
-    @hasrole('Clasificacion|Auxiliar Clasificacion')
+    @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
+        @livewire('dashboard-clasificacion')
     @endhasrole
     @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
         @livewire('dashboard-urbano')
