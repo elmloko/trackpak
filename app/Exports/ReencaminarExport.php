@@ -13,11 +13,10 @@ class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
     protected $fechaInicio;
     protected $fechaFin;
 
-    public function __construct($fechaInicio, $fechaFin, $ciudad)
+    public function __construct($fechaInicio, $fechaFin)
     {
         $this->fechaInicio = $fechaInicio;
         $this->fechaFin = $fechaFin;
-        $this->ciudad = $ciudad;
     }
 
     public function collection()
@@ -38,10 +37,6 @@ class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
 
         if ($this->fechaInicio && $this->fechaFin) {
             $query->whereBetween('date_redirigido', [$this->fechaInicio, $this->fechaFin]);
-        }
-
-        if ($this->ciudad) {
-            $query->where('CUIDAD', $this->ciudad);
         }
 
         return $query->get();
@@ -65,20 +60,15 @@ class ReencaminarExport implements FromCollection, WithHeadings, WithStyles
 
     public function styles(Worksheet $sheet)
     {
-        // Establece el espaciado entre las tablas
         $sheet->getStyle('A1:L1')->getAlignment()->setVertical('center');
         $sheet->getStyle('A1:L1')->getAlignment()->setHorizontal('center');
         $sheet->getStyle('A1:L1')->getFont()->setBold(true);
 
-        // Establece un espaciado adicional después de cada fila de datos
         $sheet->getStyle('A2:L' . ($sheet->getHighestRow()))->getAlignment()->setVertical('center');
         $sheet->getStyle('A2:L' . ($sheet->getHighestRow()))->getAlignment()->setHorizontal('center');
 
-        // Ajusta el espaciado según tus necesidades
-        // $sheet->getStyle('A:L')->getAlignment()->setVertical('center');
         $sheet->getStyle('A:L')->getFont()->setSize(12);
 
-        // Autoajusta el ancho de las columnas
         foreach(range('A', 'L') as $column) {
             $sheet->getColumnDimension($column)->setAutoSize(true);
         }

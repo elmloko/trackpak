@@ -430,29 +430,6 @@ class PackageController extends Controller
             return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
         }
     }
-    public function reencaminar($packageId)
-    {
-        $package = Package::find($packageId);
-
-        if ($package) {
-            // Cambia el estado del paquete a "redirigido"
-            $package->redirigido = true;
-            Event::create([
-                'action' => 'PRE-ENTREGA',
-                'descripcion' => 'Correccion de Destino de paquete a Oficina Postal Regional',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-
-            $package->estado = 'REENCAMINADO';
-            $package->date_redirigido = now();
-            $package->save();
-
-            return back()->with('success', 'Paquete se dio de Reencamino con éxito y cambió su estado a REENCAMINADO.');
-        } else {
-            return back()->with('error', 'No se pudo encontrar el paquete para redirigir.');
-        }
-    }
 
     public function deletecartero($id, Request $request)
     {

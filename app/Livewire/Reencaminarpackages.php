@@ -5,12 +5,16 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ReencaminarExport;
 
 class Reencaminarpackages extends Component
 {
     use WithPagination;
 
     public $search = '';
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -32,5 +36,14 @@ class Reencaminarpackages extends Component
         return view('livewire.reencaminarpackages', [
             'packages' => $packages,
         ]);
+    }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+    
+        return Excel::download(new ReencaminarExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios DND.xlsx');
     }
 }

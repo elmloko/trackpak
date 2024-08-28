@@ -16,68 +16,27 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <form method="get" action="{{ route('reencaminar.excel') }}">
-                                        @csrf
-                                        <div class="form-row align-items-center">
-                                            <div class="col-md-3">
-                                                <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                                <input type="date" name="fecha_inicio" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                <input type="date" name="fecha_fin" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ciudad">Ciudad:</label>
-                                                <select name="ciudad" class="form-control" required>
-                                                    <option value="LA PAZ">LA PAZ</option>
-                                                    <option value="COCHABAMBA">COCHABAMBA</option>
-                                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
-                                                    <option value="ORURO">ORURO</option>
-                                                    <option value="POTOSI">POTOSI</option>
-                                                    <option value="SUCRE">SUCRE</option>
-                                                    <option value="BENI">BENI</option>
-                                                    <option value="PANDO">PANDO</option>
-                                                    <option value="TARIJA">TARIJA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <button type="submit" class="btn btn-success" target="_blank">Generar Excel</button>
-                                            </div>
+                                    <form wire:submit.prevent="export"
+                                        class="form-row align-items-center">
+                                        <div class="col-md-4">
+                                            <label for="fecha_inicio">Fecha de inicio:</label>
+                                            <input type="date" wire:model="fecha_inicio"
+                                                class="form-control" required>
+                                            @error('fecha_inicio')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
-                                    </form>
-                                </div>
-                                <div class="col-md-6">
-                                </div>
-                                <div class="col-md-6">
-                                    <form method="get" action="{{ route('package.pdf.redirigidospdf') }}">
-                                        @csrf
-                                        <div class="form-row align-items-center">
-                                            <div class="col-md-3">
-                                                <label for="fecha_inicio">Fecha de inicio:</label>
-                                                <input type="date" name="fecha_inicio" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="fecha_fin">Fecha de fin:</label>
-                                                <input type="date" name="fecha_fin" class="form-control" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ciudad">Ciudad:</label>
-                                                <select name="ciudad" class="form-control" required>
-                                                    <option value="LA PAZ">LA PAZ</option>
-                                                    <option value="COCHABAMBA">COCHABAMBA</option>
-                                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
-                                                    <option value="ORURO">ORURO</option>
-                                                    <option value="POTOSI">POTOSI</option>
-                                                    <option value="SUCRE">SUCRE</option>
-                                                    <option value="BENI">BENI</option>
-                                                    <option value="PANDO">PANDO</option>
-                                                    <option value="TARIJA">TARIJA</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <button type="submit" class="btn btn-danger">Generar PDF</button>
-                                            </div>
+                                        <div class="col-md-4">
+                                            <label for="fecha_fin">Fecha de fin:</label>
+                                            <input type="date" wire:model="fecha_fin"
+                                                class="form-control" required>
+                                            @error('fecha_fin')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-success">Generar
+                                                Excel</button>
                                         </div>
                                     </form>
                                 </div>
@@ -122,14 +81,7 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->date_redirigido }}</td>
                                                 <td>
-                                                    @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
-                                                        <a class="btn btn-sm btn-info" href="#" data-toggle="modal"
-                                                            data-target="#reencaminadoModal{{ $package->id }}">
-                                                            <i class="fa fa-arrow-up"></i>
-                                                            {{ __('Reencaminado') }}
-                                                        </a>
-                                                    @endhasrole
-                                                    @include('package.modal.reencaminado')
+                                                    {{--  --}}
                                                 </td>
                                             </tr>
                                         @endif
