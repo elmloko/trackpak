@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Package;
 use App\Models\National;
 use App\Models\User;
+use App\Models\Mensaje;
+use Carbon\Carbon;
 
 use App\Models\International;
 use Illuminate\Support\Facades\Cache;
@@ -17,6 +19,10 @@ class DashboardAdmini extends Component
     public $totalEntregadosHoy;
     public $totalUsuarios;
     public $totalEntregados;
+    public $totalmensajeenv;
+    public $totalmensajeHoy;
+    public $totalmensajenenv;
+    public $totalmensaje;
 
     public function mount()
     {
@@ -51,6 +57,22 @@ class DashboardAdmini extends Component
             $packageCount = Package::where('ESTADO', 'VENTANILLA')->count();
             $internationalCount = International::where('ESTADO', 'VENTANILLA')->count();
             return $packageCount + $internationalCount;
+        });
+        $this->totalmensajeenv = Cache::remember('totalmensajeenv', 600, function () {
+            $mensajeEnviado = Mensaje::where('estado', 'Enviado')->count();
+            $mensajeRecibido = Mensaje::where('estado', 'Recibido')->count();
+            $mensajeLeido = Mensaje::where('estado', 'Leído')->count();
+            return $mensajeEnviado + $mensajeRecibido + $mensajeLeido;
+        });
+
+        $this->totalmensajeHoy = Cache::remember('totalmensajeHoy', 600, function () {
+            return Mensaje::whereDate('fecha_creacion', Carbon::today())->count();
+        });
+        $this->totalmensaje = Cache::remember('totalmensaje', 600, function () {
+            return Mensaje::count();
+        });
+        $this->totalmensajenenv = Cache::remember('totalmensajenenv', 600, function () {
+            return Mensaje::where('estado', 'No enviado')->count();
         });
     }
 
