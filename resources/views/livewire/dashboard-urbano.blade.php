@@ -13,7 +13,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpvr }}</h3>
-                        <p>Total Paquetes en Ventanilla CERTIFICADO DD</p>
+                        <p>Total CERTIFICADO en ventanilla DD</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -27,7 +27,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpvren }}</h3>
-                        <p>Total Entregados CERTIFICADO DD</p>
+                        <p>Total CERTIFICADO entregados en ventanilla DD</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -41,7 +41,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpvr }}</h3>
-                        <p>Total Hoy Entregados CERTIFICADO DD</p>
+                        <p>Total CERTIFICADO entregados hoy en ventanilla DD</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -55,7 +55,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpvhh }} Bs.</h3>
-                        <p>Total Hoy Generado CERTIFICADO DD</p>
+                        <p>Total CERTIFICADO generado hoy en ventanilla DD</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -69,7 +69,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpvdd }}</h3>
-                        <p>Total Paquetes en Ventanilla DD</p>
+                        <p>Total ORDINARIO en ventanilla DD</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -83,7 +83,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpedd }}</h3>
-                        <p>Total Entregados DD</p>
+                        <p>Total ORDINARIO entregados en ventanilla DD</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -97,7 +97,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpedd }}</h3>
-                        <p>Total Hoy Entregados DD</p>
+                        <p>Total ORDINARIO entregados hoy en ventanilla DD</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -111,7 +111,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpvdd }} Bs.</h3>
-                        <p>Total Hoy Generado DD</p>
+                        <p>Total ORDINARIO generado hoy en ventanilla DD</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
