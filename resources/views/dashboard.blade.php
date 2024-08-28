@@ -14,18 +14,19 @@
     @endhasrole
     @hasrole('Clasificacion|Auxiliar Clasificacion')
     @endhasrole
-    @hasrole('ENCOMIENDAS')
-        @livewire('dashboard-encomienda')
-    @endhasrole
-    @hasrole('Urbano|Auxiliar Urbano')
+    @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
         @livewire('dashboard-urbano')
     @endhasrole
-    @hasrole('DND')
+    @hasrole('SuperAdmin|Administrador|DND')
         @livewire('dashboarddnd')
     @endhasrole
-    @hasrole('Casillas')
+    @hasrole('SuperAdmin|Administrador|Casillas')
+        @livewire('dashboard-casillas')
     @endhasrole
-    @hasrole('ECA')
+    @hasrole('SuperAdmin|Administrador|ENCOMIENDAS')
+        @livewire('dashboard-encomienda')
+    @endhasrole
+    @hasrole('SuperAdmin|Administrador|ECA')
     @endhasrole
     @hasrole('Unica')
     @endhasrole
