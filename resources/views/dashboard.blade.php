@@ -9,10 +9,8 @@
 
 @section('content')
     @hasrole('SuperAdmin')
-        @livewire('dashboard-su')
     @endhasrole
-    @hasrole('SuperAdmin|Administrador')
-        @livewire('dashboard-admin')
+    @hasrole('Administrador')
     @endhasrole
     @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
         @livewire('dashboard-clasificacion')
