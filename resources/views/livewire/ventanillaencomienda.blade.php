@@ -181,6 +181,7 @@
                     <div class="modal-body">
                         <form>
                             <div class="form-group">
+                                <p>Donde se debe reencaminar el paquete?</p>
                                 <label for="city">Ciudad</label>
                                 <select wire:model="selectedCity" class="form-control" id="city">
                                     <option value="">Seleccione una ciudad</option>

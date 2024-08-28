@@ -14,8 +14,6 @@ class Reencaminarpackages extends Component
 
     public function render()
     {
-        // $userRegional = auth()->user()->Regional;
-
         $packages = Package::where('ESTADO', 'REENCAMINADO')
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
@@ -28,8 +26,6 @@ class Reencaminarpackages extends Component
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
-            // Filtra por la 'CUIDAD' del usuario autenticado
-            // ->where('CUIDAD', $userRegional)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 

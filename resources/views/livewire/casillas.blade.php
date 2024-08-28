@@ -165,6 +165,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <p>Donde se debe reencaminar el paquete?</p>
                         <form>
                             <div class="form-group">
                                 <label for="city">Ciudad</label>

@@ -122,7 +122,7 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->date_redirigido }}</td>
                                                 <td>
-                                                    @hasrole('SuperAdmin|Administrador|Expedicion|Auxiliar Expedicion')
+                                                    @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                                                         <a class="btn btn-sm btn-info" href="#" data-toggle="modal"
                                                             data-target="#reencaminadoModal{{ $package->id }}">
                                                             <i class="fa fa-arrow-up"></i>

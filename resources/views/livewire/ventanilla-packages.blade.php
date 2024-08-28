@@ -18,14 +18,15 @@
                                                 </button>
                                                 @include('package.modal.ventanilla')
                                             </div>
-                                        @endhasrole<div class="col-md-6">
+                                        @endhasrole
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="search">Busca:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control"
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <div class="row">
                                                 <div class="col-md-6">
@@ -115,15 +116,19 @@
                                                             <td>
                                                                 @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar
                                                                     Urbano')
-                                                                    <div class="d-flex" role="group" aria-label="Acciones">
-                                                                        <a class="btn btn-sm btn-success" href="{{ route('packages.edit', $package->id) }}" style="margin-right: 10px;">
+                                                                    <div class="d-flex" role="group"
+                                                                        aria-label="Acciones">
+                                                                        <a class="btn btn-sm btn-success"
+                                                                            href="{{ route('packages.edit', $package->id) }}"
+                                                                            style="margin-right: 10px;">
                                                                             <i class="fa fa-fw fa-edit"></i>
                                                                             {{ __('Editar') }}
                                                                         </a>
-                                                                        <button wire:click="openModal({{ $package->id }})" class="btn btn-sm btn-info">
+                                                                        <button wire:click="openModal({{ $package->id }})"
+                                                                            class="btn btn-sm btn-info">
                                                                             <i class="fa fa-edit"></i> Reencaminar
                                                                         </button>
-                                                                    </div>                                                                                                                                       
+                                                                    </div>
                                                                 @endhasrole
                                                             </td>
                                                         </tr>
@@ -149,17 +154,19 @@
         </div>
     </div>
     <!-- Modal -->
-    @if($selectedPackageId)
+    @if ($selectedPackageId)
         <div class="modal show d-block" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Reencaminar Paquete</h5>
-                        <button type="button" class="close" wire:click="$set('selectedPackageId', null)" aria-label="Close">
+                        <button type="button" class="close" wire:click="$set('selectedPackageId', null)"
+                            aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
+                        <p>Donde se debe reencaminar el paquete?</p>
                         <form>
                             <div class="form-group">
                                 <label for="city">Ciudad</label>
@@ -179,13 +186,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="observaciones">Observaciones</label>
-                                <input type="text" wire:model="observaciones" class="form-control" id="observaciones">
+                                <input type="text" wire:model="observaciones" class="form-control"
+                                    id="observaciones">
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" wire:click="$set('selectedPackageId', null)">Cerrar</button>
-                        <button type="button" wire:click="updatePackage" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" class="btn btn-secondary"
+                            wire:click="$set('selectedPackageId', null)">Cerrar</button>
+                        <button type="button" wire:click="updatePackage" class="btn btn-primary">Guardar
+                            cambios</button>
                     </div>
                 </div>
             </div>

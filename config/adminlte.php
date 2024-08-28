@@ -444,6 +444,12 @@ return [
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.clasificacion',
                         ],
+                        [
+                            'text' => 'Reencaminar Paquetes',
+                            'url' => 'test/redirigidos',
+                            'icon' => 'fas fa-paper-plane',
+                            'can'  => 'packages.clasificacion',
+                        ],
                     ],
                 ],
                 [
@@ -572,12 +578,6 @@ return [
                     'icon' => 'fas fa-boxes',
                     'can'  => 'packages.redirigidos',
                     'submenu' => [
-                        // [
-                        //     'text' => 'Reencaminar Paquetes',
-                        //     'url' => 'test/redirigidos',
-                        //     'icon' => 'fas fa-paper-plane',
-                        //     'can'  => 'packages.redirigidos',
-                        // ],
                         [
                             'text' => 'Todos Despacho',
                             'url' => 'bag/bagsall',

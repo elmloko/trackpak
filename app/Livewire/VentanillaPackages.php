@@ -144,6 +144,8 @@ class VentanillaPackages extends Component
 
     public function updatePackage()
     {
+        // Guarda el valor de auth()->user()->Regional en una variable
+        $cuidadre = auth()->user()->Regional;
         $package = Package::find($this->selectedPackageId);
 
         Event::create([
@@ -154,8 +156,9 @@ class VentanillaPackages extends Component
         ]);
 
         $package->CUIDAD = $this->selectedCity;
+        $package->cuidadre = $cuidadre;
         $package->OBSERVACIONES = $this->observaciones;
-        $package->ESTADO = 'CLASIFICACION';
+        $package->ESTADO = 'REENCAMINADO';
         $package->save();
 
         $this->reset(['selectedCity', 'observaciones', 'selectedPackageId']);
