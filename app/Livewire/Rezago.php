@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Package;
+use App\Models\International;
 use Livewire\WithPagination;
 
 class Rezago extends Component
@@ -14,24 +15,38 @@ class Rezago extends Component
 
     public function render()
     {
-
-        $packages = Package::whereIn('ESTADO', ['REZAGO'])
-            ->when($this->search, function ($query) {
-                $query->where('CODIGO', 'like', '%' . $this->search . '%')
-                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
-                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
-                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('daterezago', 'like', '%' . $this->search . '%');
-            })
-            ->orderBy('daterezago', 'desc')
-            ->paginate(10);
+        $packages = $this->getPackages();
 
         return view('livewire.rezago', [
             'packages' => $packages,
         ]);
+    }
+    public function getPackages()
+    {
+        $packageQuery = Package::where('ESTADO', 'REZAGO')
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
+                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+                    ->orWhere('updated_at', 'like', '%' . $this->search . '%');
+            })
+            ->select('id', 'CODIGO', 'DESTINATARIO', 'TELEFONO', 'CUIDAD', 'VENTANILLA', 'PESO', 'ESTADO', 'OBSERVACIONES', 'created_at');
+
+        $internationalQuery = International::where('ESTADO', 'REZAGO')
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
+                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+                    ->orWhere('updated_at', 'like', '%' . $this->search . '%');
+            })
+            ->select('id', 'CODIGO', 'DESTINATARIO', 'TELEFONO', 'CUIDAD', 'VENTANILLA', 'PESO', 'ESTADO', 'OBSERVACIONES', 'created_at');
+
+        return $packageQuery->union($internationalQuery)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
     }
 }
