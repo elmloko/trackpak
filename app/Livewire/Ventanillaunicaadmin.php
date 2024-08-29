@@ -23,6 +23,9 @@ class Ventanillaunicaadmin extends Component
     public $file;
     public $fechaInicio;
     public $fechaFin;
+    public $observaciones = '';
+    public $selectedPackageId = null;
+    public $currentModal = null;
 
     public function render()
     {
@@ -134,6 +137,30 @@ class Ventanillaunicaadmin extends Component
         Excel::import(new UnicaImport, $this->file->path());
 
         session()->flash('message', 'Archivo importado exitosamente.');
+    }
+    public function openPreRezagoModal($packageId)
+    {
+        $this->selectedPackageId = $packageId;
+        $package = Package::find($packageId);
+        $this->observaciones = $package->OBSERVACIONES;
+        $this->currentModal = 'prerezago';
+    }
+
+    public function savePreRezago()
+    {
+        $package = Package::findOrFail($this->selectedPackageId);
+        $package->ESTADO = 'PRE-REZAGO';
+        $package->OBSERVACIONES = $this->observaciones;
+        $package->dateprerezago = now();
+        $package->save();
+
+        // Reset fields
+        $this->reset(['selectedPackageId', 'observaciones']);
+
+        // Close the modal
+        $this->dispatch('closeModal');
+
+        session()->flash('message', 'Paquete actualizado a PRE-REZAGO exitosamente.');
     }
 
     private function getPackageIds()

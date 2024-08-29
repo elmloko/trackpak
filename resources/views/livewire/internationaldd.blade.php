@@ -23,16 +23,23 @@
                                             <form wire:submit.prevent="export" class="form-row align-items-center">
                                                 <div class="col-md-4">
                                                     <label for="fecha_inicio">Fecha de inicio:</label>
-                                                    <input type="date" wire:model="fecha_inicio" class="form-control" required>
-                                                    @error('fecha_inicio') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    <input type="date" wire:model="fecha_inicio" class="form-control"
+                                                        required>
+                                                    @error('fecha_inicio')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="fecha_fin">Fecha de fin:</label>
-                                                    <input type="date" wire:model="fecha_fin" class="form-control" required>
-                                                    @error('fecha_fin') <span class="text-danger">{{ $message }}</span> @enderror
+                                                    <input type="date" wire:model="fecha_fin" class="form-control"
+                                                        required>
+                                                    @error('fecha_fin')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <button type="submit" class="btn btn-success">Generar Excel</button>
+                                                    <button type="submit" class="btn btn-success">Generar
+                                                        Excel</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -48,21 +55,23 @@
                                             </div>
                                         @endhasrole
                                         @hasrole('SuperAdmin|Administrador')
-                                        <div>
-                                            <form wire:submit.prevent="import" class="form-inline">
-                                                <div class="form-group mb-2">
-                                                    <label for="fileUpload" class="sr-only">Archivo Excel</label>
-                                                    <input type="file" wire:model="file" class="form-control-file" id="fileUpload" accept=".xlsx,.xls">
-                                                </div>
-                                                <button type="submit" class="btn btn-primary mb-2">Importar</button>
-                                                <a href="{{ route('plantilladd.excel') }}" class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
-                                            </form>
-                                            @if (session()->has('message'))
-                                                <div class="alert alert-success mt-2">
-                                                    {{ session('message') }}
-                                                </div>
-                                            @endif
-                                        </div>
+                                            <div>
+                                                <form wire:submit.prevent="import" class="form-inline">
+                                                    <div class="form-group mb-2">
+                                                        <label for="fileUpload" class="sr-only">Archivo Excel</label>
+                                                        <input type="file" wire:model="file" class="form-control-file"
+                                                            id="fileUpload" accept=".xlsx,.xls">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mb-2">Importar</button>
+                                                    <a href="{{ route('plantilladd.excel') }}"
+                                                        class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
+                                                </form>
+                                                @if (session()->has('message'))
+                                                    <div class="alert alert-success mt-2">
+                                                        {{ session('message') }}
+                                                    </div>
+                                                @endif
+                                            </div>
                                         @endhasrole
                                     </div>
                                 </div>
@@ -128,25 +137,33 @@
                                             <td>{{ $international->OBSERVACIONES }}</td>
                                             <td>{{ $international->created_at }}</td>
                                             <td>
-                                                @hasrole('SuperAdmin|Administrador|Urbano')
-                                                    <a class="btn btn-sm btn-success"
-                                                        href="{{ route('internationals.edit', $international->id) }}">
-                                                        <i class="fa fa-fw fa-edit"></i>
-                                                        {{ __('Editar') }}
-                                                    </a>
-                                                @endhasrole
-                                                @hasrole('SuperAdmin|Administrador')
-                                                    <form
-                                                        action="{{ route('internationals.destroy', $international->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">
-                                                            <i class="fa fa-fw fa-trash"></i>
-                                                            {{ __('Eliminar') }}
+                                                <div class="d-flex" role="group" aria-label="Acciones">
+                                                    @hasrole('SuperAdmin|Administrador|Urbano')
+                                                        <a class="btn btn-sm btn-success mr-2"
+                                                            href="{{ route('internationals.edit', $international->id) }}">
+                                                            <i class="fa fa-fw fa-edit"></i>
+                                                            {{ __('Editar') }}
+                                                        </a>
+                                                        <button wire:click="openPreRezagoModal({{ $international->id }})"
+                                                            class="btn btn-sm btn-warning mr-2" data-toggle="modal"
+                                                            data-target="#preRezagoModal">
+                                                            <i class="fas fa-exclamation-circle"></i>
+                                                            PRE-REZAGO
                                                         </button>
-                                                    </form>
-                                                @endhasrole
+                                                    @endhasrole
+                                                    @hasrole('SuperAdmin|Administrador')
+                                                        <form
+                                                            action="{{ route('internationals.destroy', $international->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger mr-2">
+                                                                <i class="fa fa-fw fa-trash "></i>
+                                                                {{ __('Eliminar') }}
+                                                            </button>
+                                                        </form>
+                                                    @endhasrole
+                                                </div>
                                             </td>
                                         </tr>
                                     @endif
@@ -166,4 +183,33 @@
             </div>
         </div>
     </div>
+    @if ($currentModal === 'prerezago')
+        <div wire:ignore.self class="modal fade show d-block" id="preRezagoModal" tabindex="-1" role="dialog"
+            aria-labelledby="preRezagoModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="preRezagoModalLabel">Cambiar a PRE-REZAGO</h5>
+                        <button type="button" class="close" wire:click="$set('currentModal', null)"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="observaciones">Observaciones</label>
+                                <textarea wire:model="observaciones" class="form-control" id="observaciones" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            wire:click="$set('currentModal', null)">Cerrar</button>
+                        <button type="button" wire:click="savePreRezago" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>

@@ -20,6 +20,9 @@ class Internationaldd extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $observaciones = '';
+    public $selectedPackageId = null;
+    public $currentModal = null;
     public $file;
     public $fecha_inicio;
     public $fecha_fin;
@@ -146,6 +149,30 @@ class Internationaldd extends Component
         ]);
 
         return Excel::download(new InternationalddExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Certificados DD.xlsx');
+    }
+
+    public function openPreRezagoModal($packageId)
+    {
+        $this->selectedPackageId = $packageId;
+        $package = International::find($packageId);
+        $this->observaciones = $package->OBSERVACIONES;
+        $this->currentModal = 'prerezago';
+    }
+
+    public function savePreRezago()
+    {
+        $package = International::findOrFail($this->selectedPackageId);
+        $package->ESTADO = 'PRE-REZAGO';
+        $package->OBSERVACIONES = $this->observaciones;
+        $package->save();
+
+        // Reset fields
+        $this->reset(['selectedPackageId', 'observaciones']);
+
+        // Close the modal
+        $this->dispatch('closeModal');
+
+        session()->flash('message', 'Paquete actualizado a PRE-REZAGO exitosamente.');
     }
 
     private function getPackageIds()

@@ -125,8 +125,16 @@
                                                                             {{ __('Editar') }}
                                                                         </a>
                                                                         <button wire:click="openModal({{ $package->id }})"
-                                                                            class="btn btn-sm btn-info">
+                                                                            class="btn btn-sm btn-info mr-2">
                                                                             <i class="fa fa-edit"></i> Reencaminar
+                                                                        </button>
+                                                                        <button
+                                                                            wire:click="openPreRezagoModal({{ $package->id }})"
+                                                                            class="btn btn-sm btn-warning "
+                                                                            data-toggle="modal"
+                                                                            data-target="#preRezagoModal">
+                                                                            <i class="fas fa-exclamation-circle"></i>
+                                                                            PRE-REZAGO
                                                                         </button>
                                                                     </div>
                                                                 @endhasrole
@@ -154,7 +162,7 @@
         </div>
     </div>
     <!-- Modal -->
-    @if ($selectedPackageId)
+    @if ($currentModal === 'reencaminar')
         <div class="modal show d-block" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -196,6 +204,35 @@
                             wire:click="$set('selectedPackageId', null)">Cerrar</button>
                         <button type="button" wire:click="updatePackage" class="btn btn-primary">Guardar
                             cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+    @if ($currentModal === 'prerezago')
+        <div wire:ignore.self class="modal fade show d-block" id="preRezagoModal" tabindex="-1" role="dialog"
+            aria-labelledby="preRezagoModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="preRezagoModalLabel">Cambiar a PRE-REZAGO</h5>
+                        <button type="button" class="close" wire:click="$set('currentModal', null)"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="observaciones">Observaciones</label>
+                                <textarea wire:model="observaciones" class="form-control" id="observaciones" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            wire:click="$set('currentModal', null)">Cerrar</button>
+                        <button type="button" wire:click="savePreRezago" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
             </div>

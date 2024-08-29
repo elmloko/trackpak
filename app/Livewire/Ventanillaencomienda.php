@@ -22,6 +22,7 @@ class Ventanillaencomienda extends Component
     public $selectedCity = '';
     public $observaciones = '';
     public $selectedPackageId = null;
+    public $currentModal = null;
     public $file;
     public $fecha_inicio;
     public $fecha_fin;
@@ -145,6 +146,7 @@ class Ventanillaencomienda extends Component
         $package = Package::find($packageId);
         $this->selectedCity = $package->CUIDAD;
         $this->observaciones = $package->OBSERVACIONES;
+        $this->currentModal = 'reencaminar';
     }
 
     public function updatePackage()
@@ -171,6 +173,30 @@ class Ventanillaencomienda extends Component
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'Formulario de Rencaminamiento.pdf');
+    }
+    public function openPreRezagoModal($packageId)
+    {
+        $this->selectedPackageId = $packageId;
+        $package = Package::find($packageId);
+        $this->observaciones = $package->OBSERVACIONES;
+        $this->currentModal = 'prerezago';
+    }
+
+    public function savePreRezago()
+    {
+        $package = Package::findOrFail($this->selectedPackageId);
+        $package->ESTADO = 'PRE-REZAGO';
+        $package->OBSERVACIONES = $this->observaciones;
+        $package->dateprerezago = now();
+        $package->save();
+
+        // Reset fields
+        $this->reset(['selectedPackageId', 'observaciones']);
+
+        // Close the modal
+        $this->dispatch('closeModal');
+
+        session()->flash('message', 'Paquete actualizado a PRE-REZAGO exitosamente.');
     }
     private function getPackageIds()
     {

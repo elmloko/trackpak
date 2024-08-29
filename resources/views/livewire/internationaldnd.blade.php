@@ -129,12 +129,19 @@
                                             <td>{{ $international->OBSERVACIONES }}</td>
                                             <td>{{ $international->created_at }}</td>
                                             <td>
+                                                <div class="d-flex" role="group" aria-label="Acciones">
                                                 @hasrole('SuperAdmin|Administrador|DND')
-                                                    <a class="btn btn-sm btn-success"
+                                                    <a class="btn btn-sm btn-success mr-2"
                                                         href="{{ route('internationals.edit', $international->id) }}">
                                                         <i class="fa fa-fw fa-edit"></i>
                                                         {{ __('Editar') }}
                                                     </a>
+                                                    <button wire:click="openPreRezagoModal({{ $international->id }})"
+                                                        class="btn btn-sm btn-warning mr-2" data-toggle="modal"
+                                                        data-target="#preRezagoModal">
+                                                        <i class="fas fa-exclamation-circle"></i>
+                                                        PRE-REZAGO
+                                                    </button>
                                                 @endhasrole
                                                 @hasrole('SuperAdmin|Administrador')
                                                     <form
@@ -148,6 +155,7 @@
                                                         </button>
                                                     </form>
                                                 @endhasrole
+                                            </div>
                                             </td>
                                         </tr>
                                     @endif
@@ -167,4 +175,33 @@
             </div>
         </div>
     </div>
+    @if ($currentModal === 'prerezago')
+        <div wire:ignore.self class="modal fade show d-block" id="preRezagoModal" tabindex="-1" role="dialog"
+            aria-labelledby="preRezagoModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="preRezagoModalLabel">Cambiar a PRE-REZAGO</h5>
+                        <button type="button" class="close" wire:click="$set('currentModal', null)"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="observaciones">Observaciones</label>
+                                <textarea wire:model="observaciones" class="form-control" id="observaciones" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            wire:click="$set('currentModal', null)">Cerrar</button>
+                        <button type="button" wire:click="savePreRezago" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
