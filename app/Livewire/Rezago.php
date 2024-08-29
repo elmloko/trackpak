@@ -6,12 +6,16 @@ use Livewire\Component;
 use App\Models\Package;
 use App\Models\International;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RezagoExport;
 
 class Rezago extends Component
 {
     use WithPagination; // Mueve el uso de WithPagination aquí
 
     public $search = '';
+    public $fecha_inicio;
+    public $fecha_fin;
 
     public function render()
     {
@@ -48,5 +52,14 @@ class Rezago extends Component
         return $packageQuery->union($internationalQuery)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+    }
+    public function export()
+    {
+        $this->validate([
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+        ]);
+    
+        return Excel::download(new RezagoExport($this->fecha_inicio, $this->fecha_fin), 'Paquetes Rezagados.xlsx');
     }
 }
