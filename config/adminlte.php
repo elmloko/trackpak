@@ -572,94 +572,6 @@ return [
                         ],
                     ],
                 ],
-                [
-                    'text' => 'Distribuicion',
-                    'icon' => 'fas fa-boxes',
-                    'can'  => 'packages.redirigidos',
-                    'submenu' => [
-                        [
-                            'text' => 'Todos Despacho',
-                            'url' => 'bag/bagsall',
-                            'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.todo',
-                        ],
-                        // [
-                        //     'text' => 'Ingreso Despacho',
-                        //     'url' => 'bags',
-                        //     'icon' => 'fas fa-box-open',
-                        //     'can'  => 'packages.ingreso',
-                        // ],
-                        [
-                            'text' => 'Ingreso Despacho',
-                            'url' => 'bag/bagsclose',
-                            'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.cierre',
-                        ],
-                        [
-                            'text' => 'Expedicion Despacho',
-                            'url' => 'bag/bagstrans',
-                            'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.despacho',
-                        ],
-                        [
-                            'text' => 'Apertura Despacho',
-                            'url' => 'bag/bagsopen',
-                            'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.apertura',
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Urbano',
-                    'icon' => 'fas fa-building',
-                    'can'  => 'packages.urbano',
-                    'submenu' => [
-                        [
-                            'text' => 'Distribución Paquetes',
-                            'url' => 'packages/distribuicioncartero',
-                            'icon' => 'fas fa-box-open',
-                            'can'  => 'packages.distribuicioncartero',
-                        ],
-                        [
-                            'text' => 'Entregas Cartero',
-                            'url' => 'packages/carteros',
-                            'icon' => 'fas fa-cubes',
-                            'can'  => 'packages.inventariocartero',
-                        ],
-                        [
-                            'text' => 'Despacho Cartero',
-                            'url' => 'packages/despachocartero',
-                            'icon' => 'fas fa-envelope-open-text',
-                            'can'  => 'packages.inventariocartero',
-                        ],
-                        [
-                            'text' => 'Inventario Cartero',
-                            'url' => 'packages/inventariocartero',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.inventariocartero',
-                        ],
-                        [
-                            'text' => 'Entregas Domicilio',
-                            'url' => 'packages/carterosgeneral',
-                            'icon' => 'fas fa-cubes',
-                            'can'  => 'packages.ventanilla',
-                        ],
-                        [
-                            'text' => 'Despacho Domicilio',
-                            'url' => 'packages/despachocarterogeneral',
-                            'icon' => 'fas fa-envelope-open-text',
-                            'can'  => 'packages.ventanilla',
-                        ],
-                        [
-                            'text' => 'Inventario Domicilio',
-                            'url' => 'packages/generalcartero',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.generalcartero',
-                        ],
-
-                    ],
-                ],
-
             ],
         ],
         [
@@ -730,6 +642,93 @@ return [
                         ],
                     ],
                 ],
+            ],
+        ],
+        [
+            'text' => 'Distribuicion',
+            'icon' => 'fas fa-boxes',
+            'can'  => 'packages.redirigidos',
+            'submenu' => [
+                [
+                    'text' => 'Todos Despacho',
+                    'url' => 'bag/bagsall',
+                    'icon' => 'fas fa-box-open',
+                    'can'  => 'packages.todo',
+                ],
+                // [
+                //     'text' => 'Ingreso Despacho',
+                //     'url' => 'bags',
+                //     'icon' => 'fas fa-box-open',
+                //     'can'  => 'packages.ingreso',
+                // ],
+                [
+                    'text' => 'Ingreso Despacho',
+                    'url' => 'bag/bagsclose',
+                    'icon' => 'fas fa-box-open',
+                    'can'  => 'packages.cierre',
+                ],
+                [
+                    'text' => 'Expedicion Despacho',
+                    'url' => 'bag/bagstrans',
+                    'icon' => 'fas fa-box-open',
+                    'can'  => 'packages.despacho',
+                ],
+                [
+                    'text' => 'Apertura Despacho',
+                    'url' => 'bag/bagsopen',
+                    'icon' => 'fas fa-box-open',
+                    'can'  => 'packages.apertura',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Urbano',
+            'icon' => 'fas fa-building',
+            'can'  => 'packages.urbano',
+            'submenu' => [
+                [
+                    'text' => 'Distribución Paquetes',
+                    'url' => 'packages/distribuicioncartero',
+                    'icon' => 'fas fa-box-open',
+                    'can'  => 'packages.distribuicioncartero',
+                ],
+                [
+                    'text' => 'Entregas Cartero',
+                    'url' => 'packages/carteros',
+                    'icon' => 'fas fa-cubes',
+                    'can'  => 'packages.inventariocartero',
+                ],
+                [
+                    'text' => 'Despacho Cartero',
+                    'url' => 'packages/despachocartero',
+                    'icon' => 'fas fa-envelope-open-text',
+                    'can'  => 'packages.inventariocartero',
+                ],
+                [
+                    'text' => 'Inventario Cartero',
+                    'url' => 'packages/inventariocartero',
+                    'icon' => 'fas fa-suitcase',
+                    'can'  => 'packages.inventariocartero',
+                ],
+                [
+                    'text' => 'Entregas Domicilio',
+                    'url' => 'packages/carterosgeneral',
+                    'icon' => 'fas fa-cubes',
+                    'can'  => 'packages.ventanilla',
+                ],
+                [
+                    'text' => 'Despacho Domicilio',
+                    'url' => 'packages/despachocarterogeneral',
+                    'icon' => 'fas fa-envelope-open-text',
+                    'can'  => 'packages.ventanilla',
+                ],
+                [
+                    'text' => 'Inventario Domicilio',
+                    'url' => 'packages/generalcartero',
+                    'icon' => 'fas fa-suitcase',
+                    'can'  => 'packages.generalcartero',
+                ],
+
             ],
         ],
         [
