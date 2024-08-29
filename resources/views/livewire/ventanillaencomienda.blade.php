@@ -192,7 +192,16 @@
                                 <p>Donde se debe reencaminar el paquete?</p>
                                 <label for="city">Ciudad</label>
                                 <select wire:model="selectedCity" class="form-control" id="city">
-                                    <!-- Opciones de ciudad -->
+                                    <option value="">Seleccione una ciudad</option>
+                                    <option value="LA PAZ">LA PAZ</option>
+                                    <option value="COCHABAMBA">COCHABAMBA</option>
+                                    <option value="SANTA CRUZ">SANTA CRUZ</option>
+                                    <option value="ORURO">ORURO</option>
+                                    <option value="POTOSI">POTOSI</option>
+                                    <option value="SUCRE">SUCRE</option>
+                                    <option value="BENI">BENI</option>
+                                    <option value="PANDO">PANDO</option>
+                                    <option value="TARIJA">TARIJA</option>
                                 </select>
                             </div>
                             <div class="form-group">
