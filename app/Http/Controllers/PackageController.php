@@ -772,13 +772,6 @@ class PackageController extends Controller
         return view('package.encomiendasinventario');
     }
 
-    public function reencaminarexcel(Request $request)
-    {
-        $fechaInicio = $request->input('fecha_inicio');
-        $fechaFin = $request->input('fecha_fin');
-        $ciudad = $request->input('ciudad');
-        return Excel::download(new ReencaminarExport($fechaInicio, $fechaFin, $ciudad), 'Rencaminar.xlsx');
-    }
     public function packagesallpdf(Request $request)
     {
         $fechaInicio = $request->input('fecha_inicio');
