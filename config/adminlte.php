@@ -469,7 +469,6 @@ return [
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.delete',
                         ],
-                        
                     ],
                 ],
                 [
@@ -609,7 +608,7 @@ return [
                             'can'  => 'packages.apertura',
                         ],
                     ],
-                ], 
+                ],
                 [
                     'text' => 'Urbano',
                     'icon' => 'fas fa-building',
@@ -657,28 +656,10 @@ return [
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.generalcartero',
                         ],
-                        
+
                     ],
                 ],
-                [
-                    'text' => 'Rezago',
-                    'icon' => 'fas fa-database',
-                    'can'  => 'packages.ventanilla',
-                    'submenu' => [
-                        [
-                            'text' => 'Prerezago',
-                            'url' => 'packages/prerezago',
-                            'icon' => 'fas fa-cloud',
-                            'can'  => 'packages.prerezago',
-                        ],
-                        [
-                            'text' => 'Inventario Rezago',
-                            'url' => 'packages/rezago',
-                            'icon' => 'fas fa-hdd',
-                            'can'  => 'packages.rezago',
-                        ],
-                    ],
-                ],
+
             ],
         ],
         [
@@ -749,25 +730,25 @@ return [
                         ],
                     ],
                 ],
-                // [
-                //     'text' => 'Rezago',
-                //     'icon' => 'fas fa-database',
-                //     'can'  => 'packages.ventanilla',
-                //     'submenu' => [
-                //         [
-                //             'text' => 'Prerezago',
-                //             'url' => 'packages/prerezago',
-                //             'icon' => 'fas fa-cloud',
-                //             'can'  => 'packages.prerezago',
-                //         ],
-                //         [
-                //             'text' => 'Inventario Rezago',
-                //             'url' => 'packages/rezago',
-                //             'icon' => 'fas fa-hdd',
-                //             'can'  => 'packages.rezago',
-                //         ],
-                //     ],
-                // ],
+            ],
+        ],
+        [
+            'text' => 'Rezago',
+            'icon' => 'fas fa-database',
+            'can'  => 'packages.ventanilla',
+            'submenu' => [
+                [
+                    'text' => 'Prerezago',
+                    'url' => 'packages/prerezago',
+                    'icon' => 'fas fa-cloud',
+                    'can'  => 'packages.prerezago',
+                ],
+                [
+                    'text' => 'Inventario Rezago',
+                    'url' => 'packages/rezago',
+                    'icon' => 'fas fa-hdd',
+                    'can'  => 'packages.rezago',
+                ],
             ],
         ],
         [
