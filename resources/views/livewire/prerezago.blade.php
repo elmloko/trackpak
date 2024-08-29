@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-md-6 text-right">
                                 @hasrole('SuperAdmin|Administrador|Urbano')
-                                <button wire:click="cambiarEstado" class="btn btn-warning">Almacenar</button>
+                                    <button wire:click="cambiarEstado" class="btn btn-warning">Almacenar</button>
                                 @endhasrole
                             </div>
                         </div>
@@ -28,42 +28,50 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             @if ($packages->count())
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>
-                                            <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
-                                        </th>
-                                        <th>Código Rastreo</th>
-                                        <th>Destinatario</th>
-                                        <th>Teléfono</th>
-                                        <th>Ciudad</th>
-                                        <th>Ventanilla</th>
-                                        <th>Peso (gr.)</th>
-                                        <th>Estado</th>
-                                        <th>Observaciones</th>
-                                        <th>Fecha Pre-rezago</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($packages as $package)
+                                <table class="table table-striped table-hover">
+                                    <thead class="thead">
                                         <tr>
-                                            <td>
-                                                <input type="checkbox" wire:model="paquetesSeleccionados" value="{{ $package->id }}">
-                                            </td>
-                                            <td>{{ $package->CODIGO }}</td>
-                                            <td>{{ $package->DESTINATARIO }}</td>
-                                            <td>{{ $package->TELEFONO }}</td>
-                                            <td>{{ $package->CUIDAD }}</td>
-                                            <td>{{ $package->VENTANILLA }}</td>
-                                            <td>{{ $package->PESO }}</td>
-                                            <td>{{ $package->ESTADO }}</td>
-                                            <td>{{ $package->OBSERVACIONES }}</td>
-                                            <td>{{ $package->created_at }}</td>
+                                            <th>
+                                                <input type="checkbox" wire:model="selectAll"
+                                                    wire:click="toggleSelectAll">
+                                            </th>
+                                            <th>Código Rastreo</th>
+                                            <th>Destinatario</th>
+                                            <th>Teléfono</th>
+                                            <th>Ciudad</th>
+                                            <th>Ventanilla</th>
+                                            <th>Peso (gr.)</th>
+                                            <th>Estado</th>
+                                            <th>Observaciones</th>
+                                            <th>Fecha Pre-rezago</th>
+                                            <th>Acciones</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($packages as $package)
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" wire:model="paquetesSeleccionados"
+                                                        value="{{ $package->id }}">
+                                                </td>
+                                                <td>{{ $package->CODIGO }}</td>
+                                                <td>{{ $package->DESTINATARIO }}</td>
+                                                <td>{{ $package->TELEFONO }}</td>
+                                                <td>{{ $package->CUIDAD }}</td>
+                                                <td>{{ $package->VENTANILLA }}</td>
+                                                <td>{{ $package->PESO }}</td>
+                                                <td>{{ $package->ESTADO }}</td>
+                                                <td>{{ $package->OBSERVACIONES }}</td>
+                                                <td>{{ $package->created_at }}</td>
+                                                <td>
+                                                    <button wire:click="devolverPaquete({{ $package->id }})" class="btn btn-primary btn-sm">
+                                                        <i class="fas fa-undo-alt"></i> Devolver
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         {{ $packages->links() }}
@@ -81,5 +89,4 @@
             </div>
         </div>
     </div>
-</div>    
-
+</div>

@@ -81,17 +81,17 @@ class Prerezago extends Component
                 'ESTADO' => 'REZAGO',
                 'daterezago' => now(),
             ]);
-    
+
             // Actualizar el estado en la tabla International
             International::whereIn('id', $this->paquetesSeleccionados)->update([
                 'ESTADO' => 'REZAGO',
                 'updated_at' => now(),
             ]);
-    
+
             // Crear un evento para cada paquete actualizado en Package
             foreach ($this->paquetesSeleccionados as $packageId) {
                 $paquete = Package::find($packageId);
-    
+
                 if ($paquete) {
                     Event::create([
                         'action' => 'ALMACEN',
@@ -101,11 +101,11 @@ class Prerezago extends Component
                     ]);
                 }
             }
-    
+
             // Crear un evento para cada paquete actualizado en International
             foreach ($this->paquetesSeleccionados as $packageId) {
                 $paqueteInternacional = International::find($packageId);
-    
+
                 if ($paqueteInternacional) {
                     Event::create([
                         'action' => 'ALMACEN',
@@ -115,20 +115,20 @@ class Prerezago extends Component
                     ]);
                 }
             }
-    
+
             // Combinar los paquetes de ambos modelos
             $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)->get()
                 ->merge(International::whereIn('id', $this->paquetesSeleccionados)->get());
-    
+
             // Generar el PDF con los paquetes seleccionados
             $pdf = PDF::loadView('package.pdf.prerezago', ['packages' => $paquetesSeleccionados]);
-    
+
             // Obtener el contenido del PDF
             $pdfContent = $pdf->output();
-    
+
             // Restablecer la selección
             $this->resetSeleccion();
-    
+
             // Generar una respuesta con el contenido del PDF para descargar
             return response()->streamDownload(function () use ($pdfContent) {
                 echo $pdfContent;
@@ -137,7 +137,49 @@ class Prerezago extends Component
             session()->flash('error', 'No hay paquetes seleccionados para almacenar.');
         }
     }
-    
+    public function devolverPaquete($packageId)
+    {
+        // Intentar encontrar el paquete en la tabla Package
+        $paquete = Package::find($packageId);
+        if ($paquete) {
+            $paquete->update([
+                'ESTADO' => 'VENTANILLA',
+                'updated_at' => now(),
+            ]);
+
+            Event::create([
+                'action' => 'DEVOLUCION',
+                'descripcion' => 'Devolución a Ventanilla',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+            ]);
+
+            session()->flash('success', 'El paquete ha sido devuelto a Ventanilla.');
+            return;
+        }
+
+        // Intentar encontrar el paquete en la tabla International
+        $paqueteInternacional = International::find($packageId);
+        if ($paqueteInternacional) {
+            $paqueteInternacional->update([
+                'ESTADO' => 'VENTANILLA',
+                'updated_at' => now(),
+            ]);
+
+            Event::create([
+                'action' => 'DEVOLUCION',
+                'descripcion' => 'Devolución a Ventanilla',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paqueteInternacional->CODIGO,
+            ]);
+
+            session()->flash('success', 'El paquete ha sido devuelto a Ventanilla.');
+        } else {
+            session()->flash('error', 'Paquete no encontrado.');
+        }
+    }
+
+
 
     private function resetSeleccion()
     {
