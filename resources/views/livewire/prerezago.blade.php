@@ -28,49 +28,42 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             @if ($packages->count())
-                                <table class="table table-striped table-hover">
-                                    <thead class="thead">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead">
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
+                                        </th>
+                                        <th>Código Rastreo</th>
+                                        <th>Destinatario</th>
+                                        <th>Teléfono</th>
+                                        <th>Ciudad</th>
+                                        <th>Ventanilla</th>
+                                        <th>Peso (gr.)</th>
+                                        <th>Estado</th>
+                                        <th>Observaciones</th>
+                                        <th>Fecha Pre-rezago</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($packages as $package)
                                         <tr>
-                                            <th><input type="checkbox" wire:model="selectAll" wire:change="toggleSelectAll"></th>
-                                            <th>No</th>
-                                            <th>Código Rastreo</th>
-                                            <th>Destinatario</th>
-                                            <th>Teléfono</th>
-                                            <th>País</th>
-                                            <th>Ciudad</th>
-                                            <th>Ventanilla</th>
-                                            <th>Peso (gr.)</th>
-                                            <th>Tipo</th>
-                                            <th>Estado</th>
-                                            <th>Observaciones</th>
-                                            <th>Aduana</th>
-                                            {{-- <th>Fecha Pre-rezago</th> --}}
+                                            <td>
+                                                <input type="checkbox" wire:model="paquetesSeleccionados" value="{{ $package->id }}">
+                                            </td>
+                                            <td>{{ $package->CODIGO }}</td>
+                                            <td>{{ $package->DESTINATARIO }}</td>
+                                            <td>{{ $package->TELEFONO }}</td>
+                                            <td>{{ $package->CUIDAD }}</td>
+                                            <td>{{ $package->VENTANILLA }}</td>
+                                            <td>{{ $package->PESO }}</td>
+                                            <td>{{ $package->ESTADO }}</td>
+                                            <td>{{ $package->OBSERVACIONES }}</td>
+                                            <td>{{ $package->created_at }}</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($packages as $package)
-                                            @if ($package->ESTADO === 'PRE-REZAGO')
-                                                <tr>
-                                                    <td><input type="checkbox" wire:model="paquetesSeleccionados"
-                                                        value="{{ $package->id }}"></td>
-                                                    <td>{{ $package->id }}</td>
-                                                    <td>{{ $package->CODIGO }}</td>
-                                                    <td>{{ $package->DESTINATARIO }}</td>
-                                                    <td>{{ $package->TELEFONO }}</td>
-                                                    <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                    <td>{{ $package->CUIDAD }}</td>
-                                                    <td>{{ $package->VENTANILLA }}</td>
-                                                    <td>{{ $package->PESO }}</td>
-                                                    <td>{{ $package->TIPO }}</td>
-                                                    <td>{{ $package->ESTADO }}</td>
-                                                    <td>{{ $package->OBSERVACIONES }}</td>
-                                                    <td>{{ $package->ADUANA }}</td>
-                                                    {{-- <td>{{ $package->dateprerezago }}</td> --}}
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                    @endforeach
+                                </tbody>
+                            </table>
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         {{ $packages->links() }}

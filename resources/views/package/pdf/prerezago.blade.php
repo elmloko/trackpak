@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prerezago</title>
     <style>
-        /* Estilos para la tabla */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -21,12 +20,10 @@
             background-color: #f2f2f2;
         }
 
-        /* Estilos para la página en formato horizontal */
         @page {
             size: landscape;
         }
 
-        /* Estilos para la imagen y el título */
         .header {
             display: flex;
             justify-content: space-between;
@@ -70,37 +67,29 @@
                 <th>Código Rastreo</th>
                 <th>Destinatario</th>
                 <th>Teléfono</th>
-                <th>País</th>
                 <th>Ciudad</th>
-                <th>Dirección</th>
                 <th>Ventanilla</th>
                 <th>Peso (gr.)</th>
-                <th>Tipo</th>
                 <th>Estado</th>
-                <th>Aduana</th>
                 <th>Observaciones</th>
             </tr>
         </thead>
         <tbody>
-            @php $i = 1; @endphp <!-- Inicializa $i con 1 -->
+            @php $i = 1; @endphp
             @foreach ($packages as $package)
-                @if ($package->ESTADO === 'PRE-REZAGO')
-                <tr>
-                    <td>{{ $i }}</td>
-                    <td>{{ $package->CODIGO }}</td>
-                    <td>{{ $package->DESTINATARIO }}</td>
-                    <td>{{ $package->TELEFONO }}</td>
-                    <td>{{ $package->PAIS }}</td>
-                    <td>{{ $package->CUIDAD }}</td>
-                    <td>{{ $package->ZONA }}</td>
-                    <td>{{ $package->VENTANILLA }}</td>
-                    <td>{{ $package->PESO }} gr.</td>
-                    <td>{{ $package->PO }}</td>
-                    <td>{{ $package->ESTADO }}</td>
-                    <td>{{ $package->ADUANA }}</td>
-                    <td>{{ $package->created_at }}</td>
-                </tr>
-                @php $i++; @endphp <!-- Incrementa $i en cada iteración -->
+                @if ($package->ESTADO === 'REZAGO')
+                    <tr>
+                        <td>{{ $i }}</td>
+                        <td>{{ $package->CODIGO }}</td>
+                        <td>{{ $package->DESTINATARIO }}</td>
+                        <td>{{ $package->TELEFONO }}</td>
+                        <td>{{ $package->CUIDAD }}</td>
+                        <td>{{ $package->VENTANILLA }}</td>
+                        <td>{{ $package->PESO }} gr.</td>
+                        <td>{{ $package->ESTADO }}</td>
+                        <td>{{ $package->OBSERVACIONES }}</td>
+                    </tr>
+                    @php $i++; @endphp
                 @endif
             @endforeach
         </tbody>
