@@ -13,7 +13,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpvcs }}</h3>
-                        <p>Total ORDINARIO en ventanilla CASILLAS</p>
+                        <p>Total LC/AO en ventanilla CASILLAS</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -27,7 +27,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpecs }}</h3>
-                        <p>Total ORDINARIO entregados en ventanilla CASILLAS</p>
+                        <p>Total LC/AO entregados en ventanilla CASILLAS</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -41,7 +41,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpecs }}</h3>
-                        <p>Total ORDINARIO entregados hoy en ventanilla CASILLAS</p>
+                        <p>Total LC/AO entregados hoy en ventanilla CASILLAS</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -55,7 +55,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpvcs }} Bs.</h3>
-                        <p>Total ORDINARIO generado hoy en ventanilla CASILLAS</p>
+                        <p>Total LC/AO generado hoy en ventanilla CASILLAS</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>

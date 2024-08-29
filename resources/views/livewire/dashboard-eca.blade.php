@@ -13,7 +13,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpveca }}</h3>
-                        <p>Total Paquetes en Ventanilla ECA</p>
+                        <p>Total LC/AO en ventanilla ECA</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -27,7 +27,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpeeca }}</h3>
-                        <p>Total Entregados ECA</p>
+                        <p>Total LC/AO entregados en ventanilla ECA</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -41,7 +41,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpeeca }}</h3>
-                        <p>Total Hoy Entregados ECA</p>
+                        <p>Total LC/AO entregados hoy en ventanilla ECA</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -55,7 +55,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpveca }} Bs.</h3>
-                        <p>Total Hoy Generado ECA</p>
+                        <p>Total LC/AO generado hoy en ventanilla ECA</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>

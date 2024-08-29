@@ -13,7 +13,7 @@
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $totalClasificacion }}</h3>
-                        <p>Total ORDINARIO Registrado para Clasificacion</p>
+                        <p>Total LC/AO Registrado para Clasificacion</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -27,7 +27,7 @@
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $totalDespacho }}</h3>
-                        <p>Total ORDINARIO en Despacho para Clasificacion</p>
+                        <p>Total LC/AO en Despacho para Clasificacion</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -41,7 +41,7 @@
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $meslpc }}</h3>
-                        <p>Total ORDINARIO en el mes para Clasificacion</p>
+                        <p>Total LC/AO en el mes para Clasificacion</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -55,7 +55,7 @@
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ $hoylpc }}</h3>
-                        <p>Total ORDINARIO en el dia de hoy para Clasificacion</p>
+                        <p>Total LC/AO en el dia de hoy para Clasificacion</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>

@@ -47,7 +47,7 @@ class Reencaminarpackages extends Component
             'fecha_fin' => 'required|date',
         ]);
     
-        return Excel::download(new ReencaminarExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios DND.xlsx');
+        return Excel::download(new ReencaminarExport($this->fecha_inicio, $this->fecha_fin), 'Paquetes Reencaminados.xlsx');
     }
     public function editPackage($id)
     {

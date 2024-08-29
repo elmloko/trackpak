@@ -13,7 +13,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpveco }}</h3>
-                        <p>Total Paquetes en Ventanilla ENCOMIENDAS</p>
+                        <p>Total LC/AO en ventanilla ENCOMIENDAS</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -27,7 +27,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $totallpeeco }}</h3>
-                        <p>Total Entregados ENCOMIENDAS</p>
+                        <p>Total LC/AO entregados en ventanilla ENCOMIENDAS</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -41,7 +41,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpeeco }}</h3>
-                        <p>Total Hoy Entregados ENCOMIENDAS</p>
+                        <p>Total LC/AO entregados hoy en ventanilla ENCOMIENDAS</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
@@ -55,7 +55,7 @@
                 <div class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ $hoylpveco }} Bs.</h3>
-                        <p>Total Hoy Generado ENCOMIENDAS</p>
+                        <p>Total LC/AO generado hoy en ventanilla ENCOMIENDAS</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-shopping-cart"></i>
