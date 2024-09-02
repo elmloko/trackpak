@@ -184,7 +184,7 @@ class Ventanillaunicaadmin extends Component
 
             $eventData[] = [
                 'action' => 'DISPONIBLE',
-                'descripcion' => 'Paquete a la espera de ser recogido en ventanilla',
+                'descripcion' => 'Paquete a la espera de ser recogido en ventanilla REGIONAL',
                 'user_id' => auth()->user()->id,
                 'codigo' => $paquete->CODIGO,
                 'created_at' => now(),

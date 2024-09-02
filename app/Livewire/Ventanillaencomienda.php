@@ -125,9 +125,77 @@ class Ventanillaencomienda extends Component
             'file' => 'required|mimes:xls,xlsx',
         ]);
 
-        Excel::import(new EncomiendasImport, $this->file->path());
+        // Crear una instancia de UnicaImport
+        $import = new \App\Imports\EncomiendasImport();
 
-        session()->flash('message', 'Archivo importado exitosamente.');
+        // Realizar la importación usando la instancia
+        Excel::import($import, $this->file->path());
+
+        // Obtener los paquetes importados
+        $importedPackages = Package::latest()->take($import->getRowCount())->get();
+
+        $eventData = []; // Array para almacenamiento masivo de eventos
+
+        foreach ($importedPackages as $paquete) {
+            $eventData[] = [
+                'action' => 'ADMISION',
+                'descripcion' => 'Llegada de Paquete en Oficina Postal Regional',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            $eventData[] = [
+                'action' => 'CLASIFICACION',
+                'descripcion' => 'Clasificación del Paquete en Oficina Postal Regional',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            $eventData[] = [
+                'action' => 'DESPACHO',
+                'descripcion' => 'Destino de Clasificación hacia Ventanilla',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            $eventData[] = [
+                'action' => 'RECEPCIONADO',
+                'descripcion' => 'Paquete llegó a ventanilla en Oficina Postal Regional',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            $eventData[] = [
+                'action' => 'DISPONIBLE',
+                'descripcion' => 'Paquete a la espera de ser recogido en ventanilla ENCOMIENDAS',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+
+            $eventData[] = [
+                'action' => 'ESTADO',
+                'descripcion' => 'Paquete importado desde excel (Eventos creados por TrackingBO)',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        // Inserción masiva de todos los eventos
+        Event::insert($eventData);
+
+        session()->flash('message', 'Archivo importado exitosamente y eventos creados.');
     }
 
     public function export()
