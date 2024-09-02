@@ -77,12 +77,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="row mt-3">
+                        {{-- <div class="row mt-3">
                             <div class="col-md-6">
-                                {{ $packagesToAdd->links() }}
+                                {{ $combinedPackagesToAdd->links() }}
                             </div>
 
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -100,7 +100,6 @@
                                         <th>Código Rastreo</th>
                                         <th>Destinatario</th>
                                         <th>Zona</th>
-                                        <!-- Agrega otros encabezados según tu estructura de base de datos -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -119,14 +118,14 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="row mt-3">
+                            {{-- <div class="row mt-3">
                                 <div class="col-md-6">
-                                    {{ $assignedPackages->links() }}
+                                    {{ $combinedAssignedPackages->links() }}
                                 </div>
                                 <div class="col-md-6 text-right">
                                     Se asignaron {{ $assignedPackages->total() }} Paquetes
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     @else
                         <p>No hay paquetes asignados.</p>

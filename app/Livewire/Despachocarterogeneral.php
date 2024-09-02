@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Package;
+use App\Models\International; // Importa el modelo International
 use Livewire\WithPagination;
 
 class Despachocarterogeneral extends Component
@@ -15,24 +16,48 @@ class Despachocarterogeneral extends Component
     public function render()
     {
         $userRegional = auth()->user()->Regional;
-        $userasignado = auth()->user()->name;
-        $packages = Package::where('ESTADO', 'RETORNO')
-        ->when($this->search, function ($query) {
-            $query->where('CODIGO', 'like', '%' . $this->search . '%')
-                ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
-                ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
-                ->orWhere('TIPO', 'like', '%' . $this->search . '%')
-                ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                ->orWhere('created_at', 'like', '%' . $this->search . '%');
-        })
-        // Filtra por la 'CUIDAD' del usuario autenticado
-        ->where('CUIDAD', $userRegional)
-        // ->where('usercartero', $userasignado)
-        ->orderBy('created_at', 'desc')
-        ->paginate(10);
+
+        // Define las columnas que deben ser seleccionadas en ambas consultas
+        $columns = [
+            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'created_at', 'ESTADO' , 'usercartero' , 'PESO' , 'TIPO' , 'updated_at'
+        ];
+
+        // Consulta para obtener paquetes de la tabla Package
+        $packages = Package::select($columns)
+            ->where('ESTADO', 'RETORNO')
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
+                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
+                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+            })
+            ->where('CUIDAD', $userRegional)
+            ->orderBy('created_at', 'desc');
+
+        // Consulta para obtener paquetes de la tabla International
+        $internationalPackages = International::select($columns)
+            ->where('ESTADO', 'RETORNO')
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
+                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
+                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
+                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+            })
+            ->where('CUIDAD', $userRegional)
+            ->orderBy('created_at', 'desc');
+
+        // Une ambos conjuntos de resultados
+        $packages = $packages->union($internationalPackages)->paginate(10);
 
         return view('livewire.despachocarterogeneral', [
             'packages' => $packages,

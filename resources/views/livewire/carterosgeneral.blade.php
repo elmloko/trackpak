@@ -19,30 +19,6 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        {{-- <div class="col-lg-9 text-right">
-                                            <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('package.pdf.carteropdf') }}" class="btn btn-success"
-                                                    data-placement="left">
-                                                    Excel
-                                                </a>
-                                            </div>
-                                            <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('package.pdf.carteropdf') }}" class="btn btn-danger"
-                                                    data-placement="left">
-                                                    PDF
-                                                </a>
-                                            </div>
-                                            @hasrole('SuperAdmin|Administrador|Cartero')
-                                            <div class="mr-2 d-inline-block">
-                                                <!-- Botón para abrir el modal de cambio de estado -->
-                                                <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#buscarPaqueteModal">
-                                                    Añadir Paquete
-                                                </button>
-                                                @include('package.modal.cartero')
-                                            </div>
-                                            @endhasrole
-                                        </div> --}}
                                     </div>
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
@@ -63,10 +39,6 @@
                                                         <th>Código Rastreo</th>
                                                         <th>Destinatario</th>
                                                         <th>Teléfono</th>
-                                                        <th>País</th>
-                                                        <th>Ciudad</th>
-                                                        <th>Zona</th>
-                                                        <th>Ventanilla</th>
                                                         <th>Peso</th>
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
@@ -85,10 +57,6 @@
                                                                 <td>{{ $package->CODIGO }}</td>
                                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                                 <td>{{ $package->TELEFONO }}</td>
-                                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                                <td>{{ $package->CUIDAD }}</td>
-                                                                <td>{{ $package->ZONA }}</td>
-                                                                <td>{{ $package->VENTANILLA }}</td>
                                                                 <td>{{ $package->PESO }} gr.</td>
                                                                 <td>{{ $package->TIPO }}</td>
                                                                 <td>{{ $package->ESTADO }}</td>

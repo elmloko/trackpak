@@ -56,9 +56,6 @@
                                         <th>Código Rastreo</th>
                                         <th>Destinatario</th>
                                         <th>Telefono</th>
-                                        <th>Pais</th>
-                                        <th>Zona</th>
-                                        <th>Ventanilla</th>
                                         <th>Peso(gr.)</th>
                                         <th>Tipo</th>
                                         <th>Estado</th>
@@ -77,9 +74,6 @@
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                 <td>{{ $package->TELEFONO }}</td>
-                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                <td>{{ $package->ZONA }}</td>
-                                                <td>{{ $package->VENTANILLA }}</td>
                                                 <td>{{ $package->PESO }} </td>
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>{{ $package->ESTADO }}</td>

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Package;
+use App\Models\International; // Importa el modelo International
 use App\Models\Event;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
@@ -22,22 +23,55 @@ class Inventariocartero extends Component
     {
         $userasignado = auth()->user()->name;
 
+        // Define las columnas que deben ser seleccionadas en ambas consultas
+        $columns = [
+            'CODIGO',
+            'DESTINATARIO',
+            'TELEFONO',
+            'TIPO',
+            'ADUANA',
+            'deleted_at',
+            'ESTADO'
+        ];
+
+        // Consulta para obtener paquetes de la tabla Package que han sido eliminados
         $packages = Package::onlyTrashed()
+            ->select($columns)
             ->where('usercartero', $userasignado)
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('PAIS', 'like', '%' . $this->search . '%')
-                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%') // Mantenido como 'CUIDAD'
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
                     ->orWhere('deleted_at', 'like', '%' . $this->search . '%');
             })
             ->whereIn('ESTADO', ['REPARTIDO'])
-            ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+            ->orderBy('deleted_at', 'desc');
+
+        // Consulta para obtener paquetes internacionales que han sido eliminados
+        $internationalPackages = International::onlyTrashed()
+            ->select($columns)
+            ->where('usercartero', $userasignado)
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
+                    ->orWhere('PAIS', 'like', '%' . $this->search . '%')
+                    ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
+                    ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
+                    ->orWhere('TIPO', 'like', '%' . $this->search . '%')
+                    ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
+                    ->orWhere('deleted_at', 'like', '%' . $this->search . '%');
+            })
+            ->whereIn('ESTADO', ['REPARTIDO'])
+            ->orderBy('deleted_at', 'desc');
+
+        // Une ambos conjuntos de resultados
+        $packages = $packages->union($internationalPackages)->paginate(10);
 
         return view('livewire.inventariocartero', [
             'packages' => $packages,
@@ -56,7 +90,6 @@ class Inventariocartero extends Component
 
         return Excel::download(new CarteroExport($this->fecha_inicio, $this->fecha_fin, $this->user), 'Inventario Ordinario Cartero.xlsx');
     }
-
 
     public function restorePackage($id)
     {

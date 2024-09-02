@@ -39,10 +39,6 @@
                                                         <th>Código Rastreo</th>
                                                         <th>Destinatario</th>
                                                         <th>Teléfono</th>
-                                                        <th>País</th>
-                                                        <th>Ciudad</th>
-                                                        <th>Zona</th>
-                                                        <th>Ventanilla</th>
                                                         <th>Peso</th>
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
@@ -62,16 +58,12 @@
                                                                 <td>{{ $package->CODIGO }}</td>
                                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                                 <td>{{ $package->TELEFONO }}</td>
-                                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                                <td>{{ $package->CUIDAD }}</td>
-                                                                <td>{{ $package->ZONA }}</td>
-                                                                <td>{{ $package->VENTANILLA }}</td>
                                                                 <td>{{ $package->PESO }} gr.</td>
                                                                 <td>{{ $package->TIPO }}</td>
                                                                 <td>{{ $package->ESTADO }}</td>
                                                                 <td>{{ $package->created_at }}</td>
                                                                 <td>
-                                                                    @hasrole('SuperAdmin|Administrador|Cartero')
+                                                                    {{-- @hasrole('SuperAdmin|Administrador|Cartero')
                                                                         <a class="btn btn-sm btn-warning" href="#"
                                                                             data-toggle="modal"
                                                                             data-target="#bajaModal{{ $package->id }}">
@@ -79,7 +71,7 @@
                                                                             {{ __('Baja') }}
                                                                         </a>
                                                                         @include('package.modal.bajacartero')
-                                                                    @endhasrole
+                                                                    @endhasrole --}}
                                                                 </td>
                                                             </tr>
                                                         @endif

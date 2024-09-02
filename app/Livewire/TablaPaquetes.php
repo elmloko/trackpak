@@ -5,9 +5,11 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Package;
+use App\Models\International;
 use App\Models\Event;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Response;
 
 class TablaPaquetes extends Component
 {
@@ -15,12 +17,16 @@ class TablaPaquetes extends Component
 
     public $search = '';
     public $selectedCartero;
+    public $combinedPackagesToAdd;
+    public $combinedAssignedPackages;
+
     public $selectedPackages = [];
 
     public function render()
     {
         $userRegional = auth()->user()->Regional;
 
+        // Paquetes nacionales para agregar
         $packagesToAdd = Package::where('ESTADO', 'VENTANILLA')
             ->where('CUIDAD', $userRegional)
             ->when($this->search, function ($query) {
@@ -28,23 +34,58 @@ class TablaPaquetes extends Component
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%');
             })
             ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+            ->get();  // Obtener todos los resultados para combinar
 
+        // Paquetes internacionales para agregar
+        $internationalPackagesToAdd = International::where('ESTADO', 'VENTANILLA')
+            ->where('CUIDAD', $userRegional)
+            ->when($this->search, function ($query) {
+                $query->where('CODIGO', 'like', '%' . $this->search . '%')
+                    ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%');
+            })
+            ->orderBy('updated_at', 'desc')
+            ->get();  // Obtener todos los resultados para combinar
+
+        // Combina los resultados de paquetes nacionales e internacionales
+        $combinedPackagesToAdd = $packagesToAdd->merge($internationalPackagesToAdd);
+
+        // Paginación manual de los resultados combinados
+        $combinedPackagesToAdd = $combinedPackagesToAdd->sortByDesc('updated_at')->values()->forPage(1, 10); // Pagina manualmente
+
+        // Paquetes asignados nacionales
         $assignedPackages = Package::where('ESTADO', 'ASIGNADO')
             ->where('CUIDAD', $userRegional)
             ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+            ->get();  // Obtener todos los resultados para combinar
+
+        // Paquetes asignados internacionales
+        $internationalAssignedPackages = International::where('ESTADO', 'ASIGNADO')
+            ->where('CUIDAD', $userRegional)
+            ->orderBy('updated_at', 'desc')
+            ->get();  // Obtener todos los resultados para combinar
+
+        // Combina los resultados de paquetes asignados nacionales e internacionales
+        $combinedAssignedPackages = $assignedPackages->merge($internationalAssignedPackages);
+        $combinedAssignedPackages = $combinedAssignedPackages->sortByDesc('updated_at')->values()->forPage(1, 10); // Pagina manualmente
 
         return view('livewire.tabla-paquetes', [
-            'packagesToAdd' => $packagesToAdd,
-            'assignedPackages' => $assignedPackages,
+            'packagesToAdd' => $combinedPackagesToAdd,
+            'assignedPackages' => $combinedAssignedPackages,
             'carters' => User::role('CARTERO')->get(),
         ]);
     }
 
+
+
     public function agregarPaquete($packageId)
     {
-        $package = Package::findOrFail($packageId);
+        // Intenta encontrar el paquete en el modelo Package
+        $package = Package::find($packageId);
+
+        // Si no se encuentra en el modelo Package, intenta en el modelo International
+        if (!$package) {
+            $package = International::findOrFail($packageId);
+        }
 
         // Verifica si el paquete ya está seleccionado
         if (!in_array($packageId, $this->selectedPackages)) {
@@ -55,12 +96,21 @@ class TablaPaquetes extends Component
         }
     }
 
+
     public function quitarPaquete($packageId)
     {
-        $package = Package::findOrFail($packageId);
+        // Intenta encontrar el paquete en el modelo Package
+        $package = Package::find($packageId);
+
+        // Si no se encuentra en el modelo Package, intenta en el modelo International
+        if (!$package) {
+            $package = International::findOrFail($packageId);
+        }
+
+        // Elimina el paquete de la lista de seleccionados
         $this->selectedPackages = array_diff($this->selectedPackages, [$packageId]);
 
-         // Calcular el precio basado en el peso
+        // Calcular el precio basado en el peso
         $peso = $package->PESO;
         $precio = 0;
 
@@ -69,7 +119,8 @@ class TablaPaquetes extends Component
         } elseif ($peso > 0.5) {
             $precio = 10;
         }
-        // Actualizar el estado con el precio calculado
+
+        // Actualizar el estado y el precio calculado
         $package->update(['PRECIO' => $precio]);
         $package->update(['ESTADO' => 'VENTANILLA']);
         $package->touch();
@@ -93,16 +144,27 @@ class TablaPaquetes extends Component
         }
 
         try {
-            // Asigna el cartero a cada paquete
+            // Asigna el cartero a los paquetes nacionales
             Package::whereIn('id', $this->selectedPackages)
                 ->update([
-                    'ESTADO' => 'CARTERO', // Cambiado a 'CARTERO'
+                    'ESTADO' => 'CARTERO',
+                    'usercartero' => $carteroSeleccionado,
+                ]);
+
+            // Asigna el cartero a los paquetes internacionales
+            International::whereIn('id', $this->selectedPackages)
+                ->update([
+                    'ESTADO' => 'CARTERO',
                     'usercartero' => $carteroSeleccionado,
                 ]);
 
             // Crea eventos para cada paquete asignado
             foreach ($this->selectedPackages as $packageId) {
-                $package = Package::findOrFail($packageId);
+                // Verifica si el paquete es nacional o internacional
+                $package = Package::find($packageId);
+                if (!$package) {
+                    $package = International::findOrFail($packageId);
+                }
 
                 Event::create([
                     'action' => 'EN TRASCURSO',
@@ -122,32 +184,26 @@ class TablaPaquetes extends Component
                 ]);
             }
 
-            // Recupera los datos necesarios para el PDF después de actualizar el estado
-            $user = auth()->user();
+            // Recupera los datos necesarios para el PDF
             $packages = Package::where('ESTADO', 'CARTERO')
                 ->whereIn('id', $this->selectedPackages)
                 ->where('usercartero', $carteroSeleccionado)
                 ->orderBy('created_at', 'desc')
                 ->get();
 
-            $pdf = PDF::loadView('package.pdf.asignarcartero', ['packages' => $packages, 'user' => $user]);
-            $pdfContent = $pdf->output();
+            $internationalPackages = International::where('ESTADO', 'CARTERO')
+                ->whereIn('id', $this->selectedPackages)
+                ->where('usercartero', $carteroSeleccionado)
+                ->orderBy('created_at', 'desc')
+                ->get();
 
-            // Reinicia las selecciones
-            $this->selectedPackages = [];
-            $this->selectedCartero = null;
+            // Genera el PDF con los detalles
+            $pdf = PDF::loadView('package.pdf.asignarcartero', ['packages' => $this->selectedPackages, 'cartero' => $carteroSeleccionado]);
 
-            return response()->streamDownload(function () use ($pdfContent) {
-                echo $pdfContent;
-            }, 'Paquetes Asignados.pdf');
-
-            session()->flash('success', 'Paquetes asignados correctamente.');
+            // Devuelve el PDF como una descarga
+            return $pdf->download('paquete_asignado.pdf');
         } catch (\Exception $e) {
-            // Loguea la excepción para obtener más detalles
-            \Log::error('Error al asignar paquetes. Detalles: ' . $e->getMessage());
-
-            session()->flash('error', 'Error al asignar paquetes. Detalles: ' . $e->getMessage());
+            session()->flash('error', 'Error al asignar paquetes: ' . $e->getMessage());
         }
     }
 }
-
