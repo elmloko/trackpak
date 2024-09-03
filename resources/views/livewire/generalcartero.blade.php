@@ -84,10 +84,10 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
-                                                    @hasrole('SuperAdmin|Administrador|Urbano')
-                                                        <button wire:click="restorePackage({{ $package->id }})"
-                                                            class="btn btn-sm btn-info">
-                                                            <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
+                                                    @hasrole('SuperAdmin|Administrador')
+                                                        <button wire:click="restore('{{ $package->CODIGO }}')"
+                                                            class="btn btn-primary btn-sm">
+                                                            Restaurar
                                                         </button>
                                                     @endhasrole
                                                 </td>

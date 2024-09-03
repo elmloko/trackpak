@@ -30,7 +30,7 @@ class Generalcartero extends Component
             'OBSERVACIONES',
             'PESO',
             'ESTADO',
-            'usercartero' ,
+            'usercartero',
         ];
 
         // Consulta para obtener paquetes de la tabla Package que han sido eliminados
@@ -74,22 +74,23 @@ class Generalcartero extends Component
 
         return Excel::download(new CarteroGeneralExport($this->fecha_inicio, $this->fecha_fin), 'Inventario Ordinario Cartero.xlsx');
     }
-
-    public function restorePackage($id)
+    public function restore($codigo)
     {
-        $package = Package::withTrashed()->find($id);
+        // Intenta restaurar el paquete de la tabla Package
+        $package = Package::onlyTrashed()->where('CODIGO', $codigo)->first();
         if ($package) {
-            Event::create([
-                'action' => 'ESTADO',
-                'descripcion' => 'Alta de Paquete',
-                'user_id' => auth()->user()->id,
-                'codigo' => $package->CODIGO,
-            ]);
-            $package->update(['ESTADO' => 'VENTANILLA']);
             $package->restore();
-            session()->flash('success', 'El paquete ha sido restaurado exitosamente');
+            $package->ESTADO = 'VENTANILLA';
+            $package->save();
         } else {
-            session()->flash('error', 'El paquete no pudo ser encontrado o restaurado');
+            // Si no se encuentra en Package, intenta restaurar en International
+            $internationalPackage = International::onlyTrashed()->where('CODIGO', $codigo)->first();
+            if ($internationalPackage) {
+                $internationalPackage->restore();
+                $internationalPackage->ESTADO = 'VENTANILLA';
+                $internationalPackage->save();
+            }
         }
+        session()->flash('success', 'El paquete ha sido restaurado y su estado ha sido actualizado a VENTANILLA.');
     }
 }
