@@ -17,9 +17,6 @@ class TablaPaquetes extends Component
 
     public $search = '';
     public $selectedCartero;
-    public $combinedPackagesToAdd;
-    public $combinedAssignedPackages;
-
     public $selectedPackages = [];
 
     public function render()
@@ -34,7 +31,7 @@ class TablaPaquetes extends Component
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%');
             })
             ->orderBy('updated_at', 'desc')
-            ->get();  // Obtener todos los resultados para combinar
+            ->get();
 
         // Paquetes internacionales para agregar
         $internationalPackagesToAdd = International::where('ESTADO', 'VENTANILLA')
@@ -44,29 +41,29 @@ class TablaPaquetes extends Component
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%');
             })
             ->orderBy('updated_at', 'desc')
-            ->get();  // Obtener todos los resultados para combinar
+            ->get();
 
         // Combina los resultados de paquetes nacionales e internacionales
         $combinedPackagesToAdd = $packagesToAdd->merge($internationalPackagesToAdd);
 
         // Paginación manual de los resultados combinados
-        $combinedPackagesToAdd = $combinedPackagesToAdd->sortByDesc('updated_at')->values()->forPage(1, 10); // Pagina manualmente
+        $combinedPackagesToAdd = $combinedPackagesToAdd->sortByDesc('updated_at')->values()->forPage(1, 10);
 
         // Paquetes asignados nacionales
         $assignedPackages = Package::where('ESTADO', 'ASIGNADO')
             ->where('CUIDAD', $userRegional)
             ->orderBy('updated_at', 'desc')
-            ->get();  // Obtener todos los resultados para combinar
+            ->get();
 
         // Paquetes asignados internacionales
         $internationalAssignedPackages = International::where('ESTADO', 'ASIGNADO')
             ->where('CUIDAD', $userRegional)
             ->orderBy('updated_at', 'desc')
-            ->get();  // Obtener todos los resultados para combinar
+            ->get();
 
         // Combina los resultados de paquetes asignados nacionales e internacionales
         $combinedAssignedPackages = $assignedPackages->merge($internationalAssignedPackages);
-        $combinedAssignedPackages = $combinedAssignedPackages->sortByDesc('updated_at')->values()->forPage(1, 10); // Pagina manualmente
+        $combinedAssignedPackages = $combinedAssignedPackages->sortByDesc('updated_at')->values()->forPage(1, 10);
 
         return view('livewire.tabla-paquetes', [
             'packagesToAdd' => $combinedPackagesToAdd,
@@ -74,8 +71,6 @@ class TablaPaquetes extends Component
             'carters' => User::role('CARTERO')->get(),
         ]);
     }
-
-
 
     public function agregarPaquete($packageId)
     {
@@ -95,7 +90,6 @@ class TablaPaquetes extends Component
             $package->touch();
         }
     }
-
 
     public function quitarPaquete($packageId)
     {
@@ -197,11 +191,20 @@ class TablaPaquetes extends Component
                 ->orderBy('created_at', 'desc')
                 ->get();
 
+            // Combina los resultados de paquetes nacionales e internacionales
+            $combinedPackages = $packages->concat($internationalPackages);
+
             // Genera el PDF con los detalles
-            $pdf = PDF::loadView('package.pdf.asignarcartero', ['packages' => $this->selectedPackages, 'cartero' => $carteroSeleccionado]);
+            $pdf = PDF::loadView('package.pdf.asignarcartero', [
+                'packages' => $combinedPackages, 
+                'cartero' => $carteroSeleccionado
+            ]);
+            $pdfContent = $pdf->output();
 
             // Devuelve el PDF como una descarga
-            return $pdf->download('paquete_asignado.pdf');
+            return response()->streamDownload(function () use ($pdfContent) {
+                echo $pdfContent;
+            }, 'Paquetes Asignados.pdf');
         } catch (\Exception $e) {
             session()->flash('error', 'Error al asignar paquetes: ' . $e->getMessage());
         }
