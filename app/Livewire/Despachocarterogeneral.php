@@ -63,4 +63,20 @@ class Despachocarterogeneral extends Component
             'packages' => $packages,
         ]);
     }
+    public function recuperar($codigo)
+    {
+        $package = Package::where('CODIGO', $codigo)->first();
+        if ($package) {
+            $package->ESTADO = 'VENTANILLA';
+            $package->save();
+        } else {
+            $internationalPackage = International::where('CODIGO', $codigo)->first();
+            if ($internationalPackage) {
+                $internationalPackage->ESTADO = 'VENTANILLA';
+                $internationalPackage->save();
+            }
+        }
+
+        session()->flash('success', 'El paquete ha sido recuperado y su estado ha sido actualizado a VENTANILLA.');
+    }
 }

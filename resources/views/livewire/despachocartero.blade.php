@@ -43,6 +43,7 @@
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
                                                         <th>Fecha Retorno</th>
+                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>

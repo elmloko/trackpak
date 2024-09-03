@@ -19,30 +19,6 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
-                                        {{-- <div class="col-lg-9 text-right">
-                                            <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('package.pdf.carteropdf') }}" class="btn btn-success"
-                                                    data-placement="left">
-                                                    Excel
-                                                </a>
-                                            </div>
-                                            <div class="mr-2 d-inline-block">
-                                                <a href="{{ route('package.pdf.carteropdf') }}" class="btn btn-danger"
-                                                    data-placement="left">
-                                                    PDF
-                                                </a>
-                                            </div>
-                                            @hasrole('SuperAdmin|Administrador|Cartero')
-                                            <div class="mr-2 d-inline-block">
-                                                <!-- Botón para abrir el modal de cambio de estado -->
-                                                <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#buscarPaqueteModal">
-                                                    Añadir Paquete
-                                                </button>
-                                                @include('package.modal.cartero')
-                                            </div>
-                                            @endhasrole
-                                        </div> --}}
                                     </div>
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
@@ -68,6 +44,7 @@
                                                         <th>Estado</th>
                                                         <th>Cartero</th>
                                                         <th>Fecha Retorno</th>
+                                                        <th>Acciones</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -86,6 +63,15 @@
                                                                 <td>{{ $package->ESTADO }}</td>
                                                                 <td>{{ $package->usercartero }}</td>
                                                                 <td>{{ $package->updated_at }}</td>
+                                                                <td>
+                                                                    @hasrole('SuperAdmin|Administrador|Urbano')
+                                                                        <button
+                                                                            wire:click="recuperar('{{ $package->CODIGO }}')"
+                                                                            class="btn btn-primary btn-sm">
+                                                                            <i class="fas fa-undo-alt"></i> Recuperar
+                                                                        </button>
+                                                                    @endhasrole
+                                                                </td>
                                                             </tr>
                                                         @endif
                                                     @endforeach
