@@ -56,16 +56,11 @@
                                         <th>Código Rastreo</th>
                                         <th>Destinatario</th>
                                         <th>Telefono</th>
-                                        <th>Pais</th>
-                                        <th>Ciudad</th>
-                                        <th>Zona</th>
-                                        <th>Ventanilla</th>
                                         <th>Peso(gr.)</th>
                                         <th>Tipo</th>
                                         <th>Estado</th>
                                         <th>Cartero</th>
                                         <th>Observaciones</th>
-                                        <th>Aduana</th>
                                         <th>Fecha Baja</th>
                                         <th>Acciones</th>
                                         <th></th>
@@ -82,16 +77,11 @@
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                 <td>{{ $package->TELEFONO }}</td>
-                                                <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
-                                                <td>{{ $package->CIUDAD }}</td>
-                                                <td>{{ $package->ZONA }}</td>
-                                                <td>{{ $package->VENTANILLA }}</td>
                                                 <td>{{ $package->PESO }} </td>
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>{{ $package->ESTADO }}</td>
                                                 <td>{{ $package->usercartero }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
-                                                <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|Urbano')

@@ -30,6 +30,8 @@ class Inventariocartero extends Component
             'TELEFONO',
             'TIPO',
             'ADUANA',
+            'OBSERVACIONES',
+            'PESO',
             'deleted_at',
             'ESTADO'
         ];

@@ -26,9 +26,9 @@ class Generalcartero extends Component
             'DESTINATARIO',
             'TELEFONO',
             'TIPO',
-            'ADUANA',
             'deleted_at',
             'OBSERVACIONES',
+            'PESO',
             'ESTADO',
             'usercartero' ,
         ];
