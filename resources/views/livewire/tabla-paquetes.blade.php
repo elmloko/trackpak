@@ -134,4 +134,9 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('pdf-generated', function () {
+            window.location.reload();
+        });
+    </script>
 </div>

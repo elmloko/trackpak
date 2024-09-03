@@ -201,6 +201,7 @@ class TablaPaquetes extends Component
             ]);
             $pdfContent = $pdf->output();
 
+            $this->dispatch('pdf-generated');
             // Devuelve el PDF como una descarga
             return response()->streamDownload(function () use ($pdfContent) {
                 echo $pdfContent;
