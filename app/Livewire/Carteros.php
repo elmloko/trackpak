@@ -90,9 +90,17 @@ class Carteros extends Component
 
     public function saveChanges()
     {
+        // Verifica que las propiedades de estado y observaciones no están vacías
+        if (empty($this->estado) || empty($this->observaciones)) {
+            session()->flash('error', 'Debe seleccionar un estado y una observación.');
+            return;
+        }
+
+        // Busca el paquete con SoftDeletes
         $package = Package::withTrashed()->where('CODIGO', $this->selectedPackageCode)->first();
 
         if ($package) {
+            // Actualiza los campos
             $package->ESTADO = $this->estado;
             $package->OBSERVACIONES = $this->observaciones;
 
@@ -100,9 +108,7 @@ class Carteros extends Component
             if ($this->estado === 'REPARTIDO') {
                 $package->save(); // Guarda primero los cambios
                 $package->delete(); // Aplica soft delete después
-            } elseif ($this->estado === 'RETORNO') {
-                $package->save();
-            } elseif ($this->estado === 'PRE-REZAGO') {
+            } else {
                 $package->save();
             }
         } else {
@@ -111,15 +117,15 @@ class Carteros extends Component
                 $internationalPackage->ESTADO = $this->estado;
                 $internationalPackage->OBSERVACIONES = $this->observaciones;
 
-                // Aplica lógica según el estado
                 if ($this->estado === 'REPARTIDO') {
                     $internationalPackage->save(); // Guarda primero los cambios
-                    $internationalPackage->delete();
-                } elseif ($this->estado === 'RETORNO') {
-                    $internationalPackage->save();
-                } elseif ($this->estado === 'PRE-REZAGO') {
+                    $internationalPackage->delete(); // Aplica soft delete después
+                } else {
                     $internationalPackage->save();
                 }
+            } else {
+                session()->flash('error', 'Paquete no encontrado.');
+                return;
             }
         }
 

@@ -107,6 +107,7 @@
                     <div class="form-group">
                         <label for="estado">Estado</label>
                         <select class="form-control" wire:model="estado">
+                            <option value="" selected>Seleccione un estado</option>
                             <option value="REPARTIDO">REPARTIDO</option>
                             <option value="RETORNO">RETORNO</option>
                             <option value="PRE-REZAGO">PRE-REZAGO</option>
@@ -115,6 +116,7 @@
                     <div class="form-group">
                         <label for="observaciones">Observaciones</label>
                         <select class="form-control" wire:model="observaciones">
+                            <option value="" selected>Seleccione una observación</option>
                             <option value="Direccion incorrecta">Direccion incorrecta</option>
                             <option value="No se localizó el destinatario">No se localizó el destinatario</option>
                             <option value="El destinatario no esta direccion">El destinatario no está en la dirección</option>
