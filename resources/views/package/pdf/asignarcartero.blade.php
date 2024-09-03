@@ -271,7 +271,6 @@
             </tr>
         </tbody>
     </table>
-    <br>
     <table class="second-table">
         <thead>
             <tr>
