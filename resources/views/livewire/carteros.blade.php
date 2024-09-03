@@ -63,15 +63,11 @@
                                                                 <td>{{ $package->ESTADO }}</td>
                                                                 <td>{{ $package->created_at }}</td>
                                                                 <td>
-                                                                    {{-- @hasrole('SuperAdmin|Administrador|Cartero')
-                                                                        <a class="btn btn-sm btn-warning" href="#"
-                                                                            data-toggle="modal"
-                                                                            data-target="#bajaModal{{ $package->id }}">
-                                                                            <i class="fa fa-arrow-down"></i>
-                                                                            {{ __('Baja') }}
-                                                                        </a>
-                                                                        @include('package.modal.bajacartero')
-                                                                    @endhasrole --}}
+                                                                    <button
+                                                                        wire:click="openModal('{{ $package->CODIGO }}')"
+                                                                        class="btn btn-warning btn-sm">
+                                                                        <i class="fas fa-edit"></i> Dar de Baja
+                                                                    </button>
                                                                 </td>
                                                             </tr>
                                                         @endif
@@ -97,4 +93,66 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="bajaModal" tabindex="-1" role="dialog" aria-labelledby="bajaModalLabel"
+        aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bajaModalLabel">Dar de Baja</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <select class="form-control" wire:model="estado">
+                            <option value="REPARTIDO">REPARTIDO</option>
+                            <option value="RETORNO">RETORNO</option>
+                            <option value="PRE-REZAGO">PRE-REZAGO</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="observaciones">Observaciones</label>
+                        <select class="form-control" wire:model="observaciones">
+                            <option value="Direccion incorrecta">Direccion incorrecta</option>
+                            <option value="No se localizó el destinatario">No se localizó el destinatario</option>
+                            <option value="El destinatario no esta direccion">El destinatario no está en la dirección</option>
+                            <option value="El remitente solicitó entrega posterior">El remitente solicitó entrega posterior</option>
+                            <option value="Direccion inaccesible">Dirección inaccesible</option>
+                            <option value="Entrega Perdida">Entrega perdida</option>
+                            <option value="Artículo Perdido">Artículo perdido</option>
+                            <option value="Articulo Incorrecto">Artículo incorrecto</option>
+                            <option value="Articulo Dañado">Artículo dañado</option>
+                            <option value="Articulo Prohibido">Artículo prohibido</option>
+                            <option value="Importacion Restringida">Importación restringida</option>
+                            <option value="No Reclamado">No reclamado</option>
+                            <option value="Por Fuerza Mayor, Articulo no entregado">Por fuerza mayor, artículo no entregado</option>
+                            <option value="Destinatario Solicita recojo en Agencia">Destinatario solicita recojo en agencia</option>
+                            <option value="Destinatario en Vacaciones">Destinatario en vacaciones</option>
+                            <option value="Destinatario en Traslado">Destinatario en traslado</option>
+                            <option value="Otros">Otros</option>
+                            <option value="Articulo rechazado por el destinatario">Artículo rechazado por el destinatario</option>
+                            <option value="Fallecido">Fallecido</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" wire:click="saveChanges">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('show-modal', event => {
+                $('#bajaModal').modal('show');
+            });
+
+            window.addEventListener('close-modal', event => {
+                $('#bajaModal').modal('hide');
+            });
+        });
+    </script>
 </div>
