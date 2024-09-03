@@ -401,7 +401,7 @@ class PackageController extends Controller
         return redirect()->route('packages.index')
             ->with('success', 'Paquete Actualizado Con Éxito!');
     }
-    
+
     public function dirigido($id)
     {
         $package = Package::find($id);
@@ -434,49 +434,60 @@ class PackageController extends Controller
     public function deletecartero($id, Request $request)
     {
         $package = Package::find($id);
+        $internationals = Internationals::find($id);
 
-        if ($package) {
+        if ($package && $internationals) {
             // Obtén el valor seleccionado del select
             $nuevoEstado = $request->input('estado');
 
             // Guarda el nuevo estado en el paquete
             $package->estado = $nuevoEstado;
+            $internationals->estado = $nuevoEstado;
 
-            // Verifica si el estado es "VENTANILLA"
+            // Verifica si el estado es "RETORNO"
             if ($nuevoEstado == 'RETORNO') {
                 // Obtén la razón seleccionada desde el segundo select
                 $razonSeleccionada = $request->input('razon');
 
                 // Llena la variable OBSERVACIONES con la razón seleccionada
                 $package->OBSERVACIONES = $razonSeleccionada;
+                $internationals->OBSERVACIONES = $razonSeleccionada;
+
                 Event::create([
                     'action' => 'DEVUELTO',
-                    'descripcion' => 'El Cartero devolvio el paquete a Ventanilla',
+                    'descripcion' => 'El Cartero devolvió el paquete a Ventanilla',
                     'user_id' => auth()->user()->id,
                     'codigo' => $package->CODIGO,
                 ]);
                 $package->save();
+                $internationals->save();
             } elseif ($nuevoEstado == 'PRE-REZAGO') {
                 // Obtén la razón seleccionada desde el tercer select
                 $razonSeleccionada = $request->input('razon');
 
                 // Llena la variable OBSERVACIONES con la razón seleccionada
                 $package->OBSERVACIONES = $razonSeleccionada;
+                $internationals->OBSERVACIONES = $razonSeleccionada;
+
                 Event::create([
                     'action' => 'PRE-REZAGO',
-                    'descripcion' => 'El Cartero devolvio el paquete a Ventanilla y Ingreso a Almacen',
+                    'descripcion' => 'El Cartero devolvió el paquete a Ventanilla y Ingresó a Almacén',
                     'user_id' => auth()->user()->id,
                     'codigo' => $package->CODIGO,
                 ]);
                 $package->update(['dateprerezago' => now()]);
+                $internationals->update(['dateprerezago' => now()]);
                 $package->save();
+                $internationals->save();
             } else {
-                // Si el estado no es "VENTANILLA", deja OBSERVACIONES en blanco
+                // Si el estado no es "RETORNO" ni "PRE-REZAGO", deja OBSERVACIONES en blanco
                 $package->OBSERVACIONES = "";
+                $internationals->OBSERVACIONES = "";
                 // Guarda el paquete actualizado
                 $package->save();
+                $internationals->save();
 
-                // Crea un registro de evento solo si el estado 
+                // Crea un registro de evento solo si el estado
                 Event::create([
                     'action' => 'ENTREGADO',
                     'descripcion' => 'Entrega de paquete con Cartero',
@@ -484,12 +495,14 @@ class PackageController extends Controller
                     'codigo' => $package->CODIGO,
                 ]);
 
-                // Luego, elimina el paquete
+                // Luego, elimina el paquete y el registro en Internationals
                 $package->delete();
+                $internationals->delete();
             }
-            return back()->with('success', 'Paquete se dio de Baja y cambió su estado con éxito.');
+
+            return back()->with('success', 'Paquete e International se dieron de baja y cambiaron su estado con éxito.');
         } else {
-            return back()->with('error', 'No se pudo encontrar el paquete para dar de baja.');
+            return back()->with('error', 'No se pudo encontrar el paquete o el registro international para dar de baja.');
         }
     }
 
