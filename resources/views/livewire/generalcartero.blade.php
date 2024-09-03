@@ -86,8 +86,8 @@
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador')
                                                         <button wire:click="restore('{{ $package->CODIGO }}')"
-                                                            class="btn btn-primary btn-sm">
-                                                            Restaurar
+                                                            class="btn btn-info btn-sm">
+                                                            <i class="fa fa-arrow-up"></i> Alta
                                                         </button>
                                                     @endhasrole
                                                 </td>
