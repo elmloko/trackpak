@@ -106,7 +106,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="estado">Estado</label>
-                        <select class="form-control" wire:model="estado">
+                        <select class="form-control" id="estado" wire:model="estado" onchange="updateObservations()">
                             <option value="" selected>Seleccione un estado</option>
                             <option value="REPARTIDO">REPARTIDO</option>
                             <option value="RETORNO">RETORNO</option>
@@ -115,12 +115,15 @@
                     </div>
                     <div class="form-group">
                         <label for="observaciones">Observaciones</label>
-                        <select class="form-control" wire:model="observaciones">
+                        <select class="form-control" id="observaciones" wire:model="observaciones">
+                            <!-- Opciones iniciales -->
                             <option value="" selected>Seleccione una observación</option>
                             <option value="Direccion incorrecta">Direccion incorrecta</option>
                             <option value="No se localizó el destinatario">No se localizó el destinatario</option>
-                            <option value="El destinatario no esta direccion">El destinatario no está en la dirección</option>
-                            <option value="El remitente solicitó entrega posterior">El remitente solicitó entrega posterior</option>
+                            <option value="El destinatario no esta direccion">El destinatario no está en la dirección
+                            </option>
+                            <option value="El remitente solicitó entrega posterior">El remitente solicitó entrega
+                                posterior</option>
                             <option value="Direccion inaccesible">Dirección inaccesible</option>
                             <option value="Entrega Perdida">Entrega perdida</option>
                             <option value="Artículo Perdido">Artículo perdido</option>
@@ -129,12 +132,15 @@
                             <option value="Articulo Prohibido">Artículo prohibido</option>
                             <option value="Importacion Restringida">Importación restringida</option>
                             <option value="No Reclamado">No reclamado</option>
-                            <option value="Por Fuerza Mayor, Articulo no entregado">Por fuerza mayor, artículo no entregado</option>
-                            <option value="Destinatario Solicita recojo en Agencia">Destinatario solicita recojo en agencia</option>
+                            <option value="Por Fuerza Mayor, Articulo no entregado">Por fuerza mayor, artículo no
+                                entregado</option>
+                            <option value="Destinatario Solicita recojo en Agencia">Destinatario solicita recojo en
+                                agencia</option>
                             <option value="Destinatario en Vacaciones">Destinatario en vacaciones</option>
                             <option value="Destinatario en Traslado">Destinatario en traslado</option>
                             <option value="Otros">Otros</option>
-                            <option value="Articulo rechazado por el destinatario">Artículo rechazado por el destinatario</option>
+                            <option value="Articulo rechazado por el destinatario">Artículo rechazado por el
+                                destinatario</option>
                             <option value="Fallecido">Fallecido</option>
                         </select>
                     </div>
@@ -156,5 +162,42 @@
                 $('#bajaModal').modal('hide');
             });
         });
+    </script>
+    <script>
+        function updateObservations() {
+            const estado = document.getElementById('estado').value;
+            const observaciones = document.getElementById('observaciones');
+
+            // Limpiar las opciones actuales
+            observaciones.innerHTML = '';
+
+            if (estado === 'RETORNO') {
+                observaciones.innerHTML = `
+                    <option value="" selected>Seleccione una observación</option>
+                    <option value="Direccion incorrecta">Direccion incorrecta</option>
+                    <option value="No se localizó el destinatario">No se localizó el destinatario</option>
+                    <option value="El destinatario no esta direccion">El destinatario no está en la dirección</option>
+                    <option value="El remitente solicitó entrega posterior">El remitente solicitó entrega posterior</option>
+                    <option value="Direccion inaccesible">Dirección inaccesible</option>
+                    <option value="Entrega Perdida">Entrega perdida</option>
+                    <option value="Artículo Perdido">Artículo perdido</option>
+                    <option value="Articulo Incorrecto">Artículo incorrecto</option>
+                    <option value="Articulo Dañado">Artículo dañado</option>
+                    <option value="Articulo Prohibido">Artículo prohibido</option>
+                    <option value="Importacion Restringida">Importación restringida</option>
+                    <option value="No Reclamado">No reclamado</option>
+                    <option value="Por Fuerza Mayor, Articulo no entregado">Por fuerza mayor, artículo no entregado</option>
+                    <option value="Destinatario Solicita recojo en Agencia">Destinatario solicita recojo en agencia</option>
+                    <option value="Destinatario en Vacaciones">Destinatario en vacaciones</option>
+                    <option value="Destinatario en Traslado">Destinatario en traslado</option>
+                    <option value="Otros">Otros</option>
+                `;
+            } else if (estado === 'REPARTIDO') {
+                observacionesGroup.style.display = 'none'; // Ocultar las observaciones
+            } else {
+                observacionesGroup.style.display = 'block'; // Mostrar las observaciones
+                observaciones.innerHTML = '<option value="" selected>Seleccione una observación</option>';
+            }
+        }
     </script>
 </div>

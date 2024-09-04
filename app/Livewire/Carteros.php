@@ -90,9 +90,15 @@ class Carteros extends Component
 
     public function saveChanges()
     {
-        // Verifica que las propiedades de estado y observaciones no están vacías
-        if (empty($this->estado) || empty($this->observaciones)) {
-            session()->flash('error', 'Debe seleccionar un estado y una observación.');
+        // Verifica que el estado no está vacío
+        if (empty($this->estado)) {
+            session()->flash('error', 'Debe seleccionar un estado.');
+            return;
+        }
+
+        // Verifica que la observación no esté vacía solo si el estado no es REPARTIDO
+        if ($this->estado !== 'REPARTIDO' && empty($this->observaciones)) {
+            session()->flash('error', 'Debe seleccionar una observación.');
             return;
         }
 
@@ -102,7 +108,11 @@ class Carteros extends Component
         if ($package) {
             // Actualiza los campos
             $package->ESTADO = $this->estado;
-            $package->OBSERVACIONES = $this->observaciones;
+
+            // Solo actualizar OBSERVACIONES si el estado no es REPARTIDO
+            if ($this->estado !== 'REPARTIDO') {
+                $package->OBSERVACIONES = $this->observaciones;
+            }
 
             // Aplica lógica según el estado
             if ($this->estado === 'REPARTIDO') {
@@ -115,7 +125,11 @@ class Carteros extends Component
             $internationalPackage = International::withTrashed()->where('CODIGO', $this->selectedPackageCode)->first();
             if ($internationalPackage) {
                 $internationalPackage->ESTADO = $this->estado;
-                $internationalPackage->OBSERVACIONES = $this->observaciones;
+
+                // Solo actualizar OBSERVACIONES si el estado no es REPARTIDO
+                if ($this->estado !== 'REPARTIDO') {
+                    $internationalPackage->OBSERVACIONES = $this->observaciones;
+                }
 
                 if ($this->estado === 'REPARTIDO') {
                     $internationalPackage->save(); // Guarda primero los cambios
