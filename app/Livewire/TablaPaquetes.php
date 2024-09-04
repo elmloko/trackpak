@@ -9,7 +9,6 @@ use App\Models\International;
 use App\Models\Event;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Response;
 
 class TablaPaquetes extends Component
 {
@@ -18,6 +17,8 @@ class TablaPaquetes extends Component
     public $search = '';
     public $selectedCartero;
     public $selectedPackages = [];
+    public $combinedPackagesToAdd;
+    public $combinedAssignedPackages;
 
     public function render()
     {
@@ -35,7 +36,7 @@ class TablaPaquetes extends Component
 
         // Paquetes internacionales para agregar
         $internationalPackagesToAdd = International::where('ESTADO', 'VENTANILLA')
-            ->where('CUIDAD', $userRegional)
+            // ->where('CUIDAD', $userRegional)
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%');
@@ -64,7 +65,7 @@ class TablaPaquetes extends Component
         // Combina los resultados de paquetes asignados nacionales e internacionales
         $combinedAssignedPackages = $assignedPackages->merge($internationalAssignedPackages);
         $combinedAssignedPackages = $combinedAssignedPackages->sortByDesc('updated_at')->values()->forPage(1, 10);
-
+        // dd($packagesToAdd);
         return view('livewire.tabla-paquetes', [
             'packagesToAdd' => $combinedPackagesToAdd,
             'assignedPackages' => $combinedAssignedPackages,
