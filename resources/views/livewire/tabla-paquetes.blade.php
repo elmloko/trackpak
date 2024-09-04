@@ -68,8 +68,7 @@
                                         <td>{{ $package->DESTINATARIO }}</td>
                                         <td>{{ $package->ZONA }}</td>
                                         <td>
-                                            <button wire:click="agregarPaquete({{ $package->id }})"
-                                                class="btn btn-success">
+                                            <button wire:click="agregarPaquete('{{ $package->CODIGO }}')" class="btn btn-success">
                                                 <i class="fas fa-plus"></i> Agregar
                                             </button>
                                         </td>
@@ -109,8 +108,7 @@
                                             <td>{{ $package->DESTINATARIO }}</td>
                                             <td>{{ $package->ZONA }}</td>
                                             <td>
-                                                <button wire:click="quitarPaquete({{ $package->id }})"
-                                                    class="btn btn-danger ">
+                                                <button wire:click="quitarPaquete('{{ $package->CODIGO }}')" class="btn btn-danger">
                                                     <i class="fas fa-minus"></i> Quitar
                                                 </button>
                                             </td>

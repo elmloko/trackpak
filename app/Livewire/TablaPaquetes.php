@@ -73,37 +73,37 @@ class TablaPaquetes extends Component
         ]);
     }
 
-    public function agregarPaquete($packageId)
+    public function agregarPaquete($codigo)
     {
-        // Intenta encontrar el paquete en el modelo Package
-        $package = Package::find($packageId);
+        // Intenta encontrar el paquete en el modelo Package usando el CODIGO
+        $package = Package::where('CODIGO', $codigo)->first();
 
         // Si no se encuentra en el modelo Package, intenta en el modelo International
         if (!$package) {
-            $package = International::findOrFail($packageId);
+            $package = International::where('CODIGO', $codigo)->firstOrFail();
         }
 
         // Verifica si el paquete ya está seleccionado
-        if (!in_array($packageId, $this->selectedPackages)) {
-            $this->selectedPackages[] = $packageId;
+        if (!in_array($codigo, $this->selectedPackages)) {
+            $this->selectedPackages[] = $codigo;
             $package->update(['ESTADO' => 'ASIGNADO']);
             $package->update(['PRECIO' => '10']);
             $package->touch();
         }
     }
 
-    public function quitarPaquete($packageId)
+    public function quitarPaquete($codigo)
     {
-        // Intenta encontrar el paquete en el modelo Package
-        $package = Package::find($packageId);
+        // Intenta encontrar el paquete en el modelo Package usando el CODIGO
+        $package = Package::where('CODIGO', $codigo)->first();
 
         // Si no se encuentra en el modelo Package, intenta en el modelo International
         if (!$package) {
-            $package = International::findOrFail($packageId);
+            $package = International::where('CODIGO', $codigo)->firstOrFail();
         }
 
         // Elimina el paquete de la lista de seleccionados
-        $this->selectedPackages = array_diff($this->selectedPackages, [$packageId]);
+        $this->selectedPackages = array_diff($this->selectedPackages, [$codigo]);
 
         // Calcular el precio basado en el peso
         $peso = $package->PESO;
@@ -139,26 +139,26 @@ class TablaPaquetes extends Component
         }
 
         try {
-            // Asigna el cartero a los paquetes nacionales
-            Package::whereIn('id', $this->selectedPackages)
+            // Asigna el cartero a los paquetes nacionales usando el CODIGO
+            Package::whereIn('CODIGO', $this->selectedPackages)
                 ->update([
                     'ESTADO' => 'CARTERO',
                     'usercartero' => $carteroSeleccionado,
                 ]);
 
-            // Asigna el cartero a los paquetes internacionales
-            International::whereIn('id', $this->selectedPackages)
+            // Asigna el cartero a los paquetes internacionales usando el CODIGO
+            International::whereIn('CODIGO', $this->selectedPackages)
                 ->update([
                     'ESTADO' => 'CARTERO',
                     'usercartero' => $carteroSeleccionado,
                 ]);
 
             // Crea eventos para cada paquete asignado
-            foreach ($this->selectedPackages as $packageId) {
+            foreach ($this->selectedPackages as $codigo) {
                 // Verifica si el paquete es nacional o internacional
-                $package = Package::find($packageId);
+                $package = Package::where('CODIGO', $codigo)->first();
                 if (!$package) {
-                    $package = International::findOrFail($packageId);
+                    $package = International::where('CODIGO', $codigo)->firstOrFail();
                 }
 
                 Event::create([
@@ -181,13 +181,13 @@ class TablaPaquetes extends Component
 
             // Recupera los datos necesarios para el PDF
             $packages = Package::where('ESTADO', 'CARTERO')
-                ->whereIn('id', $this->selectedPackages)
+                ->whereIn('CODIGO', $this->selectedPackages)
                 ->where('usercartero', $carteroSeleccionado)
                 ->orderBy('created_at', 'desc')
                 ->get();
 
             $internationalPackages = International::where('ESTADO', 'CARTERO')
-                ->whereIn('id', $this->selectedPackages)
+                ->whereIn('CODIGO', $this->selectedPackages)
                 ->where('usercartero', $carteroSeleccionado)
                 ->orderBy('created_at', 'desc')
                 ->get();
@@ -197,7 +197,7 @@ class TablaPaquetes extends Component
 
             // Genera el PDF con los detalles
             $pdf = PDF::loadView('package.pdf.asignarcartero', [
-                'packages' => $combinedPackages, 
+                'packages' => $combinedPackages,
                 'cartero' => $carteroSeleccionado
             ]);
             $pdfContent = $pdf->output();
