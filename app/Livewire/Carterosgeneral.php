@@ -20,7 +20,7 @@ class Carterosgeneral extends Component
 
         // Asegúrate de seleccionar las mismas columnas en ambas consultas
         $columns = [
-            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'created_at', 'ESTADO' , 'usercartero' , 'PESO' , 'TIPO'
+            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'updated_at', 'ESTADO' , 'usercartero' , 'PESO' , 'TIPO'
         ];
 
         // Consulta para obtener paquetes de la tabla Package
@@ -31,10 +31,10 @@ class Carterosgeneral extends Component
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where('CUIDAD', $userRegional)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('updated_at', 'desc');
 
         // Consulta para obtener paquetes de la tabla International
         $internationalPackages = International::select($columns)
@@ -44,10 +44,10 @@ class Carterosgeneral extends Component
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('updated_at', 'like', '%' . $this->search . '%');
             })
             ->where('CUIDAD', $userRegional)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('updated_at', 'desc');
 
         // Une ambos conjuntos de resultados
         $packages = $packages->union($internationalPackages)->paginate(10);

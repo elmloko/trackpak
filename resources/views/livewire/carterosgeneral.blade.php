@@ -61,7 +61,7 @@
                                                                 <td>{{ $package->TIPO }}</td>
                                                                 <td>{{ $package->ESTADO }}</td>
                                                                 <td>{{ $package->usercartero }}</td>
-                                                                <td>{{ $package->created_at }}</td>
+                                                                <td>{{ $package->updated_at }}</td>
                                                             </tr>
                                                         @endif
                                                     @endforeach
