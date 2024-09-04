@@ -226,7 +226,6 @@
             <th></th>
             <th>CERTIFICADO</th>
             <th>ORDINARIO</th>
-            <th>EMS</th>
         </tr>
     </thead>
     <tbody>
@@ -234,17 +233,14 @@
             <td>TOTAL ENTREGADOS</td>
             <td></td>
             <td></td>
-            <td></td>
         </tr>
         <tr>
             <td>TOTAL NOTIFICADOS</td>
             <td></td>
             <td></td>
-            <td></td>
         </tr>
         <tr>
             <td>TOTAL PENDIENTE</td>
-            <td></td>
             <td></td>
             <td></td>
 
@@ -253,11 +249,9 @@
             <td>TOTAL REZAGO</td>
             <td></td>
             <td></td>
-            <td></td>
         </tr>
         <tr>
             <td><b>TOTAL ENVIOS LLEVADOS</b></td>
-            <td></td>
             <td></td>
             <td></td>
         </tr>
