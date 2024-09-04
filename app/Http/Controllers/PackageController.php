@@ -431,80 +431,80 @@ class PackageController extends Controller
         }
     }
 
-    public function deletecartero($id, Request $request)
-    {
-        $package = Package::find($id);
-        $internationals = Internationals::find($id);
+    // public function deletecartero($id, Request $request)
+    // {
+    //     $package = Package::find($id);
+    //     $internationals = Internationals::find($id);
 
-        if ($package && $internationals) {
-            // Obtén el valor seleccionado del select
-            $nuevoEstado = $request->input('estado');
+    //     if ($package && $internationals) {
+    //         // Obtén el valor seleccionado del select
+    //         $nuevoEstado = $request->input('estado');
 
-            // Guarda el nuevo estado en el paquete
-            $package->estado = $nuevoEstado;
-            $internationals->estado = $nuevoEstado;
+    //         // Guarda el nuevo estado en el paquete
+    //         $package->estado = $nuevoEstado;
+    //         $internationals->estado = $nuevoEstado;
 
-            // Verifica si el estado es "RETORNO"
-            if ($nuevoEstado == 'RETORNO') {
-                // Obtén la razón seleccionada desde el segundo select
-                $razonSeleccionada = $request->input('razon');
+    //         // Verifica si el estado es "RETORNO"
+    //         if ($nuevoEstado == 'RETORNO') {
+    //             // Obtén la razón seleccionada desde el segundo select
+    //             $razonSeleccionada = $request->input('razon');
 
-                // Llena la variable OBSERVACIONES con la razón seleccionada
-                $package->OBSERVACIONES = $razonSeleccionada;
-                $internationals->OBSERVACIONES = $razonSeleccionada;
+    //             // Llena la variable OBSERVACIONES con la razón seleccionada
+    //             $package->OBSERVACIONES = $razonSeleccionada;
+    //             $internationals->OBSERVACIONES = $razonSeleccionada;
 
-                Event::create([
-                    'action' => 'DEVUELTO',
-                    'descripcion' => 'El Cartero devolvió el paquete a Ventanilla',
-                    'user_id' => auth()->user()->id,
-                    'codigo' => $package->CODIGO,
-                ]);
-                $package->save();
-                $internationals->save();
-            } elseif ($nuevoEstado == 'PRE-REZAGO') {
-                // Obtén la razón seleccionada desde el tercer select
-                $razonSeleccionada = $request->input('razon');
+    //             Event::create([
+    //                 'action' => 'DEVUELTO',
+    //                 'descripcion' => 'El Cartero devolvió el paquete a Ventanilla',
+    //                 'user_id' => auth()->user()->id,
+    //                 'codigo' => $package->CODIGO,
+    //             ]);
+    //             $package->save();
+    //             $internationals->save();
+    //         } elseif ($nuevoEstado == 'PRE-REZAGO') {
+    //             // Obtén la razón seleccionada desde el tercer select
+    //             $razonSeleccionada = $request->input('razon');
 
-                // Llena la variable OBSERVACIONES con la razón seleccionada
-                $package->OBSERVACIONES = $razonSeleccionada;
-                $internationals->OBSERVACIONES = $razonSeleccionada;
+    //             // Llena la variable OBSERVACIONES con la razón seleccionada
+    //             $package->OBSERVACIONES = $razonSeleccionada;
+    //             $internationals->OBSERVACIONES = $razonSeleccionada;
 
-                Event::create([
-                    'action' => 'PRE-REZAGO',
-                    'descripcion' => 'El Cartero devolvió el paquete a Ventanilla y Ingresó a Almacén',
-                    'user_id' => auth()->user()->id,
-                    'codigo' => $package->CODIGO,
-                ]);
-                $package->update(['dateprerezago' => now()]);
-                $internationals->update(['dateprerezago' => now()]);
-                $package->save();
-                $internationals->save();
-            } else {
-                // Si el estado no es "RETORNO" ni "PRE-REZAGO", deja OBSERVACIONES en blanco
-                $package->OBSERVACIONES = "";
-                $internationals->OBSERVACIONES = "";
-                // Guarda el paquete actualizado
-                $package->save();
-                $internationals->save();
+    //             Event::create([
+    //                 'action' => 'PRE-REZAGO',
+    //                 'descripcion' => 'El Cartero devolvió el paquete a Ventanilla y Ingresó a Almacén',
+    //                 'user_id' => auth()->user()->id,
+    //                 'codigo' => $package->CODIGO,
+    //             ]);
+    //             $package->update(['dateprerezago' => now()]);
+    //             $internationals->update(['dateprerezago' => now()]);
+    //             $package->save();
+    //             $internationals->save();
+    //         } else {
+    //             // Si el estado no es "RETORNO" ni "PRE-REZAGO", deja OBSERVACIONES en blanco
+    //             $package->OBSERVACIONES = "";
+    //             $internationals->OBSERVACIONES = "";
+    //             // Guarda el paquete actualizado
+    //             $package->save();
+    //             $internationals->save();
 
-                // Crea un registro de evento solo si el estado
-                Event::create([
-                    'action' => 'ENTREGADO',
-                    'descripcion' => 'Entrega de paquete con Cartero',
-                    'user_id' => auth()->user()->id,
-                    'codigo' => $package->CODIGO,
-                ]);
+    //             // Crea un registro de evento solo si el estado
+    //             Event::create([
+    //                 'action' => 'ENTREGADO',
+    //                 'descripcion' => 'Entrega de paquete con Cartero',
+    //                 'user_id' => auth()->user()->id,
+    //                 'codigo' => $package->CODIGO,
+    //             ]);
 
-                // Luego, elimina el paquete y el registro en Internationals
-                $package->delete();
-                $internationals->delete();
-            }
+    //             // Luego, elimina el paquete y el registro en Internationals
+    //             $package->delete();
+    //             $internationals->delete();
+    //         }
 
-            return back()->with('success', 'Paquete e International se dieron de baja y cambiaron su estado con éxito.');
-        } else {
-            return back()->with('error', 'No se pudo encontrar el paquete o el registro international para dar de baja.');
-        }
-    }
+    //         return back()->with('success', 'Paquete e International se dieron de baja y cambiaron su estado con éxito.');
+    //     } else {
+    //         return back()->with('error', 'No se pudo encontrar el paquete o el registro international para dar de baja.');
+    //     }
+    // }
 
     public function buscarPaquete(Request $request)
     {

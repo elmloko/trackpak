@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Package;
 use App\Models\International; // Importa el modelo International
 use Livewire\WithPagination;
+use App\Models\Event;
 
 class Despachocarterogeneral extends Component
 {
@@ -19,7 +20,16 @@ class Despachocarterogeneral extends Component
 
         // Define las columnas que deben ser seleccionadas en ambas consultas
         $columns = [
-            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'created_at', 'ESTADO' , 'usercartero' , 'PESO' , 'TIPO' , 'updated_at'
+            'CODIGO',
+            'DESTINATARIO',
+            'TELEFONO',
+            'ADUANA',
+            'created_at',
+            'ESTADO',
+            'usercartero',
+            'PESO',
+            'TIPO',
+            'updated_at'
         ];
 
         // Consulta para obtener paquetes de la tabla Package
@@ -57,11 +67,23 @@ class Despachocarterogeneral extends Component
     {
         $package = Package::where('CODIGO', $codigo)->first();
         if ($package) {
+            Event::create([
+                'action' => 'DEVUELTO',
+                'descripcion' => 'Paquete Devuelto a Oficina Postal Regional.',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
             $package->ESTADO = 'VENTANILLA';
             $package->save();
         } else {
             $internationalPackage = International::where('CODIGO', $codigo)->first();
             if ($internationalPackage) {
+                Event::create([
+                    'action' => 'DEVUELTO',
+                    'descripcion' => 'Paquete Devuelto a Oficina Postal Regional.',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $internationalPackage->CODIGO,
+                ]);
                 $internationalPackage->ESTADO = 'VENTANILLA';
                 $internationalPackage->save();
             }

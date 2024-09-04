@@ -134,8 +134,8 @@ class Carteros extends Component
             // Crear eventos adicionales según el estado
             if ($this->estado === 'RETORNO') {
                 Event::create([
-                    'action' => 'DEVUELTO',
-                    'descripcion' => 'El Cartero devolvió el paquete a Ventanilla',
+                    'action' => 'RETORNO',
+                    'descripcion' => 'El Cartero Intento de Entrega por Cartero',
                     'user_id' => auth()->user()->id,
                     'codigo' => $package->CODIGO,
                 ]);

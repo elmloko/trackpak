@@ -79,6 +79,12 @@ class Generalcartero extends Component
         // Intenta restaurar el paquete de la tabla Package
         $package = Package::onlyTrashed()->where('CODIGO', $codigo)->first();
         if ($package) {
+            Event::create([
+                'action' => 'ESTADO',
+                'descripcion' => 'Alta de Paquete',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
             $package->restore();
             $package->ESTADO = 'VENTANILLA';
             $package->save();
@@ -86,6 +92,12 @@ class Generalcartero extends Component
             // Si no se encuentra en Package, intenta restaurar en International
             $internationalPackage = International::onlyTrashed()->where('CODIGO', $codigo)->first();
             if ($internationalPackage) {
+                Event::create([
+                    'action' => 'ESTADO',
+                    'descripcion' => 'Alta de Paquete',
+                    'user_id' => auth()->user()->id,
+                    'codigo' => $internationalPackage->CODIGO,
+                ]);
                 $internationalPackage->restore();
                 $internationalPackage->ESTADO = 'VENTANILLA';
                 $internationalPackage->save();
