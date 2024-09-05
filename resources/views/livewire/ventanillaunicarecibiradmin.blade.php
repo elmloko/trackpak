@@ -15,9 +15,11 @@
                                                 <div class="form-group">
                                                     <label for="search">Busca:</label>
                                                     <div class="input-group">
-                                                        <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                                        <input wire:model.lazy="search" type="text"
+                                                            class="form-control" placeholder="Buscar...">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-primary" wire:click="buscarPaquete">Buscar</button>
+                                                            <button class="btn btn-primary"
+                                                                wire:click="buscarPaquete">Buscar</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -33,13 +35,17 @@
                                             <p>{{ $message }}</p>
                                         </div>
                                     @endif
+                                    @php
+                                        $i = 1; // Inicializa la variable $i
+                                    @endphp
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-striped table-hover">
                                                 <thead class="thead">
                                                     <tr>
                                                         <th>
-                                                            <input type="checkbox" wire:model="selectAll" wire:click="toggleSelectAll">
+                                                            <input type="checkbox" wire:model="selectAll"
+                                                                wire:click="toggleSelectAll">
                                                         </th>
                                                         <th>No</th>
                                                         <th>Código Rastreo</th>
@@ -62,7 +68,9 @@
                                                     @endphp
                                                     @foreach ($packages as $package)
                                                         <tr>
-                                                            <td><input type="checkbox" wire:model="paquetesSeleccionados" value="{{ $package->id }}"></td>
+                                                            <td><input type="checkbox"
+                                                                    wire:model="paquetesSeleccionados"
+                                                                    value="{{ $package->id }}"></td>
                                                             <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>
@@ -77,7 +85,8 @@
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
                                                                 @hasrole('SuperAdmin|Administrador|Unica')
-                                                                    <a class="btn btn-sm btn-success" href="{{ route('packages.edit', $package->id) }}">
+                                                                    <a class="btn btn-sm btn-success"
+                                                                        href="{{ route('packages.edit', $package->id) }}">
                                                                         <i class="fa fa-fw fa-edit"></i>
                                                                         {{ __('Editar') }}
                                                                     </a>
@@ -89,7 +98,8 @@
                                             </table>
                                             @hasrole('SuperAdmin|Administrador|Unica')
                                                 <div class="col-md-12 text-right">
-                                                    <button wire:click="cambiarEstado" class="btn btn-warning">Guardar</button>
+                                                    <button wire:click="cambiarEstado"
+                                                        class="btn btn-warning">Guardar</button>
                                                 </div>
                                             @endhasrole
                                         </div>

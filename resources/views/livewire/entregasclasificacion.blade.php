@@ -19,11 +19,13 @@
                                         <div class="form-row align-items-center">
                                             <div class="col-md-4">
                                                 <label for="excel_fecha_inicio">Fecha de inicio:</label>
-                                                <input type="date" wire:model="fecha_inicio" class="form-control" required>
+                                                <input type="date" wire:model="fecha_inicio" class="form-control"
+                                                    required>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="excel_fecha_fin">Fecha de fin:</label>
-                                                <input type="date" wire:model="fecha_fin" class="form-control" required>
+                                                <input type="date" wire:model="fecha_fin" class="form-control"
+                                                    required>
                                             </div>
                                             <div class="col-md-4 text-center mt-3">
                                                 <button type="submit" class="btn btn-success">Generar Excel</button>
@@ -42,6 +44,9 @@
                 @endif
                 <div class="card-body">
                     <div class="table-responsive">
+                        @php
+                            $i = 1; // Inicializa la variable $i
+                        @endphp
                         @if ($packages->count())
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
@@ -66,7 +71,7 @@
                                     @foreach ($packages as $package)
                                         @if ($package->ESTADO === 'DESPACHO')
                                             <tr>
-                                                <td>{{ $package->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                 <td>{{ $package->TELEFONO }}</td>

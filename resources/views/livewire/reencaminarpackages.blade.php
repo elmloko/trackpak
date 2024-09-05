@@ -12,24 +12,23 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="search">Busca:</label>
-                                        <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                        <input wire:model.lazy="search" type="text" class="form-control"
+                                            placeholder="Buscar...">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <form wire:submit.prevent="export"
-                                        class="form-row align-items-center">
+                                    <form wire:submit.prevent="export" class="form-row align-items-center">
                                         <div class="col-md-4">
                                             <label for="fecha_inicio">Fecha de inicio:</label>
-                                            <input type="date" wire:model="fecha_inicio"
-                                                class="form-control" required>
+                                            <input type="date" wire:model="fecha_inicio" class="form-control"
+                                                required>
                                             @error('fecha_inicio')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
                                         <div class="col-md-4">
                                             <label for="fecha_fin">Fecha de fin:</label>
-                                            <input type="date" wire:model="fecha_fin"
-                                                class="form-control" required>
+                                            <input type="date" wire:model="fecha_fin" class="form-control" required>
                                             @error('fecha_fin')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -47,7 +46,10 @@
                                 <p>{{ $message }}</p>
                             </div>
                         @endif
-                        @if ($packages->count() > 0)
+                        @php
+                            $i = 1; // Inicializa la variable $i
+                        @endphp
+                       @if ($packages->count())
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
@@ -69,7 +71,7 @@
                                     @foreach ($packages as $package)
                                         @if ($package->ESTADO === 'REENCAMINADO')
                                             <tr>
-                                                <td>{{ $package->id }}</td>
+                                                <td>{{ $i++ }}</td>
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                 <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
@@ -81,7 +83,9 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->date_redirigido }}</td>
                                                 <td>
-                                                    <button wire:click="editPackage({{ $package->id }})" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal">
+                                                    <button wire:click="editPackage({{ $package->id }})"
+                                                        class="btn btn-primary btn-sm" data-toggle="modal"
+                                                        data-target="#editModal">
                                                         Recibir Paquete
                                                     </button>
                                                 </td>
@@ -107,7 +111,8 @@
         </div>
     </div>
     <!-- Modal -->
-    <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="editModal" tabindex="-1" role="dialog"
+        aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -156,7 +161,7 @@
     </div>
 </div>
 <script>
-    document.addEventListener('livewire:load', function () {
+    document.addEventListener('livewire:load', function() {
         window.addEventListener('closeModal', event => {
             $('#editModal').modal('hide');
         });

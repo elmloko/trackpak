@@ -25,7 +25,7 @@
                                 <div class="card-body">
                                     <div class="table-responsive">
                                         @php
-                                            $i = 0; // Inicializa la variable $i
+                                            $i = 1; // Inicializa la variable $i
                                         @endphp
                                         @if ($packages->count())
                                             <table class="table table-striped table-hover">
@@ -49,7 +49,7 @@
                                                 <tbody>
                                                     @foreach ($packages as $package)
                                                         <tr>
-                                                            <td>{{ $package->id }}</td>
+                                                            <td>{{ $i++ }}</td>
                                                             <td>{{ $package->CODIGO }}</td>
                                                             <td>{{ $package->DESTINATARIO }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>

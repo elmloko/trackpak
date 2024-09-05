@@ -4,7 +4,7 @@
             <div class="col-md-6">
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                     <div class="form-group">
-                        {{ Form::label('CODIGO RASTREO') }}
+                        {{ Form::label('CODIGO RASTREO*') }}
                         {{ Form::text('CODIGO', strtoupper($package->CODIGO), [
                             'class' => 'form-control' . ($errors->has('CODIGO') ? ' is-invalid' : ''),
                             'placeholder' => 'Codigo',
@@ -12,12 +12,12 @@
                             'title' => 'Ingrese solo letras mayúsculas y números',
                             'maxlength' => '20',
                         ]) }}
-                        {!! $errors->first('CODIGO', '<div class="invalid-feedback">:message</div>') !!}
+                        {!! $errors->first('CODIGO*', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 @endhasrole
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion|Urbano|ENCOMIENDAS')
                     <div class="form-group">
-                        {{ Form::label('DESTINATARIO') }}
+                        {{ Form::label('DESTINATARIO*') }}
                         {{ Form::text('DESTINATARIO', strtoupper($package->DESTINATARIO), [
                             'class' => 'form-control' . ($errors->has('DESTINATARIO') ? ' is-invalid' : ''),
                             'placeholder' => 'Destinatario',
@@ -38,7 +38,7 @@
                 @endhasrole
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                     <div class="form-group">
-                        {{ Form::label('PESO (Kg.)') }}
+                        {{ Form::label('PESO (Kg.)*') }}
                         {{ Form::text('PESO', $package->PESO, [
                             'class' => 'form-control' . ($errors->has('PESO') ? ' is-invalid' : ''),
                             'placeholder' => 'Expresa el Peso en Gramos',
@@ -54,14 +54,14 @@
                 @endhasrole
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion|Urbano')
                     <div class="form-group">
-                        {{ Form::label('TIPO', 'Tipo') }}
+                        {{ Form::label('TIPO*') }}
                         {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $package->TIPO, ['class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el tipo de paquete']) }}
                         {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 @endhasrole
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                     <div class="form-group">
-                        {{ Form::label('CIUDAD') }}
+                        {{ Form::label('CIUDAD*') }}
                         {{ Form::select('CUIDAD', ['LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ', 'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA', 'SUCRE' => 'SUCRE', 'BENI' => 'BENI', 'PANDO' => 'PANDO'], $package->CUIDAD, ['class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ciudad', 'id' => 'ciudad-select']) }}
                         {!! $errors->first('CUIDAD', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
@@ -70,7 +70,7 @@
             <div class="col-md-6">
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                     <div class="form-group">
-                        {{ Form::label('VENTANILLA') }}
+                        {{ Form::label('VENTANILLA*') }}
                         {{ Form::select('VENTANILLA', ['ECA' => 'ECA', 'UNICA' => 'UNICA', 'ENCOMIENDA' => 'ENCOMIENDA', 'DND' => 'DND', 'DD' => 'DD', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
                         {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
@@ -87,14 +87,14 @@
                         {!! $errors->first('nrocasilla', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                     <div class="form-group">
-                        {{ Form::label('ADUANA') }}
+                        {{ Form::label('ADUANA*') }}
                         {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, ['class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione el estado en el cual se observo el paquete']) }}
                         {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 @endhasrole
                 @hasrole('SuperAdmin|Administrador|ENCOMIENDAS')
                     <div class="form-group">
-                        {{ Form::label('ZONA') }}
+                        {{ Form::label('ZONA*') }}
                         {{ Form::text('ZONA', strtoupper($package->ZONA), [
                             'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
                             'placeholder' => 'Indique la Bandeja',
@@ -104,7 +104,7 @@
                 @endhasrole
                 @hasrole('SuperAdmin|Administrador|Urbano')
                     <div class="form-group">
-                        {{ Form::label('ZONA') }}
+                        {{ Form::label('ZONA*') }}
                         {{ Form::select(
                             'ZONA',
                             [

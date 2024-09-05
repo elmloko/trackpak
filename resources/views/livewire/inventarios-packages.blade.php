@@ -74,7 +74,7 @@
                                                         @foreach ($packages as $package)
                                                             @if ($package->ESTADO === 'VENTANILLA' && !$package->redirigido && $package->CUIDAD === auth()->user()->Regional)
                                                                 <tr>
-                                                                    <td>{{ $package->id }}</td>
+                                                                    <td>{{ $i++ }}</td>
                                                                     <td>{{ $package->CODIGO }}</td>
                                                                     <td>{{ $package->DESTINATARIO }}</td>
                                                                     <td>{{ $package->TELEFONO }}</td>
