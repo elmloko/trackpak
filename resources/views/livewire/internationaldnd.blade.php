@@ -191,7 +191,13 @@
                         <form>
                             <div class="form-group">
                                 <label for="observaciones">Observaciones</label>
-                                <textarea wire:model="observaciones" class="form-control" id="observaciones" rows="3"></textarea>
+                                <select wire:model="observaciones" class="form-control" id="observaciones">
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="Articulo rechazado por el destinatario">Artículo rechazado por el destinatario</option>
+                                    <option value="Fallecido">Fallecido</option>
+                                    <option value="No Reclamado">No reclamado</option>
+                                    <option value="El Destinatario desistio paquete marca de aduana">El Destinatario desistió paquete marca de aduana</option>
+                                </select>
                             </div>
                         </form>
                     </div>
