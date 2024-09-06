@@ -72,6 +72,7 @@
                                         <table class="table table-striped table-hover">
                                             <thead class="thead">
                                                 <tr>
+                                                    <th></th>
                                                     <th>No</th>
                                                     <th>Código Rastreo</th>
                                                     <th>Destinatario</th>
