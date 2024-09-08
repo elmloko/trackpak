@@ -16,6 +16,7 @@ class Carteros extends Component
     public $selectedPackageCode;
     public $estado;
     public $observaciones;
+    public $firma;
 
     public function render()
     {
@@ -109,10 +110,15 @@ class Carteros extends Component
         if ($package) {
             // Actualiza los campos
             $package->ESTADO = $this->estado;
-    
+        
             // Solo actualizar OBSERVACIONES si el estado no es REPARTIDO
             if ($this->estado !== 'REPARTIDO') {
                 $package->OBSERVACIONES = $this->observaciones;
+            }
+    
+            // Guardar la firma si existe
+            if (!empty($this->firma)) {
+                $package->firma = $this->firma; // Asigna la firma al campo correspondiente
             }
     
             // Aplica lógica según el estado
@@ -156,6 +162,11 @@ class Carteros extends Component
                 // Solo actualizar OBSERVACIONES si el estado no es REPARTIDO
                 if ($this->estado !== 'REPARTIDO') {
                     $internationalPackage->OBSERVACIONES = $this->observaciones;
+                }
+    
+                // Guardar la firma si existe
+                if (!empty($this->firma)) {
+                    $internationalPackage->firma = $this->firma; // Asigna la firma al campo correspondiente
                 }
     
                 if ($this->estado === 'REPARTIDO') {

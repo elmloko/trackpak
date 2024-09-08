@@ -33,6 +33,7 @@ class Inventariocartero extends Component
             'OBSERVACIONES',
             'PESO',
             'deleted_at',
+            'firma',
             'ESTADO'
         ];
 

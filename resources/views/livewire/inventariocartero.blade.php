@@ -59,6 +59,7 @@
                                         <th>Peso(gr.)</th>
                                         <th>Tipo</th>
                                         <th>Estado</th>
+                                        <th>Firma</th>
                                         <th>Observaciones</th>
                                         <th>Fecha Baja</th>
                                     </tr>
@@ -77,6 +78,7 @@
                                                 <td>{{ $package->PESO }} </td>
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>{{ $package->ESTADO }}</td>
+                                                <td><img src="{{ $package->firma }}" alt="Firma" class="bg-white" style="width: 200px; height: auto; border: 1px solid #ccc; padding: 5px;"></td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
                                             </tr>

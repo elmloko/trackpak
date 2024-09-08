@@ -115,7 +115,8 @@
                     </div>
                     <div class="form-group">
                         <div class="mb-3">
-                            <input type="text" class="form-control mb-2" name="firma" wire:model="firma" id="inputbase64" readonly>
+                            <input type="text" class="form-control mb-2" name="firma" wire:model="firma"
+                                id="inputbase64" readonly>
                         </div>
                         <div id="message" class="alert alert-warning text-center d-none">
                             <div class="d-flex flex-column align-items-center">
@@ -245,64 +246,70 @@
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@5.0.0/dist/signature_pad.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const canvas = document.getElementById('canvas');
-            const signaturePad = new SignaturePad(canvas);
-            const generateButton = document.getElementById('guardar');
-            const clearButton = document.getElementById('limpiar');
-            const base64Input = document.getElementById('inputbase64');
-            // const submitButton = document.getElementById('submitButton');
-            const generatingMessage = document.getElementById('generatingMessage');
-            const generatedMessage = document.getElementById('generatedMessage');
-            const message = document.getElementById('message');
-            const div1 = document.getElementById('div1');
-            // submitButton.disabled = true;
+        const canvas = document.getElementById('canvas');
+        const signaturePad = new SignaturePad(canvas);
+        const generateButton = document.getElementById('guardar');
+        const clearButton = document.getElementById('limpiar');
+        const base64Input = document.getElementById('inputbase64');
+        const generatingMessage = document.getElementById('generatingMessage');
+        const generatedMessage = document.getElementById('generatedMessage');
+        const message = document.getElementById('message');
+        const div1 = document.getElementById('div1');
 
-            function updateVisibility() {
-                const mobileWidthThreshold = 768;
-                const screenWidth = window.innerWidth;
+        // Función para actualizar visibilidad dependiendo del tamaño de la pantalla
+        function updateVisibility() {
+            const mobileWidthThreshold = 768;
+            const screenWidth = window.innerWidth;
 
-                if (screenWidth <= mobileWidthThreshold) {
-                    if (window.orientation === 0) {
-                        message.classList.remove('d-none');
-                        div1.classList.add('d-none');
-                    } else {
-                        message.classList.add('d-none');
-                        div1.classList.remove('d-none');
-                    }
+            if (screenWidth <= mobileWidthThreshold) {
+                if (window.orientation === 0) {
+                    message.classList.remove('d-none');
+                    div1.classList.add('d-none');
                 } else {
                     message.classList.add('d-none');
                     div1.classList.remove('d-none');
                 }
+            } else {
+                message.classList.add('d-none');
+                div1.classList.remove('d-none');
             }
+        }
 
-            updateVisibility();
+        updateVisibility();
 
-            clearButton.addEventListener('click', function() {
-                signaturePad.clear();
-                base64Input.value = "";
-                // submitButton.disabled = true;
-                generatedMessage.classList.add('d-none');
-            });
+        // Limpiar la firma del canvas
+        clearButton.addEventListener('click', function() {
+            signaturePad.clear();
+            base64Input.value = "";
+            generatedMessage.classList.add('d-none');
+        });
 
-            generateButton.addEventListener('click', function() {
+        // Guardar la firma en Base64 y enviarla a Livewire
+        generateButton.addEventListener('click', function() {
+            if (!signaturePad.isEmpty()) {
                 generatingMessage.classList.remove('d-none');
                 generatedMessage.classList.add('d-none');
-                // submitButton.disabled = true;
 
                 setTimeout(() => {
-                    const firma = signaturePad.toDataURL();
-                    base64Input.value = firma;
+                    const firma = signaturePad.toDataURL(); // Convertir la firma en Base64
+                    base64Input.value = firma; // Asignar el valor en el input Base64
+                    @this.set('firma', firma); // Enviar el valor de la firma a Livewire
+
                     generatingMessage.classList.add('d-none');
                     generatedMessage.classList.remove('d-none');
-                    // submitButton.disabled = false;
+
                     setTimeout(() => {
                         generatedMessage.classList.add('d-none');
                     }, 2000);
                 }, 2000);
-            });
+            } else {
+                alert("Por favor, firme antes de guardar.");
+            }
+        });
 
-            window.addEventListener('orientationchange', updateVisibility);
-            window.addEventListener('resize', updateVisibility);
+        // Manejo de la orientación de la pantalla
+        window.addEventListener('orientationchange', updateVisibility);
+        window.addEventListener('resize', updateVisibility);
         });
     </script>
 </div>
