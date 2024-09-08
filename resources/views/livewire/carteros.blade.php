@@ -95,7 +95,7 @@
     </div>
     <div class="modal fade" id="bajaModal" tabindex="-1" role="dialog" aria-labelledby="bajaModalLabel"
         aria-hidden="true" wire:ignore.self>
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="bajaModalLabel">Dar de Baja</h5>
@@ -112,6 +112,48 @@
                             <option value="RETORNO">RETORNO</option>
                             <option value="PRE-REZAGO">PRE-REZAGO</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="mb-3">
+                            <input type="text" class="form-control mb-2" name="firma" wire:model="firma" id="inputbase64" readonly>
+                        </div>
+                        <div id="message" class="alert alert-warning text-center d-none">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-4x fa-exclamation-triangle text-warning"></i>
+                                <span class="mt-2">Por favor ponga en modo horizontal la pantalla de su teléfono si
+                                    desea
+                                    firmar</span>
+                            </div>
+                        </div>
+
+                        <div id="generatingMessage" class="d-none text-center">
+                            <div class="alert alert-info">
+                                <div class="d-flex flex-column align-items-center">
+                                    <i class="fas fa-4x fa-spinner fa-spin text-primary"></i>
+                                    <span class="mt-2">Generando código de la imagen...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="generatedMessage" class="d-none text-center">
+                            <div class="alert alert-success">
+                                <div class="d-flex flex-column align-items-center">
+                                    <i class="fas fa-4x fa-check-circle text-success"></i>
+                                    <span class="mt-2">El código de la imagen se generó correctamente.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="div1" class="mb-3 text-center">
+                            <canvas id="canvas" class="border border-secondary rounded bg-white" width="600"
+                                height="250"></canvas>
+                            <div class="mt-3 div-button">
+                                <button type="button" id="guardar" class="btn btn-primary me-2"><i
+                                        class="fas fa-save"></i></button>
+                                <button type="button" id="limpiar" class="btn btn-secondary"><i
+                                        class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="observaciones">Observaciones</label>
@@ -199,5 +241,68 @@
                 observaciones.innerHTML = '<option value="" selected>Seleccione una observación</option>';
             }
         }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@5.0.0/dist/signature_pad.umd.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('canvas');
+            const signaturePad = new SignaturePad(canvas);
+            const generateButton = document.getElementById('guardar');
+            const clearButton = document.getElementById('limpiar');
+            const base64Input = document.getElementById('inputbase64');
+            // const submitButton = document.getElementById('submitButton');
+            const generatingMessage = document.getElementById('generatingMessage');
+            const generatedMessage = document.getElementById('generatedMessage');
+            const message = document.getElementById('message');
+            const div1 = document.getElementById('div1');
+            // submitButton.disabled = true;
+
+            function updateVisibility() {
+                const mobileWidthThreshold = 768;
+                const screenWidth = window.innerWidth;
+
+                if (screenWidth <= mobileWidthThreshold) {
+                    if (window.orientation === 0) {
+                        message.classList.remove('d-none');
+                        div1.classList.add('d-none');
+                    } else {
+                        message.classList.add('d-none');
+                        div1.classList.remove('d-none');
+                    }
+                } else {
+                    message.classList.add('d-none');
+                    div1.classList.remove('d-none');
+                }
+            }
+
+            updateVisibility();
+
+            clearButton.addEventListener('click', function() {
+                signaturePad.clear();
+                base64Input.value = "";
+                // submitButton.disabled = true;
+                generatedMessage.classList.add('d-none');
+            });
+
+            generateButton.addEventListener('click', function() {
+                generatingMessage.classList.remove('d-none');
+                generatedMessage.classList.add('d-none');
+                // submitButton.disabled = true;
+
+                setTimeout(() => {
+                    const firma = signaturePad.toDataURL();
+                    base64Input.value = firma;
+                    generatingMessage.classList.add('d-none');
+                    generatedMessage.classList.remove('d-none');
+                    // submitButton.disabled = false;
+                    setTimeout(() => {
+                        generatedMessage.classList.add('d-none');
+                    }, 2000);
+                }, 2000);
+            });
+
+            window.addEventListener('orientationchange', updateVisibility);
+            window.addEventListener('resize', updateVisibility);
+        });
     </script>
 </div>
