@@ -114,7 +114,15 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <div class="mb-3">
+                        <label for="tipoSeleccion">Seleccione una opción</label>
+                        <select class="form-control" id="tipoSeleccion" onchange="toggleDivs()">
+                            <option value="">Seleccione una opción</option>
+                            <option value="foto">Foto</option>
+                            <option value="firma">Firma</option>
+                        </select>
+                    </div>
+                    <div id="divFirma" class="mb-3 text-center" style="display: none;">
+                        <div class="mb-3 text-center">
                             <input type="text" class="form-control mb-2" name="firma" wire:model="firma"
                                 id="inputbase64" readonly>
                         </div>
@@ -156,10 +164,23 @@
                             </div>
                         </div>
                     </div>
+                    <div id="divFoto" class="mb-3 text-center" style="display: none;">
+                        <div class="mb-3">
+                            <input type="text" class="form-control mb-2" name="foto" wire:model="foto"
+                                id="inputbase64foto" readonly>
+                        </div>
+                        <label class="border border-secondary rounded w-100 bg-light p-5">
+                            <div class="d-flex flex-column align-items-center">
+                                <i class="fas fa-4x fa-image text-info"></i>
+                                <p class="mt-2">Sacar Foto</p>
+                            </div>
+                            <input type="file" accept="image/*" id="capturephoto" wire:model="foto"
+                                capture="camera" class="d-none">
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label for="observaciones">Observaciones</label>
                         <select class="form-control" id="observaciones" wire:model="observaciones">
-                            <!-- Opciones iniciales -->
                             <option value="" selected>Seleccione una observación</option>
                             <option value="Direccion incorrecta">Direccion incorrecta</option>
                             <option value="No se localizó el destinatario">No se localizó el destinatario</option>
@@ -207,6 +228,30 @@
         });
     </script>
     <script>
+        function toggleDivs() {
+            const seleccion = document.getElementById('tipoSeleccion').value;
+            const divFirma = document.getElementById('divFirma');
+            const divFoto = document.getElementById('divFoto');
+
+            if (seleccion === 'foto') {
+                divFirma.style.display = 'none';
+                divFoto.style.display = 'block';
+            } else if (seleccion === 'firma') {
+                divFoto.style.display = 'none';
+                divFirma.style.display = 'block';
+            } else {
+                divFoto.style.display = 'none';
+                divFirma.style.display = 'none';
+            }
+        }
+
+        // Inicialmente ocultar ambos divs
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('divFirma').style.display = 'none';
+            document.getElementById('divFoto').style.display = 'none';
+        });
+    </script>
+    <script>
         function updateObservations() {
             const estado = document.getElementById('estado').value;
             const observaciones = document.getElementById('observaciones');
@@ -246,70 +291,102 @@
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@5.0.0/dist/signature_pad.umd.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        const canvas = document.getElementById('canvas');
-        const signaturePad = new SignaturePad(canvas);
-        const generateButton = document.getElementById('guardar');
-        const clearButton = document.getElementById('limpiar');
-        const base64Input = document.getElementById('inputbase64');
-        const generatingMessage = document.getElementById('generatingMessage');
-        const generatedMessage = document.getElementById('generatedMessage');
-        const message = document.getElementById('message');
-        const div1 = document.getElementById('div1');
+            const canvas = document.getElementById('canvas');
+            const signaturePad = new SignaturePad(canvas);
+            const generateButton = document.getElementById('guardar');
+            const clearButton = document.getElementById('limpiar');
+            const base64Input = document.getElementById('inputbase64');
+            const generatingMessage = document.getElementById('generatingMessage');
+            const generatedMessage = document.getElementById('generatedMessage');
+            const message = document.getElementById('message');
+            const div1 = document.getElementById('div1');
 
-        // Función para actualizar visibilidad dependiendo del tamaño de la pantalla
-        function updateVisibility() {
-            const mobileWidthThreshold = 768;
-            const screenWidth = window.innerWidth;
+            // Función para actualizar visibilidad dependiendo del tamaño de la pantalla
+            function updateVisibility() {
+                const mobileWidthThreshold = 768;
+                const screenWidth = window.innerWidth;
 
-            if (screenWidth <= mobileWidthThreshold) {
-                if (window.orientation === 0) {
-                    message.classList.remove('d-none');
-                    div1.classList.add('d-none');
+                if (screenWidth <= mobileWidthThreshold) {
+                    if (window.orientation === 0) {
+                        message.classList.remove('d-none');
+                        div1.classList.add('d-none');
+                    } else {
+                        message.classList.add('d-none');
+                        div1.classList.remove('d-none');
+                    }
                 } else {
                     message.classList.add('d-none');
                     div1.classList.remove('d-none');
                 }
-            } else {
-                message.classList.add('d-none');
-                div1.classList.remove('d-none');
             }
-        }
 
-        updateVisibility();
+            updateVisibility();
 
-        // Limpiar la firma del canvas
-        clearButton.addEventListener('click', function() {
-            signaturePad.clear();
-            base64Input.value = "";
-            generatedMessage.classList.add('d-none');
-        });
-
-        // Guardar la firma en Base64 y enviarla a Livewire
-        generateButton.addEventListener('click', function() {
-            if (!signaturePad.isEmpty()) {
-                generatingMessage.classList.remove('d-none');
+            // Limpiar la firma del canvas
+            clearButton.addEventListener('click', function() {
+                signaturePad.clear();
+                base64Input.value = "";
                 generatedMessage.classList.add('d-none');
+            });
 
-                setTimeout(() => {
-                    const firma = signaturePad.toDataURL(); // Convertir la firma en Base64
-                    base64Input.value = firma; // Asignar el valor en el input Base64
-                    @this.set('firma', firma); // Enviar el valor de la firma a Livewire
-
-                    generatingMessage.classList.add('d-none');
-                    generatedMessage.classList.remove('d-none');
+            // Guardar la firma en Base64 y enviarla a Livewire
+            generateButton.addEventListener('click', function() {
+                if (!signaturePad.isEmpty()) {
+                    generatingMessage.classList.remove('d-none');
+                    generatedMessage.classList.add('d-none');
 
                     setTimeout(() => {
-                        generatedMessage.classList.add('d-none');
-                    }, 2000);
-                }, 2000);
-            } else {
-                alert("Por favor, firme antes de guardar.");
-            }
-        });
+                        const firma = signaturePad.toDataURL(); // Convertir la firma en Base64
+                        base64Input.value = firma; // Asignar el valor en el input Base64
+                        @this.set('firma', firma); // Enviar el valor de la firma a Livewire
 
-        // Manejo de la orientación de la pantalla
-        window.addEventListener('orientationchange', updateVisibility);
-        window.addEventListener('resize', updateVisibility);
+                        generatingMessage.classList.add('d-none');
+                        generatedMessage.classList.remove('d-none');
+
+                        setTimeout(() => {
+                            generatedMessage.classList.add('d-none');
+                        }, 2000);
+                    }, 2000);
+                } else {
+                    alert("Por favor, firme antes de guardar.");
+                }
+            });
+
+            // Manejo de la orientación de la pantalla
+            window.addEventListener('orientationchange', updateVisibility);
+            window.addEventListener('resize', updateVisibility);
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('capturephoto');
+            const base64Inputfoto = document.getElementById(
+            'inputbase64foto'); // Input para almacenar la imagen base64
+
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = new Image();
+                        img.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            ctx.drawImage(img, 0, 0);
+                            const dataurl = canvas.toDataURL('image/jpeg',
+                            0.5); // Generar imagen base64 comprimida
+
+                            base64Inputfoto.value =
+                            dataurl; // Asignar el valor base64 al input oculto
+                            @this.set('foto',
+                            dataurl); // Enviar el valor de la imagen en base64 a Livewire
+                        }
+                        img.src = e.target.result;
+                    }
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            });
         });
     </script>
 </div>

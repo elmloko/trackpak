@@ -79,6 +79,9 @@
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>{{ $package->ESTADO }}</td>
                                                 <td><img src="{{ $package->firma }}" alt="Firma" class="bg-white" style="width: 200px; height: auto; border: 1px solid #ccc; padding: 5px;"></td>
+                                                <td>
+                                                    <img src="{{ $package->foto }}" alt="Foto" class="bg-white" style="width: 200px; height: auto; border: 1px solid #ccc; padding: 5px;">
+                                                </td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
                                             </tr>

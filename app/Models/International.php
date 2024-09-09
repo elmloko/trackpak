@@ -14,7 +14,7 @@ class International extends Model
 
     protected $perPage = 20;
     
-    protected $fillable = ['CODIGO','DESTINATARIO','TELEFONO','PAIS','CUIDAD','ZONA','VENTANILLA','PESO','TIPO','ADUANA','ESTADO','ISO','PRECIO','OBSERVACIONES','usercartero','firma'];
+    protected $fillable = ['CODIGO','DESTINATARIO','TELEFONO','PAIS','CUIDAD','ZONA','VENTANILLA','PESO','TIPO','ADUANA','ESTADO','ISO','PRECIO','OBSERVACIONES','usercartero','firma','foto'];
 
 
 

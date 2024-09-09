@@ -7,16 +7,19 @@ use App\Models\Package;
 use App\Models\International; // Importa el modelo International
 use Livewire\WithPagination;
 use App\Models\Event;
+use Livewire\WithFileUploads;
 
 class Carteros extends Component
 {
     use WithPagination;
+    use WithFileUploads;
 
     public $search = '';
     public $selectedPackageCode;
     public $estado;
     public $observaciones;
     public $firma;
+    public $foto;
 
     public function render()
     {
@@ -110,7 +113,7 @@ class Carteros extends Component
         if ($package) {
             // Actualiza los campos
             $package->ESTADO = $this->estado;
-        
+    
             // Solo actualizar OBSERVACIONES si el estado no es REPARTIDO
             if ($this->estado !== 'REPARTIDO') {
                 $package->OBSERVACIONES = $this->observaciones;
@@ -118,14 +121,19 @@ class Carteros extends Component
     
             // Guardar la firma si existe
             if (!empty($this->firma)) {
-                $package->firma = $this->firma; // Asigna la firma al campo correspondiente
+                $package->firma = $this->firma;
+            }
+
+            // Guardar la foto en base64 si existe
+            if (!empty($this->foto)) {
+                $package->foto = $this->foto; // Asigna el valor base64 al campo `foto`
             }
     
             // Aplica lógica según el estado
             if ($this->estado === 'REPARTIDO') {
                 $package->save(); // Guarda primero los cambios
                 $package->delete(); // Aplica soft delete después
-                
+    
                 // Crear evento para REPARTIDO
                 Event::create([
                     'action' => 'ENTREGADO',
@@ -169,10 +177,15 @@ class Carteros extends Component
                     $internationalPackage->firma = $this->firma; // Asigna la firma al campo correspondiente
                 }
     
+                // Guardar la foto en base64 si existe
+                if (!empty($this->foto)) {
+                    $internationalPackage->foto = $this->foto; // Asigna la foto en base64 al campo correspondiente
+                }
+    
                 if ($this->estado === 'REPARTIDO') {
                     $internationalPackage->save(); // Guarda primero los cambios
                     $internationalPackage->delete(); // Aplica soft delete después
-                    
+    
                     // Crear evento para REPARTIDO
                     Event::create([
                         'action' => 'ENTREGADO',
@@ -211,5 +224,5 @@ class Carteros extends Component
     
         // Cierra el modal
         $this->dispatch('close-modal');
-    }
+    }    
 }
