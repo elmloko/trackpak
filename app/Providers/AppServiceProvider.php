@@ -5,9 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Validator;
-use Illuminate\Support\Facades\Gate
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\App;;
+use Illuminate\Support\Facades\Gate;
 use App\Models\User; // Importa la clase User correcta
 
 class AppServiceProvider extends ServiceProvider
@@ -31,17 +29,5 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('viewPulse', function (?User $user) {
             return $user !== null;
         });
-        if (App::environment('local')) {
-            // Lista de comandos que quieres deshabilitar en producción
-            $restrictedCommands = [
-                'migrate:fresh',
-                'migrate:reset',
-                'db:wipe',
-            ];
-
-            Artisan::command($restrictedCommands, function () {
-                $this->error("Este comando está deshabilitado en producción.");
-            })->describe('Comando deshabilitado en producción.');
-        }
     }
 }
