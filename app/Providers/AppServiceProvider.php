@@ -5,9 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Validator;
-use Illuminate\Support\Facades\Gate
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\App;;
+use Illuminate\Support\Facades\App;
 use App\Models\User; // Importa la clase User correcta
 
 class AppServiceProvider extends ServiceProvider
