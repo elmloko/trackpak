@@ -182,6 +182,7 @@
                         <label for="observaciones">Observaciones</label>
                         <select class="form-control" id="observaciones" wire:model="observaciones">
                             <option value="" selected>Seleccione una observación</option>
+                            <option value="Destinatario Notificado en Puerta">Destinatario Notificado en Puerta</option>
                             <option value="Direccion incorrecta">Direccion incorrecta</option>
                             <option value="No se localizó el destinatario">No se localizó el destinatario</option>
                             <option value="El destinatario no esta direccion">El destinatario no está en la dirección
@@ -262,6 +263,7 @@
             if (estado === 'RETORNO') {
                 observaciones.innerHTML = `
                     <option value="" selected>Seleccione una observación</option>
+                    <option value="Destinatario Notificado en Puerta">Destinatario Notificado en Puerta</option>
                     <option value="Direccion incorrecta">Direccion incorrecta</option>
                     <option value="No se localizó el destinatario">No se localizó el destinatario</option>
                     <option value="El destinatario no esta direccion">El destinatario no está en la dirección</option>
@@ -281,7 +283,14 @@
                     <option value="Otros">Otros</option>
                 `;
             } else if (estado === 'REPARTIDO') {
-                observacionesGroup.style.display = 'none'; // Ocultar las observaciones
+                observacionesGroup.style.display = 'none';
+            } else if (estado === 'PRE-REZAGO') {
+                observaciones.innerHTML =
+                    observaciones.innerHTML = `
+                    <option value="" selected>Seleccione una observación</option>
+                    <option value="Articulo rechazado por el destinatario">Artículo rechazado por el destinatario</option>
+                    <option value="Fallecido">Fallecido</option>
+                `;
             } else {
                 observacionesGroup.style.display = 'block'; // Mostrar las observaciones
                 observaciones.innerHTML = '<option value="" selected>Seleccione una observación</option>';
