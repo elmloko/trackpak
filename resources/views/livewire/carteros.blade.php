@@ -108,9 +108,9 @@
                         <label for="estado">Estado</label>
                         <select class="form-control" id="estado" wire:model="estado" onchange="updateObservations()">
                             <option value="" selected>Seleccione un estado</option>
-                            <option value="REPARTIDO">REPARTIDO</option>
-                            <option value="RETORNO">RETORNO</option>
-                            <option value="PRE-REZAGO">PRE-REZAGO</option>
+                            <option value="REPARTIDO">ENTREGADO</option>
+                            <option value="RETORNO">NOTIFICADO</option>
+                            <option value="PRE-REZAGO">RECHAZADO</option>
                         </select>
                     </div>
                     <div class="form-group">
