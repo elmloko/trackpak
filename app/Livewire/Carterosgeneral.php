@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use App\Models\International;
+use App\Models\User;
 use Livewire\WithPagination;
 
 class Carterosgeneral extends Component
@@ -12,20 +13,23 @@ class Carterosgeneral extends Component
     use WithPagination;
 
     public $search = '';
+    public $selectedCartero = '';
 
     public function render()
     {
+        // Obtener todos los usuarios con rol CARTERO usando Spatie Laravel Permission
+        $carteros = User::role('CARTERO')->get();
+
         $userRegional = auth()->user()->Regional;
-        $userasignado = auth()->user()->name;
 
-        // Asegúrate de seleccionar las mismas columnas en ambas consultas
-        $columns = [
-            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'updated_at', 'ESTADO' , 'usercartero' , 'PESO' , 'TIPO'
-        ];
+        $columns = ['CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'updated_at', 'ESTADO', 'usercartero', 'PESO', 'TIPO'];
 
-        // Consulta para obtener paquetes de la tabla Package
+        // Filtrar paquetes según el cartero seleccionado
         $packages = Package::select($columns)
             ->where('ESTADO', 'CARTERO')
+            ->when($this->selectedCartero, function ($query) {
+                return $query->where('usercartero', $this->selectedCartero);
+            })
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
@@ -36,9 +40,11 @@ class Carterosgeneral extends Component
             ->where('CUIDAD', $userRegional)
             ->orderBy('updated_at', 'desc');
 
-        // Consulta para obtener paquetes de la tabla International
         $internationalPackages = International::select($columns)
             ->where('ESTADO', 'CARTERO')
+            ->when($this->selectedCartero, function ($query) {
+                return $query->where('usercartero', $this->selectedCartero);
+            })
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
@@ -49,11 +55,12 @@ class Carterosgeneral extends Component
             ->where('CUIDAD', $userRegional)
             ->orderBy('updated_at', 'desc');
 
-        // Une ambos conjuntos de resultados
+        // Unión de ambos resultados
         $packages = $packages->union($internationalPackages)->paginate(10);
 
         return view('livewire.carterosgeneral', [
             'packages' => $packages,
+            'carteros' => $carteros,
         ]);
     }
 }
