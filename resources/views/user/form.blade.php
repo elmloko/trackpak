@@ -29,8 +29,10 @@
         @foreach ($roles as $role)
             <div>
                 <label>
-                    {!! Form::checkbox('roles[]', $role->id, $user->hasRole($role->name), ['class' => 'mr-1']) !!}
-                    {{ $role->name }}
+                    @if($role->name !== 'SuperAdmin')
+                        {!! Form::checkbox('roles[]', $role->id, $user->hasRole($role->name), ['class' => 'mr-1']) !!}
+                        {{ $role->name }}
+                    @endif
                 </label>
             </div>
         @endforeach
