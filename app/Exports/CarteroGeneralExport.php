@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use App\Models\Package;
+use App\Models\International;
 
 class CarteroGeneralExport implements FromCollection, WithHeadings, WithStyles
 {
@@ -14,33 +15,56 @@ class CarteroGeneralExport implements FromCollection, WithHeadings, WithStyles
     protected $fechaFin;
 
     public function __construct($fechaInicio, $fechaFin)
-{
-    $this->fechaInicio = $fechaInicio;
-    $this->fechaFin = $fechaFin;
-}
+    {
+        $this->fechaInicio = $fechaInicio;
+        $this->fechaFin = $fechaFin;
+    }
 
     public function collection()
     {
-        $query = Package::withTrashed()->where('ESTADO', 'REPARTIDO')
+        // Paquetes nacionales (Package)
+        $nationalPackages = Package::withTrashed()->where('ESTADO', 'REPARTIDO')
             ->select(
                 'CODIGO',
                 'DESTINATARIO',
-                'TELEFONO',  // Se corrigió el nombre de la columna de 'CUIDAD' a 'CIUDAD'
+                'TELEFONO',
                 'ZONA',
                 'VENTANILLA',
                 'PESO',
                 'ESTADO',
                 'usercartero',
-                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
+                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at")
             );
 
         if ($this->fechaInicio && $this->fechaFin) {
-            $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
+            $nationalPackages->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
         }
 
-        return $query->get();  // Agregar este return para obtener los resultados de la consulta
-    }
+        $nationalPackages = $nationalPackages->get();
 
+        // Paquetes internacionales (International)
+        $internationalPackages = International::withTrashed()->where('ESTADO', 'REPARTIDO')
+            ->select(
+                'CODIGO',
+                'DESTINATARIO',
+                'TELEFONO',
+                'ZONA',
+                'VENTANILLA',
+                'PESO',
+                'ESTADO',
+                'usercartero',
+                \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at")
+            );
+
+        if ($this->fechaInicio && $this->fechaFin) {
+            $internationalPackages->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
+        }
+
+        $internationalPackages = $internationalPackages->get();
+
+        // Combinar ambas colecciones
+        return $nationalPackages->concat($internationalPackages);
+    }
 
     public function headings(): array
     {
@@ -69,11 +93,10 @@ class CarteroGeneralExport implements FromCollection, WithHeadings, WithStyles
         $sheet->getStyle('A2:L' . ($sheet->getHighestRow()))->getAlignment()->setHorizontal('center');
 
         // Ajusta el espaciado según tus necesidades
-        // $sheet->getStyle('A:L')->getAlignment()->setVertical('center');
         $sheet->getStyle('A:L')->getFont()->setSize(12);
 
         // Autoajusta el ancho de las columnas
-        foreach(range('A', 'L') as $column) {
+        foreach (range('A', 'L') as $column) {
             $sheet->getColumnDimension($column)->setAutoSize(true);
         }
 
