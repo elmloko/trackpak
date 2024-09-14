@@ -25,16 +25,11 @@ class CarteroGeneralExport implements FromCollection, WithHeadings, WithStyles
             ->select(
                 'CODIGO',
                 'DESTINATARIO',
-                'TELEFONO',
-                'PAIS',
-                'CUIDAD',  // Se corrigió el nombre de la columna de 'CUIDAD' a 'CIUDAD'
+                'TELEFONO',  // Se corrigió el nombre de la columna de 'CUIDAD' a 'CIUDAD'
                 'ZONA',
                 'VENTANILLA',
                 'PESO',
-                'PRECIO',
-                'TIPO',
                 'ESTADO',
-                'ADUANA',
                 'usercartero',
                 \DB::raw("DATE_FORMAT(deleted_at, '%Y-%m-%d %H:%i') AS formatted_deleted_at"),
             );
@@ -53,14 +48,10 @@ class CarteroGeneralExport implements FromCollection, WithHeadings, WithStyles
             'CODIGO',
             'DESTINATARIO',
             'TELEFONO',
-            'PAIS',
-            'DESTINO',
             'DIRECCION',
             'VENTANILLA',
             'PESO',
-            'TIPO',
             'ESTADO',
-            'ADUANA',
             'CARTERO',
             'FECHA BAJA',
         ];

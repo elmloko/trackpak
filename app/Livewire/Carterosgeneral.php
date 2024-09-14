@@ -7,6 +7,8 @@ use App\Models\Package;
 use App\Models\International;
 use App\Models\User;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CarteroeGeneralExport;
 
 class Carterosgeneral extends Component
 {
@@ -62,5 +64,12 @@ class Carterosgeneral extends Component
             'packages' => $packages,
             'carteros' => $carteros,
         ]);
+    }
+    public function exportToExcel()
+    {
+        // Obtener la regional del usuario logueado
+        $userRegional = auth()->user()->Regional;
+
+        return Excel::download(new CarteroeGeneralExport($this->search, $this->selectedCartero, $userRegional), 'Entregas Cartero.xlsx');
     }
 }

@@ -27,6 +27,12 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <label>&nbsp;</label> <!-- Espacio para el botón -->
+                                            <button wire:click="exportToExcel" class="btn btn-success btn-sm btn-block">Exportar a Excel</button>
+                                        </div>
+                                    </div>
                                     {{-- <div class="col-lg-2">
                                         <button wire:click="buscar" class="btn btn-primary">Buscar</button>
                                     </div> --}}
