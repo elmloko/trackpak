@@ -55,11 +55,7 @@
                                     <th>Descripcion</th>
                                     <th>Usuario</th>
                                     <th>Codigo</th>
-                                    <th>Fecha y Hora de Modificacion</th>
-                                    @hasrole('SuperAdmin')
-                                    <th>Acciones</th>
-                                    @endhasrole
-                                    <th></th>
+                                    <th>Fecha y Hora del Evento</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,23 +70,6 @@
                                         <td>{{ $event->user->name }}</td>
                                         <td>{{ $event->codigo }}</td>
                                         <td>{{ $event->created_at }}</td>
-
-                                        <td>
-                                            <form action="{{ route('events.destroy', $event->id) }}" method="POST">
-                                                @hasrole('SuperAdmin')
-                                                <a class="btn btn-sm btn-success" href="{{ route('events.edit', $event->id) }}">
-                                                    <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
-                                                </a>
-                                                @endhasrole
-                                                @hasrole('SuperAdmin')
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}
-                                                </button>
-                                                @endhasrole
-                                            </form>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
