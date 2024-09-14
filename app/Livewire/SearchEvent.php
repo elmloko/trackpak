@@ -5,6 +5,8 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Event;
 use Livewire\WithPagination;
+use App\Exports\EventsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SearchEvent extends Component
 {
@@ -33,5 +35,9 @@ class SearchEvent extends Component
             'events' => $events,
             'users' => $users, // Pasar los usuarios a la vista
         ]);
+    }
+    public function exportToExcel()
+    {
+        return Excel::download(new EventsExport($this->search, $this->selectedUserId), 'events.xlsx');
     }
 }
