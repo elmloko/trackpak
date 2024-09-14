@@ -4,65 +4,67 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Package;
-use App\Models\International; // Importa el modelo International
-use Livewire\WithPagination;
+use App\Models\International;
+use App\Models\User;  // Importamos el modelo de usuario
 use App\Models\Event;
+use Livewire\WithPagination;
+use App\Exports\CarteroeExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Despachocarterogeneral extends Component
 {
     use WithPagination;
 
     public $search = '';
+    public $selectedCartero = '';
 
     public function render()
     {
         $userRegional = auth()->user()->Regional;
 
-        // Define las columnas que deben ser seleccionadas en ambas consultas
+        // Obtener la lista de carteros
+        $carteros = User::role('CARTERO')->get();
+
         $columns = [
-            'CODIGO',
-            'DESTINATARIO',
-            'TELEFONO',
-            'ADUANA',
-            'created_at',
-            'ESTADO',
-            'usercartero',
-            'PESO',
-            'TIPO',
-            'updated_at'
+            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'PESO', 'ESTADO', 'usercartero', 'updated_at'
         ];
 
-        // Consulta para obtener paquetes de la tabla Package
+        // Filtrar paquetes por cartero y otros criterios
         $packages = Package::select($columns)
             ->where('ESTADO', 'RETORNO')
+            ->when($this->selectedCartero, function ($query) {
+                return $query->where('usercartero', $this->selectedCartero);
+            })
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%');
             })
             ->where('CUIDAD', $userRegional)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('updated_at', 'desc');
 
-        // Consulta para obtener paquetes de la tabla International
+        // Filtrar también en los paquetes internacionales
         $internationalPackages = International::select($columns)
             ->where('ESTADO', 'RETORNO')
+            ->when($this->selectedCartero, function ($query) {
+                return $query->where('usercartero', $this->selectedCartero);
+            })
             ->when($this->search, function ($query) {
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
-                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('created_at', 'like', '%' . $this->search . '%');
+                    ->orWhere('TELEFONO', 'like', '%' . $this->search . '%');
             })
             ->where('CUIDAD', $userRegional)
-            ->orderBy('created_at', 'desc');
+            ->orderBy('updated_at', 'desc');
 
-        // Une ambos conjuntos de resultados
         $packages = $packages->union($internationalPackages)->paginate(10);
 
         return view('livewire.despachocarterogeneral', [
             'packages' => $packages,
+            'carteros' => $carteros, // Pasar los carteros a la vista
         ]);
     }
+
     public function recuperar($codigo)
     {
         $package = Package::where('CODIGO', $codigo)->first();
@@ -90,5 +92,10 @@ class Despachocarterogeneral extends Component
         }
 
         session()->flash('success', 'El paquete ha sido recuperado y su estado ha sido actualizado a VENTANILLA.');
+    }
+    public function exportToExcel()
+    {
+        $userRegional = auth()->user()->Regional;
+        return Excel::download(new CarteroeExport($this->search, $this->selectedCartero, $userRegional), 'despacho_carteros.xlsx');
     }
 }
