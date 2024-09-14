@@ -11,14 +11,17 @@
                                         {{ __('Entregas de Paquetes en Carteros') }}
                                     </h5>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-3">
+                                <div class="row align-items-end">
+                                    <div class="col-lg-4 mb-2">
                                         <div class="form-group">
+                                            <label for="buscar">Buscar:</label>
                                             <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    
+                                    <div class="col-lg-4 mb-2">
                                         <div class="form-group">
+                                            <label for="cartero">Seleccionar Cartero:</label>
                                             <select wire:model.lazy="selectedCartero" class="form-control">
                                                 <option value="">{{ __('Seleccionar Cartero') }}</option>
                                                 @foreach ($carteros as $cartero)
@@ -27,15 +30,10 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2">
-                                        <div class="form-group">
-                                            <label>&nbsp;</label> <!-- Espacio para el botón -->
-                                            <button wire:click="exportToExcel" class="btn btn-success btn-sm btn-block">Exportar a Excel</button>
-                                        </div>
+                                
+                                    <div class="col-lg-1 mb-2">
+                                        <button wire:click="exportToExcel" class="btn btn-success btn-block">Exportar a Excel</button>
                                     </div>
-                                    {{-- <div class="col-lg-2">
-                                        <button wire:click="buscar" class="btn btn-primary">Buscar</button>
-                                    </div> --}}
                                 </div>
                                 @if ($message = Session::get('success'))
                                     <div class="alert alert-success">
