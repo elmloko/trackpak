@@ -12,24 +12,30 @@
                         <div class="row">
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label for="buscar">Buscar:</label>
-                                    <input wire:model.lazy="search" type="text" class="form-control"
-                                        placeholder="Buscar...">
+                                    <label for="buscar">Buscar por Código:</label>
+                                    <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar código...">
                                 </div>
                             </div>
-                            <div class="col-lg-9 text-right">
-                                <div class="mr-2 d-inline-block">
-                                    <a href="{{ route('events.pdf.eventspdf') }}" class="btn btn-danger"
-                                        data-placement="left">
-                                        PDF
-                                    </a>
-                                </div>
-                                <div class="mr-2 d-inline-block">
-                                    @hasrole('SuperAdmin')
-                                    <a href="{{ route('events.create') }}" class="btn btn-primary">{{ __('Crear Nuevo') }}</a>
-                                    @endhasrole
+                            
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="user_id">Buscar por Usuario:</label>
+                                    <select wire:model.lazy="selectedUserId" class="form-control">
+                                        <option value="">Seleccione un usuario</option>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
+                            
+                            <div class="col-lg-1">
+                                <div class="form-group">
+                                    <label>&nbsp;</label> <!-- Espacio para el botón -->
+                                    <button wire:click="render" class="btn btn-primary btn-sm btn-block">Buscar</button>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
