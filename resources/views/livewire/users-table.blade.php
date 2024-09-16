@@ -9,20 +9,13 @@
                         </span>
                         <div style="display: flex; align-items: center;">
                             <div class="mr-2">
-                                <a href="{{ route('users.excel') }}" class="btn btn-success btn-sm"
-                                    data-placement="left">
-                                    Excel
-                                </a>
+                                <a href="{{ route('users.excel') }}" class="btn btn-success btn-sm" data-placement="left">Excel</a>
                             </div>
                             <div class="mr-2">
-                                <a href="{{ route('users.pdf') }}" class="btn btn-danger btn-sm"
-                                    data-placement="left">
-                                    PDF
-                                </a>
+                                <a href="{{ route('users.pdf') }}" class="btn btn-danger btn-sm" data-placement="left">PDF</a>
                             </div>
                             <div class="float-right">
-                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"
-                                    data-placement="left">
+                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
                             </div>
@@ -91,8 +84,9 @@
                                                 <a class="btn btn-sm btn-success" href="{{ route('users.edit', $user->id) }}">
                                                     <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
                                                 </a>
-                                                <button wire:click="delete({{ $user->id }})" class="btn btn-danger btn-sm">
-                                                    <i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}
+                                                <!-- Botón para abrir el modal de cambiar contraseña -->
+                                                <button wire:click="setPasswordUser({{ $user->id }})" class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-key"></i> {{ __('Cambiar Contraseña') }}
                                                 </button>
                                             @endif
                                         </td>
@@ -114,4 +108,36 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal para cambiar la contraseña -->
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changePasswordModalLabel">Cambiar Contraseña</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="password" wire:model="newPassword" class="form-control" placeholder="Nueva Contraseña">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" wire:click="updatePassword" class="btn btn-primary">Actualizar Contraseña</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Scripts para controlar el modal -->
+<script>
+    window.addEventListener('openModal', event => {
+        $('#changePasswordModal').modal('show');
+    });
+
+    window.addEventListener('closeModal', event => {
+        $('#changePasswordModal').modal('hide');
+    });
+</script>
