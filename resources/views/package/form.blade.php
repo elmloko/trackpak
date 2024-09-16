@@ -193,6 +193,11 @@
                     ]) }}
                     {!! $errors->first('OBSERVACIONES', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
+                <div class="form-group">
+                    {{ Form::label('FOTO') }}
+                    <input type="file" id="capturephoto" class="form-control" accept="image/*">
+                    <input type="hidden" id="inputbase64foto" name="foto"> <!-- Campo oculto para almacenar la imagen en base64 -->
+                </div>
             </div>
         </div>
     </div>
@@ -203,6 +208,32 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.getElementById('capturephoto');
+        const base64Inputfoto = document.getElementById('inputbase64foto'); // Input para almacenar la imagen base64
+
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        const dataurl = canvas.toDataURL('image/jpeg', 0.5); // Generar imagen base64 comprimida
+                        base64Inputfoto.value = dataurl; // Asignar el valor base64 al input oculto
+                    }
+                    img.src = e.target.result;
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        });
+    });
+</script>
 <script>
     $(document).ready(function() {
         // Ocultar opciones de Ventanilla al cargar la página
