@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\International;
 use Livewire\WithPagination;
 use App\Exports\Internationalinvdd;
+use App\Exports\KardexExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -92,5 +93,26 @@ class Deleteadodd extends Component
         } else {
             session()->flash('error', 'No se pudo encontrar el paquete.');
         }
+    }
+    public function generateKardex()
+    {
+        // Obtiene la fecha actual
+        $fechaHoy = now()->toDateString();
+    
+        // Obtiene el usuario actual
+        $user = auth()->user();
+    
+        // Obtiene todos los paquetes que han sido dados de baja hoy
+        $packages = International::onlyTrashed()
+            ->whereDate('deleted_at', $fechaHoy) // Filtrar por la fecha de baja de hoy
+            ->get(); // Obtener todos los paquetes
+    
+            // if ($packages->isEmpty()) {
+            //     session()->flash('error', 'No se encontraron paquetes dados de baja el día de hoy.');
+            //     return;
+            // }
+    
+        // Llama a la clase exportable con la fecha de hoy, el usuario y todos los paquetes
+        return Excel::download(new KardexExport($fechaHoy, $user, $packages), 'Kardex_Inventario_' . $fechaHoy . '.xlsx');
     }
 }

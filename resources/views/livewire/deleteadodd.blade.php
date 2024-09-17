@@ -12,14 +12,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <div class="form-group">
                                     <label for="search">Busca:</label>
                                     <input wire:model.lazy="search" type="text" class="form-control"
                                         placeholder="Buscar...">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-5">
                                 <form wire:submit.prevent="export" class="form-row align-items-center">
                                     <div class="col-md-4">
                                         <label for="fecha_inicio">Fecha de inicio:</label>
@@ -39,6 +39,10 @@
                                         <button type="submit" class="btn btn-success">Generar Excel</button>
                                     </div>
                                 </form>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" wire:click="generateKardex" class="btn btn-primary">Generar
+                                    Kardex</button>
                             </div>
                         </div>
                     </div>
