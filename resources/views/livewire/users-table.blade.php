@@ -9,13 +9,16 @@
                         </span>
                         <div style="display: flex; align-items: center;">
                             <div class="mr-2">
-                                <a href="{{ route('users.excel') }}" class="btn btn-success btn-sm" data-placement="left">Excel</a>
+                                <a href="{{ route('users.excel') }}" class="btn btn-success btn-sm"
+                                    data-placement="left">Excel</a>
                             </div>
                             <div class="mr-2">
-                                <a href="{{ route('users.pdf') }}" class="btn btn-danger btn-sm" data-placement="left">PDF</a>
+                                <a href="{{ route('users.pdf') }}" class="btn btn-danger btn-sm"
+                                    data-placement="left">PDF</a>
                             </div>
                             <div class="float-right">
-                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"
+                                    data-placement="left">
                                     {{ __('Crear Nuevo') }}
                                 </a>
                             </div>
@@ -33,7 +36,8 @@
                     <!-- Barra de búsqueda con botón de búsqueda -->
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <input type="text" wire:model="search" class="form-control" placeholder="Buscar por nombre o email...">
+                            <input type="text" wire:model="search" class="form-control"
+                                placeholder="Buscar por nombre o email...">
                         </div>
                         <div class="col-md-2">
                             <button wire:click="searchUsers" class="btn btn-primary">Buscar</button>
@@ -65,8 +69,8 @@
                                         <td>{{ $user->Regional }}</td>
                                         <td>{{ $user->ci }}</td>
                                         <td><span class="badge {{ $user->trashed() ? 'badge-danger' : 'badge-info' }}">
-                                            {{ $user->trashed() ? 'Inactivo' : 'Activo' }}
-                                        </span></td>
+                                                {{ $user->trashed() ? 'Inactivo' : 'Activo' }}
+                                            </span></td>
                                         <td>
                                             @foreach ($user->roles as $role)
                                                 <span class="badge badge-info">{{ $role->name }}</span>
@@ -74,20 +78,25 @@
                                         </td>
                                         <td>
                                             @if ($user->trashed())
-                                                <button wire:click="restore({{ $user->id }})" class="btn btn-sm btn-success">
+                                                <button wire:click="restore({{ $user->id }})"
+                                                    class="btn btn-sm btn-success">
                                                     <i class="fa fa-arrow-up"></i> {{ __('Alta') }}
                                                 </button>
                                             @else
-                                                <button wire:click="delete({{ $user->id }})" class="btn btn-sm btn-warning">
+                                                <button wire:click="delete({{ $user->id }})"
+                                                    class="btn btn-sm btn-warning">
                                                     <i class="fa fa-arrow-down"></i> {{ __('Baja') }}
                                                 </button>
-                                                <a class="btn btn-sm btn-success" href="{{ route('users.edit', $user->id) }}">
+                                                <a class="btn btn-sm btn-success"
+                                                    href="{{ route('users.edit', $user->id) }}">
                                                     <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
                                                 </a>
-                                                <!-- Botón para abrir el modal de cambiar contraseña -->
-                                                <button wire:click="setPasswordUser({{ $user->id }})" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-key"></i> {{ __('Cambiar Contraseña') }}
-                                                </button>
+                                                @hasrole('SuperAdmin')
+                                                    <button wire:click="setPasswordUser({{ $user->id }})"
+                                                        class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-key"></i> {{ __('Cambiar Contraseña') }}
+                                                    </button>
+                                                @endhasrole
                                             @endif
                                         </td>
                                     </tr>
@@ -110,7 +119,8 @@
     </div>
 
     <!-- Modal para cambiar la contraseña -->
-    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -124,7 +134,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" wire:click="updatePassword" class="btn btn-primary">Actualizar Contraseña</button>
+                    <button type="button" wire:click="updatePassword" class="btn btn-primary">Actualizar
+                        Contraseña</button>
                 </div>
             </div>
         </div>
