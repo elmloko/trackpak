@@ -196,18 +196,18 @@ class KardexExport implements FromCollection, WithHeadings, WithCustomStartCell,
         $sheet->getStyle('B' . $finalRow)->getAlignment()->setHorizontal('left');
 
         // Sección de firmas - Recaudador (celdas E:F)
-        $sheet->mergeCells('E' . $finalRow . ':F' . ($finalRow + 2));
+        $sheet->mergeCells('E' . $finalRow . ':F' . ($finalRow + 3));
         $sheet->setCellValue('E' . $finalRow, "SELLO / FIRMA DE CONFORMIDAD\nRECAUDADOR");
         $sheet->getStyle('E' . $finalRow)->getAlignment()->setHorizontal('center');
         $sheet->getStyle('E' . $finalRow)->getAlignment()->setVertical('center');
-        $sheet->getStyle('E' . $finalRow . ':F' . ($finalRow + 2))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('E' . $finalRow . ':F' . ($finalRow + 3))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
         // Sección de firmas - Revisor (celdas G:H)
-        $sheet->mergeCells('G' . $finalRow . ':H' . ($finalRow + 2));
+        $sheet->mergeCells('G' . $finalRow . ':H' . ($finalRow + 3));
         $sheet->setCellValue('G' . $finalRow, "SELLO / FIRMA DE CONFORMIDAD\nREVISOR");
         $sheet->getStyle('G' . $finalRow)->getAlignment()->setHorizontal('center');
         $sheet->getStyle('G' . $finalRow)->getAlignment()->setVertical('center');
-        $sheet->getStyle('G' . $finalRow . ':H' . ($finalRow + 2))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('G' . $finalRow . ':H' . ($finalRow + 3))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
         // Combinar las celdas de I para el "Sello Recepción Tesorería" y que ocupe más espacio
         $sheet->mergeCells('I' . ($finalRow) . ':I' . ($finalRow + 3));
