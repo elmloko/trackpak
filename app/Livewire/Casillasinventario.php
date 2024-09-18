@@ -96,6 +96,13 @@ class Casillasinventario extends Component
         // Obtiene el usuario actual
         $user = auth()->user();
     
+        Event::create([
+            'action' => 'ESTADO',
+            'descripcion' => 'Generar Kardex Casillas',
+            'user_id' => auth()->user()->id,
+            'codigo' => 'N/A',
+        ]);
+        
         // Obtiene todos los paquetes internacionales que han sido dados de baja hoy y tienen VENTANILLA = 'DD'
         $internationalPackages = International::onlyTrashed()
             ->whereDate('deleted_at', $fechaHoy) // Filtrar por la fecha de baja de hoy
