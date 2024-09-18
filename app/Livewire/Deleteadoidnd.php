@@ -4,8 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\International;
+use App\Models\Package;
 use Livewire\WithPagination;
 use App\Exports\Internationalinvdnd;
+use App\Exports\KardexExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -93,5 +95,31 @@ class Deleteadoidnd extends Component
         } else {
             session()->flash('error', 'No se pudo encontrar el paquete.');
         }
+    }
+    public function generateKardex()
+    {
+        // Obtiene la fecha actual
+        $fechaHoy = now()->toDateString();
+    
+        // Obtiene el usuario actual
+        $user = auth()->user();
+    
+        // Obtiene todos los paquetes internacionales que han sido dados de baja hoy y tienen VENTANILLA = 'DD'
+        $internationalPackages = International::onlyTrashed()
+            ->whereDate('deleted_at', $fechaHoy) // Filtrar por la fecha de baja de hoy
+            ->where('VENTANILLA', 'DND') // Filtrar por ventanilla 'DD'
+            ->get(); // Obtener todos los paquetes internacionales
+    
+        // Obtiene todos los paquetes locales (Packages) que han sido dados de baja hoy y tienen VENTANILLA = 'DD'
+        $packages = Package::onlyTrashed()
+            ->whereDate('deleted_at', $fechaHoy) // Filtrar por la fecha de baja de hoy
+            ->where('VENTANILLA', 'DND') // Filtrar por ventanilla 'DD'
+            ->get(); // Obtener todos los paquetes locales
+    
+        // Combina ambos resultados (paquetes internacionales y locales)
+        $combinedPackages = $internationalPackages->merge($packages);
+    
+        // Llama a la clase exportable con la fecha de hoy, el usuario y todos los paquetes combinados
+        return Excel::download(new KardexExport($fechaHoy, $user, $combinedPackages), 'Kardex_Inventario_' . $fechaHoy . '.xlsx');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\International;
+use App\Models\Package;
 use Livewire\WithPagination;
 use App\Exports\Internationalinvdd;
 use App\Exports\KardexExport;
@@ -102,17 +103,22 @@ class Deleteadodd extends Component
         // Obtiene el usuario actual
         $user = auth()->user();
     
-        // Obtiene todos los paquetes que han sido dados de baja hoy
-        $packages = International::onlyTrashed()
+        // Obtiene todos los paquetes internacionales que han sido dados de baja hoy y tienen VENTANILLA = 'DD'
+        $internationalPackages = International::onlyTrashed()
             ->whereDate('deleted_at', $fechaHoy) // Filtrar por la fecha de baja de hoy
-            ->get(); // Obtener todos los paquetes
+            ->where('VENTANILLA', 'DD') // Filtrar por ventanilla 'DD'
+            ->get(); // Obtener todos los paquetes internacionales
     
-            // if ($packages->isEmpty()) {
-            //     session()->flash('error', 'No se encontraron paquetes dados de baja el día de hoy.');
-            //     return;
-            // }
+        // Obtiene todos los paquetes locales (Packages) que han sido dados de baja hoy y tienen VENTANILLA = 'DD'
+        $packages = Package::onlyTrashed()
+            ->whereDate('deleted_at', $fechaHoy) // Filtrar por la fecha de baja de hoy
+            ->where('VENTANILLA', 'DD') // Filtrar por ventanilla 'DD'
+            ->get(); // Obtener todos los paquetes locales
     
-        // Llama a la clase exportable con la fecha de hoy, el usuario y todos los paquetes
-        return Excel::download(new KardexExport($fechaHoy, $user, $packages), 'Kardex_Inventario_' . $fechaHoy . '.xlsx');
+        // Combina ambos resultados (paquetes internacionales y locales)
+        $combinedPackages = $internationalPackages->merge($packages);
+    
+        // Llama a la clase exportable con la fecha de hoy, el usuario y todos los paquetes combinados
+        return Excel::download(new KardexExport($fechaHoy, $user, $combinedPackages), 'Kardex_Inventario_' . $fechaHoy . '.xlsx');
     }
 }

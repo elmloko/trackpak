@@ -38,7 +38,9 @@
                                     <button type="submit" class="btn btn-success">Generar Excel</button>
                                 </div>
                             </form>
-                            <div class="col-lg-6">
+                            <div class="col-md-2">
+                                <button type="button" wire:click="generateKardex" class="btn btn-primary">Generar
+                                    Kardex</button>
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-8">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="search">Busca:</label>
                                     <input wire:model.lazy="search" type="text" class="form-control"
@@ -38,6 +38,10 @@
                                     <button type="submit" class="btn btn-success">Generar Excel</button>
                                 </div>
                             </form>
+                            <div class="col-md-2">
+                                <button type="button" wire:click="generateKardex" class="btn btn-primary">Generar
+                                    Kardex</button>
+                            </div>
                         </div>
                     </div>
                 </div>
