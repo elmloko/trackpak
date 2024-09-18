@@ -190,33 +190,39 @@ class KardexExport implements FromCollection, WithHeadings, WithCustomStartCell,
         $finalRow = $totalRow + 2;
 
         // "Observaciones" - combinar celdas B: D para las observaciones
-        $sheet->mergeCells('B' . $finalRow . ':D' . ($finalRow + 3));
+        $sheet->mergeCells('B' . $finalRow . ':D' . ($finalRow + 8));
         $sheet->setCellValue('B' . $finalRow, 'Observaciones:');
         $sheet->getStyle('B' . $finalRow)->getAlignment()->setVertical('top');
         $sheet->getStyle('B' . $finalRow)->getAlignment()->setHorizontal('left');
 
         // Sección de firmas - Recaudador (celdas E:F)
-        $sheet->mergeCells('E' . $finalRow . ':F' . ($finalRow + 3));
+        $sheet->mergeCells('E' . $finalRow . ':F' . ($finalRow + 8));
         $sheet->setCellValue('E' . $finalRow, "SELLO / FIRMA DE CONFORMIDAD\nRECAUDADOR");
         $sheet->getStyle('E' . $finalRow)->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('E' . $finalRow)->getAlignment()->setVertical('center');
-        $sheet->getStyle('E' . $finalRow . ':F' . ($finalRow + 3))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('E' . $finalRow)->getAlignment()->setVertical('bottom');
+        $sheet->getStyle('E' . $finalRow)->getAlignment()->setWrapText(true); // Habilitar ajuste de texto
+        $sheet->getStyle('E' . $finalRow . ':F' . ($finalRow + 8))->getFont()->setSize(8);
+        $sheet->getStyle('E' . $finalRow . ':F' . ($finalRow + 8))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
         // Sección de firmas - Revisor (celdas G:H)
-        $sheet->mergeCells('G' . $finalRow . ':H' . ($finalRow + 3));
+        $sheet->mergeCells('G' . $finalRow . ':H' . ($finalRow + 8));
         $sheet->setCellValue('G' . $finalRow, "SELLO / FIRMA DE CONFORMIDAD\nREVISOR");
         $sheet->getStyle('G' . $finalRow)->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('G' . $finalRow)->getAlignment()->setVertical('center');
-        $sheet->getStyle('G' . $finalRow . ':H' . ($finalRow + 3))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('G' . $finalRow)->getAlignment()->setVertical('bottom');
+        $sheet->getStyle('G' . $finalRow)->getAlignment()->setWrapText(true); // Habilitar ajuste de texto
+        $sheet->getStyle('G' . $finalRow . ':H' . ($finalRow + 8))->getFont()->setSize(8);
+        $sheet->getStyle('G' . $finalRow . ':H' . ($finalRow + 8))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
-        // Combinar las celdas de I para el "Sello Recepción Tesorería" y que ocupe más espacio
-        $sheet->mergeCells('I' . ($finalRow) . ':I' . ($finalRow + 3));
+        // Sección de firmas - Tesorería (celda I)
+        $sheet->mergeCells('I' . ($finalRow) . ':I' . ($finalRow + 8));
         $sheet->setCellValue('I' . ($finalRow), 'SELLO RECEPCIÓN TESORERÍA');
         $sheet->getStyle('I' . ($finalRow))->getAlignment()->setHorizontal('center');
-        $sheet->getStyle('I' . ($finalRow))->getAlignment()->setVertical('center');
-        $sheet->getStyle('I' . ($finalRow) . ':I' . ($finalRow + 3))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('I' . ($finalRow))->getAlignment()->setVertical('bottom');
+        $sheet->getStyle('I' . ($finalRow))->getAlignment()->setWrapText(true); // Habilitar ajuste de texto
+        $sheet->getStyle('I' . ($finalRow) . ':I' . ($finalRow + 8))->getFont()->setSize(8);
+        $sheet->getStyle('I' . ($finalRow) . ':I' . ($finalRow + 8))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
         // Aplicar bordes a toda la sección de observaciones y firmas
-        $sheet->getStyle('B' . $finalRow . ':I' . ($finalRow + 3))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+        $sheet->getStyle('B' . $finalRow . ':I' . ($finalRow + 8))->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
     }
 }
