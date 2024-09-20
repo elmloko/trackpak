@@ -44,6 +44,9 @@
                                                         <th>Aduana</th>
                                                         <th>Observaciones</th>
                                                         <th>Ultima Actualizacion</th>
+                                                        @hasrole('SuperAdmin|Administrador')
+                                                            <th>Acciones</th>
+                                                        @endhasrole
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -62,6 +65,26 @@
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->updated_at }}</td>
+                                                            <td>
+                                                                @hasrole('SuperAdmin|Administrador')
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <a class="btn btn-sm btn-success"
+                                                                                href="{{ route('packages.edit', $package->id) }}">
+                                                                                <i class="fa fa-fw fa-edit"></i>
+                                                                                {{ __('Editar') }}
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <button
+                                                                                wire:click="eliminarPaquete({{ $package->id }})"
+                                                                                class="btn btn-sm btn-danger">
+                                                                                <i class="fas fa-trash-alt"></i> Eliminar
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                @endhasrole
+                                                            </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>

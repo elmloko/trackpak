@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
+use App\Models\Event;
 
 class SearchPackages extends Component
 {
@@ -28,6 +29,33 @@ class SearchPackages extends Component
         return view('livewire.search-packages', [
             'packages' => $packages,
         ]);
+    }
+    public function eliminarPaquete($id)
+    {
+        // Encuentra el paquete
+        $package = Package::find($id);
+
+        // Verifica si el paquete existe
+        if ($package) {
+            $codigo = $package->CODIGO; // Obtiene el código antes de eliminar el paquete
+
+            // Elimina el paquete permanentemente
+            $package->forceDelete();
+
+            // Crea el evento de eliminación
+            Event::create([
+                'action' => 'ESTADO',
+                'descripcion' => 'Eliminación de Paquete',
+                'user_id' => auth()->user()->id,
+                'codigo' => $codigo,
+            ]);
+
+            // Mensaje de éxito
+            session()->flash('success', 'Paquete Eliminado Con Éxito!');
+        } else {
+            // Mensaje de error si el paquete no existe
+            session()->flash('error', 'Paquete no encontrado.');
+        }
     }
 }
 
