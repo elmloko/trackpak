@@ -61,7 +61,13 @@
                                                             <td>{{ $package->VENTANILLA }}</td>
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
-                                                            <td>{{ $package->ESTADO }}</td>
+                                                            <td>
+                                                                @if($package->ESTADO == 'REPARTIDO')
+                                                                    ENTREGADO CARTERO
+                                                                @else
+                                                                    {{ $package->ESTADO }}
+                                                                @endif
+                                                            </td>
                                                             <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->updated_at }}</td>
