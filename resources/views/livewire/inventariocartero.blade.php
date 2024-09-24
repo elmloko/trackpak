@@ -77,7 +77,13 @@
                                                 <td>{{ $package->TELEFONO }}</td>
                                                 <td>{{ $package->PESO }} </td>
                                                 <td>{{ $package->TIPO }}</td>
-                                                <td>{{ $package->ESTADO }}</td>
+                                                <td>
+                                                    @if($package->ESTADO == 'REPARTIDO')
+                                                        ENTREGADO CARTERO
+                                                    @else
+                                                        {{ $package->ESTADO }}
+                                                    @endif
+                                                </td>
                                                 <!-- Condicional para la firma -->
                                                 <td>
                                                     @if ($package->firma)

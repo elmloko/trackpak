@@ -79,7 +79,13 @@
                                                 <td>{{ $package->TELEFONO }}</td>
                                                 <td>{{ $package->PESO }} </td>
                                                 <td>{{ $package->TIPO }}</td>
-                                                <td>{{ $package->ESTADO }}</td>
+                                                <td>
+                                                    @if($package->ESTADO == 'REPARTIDO')
+                                                        ENTREGADO CARTERO
+                                                    @else
+                                                        {{ $package->ESTADO }}
+                                                    @endif
+                                                </td>
                                                 <td>{{ $package->usercartero }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->deleted_at }}</td>
