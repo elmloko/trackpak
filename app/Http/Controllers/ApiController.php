@@ -117,6 +117,7 @@ class ApiController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    
     public function softdeletes()
     {
         try {
@@ -130,7 +131,90 @@ class ApiController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
+    public function softdeletesUDD()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesSoftUDD()');
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function softdeletesUDND()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesSoftUDND()');
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function softdeletesUCASILLAS()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesSoftUCASILLAS()');
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function softdeletesUENCOMIENDAS()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesSoftUENCOMIENDAS()');
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function softdeletesRDD()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesSoftRDD()');
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function softdeletesRDND()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesSoftRDND()');
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function softdeletesRCASILLAS()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesSoftRCASILLAS()');
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
     public function callventanilla()
     {
         try {
@@ -219,12 +303,12 @@ class ApiController extends Controller
         // Buscar el paquete por el código proporcionado en ambos modelos
         $package = Package::withTrashed()->where('CODIGO', $codigo)->first();
         $international = International::withTrashed()->where('CODIGO', $codigo)->first();
-    
+
         // Verificar si se encontró en alguno de los dos modelos
         if (!$package && !$international) {
             return response()->json(['error' => 'Package not found'], 404);
         }
-    
+
         // Si se encuentra en el modelo Package
         if ($package) {
             return response()->json([
@@ -238,7 +322,7 @@ class ApiController extends Controller
                 'VENTANILLA' => $package->VENTANILLA,
             ]);
         }
-    
+
         // Si se encuentra en el modelo International
         if ($international) {
             return response()->json([

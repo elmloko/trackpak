@@ -21,6 +21,13 @@ Route::middleware('predefined.token')->group(function () {
     Route::get('/packagesRDND', [ApiController::class, 'packagesRDND']);
     Route::get('/packagesRCASILLAS', [ApiController::class, 'packagesRCASILLAS']);
     Route::get('/softdeletes', [ApiController::class, 'softdeletes']);
+    Route::get('/softdeletesUDD', [ApiController::class, 'softdeletesUDD']);
+    Route::get('/softdeletesUDND', [ApiController::class, 'softdeletesUDND']);
+    Route::get('/softdeletesUCASILLAS', [ApiController::class, 'softdeletesUCASILLAS']);
+    Route::get('/softdeletesUENCOMIENDAS', [ApiController::class, 'softdeletesUENCOMIENDAS']);
+    Route::get('/softdeletesRDD', [ApiController::class, 'softdeletesRDD']);
+    Route::get('/softdeletesRDND', [ApiController::class, 'softdeletesRDND']);
+    Route::get('/softdeletesRCASILLAS', [ApiController::class, 'softdeletesRCASILLAS']);
     Route::get('/callventanilla', [ApiController::class, 'callventanilla']);
     Route::get('/callclasi', [ApiController::class, 'callclasi']);
     Route::post('/delete/{codigo}', [ApiController::class, 'delete']);
