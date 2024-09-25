@@ -52,6 +52,19 @@ class ApiController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    public function packagesUECA()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanillaUECA()');
+
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
     public function packagesUCASILLAS()
     {
         try {
@@ -117,7 +130,7 @@ class ApiController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-    
+
     public function softdeletes()
     {
         try {
@@ -172,6 +185,18 @@ class ApiController extends Controller
         try {
             // Llamar al procedimiento almacenado
             $packages = DB::select('CALL GetAllPackagesSoftUENCOMIENDAS()');
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function softdeletesUECA()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesSoftUECA()');
             // Devolver los datos de los paquetes en formato JSON
             return response()->json($packages);
         } catch (\Exception $e) {
