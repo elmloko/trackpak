@@ -32,6 +32,11 @@ Route::middleware('predefined.token')->group(function () {
     Route::get('/softdeletesRCASILLAS', [ApiController::class, 'softdeletesRCASILLAS']);
     Route::get('/callventanilla', [ApiController::class, 'callventanilla']);
     Route::get('/callclasi', [ApiController::class, 'callclasi']);
+    Route::get('/callclasiUDD', [ApiController::class, 'callclasiUDD']);
+    Route::get('/callclasiUDND', [ApiController::class, 'callclasiUDND']);
+    Route::get('/callclasiUCASILLAS', [ApiController::class, 'callclasiUCASILLAS']);
+    Route::get('/callclasiUECA', [ApiController::class, 'callclasiUECA']);
+    Route::get('/callclasiUENCOMIENDAS', [ApiController::class, 'callclasiUENCOMIENDAS']);
     Route::post('/delete/{codigo}', [ApiController::class, 'delete']);
     Route::get('/events/repeated-codes/{codigo}', [ApiController::class, 'getEventsByCodigo']);
 });

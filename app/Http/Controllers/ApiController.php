@@ -267,6 +267,71 @@ class ApiController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    public function callclasiUDD()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesClasiUDD()');
+
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function callclasiUDND()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesClasiUDND()');
+
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function callclasiUECA()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesClasiUECA()');
+
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function callclasiUCASILLAS()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesClasiUCASILLAS()');
+
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function callclasiUENCOMIENDAS()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesClasiUENCOMIENDA()');
+
+            // Devolver los datos de los paquetes en formato JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 
     public function getEventsByCodigo($codigo)
     {
