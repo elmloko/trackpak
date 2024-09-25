@@ -26,6 +26,97 @@ class ApiController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+    public function packagesUDD()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanillaUDD()');
+
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function packagesUDND()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanillaUDND()');
+
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function packagesUCASILLAS()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanillaUCASILLAS()');
+
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function packagesUENCOMIENDAS()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanillaUENCOMIENDA()');
+
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function packagesRDD()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanillaRDD()');
+
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function packagesRDND()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanillaRDND()');
+
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    public function packagesRCASILLAS()
+    {
+        try {
+            // Llamar al procedimiento almacenado
+            $packages = DB::select('CALL GetAllPackagesVentanillaRCASILLAS()');
+
+            // Devolver los resultados como JSON
+            return response()->json($packages);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
     public function softdeletes()
     {
         try {

@@ -13,6 +13,13 @@ Route::middleware('predefined.token')->group(function () {
     Route::get('/prueba/{codigo}', [ApiController::class, 'show']);
     Route::post('/ventanilla', [ApiController::class, 'ventanilla']);
     Route::get('/packages', [ApiController::class, 'index']);
+    Route::get('/packagesUDD', [ApiController::class, 'packagesUDD']);
+    Route::get('/packagesUDND', [ApiController::class, 'packagesUDND']);
+    Route::get('/packagesUCASILLAS', [ApiController::class, 'packagesUCASILLAS']);
+    Route::get('/packagesUENCOMIENDAS', [ApiController::class, 'packagesUENCOMIENDAS']);
+    Route::get('/packagesRDD', [ApiController::class, 'packagesRDD']);
+    Route::get('/packagesRDND', [ApiController::class, 'packagesRDND']);
+    Route::get('/packagesRCASILLAS', [ApiController::class, 'packagesRCASILLAS']);
     Route::get('/softdeletes', [ApiController::class, 'softdeletes']);
     Route::get('/callventanilla', [ApiController::class, 'callventanilla']);
     Route::get('/callclasi', [ApiController::class, 'callclasi']);
