@@ -63,10 +63,10 @@
                                         <td>{{ $international->TIPO }}</td>
                                         <td>{{ $international->ADUANA }}</td>
                                         <td>
-                                            @if($package->ESTADO == 'REPARTIDO')
+                                            @if($international->ESTADO == 'REPARTIDO')
                                                 ENTREGADO CARTERO
                                             @else
-                                                {{ $package->ESTADO }}
+                                                {{ $international->ESTADO }}
                                             @endif
                                         </td>
                                         <td>{{ $international->PRECIO }}</td>
