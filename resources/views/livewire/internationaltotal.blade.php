@@ -62,7 +62,13 @@
                                         <td>{{ $international->PESO }}</td>
                                         <td>{{ $international->TIPO }}</td>
                                         <td>{{ $international->ADUANA }}</td>
-                                        <td>{{ $international->ESTADO }}</td>
+                                        <td>
+                                            @if($package->ESTADO == 'REPARTIDO')
+                                                ENTREGADO CARTERO
+                                            @else
+                                                {{ $package->ESTADO }}
+                                            @endif
+                                        </td>
                                         <td>{{ $international->PRECIO }}</td>
                                         <td>{{ $international->OBSERVACIONES }}</td>
                                         <td>{{ $international->created_at }}</td>
