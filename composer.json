@@ -23,6 +23,7 @@
         "milon/barcode": "^10.0",
         "opcodesio/log-viewer": "^3.10",
         "picqer/php-barcode-generator": "^2.4",
+        "spatie/laravel-backup": "^9.1",
         "spatie/laravel-permission": "^5.11",
         "tymon/jwt-auth": "*",
         "wire-elements/modal": "^2.0"
