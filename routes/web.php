@@ -226,6 +226,7 @@ Route::middleware('auth')->group(function () {
     Route::get('internationals/ventanillacasillas', [InternationalController::class, 'ventanillacasillas'])->name('internationals.ventanillacasillas');
     Route::get('/internationals/deleteadodnd', [InternationalController::class, 'deleteadodnd'])->name('internationals.deleteadodnd');
     Route::get('/internationals/deleteadocasillas', [InternationalController::class, 'deleteadocasillas'])->name('internationals.deleteadocasillas');
+    Route::get('/traspasoventanillas', [InternationalController::class, 'traspasoventanillas'])->name('internationals.traspasoventanillas');
 
     //Plantillas Importar
     Route::get('internationals/plantillaeexcel', [InternationalController::class, 'plantillaeexcel'])->name('plantillae.excel');

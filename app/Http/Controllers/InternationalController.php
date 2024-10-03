@@ -175,4 +175,8 @@ class InternationalController extends Controller
     {
         return view('international.deleteadocasillas');
     }
+    public function traspasoventanillas()
+    {
+        return view('international.traspasoventanillas');
+    }
 }

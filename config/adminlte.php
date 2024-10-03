@@ -572,6 +572,12 @@ return [
                         ],
                     ],
                 ],
+                [
+                    'text' => 'Traspazo de Ventanillas',
+                    'url' => 'traspasoventanillas',
+                    'icon' => 'fas fa-box',
+                    'can'  => 'packages.ventanilla',
+                ],
             ],
         ],
         [
