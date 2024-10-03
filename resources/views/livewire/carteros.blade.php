@@ -197,6 +197,8 @@
                             <option value="Articulo Prohibido">Artículo prohibido</option>
                             <option value="Importacion Restringida">Importación restringida</option>
                             <option value="No Reclamado">No reclamado</option>
+                            <option value="Destinatario se mudo">Destinatario se mudo</option>
+                            <option value="Direccion Insuficiente">Direccion Insuficiente</option>
                             <option value="Por Fuerza Mayor, Articulo no entregado">Por fuerza mayor, artículo no
                                 entregado</option>
                             <option value="Destinatario Solicita recojo en Agencia">Destinatario solicita recojo en
@@ -280,6 +282,8 @@
                     <option value="Destinatario Solicita recojo en Agencia">Destinatario solicita recojo en agencia</option>
                     <option value="Destinatario en Vacaciones">Destinatario en vacaciones</option>
                     <option value="Destinatario en Traslado">Destinatario en traslado</option>
+                    <option value="Destinatario se mudo">Destinatario se mudo</option>
+                    <option value="Direccion Insuficiente">Direccion Insuficiente</option>
                     <option value="Otros">Otros</option>
                 `;
             } else if (estado === 'REPARTIDO') {
