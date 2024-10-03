@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
-use Artisan;
+use Illuminate\Support\Facades\Artisan;
 
 class BackupController extends Controller
 {
@@ -21,7 +21,7 @@ class BackupController extends Controller
     public function download($file)
     {
         $filePath = "TrackPak/{$file}";
-    
+
         if (Storage::disk('local')->exists($filePath)) {
             // Usar streamDownload y agregar encabezados en el tercer parámetro
             return response()->streamDownload(function () use ($filePath) {
@@ -30,18 +30,21 @@ class BackupController extends Controller
                 'Access-Control-Allow-Origin' => '*',  // Encabezado para CORS
             ]);
         }
-    
-        return redirect()->back()->with('error', 'Archivo no encontrado');
-    }  
-    // public function runBackup()
-    // {
-    //     try {
-    //         // Ejecuta el comando 'php artisan backup:run'
-    //         Artisan::call('backup:run');
 
-    //         return redirect()->back()->with('success', 'Backup realizado con éxito.');
-    //     } catch (\Exception $e) {
-    //         return redirect()->back()->with('error', 'Error al ejecutar el backup: ' . $e->getMessage());
-    //     }
-    // } 
+        return redirect()->back()->with('error', 'Archivo no encontrado');
+    }
+    public function runBackup()
+    {
+        try {
+            // Ejecuta el comando php artisan backup:run
+            Artisan::call('backup:run');
+            
+            // Mensaje de éxito
+            return redirect()->back()->with('success', 'Respaldo ejecutado correctamente.');
+        } catch (\Exception $e) {
+            // Capturar y mostrar el error
+            return redirect()->back()->with('error', 'Ocurrió un error durante el respaldo: ' . $e->getMessage());
+        }
+    }
+    
 }

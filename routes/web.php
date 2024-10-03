@@ -245,7 +245,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/backups', [BackupController::class, 'index'])->name('backups.index');
     Route::get('/backups/download/{file}', [BackupController::class, 'download'])->name('backups.download');
-    Route::get('/run-backup', [BackupController::class, 'runBackup'])->name('backups.run');
+    Route::get('/run-backup', [BackupController::class, 'runBackup'])->name('run-backup');
 
     Blade::if('role', function ($roles) {
         return auth()->check() && auth()->user()->hasAnyRole(explode('|', $roles));

@@ -21,7 +21,11 @@
         @endif
 
         <!-- Botón para ejecutar el backup -->
-        <a href="{{ route('backups.run') }}" class="btn btn-primary mb-3">Ejecutar Backup</a>
+        <form action="{{ route('run-backup') }}" method="GET">
+            <button type="submit" class="btn btn-primary">
+                Ejecutar Respaldo
+            </button>
+        </form>
 
         <table class="table">
             <thead>
