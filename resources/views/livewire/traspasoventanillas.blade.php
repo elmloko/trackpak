@@ -3,16 +3,19 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                    <h5 id="card_title">{{ __('Paquetes Ordinarios Nacionales') }}</h5>
+                    <h5 id="card_title">{{ __('Traspaso de Paquetes Ordinarios') }}</h5>
                 </div>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <!-- Formulario de búsqueda -->
-                        <input type="text" wire:model="searchTerm" class="form-control"
-                            placeholder="Buscar código de rastreo">
-                        <button wire:click="searchPackage" class="btn btn-primary mt-2">Buscar</button>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!-- Formulario de búsqueda -->
+                            <input type="text" wire:model="searchTerm" class="form-control"
+                                placeholder="Buscar código de rastreo">
+                        </div>
+                        <div class="col-md-1">
+                            <button wire:click="searchPackage" class="btn btn-primary mt-2">Buscar</button>
+                        </div>
                     </div>
-
                     <div class="table-responsive">
                         @if (session()->has('message'))
                             <div class="alert alert-success">
