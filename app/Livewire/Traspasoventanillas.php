@@ -30,6 +30,20 @@ class Traspasoventanillas extends Component
         }
     }
 
+    public function quitarVentana($packageId)
+    {
+        // Buscar el paquete por ID
+        $package = Package::find($packageId);
+
+        if ($package) {
+            // Actualizar el estado del paquete a 'QUITADO'
+            $package->ESTADO = 'VENTANILLA';
+            $package->save();
+
+            session()->flash('message', 'El paquete ha sido quitado de la ventanilla.');
+        }
+    }
+
     public function render()
     {
         // Filtrar los paquetes con estado 'TRASPAZO' para mostrarlos en la tabla

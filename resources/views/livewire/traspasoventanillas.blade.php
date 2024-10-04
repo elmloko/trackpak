@@ -43,6 +43,7 @@
                                         <th>Aduana</th>
                                         <th>Observaciones</th>
                                         <th>Ultima Actualización</th>
+                                        <th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,6 +68,11 @@
                                             <td>{{ $package->ADUANA }}</td>
                                             <td>{{ $package->OBSERVACIONES }}</td>
                                             <td>{{ $package->updated_at }}</td>
+                                            <td>
+                                                @if($package->ESTADO == 'TRASPAZO')
+                                                    <button wire:click="quitarVentana({{ $package->id }})" class="btn btn-warning">Quitar</button>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
