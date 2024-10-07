@@ -3,8 +3,9 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Package;
 use Livewire\WithPagination;
+use App\Models\Package;
+use App\Models\Event;
 
 class Traspasoventanillas extends Component
 {
@@ -25,9 +26,17 @@ class Traspasoventanillas extends Component
             $package->ESTADO = 'TRASPAZO';
             $package->save();
 
+            // Crear el evento para el cambio de estado
+            Event::create([
+                'action' => 'TRASPAZO',
+                'descripcion' => 'Paquete seleccionado para traspaso de Ventanilla',
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
+
             session()->flash('message', 'El paquete con código ' . $this->searchTerm . ' ha sido actualizado a TRASPAZO.');
         } else {
-            session()->flash('message', 'No se encontró ningún paquete con el código o el estado no es VENTANILLA.');
+            session()->flash('message', 'No se encontró ningún paquete con el código ingresado o el estado no es VENTANILLA.');
         }
     }
 
@@ -37,11 +46,13 @@ class Traspasoventanillas extends Component
         $package = Package::find($packageId);
 
         if ($package) {
-            // Actualizar el estado del paquete a 'QUITADO'
+            // Actualizar el estado del paquete a 'VENTANILLA'
             $package->ESTADO = 'VENTANILLA';
             $package->save();
 
-            session()->flash('message', 'El paquete ha sido quitado de la ventanilla.');
+            session()->flash('message', 'El paquete ha sido regresado a la ventanilla.');
+        } else {
+            session()->flash('message', 'No se pudo encontrar el paquete para quitar de la ventanilla.');
         }
     }
 
@@ -49,7 +60,7 @@ class Traspasoventanillas extends Component
     {
         // Verificar si se ha seleccionado una ventanilla
         if (!$this->selectedVentanilla) {
-            session()->flash('message', 'Seleccione una ventanilla antes de traspazar.');
+            session()->flash('message', 'Seleccione una ventanilla antes de traspasar.');
             return;
         }
 
@@ -60,9 +71,17 @@ class Traspasoventanillas extends Component
             $package->VENTANILLA = $this->selectedVentanilla;
             $package->ESTADO = 'VENTANILLA'; // Cambiar el estado de nuevo a 'VENTANILLA'
             $package->save();
+
+            // Crear el evento para el cambio de ventanilla
+            Event::create([
+                'action' => 'TRASPAZO',
+                'descripcion' => 'Paquete traspasado a Ventanilla ' . $this->selectedVentanilla,
+                'user_id' => auth()->user()->id,
+                'codigo' => $package->CODIGO,
+            ]);
         }
 
-        session()->flash('message', 'Los paquetes han sido traspazados a la ventanilla seleccionada.');
+        session()->flash('message', 'Los paquetes han sido traspasados a la ventanilla seleccionada.');
     }
 
     public function render()
@@ -78,4 +97,3 @@ class Traspasoventanillas extends Component
         ]);
     }
 }
-
