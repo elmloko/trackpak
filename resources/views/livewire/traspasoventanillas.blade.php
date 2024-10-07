@@ -69,7 +69,7 @@
                                             <td>{{ $package->OBSERVACIONES }}</td>
                                             <td>{{ $package->updated_at }}</td>
                                             <td>
-                                                @if($package->ESTADO == 'TRASPAZO')
+                                                @if($package->ESTADO == 'VENTANILLA')
                                                     <button wire:click="quitarVentana({{ $package->id }})" class="btn btn-warning">Quitar</button>
                                                 @endif
                                             </td>
@@ -81,6 +81,25 @@
                             <p>No se encontraron resultados para la búsqueda.</p>
                         @endif
                     </div>
+
+                    <!-- Nueva funcionalidad: Select y botón para traspazar -->
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <label for="ventanillaSelect">Seleccionar Ventanilla</label>
+                            <select wire:model="selectedVentanilla" class="form-control" id="ventanillaSelect">
+                                <option value="">Seleccione</option>
+                                <option value="DD">DD</option>
+                                <option value="DND">DND</option>
+                                <option value="ECA">ECA</option>
+                                <option value="ENCOMIENDAS">ENCOMIENDAS</option>
+                                <option value="CASILLAS">CASILLAS</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button wire:click="traspazarPaquetes" class="btn btn-primary mt-4">TRASPAZAR</button>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

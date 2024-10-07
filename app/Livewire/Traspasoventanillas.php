@@ -11,6 +11,7 @@ class Traspasoventanillas extends Component
     use WithPagination;
 
     public $searchTerm; // Variable para el código de búsqueda
+    public $selectedVentanilla; // Variable para el select de ventanillas
 
     public function searchPackage()
     {
@@ -44,6 +45,26 @@ class Traspasoventanillas extends Component
         }
     }
 
+    public function traspazarPaquetes()
+    {
+        // Verificar si se ha seleccionado una ventanilla
+        if (!$this->selectedVentanilla) {
+            session()->flash('message', 'Seleccione una ventanilla antes de traspazar.');
+            return;
+        }
+
+        // Actualizar todos los paquetes con estado 'TRASPAZO' a la ventanilla seleccionada
+        $packages = Package::where('ESTADO', 'TRASPAZO')->get();
+
+        foreach ($packages as $package) {
+            $package->VENTANILLA = $this->selectedVentanilla;
+            $package->ESTADO = 'VENTANILLA'; // Cambiar el estado de nuevo a 'VENTANILLA'
+            $package->save();
+        }
+
+        session()->flash('message', 'Los paquetes han sido traspazados a la ventanilla seleccionada.');
+    }
+
     public function render()
     {
         // Filtrar los paquetes con estado 'TRASPAZO' para mostrarlos en la tabla
@@ -57,3 +78,4 @@ class Traspasoventanillas extends Component
         ]);
     }
 }
+
