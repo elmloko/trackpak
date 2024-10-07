@@ -71,7 +71,7 @@
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                     <div class="form-group">
                         {{ Form::label('VENTANILLA*') }}
-                        {{ Form::select('VENTANILLA', ['ECA' => 'ECA', 'UNICA' => 'UNICA', 'ENCOMIENDA' => 'ENCOMIENDA', 'DND' => 'DND', 'DD' => 'DD', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
+                        {{ Form::select('VENTANILLA', ['ECA' => 'ECA', 'UNICA' => 'UNICA', 'ENCOMIENDAS' => 'ENCOMIENDAS', 'DND' => 'DND', 'DD' => 'DD', 'ECA' => 'ECA', 'CASILLAS' => 'CASILLAS', 'UNICA' => 'UNICA'], $package->VENTANILLA, ['class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''), 'placeholder' => 'Selecione la Ventanilla', 'id' => 'ventanilla-select']) }}
                         {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                     <div class="form-group">
@@ -248,6 +248,7 @@
                 $('#ventanilla-select option[value="DD"]').show();
                 $('#ventanilla-select option[value="ECA"]').show();
                 $('#ventanilla-select option[value="CASILLAS"]').show();
+                $('#ventanilla-select option[value="ENCOMIENDAS"]').show();
             } else {
                 $('#ventanilla-select option[value="UNICA"]').show();
                 $('#ventanilla-select option[value="DND"]').hide();

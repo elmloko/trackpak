@@ -40,7 +40,7 @@ class PackageController extends Controller
             'DESTINATARIO' => 'required|string|max:255',
             'TELEFONO' => 'required|numeric|regex:/^[0-9]+$/',
             'CUIDAD' => 'required',
-            'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA',
+            'VENTANILLA' => 'required|in:DND,DD,ECA,CASILLAS,UNICA,ENCOMIENDAS',
             // 'ZONA' => 'required_if:VENTANILLA,DD,ECA,CASILLAS|string|max:255',
             'PESO' => 'required|numeric|regex:/^\d+(\.\d{1,3})?$/|between:0.001,10.000',
             'TIPO' => 'required|string',
