@@ -137,7 +137,7 @@ class ClasificacionPackages extends Component
         $pdfContent = $pdf->output();
 
 
-        toastr()->success('Data has been saved successfully!', 'Congrats');
+        toastr()->success('SE NOTIFICO A REGIONAL');
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
