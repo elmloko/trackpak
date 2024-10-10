@@ -136,6 +136,8 @@ class ClasificacionPackages extends Component
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
 
+
+        toastr()->success('Data has been saved successfully!', 'Congrats');
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
