@@ -23,6 +23,7 @@ class DashboardAdmini extends Component
     public $totalmensajeHoy;
     public $totalmensajenenv;
     public $totalmensaje;
+    public $despachoclasi;
 
     public function mount()
     {
@@ -74,10 +75,17 @@ class DashboardAdmini extends Component
         $this->totalmensajenenv = Cache::remember('totalmensajenenv', 600, function () {
             return Mensaje::where('estado', 'No enviado')->count();
         });
+        Cache::forget('despachoclasi');
+        $this->despachoclasi = Cache::remember('despachoclasi', 600, function () {
+            return Package::where('ESTADO', 'PRE-REZAGO')->count();
+        });
     }
 
     public function render()
     {
+        if (auth()->user()->hasRole('Administrador') && $this->despachoclasi > 0) {
+            toastr()->warning("TIENES PAQUETES OBSERVADOS PARA SER REZAGADOS!. SON :{$this->despachoclasi}");
+        }
         return view('livewire.dashboard-admini');
     }
 }
