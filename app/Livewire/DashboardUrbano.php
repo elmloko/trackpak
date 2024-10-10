@@ -105,12 +105,6 @@ class DashboardUrbano extends Component
         if (auth()->user()->hasRole('Urbano') && $this->despachoclasi > 0) {
             toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasi} PAQUETES PARA VENTANILLA DD");
         }
-        if (auth()->user()->hasRole('Urbano') && $this->despachoclasid > 0) {
-            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasid} PAQUETES PARA VENTANILLA DND");
-        }
-        if (auth()->user()->hasRole('Urbano') && $this->despachoclasic > 0) {
-            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasic} PAQUETES PARA VENTANILLA CASILLAS");
-        }
         if (auth()->user()->hasRole('Urbano') && $this->despachoclasica > 0) {
             toastr()->warning("PAQUETES PENDIENTES PARA RECIBIR. SON :{$this->despachoclasica} PAQUETES DEVUELTOS POR CARTEROS");
         }
