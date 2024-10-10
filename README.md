@@ -27,6 +27,7 @@ To solve these problems, a modern and efficient system for tracking parcels nati
   https://jwt-auth.readthedocs.io/en/develop/					tymon/jwt-auth
   https://laravel.com/docs/11.x/pulse						laravel/pulse
   https://log-viewer.opcodes.io/							opcodesio/log-viewer
+  https://github.com/reytechcode/Toastr-Laravel				yoeunes/toast
 
 ## Installation
 
