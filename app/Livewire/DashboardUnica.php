@@ -11,6 +11,7 @@ class DashboardUnica extends Component
 {
     public $statistics = [];
     public $userRegional;
+    public $despachoclasica;
 
     public function mount()
     {
@@ -38,14 +39,27 @@ class DashboardUnica extends Component
             $this->statistics[$city]['today_v'] = Cache::remember("{$city}_today_v", 600, function () use ($city) {
                 return Package::onlyTrashed()->where('CUIDAD', $city)->where('ESTADO', 'ENTREGADO')->whereDate('deleted_at', today())->sum('PRECIO');
             });
+            // Eliminar el caché anterior y volver a calcular el valor
+            Cache::forget('despachoclasica');
+            $this->despachoclasica = Cache::remember('despachoclasica', 600, function () {
+                return Package::where('CUIDAD', $this->userRegional)
+                    ->where('ESTADO', 'DESPACHO')
+                    ->where('VENTANILLA', 'UNICA')
+                    ->count();
+            });
         }
     }
 
     public function render()
     {
+        // Mostrar notificación solo si el usuario tiene el rol 'Casillas' y hay paquetes en despacho
+        if (auth()->user()->hasRole('Unica') && $this->despachoclasica > 0) {
+            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasica} PAQUETES PARA VENTANILLA $this->userRegional ");
+        }
+
         return view('livewire.dashboard-unica', [
             'statistics' => $this->statistics,
-            'userRegional' => $this->userRegional
+            'userRegional' => $this->userRegional,
         ]);
     }
 }
