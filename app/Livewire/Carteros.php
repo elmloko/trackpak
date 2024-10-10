@@ -153,6 +153,7 @@ class Carteros extends Component
                     'user_id' => auth()->user()->id,
                     'codigo' => $package->CODIGO,
                 ]);
+                toastr()->success("SE NOTIFICÓ A ENCARGADO DE VENTANILLA");
             } elseif ($this->estado === 'PRE-REZAGO') {
                 Event::create([
                     'action' => 'PRE-REZAGO',
@@ -160,6 +161,7 @@ class Carteros extends Component
                     'user_id' => auth()->user()->id,
                     'codigo' => $package->CODIGO,
                 ]);
+                toastr()->success("SE NOTIFICÓ A ENCARGADO DE REGIONAL");
             }
     
         } else {
@@ -205,6 +207,7 @@ class Carteros extends Component
                         'user_id' => auth()->user()->id,
                         'codigo' => $internationalPackage->CODIGO,
                     ]);
+                    toastr()->success("SE NOTIFICÓ A ENCARGADO DE VENTANILLA");
                 } elseif ($this->estado === 'PRE-REZAGO') {
                     Event::create([
                         'action' => 'PRE-REZAGO',
@@ -212,6 +215,7 @@ class Carteros extends Component
                         'user_id' => auth()->user()->id,
                         'codigo' => $internationalPackage->CODIGO,
                     ]);
+                    toastr()->success("SE NOTIFICÓ A ENCARGADO DE REGIONAL");
                 }
     
             } else {
