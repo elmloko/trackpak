@@ -26,6 +26,9 @@
     @hasrole('SuperAdmin|Administrador|ENCOMIENDAS')
         @livewire('dashboard-encomienda')
     @endhasrole
+    @hasrole('SuperAdmin|Administrador|Cartero')
+        @livewire('dashboardcartero')
+    @endhasrole
     @hasrole('SuperAdmin|Administrador|ECA')
         @livewire('dashboard-eca')
     @endhasrole

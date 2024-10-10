@@ -20,6 +20,7 @@ class DashboardUrbano extends Component
     public $despachoclasi;
     public $despachoclasid;
     public $despachoclasic;
+    public $despachoclasica;
 
     public function mount()
     {
@@ -82,6 +83,21 @@ class DashboardUrbano extends Component
                 ->where('VENTANILLA', 'CASILLAS')
                 ->count();
         });
+        Cache::forget('despachoclasica');
+        $this->despachoclasica = Cache::remember('despachoclasica', 600, function () {
+            // Contar paquetes con estado RETORNO
+            $packagesCount = Package::where('CUIDAD', 'LA PAZ')
+                ->where('ESTADO', 'RETORNO')
+                ->count();
+        
+            // Contar internacionales con estado RETORNO
+            $internationalCount = International::where('CUIDAD', 'LA PAZ')
+                ->where('ESTADO', 'RETORNO')
+                ->count();
+        
+            // Retornar la suma de ambos conteos
+            return $packagesCount + $internationalCount;
+        });
     }
 
     public function render()
@@ -94,6 +110,9 @@ class DashboardUrbano extends Component
         }
         if (auth()->user()->hasRole('Urbano') && $this->despachoclasic > 0) {
             toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasic} PAQUETES PARA VENTANILLA CASILLAS");
+        }
+        if (auth()->user()->hasRole('Urbano') && $this->despachoclasica > 0) {
+            toastr()->warning("PAQUETES PENDIENTES PARA RECIBIR. SON :{$this->despachoclasica} PAQUETES DEVUELTOS POR CARTEROS");
         }
         return view('livewire.dashboard-urbano');
     }
