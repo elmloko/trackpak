@@ -33,4 +33,14 @@
             </main>
         </div>
     </body>
+    <!-- Incluye los scripts de Toastr y jQuery al final para cargar más rápido la página -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Si quieres que los mensajes de Toastr se muestren en todas las vistas, puedes usar algo como esto -->
+    @if(session()->has('toastr'))
+        <script>
+            {!! session('toastr') !!}
+        </script>
+    @endif
 </html>

@@ -91,6 +91,8 @@ class ClasificacionPackages extends Component
         $ciudadOrigen = auth()->user()->Regional;
         // Obtener la ciudad de destino
         $ciudadDestino = $paquetesSeleccionados->first()->CUIDAD;
+        $ventanilla = $paquetesSeleccionados->first()->VENTANILLA ?? 'Desconocida';
+        $cuidad = $paquetesSeleccionados->first()->CUIDAD ?? 'Desconocida';
 
         // Mapas de siglas
         $siglasOrigen = [
@@ -137,7 +139,7 @@ class ClasificacionPackages extends Component
         $pdfContent = $pdf->output();
 
 
-        toastr()->success('SE NOTIFICO A REGIONAL');
+        toastr()->success("SE NOTIFICÓ A REGIONAL. {$cuidad}{$ventanilla}");
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
