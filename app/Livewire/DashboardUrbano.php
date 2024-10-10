@@ -17,6 +17,9 @@ class DashboardUrbano extends Component
     public $totallpedd;
     public $hoylpedd;
     public $hoylpvdd;
+    public $despachoclasi;
+    public $despachoclasid;
+    public $despachoclasic;
 
     public function mount()
     {
@@ -57,10 +60,41 @@ class DashboardUrbano extends Component
         $this->hoylpvdd = Cache::remember('hoylpvdd', 600, function () {
             return Package::onlyTrashed()->where('CUIDAD', 'LA PAZ')->where('ESTADO', 'ENTREGADO')->where('VENTANILLA', 'DD')->whereDate('deleted_at', today())->sum('PRECIO');
         });
+
+        Cache::forget('despachoclasi');
+        $this->despachoclasi = Cache::remember('despachoclasi', 600, function () {
+            return Package::where('CUIDAD', 'LA PAZ')
+                ->where('ESTADO', 'DESPACHO')
+                ->where('VENTANILLA', 'DD')
+                ->count();
+        });
+        Cache::forget('despachoclasid');
+        $this->despachoclasid = Cache::remember('despachoclasid', 600, function () {
+            return Package::where('CUIDAD', 'LA PAZ')
+                ->where('ESTADO', 'DESPACHO')
+                ->where('VENTANILLA', 'DND')
+                ->count();
+        });
+        Cache::forget('despachoclasic');
+        $this->despachoclasic = Cache::remember('despachoclasic', 600, function () {
+            return Package::where('CUIDAD', 'LA PAZ')
+                ->where('ESTADO', 'DESPACHO')
+                ->where('VENTANILLA', 'CASILLAS')
+                ->count();
+        });
     }
 
     public function render()
     {
+        if (auth()->user()->hasRole('Urbano') && $this->despachoclasi > 0) {
+            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasi} PAQUETES PARA VENTANILLA DD");
+        }
+        if (auth()->user()->hasRole('Urbano') && $this->despachoclasid > 0) {
+            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasid} PAQUETES PARA VENTANILLA DND");
+        }
+        if (auth()->user()->hasRole('Urbano') && $this->despachoclasic > 0) {
+            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasic} PAQUETES PARA VENTANILLA CASILLAS");
+        }
         return view('livewire.dashboard-urbano');
     }
 }

@@ -12,6 +12,7 @@ class DashboardEca extends Component
     public $totallpeeca;
     public $hoylpeeca;
     public $hoylpveca;
+    public $despachoclasi;
 
     public function mount()
     {
@@ -53,10 +54,20 @@ class DashboardEca extends Component
                 ->whereDate('deleted_at', today())
                 ->sum('PRECIO');
         });
+        Cache::forget('despachoclasi');
+        $this->despachoclasi = Cache::remember('despachoclasi', 600, function () {
+            return Package::where('CUIDAD', 'LA PAZ')
+                ->where('ESTADO', 'DESPACHO')
+                ->where('VENTANILLA', 'ECA')
+                ->count();
+        });
     }
 
     public function render()
     {
+        if (auth()->user()->hasRole('ECA') && $this->despachoclasi > 0) {
+            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasi} PAQUETES");
+        }
         return view('livewire.dashboard-eca');
     }
 }

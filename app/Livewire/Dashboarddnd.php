@@ -17,6 +17,7 @@ class Dashboarddnd extends Component
     public $totallpednd;
     public $hoylpednd;
     public $hoylpvdnd;
+    public $despachoclasi;
 
     public function mount()
     {
@@ -91,10 +92,20 @@ class Dashboarddnd extends Component
                 ->whereDate('deleted_at', today())
                 ->sum('PRECIO');
         });
+        Cache::forget('despachoclasi');
+        $this->despachoclasi = Cache::remember('despachoclasi', 600, function () {
+            return Package::where('CUIDAD', 'LA PAZ')
+                ->where('ESTADO', 'DESPACHO')
+                ->where('VENTANILLA', 'DND')
+                ->count();
+        });
     }
 
     public function render()
     {
+        if (auth()->user()->hasRole('DND') && $this->despachoclasi > 0) {
+            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasi} PAQUETES PARA VENTANILLA DND");
+        }
         return view('livewire.dashboarddnd');
     }
 }

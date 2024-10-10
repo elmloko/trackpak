@@ -23,7 +23,7 @@ return [
         'showMethod'        => 'fadeIn', // Método de animación al mostrar la notificación.
         'hideMethod'        => 'fadeOut', // Método de animación al ocultar la notificación.
         'newestOnTop'       => true, // Muestra las notificaciones nuevas en la parte superior.
-        'preventDuplicates' => true, // Evita que se muestren notificaciones duplicadas.
+        'preventDuplicates' => false, // Evita que se muestren notificaciones duplicadas.
         'tapToDismiss'      => true, // Permite cerrar la notificación al hacer clic en ella.
     ],
 

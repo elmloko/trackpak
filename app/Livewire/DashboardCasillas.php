@@ -12,6 +12,7 @@ class DashboardCasillas extends Component
     public $totallpecs;
     public $hoylpecs;
     public $hoylpvcs;
+    public $despachoclasica;
 
     public function mount()
     {
@@ -53,10 +54,21 @@ class DashboardCasillas extends Component
                 ->whereDate('deleted_at', today())
                 ->sum('PRECIO');
         });
+        Cache::forget('despachoclasica');
+        $this->despachoclasica = Cache::remember('despachoclasica', 600, function () {
+            return Package::where('CUIDAD', 'LA PAZ')
+                ->where('ESTADO', 'DESPACHO')
+                ->where('VENTANILLA', 'CASILLAS')
+                ->count();
+        });
     }
 
     public function render()
     {
+        if (auth()->user()->hasRole('Casillas') && $this->despachoclasica > 0) {
+            toastr()->warning("TIENES PAQUETES EN DESPACHO REVISA TU CN33 PARA RECIBIRLOS!. SON :{$this->despachoclasica} PAQUETES PARA VENTANILLA CASILLAS");
+        }
+
         return view('livewire.dashboard-casillas');
     }
 }
