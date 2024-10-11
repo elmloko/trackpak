@@ -19,7 +19,12 @@
                     class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Buscar</button>
                 </div>
                 <div class="mt-4">
-                    <div class="g-recaptcha flex justify-center mt-4" data-sitekey="6LcJRHQpAAAAABKCk7seFIHEImEUo2Q31tPLpSjX"></div>
+                    <div>
+                            {!! htmlFormSnippet() !!}
+                            @if (!isset($_POST['g-recaptcha-response']) && $errors->any())
+                                <small class="text-danger">Por favor, complete el reCAPTCHA</small>
+                            @endif
+                        </div>
                 </div>
             </form>
         </div>
