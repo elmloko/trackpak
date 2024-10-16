@@ -650,43 +650,43 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'Distribuicion',
-            'icon' => 'fas fa-boxes',
-            'can'  => 'packages.redirigidos',
-            'submenu' => [
-                [
-                    'text' => 'Todos Despacho',
-                    'url' => 'bag/bagsall',
-                    'icon' => 'fas fa-box-open',
-                    'can'  => 'packages.todo',
-                ],
-                // [
-                //     'text' => 'Ingreso Despacho',
-                //     'url' => 'bags',
-                //     'icon' => 'fas fa-box-open',
-                //     'can'  => 'packages.ingreso',
-                // ],
-                [
-                    'text' => 'Ingreso Despacho',
-                    'url' => 'bag/bagsclose',
-                    'icon' => 'fas fa-box-open',
-                    'can'  => 'packages.cierre',
-                ],
-                [
-                    'text' => 'Expedicion Despacho',
-                    'url' => 'bag/bagstrans',
-                    'icon' => 'fas fa-box-open',
-                    'can'  => 'packages.despacho',
-                ],
-                [
-                    'text' => 'Apertura Despacho',
-                    'url' => 'bag/bagsopen',
-                    'icon' => 'fas fa-box-open',
-                    'can'  => 'packages.apertura',
-                ],
-            ],
-        ],
+        // [
+        //     'text' => 'Distribuicion',
+        //     'icon' => 'fas fa-boxes',
+        //     'can'  => 'packages.redirigidos',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Todos Despacho',
+        //             'url' => 'bag/bagsall',
+        //             'icon' => 'fas fa-box-open',
+        //             'can'  => 'packages.todo',
+        //         ],
+        //         // [
+        //         //     'text' => 'Ingreso Despacho',
+        //         //     'url' => 'bags',
+        //         //     'icon' => 'fas fa-box-open',
+        //         //     'can'  => 'packages.ingreso',
+        //         // ],
+        //         [
+        //             'text' => 'Ingreso Despacho',
+        //             'url' => 'bag/bagsclose',
+        //             'icon' => 'fas fa-box-open',
+        //             'can'  => 'packages.cierre',
+        //         ],
+        //         [
+        //             'text' => 'Expedicion Despacho',
+        //             'url' => 'bag/bagstrans',
+        //             'icon' => 'fas fa-box-open',
+        //             'can'  => 'packages.despacho',
+        //         ],
+        //         [
+        //             'text' => 'Apertura Despacho',
+        //             'url' => 'bag/bagsopen',
+        //             'icon' => 'fas fa-box-open',
+        //             'can'  => 'packages.apertura',
+        //         ],
+        //     ],
+        // ],
         [
             'text' => 'Urbano',
             'icon' => 'fas fa-building',
