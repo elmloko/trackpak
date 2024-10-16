@@ -69,9 +69,8 @@
                                             <td>{{ $package->OBSERVACIONES }}</td>
                                             <td>{{ $package->updated_at }}</td>
                                             <td>
-                                                @if($package->ESTADO == 'VENTANILLA')
-                                                    <button wire:click="quitarVentana({{ $package->id }})" class="btn btn-warning">Quitar</button>
-                                                @endif
+                                                <button wire:click="quitarVentana({{ $package->id }})"
+                                                    class="btn btn-warning">Quitar</button>
                                             </td>
                                         </tr>
                                     @endforeach

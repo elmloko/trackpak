@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Package;
 use App\Models\Event;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Traspasoventanillas extends Component
 {
@@ -63,15 +64,15 @@ class Traspasoventanillas extends Component
             session()->flash('message', 'Seleccione una ventanilla antes de traspasar.');
             return;
         }
-
+    
         // Actualizar todos los paquetes con estado 'TRASPAZO' a la ventanilla seleccionada
         $packages = Package::where('ESTADO', 'TRASPAZO')->get();
-
+    
         foreach ($packages as $package) {
             $package->VENTANILLA = $this->selectedVentanilla;
             $package->ESTADO = 'VENTANILLA'; // Cambiar el estado de nuevo a 'VENTANILLA'
             $package->save();
-
+    
             // Crear el evento para el cambio de ventanilla
             Event::create([
                 'action' => 'TRASPAZO',
@@ -80,8 +81,17 @@ class Traspasoventanillas extends Component
                 'codigo' => $package->CODIGO,
             ]);
         }
+    
+        // Generar el PDF con los datos de los paquetes traspasados
+        $pdf = PDF::loadView('package.pdf.traspazopdf', ['packages' => $packages, 'selectedVentanilla' => $this->selectedVentanilla]);
+    
+        // Obtener el contenido del PDF
+        $pdfContent = $pdf->output();
 
-        session()->flash('message', 'Los paquetes han sido traspasados a la ventanilla seleccionada.');
+        // Generar una respuesta con el contenido del PDF para descargar
+        return response()->streamDownload(function () use ($pdfContent) {
+            echo $pdfContent;
+        }, 'Traspazo Ventanillas.pdf');
     }
 
     public function render()

@@ -340,82 +340,82 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'Paquetes Nacionales',
-            'icon' => 'fas fa-users',
-            'can'  => '',
-            'submenu' => [
-                [
-                    'text' => 'Todos Paquetes',
-                    'url' => 'national/total',
-                    'can'  => 'packages',
-                    'icon' => 'fas fa-box',
-                ],
-                [
-                    'text' => 'Admision',
-                    'icon' => 'fas fa-cube ',
-                    'can'  => 'national',
-                    'submenu' => [
-                        [
-                            'text' => 'Registro Admision',
-                            'url' => 'national',
-                            'icon' => 'fas fa-user',
-                            'can'  => 'national',
-                        ],
-                        [
-                            'text' => 'Despacho Admision',
-                            'url' => 'national/despachoadmision',
-                            'can'  => 'national',
-                            'icon' => 'fas fa-lock',
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Expedicion',
-                    'icon' => 'fas fa-cube ',
-                    'can'  => 'national',
-                    'submenu' => [
-                        [
-                            'text' => 'Clasificacion',
-                            'url' => 'national/nacionaldespacho',
-                            'icon' => 'fas fa-key',
-                            'can'  => 'national',
-                        ],
-                        [
-                            'text' => 'Expedición',
-                            'url' => 'national/nacionalcartero',
-                            'icon' => 'fas fa-lock',
-                            'can'  => 'national',
-                        ],
-                        [
-                            'text' => 'Inventario Expedición',
-                            'url' => 'national/nacionalexpedision',
-                            'icon' => 'fas fa-lock',
-                            'can'  => 'national',
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Regional',
-                    'icon' => 'fas fa-cube ',
-                    'can'  => 'national',
-                    'submenu' => [
-                        [
-                            'text' => 'Entregas Regional',
-                            'url' => 'national/nacionalunica',
-                            'icon' => 'fas fa-key',
-                            'can'  => 'national',
-                        ],
-                        [
-                            'text' => 'Inventario Regional',
-                            'url' => 'national/nacionalunicainventario',
-                            'icon' => 'fas fa-lock',
-                            'can'  => 'national',
-                        ],
-                    ],
-                ],
-            ],
-        ],
+        // [
+        //     'text' => 'Paquetes Nacionales',
+        //     'icon' => 'fas fa-users',
+        //     'can'  => '',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Todos Paquetes',
+        //             'url' => 'national/total',
+        //             'can'  => 'packages',
+        //             'icon' => 'fas fa-box',
+        //         ],
+        //         [
+        //             'text' => 'Admision',
+        //             'icon' => 'fas fa-cube ',
+        //             'can'  => 'national',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'Registro Admision',
+        //                     'url' => 'national',
+        //                     'icon' => 'fas fa-user',
+        //                     'can'  => 'national',
+        //                 ],
+        //                 [
+        //                     'text' => 'Despacho Admision',
+        //                     'url' => 'national/despachoadmision',
+        //                     'can'  => 'national',
+        //                     'icon' => 'fas fa-lock',
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'Expedicion',
+        //             'icon' => 'fas fa-cube ',
+        //             'can'  => 'national',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'Clasificacion',
+        //                     'url' => 'national/nacionaldespacho',
+        //                     'icon' => 'fas fa-key',
+        //                     'can'  => 'national',
+        //                 ],
+        //                 [
+        //                     'text' => 'Expedición',
+        //                     'url' => 'national/nacionalcartero',
+        //                     'icon' => 'fas fa-lock',
+        //                     'can'  => 'national',
+        //                 ],
+        //                 [
+        //                     'text' => 'Inventario Expedición',
+        //                     'url' => 'national/nacionalexpedision',
+        //                     'icon' => 'fas fa-lock',
+        //                     'can'  => 'national',
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'Regional',
+        //             'icon' => 'fas fa-cube ',
+        //             'can'  => 'national',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'Entregas Regional',
+        //                     'url' => 'national/nacionalunica',
+        //                     'icon' => 'fas fa-key',
+        //                     'can'  => 'national',
+        //                 ],
+        //                 [
+        //                     'text' => 'Inventario Regional',
+        //                     'url' => 'national/nacionalunicainventario',
+        //                     'icon' => 'fas fa-lock',
+        //                     'can'  => 'national',
+        //                 ],
+        //             ],
+        //         ],
+        //     ],
+        // ],
         [
             'text' => 'Paquetes Ordinarios',
             'icon' => 'fas fa-archive',
