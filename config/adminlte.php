@@ -554,18 +554,24 @@ return [
                     ],
                 ],
                 [
-                    'text' => 'ENCOMIENDAS',
+                    'text' => 'VENTANILLA 7',
                     'icon' => 'fas fa-archive',
                     'can'  => 'packages.encomiendas',
                     'submenu' => [
                         [
-                            'text' => 'Entregas ENCOMIENDAS',
+                            'text' => 'Recibir Paqueteria',
+                            'url' => 'packages/ventanilladdrecibir',
+                            'icon' => 'fas fa-box',
+                            'can'  => 'packages.encomiendas',
+                        ],
+                        [
+                            'text' => 'Entregas Paqueteria',
                             'url' => 'packages/encomiendas',
                             'icon' => 'fas fa-box',
                             'can'  => 'packages.encomiendas',
                         ],
                         [
-                            'text' => 'Inventario ENCOMIENDAS',
+                            'text' => 'Inventario Paqueteria',
                             'url' => 'packages/encomiendasinventario',
                             'icon' => 'fas fa-suitcase',
                             'can'  => 'packages.encomiendas',

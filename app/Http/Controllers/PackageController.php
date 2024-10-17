@@ -708,6 +708,10 @@ class PackageController extends Controller
     {
         return view('package.ventanillaunicarecibir');
     }
+    public function ventanilladdrecibir()
+    {
+        return view('package.ventanilladdrecibir');
+    }
     public function deleteado()
     {
         return view('package.deleteado');
