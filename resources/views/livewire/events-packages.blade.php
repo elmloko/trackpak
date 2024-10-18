@@ -32,13 +32,6 @@
                             <div class="col-lg-1">
                                 <div class="form-group">
                                     <label>&nbsp;</label> <!-- Espacio para el botón -->
-                                    <button wire:click="render" class="btn btn-primary btn-sm btn-block">Buscar</button>
-                                </div>
-                            </div>
-                            
-                            <div class="col-lg-1">
-                                <div class="form-group">
-                                    <label>&nbsp;</label> <!-- Espacio para el botón -->
                                     <button wire:click="exportToExcel" class="btn btn-success btn-sm btn-block">Exportar</button>
                                 </div>
                             </div>
