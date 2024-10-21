@@ -359,7 +359,7 @@ class ApiController extends Controller
             Event::create([
                 'action' => 'ENTREGADO',
                 'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional (SISTEMA ATM)',
-                'user_id' => 84,  // Asignar un ID de usuario predeterminado o ajustarlo según tus necesidades
+                'user_id' => 86,  // Asignar un ID de usuario predeterminado o ajustarlo según tus necesidades
                 'codigo' => $package->CODIGO,
             ]);
 
