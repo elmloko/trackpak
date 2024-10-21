@@ -407,6 +407,8 @@ class ApiController extends Controller
                 'ESTADO' => $package->ESTADO,
                 'TELEFONO' => $package->TELEFONO,
                 'ZONA' => $package->ZONA,
+                'TIPO' => $package->TIPO,
+                'PESO' => $package->PESO,
                 'ADUANA' => $package->ADUANA,
                 'CUIDAD' => $package->CUIDAD,
                 'VENTANILLA' => $package->VENTANILLA,
