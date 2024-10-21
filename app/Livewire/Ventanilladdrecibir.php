@@ -53,24 +53,28 @@ class Ventanilladdrecibir extends Component
     {
         $package = Package::where('CODIGO', $this->search)->first();
         $userRegional = auth()->user()->Regional;
-        
+    
         if ($package) {
             if ($userRegional === $package->CUIDAD) {
-                $package->ESTADO = 'RECIBIDO';
-                $package->save();
-
-                $this->paqueteSeleccionado = $package->id;
-                $this->zona = $package->ZONA;
-                $this->showModal = true; // Mostrar el modal
-
-                session()->flash('success', 'El estado del paquete ha sido actualizado a RECIBIDO.');
+                if ($package->VENTANILLA === 'ENCOMIENDAS') {
+                    $package->ESTADO = 'RECIBIDO';
+                    $package->save();
+    
+                    $this->paqueteSeleccionado = $package->id;
+                    $this->zona = $package->ZONA;
+                    $this->showModal = true; // Mostrar el modal
+    
+                    session()->flash('success', 'El estado del paquete ha sido actualizado a RECIBIDO.');
+                } else {
+                    session()->flash('error', 'El paquete no corresponde a la ventanilla de encomiendas.');
+                }
             } else {
                 session()->flash('error', 'No se puede recibir el paquete porque no pertenece a la misma regional.');
             }
         } else {
             session()->flash('error', 'Paquete no encontrado.');
         }
-        
+    
         $this->search = '';
     }
 
