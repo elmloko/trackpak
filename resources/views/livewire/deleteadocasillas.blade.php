@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h5 id="card_title">
-                                    {{ __('Inventario de Paquetes en Entregados en Ventanilla') }}
+                                    {{ __('Inventario de Paquetes en Entregados en Ventanilla Casillas') }}
                                 </h5>
                             </div>
                         </div>

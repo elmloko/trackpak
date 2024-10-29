@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <h5 id="card_title">
-                                {{ __('Inventario de Paquetes en Entregados') }}
+                                {{ __('Eventos del Sistema TrackingBO') }}
                             </h5>
                         </div>
                         <div class="row">
