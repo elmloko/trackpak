@@ -144,7 +144,7 @@
                                 <option value="">Seleccione Ventanilla</option>
                                 <option value="DD">DD</option>
                                 <option value="DND">DND</option>
-                                <option value="ENCOMIENDAS">ENCOMIENDAS</option>
+                                <option value="ENCOMIENDAS">VENTANILLA 7</option>
                                 <option value="CASILLAS">CASILLAS</option>
                                 <option value="ECA">ECA</option>
                                 <option value="UNICA">UNICA</option>

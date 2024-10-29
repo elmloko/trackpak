@@ -76,7 +76,7 @@
                                 <p class="small-text"><strong>Código Rastreo:</strong> {{ $package->CODIGO }}</p>
                                 <p class="small-text"><strong>Destinatario:</strong> {{ $package->DESTINATARIO }}</p>
                                 <p class="small-text"><strong>Ciudad:</strong> {{ $package->CUIDAD }}</p>
-                                <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA }}</p>
+                                <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA === 'ENCOMIENDAS' ? 'VENTANILLA 7' : $package->VENTANILLA }}</p>
                             </td>
                             <td>
                                 <p class="small-text"><strong>Nro. Factura:</strong></p>

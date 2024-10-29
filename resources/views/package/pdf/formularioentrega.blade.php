@@ -69,7 +69,7 @@
                         <p class="small-text"><strong>Destinatario:</strong> {{ $package->DESTINATARIO }}</p>
                         <p class="small-text"><strong>Ciudad:</strong> {{ $package->CUIDAD }}</p>
                         <p class="small-text"><strong>Origen:</strong> {{ $package->PAIS }}</p>
-                        <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA }}</p>
+                        <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA === 'ENCOMIENDAS' ? 'VENTANILLA 7' : $package->VENTANILLA }}</p>
                         <p class="small-text"><strong>Aduana:</strong> {{ $package->ADUANA }}</p>
                     </td>
                     <td>
@@ -115,7 +115,7 @@
                         <p class="small-text"><strong>Destinatario:</strong> {{ $package->DESTINATARIO }}</p>
                         <p class="small-text"><strong>Ciudad:</strong> {{ $package->CUIDAD }}</p>
                         <p class="small-text"><strong>Origen:</strong> {{ $package->PAIS }}</p>
-                        <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA }}</p>
+                        <p class="small-text"><strong>Ventanilla:</strong> {{ $package->VENTANILLA === 'ENCOMIENDAS' ? 'VENTANILLA 7' : $package->VENTANILLA }}</p>
                         <p class="small-text"><strong>Aduana:</strong> {{ $package->ADUANA }}</p>
                     </td>
                     <td>

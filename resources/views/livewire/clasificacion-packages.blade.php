@@ -87,7 +87,9 @@
                                                 <td>{{ $package->TELEFONO }}</td>
                                                 <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                 <td>{{ $package->CUIDAD }}</td>
-                                                <td>{{ $package->VENTANILLA }}</td>
+                                                <td>
+                                                    {{ $package->VENTANILLA === 'ENCOMIENDAS' ? 'VENTANILLA 7' : $package->VENTANILLA }}
+                                                </td>
                                                 <td>{{ $package->PESO }}</td>
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>{{ $package->nrocasilla }}</td>

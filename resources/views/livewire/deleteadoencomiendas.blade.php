@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h5 id="card_title">
-                                    {{ __('Inventario de Paquetes en Entregados en Ventanilla') }}
+                                    {{ __('Inventario de Paquetes en Entregados en Ventanilla 7') }}
                                 </h5>
                             </div>
                         </div>
@@ -60,9 +60,7 @@
                                         <th>Código Rastreo</th>
                                         <th>Destinatario</th>
                                         <th>Telefono</th>
-                                        <th>Ciudad</th>
                                         <th>Dirección</th>
-                                        <th>Ventanilla</th>
                                         <th>Peso</th>
                                         <th>Estado</th>
                                         <th>Observaciones</th>
@@ -80,9 +78,7 @@
                                                 <td>{{ $package->CODIGO }}</td>
                                                 <td>{{ $package->DESTINATARIO }}</td>
                                                 <td>{{ $package->TELEFONO }}</td>
-                                                <td>{{ $package->CUIDAD }}</td>
                                                 <td>{{ $package->ZONA }}</td>
-                                                <td>{{ $package->VENTANILLA }}</td>
                                                 <td>{{ $package->PESO }} gr.</td>
                                                 <td>{{ $package->ESTADO }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
