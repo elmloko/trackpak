@@ -343,7 +343,7 @@
                     @endif
                 @empty
                     @isset($codigo)
-                        <p class="mb-4 text-black">No hay resultados para la búsqueda
+                        <p class="mb-4 text-black">El paquete no se encuentra registrado en la Agencia Boliviana de Correos. Esto puede deberse a que aún no ha sido procesado o ingresado al sistema. Por favor, verifica más tarde o consulta con la oficina de origen.
                             <b>"{{ $codigo }}"</b>
                         </p>
                     @endisset
@@ -381,7 +381,7 @@
                     <!-- Aquí puedes agregar el bucle para mostrar los eventos del paquete -->
                 @else
                     <!-- Aquí puedes manejar el caso en el que no se encontraron paquetes -->
-                    No se encontraron paquetes.
+                    El paquete no se encuentra registrado en la Agencia Boliviana de Correos. Esto puede deberse a que aún no ha sido procesado o ingresado al sistema. Por favor, verifica más tarde o consulta con la oficina de origen.
                 @endif
             </div>
         </div>
