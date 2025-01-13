@@ -422,7 +422,7 @@
     @else
         @isset($codigo)
             <div class="bg-white rounded p-4 mt-4 mb-8" style="max-width: 800px; margin: 0 auto; padding-bottom: 20px;">
-                <p class="mb-4 text-black">No hay resultados para la búsqueda
+                <p class="mb-4 text-black">El paquete no se encuentra registrado en la Agencia Boliviana de Correos. Esto puede deberse a que aún no ha sido procesado o ingresado al sistema. Por favor, verifica más tarde o consulta con la oficina de origen.
                     <b>"{{ $codigo }}"</b>
                 </p>
             </div>
