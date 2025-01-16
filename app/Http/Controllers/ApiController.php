@@ -13,6 +13,33 @@ use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
+    public function searchByManifiesto(Request $request)
+    {
+        // Validar la entrada
+        $request->validate([
+            'manifiesto' => 'required|string|max:8', // Se asume que "manifiesto" tiene un formato "A1234567"
+        ]);
+
+        // Buscar paquetes por el campo "manifiesto" y obtener los campos CODIGO, CUIDAD y PESO
+        $packages = Package::where('manifiesto', $request->manifiesto)
+            ->get(['CODIGO', 'CUIDAD', 'PESO']);
+
+        // Verificar si se encontraron resultados
+        if ($packages->isEmpty()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se encontraron paquetes con el manifiesto especificado.',
+            ], 404);
+        }
+
+        // Devolver los datos de los paquetes encontrados
+        return response()->json([
+            'success' => true,
+            'message' => 'Paquetes encontrados.',
+            'data' => $packages,
+        ]);
+    }
+
     public function index()
     {
         try {

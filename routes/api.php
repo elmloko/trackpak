@@ -39,4 +39,5 @@ Route::middleware('predefined.token')->group(function () {
     Route::get('/callclasiUENCOMIENDAS', [ApiController::class, 'callclasiUENCOMIENDAS']);
     Route::post('/delete/{codigo}', [ApiController::class, 'delete']);
     Route::get('/events/repeated-codes/{codigo}', [ApiController::class, 'getEventsByCodigo']);
+    Route::get('/searchbymanifiesto', [ApiController::class, 'searchByManifiesto']);
 });
