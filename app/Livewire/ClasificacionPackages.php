@@ -71,17 +71,17 @@ class ClasificacionPackages extends Component
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-    
+
         // Obtener el último número de manifiesto registrado
         $ultimoManifiesto = Package::whereNotNull('manifiesto')
             ->latest('manifiesto')
             ->value('manifiesto');
-    
+
         // Extraer el número y generar el siguiente manifiesto
-        $nuevoManifiesto = $ultimoManifiesto 
+        $nuevoManifiesto = $ultimoManifiesto
             ? 'A' . str_pad((int)substr($ultimoManifiesto, 1) + 1, 7, '0', STR_PAD_LEFT)
             : 'A0000001';
-    
+
         foreach ($paquetesSeleccionados as $paquete) {
             if ($paquete) {
                 $paquete->ESTADO = 'DESPACHO';
@@ -90,7 +90,7 @@ class ClasificacionPackages extends Component
                 $paquete->manifiesto = $nuevoManifiesto;
                 $paquete->save();
             }
-    
+
             Event::create([
                 'action' => 'DESPACHO',
                 'descripcion' => 'Destino de Clasificacion hacia Ventanilla',
@@ -98,14 +98,14 @@ class ClasificacionPackages extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-    
+
         // Obtener la ciudad de origen
         $ciudadOrigen = auth()->user()->Regional;
         // Obtener la ciudad de destino
         $ciudadDestino = $paquetesSeleccionados->first()->CUIDAD;
         $ventanilla = $paquetesSeleccionados->first()->VENTANILLA ?? 'Desconocida';
         $cuidad = $paquetesSeleccionados->first()->CUIDAD ?? 'Desconocida';
-    
+
         // Mapas de siglas
         $siglasOrigen = [
             'LA PAZ' => 'BOLPA',
@@ -118,7 +118,7 @@ class ClasificacionPackages extends Component
             'SUCRE' => 'BOSRA',
             'PANDO' => 'BOPNA',
         ];
-    
+
         $siglasDestino = [
             'POTOSI' => 'BOPTA',
             'ORURO' => 'BOORA',
@@ -130,14 +130,14 @@ class ClasificacionPackages extends Component
             'SUCRE' => 'BOSRA',
             'PANDO' => 'BOPNA',
         ];
-    
+
         // Transformar las siglas
         $siglasOrigen = $siglasOrigen[$ciudadOrigen] ?? 'SIGLA DESCONOCIDA';
         $siglasDestino = $siglasDestino[$ciudadDestino] ?? 'SIGLA DESCONOCIDA';
-    
+
         // Obtener el año del paquete (se asume que hay un campo 'created_at' o similar)
         $anioPaquete = $paquetesSeleccionados->first()->created_at->format('Y');
-    
+
         // Generar el PDF con los paquetes seleccionados y las siglas
         $pdf = PDF::loadView('package.pdf.despachopdf', [
             'packages' => $paquetesSeleccionados,
@@ -149,14 +149,17 @@ class ClasificacionPackages extends Component
         ]);
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-    
+
         toastr()->success("SE NOTIFICÓ A REGIONAL. {$cuidad}{$ventanilla}");
+
+        // Emitimos un evento para refrescar la página
+        $this->redirect('/packages/clasificacion');
+
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Despacho_Clasificacion.pdf');
     }
-    
 
     public function eliminarPaquete($id)
     {

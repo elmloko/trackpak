@@ -103,7 +103,7 @@
                                                     @else
                                                         <p></p>
                                                     @endif
-                                                </td>                                                
+                                                </td>
                                                 <td>{{ $package->created_at }}</td>
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|Clasificacion')
