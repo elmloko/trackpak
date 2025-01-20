@@ -82,8 +82,17 @@
 <body>
     <div class="header">
         <div class="logo">
-            <img src="{{ public_path('images/images.png') }}" alt="" width="150" height="50">
-            <p class="cn">CN 33</p>
+            <img src="{{ public_path('images/images.png') }}" alt="Logo" width="150" height="50">
+        </div>
+        <div class="barcode-section" style="text-align: right; margin-top: -50px;">
+            <!-- Código de barras -->
+            <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($packages[0]->manifiesto ?? '0000', 'C128',1.25, 25) }}" alt="Código de barras" style="display: block; margin-bottom: 10px;">
+            
+            <!-- Manifiesto -->
+            <p style="margin: 5px 0; font-size: 15px; font-weight: bold;">{{ $packages[0]->manifiesto ?? 'Manifiesto no disponible' }}</p>
+            
+            <!-- CN -->
+            <p style="margin: 5px 0; font-size: 18px;">CN 33</p>
         </div>
         <div class="title">
             <h2>Manifiesto Área Clasificación</h2>
