@@ -99,6 +99,7 @@
                                                     <th>Bandeja</th>
                                                     <th>Teléfono</th>
                                                     <th>Peso (gr.)</th>
+                                                    <th>Aduana</th>
                                                     <th>Estado</th>
                                                     <th>Observaciones</th>
                                                     <th>Fecha</th>
@@ -125,6 +126,7 @@
                                                             <td>{{ $package->ZONA }}</td>
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PESO }}</td>
+                                                            <td>{{ $package->ADUANA }}</td>
                                                             <td>{{ $package->ESTADO }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->created_at }}</td>

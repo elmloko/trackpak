@@ -36,7 +36,7 @@ class Ventanillaencomienda extends Component
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ZONA', 'like', $this->search . '%') 
+                    ->orWhere('ZONA', 'like', $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->where(function ($query) use ($userRegional) {
@@ -100,9 +100,11 @@ class Ventanillaencomienda extends Component
         // Restablecer la selección
         $this->resetSeleccion();
 
-        // Generar el PDF con los paquetes seleccionados
-        $pdf = PDF::loadView('package.pdf.deleteadoencomiendaspdf', ['packages' => $paquetesSeleccionados]);
-        // Obtener el contenido del PDF
+        // Determinar el formulario correspondiente
+        $formulario = $paquete->ADUANA === 'SI' ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+
+        // Generar el PDF del paquete
+        $pdf = PDF::loadView($formulario, ['packages' => collect([$paquete])]);
         $pdfContent = $pdf->output();
 
         // Generar una respuesta con el contenido del PDF para descargar
@@ -207,7 +209,7 @@ class Ventanillaencomienda extends Component
 
         return Excel::download(new EncomiendasExport($this->fecha_inicio, $this->fecha_fin), 'Ventanilla Ordinarios ENCOMIENDA.xlsx');
     }
-    
+
     public function openModal($packageId)
     {
         $this->selectedPackageId = $packageId;
@@ -231,7 +233,7 @@ class Ventanillaencomienda extends Component
         $package->CUIDAD = $this->selectedCity;
         $package->OBSERVACIONES = $this->observaciones;
         $package->save();
-        
+
 
         $this->reset(['selectedCity', 'observaciones', 'selectedPackageId']);
         session()->flash('message', 'Paquete actualizado exitosamente.');
