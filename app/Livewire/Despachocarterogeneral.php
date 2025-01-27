@@ -10,6 +10,8 @@ use App\Models\Event;
 use Livewire\WithPagination;
 use App\Exports\CarteroeExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class Despachocarterogeneral extends Component
 {
@@ -17,6 +19,7 @@ class Despachocarterogeneral extends Component
 
     public $search = '';
     public $selectedCartero = '';
+    public $selectedDate;
 
     public function render()
     {
@@ -26,7 +29,13 @@ class Despachocarterogeneral extends Component
         $carteros = User::role('CARTERO')->get();
 
         $columns = [
-            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'PESO', 'ESTADO', 'usercartero', 'updated_at'
+            'CODIGO',
+            'DESTINATARIO',
+            'TELEFONO',
+            'PESO',
+            'ESTADO',
+            'usercartero',
+            'updated_at'
         ];
 
         // Filtrar paquetes por cartero y otros criterios
@@ -97,5 +106,36 @@ class Despachocarterogeneral extends Component
     {
         $userRegional = auth()->user()->Regional;
         return Excel::download(new CarteroeExport($this->search, $this->selectedCartero, $userRegional), 'despacho_carteros.xlsx');
+    }
+    public function exportToPdf()
+    {
+        $userRegional = auth()->user()->Regional;
+
+        // Obtener los paquetes filtrados
+        $packages = Package::select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PESO', 'TIPO', 'ESTADO', 'usercartero', 'updated_at')
+            ->whereIn('ESTADO', ['PRE-REZAGO', 'RETORNO', 'REPARTIDO','CARTERO'])
+            ->when($this->selectedCartero, function ($query) {
+                return $query->where('usercartero', $this->selectedCartero);
+            })
+            ->when($this->search, function ($query) {
+                return $query->where(function ($subQuery) {
+                    $subQuery->where('CODIGO', 'like', '%' . $this->search . '%')
+                        ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
+                        ->orWhere('TELEFONO', 'like', '%' . $this->search . '%');
+                });
+            })
+            ->when($this->selectedDate, function ($query) {
+                return $query->whereDate('updated_at', $this->selectedDate);
+            })
+            ->where('CUIDAD', $userRegional)
+            ->get();
+
+        // Generar el PDF
+        $pdf = Pdf::loadView('package.pdf.reportescartero', compact('packages'));
+
+        // Descargar el PDF
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'despacho_carteros.pdf');
     }
 }

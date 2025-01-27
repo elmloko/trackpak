@@ -15,23 +15,36 @@
                                     <div class="row">
                                         <div class="col-lg-3">
                                             <div class="form-group">
-                                                <input wire:model.lazy="search" type="text" class="form-control" placeholder="Buscar...">
+                                                <input wire:model.lazy="search" type="text" class="form-control"
+                                                    placeholder="Buscar...">
                                             </div>
                                         </div>
-                                    
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <select wire:model.lazy="selectedCartero" class="form-control">
                                                     <option value="">{{ __('Seleccionar Cartero') }}</option>
                                                     @foreach ($carteros as $cartero)
-                                                        <option value="{{ $cartero->name }}">{{ $cartero->name }}</option>
+                                                        <option value="{{ $cartero->name }}">{{ $cartero->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-                                    
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <input wire:model.lazy="selectedDate" type="date"
+                                                        class="form-control" placeholder="Seleccionar Fecha">
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                    <div class="row">
                                         <div class="col-lg-2 mb-2">
-                                            <button wire:click="exportToExcel" class="btn btn-success btn-sm btn-block">Exportar a Excel</button>
+                                            <button wire:click="exportToExcel"
+                                                class="btn btn-success btn-sm btn-block">Exportar a Excel</button>
+                                        </div>
+                                        <div class="col-lg-2 mb-2">
+                                            <button wire:click="exportToPdf"
+                                                class="btn btn-danger btn-sm btn-block">GENERAR REPORTE DIARIO</button>
                                         </div>
                                     </div>
                                     @if ($message = Session::get('success'))
