@@ -93,14 +93,14 @@
     <table>
         <thead>
             <tr>
-                <th>Código</th>
+                <th>Código Rastreo</th>
                 <th>Destinatario</th>
                 <th>Teléfono</th>
                 <th>Peso</th>
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>Cartero</th>
-                <th>Fecha Actualización</th>
+                <th>Fecha Retorno</th>
             </tr>
         </thead>
         <tbody>
@@ -109,28 +109,15 @@
                     <td>{{ $package->CODIGO }}</td>
                     <td>{{ $package->DESTINATARIO }}</td>
                     <td>{{ $package->TELEFONO }}</td>
-                    <td>{{ $package->PESO }}</td>
+                    <td>{{ $package->PESO }} gr</td>
                     <td>{{ $package->TIPO }}</td>
                     <td>{{ $package->ESTADO }}</td>
                     <td>{{ $package->usercartero }}</td>
                     <td>{{ $package->updated_at }}</td>
                 </tr>
             @endforeach
-            @foreach ($internationals as $international)
-                <tr>
-                    <td>{{ $international->CODIGO }}</td>
-                    <td>{{ $international->DESTINATARIO }}</td>
-                    <td>{{ $international->TELEFONO }}</td>
-                    <td>{{ $international->PESO }}</td>
-                    <td>{{ $international->TIPO }}</td>
-                    <td>{{ $international->ESTADO }}</td>
-                    <td>{{ $international->usercartero }}</td>
-                    <td>{{ $international->updated_at }}</td>
-                </tr>
-            @endforeach
         </tbody>
     </table>
-
     <table class="resume-table">
         <thead>
             <tr>
@@ -142,32 +129,32 @@
         <tbody>
             <tr>
                 <td>TOTAL ENTREGADOS</td>
-                <td>{{ $totals['certificado']['entregados'] }}</td>
-                <td>{{ $totals['ordinario']['entregados'] }}</td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>TOTAL NOTIFICADOS</td>
-                <td>{{ $totals['certificado']['notificados'] }}</td>
-                <td>{{ $totals['ordinario']['notificados'] }}</td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td>TOTAL PENDIENTE</td>
-                <td>{{ $totals['certificado']['pendiente'] }}</td>
-                <td>{{ $totals['ordinario']['pendiente'] }}</td>
+                <td></td>
+                <td></td>
+
             </tr>
             <tr>
                 <td>TOTAL REZAGO</td>
-                <td>{{ $totals['certificado']['rezago'] }}</td>
-                <td>{{ $totals['ordinario']['rezago'] }}</td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td><b>TOTAL ENVIOS LLEVADOS</b></td>
-                <td>{{ $totals['certificado']['total_envios'] }}</td>
-                <td>{{ $totals['ordinario']['total_envios'] }}</td>
+                <td></td>
+                <td></td>
             </tr>
         </tbody>
     </table>
-              
 </body>
 
 </html>
