@@ -48,6 +48,35 @@
         .date {
             line-height: 0.5;
         }
+
+        .resume-table {
+            border: 1px solid #000;
+            margin: 20px auto;
+            width: 70%;
+            /* Ancho de la tabla */
+            text-align: center;
+            /* Centra el contenido de la tabla */
+        }
+
+        .resume-table td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+            font-size: 10px;
+            /* Tamaño de la fuente más pequeño */
+            line-height: 0.5;
+            /* Ajusta el line-height para quitar el interlineado */
+        }
+
+        .resume-table th {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+            font-size: 12px;
+            /* Tamaño de la fuente para los títulos */
+            font-weight: bold;
+            /* Texto en negrita para los títulos */
+        }
     </style>
 </head>
 
@@ -64,14 +93,14 @@
     <table>
         <thead>
             <tr>
-                <th>Código Rastreo</th>
+                <th>Código</th>
                 <th>Destinatario</th>
                 <th>Teléfono</th>
                 <th>Peso</th>
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>Cartero</th>
-                <th>Fecha Retorno</th>
+                <th>Fecha Actualización</th>
             </tr>
         </thead>
         <tbody>
@@ -80,15 +109,65 @@
                     <td>{{ $package->CODIGO }}</td>
                     <td>{{ $package->DESTINATARIO }}</td>
                     <td>{{ $package->TELEFONO }}</td>
-                    <td>{{ $package->PESO }} gr</td>
+                    <td>{{ $package->PESO }}</td>
                     <td>{{ $package->TIPO }}</td>
                     <td>{{ $package->ESTADO }}</td>
                     <td>{{ $package->usercartero }}</td>
                     <td>{{ $package->updated_at }}</td>
                 </tr>
             @endforeach
+            @foreach ($internationals as $international)
+                <tr>
+                    <td>{{ $international->CODIGO }}</td>
+                    <td>{{ $international->DESTINATARIO }}</td>
+                    <td>{{ $international->TELEFONO }}</td>
+                    <td>{{ $international->PESO }}</td>
+                    <td>{{ $international->TIPO }}</td>
+                    <td>{{ $international->ESTADO }}</td>
+                    <td>{{ $international->usercartero }}</td>
+                    <td>{{ $international->updated_at }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
+
+    <table class="resume-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>CERTIFICADO</th>
+                <th>ORDINARIO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>TOTAL ENTREGADOS</td>
+                <td>{{ $totals['certificado']['entregados'] }}</td>
+                <td>{{ $totals['ordinario']['entregados'] }}</td>
+            </tr>
+            <tr>
+                <td>TOTAL NOTIFICADOS</td>
+                <td>{{ $totals['certificado']['notificados'] }}</td>
+                <td>{{ $totals['ordinario']['notificados'] }}</td>
+            </tr>
+            <tr>
+                <td>TOTAL PENDIENTE</td>
+                <td>{{ $totals['certificado']['pendiente'] }}</td>
+                <td>{{ $totals['ordinario']['pendiente'] }}</td>
+            </tr>
+            <tr>
+                <td>TOTAL REZAGO</td>
+                <td>{{ $totals['certificado']['rezago'] }}</td>
+                <td>{{ $totals['ordinario']['rezago'] }}</td>
+            </tr>
+            <tr>
+                <td><b>TOTAL ENVIOS LLEVADOS</b></td>
+                <td>{{ $totals['certificado']['total_envios'] }}</td>
+                <td>{{ $totals['ordinario']['total_envios'] }}</td>
+            </tr>
+        </tbody>
+    </table>
+              
 </body>
 
 </html>
