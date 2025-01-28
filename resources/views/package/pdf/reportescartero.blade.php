@@ -100,7 +100,7 @@
                 <th>Tipo</th>
                 <th>Estado</th>
                 <th>Cartero</th>
-                <th>Fecha Retorno</th>
+                <th>Fecha Actualización</th>
             </tr>
         </thead>
         <tbody>
