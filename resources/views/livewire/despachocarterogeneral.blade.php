@@ -19,6 +19,14 @@
                                                     placeholder="Buscar...">
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <input wire:model.lazy="selectedDate" type="date"
+                                                    class="form-control" placeholder="Seleccionar Fecha">
+                                            </div>
+                                        </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <select wire:model.lazy="selectedCartero" class="form-control">
@@ -29,15 +37,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <input wire:model.lazy="selectedDate" type="date"
-                                                        class="form-control" placeholder="Seleccionar Fecha">
-                                                </div>
-                                            </div>
-                                        </div>  
-                                    </div>
-                                    <div class="row">
+                                        </div>
                                         <div class="col-lg-2 mb-2">
                                             <button wire:click="exportToExcel"
                                                 class="btn btn-success btn-sm btn-block">Exportar a Excel</button>

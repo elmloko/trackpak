@@ -110,9 +110,10 @@ class Despachocarterogeneral extends Component
     public function exportToPdf()
     {
         $userRegional = auth()->user()->Regional;
-    
-        // Obtener los paquetes filtrados
-        $packages = Package::select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PESO', 'TIPO', 'ESTADO', 'usercartero', 'updated_at')
+
+        // Obtener los paquetes filtrados, incluyendo eliminados lógicamente
+        $packages = Package::withTrashed() // Incluye tanto registros activos como eliminados lógicamente
+            ->select('CODIGO', 'DESTINATARIO', 'TELEFONO', 'PESO', 'TIPO', 'ESTADO', 'usercartero', 'updated_at')
             ->whereIn('ESTADO', ['PRE-REZAGO', 'RETORNO', 'REPARTIDO', 'CARTERO'])
             ->when($this->selectedCartero, function ($query) {
                 return $query->where('usercartero', $this->selectedCartero);
@@ -129,14 +130,14 @@ class Despachocarterogeneral extends Component
             })
             ->where('CUIDAD', $userRegional)
             ->get();
-    
-        // Contar los paquetes por estado
+
+        // Contar los paquetes por estado, incluyendo eliminados
         $totalEntregados = $packages->where('ESTADO', 'REPARTIDO')->count();
         $totalNotificados = $packages->where('ESTADO', 'RETORNO')->count();
         $totalPendiente = $packages->where('ESTADO', 'CARTERO')->count();
         $totalRezago = $packages->where('ESTADO', 'PRE-REZAGO')->count();
         $totalEnvios = $packages->count();
-    
+
         // Generar el PDF
         $pdf = Pdf::loadView('package.pdf.reportescartero', [
             'packages' => $packages,
@@ -148,10 +149,10 @@ class Despachocarterogeneral extends Component
                 'envios' => $totalEnvios,
             ],
         ]);
-    
+
         // Descargar el PDF
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
         }, 'despacho_carteros.pdf');
-    }    
+    }
 }
