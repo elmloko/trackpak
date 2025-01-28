@@ -122,39 +122,33 @@
         <thead>
             <tr>
                 <th></th>
-                <th>CERTIFICADO</th>
-                <th>ORDINARIO</th>
+                <th>PAQUETES</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>TOTAL ENTREGADOS</td>
-                <td></td>
-                <td></td>
+                <td>{{ $totals['entregados'] }}</td>
             </tr>
             <tr>
                 <td>TOTAL NOTIFICADOS</td>
-                <td></td>
-                <td></td>
+                <td>{{ $totals['notificados'] }}</td>
             </tr>
             <tr>
                 <td>TOTAL PENDIENTE</td>
-                <td></td>
-                <td></td>
-
+                <td>{{ $totals['pendiente'] }}</td>
             </tr>
             <tr>
                 <td>TOTAL REZAGO</td>
-                <td></td>
-                <td></td>
+                <td>{{ $totals['rezago'] }}</td>
             </tr>
             <tr>
                 <td><b>TOTAL ENVIOS LLEVADOS</b></td>
-                <td></td>
-                <td></td>
+                <td>{{ $totals['envios'] }}</td>
             </tr>
         </tbody>
     </table>
+    
 </body>
 
 </html>
