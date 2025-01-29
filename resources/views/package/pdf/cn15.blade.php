@@ -49,6 +49,7 @@
             <div class="checkbox-item"><input type="checkbox"> Fallecido / Décédé</div>
         </div>
         <div class="footer">
+            <strong>Codigo:</strong> {{ $data['codigo'] }}<br>
             <strong>Fecha de devolución:</strong> {{ $data['fecha'] }}<br>
             <strong>Devolución a sección:</strong> {{ $data['observaciones'] ?? 'N/A' }}
         </div>

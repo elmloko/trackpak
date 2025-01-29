@@ -157,6 +157,7 @@ class Carteros extends Component
                 // Datos para el PDF
                 $data = [
                     'package' => $package,
+                    'codigo' => $package->CODIGO,
                     'user' => auth()->user()->name,
                     'estado' => $this->estado,
                     'observaciones' => $this->observaciones,
@@ -226,6 +227,7 @@ class Carteros extends Component
                     // Datos para el PDF
                     $data = [
                         'package' => $package,
+                        'codigo' => $internationalPackage->CODIGO,
                         'user' => auth()->user()->name,
                         'estado' => $this->estado,
                         'observaciones' => $this->observaciones,
