@@ -110,7 +110,7 @@
                             <option value="" selected>Seleccione un estado</option>
                             <option value="REPARTIDO">ENTREGADO</option>
                             <option value="RETORNO">NOTIFICADO</option>
-                            <option value="PRE-REZAGO">RECHAZADO</option>
+                            {{-- <option value="PRE-REZAGO">RECHAZADO</option> --}}
                         </select>
                     </div>
                     <div class="form-group">
@@ -179,7 +179,7 @@
                         </label>
                     </div>
                     <div class="form-group">
-                        <label for="observaciones">Observaciones</label>
+                        <label for="observaciones">Indique la Razon</label>
                         <select class="form-control" id="observaciones" wire:model="observaciones">
                             <option value="" selected>Seleccione una observación</option>
                             <option value="Destinatario Notificado en Puerta">Destinatario Notificado en Puerta</option>
@@ -209,6 +209,7 @@
                             <option value="Articulo rechazado por el destinatario">Artículo rechazado por el
                                 destinatario</option>
                             <option value="Fallecido">Fallecido</option>
+                            <option value="Rezagar">Rezagar</option>
                         </select>
                     </div>
                 </div>
@@ -265,6 +266,7 @@
             if (estado === 'RETORNO') {
                 observaciones.innerHTML = `
                     <option value="" selected>Seleccione una observación</option>
+                    <option value="Rezagar">Rezagar</option>
                     <option value="Destinatario Notificado en Puerta">Destinatario Notificado en Puerta</option>
                     <option value="Direccion incorrecta">Direccion incorrecta</option>
                     <option value="No se localizó el destinatario">No se localizó el destinatario</option>
