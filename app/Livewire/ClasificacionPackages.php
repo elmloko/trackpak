@@ -16,6 +16,8 @@ class ClasificacionPackages extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
     public $selectedCity = '';
+    public $showModal = false;
+    public $codigoManifiesto;
 
     public function render()
     {
@@ -198,5 +200,92 @@ class ClasificacionPackages extends Component
     {
         $this->selectAll = false;
         $this->paquetesSeleccionados = [];
+    }
+    // Abre el modal
+    public function abrirModal()
+    {
+        $this->showModal = true;
+    }
+
+    // Cierra el modal
+    public function cerrarModal()
+    {
+        $this->showModal = false;
+        $this->codigoManifiesto = '';
+    }
+
+    // Generar PDF usando el código de Manifiesto ingresado
+    public function generarPDF()
+    {
+        // Validamos que se haya ingresado un manifiesto
+        if (!$this->codigoManifiesto) {
+            session()->flash('error', 'Por favor ingrese un código de Manifiesto.');
+            return;
+        }
+
+        // Buscamos paquetes con ese manifiesto
+        $paquetesSeleccionados = Package::withTrashed()
+            ->where('manifiesto', $this->codigoManifiesto)
+            ->get();
+
+
+        if ($paquetesSeleccionados->isEmpty()) {
+            session()->flash('error', 'No se encontraron paquetes con ese código de Manifiesto.');
+            return;
+        }
+
+        // Obtener la ciudad de origen y destino del primer paquete
+        $ciudadOrigen  = auth()->user()->Regional;
+        $ciudadDestino = $paquetesSeleccionados->first()->CUIDAD ?? 'Desconocida';
+
+        // Mapas de siglas
+        $siglasOrigenMap = [
+            'LA PAZ'        => 'BOLPA',
+            'COCHABAMBA'    => 'BOCBA',
+            'SANTA CRUZ'    => 'BOSCA',
+            'POTOSI'        => 'BOPTA',
+            'ORURO'         => 'BOORA',
+            'BENI'          => 'BOBNA',
+            'TARIJA'        => 'BOTJA',
+            'SUCRE'         => 'BOSRA',
+            'PANDO'         => 'BOPNA',
+        ];
+        $siglasDestinoMap = [
+            'POTOSI'        => 'BOPTA',
+            'ORURO'         => 'BOORA',
+            'BENI'          => 'BOBNA',
+            'LA PAZ'        => 'BOLPA',
+            'COCHABAMBA'    => 'BOCBA',
+            'SANTA CRUZ'    => 'BOSCA',
+            'TARIJA'        => 'BOTJA',
+            'SUCRE'         => 'BOSRA',
+            'PANDO'         => 'BOPNA',
+        ];
+
+        $siglasOrigen  = $siglasOrigenMap[$ciudadOrigen] ?? 'SIGLA DESCONOCIDA';
+        $siglasDestino = $siglasDestinoMap[$ciudadDestino] ?? 'SIGLA DESCONOCIDA';
+
+        // Año del primer paquete despachado
+        $anioPaquete = optional($paquetesSeleccionados->first()->created_at)->format('Y');
+
+        // Creamos el PDF
+        $pdf = Pdf::loadView('package.pdf.despachopdf', [
+            'packages'      => $paquetesSeleccionados,
+            'siglasOrigen'  => $siglasOrigen,
+            'siglasDestino' => $siglasDestino,
+            'ciudadOrigen'  => $ciudadOrigen,
+            'ciudadDestino' => $ciudadDestino,
+            'anioPaquete'   => $anioPaquete
+        ]);
+
+        $pdfContent = $pdf->output();
+
+        // Cerramos el modal
+        $this->cerrarModal();
+
+        // Retornamos la descarga
+        return response()->streamDownload(function () use ($pdfContent) {
+            echo $pdfContent;
+        }, 'Manifiesto_' . $this->codigoManifiesto . '.pdf');
     }
 }

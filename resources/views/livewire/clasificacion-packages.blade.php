@@ -28,6 +28,7 @@
                                     placeholder="Buscar...">
                             </div>
                         </div>
+                        
                         <div class="col-md-6 text-right">
                             @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
@@ -38,7 +39,37 @@
                                 </button>
                             @endhasrole
                         </div>
+                        <div class="col-md-3">
+                            <button wire:click="abrirModal" class="btn btn-primary">Generar Manifiesto</button>
+    
+                            @if ($showModal)
+                                <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Generar Manifiesto</h5>
+                                                <button type="button" class="close" wire:click="cerrarModal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label for="codigoManifiesto">Código de Manifiesto:</label>
+                                                <input type="text" class="form-control" wire:model="codigoManifiesto">
+                                                @if(session()->has('error'))
+                                                    <div class="alert alert-danger mt-2">
+                                                        {{ session('error') }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" wire:click="cerrarModal">Cerrar</button>
+                                                <button type="button" class="btn btn-success" wire:click="generarPDF">Generar PDF</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                     </div>
+
                 </div>
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
