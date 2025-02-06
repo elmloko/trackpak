@@ -44,8 +44,6 @@
                             @endhasrole
                         </div>
                         <div class="col-md-3">
-                            
-    
                             @if ($showModal)
                                 <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
                                     <div class="modal-dialog">
