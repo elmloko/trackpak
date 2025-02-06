@@ -133,6 +133,7 @@
                         <div class="form-group">
                             <label for="zona">ZONA</label>
                             <select class="form-control" id="zona" name="zona" wire:model.defer="zona">
+                                <option value="DND">DND</option>
                                 <option value="ACHACHICALA">ACHACHICALA</option>
                                 <option value="ACHUMANI">ACHUMANI</option>
                                 <option value="ALTO OBRAJES">ALTO OBRAJES</option>
