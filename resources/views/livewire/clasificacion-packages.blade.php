@@ -28,9 +28,7 @@
                                     placeholder="Buscar...">
                             </div>
                         </div>
-                        <button wire:click="exportExcel" class="btn btn-success">
-                            <i class="fas fa-file-excel"></i> Exportar a Excel
-                        </button>
+                        
                         <div class="col-md-6 text-right">
                             @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
@@ -39,10 +37,14 @@
                                 <button wire:click="cambiarEstado" class="btn btn-warning">
                                     {{ __('Despachar') }}
                                 </button>
+                                <button wire:click="exportExcel" class="btn btn-success">
+                                    <i class="fas fa-file-excel"></i> Exportar a Excel
+                                </button>
+                                <button wire:click="abrirModal" class="btn btn-info">Generar Manifiesto</button>
                             @endhasrole
                         </div>
                         <div class="col-md-3">
-                            <button wire:click="abrirModal" class="btn btn-primary">Generar Manifiesto</button>
+                            
     
                             @if ($showModal)
                                 <div class="modal fade show d-block" style="background: rgba(0,0,0,0.5);" tabindex="-1">
