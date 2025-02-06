@@ -7,6 +7,8 @@ use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\RegistrosExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClasificacionPackages extends Component
 {
@@ -287,5 +289,9 @@ class ClasificacionPackages extends Component
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Manifiesto_' . $this->codigoManifiesto . '.pdf');
+    }
+    public function exportExcel()
+    {
+        return Excel::download(new RegistrosExport($this->search, $this->selectedCity), 'Clasificacion Registros.xlsx');
     }
 }

@@ -28,7 +28,9 @@
                                     placeholder="Buscar...">
                             </div>
                         </div>
-                        
+                        <button wire:click="exportExcel" class="btn btn-success">
+                            <i class="fas fa-file-excel"></i> Exportar a Excel
+                        </button>
                         <div class="col-md-6 text-right">
                             @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                                 <a href="{{ route('packages.create') }}" class="btn btn-primary" data-placement="left">
