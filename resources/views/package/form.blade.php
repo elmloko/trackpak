@@ -196,7 +196,8 @@
                 <div class="form-group">
                     {{ Form::label('FOTO') }}
                     <input type="file" id="capturephoto" class="form-control" accept="image/*">
-                    <input type="hidden" id="inputbase64foto" name="foto"> <!-- Campo oculto para almacenar la imagen en base64 -->
+                    <input type="hidden" id="inputbase64foto" name="foto">
+                    <!-- Campo oculto para almacenar la imagen en base64 -->
                 </div>
             </div>
         </div>
@@ -211,7 +212,8 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const fileInput = document.getElementById('capturephoto');
-        const base64Inputfoto = document.getElementById('inputbase64foto'); // Input para almacenar la imagen base64
+        const base64Inputfoto = document.getElementById(
+        'inputbase64foto'); // Input para almacenar la imagen base64
 
         fileInput.addEventListener('change', function() {
             if (fileInput.files && fileInput.files[0]) {
@@ -224,8 +226,10 @@
                         canvas.width = img.width;
                         canvas.height = img.height;
                         ctx.drawImage(img, 0, 0);
-                        const dataurl = canvas.toDataURL('image/jpeg', 0.5); // Generar imagen base64 comprimida
-                        base64Inputfoto.value = dataurl; // Asignar el valor base64 al input oculto
+                        const dataurl = canvas.toDataURL('image/jpeg',
+                        0.5); // Generar imagen base64 comprimida
+                        base64Inputfoto.value =
+                        dataurl; // Asignar el valor base64 al input oculto
                     }
                     img.src = e.target.result;
                 }
@@ -299,6 +303,14 @@
             // Convertir el valor a mayúsculas y actualizar el valor del campo
             $(this).val($(this).val().toUpperCase());
         });
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        // Seleccionar el campo de código rastreo y darle foco automáticamente
+        const codigoInput = document.querySelector('input[name="CODIGO"]');
+
+        if (codigoInput) {
+            codigoInput.focus();
+        }
     });
 </script>
 <script>
