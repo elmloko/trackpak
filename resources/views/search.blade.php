@@ -401,7 +401,7 @@
                                         @if (!empty($result->office))
                                             <span class="description">Oficina: {{ $result->office }}</span><br>
                                         @else
-                                            <span class="description">País: {{ $country }}</span><br>
+                                            <span class="description">País Origen: {{ $country }}</span><br>
                                         @endif
 
                                         @if (isset($result->nextOffice) && !empty($result->nextOffice))
