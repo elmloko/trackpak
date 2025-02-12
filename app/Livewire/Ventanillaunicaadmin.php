@@ -27,6 +27,17 @@ class Ventanillaunicaadmin extends Component
     public $selectedPackageId = null;
     public $currentModal = null;
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Entregas Paqueteria AdminRegional"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
         $packages = Package::where('ESTADO', 'VENTANILLA')

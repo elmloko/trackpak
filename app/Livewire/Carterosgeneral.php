@@ -9,6 +9,7 @@ use App\Models\User;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\CarteroeGeneralExport;
+use App\Models\Event;
 
 class Carterosgeneral extends Component
 {
@@ -16,6 +17,17 @@ class Carterosgeneral extends Component
 
     public $search = '';
     public $selectedCartero = '';
+
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Entregas Paqueteria CarteroAdmin"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
 
     public function render()
     {

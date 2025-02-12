@@ -8,6 +8,7 @@ use App\Models\National;
 use App\Models\User;
 use App\Models\Mensaje;
 use Carbon\Carbon;
+use App\Models\Event;
 
 use App\Models\International;
 use Illuminate\Support\Facades\Cache;
@@ -28,6 +29,13 @@ class DashboardAdmini extends Component
     public function mount()
     {
         $this->loadStatistics();
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Estadisticas del Sistema Administrador"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
     }
 
     protected function loadStatistics()

@@ -6,12 +6,24 @@ use Livewire\Component;
 use App\Models\Package;
 use App\Models\International; // Importa el modelo International
 use Livewire\WithPagination;
+use App\Models\Event;
 
 class Despachocartero extends Component
 {
     use WithPagination;
 
     public $search = '';
+
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Despacho de Paqueteria Carteros"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
 
     public function render()
     {

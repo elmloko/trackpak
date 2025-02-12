@@ -5,12 +5,24 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\International;
 use Livewire\WithPagination;
+use App\Models\Event;
 
 class Internationaltotal extends Component
 {
     use WithPagination;
 
     public $search = '';
+
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Todos los paquetes Certificado"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
 
     public function render()
     {

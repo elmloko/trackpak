@@ -15,6 +15,17 @@ class Traspasoventanillas extends Component
     public $searchTerm; // Variable para el código de búsqueda
     public $selectedVentanilla; // Variable para el select de ventanillas
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Traspazo de Ventanillas"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function searchPackage()
     {
         // Buscar el paquete por el código de rastreo y estado 'VENTANILLA'

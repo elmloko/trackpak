@@ -15,6 +15,17 @@ class SearchEvent extends Component
     public $search = ''; // Para búsqueda en el campo 'codigo'
     public $selectedUserId = ''; // Para búsqueda por 'user_id'
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Consulta de Eventos del Sistema"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
         $users = \App\Models\User::all(); // Obtener todos los usuarios
@@ -28,8 +39,11 @@ class SearchEvent extends Component
             ->when($this->selectedUserId, function ($query) {
                 return $query->where('user_id', $this->selectedUserId);
             })
+            ->when(!auth()->user()->hasRole('SuperAdmin'), function ($query) {
+                return $query->where('action', '!=', 'INGRESO'); // Ocultar eventos de ingreso
+            })
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(50);
 
         return view('livewire.events-packages', [
             'events' => $events,

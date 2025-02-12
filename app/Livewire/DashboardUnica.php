@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Package;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Event;
 
 class DashboardUnica extends Component
 {
@@ -17,6 +18,12 @@ class DashboardUnica extends Component
     {
         $this->userRegional = Auth::user()->Regional; // O ajusta según cómo recuperes la región del usuario
         $this->loadStatistics();
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Estadisticas del Sistema Regional"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
     }
 
     protected function loadStatistics()

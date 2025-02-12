@@ -19,6 +19,17 @@ class Ventanilladdrecibir extends Component
     public $paqueteSeleccionado = null;
     public $showModal = false; // Variable para controlar la visibilidad del modal
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Recibir Paqueteria V7"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
         $userRegional = auth()->user()->Regional;

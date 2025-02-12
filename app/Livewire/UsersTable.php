@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Event;
 
 class UsersTable extends Component
 {
@@ -55,6 +56,17 @@ class UsersTable extends Component
 
         // Cerrar el modal después de la actualización
         $this->dispatch('closeModal');
+    }
+
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Usuarios de Sistema"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
     }
 
     public function render()

@@ -18,6 +18,17 @@ class Generalcartero extends Component
     public $fecha_inicio;
     public $fecha_fin;
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Inventario Paqueteria CarterosAdmin"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
         // Define las columnas que deben ser seleccionadas en ambas consultas
