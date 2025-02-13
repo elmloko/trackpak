@@ -204,7 +204,7 @@
     </div>
     <div class="box-footer mt20">
         <div class="text-right">
-            <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
+            <button type="submit" class="btn btn-primary" id="submit-btn">{{ __('Guardar') }}</button>
         </div>
     </div>
 </div>
@@ -333,4 +333,10 @@
 
     // Llamar a la función al cargar la página para establecer el estado inicial
     window.onload = toggleCasillero;
+</script>
+<script>
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        this.disabled = true;
+        this.form.submit();
+    });
 </script>
