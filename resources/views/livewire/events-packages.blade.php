@@ -71,6 +71,39 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-1">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <!-- Botón para generar el backup -->
+                                    <button type="button" class="btn btn-info btn-sm btn-block" wire:click="gitProject"
+                                        wire:loading.attr="disabled" wire:target="gitProject" data-bs-toggle="modal"
+                                        data-bs-target="#backupModal">
+                                        Traer Cambios
+                                    </button>
+
+                                    <!-- Modal de carga -->
+                                    <div wire:loading wire:target="gitProject">
+                                        <div class="modal fade show" id="backupModal" tabindex="-1" role="dialog"
+                                            style="display:block; background:rgba(0,0,0,0.5);" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Traer Cambios</h5>
+                                                    </div>
+                                                    <div class="modal-body text-center">
+                                                        <p>Por favor espere, el proceso puede tardar unos segundos...
+                                                        </p>
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                                                style="width: 100%;"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             @endhasrole
                         </div>
                     </div>

@@ -46,15 +46,29 @@ class SearchEvent extends Component
         try {
             // Invocar el comando backup
             Artisan::call('backup:project');
-    
+
             // Emitir un evento para cerrar el modal
             $this->dispatch('close-modal');
-    
+
             // Mensaje de éxito
             session()->flash('message', 'Backup generado satisfactoriamente.');
         } catch (\Exception $e) {
             session()->flash('error', 'Error al generar el backup: ' . $e->getMessage());
         }
     }
-    
+    public function gitProject()
+    {
+        try {
+            // Invocar el comando backup
+            Artisan::call('deploy');
+
+            // Emitir un evento para cerrar el modal
+            $this->dispatch('close-modal');
+
+            // Mensaje de éxito
+            session()->flash('message', 'Cambios hechos satisfactoriamente.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error al traer los cambios: ' . $e->getMessage());
+        }
+    }
 }
