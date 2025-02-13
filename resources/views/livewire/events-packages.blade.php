@@ -123,7 +123,7 @@
                                     <th>Accion</th>
                                     <th>Descripcion</th>
                                     <th>Usuario</th>
-                                    <th>xxxx</th>
+                                    <th>Codigo</th>
                                     <th>Fecha y Hora del Evento</th>
                                 </tr>
                             </thead>
