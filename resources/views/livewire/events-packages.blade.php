@@ -37,6 +37,7 @@
                                         class="btn btn-success btn-sm btn-block">Exportar</button>
                                 </div>
                             </div>
+                            @hasrole('SuperAdmin|Administrador')
                             <div class="col-lg-1">
                                 <div class="form-group">
                                     <label>&nbsp;</label>
@@ -70,6 +71,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endhasrole
                         </div>
                     </div>
                 </div>
