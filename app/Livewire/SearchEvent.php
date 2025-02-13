@@ -7,6 +7,7 @@ use App\Models\Event;
 use Livewire\WithPagination;
 use App\Exports\EventsExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Artisan;
 
 class SearchEvent extends Component
 {
@@ -40,4 +41,20 @@ class SearchEvent extends Component
     {
         return Excel::download(new EventsExport($this->search, $this->selectedUserId), 'events.xlsx');
     }
+    public function backupProject()
+    {
+        try {
+            // Invocar el comando backup
+            Artisan::call('backup:project');
+    
+            // Emitir un evento para cerrar el modal
+            $this->dispatch('close-modal');
+    
+            // Mensaje de éxito
+            session()->flash('message', 'Backup generado satisfactoriamente.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error al generar el backup: ' . $e->getMessage());
+        }
+    }
+    
 }
