@@ -8,6 +8,8 @@ use App\Models\International;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\RezagoExport;
+use App\Models\Event;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Rezago extends Component
 {
@@ -61,5 +63,46 @@ class Rezago extends Component
         ]);
     
         return Excel::download(new RezagoExport($this->fecha_inicio, $this->fecha_fin), 'Paquetes Rezagados.xlsx');
+    }
+    public function devolverPaquete($packageId)
+    {
+        // Intentar encontrar el paquete en la tabla Package
+        $paquete = Package::find($packageId);
+        if ($paquete) {
+            $paquete->update([
+                'ESTADO' => 'PRE-REZAGO',
+                'updated_at' => now(),
+            ]);
+
+            Event::create([
+                'action' => 'DEVOLUCION',
+                'descripcion' => 'Devolución a URBANO',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paquete->CODIGO,
+            ]);
+
+            session()->flash('success', 'El paquete ha sido devuelto a Ventanilla.');
+            return;
+        }
+
+        // Intentar encontrar el paquete en la tabla International
+        $paqueteInternacional = International::find($packageId);
+        if ($paqueteInternacional) {
+            $paqueteInternacional->update([
+                'ESTADO' => 'PRE-REZAGO',
+                'updated_at' => now(),
+            ]);
+
+            Event::create([
+                'action' => 'DEVOLUCION',
+                'descripcion' => 'Devolución a URBANO',
+                'user_id' => auth()->user()->id,
+                'codigo' => $paqueteInternacional->CODIGO,
+            ]);
+
+            session()->flash('success', 'El paquete ha sido devuelto a Ventanilla.');
+        } else {
+            session()->flash('error', 'Paquete no encontrado.');
+        }
     }
 }

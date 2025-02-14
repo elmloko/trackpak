@@ -82,6 +82,13 @@
                                                 <td>{{ $package->ESTADO }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->created_at }}</td>
+                                                @hasrole('SuperAdmin|Administrador')
+                                                <td>
+                                                    <button wire:click="devolverPaquete({{ $package->id }})" class="btn btn-primary btn-sm">
+                                                        <i class="fas fa-undo-alt"></i> Devolver
+                                                    </button>
+                                                </td>
+                                                @endhasrole
                                             </tr>
                                         @endif
                                     @endforeach
