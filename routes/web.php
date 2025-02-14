@@ -152,26 +152,6 @@ Route::middleware('auth')->group(function () {
     Route::get('cartero/carteroexcel', [PackageController::class, 'carteroexcel'])->name('cartero.excel');
     Route::get('cartero/carterogeneralexcel', [PackageController::class, 'carterogeneralexcel'])->name('carterogeneralexcel.excel');
 
-    Route::get('/national', [NationalController::class, 'index'])->name('nationals.index');
-    Route::get('/national/create', [NationalController::class, 'create'])->name('nationals.create');
-    Route::post('/national', [NationalController::class, 'store'])->name('nationals.store');
-    // Route::get('/national/{national}', [NationalController::class, 'show'])->name('nationals.show');
-    Route::get('/national/{national}/edit', [NationalController::class, 'edit'])->name('nationals.edit');
-    Route::put('/national/{national}', [NationalController::class, 'update'])->name('nationals.update');
-    Route::delete('/national/{national}', [NationalController::class, 'destroy'])->name('nationals.destroy');
-    Route::get('/national/total', [NationalController::class, 'total'])->name('national.total');
-    Route::get('/national/despachoadmision', [NationalController::class, 'despachoadmision'])->name('national.despachoadmision');
-    Route::get('/national/pdf/cn22', [NationalController::class, 'cn22'])->name('national.pdf.cn22');
-    Route::get('national/despachoadmisionexcel', [NationalController::class, 'despachoadmisionexcel'])->name('despachoadmision.excel');
-    Route::get('/national/nacionaldespacho', [NationalController::class, 'nacionaldespacho'])->name('national.nacionaldespacho');
-    Route::post('national/buscarPaquete', [NationalController::class, 'buscarPaquete'])->name('national.buscarPaquete');
-    Route::put('/national/{id}/devolver', [NationalController::class, 'devolver'])->name('national.devolver');
-    Route::get('/national/nacionalcartero', [NationalController::class, 'nacionalcartero'])->name('national.nacionalcartero');
-    Route::get('/national/nacionalexpedision', [NationalController::class, 'nacionalexpedision'])->name('national.nacionalexpedision');
-    Route::get('/national/nacionalunica', [NationalController::class, 'nacionalunica'])->name('national.nacionalunica');
-    Route::get('/national/nacionalunicainventario', [NationalController::class, 'nacionalunicainventario'])->name('national.nacionalunicainventario');
-    Route::get('/national/nacionalexpedisionexcel', [NationalController::class, 'nacionalexpedisionexcel'])->name('nacionalexpedision.excel');
-    Route::post('national/llegarPaquete', [NationalController::class, 'llegarPaquete'])->name('national.llegarPaquete');
     //Eventos
     Route::get('/events', [EventController::class, 'index'])->name('events.index');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
