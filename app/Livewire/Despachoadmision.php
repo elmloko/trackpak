@@ -27,7 +27,7 @@ class Despachoadmision extends Component
         ->whereIn('ESTADO', ['DESPACHO'])
         ->where('ORIGEN', $userorigen)
         ->orderBy('created_at', 'desc')
-        ->paginate(10);
+        ->paginate(100);
 
         return view('livewire.despachoadmision', [
             'nationals' => $nationals,

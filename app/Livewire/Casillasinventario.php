@@ -40,7 +40,7 @@ class Casillasinventario extends Component
             ->whereIn('ESTADO', ['CASILLA'])
             ->where('CUIDAD', $userRegional)
             ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.casillasinventario', [
             'packages' => $packages,

@@ -37,7 +37,7 @@ class Deleteadounicaadmin extends Component
             ->whereIn('ESTADO', ['ENTREGADO'])
             ->where('VENTANILLA', 'UNICA')
             ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.deleteadounicaadmin', [
             'packages' => $packages,

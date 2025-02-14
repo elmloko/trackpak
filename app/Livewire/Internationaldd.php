@@ -47,7 +47,7 @@ class Internationaldd extends Component
                 ->where('CUIDAD', $userRegional);
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(100);
 
             return view('livewire.internationaldd', [
                 'internationals' => $international,

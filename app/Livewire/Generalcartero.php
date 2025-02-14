@@ -58,7 +58,7 @@ class Generalcartero extends Component
             ->orderBy('deleted_at', 'desc');
 
         // Une ambos conjuntos de resultados
-        $packages = $packages->union($internationalPackages)->paginate(10);
+        $packages = $packages->union($internationalPackages)->paginate(100);
 
         return view('livewire.generalcartero', [
             'packages' => $packages,

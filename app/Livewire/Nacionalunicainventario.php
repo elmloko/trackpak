@@ -36,7 +36,7 @@ class Nacionalunicainventario extends Component
                 $query->where('DESTINO', $this->selectedCity);
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.nacionalunicainventario', [
             'nationals' => $nationals,

@@ -43,7 +43,7 @@ class VentanillaPackages extends Component
                     ->where('CUIDAD', $userRegional);
             })
             ->orderBy('updated_at', 'desc')
-            ->paginate(20);
+            ->paginate(100);
 
         return view('livewire.ventanilla-packages', [
             'packages' => $packages,

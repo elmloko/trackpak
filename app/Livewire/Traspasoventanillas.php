@@ -99,7 +99,7 @@ class Traspasoventanillas extends Component
         // Filtrar los paquetes con estado 'TRASPAZO' para mostrarlos en la tabla
         $packages = Package::where('ESTADO', 'TRASPAZO')
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         // Retornar la vista con los paquetes filtrados
         return view('livewire.traspasoventanillas', [

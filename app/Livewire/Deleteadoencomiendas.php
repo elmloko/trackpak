@@ -37,7 +37,7 @@ class Deleteadoencomiendas extends Component
             ->where('CUIDAD', $userRegional)
             ->where('VENTANILLA', 'ENCOMIENDAS')
             ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.deleteadoencomiendas', [
             'packages' => $packages,

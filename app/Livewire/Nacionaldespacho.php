@@ -38,7 +38,7 @@ class Nacionaldespacho extends Component
             $query->where('DESTINO', $this->selectedCity);
         })
         ->orderBy('created_at', 'desc')
-        ->paginate(10);
+        ->paginate(100);
 
         $carteros = User::role('Cartero')->get(); // Obtener usuarios con el rol 'Cartero'
 

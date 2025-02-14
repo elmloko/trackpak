@@ -18,7 +18,7 @@ class PackageController extends Controller
         $userCuidad = auth()->user()->Regional;
 
         // Filtrar los paquetes por la regional del usuario
-        $packages = Package::where('CUIDAD', $userCuidad)->paginate(20);
+        $packages = Package::where('CUIDAD', $userCuidad)->paginate(100);
 
         return view('package.index', compact('packages'))
             ->with('i', (request()->input('page', 1) - 1) * $packages->perPage());

@@ -39,7 +39,7 @@ class Ventanillaunica extends Component
             ->where('CUIDAD', $userRegional) // Asegúrate de que 'CUIDAD' esté correctamente escrito en la base de datos
             ->where('VENTANILLA', 'UNICA')
             ->orderBy('updated_at', 'desc')
-            ->paginate(20);
+            ->paginate(100);
 
         return view('livewire.ventanillaunica', [
             'packages' => $packages,

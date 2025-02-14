@@ -69,7 +69,7 @@ class Carteros extends Component
             ->orderBy('created_at', 'desc');
 
         // Une ambos conjuntos de resultados
-        $packages = $packages->union($internationalPackages)->paginate(10);
+        $packages = $packages->union($internationalPackages)->paginate(100);
 
         return view('livewire.carteros', [
             'packages' => $packages,

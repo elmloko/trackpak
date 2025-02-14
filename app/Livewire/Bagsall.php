@@ -26,7 +26,7 @@ class Bagsall extends Component
                 ->orWhere('created_at', 'like', '%' . $this->search . '%');
         })
             ->orderBy('MARBETE', 'asc')
-            ->paginate(10);
+            ->paginate(100);
 
         // Calcular la suma de PESOF y PAQUETES por grupo de MARBETE
         $sum = Bag::select('MARBETE',

@@ -24,7 +24,7 @@ class SearchPackages extends Component
             ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
             ->orWhere('created_at', 'like', '%' . $this->search . '%')
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.search-packages', [
             'packages' => $packages,

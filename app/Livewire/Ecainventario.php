@@ -37,7 +37,7 @@ class Ecainventario extends Component
             ->whereIn('VENTANILLA', ['ECA'])
             ->where('CUIDAD', $userRegional)
             ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.ecainventario', [
             'packages' => $packages,

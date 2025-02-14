@@ -40,7 +40,7 @@ class Deleteadodd extends Component
             ->where('CUIDAD', $userRegional)
             ->where('VENTANILLA', 'DD')
             ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.deleteadodd', [
             'packages' => $packages,

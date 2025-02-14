@@ -36,7 +36,7 @@ class Nacionalcartero extends Component
             $query->where('DESTINO', $this->selectedCity);
         })
         ->orderBy('created_at', 'desc')
-        ->paginate(10);
+        ->paginate(100);
 
         return view('livewire.nacionalcartero', [
             'nationals' => $nationals,

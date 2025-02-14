@@ -39,7 +39,7 @@ class Ventanillaunicaadmin extends Component
             })
             ->where('VENTANILLA', 'UNICA')
             ->orderBy('updated_at', 'desc')
-            ->paginate(20);
+            ->paginate(100);
 
         return view('livewire.ventanillaunicaadmin', [
             'packages' => $packages,

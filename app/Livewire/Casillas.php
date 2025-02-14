@@ -39,7 +39,7 @@ class Casillas extends Component
             ->where('CUIDAD', $userRegional)
             ->where('VENTANILLA', 'CASILLAS')
             ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.casillas', [
             'packages' => $packages,

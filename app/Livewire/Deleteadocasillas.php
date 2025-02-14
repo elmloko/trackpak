@@ -45,7 +45,7 @@ class Deleteadocasillas extends Component
             ->where('CUIDAD', $userRegional)
             ->where('VENTANILLA', 'CASILLAS')
             ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.deleteadocasillas', [
             'packages' => $packages,

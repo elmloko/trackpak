@@ -58,7 +58,7 @@ class Carterosgeneral extends Component
             ->orderBy('updated_at', 'desc');
 
         // Unión de ambos resultados
-        $packages = $packages->union($internationalPackages)->paginate(10);
+        $packages = $packages->union($internationalPackages)->paginate(100);
 
         return view('livewire.carterosgeneral', [
             'packages' => $packages,

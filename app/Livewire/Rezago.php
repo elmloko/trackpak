@@ -53,7 +53,7 @@ class Rezago extends Component
 
         return $packageQuery->union($internationalQuery)
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
     }
     public function export()
     {

@@ -33,7 +33,7 @@ class Ventanilladdrecibir extends Component
             ->where('CUIDAD', $userRegional)
             ->where('VENTANILLA', 'ENCOMIENDAS')
             ->orderBy('updated_at', 'desc')
-            ->paginate(20);
+            ->paginate(100);
     
         return view('livewire.ventanilladdrecibir', [
             'packages' => $packages,

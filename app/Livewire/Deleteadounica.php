@@ -39,7 +39,7 @@ class Deleteadounica extends Component
             ->where('CUIDAD', $userRegional)
             ->where('VENTANILLA', 'UNICA')
             ->orderBy('deleted_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.deleteadounica', [
             'packages' => $packages,

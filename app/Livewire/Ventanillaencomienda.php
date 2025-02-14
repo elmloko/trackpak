@@ -46,7 +46,7 @@ class Ventanillaencomienda extends Component
                     ->where('CUIDAD', $userRegional);
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(20);
+            ->paginate(100);
 
         return view('livewire.ventanillaencomienda', [
             'packages' => $packages,

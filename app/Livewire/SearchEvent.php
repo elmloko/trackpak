@@ -30,7 +30,7 @@ class SearchEvent extends Component
                 return $query->where('user_id', $this->selectedUserId);
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            ->paginate(100);
 
         return view('livewire.events-packages', [
             'events' => $events,

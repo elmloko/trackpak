@@ -66,7 +66,7 @@ class Despachocarterogeneral extends Component
             ->where('CUIDAD', $userRegional)
             ->orderBy('updated_at', 'desc');
 
-        $packages = $packages->union($internationalPackages)->paginate(10);
+        $packages = $packages->union($internationalPackages)->paginate(100);
 
         return view('livewire.despachocarterogeneral', [
             'packages' => $packages,
