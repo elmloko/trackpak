@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use App\Exports\EventsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class SearchEvent extends Component
 {
@@ -44,14 +45,21 @@ class SearchEvent extends Component
     public function backupProject()
     {
         try {
-            // Invocar el comando backup
+            // Ejecutar el comando de backup
             Artisan::call('backup:project');
+            $output = Artisan::output();
 
-            // Emitir un evento para cerrar el modal
-            $this->dispatch('close-modal');
+            // Extraer la ruta del archivo de backup del output
+            if (preg_match('/Backup generado correctamente: (.+)$/m', $output, $matches)) {
+                $fullPath = trim($matches[1]);
+                // Convertir la ruta absoluta a relativa (asumiendo que está en storage/app)
+                $relativePath = str_replace(storage_path('app') . DIRECTORY_SEPARATOR, '', $fullPath);
 
-            // Mensaje de éxito
-            session()->flash('message', 'Backup generado satisfactoriamente.');
+                // Redirigir a la ruta que realizará la descarga
+                return redirect()->to(route('backup.download', ['file' => urlencode($relativePath)]));
+            } else {
+                session()->flash('error', 'No se encontró el archivo de backup.');
+            }
         } catch (\Exception $e) {
             session()->flash('error', 'Error al generar el backup: ' . $e->getMessage());
         }

@@ -15,6 +15,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InternationalController;
 use App\Http\Controllers\BackupController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +25,26 @@ Route::get('/search', [EventController::class, 'search'])->name('search');
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+    Route::get('/download-backup', function (Request $request) {
+        $file = $request->get('file');
+    
+        // Decodificar la cadena si es necesario
+        $file = urldecode($file);
+    
+        // Verificar si se pasó una ruta absoluta y convertirla a relativa
+        $storagePath = realpath(storage_path('app'));
+        $realFilePath = realpath($file);
+        if ($realFilePath && strpos($realFilePath, $storagePath) === 0) {
+            $file = ltrim(str_replace($storagePath, '', $realFilePath), DIRECTORY_SEPARATOR);
+        }
+    
+        if (!$file || !Storage::exists($file)) {
+            abort(404, 'Archivo de backup no encontrado.');
+        }
+    
+        return Storage::download($file);
+    })->name('backup.download');
 
 Route::middleware('auth')->group(function () {
 
