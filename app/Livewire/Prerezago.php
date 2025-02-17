@@ -139,47 +139,26 @@ class Prerezago extends Component
     }
     public function devolverPaquete($packageId)
     {
-        // Intentar encontrar el paquete en la tabla Package
-        $paquete = Package::find($packageId);
+        // Buscar el paquete en Package o International
+        $paquete = Package::find($packageId) ?? International::find($packageId);
+    
         if ($paquete) {
             $paquete->update([
                 'ESTADO' => 'VENTANILLA',
                 'updated_at' => now(),
             ]);
-
+    
             Event::create([
                 'action' => 'DEVOLUCION',
-                'descripcion' => 'Devolución a Ventanilla',
+                'descripcion' => 'Devolución a VENTANILA',
                 'user_id' => auth()->user()->id,
                 'codigo' => $paquete->CODIGO,
             ]);
-
-            session()->flash('success', 'El paquete ha sido devuelto a Ventanilla.');
-            return;
-        }
-
-        // Intentar encontrar el paquete en la tabla International
-        $paqueteInternacional = International::find($packageId);
-        if ($paqueteInternacional) {
-            $paqueteInternacional->update([
-                'ESTADO' => 'VENTANILLA',
-                'updated_at' => now(),
-            ]);
-
-            Event::create([
-                'action' => 'DEVOLUCION',
-                'descripcion' => 'Devolución a Ventanilla',
-                'user_id' => auth()->user()->id,
-                'codigo' => $paqueteInternacional->CODIGO,
-            ]);
-
             session()->flash('success', 'El paquete ha sido devuelto a Ventanilla.');
         } else {
             session()->flash('error', 'Paquete no encontrado.');
         }
-    }
-
-
+    } 
 
     private function resetSeleccion()
     {
