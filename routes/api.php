@@ -40,4 +40,5 @@ Route::middleware('predefined.token')->group(function () {
     Route::post('/delete/{codigo}', [ApiController::class, 'delete']);
     Route::get('/events/repeated-codes/{codigo}', [ApiController::class, 'getEventsByCodigo']);
     Route::get('/searchbymanifiesto', [ApiController::class, 'searchByManifiesto']);
+    Route::put('/updatePackage/{id}', [ApiController::class, 'updatePackage']);
 });

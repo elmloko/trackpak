@@ -10,9 +10,52 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ApiController extends Controller
 {
+    public function updatePackage(Request $request, $codigo)
+    {
+        // Validamos los datos recibidos (no incluimos 'codigo' ya que viene por la URL)
+        $data = $request->validate([
+            'ESTADO'      => 'required|string',
+            'action'      => 'required|string',
+            'user_id'     => 'required|exists:users,id',
+            'descripcion' => 'nullable|string',
+            'usercartero' => 'nullable|string',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            // Buscamos el paquete por el campo CODIGO
+            $package = Package::where('CODIGO', $codigo)->firstOrFail();
+
+            // Actualizamos el estado y la marca de tiempo
+            $package->ESTADO = $data['ESTADO'];
+            $package->usercartero = $data['usercartero'];
+            $package->updated_at = now();
+            $package->save();
+
+            // Registramos el evento utilizando el mismo código que se recibe en la URL
+            Event::create([
+                'action'      => $data['action'],
+                'user_id'     => $data['user_id'],
+                'codigo'      => $codigo,
+                'descripcion' => $data['descripcion'] ?? null,
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ]);
+
+            DB::commit();
+
+            return response()->json(['message' => 'Actualización y registro de evento exitosos'], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'Ocurrió un error: ' . $e->getMessage()], 500);
+        }
+    }
+
     public function searchByManifiesto(Request $request)
     {
         // Validar la entrada
