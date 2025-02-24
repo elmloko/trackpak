@@ -38,8 +38,8 @@ class ApiController extends Controller
             $package->OBSERVACIONES = $data['OBSERVACIONES'] ?? null;
             $package->updated_at = now();
 
-            // Si el estado es ENTREGADO, aplicar soft delete
-            if ($data['ESTADO'] === 'ENTREGADO') {
+            // Si el estado es ENTREGADO o REPARTIDO, aplicar soft delete
+            if (in_array($data['ESTADO'], ['ENTREGADO', 'REPARTIDO'])) {
                 $package->save();
                 $package->delete(); // Aplicar SoftDelete
             } else {
