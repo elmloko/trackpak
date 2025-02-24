@@ -16,7 +16,7 @@ class ApiController extends Controller
 {
     public function updatePackage(Request $request, $codigo)
     {
-        // Validamos los datos recibidos (no incluimos 'codigo' ya que viene por la URL)
+        // Validar los datos recibidos
         $data = $request->validate([
             'ESTADO'      => 'required|string',
             'action'      => 'required|string',
@@ -24,23 +24,29 @@ class ApiController extends Controller
             'descripcion' => 'nullable|string',
             'OBSERVACIONES' => 'nullable|string',
             'usercartero' => 'nullable|string',
-
         ]);
 
         try {
             DB::beginTransaction();
 
-            // Buscamos el paquete por el campo CODIGO
+            // Buscar el paquete por el campo CODIGO
             $package = Package::where('CODIGO', $codigo)->firstOrFail();
 
-            // Actualizamos el estado y la marca de tiempo
+            // Actualizar estado y otros datos del paquete
             $package->ESTADO = $data['ESTADO'];
-            $package->usercartero = $data['usercartero'];
-            $package->OBSERVACIONES = $data['OBSERVACIONES'];
+            $package->usercartero = $data['usercartero'] ?? null;
+            $package->OBSERVACIONES = $data['OBSERVACIONES'] ?? null;
             $package->updated_at = now();
-            $package->save();
 
-            // Registramos el evento utilizando el mismo código que se recibe en la URL
+            // Si el estado es ENTREGADO, aplicar soft delete
+            if ($data['ESTADO'] === 'ENTREGADO') {
+                $package->save();
+                $package->delete(); // Aplicar SoftDelete
+            } else {
+                $package->save(); // Guardar sin eliminar
+            }
+
+            // Registrar el evento relacionado con el paquete
             Event::create([
                 'action'      => $data['action'],
                 'user_id'     => $data['user_id'],
