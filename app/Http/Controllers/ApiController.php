@@ -22,7 +22,9 @@ class ApiController extends Controller
             'action'      => 'required|string',
             'user_id'     => 'required|exists:users,id',
             'descripcion' => 'nullable|string',
+            'OBSERVACIONES' => 'nullable|string',
             'usercartero' => 'nullable|string',
+
         ]);
 
         try {
@@ -34,6 +36,7 @@ class ApiController extends Controller
             // Actualizamos el estado y la marca de tiempo
             $package->ESTADO = $data['ESTADO'];
             $package->usercartero = $data['usercartero'];
+            $package->OBSERVACIONES = $data['OBSERVACIONES'];
             $package->updated_at = now();
             $package->save();
 
