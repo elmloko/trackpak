@@ -31,6 +31,7 @@ class RegistrosExport implements FromCollection, WithHeadings, WithStyles
                     ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
                     ->orWhere('TIPO', 'like', '%' . $this->search . '%')
                     ->orWhere('ADUANA', 'like', '%' . $this->search . '%')
+                    ->orWhere('usercartero', 'like', '%' . $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->when($this->selectedCity, function ($query) {
@@ -47,6 +48,7 @@ class RegistrosExport implements FromCollection, WithHeadings, WithStyles
                 'ADUANA',
                 'PESO',
                 'OBSERVACIONES',
+                'usercartero',
                 'created_at'
             )
             ->get();
@@ -65,6 +67,7 @@ class RegistrosExport implements FromCollection, WithHeadings, WithStyles
             'Aduana',
             'Peso (kg)',
             'Observaciones',
+            'Usuario',
             'Fecha Ingreso'
         ];
     }
