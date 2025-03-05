@@ -69,7 +69,7 @@
             </div>
         </div>
     </div>
-    <div class="card card-light">
+    {{-- <div class="card card-light">
         <div class="card-header">
             <h3 class="card-title">Estadisticas Mensajes</h3>
             <div class="card-tools">
@@ -138,5 +138,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
