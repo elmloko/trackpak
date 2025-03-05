@@ -692,12 +692,12 @@ return [
             'icon' => 'fas fa-calendar-alt',
             'can'  => 'packages',
         ],
-        [
-            'text' => 'Mensajeria',
-            'url' => 'mensajes',
-            'icon' => 'fas fa-calendar-alt',
-            'can'  => 'users.index',
-        ],
+        // [
+        //     'text' => 'Mensajeria',
+        //     'url' => 'mensajes',
+        //     'icon' => 'fas fa-calendar-alt',
+        //     'can'  => 'users.index',
+        // ],
         [
             'text' => 'Rendimiento',
             'url' => '/pulse',
