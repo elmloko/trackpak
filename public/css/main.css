@@ -40,7 +40,9 @@
   src: url('../fonts/montserrat/Montserrat-Regular.ttf'); 
 }
 
-
+.centrado {
+  text-align: center;
+}
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 

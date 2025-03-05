@@ -37,7 +37,10 @@
             <div class="wrap-login100">
                 <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                     @csrf
-
+                    <div class="centrado">
+                        <h2>SISTEMA DE SEGUIMIENTO DE PAQUETERÍA POSTAL PARA MEJORA DEL SERVICIO Y CONTROL DE ENVÍOS A NIVEL NACIONAL</h2>
+                        <h3>"TRACKINGBO"</h3>
+                    </div>
                     <span class="label-input100">{{ __('Email') }}</span>
                     <div class="wrap-input100 validate-input"
                         data-validate="Valid email is required: name@correos.gob.bo">
@@ -59,12 +62,12 @@
                             </label>
                         </div>
 
-                        <div>
+                        {{-- <div>
                             {!! htmlFormSnippet() !!}
                             @if (!isset($_POST['g-recaptcha-response']) && $errors->any())
                                 <small class="text-danger">Por favor, complete el reCAPTCHA</small>
                             @endif
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="container-login100-form-btn">
