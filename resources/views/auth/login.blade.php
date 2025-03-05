@@ -37,7 +37,7 @@
             <div class="wrap-login100">
                 <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
                     @csrf
-                    <div class="centrado">
+                    <div class="text-center mb-4">
                         <h2>SISTEMA DE SEGUIMIENTO DE PAQUETERÍA POSTAL PARA MEJORA DEL SERVICIO Y CONTROL DE ENVÍOS A NIVEL NACIONAL</h2>
                         <h3>"TRACKINGBO"</h3>
                     </div>
