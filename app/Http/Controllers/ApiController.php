@@ -24,7 +24,7 @@ class ApiController extends Controller
         ]);
 
         // Buscar el paquete usando el campo CODIGO
-        $package = Package::where('CODIGO', $request->codigo)->first();
+        $package = Package::withTrashed()->where('CODIGO', $request->codigo)->first();
 
         if (!$package) {
             return response()->json(['message' => 'No se encontró el paquete con ese código'], 404);
