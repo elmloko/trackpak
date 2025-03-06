@@ -14,6 +14,35 @@ use Carbon\Carbon;
 
 class ApiController extends Controller
 {
+    public function updateImages(Request $request)
+    {
+        // Validar los campos: 'codigo' es obligatorio, 'foto' y 'firma' pueden ser nulos
+        $request->validate([
+            'codigo' => 'required|string',
+            'foto'   => 'nullable|string',
+            'firma'  => 'nullable|string'
+        ]);
+
+        // Buscar el paquete usando el campo CODIGO
+        $package = Package::where('CODIGO', $request->codigo)->first();
+
+        if (!$package) {
+            return response()->json(['message' => 'No se encontró el paquete con ese código'], 404);
+        }
+
+        // Actualizar los campos si se proporcionan
+        if ($request->has('foto')) {
+            $package->foto = $request->foto;
+        }
+        if ($request->has('firma')) {
+            $package->firma = $request->firma;
+        }
+
+        $package->save();
+
+        return response()->json(['message' => 'Imágenes actualizadas correctamente'], 200);
+    }
+
     public function updatePackage(Request $request, $codigo)
     {
         // Validar los datos recibidos

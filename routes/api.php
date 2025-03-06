@@ -41,4 +41,5 @@ Route::middleware('predefined.token')->group(function () {
     Route::get('/events/repeated-codes/{codigo}', [ApiController::class, 'getEventsByCodigo']);
     Route::get('/searchbymanifiesto', [ApiController::class, 'searchByManifiesto']);
     Route::put('/updatePackage/{id}', [ApiController::class, 'updatePackage']);
+    Route::post('/actualizar-imagenes', [ApiController::class, 'updateImages']);
 });
