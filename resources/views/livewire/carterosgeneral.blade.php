@@ -58,6 +58,7 @@
                                                     <th>Tipo</th>
                                                     <th>Estado</th>
                                                     <th>Cartero</th>
+                                                    <th>Foto</th>
                                                     <th>Fecha Ingreso</th>
                                                 </tr>
                                             </thead>
@@ -73,6 +74,14 @@
                                                         <td>{{ $package->TIPO }}</td>
                                                         <td>{{ $package->ESTADO }}</td>
                                                         <td>{{ $package->usercartero }}</td>
+                                                        <td>
+                                                            @if ($package->foto)
+                                                                <img src="{{ $package->foto }}" alt="Foto" class="bg-white"
+                                                                    style="width: 100px; height: auto; border: 1px solid #ccc; padding: 5px;">
+                                                            @else
+                                                                <p></p>
+                                                            @endif
+                                                        </td>
                                                         <td>{{ $package->updated_at }}</td>
                                                     </tr>
                                                 @endforeach

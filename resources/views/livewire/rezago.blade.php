@@ -48,6 +48,7 @@
                                 <th>Peso</th>
                                 <th>Estado</th>
                                 <th>Observaciones</th>
+                                <th>Foto</th>
                                 <th>Fecha Rezago</th>
                                 @hasrole('SuperAdmin|Administrador')
                                 <th>Acciones</th>
@@ -68,6 +69,14 @@
                                     <td>{{ $package->PESO }} gr.</td>
                                     <td>{{ $package->ESTADO }}</td>
                                     <td>{{ $package->OBSERVACIONES }}</td>
+                                    <td>
+                                        @if ($package->foto)
+                                            <img src="{{ $package->foto }}" alt="Foto" class="bg-white"
+                                                style="width: 100px; height: auto; border: 1px solid #ccc; padding: 5px;">
+                                        @else
+                                            <p></p>
+                                        @endif
+                                    </td>
                                     <td>{{ $package->created_at }}</td>
                                     <td>
                                         <button wire:click="devolverPaquete({{ $package->id }}, 'Package')" class="btn btn-primary btn-sm">
@@ -88,6 +97,7 @@
                                     <td>{{ $international->PESO }} gr.</td>
                                     <td>{{ $international->ESTADO }}</td>
                                     <td>{{ $international->OBSERVACIONES }}</td>
+                                    <td></td>
                                     <td>{{ $international->created_at }}</td>
                                     <td>
                                         <button wire:click="devolverPaquete({{ $international->id }}, 'International')" class="btn btn-primary btn-sm">

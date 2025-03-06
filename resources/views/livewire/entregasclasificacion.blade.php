@@ -64,6 +64,7 @@
                                         <th>Observaciones</th>
                                         <th>Aduana</th>
                                         <th>Manifiesto</th>
+                                        <th>Foto</th>
                                         <th>Fecha Despacho</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -86,6 +87,14 @@
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>{{ $package->ADUANA }}</td>
                                                 <td>{{ $package->manifiesto }}</td>
+                                                <td>
+                                                    @if ($package->foto)
+                                                        <img src="{{ $package->foto }}" alt="Foto" class="bg-white"
+                                                            style="width: 100px; height: auto; border: 1px solid #ccc; padding: 5px;">
+                                                    @else
+                                                        <p></p>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $package->datedespachoclasificacion }}</td>
                                                 <td>
                                                     @hasrole('SuperAdmin|Administrador|Clasificacion')
