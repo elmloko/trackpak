@@ -42,6 +42,7 @@
                                                         <th>Tipo</th>
                                                         <th>Estado</th>
                                                         <th>Aduana</th>
+                                                        <th>Manifiesto</th>
                                                         <th>Observaciones</th>
                                                         <th>Ultima Actualizacion</th>
                                                         @hasrole('SuperAdmin|Administrador')
@@ -69,6 +70,7 @@
                                                                 @endif
                                                             </td>
                                                             <td>{{ $package->ADUANA }}</td>
+                                                            <td>{{ $package->manifiesto }}</td>
                                                             <td>{{ $package->OBSERVACIONES }}</td>
                                                             <td>{{ $package->updated_at }}</td>
                                                             <td>
