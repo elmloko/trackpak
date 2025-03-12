@@ -20,7 +20,7 @@ class Despachocartero extends Component
 
         // Define las columnas que deben ser seleccionadas en ambas consultas
         $columns = [
-            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'created_at', 'ESTADO' , 'usercartero' , 'PESO' , 'TIPO' , 'updated_at'
+            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'created_at', 'ESTADO' , 'usercartero' , 'PESO' , 'foto', 'TIPO' , 'updated_at'
         ];
 
         // Consulta para obtener paquetes de la tabla Package

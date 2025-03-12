@@ -44,7 +44,7 @@
                                                         <th>Estado</th>
                                                         <th>Foto</th>
                                                         <th>Fecha Retorno</th>
-                                                        
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -63,10 +63,9 @@
                                                                 <td>{{ $package->ESTADO }}</td>
                                                                 <td>
                                                                     @if ($package->foto)
-                                                                        <img src="{{ $package->foto }}" alt="Foto" class="bg-white"
-                                                                            style="width: 100px; height: auto; border: 1px solid #ccc; padding: 5px;">
+                                                                        <a href="{{ $package->foto }}" download="foto.png" class="btn btn-sm btn-secondary">Descargar</a>
                                                                     @else
-                                                                        <p></p>
+                                                                        <span>Sin Foto</span>
                                                                     @endif
                                                                 </td>
                                                                 <td>{{ $package->updated_at }}</td>

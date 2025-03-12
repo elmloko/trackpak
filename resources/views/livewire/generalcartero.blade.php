@@ -81,7 +81,7 @@
                                                 <td>{{ $package->PESO }} </td>
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>
-                                                    @if($package->ESTADO == 'REPARTIDO')
+                                                    @if ($package->ESTADO == 'REPARTIDO')
                                                         ENTREGADO CARTERO
                                                     @else
                                                         {{ $package->ESTADO }}
@@ -90,11 +90,10 @@
                                                 <td>{{ $package->usercartero }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>
-                                                    @if ($package->foto)
-                                                        <img src="{{ $package->foto }}" alt="Foto" class="bg-white"
-                                                            style="width: 100px; height: auto; border: 1px solid #ccc; padding: 5px;">
+                                                    @if ($package->firma)
+                                                        <a href="{{ $package->firma }}" download="foto.png" class="btn btn-sm btn-secondary">Descargar</a>
                                                     @else
-                                                        <p></p>
+                                                        <span>Sin Foto</span>
                                                     @endif
                                                 </td>
                                                 <td>{{ $package->deleted_at }}</td>

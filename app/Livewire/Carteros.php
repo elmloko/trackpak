@@ -37,6 +37,7 @@ class Carteros extends Component
             'ESTADO',
             'usercartero',
             'PESO',
+            'firma',
             'TIPO'
         ];
 

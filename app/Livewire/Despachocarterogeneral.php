@@ -35,6 +35,7 @@ class Despachocarterogeneral extends Component
             'PESO',
             'ESTADO',
             'usercartero',
+            'foto',
             'updated_at'
         ];
 
