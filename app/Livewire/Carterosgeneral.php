@@ -24,7 +24,7 @@ class Carterosgeneral extends Component
 
         $userRegional = auth()->user()->Regional;
 
-        $columns = ['CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'updated_at', 'ESTADO', 'usercartero', 'PESO', 'TIPO'];
+        $columns = ['CODIGO', 'DESTINATARIO', 'TELEFONO', 'ADUANA', 'updated_at', 'ESTADO', 'usercartero', 'PESO','foto','firma', 'TIPO'];
 
         // Filtrar paquetes según el cartero seleccionado
         $packages = Package::select($columns)

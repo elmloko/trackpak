@@ -78,7 +78,7 @@
                                                 <td>{{ $package->PESO }} </td>
                                                 <td>{{ $package->TIPO }}</td>
                                                 <td>
-                                                    @if($package->ESTADO == 'REPARTIDO')
+                                                    @if ($package->ESTADO == 'REPARTIDO')
                                                         ENTREGADO CARTERO
                                                     @else
                                                         {{ $package->ESTADO }}
@@ -86,16 +86,19 @@
                                                 </td>
                                                 <!-- Condicional para la firma -->
                                                 <td>
-                                                    @if ($package->firma)
-                                                        <img src="{{ $package->firma }}" alt="Firma"
-                                                            class="bg-white"
-                                                            style="width: 200px; height: auto; border: 1px solid #ccc; padding: 5px;">
-                                                    @else
-                                                        <p></p>
-                                                    @endif
-                                                    @if ($package->foto)
-                                                        <img src="{{ $package->foto }}" alt="Foto" class="bg-white"
-                                                            style="width: 100px; height: auto; border: 1px solid #ccc; padding: 5px;">
+                                                    @if ($package->firma || $package->foto)
+                                                        @if ($package->firma)
+                                                            <a href="{{ $package->firma }}" download="firma.png"
+                                                                class="btn btn-sm btn-secondary">
+                                                                <i class="fa fa-download"></i> Descargar Firma
+                                                            </a>
+                                                        @endif
+                                                        @if ($package->foto)
+                                                            <a href="{{ $package->foto }}" download="foto.png"
+                                                                class="btn btn-sm btn-secondary">
+                                                                <i class="fa fa-download"></i> Descargar Foto
+                                                            </a>
+                                                        @endif
                                                     @else
                                                         <p></p>
                                                     @endif

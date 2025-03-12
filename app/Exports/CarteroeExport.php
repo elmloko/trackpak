@@ -25,7 +25,7 @@ class CarteroeExport implements FromCollection, WithHeadings, WithStyles
     public function collection()
     {
         $columns = [
-            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'PESO', 'ESTADO', 'usercartero', 'updated_at'
+            'CODIGO', 'DESTINATARIO', 'TELEFONO', 'PESO', 'ESTADO', 'usercartero', 'updated_at','foto','firma',
         ];
 
         // Filtrar paquetes nacionales por el cartero

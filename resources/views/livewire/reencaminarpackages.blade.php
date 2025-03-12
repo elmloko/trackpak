@@ -83,13 +83,12 @@
                                                 <td>{{ $package->ESTADO }}</td>
                                                 <td>{{ $package->OBSERVACIONES }}</td>
                                                 <td>
-                                                    @if ($package->foto)
-                                                        <img src="{{ $package->foto }}" alt="Foto" class="bg-white"
-                                                            style="width: 100px; height: auto; border: 1px solid #ccc; padding: 5px;">
-                                                    @else
-                                                        <p></p>
-                                                    @endif
-                                                </td>
+                                                                @if ($package->foto)
+                                                                    <a href="{{ $package->foto }}" download="foto.png" class="btn btn-sm btn-secondary">Descargar</a>
+                                                                @else
+                                                                    <p></p>
+                                                                @endif
+                                                            </td>
                                                 <td>{{ $package->date_redirigido }}</td>
                                                 <td>
                                                     <button wire:click="editPackage({{ $package->id }})"

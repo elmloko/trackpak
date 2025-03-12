@@ -30,6 +30,7 @@ class Generalcartero extends Component
             'OBSERVACIONES',
             'PESO',
             'ESTADO',
+            'foto',
             'firma',
             'usercartero',
         ];

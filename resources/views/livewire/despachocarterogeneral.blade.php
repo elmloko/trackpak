@@ -94,7 +94,7 @@
                                                                     @if ($package->foto)
                                                                         <a href="{{ $package->foto }}" download="foto.png" class="btn btn-sm btn-secondary">Descargar</a>
                                                                     @else
-                                                                        <span>Sin Foto</span>
+                                                                        <p></p>
                                                                     @endif
                                                                 </td>
                                                                 <td>{{ $package->updated_at }}</td>

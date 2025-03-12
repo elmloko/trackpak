@@ -93,7 +93,7 @@
                                                     @if ($package->firma)
                                                         <a href="{{ $package->firma }}" download="foto.png" class="btn btn-sm btn-secondary">Descargar</a>
                                                     @else
-                                                        <span>Sin Foto</span>
+                                                        <p></p>
                                                     @endif
                                                 </td>
                                                 <td>{{ $package->deleted_at }}</td>
