@@ -358,9 +358,12 @@ class PackageController extends Controller
 
     public function edit($id)
     {
-        $package = Package::find($id);
+        $package = Package::withTrashed()->find($id);
+        if (!$package) {
+            abort(404);
+        }
         return view('package.edit', compact('package'));
-    }
+    }    
 
     public function update(Request $request, Package $package)
     {
