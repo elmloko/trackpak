@@ -6,7 +6,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="card">
+                                <div>
                                     <div>
                                         <h5 id="card_title">
                                             {{ __('Paquetes Ordinarios Nacionales') }}
