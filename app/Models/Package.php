@@ -28,10 +28,12 @@ class Package extends Model
 
   protected $perPage = 20;
 
-  /**
-   * Attributes that should be mass-assignable.
-   *
-   * @var array
-   */
+  public function resolveRouteBinding($value, $field = null)
+  {
+    return $this->withTrashed()
+      ->where($field ?? $this->getRouteKeyName(), $value)
+      ->firstOrFail();
+  }
+
   protected $fillable = ['CODIGO', 'DESTINATARIO', 'TELEFONO', 'PAIS', 'CUIDAD', 'ZONA', 'VENTANILLA', 'PESO', 'TIPO', 'ESTADO', 'ADUANA', 'ISO', 'PRECIO', 'OBSERVACIONES', 'date_redirigido', 'redirigido', 'nrocasilla', 'usercartero', 'firma', 'foto', 'manifiesto'];
 }

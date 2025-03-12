@@ -359,11 +359,8 @@ class PackageController extends Controller
     public function edit($id)
     {
         $package = Package::withTrashed()->find($id);
-        if (!$package) {
-            abort(404);
-        }
         return view('package.edit', compact('package'));
-    }    
+    }
 
     public function update(Request $request, Package $package)
     {
@@ -394,6 +391,14 @@ class PackageController extends Controller
         ]);
 
         $package->update($request->all());
+
+        if (($package->ESTADO === 'ENTREGADO' || $package->ESTADO === 'REPARTIDO') && !$package->trashed()) {
+            // Si el estado es ENTREGADO o REPARTIDO y no está eliminado, se aplica soft delete.
+            $package->delete();
+        } elseif (!in_array($package->ESTADO, ['ENTREGADO', 'REPARTIDO']) && $package->trashed()) {
+            // Si el estado es cualquier otro y está eliminado, se quita el soft delete.
+            $package->restore();
+        }
 
         Event::create([
             'action' => 'ESTADO',

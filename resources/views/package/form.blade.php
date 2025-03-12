@@ -61,7 +61,7 @@
                         {{ Form::label('TIPO*') }}
                         {{ Form::select('TIPO', ['PAQUETE' => 'PAQUETE', 'SOBRE' => 'SOBRE'], $package->TIPO, [
                             'class' => 'form-control' . ($errors->has('TIPO') ? ' is-invalid' : ''),
-                            'placeholder' => 'Selecione el tipo de paquete'
+                            'placeholder' => 'Selecione el tipo de paquete',
                         ]) }}
                         {!! $errors->first('TIPO', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
@@ -70,16 +70,56 @@
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                     <div class="form-group">
                         {{ Form::label('CIUDAD*') }}
-                        {{ Form::select('CUIDAD', [
-                            'LA PAZ' => 'LA PAZ', 'COCHABAMBA' => 'COCHABAMBA', 'SANTA CRUZ' => 'SANTA CRUZ',
-                            'ORURO' => 'ORURO', 'POTOSI' => 'POTOSI', 'TARIJA' => 'TARIJA',
-                            'SUCRE' => 'SUCRE', 'BENI' => 'BENI', 'PANDO' => 'PANDO'
-                        ], $package->CUIDAD, [
-                            'class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''),
-                            'placeholder' => 'Selecione la Ciudad',
-                            'id' => 'ciudad-select'
-                        ]) }}
+                        {{ Form::select(
+                            'CUIDAD',
+                            [
+                                'LA PAZ' => 'LA PAZ',
+                                'COCHABAMBA' => 'COCHABAMBA',
+                                'SANTA CRUZ' => 'SANTA CRUZ',
+                                'ORURO' => 'ORURO',
+                                'POTOSI' => 'POTOSI',
+                                'TARIJA' => 'TARIJA',
+                                'SUCRE' => 'SUCRE',
+                                'BENI' => 'BENI',
+                                'PANDO' => 'PANDO',
+                            ],
+                            $package->CUIDAD,
+                            [
+                                'class' => 'form-control' . ($errors->has('CUIDAD') ? ' is-invalid' : ''),
+                                'placeholder' => 'Selecione la Ciudad',
+                                'id' => 'ciudad-select',
+                            ],
+                        ) }}
                         {!! $errors->first('CUIDAD', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                @endhasrole
+
+                @hasrole('SuperAdmin|Administrador')
+                    <div class="form-group">
+                        {{ Form::label('ESTADO*') }}
+                        {{ Form::select(
+                            'ESTADO',
+                            [
+                                'CLASIFICACION' => 'CLASIFICACION',
+                                'DESPACHO' => 'DESPACHO',
+                                'VENTANILLA' => 'VENTANILLA',
+                                'ENTREGADO' => 'ENTREGADO',
+                                'CARTERO' => 'CARTERO',
+                                'RETORNO' => 'RETORNO',
+                                'REENCAMINADO' => 'REENCAMINADO',
+                                'RECIBIDO' => 'RECIBIDO',
+                                'REPARTIDO' => 'REPARTIDO',
+                                'PRE-REZAGO' => 'PRE-REZAGO',
+                                'REZAGO' => 'REZAGO',
+                            ],
+                            $package->ESTADO,
+                            [
+                                'class' => 'form-control' . ($errors->has('ESTADO') ? ' is-invalid' : ''),
+                                'placeholder' => 'Selecione la Ciudad',
+                                'id' => 'ciudad-select',
+                            ],
+                        ) }}
+                        {!! $errors->first('ESTADO', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 @endhasrole
             </div>
@@ -88,18 +128,23 @@
                 @hasrole('SuperAdmin|Administrador|Clasificacion|Auxiliar Clasificacion')
                     <div class="form-group">
                         {{ Form::label('VENTANILLA*') }}
-                        {{ Form::select('VENTANILLA', [
-                            'ECA' => 'ECA',
-                            'UNICA' => 'UNICA',
-                            'ENCOMIENDAS' => 'VENTANILLA 7',
-                            'DND' => 'DND',
-                            'DD' => 'DD',
-                            'CASILLAS' => 'CASILLAS',
-                        ], $package->VENTANILLA, [
-                            'class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''),
-                            'placeholder' => 'Selecione la Ventanilla',
-                            'id' => 'ventanilla-select'
-                        ]) }}
+                        {{ Form::select(
+                            'VENTANILLA',
+                            [
+                                'ECA' => 'ECA',
+                                'UNICA' => 'UNICA',
+                                'ENCOMIENDAS' => 'VENTANILLA 7',
+                                'DND' => 'DND',
+                                'DD' => 'DD',
+                                'CASILLAS' => 'CASILLAS',
+                            ],
+                            $package->VENTANILLA,
+                            [
+                                'class' => 'form-control' . ($errors->has('VENTANILLA') ? ' is-invalid' : ''),
+                                'placeholder' => 'Selecione la Ventanilla',
+                                'id' => 'ventanilla-select',
+                            ],
+                        ) }}
                         {!! $errors->first('VENTANILLA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                     <div class="form-group">
@@ -118,7 +163,7 @@
                         {{ Form::label('ADUANA*') }}
                         {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, [
                             'class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''),
-                            'placeholder' => 'Selecione el estado en el cual se observó el paquete'
+                            'placeholder' => 'Selecione el estado en el cual se observó el paquete',
                         ]) }}
                         {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
@@ -137,7 +182,7 @@
                         {{ Form::label('ADUANA*') }}
                         {{ Form::select('ADUANA', ['SI' => 'SI', 'NO' => 'NO'], $package->ADUANA, [
                             'class' => 'form-control' . ($errors->has('ADUANA') ? ' is-invalid' : ''),
-                            'placeholder' => 'Selecione el estado en el cual se observó el paquete'
+                            'placeholder' => 'Selecione el estado en el cual se observó el paquete',
                         ]) }}
                         {!! $errors->first('ADUANA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
@@ -146,75 +191,80 @@
                 @hasrole('SuperAdmin|Administrador|Urbano')
                     <div class="form-group">
                         {{ Form::label('ZONA*') }}
-                        {{ Form::select('ZONA', [
-                            'DND' => 'DND',
-                            'EL ALTO' => 'EL ALTO',
-                            'CALACOTO' => 'CALACOTO',
-                            'SAN PEDRO' => 'SAN PEDRO',
-                            'LOS ANDES' => 'LOS ANDES',
-                            'SEGUENCOMA' => 'SEGUENCOMA',
-                            'VILLA PABON' => 'VILLA PABON',
-                            'VILLA ARMONIA' => 'VILLA ARMONIA',
-                            'IRPAVI' => 'IRPAVI',
-                            'CENTRO' => 'CENTRO',
-                            'VILLA NUEVA POTOSI' => 'VILLA NUEVA POTOSI',
-                            'AUQUISAMANA' => 'AUQUISAMAÑA',
-                            'ROSARIO GRAN PODER' => 'ROSARIO GRAN PODER',
-                            'VILLA EL CARMEN' => 'VILLA EL CARMEN',
-                            'ACHUMANI' => 'ACHUMANI',
-                            'MIRAFLORES' => 'MIRAFLORES',
-                            'CEMENTERIO' => 'CEMENTERIO',
-                            'MALLASILLA' => 'MALLASILLA',
-                            'VILLA SALOME' => 'VILLA SALOME',
-                            'LOS PINOS / SAN MIGUEL' => 'LOS PINOS / SAN MIGUEL',
-                            'VILLA FATIMA' => 'VILLA FATIMA',
-                            'PASANKERI' => 'PASANKERI',
-                            'ALTO OBRAJES' => 'ALTO OBRAJES',
-                            'PURA PURA' => 'PURA PURA',
-                            'OBRAJES' => 'OBRAJES',
-                            'VILLA COPACABANA' => 'VILLA COPACABANA',
-                            'LLOJETA' => 'LLOJETA',
-                            'BUENOS AIRES' => 'BUENOS AIRES',
-                            'ACHACHICALA' => 'ACHACHICALA',
-                            'TEMBLADERANI' => 'TEMBLADERANI',
-                            'SOPOCACHI' => 'SOPOCACHI',
-                            'ZONA NORTE' => 'ZONA NORTE',
-                            'PAMPAHASSI' => 'PAMPAHASSI',
-                            'VINO TINTO' => 'VINO TINTO',
-                            'BELLA VISTA / BOLONIA' => 'BELLA VISTA / BOLONIA',
-                            'VILLA SAN ANTONIO' => 'VILLA SAN ANTONIO',
-                            'MUNAYPATA' => 'MUNAYPATA',
-                            'SAN SEBASTIAN' => 'SAN SEBASTIAN',
-                            'PERIFERICA' => 'PERIFERICA',
-                            'COTA COTA / CHASQUIPAMPA' => 'COTA COTA / CHASQUIPAMPA',
-                            'LA PORTADA' => 'LA PORTADA',
-                            'FLORIDA' => 'FLORIDA',
-                            'VILLA VICTORIA' => 'VILLA VICTORIA',
-                            'CIUDADELA FERROVIARIA' => 'CIUDADELA FERROVIARIA',
-                            'PG1A' => 'PG1A',
-                            'PG2A' => 'PG2A',
-                            'PG3A' => 'PG3A',
-                            'PG4A' => 'PG4A',
-                            'PG5A' => 'PG5A',
-                            'PG1B' => 'PG1B',
-                            'PG2B' => 'PG2B',
-                            'PG3B' => 'PG3B',
-                            'PG4B' => 'PG4B',
-                            'PG5B' => 'PG5B',
-                            'PG1C' => 'PG1C',
-                            'PG2C' => 'PG2C',
-                            'PG3C' => 'PG3C',
-                            'PG4C' => 'PG4C',
-                            'PG5C' => 'PG5C',
-                            'PG1D' => 'PG1D',
-                            'PG2D' => 'PG2D',
-                            'PG3D' => 'PG3D',
-                            'PG4D' => 'PG4D',
-                            'PG5D' => 'PG5D',
-                        ], $package->ZONA, [
-                            'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
-                            'placeholder' => 'Seleccione la Zona',
-                        ]) }}
+                        {{ Form::select(
+                            'ZONA',
+                            [
+                                'DND' => 'DND',
+                                'EL ALTO' => 'EL ALTO',
+                                'CALACOTO' => 'CALACOTO',
+                                'SAN PEDRO' => 'SAN PEDRO',
+                                'LOS ANDES' => 'LOS ANDES',
+                                'SEGUENCOMA' => 'SEGUENCOMA',
+                                'VILLA PABON' => 'VILLA PABON',
+                                'VILLA ARMONIA' => 'VILLA ARMONIA',
+                                'IRPAVI' => 'IRPAVI',
+                                'CENTRO' => 'CENTRO',
+                                'VILLA NUEVA POTOSI' => 'VILLA NUEVA POTOSI',
+                                'AUQUISAMANA' => 'AUQUISAMAÑA',
+                                'ROSARIO GRAN PODER' => 'ROSARIO GRAN PODER',
+                                'VILLA EL CARMEN' => 'VILLA EL CARMEN',
+                                'ACHUMANI' => 'ACHUMANI',
+                                'MIRAFLORES' => 'MIRAFLORES',
+                                'CEMENTERIO' => 'CEMENTERIO',
+                                'MALLASILLA' => 'MALLASILLA',
+                                'VILLA SALOME' => 'VILLA SALOME',
+                                'LOS PINOS / SAN MIGUEL' => 'LOS PINOS / SAN MIGUEL',
+                                'VILLA FATIMA' => 'VILLA FATIMA',
+                                'PASANKERI' => 'PASANKERI',
+                                'ALTO OBRAJES' => 'ALTO OBRAJES',
+                                'PURA PURA' => 'PURA PURA',
+                                'OBRAJES' => 'OBRAJES',
+                                'VILLA COPACABANA' => 'VILLA COPACABANA',
+                                'LLOJETA' => 'LLOJETA',
+                                'BUENOS AIRES' => 'BUENOS AIRES',
+                                'ACHACHICALA' => 'ACHACHICALA',
+                                'TEMBLADERANI' => 'TEMBLADERANI',
+                                'SOPOCACHI' => 'SOPOCACHI',
+                                'ZONA NORTE' => 'ZONA NORTE',
+                                'PAMPAHASSI' => 'PAMPAHASSI',
+                                'VINO TINTO' => 'VINO TINTO',
+                                'BELLA VISTA / BOLONIA' => 'BELLA VISTA / BOLONIA',
+                                'VILLA SAN ANTONIO' => 'VILLA SAN ANTONIO',
+                                'MUNAYPATA' => 'MUNAYPATA',
+                                'SAN SEBASTIAN' => 'SAN SEBASTIAN',
+                                'PERIFERICA' => 'PERIFERICA',
+                                'COTA COTA / CHASQUIPAMPA' => 'COTA COTA / CHASQUIPAMPA',
+                                'LA PORTADA' => 'LA PORTADA',
+                                'FLORIDA' => 'FLORIDA',
+                                'VILLA VICTORIA' => 'VILLA VICTORIA',
+                                'CIUDADELA FERROVIARIA' => 'CIUDADELA FERROVIARIA',
+                                'PG1A' => 'PG1A',
+                                'PG2A' => 'PG2A',
+                                'PG3A' => 'PG3A',
+                                'PG4A' => 'PG4A',
+                                'PG5A' => 'PG5A',
+                                'PG1B' => 'PG1B',
+                                'PG2B' => 'PG2B',
+                                'PG3B' => 'PG3B',
+                                'PG4B' => 'PG4B',
+                                'PG5B' => 'PG5B',
+                                'PG1C' => 'PG1C',
+                                'PG2C' => 'PG2C',
+                                'PG3C' => 'PG3C',
+                                'PG4C' => 'PG4C',
+                                'PG5C' => 'PG5C',
+                                'PG1D' => 'PG1D',
+                                'PG2D' => 'PG2D',
+                                'PG3D' => 'PG3D',
+                                'PG4D' => 'PG4D',
+                                'PG5D' => 'PG5D',
+                            ],
+                            $package->ZONA,
+                            [
+                                'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
+                                'placeholder' => 'Seleccione la Zona',
+                            ],
+                        ) }}
                         {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 @endhasrole
@@ -283,10 +333,12 @@
             const ciudad = $('#ciudad-select').val();
             if (ciudad === 'LA PAZ') {
                 $('#ventanilla-select option[value="UNICA"]').hide();
-                $('#ventanilla-select option[value="DND"], option[value="DD"], option[value="ECA"], option[value="CASILLAS"], option[value="ENCOMIENDAS"]').show();
+                $('#ventanilla-select option[value="DND"], option[value="DD"], option[value="ECA"], option[value="CASILLAS"], option[value="ENCOMIENDAS"]')
+                    .show();
             } else {
                 $('#ventanilla-select option[value="UNICA"]').show();
-                $('#ventanilla-select option[value="DND"], option[value="DD"], option[value="ECA"], option[value="CASILLAS"]').hide();
+                $('#ventanilla-select option[value="DND"], option[value="DD"], option[value="ECA"], option[value="CASILLAS"]')
+                    .hide();
             }
             toggleCasillero();
         }
