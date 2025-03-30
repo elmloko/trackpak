@@ -62,33 +62,21 @@ class Ventanillaencomienda extends Component
     }
     public function cambiarEstado()
     {
-        // Obtener los paquetes seleccionados y actualizar su estado
         $paquetesSeleccionados = Package::whereIn('id', $this->paquetesSeleccionados)
             ->when($this->selectedCity, function ($query) {
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-
-
+    
         foreach ($paquetesSeleccionados as $paquete) {
-            // Calcular el precio basado en el peso del paquete
             $peso = $paquete->PESO;
-            if ($peso >= 0.000 && $peso <= 0.5) {
-                $precio = 5;
-            } elseif ($peso > 0.5) {
-                $precio = 10;
-            }
-
-            // Actualizar el precio del paquete
+            $precio = ($peso <= 0.5) ? 5 : 10;
+    
             $paquete->PRECIO = $precio;
-            $paquete->save();
-
-            // Actualizar el estado del paquete
             $paquete->ESTADO = 'ENTREGADO';
             $paquete->save();
             $paquete->delete();
-
-            // Crear un evento
+    
             Event::create([
                 'action' => 'ENTREGADO',
                 'descripcion' => 'Entrega de paquete en ventanilla en Oficina Postal Regional',
@@ -96,22 +84,19 @@ class Ventanillaencomienda extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-
-        // Restablecer la selección
+    
         $this->resetSeleccion();
-
-        // Determinar el formulario correspondiente
-        $formulario = $paquete->ADUANA === 'SI' ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
-
-        // Generar el PDF del paquete
-        $pdf = PDF::loadView($formulario, ['packages' => collect([$paquete])]);
-        $pdfContent = $pdf->output();
-
-        // Generar una respuesta con el contenido del PDF para descargar
-        return response()->streamDownload(function () use ($pdfContent) {
-            echo $pdfContent;
+    
+        $tieneAduana = $paquetesSeleccionados->contains(fn ($p) => $p->ADUANA === 'SI');
+        $formulario = $tieneAduana ? 'package.pdf.formularioentrega' : 'package.pdf.formularioentrega2';
+    
+        $pdf = PDF::loadView($formulario, ['packages' => $paquetesSeleccionados]);
+    
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->output();
         }, 'Despacho Encomiendas.pdf');
     }
+    
 
     public function toggleSelectSingle($packageId)
     {
