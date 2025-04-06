@@ -333,36 +333,36 @@ class EventController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $client = new Client(['base_uri' => 'http://172.65.10.37/']);
-        $response = $client->post('api/Autenticacion/Validar', [
-            'json' => [
-                'correo' => 'Correos',
-                'clave' => 'AGBClp2020'
-            ]
-        ]);
-        $body = json_decode($response->getBody());
-        $token = $body->token;
+        // $client = new Client(['base_uri' => 'http://172.65.10.37/']);
+        // $response = $client->post('api/Autenticacion/Validar', [
+        //     'json' => [
+        //         'correo' => 'Correos',
+        //         'clave' => 'AGBClp2020'
+        //     ]
+        // ]);
+        // $body = json_decode($response->getBody());
+        // $token = $body->token;
 
-        $response = $client->post('api/O_MAIL_OBJECTS/buscar', [
-            'headers' => [
-                'Authorization' => 'Bearer ' . $token,
-                'Accept' => 'application/json',
-            ],
-            'json' => [
-                'id' => $codigo
-            ]
-        ]);
+        // $response = $client->post('api/O_MAIL_OBJECTS/buscar', [
+        //     'headers' => [
+        //         'Authorization' => 'Bearer ' . $token,
+        //         'Accept' => 'application/json',
+        //     ],
+        //     'json' => [
+        //         'id' => $codigo
+        //     ]
+        // ]);
 
-        $results = json_decode($response->getBody());
+        // $results = json_decode($response->getBody());
 
-        // Mapear los eventos
-        foreach ($results as $result) {
-            $result->eventType = $this->mapEventType($result->eventType);
-        }
+        // // Mapear los eventos
+        // foreach ($results as $result) {
+        //     $result->eventType = $this->mapEventType($result->eventType);
+        // }
 
-        usort($results, function ($a, $b) {
-            return strtotime($b->eventDate) - strtotime($a->eventDate);
-        });
+        // usort($results, function ($a, $b) {
+        //     return strtotime($b->eventDate) - strtotime($a->eventDate);
+        // });
 
         return view('search', compact('results', 'packages', 'event', 'codigo', 'country'));
     }
