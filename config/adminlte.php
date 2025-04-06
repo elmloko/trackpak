@@ -510,76 +510,76 @@ return [
                 ],
             ],
         ],
-        [
-            'text' => 'Paquetes Certificados',
-            'icon' => 'fas fa-archive',
-            'can'  => '',
-            'submenu' => [
-                [
-                    'text' => 'Todos Paquetes',
-                    'url' => 'internationals',
-                    'icon' => 'fas fa-box',
-                    'can'  => 'packages',
-                ],
-                [
-                    'text' => 'Ventanilla DD',
-                    'icon' => 'fas fa-window-maximize',
-                    'can'  => 'packages.ventanilla',
-                    'submenu' => [
-                        [
-                            'text' => 'Entregas Ventanilla DD',
-                            'url' => 'internationals/ventanilladd',
-                            'icon' => 'fas fa-truck',
-                            'can'  => 'packages.ventanilla',
-                        ],
-                        [
-                            'text' => 'Inventario Ventanilla DD',
-                            'url' => 'internationals/deleteadodd',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.delete',
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Ventanilla DND',
-                    'icon' => 'fas fa-window-maximize',
-                    'can'  => 'packages.dnd',
-                    'submenu' => [
-                        [
-                            'text' => 'Entregas Ventanilla DND',
-                            'url' => 'internationals/ventanilladnd',
-                            'icon' => 'fas fa-truck',
-                            'can'  => 'packages.dnd',
-                        ],
-                        [
-                            'text' => 'Inventario Ventanilla DND',
-                            'url' => 'internationals/deleteadodnd',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.dnd',
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Ventanilla Casillas',
-                    'icon' => 'fas fa-window-maximize',
-                    'can'  => 'packages.casillas',
-                    'submenu' => [
-                        [
-                            'text' => 'Entregas Ventanilla Casillas',
-                            'url' => 'internationals/ventanillacasillas',
-                            'icon' => 'fas fa-truck',
-                            'can'  => 'packages.casillas',
-                        ],
-                        [
-                            'text' => 'Inventario Ventanilla Casillas',
-                            'url' => 'internationals/deleteadocasillas',
-                            'icon' => 'fas fa-suitcase',
-                            'can'  => 'packages.casillas',
-                        ],
-                    ],
-                ],
-            ],
-        ],
+        // [
+        //     'text' => 'Paquetes Certificados',
+        //     'icon' => 'fas fa-archive',
+        //     'can'  => '',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Todos Paquetes',
+        //             'url' => 'internationals',
+        //             'icon' => 'fas fa-box',
+        //             'can'  => 'packages',
+        //         ],
+        //         [
+        //             'text' => 'Ventanilla DD',
+        //             'icon' => 'fas fa-window-maximize',
+        //             'can'  => 'packages.ventanilla',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'Entregas Ventanilla DD',
+        //                     'url' => 'internationals/ventanilladd',
+        //                     'icon' => 'fas fa-truck',
+        //                     'can'  => 'packages.ventanilla',
+        //                 ],
+        //                 [
+        //                     'text' => 'Inventario Ventanilla DD',
+        //                     'url' => 'internationals/deleteadodd',
+        //                     'icon' => 'fas fa-suitcase',
+        //                     'can'  => 'packages.delete',
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'Ventanilla DND',
+        //             'icon' => 'fas fa-window-maximize',
+        //             'can'  => 'packages.dnd',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'Entregas Ventanilla DND',
+        //                     'url' => 'internationals/ventanilladnd',
+        //                     'icon' => 'fas fa-truck',
+        //                     'can'  => 'packages.dnd',
+        //                 ],
+        //                 [
+        //                     'text' => 'Inventario Ventanilla DND',
+        //                     'url' => 'internationals/deleteadodnd',
+        //                     'icon' => 'fas fa-suitcase',
+        //                     'can'  => 'packages.dnd',
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'Ventanilla Casillas',
+        //             'icon' => 'fas fa-window-maximize',
+        //             'can'  => 'packages.casillas',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'Entregas Ventanilla Casillas',
+        //                     'url' => 'internationals/ventanillacasillas',
+        //                     'icon' => 'fas fa-truck',
+        //                     'can'  => 'packages.casillas',
+        //                 ],
+        //                 [
+        //                     'text' => 'Inventario Ventanilla Casillas',
+        //                     'url' => 'internationals/deleteadocasillas',
+        //                     'icon' => 'fas fa-suitcase',
+        //                     'can'  => 'packages.casillas',
+        //                 ],
+        //             ],
+        //         ],
+        //     ],
+        // ],
         // [
         //     'text' => 'Distribuicion',
         //     'icon' => 'fas fa-boxes',
