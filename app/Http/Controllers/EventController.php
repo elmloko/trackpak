@@ -364,7 +364,7 @@ class EventController extends Controller
         //     return strtotime($b->eventDate) - strtotime($a->eventDate);
         // });
 
-        return view('search', compact('packages', 'event', 'codigo', 'country'));
+        return view('search', compact('results', 'packages', 'event', 'codigo', 'country'));
     }
 
     private function mapEventType($eventType)
