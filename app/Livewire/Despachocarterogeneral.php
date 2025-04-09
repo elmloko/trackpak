@@ -21,6 +21,17 @@ class Despachocarterogeneral extends Component
     public $selectedCartero = '';
     public $selectedDate;
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Despacho de Paqueteria CarterosAdmin"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
         $userRegional = auth()->user()->Regional;

@@ -13,6 +13,17 @@ class SearchPackages extends Component
 
     public $search = '';
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Todos los paquetes Ordinario"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
         $packages = Package::withTrashed() // Incluye los paquetes eliminados suavemente
@@ -20,7 +31,7 @@ class SearchPackages extends Component
             ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
             ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
             ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
-            ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')  
+            ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
             ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
             ->orWhere('created_at', 'like', '%' . $this->search . '%')
             ->orderBy('created_at', 'desc')
@@ -58,6 +69,3 @@ class SearchPackages extends Component
         }
     }
 }
-
-
-

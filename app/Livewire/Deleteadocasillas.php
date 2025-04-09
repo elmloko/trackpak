@@ -25,6 +25,16 @@ class Deleteadocasillas extends Component
         return Excel::download(new Internationalinvcasillas($this->fecha_inicio, $this->fecha_fin), 'Inventario Certificados CASILLAS.xlsx');
     }
     
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Inventario Paqueteria Casillas Certificado"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
     public function render()
     {
         $userRegional = auth()->user()->Regional;

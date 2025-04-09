@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Livewire;
 
@@ -18,6 +18,17 @@ class Rezago extends Component
     public $search = '';
     public $fecha_inicio;
     public $fecha_fin;
+
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Rezago de Paquetes"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
 
     public function render()
     {

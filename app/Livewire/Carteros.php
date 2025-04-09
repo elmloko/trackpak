@@ -6,9 +6,9 @@ use Livewire\Component;
 use App\Models\Package;
 use App\Models\International; // Importa el modelo International
 use Livewire\WithPagination;
-use App\Models\Event;
 use Livewire\WithFileUploads;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Event;
 
 class Carteros extends Component
 {
@@ -21,6 +21,17 @@ class Carteros extends Component
     public $observaciones;
     public $firma;
     public $foto;
+
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Entregas Paqueteria Cartero"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
 
     public function render()
     {

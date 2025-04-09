@@ -7,6 +7,7 @@ use App\Models\Package;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ClasificacionExport;
+use App\Models\Event;
 
 class Entregasclasificacion extends Component
 {
@@ -17,6 +18,16 @@ class Entregasclasificacion extends Component
     public $fecha_fin;
     public $ciudad;
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Inventario Clasificacion"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
     public function render()
     {
         $packages = Package::where('ESTADO', 'DESPACHO')

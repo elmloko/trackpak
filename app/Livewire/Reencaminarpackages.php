@@ -7,6 +7,7 @@ use App\Models\Package;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ReencaminarExport;
+use App\Models\Event;
 
 class Reencaminarpackages extends Component
 {
@@ -19,6 +20,16 @@ class Reencaminarpackages extends Component
     public $editCiudad;
     public $editVentanilla;
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Reencaminar Paquetes"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
     public function render()
     {
         $packages = Package::where('ESTADO', 'REENCAMINADO')

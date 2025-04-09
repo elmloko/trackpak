@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Package;
 use Illuminate\Support\Facades\Cache;
+use App\Models\Event;
 
 class DashboardEncomienda extends Component
 {
@@ -16,6 +17,12 @@ class DashboardEncomienda extends Component
     public function mount()
     {
         $this->loadStatistics();
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Estadisticas del Sistema V7"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
     }
 
     protected function loadStatistics()

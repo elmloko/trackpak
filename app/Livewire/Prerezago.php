@@ -17,6 +17,17 @@ class Prerezago extends Component
     public $selectAll = false;
     public $paquetesSeleccionados = [];
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Pre-Rezago de Paquetes"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
         $packages = $this->getPackages();

@@ -20,6 +20,17 @@ class Deleteadodd extends Component
     public $fecha_inicio;
     public $fecha_fin;
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Inventario Paqueteria DD Certificado"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
         $userRegional = auth()->user()->Regional;

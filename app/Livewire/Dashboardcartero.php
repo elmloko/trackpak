@@ -18,6 +18,12 @@ class Dashboardcartero extends Component
     public function mount()
     {
         $this->loadStatistics();
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Estadisticas del Sistema Cartero"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
     }
 
     protected function loadStatistics()

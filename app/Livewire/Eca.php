@@ -24,6 +24,17 @@ class Eca extends Component
     public $currentModal = null;
     public $observaciones = '';
 
+    public function mount()
+    {
+        // Registrar auditoría solo cuando el usuario ingresa por primera vez a la pestaña
+        Event::create([
+            'action' => 'INGRESO',
+            'descripcion' => 'Usuario ingresó a la pestaña "Entregas Paqueteria ECA"',
+            'user_id' => auth()->user()->id,
+            'codigo' => 0,
+        ]);
+    }
+
     public function render()
     {
          $userRegional = auth()->user()->Regional;
