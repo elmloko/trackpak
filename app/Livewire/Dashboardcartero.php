@@ -7,6 +7,7 @@ use App\Models\International;
 use App\Models\Package;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Event;
 
 class Dashboardcartero extends Component
 {
