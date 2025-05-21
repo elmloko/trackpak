@@ -62,12 +62,12 @@
                             </label>
                         </div>
 
-                        <div>
+                        {{-- <div>
                             {!! htmlFormSnippet() !!}
                             @if (!isset($_POST['g-recaptcha-response']) && $errors->any())
                                 <small class="text-danger">Por favor, complete el reCAPTCHA</small>
                             @endif
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="container-login100-form-btn">
