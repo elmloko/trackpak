@@ -7,6 +7,9 @@ use Illuminate\Pagination\Paginator;
 use Validator;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User; // Importa la clase User correcta
+use Illuminate\Support\Facades\Cookie;
+use Symfony\Component\HttpFoundation\Cookie as SymfonyCookie;
+use Illuminate\Support\Facades\Response;
 
 class AppServiceProvider extends ServiceProvider
 {
