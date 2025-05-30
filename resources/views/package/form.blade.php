@@ -209,6 +209,7 @@
                                 'ROSARIO GRAN PODER' => 'ROSARIO GRAN PODER',
                                 'VILLA EL CARMEN' => 'VILLA EL CARMEN',
                                 'ACHUMANI' => 'ACHUMANI',
+                                'PROVINCIA' => 'PROVINCIA',
                                 'MIRAFLORES' => 'MIRAFLORES',
                                 'CEMENTERIO' => 'CEMENTERIO',
                                 'MALLASILLA' => 'MALLASILLA',

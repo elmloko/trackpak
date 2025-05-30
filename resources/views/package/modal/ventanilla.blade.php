@@ -65,6 +65,7 @@
                                 <option value="VILLA VICTORIA">VILLA VICTORIA</option>
                                 <option value="VINO TINTO">VINO TINTO</option>
                                 <option value="ZONA NORTE">ZONA NORTE</option>
+                                <option value="PROVINCIA">PROVINCIA</option>
                                 <option value="PG1A">PG1A</option>
                                 <option value="PG2A">PG2A</option>
                                 <option value="PG3A">PG3A</option>
