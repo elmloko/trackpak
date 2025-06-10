@@ -1,0 +1,50 @@
+services:
+  app:
+    build: .
+    container_name: trackpak_app
+    restart: unless-stopped
+    volumes:
+      - trackpak_code:/var/www/html
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=trackpak
+      - DB_USERNAME=root
+      - DB_PASSWORD=agbc
+    depends_on:
+      - db
+
+  web:
+    image: nginx:stable-alpine
+    container_name: trackpak_web
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - trackpak_code:/var/www/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+  db:
+    image: mysql:8.0
+    container_name: trackpak_db
+    restart: unless-stopped
+    environment:
+      # Hacemos que root tenga contraseña "agbc"
+      MYSQL_ROOT_PASSWORD: agbc
+      # La base de datos de tu app
+      MYSQL_DATABASE: trackpak
+      # (Opcional) si no quieres un usuario extra, comenta las siguientes líneas:
+      # MYSQL_USER: trackpak
+      # MYSQL_PASSWORD: trackpak
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # Montamos tu script SQL en el arranque
+      - ./mysql-init:/docker-entrypoint-initdb.d
+
+volumes:
+  trackpak_code:
+  db_data:
