@@ -191,28 +191,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/mensaje/{mensaje}', [MensajeController::class, 'update'])->name('mensajes.update');
     Route::delete('/mensaje/{mensaje}', [MensajeController::class, 'destroy'])->name('mensajes.destroy');
 
-    //Sacas
-    Route::get('/bags', [BagController::class, 'index'])->name('bags.index');
-    Route::get('/bag/create', [BagController::class, 'create'])->name('bags.create');
-    Route::get('bags/{bags}', [BagController::class, 'show'])->name('bags.show');
-    Route::post('/bag', [BagController::class, 'store'])->name('bags.store');
-    Route::get('/bag/{bag}/edit', [BagController::class, 'edit'])->name('bags.edit');
-    Route::put('/bag/{bag}', [BagController::class, 'update'])->name('bags.update');
-    Route::delete('/bag/{bag}', [BagController::class, 'destroy'])->name('bags.destroy');
-    Route::put('/bags/close/{id}', [BagController::class, 'closeExpedition'])->name('bags.closeExpedition');
-    Route::put('/bags/show/{id}', [BagController::class, 'showExpedition'])->name('bags.showExpedition');
-    Route::put('/bags/aviso/{id}', [BagController::class, 'avisoExpedition'])->name('bags.avisoExpedition');
-    Route::put('/bags/go/{id}', [BagController::class, 'goExpedition'])->name('bags.goExpedition');
-    Route::put('/bags/return/{id}', [BagController::class, 'returnExpedition'])->name('bags.returnExpedition');
-    Route::get('/bag/bagsclose', [BagController::class, 'bagsclose'])->name('bags.bagsclose');
-    Route::get('/bag/bagsopen', [BagController::class, 'bagsopen'])->name('bags.bagsopen');
-    Route::get('/bag/bagstrans', [BagController::class, 'bagstrans'])->name('bags.bagstrans');
-    Route::post('bag/bagsadd', [BagController::class, 'bagsadd'])->name('bag.bagsadd');
-    Route::get('bag/pdf/cn31', [BagController::class, 'cn35'])->name('bag.pdf.cn31');
-    Route::get('bag/pdf/cn35', [BagController::class, 'cn35'])->name('bag.pdf.cn35');
-    Route::get('bag/pdf/cn38', [BagController::class, 'cn38'])->name('bag.pdf.cn38');
-    Route::get('/bag/bagsall', [BagController::class, 'bagsall'])->name('bags.bagsall');
-
     Route::get('/internationals', [InternationalController::class, 'index'])->name('internationals.index');
     Route::get('/internationals/create', [InternationalController::class, 'create'])->name('internationals.create');
     Route::post('/internationals', [InternationalController::class, 'store'])->name('internationals.store');
