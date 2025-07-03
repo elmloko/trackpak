@@ -315,45 +315,46 @@ return [
         ],
         [
             'text' => 'Usuarios',
-            'icon' => 'fas fa-users',
+            'icon' => 'fas fa-users', // Correcto para grupo de usuarios
             'can'  => 'users.index',
             'submenu' => [
                 [
                     'text' => 'Personal AGBC',
                     'url' => 'users',
-                    'icon' => 'fas fa-user',
+                    'icon' => 'fas fa-id-badge', // Más institucional que solo 'user'
                 ],
                 [
                     'text' => 'Roles',
                     'url' => 'roles',
-                    'icon' => 'fas fa-users-cog',
+                    'icon' => 'fas fa-user-shield', // Mejor para roles de seguridad
                 ],
                 [
                     'text' => 'Permisos',
                     'url' => 'permissions',
-                    'icon' => 'fas fa-key',
+                    'icon' => 'fas fa-unlock-alt', // Alternativa a 'key', más clara
                 ],
                 [
                     'text' => 'Accesos',
                     'url' => 'role-has-permissions',
-                    'icon' => 'fas fa-key',
+                    'icon' => 'fas fa-door-open', // Representa accesos/sesiones
                 ],
             ],
         ],
+
         [
             'text' => 'Paquetes Ordinarios',
-            'icon' => 'fas fa-archive',
+            'icon' => 'fas fa-boxes', // Paquetes múltiples
             'can'  => '',
             'submenu' => [
                 [
                     'text' => 'Todos Paquetes',
                     'url' => 'packages',
-                    'icon' => 'fas fa-box',
+                    'icon' => 'fas fa-box-open', // Caja abierta para ver todos
                     'can'  => 'packages',
                 ],
                 [
                     'text' => 'Clasificacion',
-                    'icon' => 'fas fa-cube ',
+                    'icon' => 'fas fa-layer-group', // Clasificación por capas
                     'can'  => 'packages.clasificacion',
                     'submenu' => [
                         [
@@ -365,139 +366,138 @@ return [
                         [
                             'text' => 'Inventario Clasificacion',
                             'url' => 'packages/entregasclasificacion',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-warehouse',
                             'can'  => 'packages.clasificacion',
                         ],
                         [
                             'text' => 'Reencaminar Paquetes',
                             'url' => 'test/redirigidos',
-                            'icon' => 'fas fa-paper-plane',
+                            'icon' => 'fas fa-route',
                             'can'  => 'packages.clasificacion',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Ventanilla DD',
-                    'icon' => 'fas fa-window-maximize',
+                    'icon' => 'fas fa-door-open', // Representa ventanilla
                     'can'  => 'packages.ventanilla',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla DD',
                             'url' => 'packages/ventanilla',
-                            'icon' => 'fas fa-truck',
+                            'icon' => 'fas fa-dolly', // Entrega
                             'can'  => 'packages.ventanilla',
                         ],
                         [
                             'text' => 'Inventario Ventanilla DD',
                             'url' => 'test/deleteado',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-clipboard-list', // Ícono más contextual
+                            'can'  => 'packages.delete',
                             'can'  => 'packages.delete',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Ventanilla DND',
-                    'icon' => 'fas fa-window-maximize',
+                    'icon' => 'fas fa-door-closed',
                     'can'  => 'packages.dnd',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla DND',
                             'url' => 'packages/ventanilladnd',
-                            'icon' => 'fas fa-truck',
+                            'icon' => 'fas fa-dolly-flatbed',
                             'can'  => 'packages.dnd',
                         ],
                         [
                             'text' => 'Inventario Ventanilla DND',
                             'url' => 'test/deleteadodnd',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-boxes',
                             'can'  => 'packages.dnd',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Ventanilla UNICA',
-                    'icon' => 'fas fa-window-maximize',
+                    'icon' => 'fas fa-store-alt',
                     'can'  => 'packages.unica',
                     'submenu' => [
                         [
                             'text' => 'Recibir Correspondencia',
                             'url' => 'packages/ventanillaunicarecibir',
-                            'icon' => 'fas fa-truck',
+                            'icon' => 'fas fa-inbox',
                             'can'  => 'packages.unica',
                         ],
                         [
                             'text' => 'Entregar Correspondencia',
                             'url' => 'packages/ventanillaunica',
-                            'icon' => 'fas fa-truck',
+                            'icon' => 'fas fa-envelope-open-text',
                             'can'  => 'packages.unica',
                         ],
                         [
                             'text' => 'Inventario Correspondencia',
                             'url' => 'test/deleteadounica',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-clipboard-check',
                             'can'  => 'packages.unica',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Casillas',
-                    'icon' => 'fas fa-archive',
+                    'icon' => 'fas fa-th-large',
                     'can'  => 'packages.casillas',
                     'submenu' => [
                         [
                             'text' => 'Entregas Casillas',
                             'url' => 'packages/casillas',
-                            'icon' => 'fas fa-box',
-                            // 'can'  => '	packages.casillas',
+                            'icon' => 'fas fa-mail-bulk',
                         ],
                         [
                             'text' => 'Inventario Casillas',
                             'url' => 'packages/casillasinventario',
-                            'icon' => 'fas fa-suitcase',
-                            // 'can'  => '	packages.casillas',
+                            'icon' => 'fas fa-clipboard-list',
                         ],
                     ],
                 ],
                 [
                     'text' => 'ECA',
-                    'icon' => 'fas fa-archive',
+                    'icon' => 'fas fa-building',
                     'can'  => 'packages.eca',
                     'submenu' => [
                         [
                             'text' => 'Entregas ECA',
                             'url' => 'packages/eca',
-                            'icon' => 'fas fa-box',
+                            'icon' => 'fas fa-truck-loading',
                             'can'  => 'packages.eca',
                         ],
                         [
                             'text' => 'Inventario ECA',
                             'url' => 'packages/ecainventario',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-box-tissue',
                             'can'  => 'packages.eca',
                         ],
                     ],
                 ],
                 [
                     'text' => 'VENTANILLA 7',
-                    'icon' => 'fas fa-archive',
+                    'icon' => 'fas fa-store',
                     'can'  => 'packages.encomiendas',
                     'submenu' => [
                         [
                             'text' => 'Recibir Paqueteria',
                             'url' => 'packages/ventanilladdrecibir',
-                            'icon' => 'fas fa-box',
+                            'icon' => 'fas fa-inbox',
                             'can'  => 'packages.encomiendas',
                         ],
                         [
                             'text' => 'Entregas Paqueteria',
                             'url' => 'packages/encomiendas',
-                            'icon' => 'fas fa-box',
+                            'icon' => 'fas fa-box-open',
                             'can'  => 'packages.encomiendas',
                         ],
                         [
                             'text' => 'Inventario Paqueteria',
                             'url' => 'packages/encomiendasinventario',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-clipboard-check',
                             'can'  => 'packages.encomiendas',
                         ],
                     ],
@@ -505,75 +505,75 @@ return [
                 [
                     'text' => 'Traspazo de Ventanillas',
                     'url' => 'traspasoventanillas',
-                    'icon' => 'fas fa-box',
+                    'icon' => 'fas fa-random',
                     'can'  => 'packages.ventanilla',
                 ],
             ],
         ],
         [
             'text' => 'Paquetes Certificados',
-            'icon' => 'fas fa-archive',
+            'icon' => 'fas fa-shield-alt', // Representa algo "certificado", protegido
             'can'  => '',
             'submenu' => [
                 [
                     'text' => 'Todos Paquetes',
                     'url' => 'internationals',
-                    'icon' => 'fas fa-box',
+                    'icon' => 'fas fa-box-open', // Ver todos los paquetes
                     'can'  => 'packages',
                 ],
                 [
                     'text' => 'Ventanilla DD',
-                    'icon' => 'fas fa-window-maximize',
+                    'icon' => 'fas fa-door-open', // Ventanilla
                     'can'  => 'packages.ventanilla',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla DD',
                             'url' => 'internationals/ventanilladd',
-                            'icon' => 'fas fa-truck',
+                            'icon' => 'fas fa-dolly', // Entrega
                             'can'  => 'packages.ventanilla',
                         ],
                         [
                             'text' => 'Inventario Ventanilla DD',
                             'url' => 'internationals/deleteadodd',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-clipboard-list', // Inventario
                             'can'  => 'packages.delete',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Ventanilla DND',
-                    'icon' => 'fas fa-window-maximize',
+                    'icon' => 'fas fa-door-closed', // Otra ventanilla
                     'can'  => 'packages.dnd',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla DND',
                             'url' => 'internationals/ventanilladnd',
-                            'icon' => 'fas fa-truck',
+                            'icon' => 'fas fa-dolly-flatbed', // Entrega tipo DND
                             'can'  => 'packages.dnd',
                         ],
                         [
                             'text' => 'Inventario Ventanilla DND',
                             'url' => 'internationals/deleteadodnd',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-clipboard-list',
                             'can'  => 'packages.dnd',
                         ],
                     ],
                 ],
                 [
                     'text' => 'Ventanilla Casillas',
-                    'icon' => 'fas fa-window-maximize',
+                    'icon' => 'fas fa-th-large', // Casillas postales (relevante al texto)
                     'can'  => 'packages.casillas',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla Casillas',
                             'url' => 'internationals/ventanillacasillas',
-                            'icon' => 'fas fa-truck',
+                            'icon' => 'fas fa-envelope-open-text', // Entrega por casillas
                             'can'  => 'packages.casillas',
                         ],
                         [
                             'text' => 'Inventario Ventanilla Casillas',
                             'url' => 'internationals/deleteadocasillas',
-                            'icon' => 'fas fa-suitcase',
+                            'icon' => 'fas fa-clipboard-check', // Inventario validado
                             'can'  => 'packages.casillas',
                         ],
                     ],
@@ -582,52 +582,51 @@ return [
         ],
         [
             'text' => 'Urbano',
-            'icon' => 'fas fa-building',
+            'icon' => 'fas fa-city', // Más contextual que 'building'
             'can'  => 'packages.urbano',
             'submenu' => [
                 [
                     'text' => 'Distribución Paquetes',
                     'url' => 'packages/distribuicioncartero',
-                    'icon' => 'fas fa-box-open',
+                    'icon' => 'fas fa-dolly', // Representa mejor transporte de paquetes
                     'can'  => 'packages.distribuicioncartero',
                 ],
                 [
                     'text' => 'Entregas Cartero',
                     'url' => 'packages/carteros',
-                    'icon' => 'fas fa-cubes',
+                    'icon' => 'fas fa-user-check', // Cartero que entrega
                     'can'  => 'packages.inventariocartero',
                 ],
                 [
                     'text' => 'Despacho Cartero',
                     'url' => 'packages/despachocartero',
-                    'icon' => 'fas fa-envelope-open-text',
+                    'icon' => 'fas fa-truck-loading', // Envío/despacho
                     'can'  => 'packages.inventariocartero',
                 ],
                 [
                     'text' => 'Inventario Cartero',
                     'url' => 'packages/inventariocartero',
-                    'icon' => 'fas fa-suitcase',
+                    'icon' => 'fas fa-clipboard-check', // Inventario organizado
                     'can'  => 'packages.inventariocartero',
                 ],
                 [
                     'text' => 'Entregas Domicilio',
                     'url' => 'packages/carterosgeneral',
-                    'icon' => 'fas fa-cubes',
+                    'icon' => 'fas fa-house-user', // Entrega a domicilio
                     'can'  => 'packages.ventanilla',
                 ],
                 [
                     'text' => 'Despacho Domicilio',
                     'url' => 'packages/despachocarterogeneral',
-                    'icon' => 'fas fa-envelope-open-text',
+                    'icon' => 'fas fa-truck-moving', // Despacho general
                     'can'  => 'packages.ventanilla',
                 ],
                 [
                     'text' => 'Inventario Domicilio',
                     'url' => 'packages/generalcartero',
-                    'icon' => 'fas fa-suitcase',
+                    'icon' => 'fas fa-clipboard-check', // Más representativo de inventario físico
                     'can'  => 'packages.generalcartero',
                 ],
-
             ],
         ],
         [
@@ -652,7 +651,7 @@ return [
         [
             'text' => 'Eventos',
             'url' => 'events',
-            'icon' => 'fas fa-calendar-alt',
+            'icon' => 'fas fa-calendar-check', // Representa un evento confirmado o marcado
             'can'  => 'packages',
         ],
         // [
@@ -665,13 +664,13 @@ return [
             'text' => 'Rendimiento',
             'url' => '/pulse',
             'can'  => 'users.index',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-chart-line', // Rendimiento, métricas en tiempo real
         ],
         [
             'text' => 'Logs',
             'url' => '/log-viewer',
             'can'  => 'users.index',
-            'icon' => 'fas fa-user',
+            'icon' => 'fas fa-file-alt', // Documentación o logs
         ],
     ],
 
