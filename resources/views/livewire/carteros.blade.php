@@ -61,10 +61,11 @@
                                                                 <td>{{ $package->PESO }} gr.</td>
                                                                 <td>{{ $package->TIPO }}</td>
                                                                 <td>{{ $package->ESTADO }}</td>
-                                                                <td>{{ $package->firma }}</td>
                                                                 <td>
-                                                                    @if ($package->firma)
-                                                                        <a href="{{ $package->firma }}" download="foto.png" class="btn btn-sm btn-secondary">Descargar</a>
+                                                                    @if ($package->foto)
+                                                                        <a href="{{ $package->foto }}"
+                                                                            download="foto.png"
+                                                                            class="btn btn-sm btn-secondary">Descargar</a>
                                                                     @else
                                                                         <p></p>
                                                                     @endif
@@ -190,7 +191,8 @@
                         <label for="observaciones">Indique la Razon</label>
                         <select class="form-control" id="observaciones" wire:model="observaciones">
                             <option value="" selected>Seleccione una observación</option>
-                            <option value="Destinatario Notificado en Puerta">Destinatario Notificado en Puerta</option>
+                            <option value="Destinatario Notificado en Puerta">Destinatario Notificado en Puerta
+                            </option>
                             <option value="Direccion incorrecta">Direccion incorrecta</option>
                             <option value="No se localizó el destinatario">No se localizó el destinatario</option>
                             <option value="El destinatario no esta direccion">El destinatario no está en la dirección
@@ -384,7 +386,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const fileInput = document.getElementById('capturephoto');
             const base64Inputfoto = document.getElementById(
-            'inputbase64foto'); // Input para almacenar la imagen base64
+                'inputbase64foto'); // Input para almacenar la imagen base64
 
             fileInput.addEventListener('change', function() {
                 if (fileInput.files && fileInput.files[0]) {
@@ -398,12 +400,12 @@
                             canvas.height = img.height;
                             ctx.drawImage(img, 0, 0);
                             const dataurl = canvas.toDataURL('image/jpeg',
-                            0.5); // Generar imagen base64 comprimida
+                                0.5); // Generar imagen base64 comprimida
 
                             base64Inputfoto.value =
-                            dataurl; // Asignar el valor base64 al input oculto
+                                dataurl; // Asignar el valor base64 al input oculto
                             @this.set('foto',
-                            dataurl); // Enviar el valor de la imagen en base64 a Livewire
+                                dataurl); // Enviar el valor de la imagen en base64 a Livewire
                         }
                         img.src = e.target.result;
                     }
