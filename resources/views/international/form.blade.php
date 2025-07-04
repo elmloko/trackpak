@@ -74,6 +74,7 @@
                                 'VILLA VICTORIA' => 'VILLA VICTORIA',
                                 'VINO TINTO' => 'VINO TINTO',
                                 'ZONA NORTE' => 'ZONA NORTE',
+                                'PROVINCIA' => 'PROVINCIA',
                                 'PG1A' => 'PG1A',
                                 'PG2A' => 'PG2A',
                                 'PG3A' => 'PG3A',

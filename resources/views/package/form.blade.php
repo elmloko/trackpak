@@ -239,6 +239,7 @@
                                 'FLORIDA' => 'FLORIDA',
                                 'VILLA VICTORIA' => 'VILLA VICTORIA',
                                 'CIUDADELA FERROVIARIA' => 'CIUDADELA FERROVIARIA',
+                                'PROVINCIA' => 'PROVINCIA',
                                 'PG1A' => 'PG1A',
                                 'PG2A' => 'PG2A',
                                 'PG3A' => 'PG3A',
