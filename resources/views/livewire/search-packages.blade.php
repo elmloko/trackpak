@@ -13,11 +13,28 @@
                                         </h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="search">Busca:</label>
                                                 <input wire:model.lazy="search" type="text" class="form-control"
                                                     placeholder="Buscar...">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>Desde:</label>
+                                                    <input type="date" wire:model="desde" class="form-control">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>Hasta:</label>
+                                                    <input type="date" wire:model="hasta" class="form-control">
+                                                </div>
+                                                <div class="col-md-4 d-flex align-items-end">
+                                                    <button wire:click="exportarExcel" class="btn btn-success">
+                                                        <i class="fas fa-file-excel"></i> Exportar Excel
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -59,11 +76,12 @@
                                                             <td>{{ $package->TELEFONO }}</td>
                                                             <td>{{ $package->PAIS }} - {{ $package->ISO }}</td>
                                                             <td>{{ $package->CUIDAD }}</td>
-                                                            <td>{{ $package->VENTANILLA === 'ENCOMIENDAS' ? 'VENTANILLA 7' : $package->VENTANILLA }}</td>
+                                                            <td>{{ $package->VENTANILLA === 'ENCOMIENDAS' ? 'VENTANILLA 7' : $package->VENTANILLA }}
+                                                            </td>
                                                             <td>{{ $package->PESO }} </td>
                                                             <td>{{ $package->TIPO }}</td>
                                                             <td>
-                                                                @if($package->ESTADO == 'REPARTIDO')
+                                                                @if ($package->ESTADO == 'REPARTIDO')
                                                                     ENTREGADO CARTERO
                                                                 @else
                                                                     {{ $package->ESTADO }}

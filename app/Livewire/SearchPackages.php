@@ -6,12 +6,25 @@ use Livewire\Component;
 use App\Models\Package;
 use Livewire\WithPagination;
 use App\Models\Event;
+use App\Exports\CreacionExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SearchPackages extends Component
 {
     use WithPagination;
 
     public $search = '';
+    public $desde, $hasta;
+
+    public function exportarExcel()
+    {
+        $this->validate([
+            'desde' => 'required|date',
+            'hasta' => 'required|date|after_or_equal:desde',
+        ]);
+
+        return Excel::download(new CreacionExport($this->desde, $this->hasta), 'paquetes.xlsx');
+    }
 
     public function render()
     {
@@ -20,7 +33,7 @@ class SearchPackages extends Component
             ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
             ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
             ->orWhere('CUIDAD', 'like', '%' . $this->search . '%')
-            ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')  
+            ->orWhere('VENTANILLA', 'like', '%' . $this->search . '%')
             ->orWhere('ESTADO', 'like', '%' . $this->search . '%')
             ->orWhere('created_at', 'like', '%' . $this->search . '%')
             ->orderBy('created_at', 'desc')
@@ -58,6 +71,3 @@ class SearchPackages extends Component
         }
     }
 }
-
-
-
