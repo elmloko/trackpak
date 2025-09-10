@@ -7,7 +7,8 @@
                 RASTREA TU CODIGO
             </h1>
             <p class="leading-normal text-2xl mb-6">
-                Este es un servicio de seguimiento de codigo rastreo postales a nivel internacional / nacional de la Agencia Boliviana de Correos
+                Este es un servicio de seguimiento de codigo rastreo postales a nivel internacional / nacional de la
+                Agencia Boliviana de Correos
             </p>
             <form method="GET" action="{{ route('search') }}" class="w-full">
                 @csrf
@@ -15,16 +16,26 @@
                     <input type="text" name="codigo" placeholder="Ingresa tu código de rastreo"
                         class="w-full py-3 px-4 mx-3 border rounded-full text-black" style="width: 100%;"
                         pattern=".{13,13}" required title="El código de rastreo debe tener 13 dígitos">
-                        <button type="submit"
-                    class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Buscar</button>
+                    <button type="submit"
+                        class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Buscar</button>
                 </div>
-                <div class="mt-4">
-                    <div>
-                            {!! htmlFormSnippet() !!}
-                            @if (!isset($_POST['g-recaptcha-response']) && $errors->any())
-                                <small class="text-danger">Por favor, complete el reCAPTCHA</small>
-                            @endif
-                        </div>
+                <br>
+                <div>
+                    <label for="captcha" class="leading-normal text-2xl mb-6">Verificación de seguridad:</label>
+                    <br>
+                    <input type="text" name="captcha"
+                        class="w-1/8 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                        placeholder="Ingrese el texto del captcha">
+                    <div class="flex items-center space-x-3">
+                        <div id="captcha-img" class="border rounded text-black">{!! captcha_img('flat') !!}</div>
+                        {{-- <button type="button" id="refresh-captcha"
+                            class="text-sm px-3 py-2 border rounded bg-gray-200 hover:bg-gray-300 transition text-black">
+                            <i class="fa fa-refresh mr-1"></i>Recargar
+                        </button> --}}
+                    </div>
+                    @error('captcha')
+                        <small class="text-red-600">{{ $message }}</small>
+                    @enderror
                 </div>
             </form>
         </div>
@@ -34,5 +45,13 @@
         </div>
     </div>
 </div>
-
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    document.getElementById('refresh-captcha').addEventListener('click', function() {
+        fetch('/captcha-refresh')
+            .then(res => res.json())
+            .then(data => {
+                document.querySelector('span').innerHTML = data.captcha;
+            });
+    });
+</script>
+{{-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> --}}
