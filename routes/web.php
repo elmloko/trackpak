@@ -17,11 +17,7 @@ use App\Http\Controllers\BackupController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-use Mews\Captcha\Captcha;
 
-Route::get('captcha-refresh', function () {
-    return response()->json(['captcha'=> captcha_img()]);
-});
 Route::get('/', function () {
     return view('welcome');
 });

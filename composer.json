@@ -20,7 +20,6 @@
         "laravelcollective/html": "^6.4",
         "livewire/livewire": "^3.0",
         "maatwebsite/excel": "^3.1",
-        "mews/captcha": "^3.4",
         "milon/barcode": "^10.0",
         "opcodesio/log-viewer": "^3.10",
         "picqer/php-barcode-generator": "^2.4",
