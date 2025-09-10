@@ -20,23 +20,30 @@
                         class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-3 px-8 shadow opacity-75 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">Buscar</button>
                 </div>
                 <br>
-                <div>
-                    <label for="captcha" class="leading-normal text-2xl mb-6">Verificación de seguridad:</label>
-                    <br>
-                    <input type="text" name="captcha"
-                        class="w-1/8 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
-                        placeholder="Ingrese el texto del captcha">
-                    <div class="flex items-center space-x-3">
-                        <div id="captcha-img" class="border rounded text-black">{!! captcha_img('flat') !!}</div>
-                        {{-- <button type="button" id="refresh-captcha"
-                            class="text-sm px-3 py-2 border rounded bg-gray-200 hover:bg-gray-300 transition text-black">
-                            <i class="fa fa-refresh mr-1"></i>Recargar
-                        </button> --}}
+                <div class="mb-6">
+                    <label for="captcha" class="block text-lg font-semibold text-white drop-shadow-md mb-3">
+                        Verificación de seguridad
+                    </label>
+
+                    <div class="flex items-center space-x-4">
+
+                        <!-- Input del captcha -->
+                        <input type="text" name="captcha" id="captcha"
+                            class="w-48 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                            placeholder="Ingrese el texto">
+                        <!-- Imagen del captcha -->
+                        <div id="captcha-img" class="border rounded p-2 bg-white shadow text-black">
+                            {!! captcha_img('flat') !!}
+                        </div>
+
                     </div>
+
+                    <!-- Mensaje de error -->
                     @error('captcha')
-                        <small class="text-red-600">{{ $message }}</small>
+                        <small class="block mt-2 text-red-600">{{ $message }}</small>
                     @enderror
                 </div>
+
             </form>
         </div>
         <!-- Columna Derecha -->
