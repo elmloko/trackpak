@@ -311,7 +311,7 @@ class EventController extends Controller
     {
         $request->validate([
             'codigo' => 'required|size:13',
-            'g-recaptcha-response' => 'required|captcha'
+            'captcha' => 'required|captcha',
         ]);
 
         $codigo = $request->input('codigo');
