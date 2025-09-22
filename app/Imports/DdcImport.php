@@ -8,6 +8,13 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class DdcImport implements ToModel, WithHeadingRow
 {
+    protected $regional;
+
+    public function __construct($regional)
+    {
+        $this->regional = $regional;
+    }
+
     public function model(array $row)
     {
         return new International([
@@ -18,7 +25,7 @@ class DdcImport implements ToModel, WithHeadingRow
             'ADUANA' => strtoupper($row['aduana'] ?? ''),
             'ZONA' => strtoupper($row['zona'] ?? ''),
             'TIPO' => strtoupper($row['tipo'] ?? ''),
-            'CUIDAD' => 'LA PAZ',
+            'CUIDAD' => $this->regional,   // ✅ ahora guarda según la regional del usuario
             'VENTANILLA' => 'DD',
             'ESTADO' => 'VENTANILLA',
             'created_at' => now(),

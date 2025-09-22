@@ -54,7 +54,7 @@
                                                 </a>
                                             </div>
                                         @endhasrole
-                                        @hasrole('SuperAdmin|Administrador')
+                                        @hasrole('SuperAdmin|Administrador|Urbano')
                                             <div>
                                                 <form wire:submit.prevent="import" class="form-inline">
                                                     <div class="form-group mb-2">

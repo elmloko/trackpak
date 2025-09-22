@@ -36,22 +36,22 @@ class Internationaldd extends Component
                 $query->where('CODIGO', 'like', '%' . $this->search . '%')
                     ->orWhere('DESTINATARIO', 'like', '%' . $this->search . '%')
                     ->orWhere('TELEFONO', 'like', '%' . $this->search . '%')
-                    ->orWhere('ZONA', 'like', $this->search . '%') 
+                    ->orWhere('ZONA', 'like', $this->search . '%')
                     ->orWhere('created_at', 'like', '%' . $this->search . '%');
             })
             ->where(function ($query) use ($userRegional) {
                 $query->where(function ($subQuery) {
                     $subQuery->where('VENTANILLA', 'DD');
-                        // ->orWhere('VENTANILLA', 'DND');
+                    // ->orWhere('VENTANILLA', 'DND');
                 })
-                ->where('CUIDAD', $userRegional);
+                    ->where('CUIDAD', $userRegional);
             })
             ->orderBy('created_at', 'desc')
             ->paginate(100);
 
-            return view('livewire.internationaldd', [
-                'internationals' => $international,
-            ]);
+        return view('livewire.internationaldd', [
+            'internationals' => $international,
+        ]);
     }
     public function toggleSelectAll()
     {
@@ -69,7 +69,7 @@ class Internationaldd extends Component
                 $query->where('CUIDAD', $this->selectedCity);
             })
             ->get();
-    
+
         // Determinar el formulario según la condición de ADUANA
         $primerPaquete = $paquetesSeleccionados->first();
 
@@ -78,7 +78,7 @@ class Internationaldd extends Component
         } else {
             $formulario = 'package.pdf.formularioentrega2';
         }
-    
+
         foreach ($paquetesSeleccionados as $paquete) {
             // Calcular el precio basado en el peso del paquete
             $peso = $paquete->PESO;
@@ -87,16 +87,16 @@ class Internationaldd extends Component
             } elseif ($peso > 0.5) {
                 $precio = 10;
             }
-    
+
             // Actualizar el precio del paquete
             $paquete->PRECIO = $precio;
             $paquete->save();
-    
+
             // Actualizar el estado del paquete
             $paquete->ESTADO = 'ENTREGADO';
             $paquete->save();
             $paquete->delete();
-    
+
             // Crear un evento
             Event::create([
                 'action' => 'ENTREGADO',
@@ -105,21 +105,21 @@ class Internationaldd extends Component
                 'codigo' => $paquete->CODIGO,
             ]);
         }
-    
+
         // Restablecer la selección
         $this->resetSeleccion();
-    
+
         // Generar el PDF con los paquetes seleccionados
         $pdf = PDF::loadView($formulario, ['packages' => $paquetesSeleccionados]);
-    
+
         // Obtener el contenido del PDF
         $pdfContent = $pdf->output();
-    
+
         // Generar una respuesta con el contenido del PDF para descargar
         return response()->streamDownload(function () use ($pdfContent) {
             echo $pdfContent;
         }, 'Formulario Certificado DD.pdf');
-    }    
+    }
 
     public function import()
     {
@@ -127,7 +127,9 @@ class Internationaldd extends Component
             'file' => 'required|mimes:xls,xlsx',
         ]);
 
-        Excel::import(new DdcImport, $this->file->path());
+        $userRegional = auth()->user()->Regional;
+
+        Excel::import(new DdcImport($userRegional), $this->file->path());
 
         session()->flash('message', 'Archivo importado exitosamente.');
     }
