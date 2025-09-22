@@ -524,19 +524,19 @@ return [
                 [
                     'text' => 'Ventanilla DD',
                     'icon' => 'fas fa-door-open', // Ventanilla
-                    'can'  => 'packages.ventanilla',
+                    'can'  => 'packages.internacional',
                     'submenu' => [
                         [
                             'text' => 'Entregas Ventanilla DD',
                             'url' => 'internationals/ventanilladd',
                             'icon' => 'fas fa-dolly', // Entrega
-                            'can'  => 'packages.ventanilla',
+                            'can'  => 'packages.internacional',
                         ],
                         [
                             'text' => 'Inventario Ventanilla DD',
                             'url' => 'internationals/deleteadodd',
                             'icon' => 'fas fa-clipboard-list', // Inventario
-                            'can'  => 'packages.delete',
+                            'can'  => 'packages.internacional',
                         ],
                     ],
                 ],
