@@ -63,10 +63,25 @@ class UsersTable extends Component
         $users = User::withTrashed()
             ->where(function ($query) {
                 $query->where('name', 'like', '%' . $this->searchQuery . '%')
-                      ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
+                    ->orWhere('email', 'like', '%' . $this->searchQuery . '%');
             })
             ->paginate(10);
 
         return view('livewire.users-table', ['users' => $users]);
+    }
+    public function restore($id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+        $user->restore();
+
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario reactivado correctamente');
+    }
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete(); // soft delete (si tu modelo usa SoftDeletes)
+
+        session()->flash('success', 'Usuario dado de baja correctamente.');
     }
 }
