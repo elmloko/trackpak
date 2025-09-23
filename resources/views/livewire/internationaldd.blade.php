@@ -54,25 +54,39 @@
                                                 </a>
                                             </div>
                                         @endhasrole
-                                        @hasrole('SuperAdmin|Administrador|Urbano')
-                                            <div>
-                                                <form wire:submit.prevent="import" class="form-inline">
-                                                    <div class="form-group mb-2">
+                                        <div>
+                                            {{-- Importar: solo SuperAdmin o Administrador --}}
+                                            @hasanyrole('SuperAdmin|Administrador')
+                                                <form wire:submit.prevent="import" class="form-inline align-items-center">
+                                                    <div class="form-group mb-2 mr-2">
                                                         <label for="fileUpload" class="sr-only">Archivo Excel</label>
-                                                        <input type="file" wire:model="file" class="form-control-file"
-                                                            id="fileUpload" accept=".xlsx,.xls">
+                                                        <input type="file" wire:model="file" id="fileUpload"
+                                                            class="form-control-file" accept=".xlsx,.xls">
+                                                        @error('file')
+                                                            <small class="text-danger d-block">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
-                                                    <button type="submit" class="btn btn-primary mb-2">Importar</button>
-                                                    <a href="{{ route('plantilladd.excel') }}"
-                                                        class="btn btn-secondary mb-2 ml-2">Descargar Modelo Excel</a>
+
+                                                    <button type="submit" class="btn btn-primary mb-2"
+                                                        wire:loading.attr="disabled" wire:target="import,file">
+                                                        <span wire:loading.remove wire:target="import">Importar</span>
+                                                        <span wire:loading wire:target="import">Importando…</span>
+                                                    </button>
                                                 </form>
-                                                @if (session()->has('message'))
-                                                    <div class="alert alert-success mt-2">
-                                                        {{ session('message') }}
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        @endhasrole
+                                            @endhasanyrole
+
+                                            {{-- Descargar modelo: SuperAdmin, Administrador, Urbano o Unica --}}
+                                            @hasanyrole('SuperAdmin|Administrador|Urbano|Unica')
+                                                <a href="{{ route('plantilladd.excel') }}"
+                                                    class="btn btn-secondary mb-2 mt-2">Descargar Modelo Excel</a>
+                                            @endhasanyrole
+
+                                            @if (session()->has('message'))
+                                                <div class="alert alert-success mt-2">
+                                                    {{ session('message') }}
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
 
@@ -201,10 +215,12 @@
                                 <label for="observaciones">Observaciones</label>
                                 <select wire:model="observaciones" class="form-control" id="observaciones">
                                     <option value="">Seleccione una opción</option>
-                                    <option value="Articulo rechazado por el destinatario">Artículo rechazado por el destinatario</option>
+                                    <option value="Articulo rechazado por el destinatario">Artículo rechazado por el
+                                        destinatario</option>
                                     <option value="Fallecido">Fallecido</option>
                                     <option value="No Reclamado">No reclamado</option>
-                                    <option value="El Destinatario desistio paquete marca de aduana">El Destinatario desistió paquete marca de aduana</option>
+                                    <option value="El Destinatario desistio paquete marca de aduana">El Destinatario
+                                        desistió paquete marca de aduana</option>
                                 </select>
                             </div>
                         </form>
