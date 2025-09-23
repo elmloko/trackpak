@@ -43,7 +43,7 @@
                                                 </div>
                                             </form>
                                         </div>
-                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano')
+                                        @hasrole('SuperAdmin|Administrador|Urbano|Auxiliar Urbano|Unica')
                                             <div class="col-md-1">
                                                 <button wire:click="cambiarEstado" class="btn btn-warning">Entregar</button>
                                             </div>
