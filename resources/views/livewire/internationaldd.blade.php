@@ -152,7 +152,7 @@
                                             <td>{{ $international->created_at }}</td>
                                             <td>
                                                 <div class="d-flex" role="group" aria-label="Acciones">
-                                                    @hasrole('SuperAdmin|Administrador|Urbano')
+                                                    @hasrole('SuperAdmin|Administrador|Urbano|Unica')
                                                         <a class="btn btn-sm btn-success mr-2"
                                                             href="{{ route('internationals.edit', $international->id) }}">
                                                             <i class="fa fa-fw fa-edit"></i>
