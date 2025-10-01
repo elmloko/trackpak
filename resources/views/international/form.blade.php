@@ -24,7 +24,7 @@
                         {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 @endhasrole
-                @hasrole('SuperAdmin|Administrador|Urbano')
+                @hasrole('SuperAdmin|Administrador|Unica')
                     <div class="form-group">
                         {{ Form::label('ZONA') }}
                         {{ Form::text('ZONA', old('ZONA', $international->ZONA ?? ''), [
@@ -41,7 +41,7 @@
                         {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 @endhasrole
-                {{-- @hasrole('SuperAdmin|Administrador|Urbano')
+                @hasrole('Urbano')
                     <div class="form-group">
                         {{ Form::label('ZONA') }}
                         {{ Form::select(
@@ -124,7 +124,7 @@
 
                         {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
-                @endhasrole --}}
+                @endhasrole
             </div>
             <div class="col-md-6">
                 <div class="form-group">
