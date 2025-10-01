@@ -27,6 +27,23 @@
                 @hasrole('SuperAdmin|Administrador|Urbano')
                     <div class="form-group">
                         {{ Form::label('ZONA') }}
+                        {{ Form::text('ZONA', old('ZONA', $international->ZONA ?? ''), [
+                            'class' => 'form-control' . ($errors->has('ZONA') ? ' is-invalid' : ''),
+                            'placeholder' => 'Ej: VILLAFATIMA, PG1A',
+                            'maxlength' => 40,
+                            'autocomplete' => 'off',
+                            'inputmode' => 'latin',
+                            // Limpia en el cliente: quita tildes, deja A-Z y 0-9, sin espacios
+                            'oninput' => "this.value = this.value
+                                        .normalize('NFD').replace(/[\\u0300-\\u036f]/g,'')
+                                        .toUpperCase().replace(/[^A-Z0-9]/g,'');",
+                        ]) }}
+                        {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
+                    </div>
+                @endhasrole
+                {{-- @hasrole('SuperAdmin|Administrador|Urbano')
+                    <div class="form-group">
+                        {{ Form::label('ZONA') }}
                         {{ Form::select(
                             'ZONA',
                             [
@@ -107,7 +124,7 @@
 
                         {!! $errors->first('ZONA', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
-                @endhasrole
+                @endhasrole --}}
             </div>
             <div class="col-md-6">
                 <div class="form-group">
