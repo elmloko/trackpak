@@ -164,6 +164,10 @@
                                                             <i class="fas fa-exclamation-circle"></i>
                                                             PRE-REZAGO
                                                         </button>
+                                                        <button class="btn btn-sm btn-info mr-2"
+                                                            wire:click="openReencaminarModal({{ $international->id }})">
+                                                            <i class="fas fa-exchange-alt"></i> REENCAMINAR
+                                                        </button>
                                                     @endhasrole
                                                     @hasrole('SuperAdmin|Administrador')
                                                         <form
@@ -197,6 +201,54 @@
             </div>
         </div>
     </div>
+    @if ($currentModal === 'reencaminar')
+        <div wire:ignore.self class="modal fade show d-block" id="reencaminarModal" tabindex="-1" role="dialog"
+            aria-labelledby="reencaminarModalLabel" aria-hidden="true" style="background: rgba(0,0,0,.5);">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reencaminarModalLabel">Reencaminar paquete</h5>
+                        <button type="button" class="close" wire:click="$set('currentModal', null)"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        @if ($selectedPackageId)
+                            <div class="alert alert-light">
+                                Paquete:
+                                <strong>{{ optional(\App\Models\International::find($selectedPackageId))->CODIGO }}</strong>
+                            </div>
+                        @endif
+
+                        <div class="form-group">
+                            <label for="selectedRegional">Regional destino</label>
+                            <select id="selectedRegional" class="form-control" wire:model="selectedRegional">
+                                <option value="">-- Seleccionar --</option>
+                                @foreach ($departamentos as $dep)
+                                    <option value="{{ $dep }}">{{ $dep }}</option>
+                                @endforeach
+                            </select>
+                            @error('selectedRegional')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            wire:click="$set('currentModal', null)">Cerrar</button>
+                        <button type="button" class="btn btn-info" wire:click="saveReencaminarSingle"
+                            wire:loading.attr="disabled" wire:target="saveReencaminarSingle">
+                            <span wire:loading.remove wire:target="saveReencaminarSingle">Confirmar reencaminado</span>
+                            <span wire:loading wire:target="saveReencaminarSingle">Procesando…</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     @if ($currentModal === 'prerezago')
         <div wire:ignore.self class="modal fade show d-block" id="preRezagoModal" tabindex="-1" role="dialog"
             aria-labelledby="preRezagoModalLabel" aria-hidden="true">

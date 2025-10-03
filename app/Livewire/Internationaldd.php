@@ -26,6 +26,23 @@ class Internationaldd extends Component
     public $file;
     public $fecha_inicio;
     public $fecha_fin;
+    public $selectedRegional = '';
+    public $departamentos = [
+        'LA PAZ',
+        'COCHABAMBA',
+        'SANTA CRUZ',
+        'ORURO',
+        'POTOSI',
+        'CHUQUISACA',
+        'TARIJA',
+        'BENI',
+        'PANDO'
+    ];
+
+    protected $rules = [
+        // otras reglas que ya tengas...
+        'selectedRegional' => 'required|string|in:LA PAZ,COCHABAMBA,SANTA CRUZ,ORURO,POTOSI,CHUQUISACA,TARIJA,BENI,PANDO',
+    ];
 
     public function render()
     {
@@ -186,5 +203,53 @@ class Internationaldd extends Component
     {
         $this->selectAll = false;
         $this->paquetesSeleccionados = [];
+    }
+    public function openReencaminarModal($packageId)
+    {
+        $this->selectedPackageId = $packageId;
+        $this->selectedRegional = '';
+        $this->currentModal = 'reencaminar';
+    }
+
+    // Guardar reencaminado solo para 1 paquete
+    public function saveReencaminarSingle()
+    {
+        $this->validateOnly('selectedRegional');
+
+        $paq = International::find($this->selectedPackageId);
+        if (!$paq) {
+            session()->flash('message', 'No se encontró el paquete.');
+            return;
+        }
+
+        // Cambiar estado
+        $paq->ESTADO = 'VENTANILLA';
+
+        // Si tu tabla tiene este campo (lo usas en el Blade)
+        if (isset($paq->redirigido)) {
+            $paq->redirigido = true;
+        }
+
+        // Si quieres que cambie de Regional al destino:
+        // (Si prefieres no tocar la regional original, comenta esta línea
+        // y usa un campo propio como regional_destino)
+        $paq->CUIDAD = $this->selectedRegional;
+
+        $paq->save();
+
+        // Registrar evento
+        Event::create([
+            'action'      => 'REENCAMINADO',
+            'descripcion' => 'Paquete reencaminado a Regional: ' . $this->selectedRegional,
+            'user_id'     => auth()->id(),
+            'codigo'      => $paq->CODIGO,
+        ]);
+
+        // Reset y cerrar
+        $this->selectedPackageId = null;
+        $this->selectedRegional = '';
+        $this->currentModal = null;
+
+        session()->flash('message', 'Paquete reencaminado exitosamente.');
     }
 }
