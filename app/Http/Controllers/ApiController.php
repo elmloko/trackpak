@@ -20,8 +20,8 @@ class ApiController extends Controller
         // Forzar API: siempre errores en JSON (aunque falte el header)
         $request->headers->set('Accept', 'application/json');
 
-        $validated = $request->validate([
-            'codigo' => ['required', 'size:13'],
+        $request->validate([
+            'codigo' => 'required|string',
         ]);
 
         $codigo  = $validated['codigo'];
