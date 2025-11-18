@@ -41,7 +41,7 @@ class InternationalddExport implements FromCollection, WithHeadings, WithStyles
         $query->whereBetween('created_at', [$this->fechaInicio, $this->fechaFin]);
     }
 
-    $query->where('CUIDAD', $regional);
+    // $query->where('CUIDAD', $regional);
 
     return $query->get();
 }
