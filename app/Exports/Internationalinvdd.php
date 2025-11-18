@@ -40,7 +40,7 @@ class Internationalinvdd implements FromCollection, WithHeadings, WithStyles
         if ($this->fechaInicio && $this->fechaFin) {
             $query->whereBetween('deleted_at', [$this->fechaInicio, $this->fechaFin]);
         }
-        $query->where('CUIDAD', $regional);
+        // $query->where('CUIDAD', $regional);
         return $query->get();
     }
 
