@@ -307,8 +307,8 @@
                     <div class="w-full mb-4 flex flex-col items-center justify-center">
                         <img src="{{ asset('images/LOGOcen.png') }}" alt="TrackingBO"
                             class="max-w-full max-h-full mb-2">
-                        <img src="{{ asset('images/LOGO-BOLIVIA-BLANCO.png') }}" alt="TrackingBO"
-                            class="max-w-full max-h-full">
+                        {{-- <img src="{{ asset('images/LOGO-BOLIVIA-BLANCO.png') }}" alt="TrackingBO"
+                            class="max-w-full max-h-full"> --}}
                     </div>
                 </div>
 
@@ -442,7 +442,7 @@
         <div class="text-center mt-4">
             <div class="footer-content">
                 <hr class="line-divider text-black">
-                <p class="mb-2 text-lg text-while">#EstamosSaliendoAdelante #RumboalBicentenario</p>
+                {{-- <p class="mb-2 text-lg text-while">#EstamosSaliendoAdelante #RumboalBicentenario</p> --}}
                 <p class="mb-2 text-lg text-while">&copy; {{ date('Y') }} Todos los derechos reservados - Agencia
                     Boliviana de Correos</p>
                 <a href="mailto:mespinozarojas46@gmail.com" class="opacity-75"
