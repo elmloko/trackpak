@@ -117,7 +117,7 @@ class ApiController extends Controller
         $eventMappings = [
             "Recibir envío del cliente (salida)" => "Paquete recibido del cliente.",
             "Enviar envío a ubicación nacional (salida)" => "Paquete en camino a ubicación nacional.",
-            "Recibir envío en oficina de cambio (salida)" => "Paquete recibido en oficina de tránsito.",
+            "Recibir envío en oficina de cambio (salida)" => "Paquete recibido en oficina origen de tránsito.",
             "Enviar envío a aduana (salida)" => "Paquete enviado a aduana.",
             "Recibir envío en ubicación (salida)" => "Paquete recibido en centro de procesamiento.",
             "Registrar motivo de retención de envío por parte de aduana (Sal)" => "Paquete retenido en aduana.",
@@ -130,7 +130,7 @@ class ApiController extends Controller
             "Insertar envío en saca nacional" => "Paquete incluido en la saca nacional.",
             "Eliminar envío de saca nacional" => "Paquete eliminado de la saca nacional.",
             "Cancelar exportación de envío" => "Exportación del paquete cancelada.",
-            "Recibir envío en oficina de cambio (entrada)" => "Paquete recibido en oficina de tránsito.",
+            "Recibir envío en oficina de cambio (entrada)" => "Paquete recibido en oficina destino de tránsito.",
             "Enviar envío a aduana (entrada)" => "Paquete en camino a aduana.",
             "Recibir envío en oficina de entrega (entrada)" => "Paquete recibido en oficina de entrega(Listo para entregar).",
             "Recibir envío en ubicación (entrada)" => "Paquete recibido en ubicación específica.",
