@@ -10,8 +10,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('predefined.token')->group(function () {
-
-
     Route::get('/prueba/{codigo}', [ApiController::class, 'show']);
     Route::post('/ventanilla', [ApiController::class, 'ventanilla']);
     Route::post('/busqueda-rr', [ApiController::class, 'busquedaRRApi']);
@@ -46,6 +44,3 @@ Route::middleware('predefined.token')->group(function () {
     Route::put('/updatePackage/{id}', [ApiController::class, 'updatePackage']);
     Route::put('/actualizar-imagenes', [ApiController::class, 'updateImages']);
 });
-
-Route::post('/subscribe', [ApiController::class, 'subscribe']);
-Route::post('/unsubscribe', [ApiController::class, 'unsubscribe']);
