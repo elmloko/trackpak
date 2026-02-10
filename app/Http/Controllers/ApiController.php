@@ -12,9 +12,45 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use App\Models\TrackingSubscription;
+
 
 class ApiController extends Controller
 {
+public function subscribe(Request $request)
+{
+    $data = $request->validate([
+        'codigo' => ['required', 'size:13'],
+        'fcm_token' => ['required', 'string'],
+    ]);
+
+    $sub = TrackingSubscription::firstOrNew([
+        'codigo' => $data['codigo'],
+        'fcm_token' => $data['fcm_token'],
+    ]);
+
+    if (!$sub->exists) {
+        $sub->last_sig = null; // se llena en el cron
+        $sub->save();
+    }
+
+    return response()->json(['ok' => true]);
+}
+
+public function unsubscribe(Request $request)
+{
+    $data = $request->validate([
+        'codigo' => ['required', 'size:13'],
+        'fcm_token' => ['required', 'string'],
+    ]);
+
+    TrackingSubscription::where('codigo', $data['codigo'])
+        ->where('fcm_token', $data['fcm_token'])
+        ->delete();
+
+    return response()->json(['ok' => true]);
+}
+
     public function busquedaRRApi(Request $request)
     {
         // Forzar API: siempre errores en JSON (aunque falte el header)
