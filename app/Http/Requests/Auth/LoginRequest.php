@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -53,10 +54,23 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
+        Log::info('Login attempt received', [
+            'email' => (string) $this->input('email'),
+            'ip' => $this->ip(),
+            'remember' => $this->boolean('remember'),
+            'throttle_key' => $this->throttleKey(),
+        ]);
+
         $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
+            Log::warning('Login failed: invalid credentials', [
+                'email' => (string) $this->input('email'),
+                'ip' => $this->ip(),
+                'throttle_key' => $this->throttleKey(),
+                'attempts' => RateLimiter::attempts($this->throttleKey()),
+            ]);
 
             throw ValidationException::withMessages([
                 'email' => trans('auth.failed'),
@@ -64,6 +78,10 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+        Log::info('Login credentials accepted', [
+            'email' => (string) $this->input('email'),
+            'ip' => $this->ip(),
+        ]);
         
     }
 
@@ -81,6 +99,12 @@ class LoginRequest extends FormRequest
         event(new Lockout($this));
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
+        Log::warning('Login blocked by rate limiter', [
+            'email' => (string) $this->input('email'),
+            'ip' => $this->ip(),
+            'throttle_key' => $this->throttleKey(),
+            'retry_after_seconds' => $seconds,
+        ]);
 
         throw ValidationException::withMessages([
             'email' => trans('auth.throttle', [

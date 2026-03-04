@@ -4,15 +4,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\BusquedasController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware('predefined.token')->group(function () {
+
+
     Route::get('/prueba/{codigo}', [ApiController::class, 'show']);
     Route::post('/ventanilla', [ApiController::class, 'ventanilla']);
     Route::post('/busqueda-rr', [ApiController::class, 'busquedaRRApi']);
+    Route::post('/busquedas/rr', [BusquedasController::class, 'busquedaRRApi']);
     Route::get('/packages', [ApiController::class, 'index']);
     Route::get('/packagesUDD', [ApiController::class, 'packagesUDD']);
     Route::get('/packagesUDND', [ApiController::class, 'packagesUDND']);
@@ -44,3 +48,6 @@ Route::middleware('predefined.token')->group(function () {
     Route::put('/updatePackage/{id}', [ApiController::class, 'updatePackage']);
     Route::put('/actualizar-imagenes', [ApiController::class, 'updateImages']);
 });
+
+Route::post('/subscribe', [ApiController::class, 'subscribe']);
+Route::post('/unsubscribe', [ApiController::class, 'unsubscribe']);
