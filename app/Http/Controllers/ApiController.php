@@ -16,7 +16,27 @@ use App\Models\TrackingSubscription;
 
 
 class ApiController extends Controller
-{public function subscribe(Request $request)
+{
+    public function buscarDespacho($codigo)
+    {
+        $package = Package::where('CODIGO', $codigo)
+            ->where('ESTADO', 'DESPACHO')
+            ->first();
+
+        if (!$package) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Paquete no encontrado o no está en estado DESPACHO.',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data'    => $package,
+        ]);
+    }
+
+    public function subscribe(Request $request)
 {
     $data = $request->validate([
         'codigo' => ['required', 'size:13'],
