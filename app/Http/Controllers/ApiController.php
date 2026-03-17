@@ -30,12 +30,21 @@ class ApiController extends Controller
             ], 404);
         }
 
-        $data = $package->toArray();
-        $data['ESTADO'] = 'ENVIADO';
-
         return response()->json([
             'success' => true,
-            'data'    => $data,
+            'data'    => [
+                'CODIGO'       => $package->CODIGO,
+                'DESTINATARIO' => $package->DESTINATARIO,
+                'TELEFONO'     => $package->TELEFONO,
+                'CUIDAD'       => $package->CUIDAD,
+                'PESO'         => $package->PESO,
+                'TIPO'         => $package->TIPO,
+                'ADUANA'       => $package->ADUANA,
+                'ESTADO'       => 'ENVIADO',
+                'OBSERVACIONES'=> $package->OBSERVACIONES,
+                'created_at'   => $package->created_at,
+                'updated_at'   => $package->updated_at,
+            ],
         ]);
     }
 
