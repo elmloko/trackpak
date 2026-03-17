@@ -14,7 +14,6 @@ Route::middleware('predefined.token')->group(function () {
 
 
     Route::get('/prueba/{codigo}', [ApiController::class, 'show']);
-    Route::get('/despacho/{codigo}', [ApiController::class, 'buscarDespacho']);
     Route::post('/ventanilla', [ApiController::class, 'ventanilla']);
     Route::post('/busqueda-rr', [ApiController::class, 'busquedaRRApi']);
     Route::post('/busquedas/rr', [BusquedasController::class, 'busquedaRRApi']);
